@@ -1,0 +1,79 @@
+\section{\(\mathrm{IPC}(\rightarrow)\)}
+\subsection{Język elementarny}
+
+\begin{definicja}$ $\newline
+  \begin{itemize}
+    \item  Zbiorem \(\Phi\) formuł \(\mathrm{IPC}(\rightarrow)\) nazywamy język generowany przez gramatykę 
+    \begin{align*}
+    %\Phi &:= \mathrm{V}\ |\ \left ( \Phi \land \Phi \right )\ |\ \left ( \Phi \lor \Phi \right ) \ |\ \left ( \Phi \rightarrow \Phi \right )\ |\ \bot\\
+    \Phi &:= \mathrm{V}\ |\ \left ( \Phi \rightarrow \Phi \right )\ |\ \bot\\
+    \mathrm{V} &:= \mathrm{p}\ |\ \mathrm{V'}
+    \end{align*}
+
+    \item Wyrażenia powstałe z produkcji V nazywamy \emph{zmiennymi zdaniowymi}. Zmienne zdaniowe oraz \(\bot\) są formułami \emph{atomowymi}. Pozostałe wyrażenia nazywamy formułami \emph{złożonymi}. 
+
+    \item W języku podmiotowym wprowadzamy następujące oznaczenia
+    \begin{align*}
+      \left\ulcorner \lnot \varphi\right\urcorner\ &:=\ \left\ulcorner\varphi\rightarrow\bot\right\urcorner\\
+    %  \left\ulcorner\varphi \leftrightarrow \psi \right\urcorner\ &:=\ \left\ulcorner\left(\varphi\rightarrow\psi\right)\land\left(\psi\rightarrow\varphi\right)\right\urcorner\\
+      \left\ulcorner\top\right\urcorner &:= \left\ulcorner\bot\rightarrow\bot\right\urcorner
+    \end{align*}
+
+  \end{itemize}
+
+\end{definicja}
+
+\begin{konwencja*}$ $\newline 
+  \begin{enumerate}
+    \item Zamiast \(\mathrm{p'},\, \mathrm{p''},\, \mathrm{p'''},\, \dots\) używamy kolejno liter \(\mathrm{p},\, \mathrm{q},\, \mathrm{r},\, \dots\)
+    \item Zmienne metasyntaktyczne oznaczamy późniejszymi literami greckiego alfabetu, tj. \(\varphi,\, \psi,\, \dots\)
+    \item \(\rightarrow\) jest łączna w prawo.
+    %\item \(\lnot\) ma najwyższy priorytet, \(\rightarrow\) – najniższy, \(\land\), \(\lor\) – równy sobie.
+    \item \(\lnot\) ma najwyższy priorytet, \(\rightarrow\) – najniższy.
+    \item Pomijamy najbardziej zewnętrzne nawiasy.
+  \end{enumerate}
+\end{konwencja*}
+
+\subsection{Implikacyjny fragment dedukcji naturalnej}
+
+\begin{definicja}$ $\newline 
+  \begin{itemize}
+    \item Wprowadzamy relację \emph{wyprowadzalności} \(\vdash\,\subset\mathcal{P}\left(\Phi\right)\times\Phi\) spełniającą poniższe reguły:
+    \begin{center}
+      \begin{tabular}{ ccc}
+      {\begin{prooftree}
+        \Hypo{ \Gamma, \varphi \vdash \varphi \ (\mathrm{Ax}) }
+        \end{prooftree}},
+      &
+      {\begin{prooftree}
+        \Hypo{ \Gamma, \varphi \vdash \psi }
+        \Infer1[(\(\rightarrow\)I)]{\Gamma \vdash \varphi \to \psi}
+      \end{prooftree}},
+      &
+      {\begin{prooftree}
+        \Hypo{\Gamma \vdash \varphi \to \psi} \Hypo{ \Gamma \vdash \varphi}
+        \Infer2[(\(\rightarrow\)E)]{\Gamma \vdash \psi}
+      \end{prooftree}}.
+      \end{tabular}
+    \end{center}
+
+    Każdy element relacji \(\vdash\) nazywamy \emph{sądem}. 
+
+    \item \emph{Dowodem} sądu \(\Gamma \vdash \varphi\) nazywamy skończone drzewo sądów spełniające poniższe warunki:
+
+    \begin{enumerate}
+      \item W korzeniu drzewa znajduje się sąd \(\Gamma \vdash \varphi\).
+      \item Liście są \emph{aksjomatami}, tj. sądami postaci \(\Gamma, \varphi \vdash \varphi\).
+      \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania nowych sądów.
+    \end{enumerate}
+
+  \end{itemize}
+\end{definicja}
+
+\begin{definicja} Dwójkę \(\left(\Phi,\, \vdash\right)\) nazywamy \emph{implikacyjnym fragmentem logiki intuicjonistycznej} i oznaczamy \(\mathrm{NJ(\to)}\).
+\end{definicja}
+
+\subsection{Semantyka}
+\begin{twierdzenie}{(O pełności)}
+  System dedukcyjny \(\mathrm{NJ}(\to)\) jest pełny względem modeli Kripkego.
+\end{twierdzenie}
