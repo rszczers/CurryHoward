@@ -1,12 +1,12 @@
-\section{\(\mathrm{IPC}(\rightarrow)\)}
+\section{Implikatywna logika minimalna}
 \subsection{Język}
 
 \begin{definicja}$ $\newline
   \begin{itemize}
-    \item  Zbiorem \(\Phi_{\to}\) formuł \(\mathrm{IPC}(\rightarrow)\) nazywamy język generowany przez gramatykę
+    \item  Zbiorem \(\Phi_{\to}\) formuł implikatywnej logiki minimalnej \(\mathrm{NJ}(\to)\) nazywamy język generowany przez gramatykę
     \begin{align*}
     %\Phi &:= \mathrm{V}\ |\ \left ( \Phi \land \Phi \right )\ |\ \left ( \Phi \lor \Phi \right ) \ |\ \left ( \Phi \rightarrow \Phi \right )\ |\ \bot\\
-      \Phi_{\to} &:= \mathrm{V}\ |\ \left ( \Phi_{\to} \rightarrow \Phi_{\to} \right )\ |\ \bot\\
+    \Phi_{\to} &:= \mathrm{V}\ |\ \left ( \Phi_{\to} \rightarrow \Phi_{\to} \right )\ |\ \bot\\
     \mathrm{V} &:= \mathrm{p}\ |\ \mathrm{V'}
     \end{align*}
 
@@ -41,7 +41,7 @@
 
   \item Na zbiorze sądów \(\mathcal{P}(\Phi_{\to})\times\Phi_{\to}\) wprowadzamy relacje okreslające reguły wyprowadzania
   \begin{center}
-    \begin{tabular}{ ccc}
+    \begin{tabular}{ cc}
     {\begin{prooftree}
       \Hypo{ \Gamma, \varphi \vdash \psi }
       \Infer1[(\(\rightarrow\)I)]{\Gamma \vdash \varphi \to \psi}
@@ -53,7 +53,7 @@
     \end{prooftree}}.
     \end{tabular}
   \end{center}
-  oraz wybieramy spośród nich jeden aksjomat postaci \(\Gamma, \varphi\vdash\varphi\ (\mathrm{Ax})\).
+  oraz wybieramy spośród sądów jeden aksjomat postaci \(\Gamma, \varphi\vdash\varphi\ (\mathrm{Ax})\).
 
   \item \emph{Dowodem} sądu \(\Gamma \vdash \varphi\) nazywamy skończone drzewo sądów spełniające poniższe warunki:
     \begin{enumerate}
@@ -62,10 +62,18 @@
       \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania nowych sądów.
   \end{enumerate}
 
-      Jeśli istnieje dowód sądu \(\Gamma\vdash\varphi\) to mówimy, że formuła \(\varphi\) jest \emph{wyprowadzalna} ze zbioru \emph{przesłanek} \(\Gamma\) i piszemy \(\Gamma\vdash_{N}\varphi\). Formułę \(\varphi\) nazywamy wówczas \emph{tezą} systemu NJ(\(\to\)).
+      Jeśli istnieje dowód sądu \(\Gamma\vdash\varphi\) to mówimy, że formuła \(\varphi\) jest \emph{wyprowadzalna} ze zbioru \emph{przesłanek} \(\Gamma\) i piszemy \(\Gamma\vdash_{N}\varphi\). Formułę \(\varphi\) nazywamy wówczas \emph{tezą} systemu \(\mathrm{NJ}(\to)\).
 
   \end{itemize}
 \end{definicja}
+
+\begin{lemat}
+  \(\mathrm{NJ}(\to)\) jest zamknięty ze względu na
+  \begin{enumerate}[label=({\alph*})]
+    \item osłabianie: jeśli \(\Gamma\vdash\varphi\), to tym bardziej \(\Gamma,\,\psi \vdash \varphi\).
+    \item podstawianie: jeśli  \(\Gamma\vdash\varphi\), to \(\Gamma[p/\psi]\vdash\varphi[p/\psi]\).
+  \end{enumerate}
+\end{lemat}
 
 \subsection{Semantyka}
 \begin{twierdzenie}{(O pełności)}

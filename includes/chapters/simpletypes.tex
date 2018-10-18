@@ -2,22 +2,17 @@
 
 \subsection{Język}
 
-\begin{definicja}
+\begin{definicja}$ $\newline
 \begin{itemize}
 \item
-\emph{Typami prostymi} nazywamy język \(\mathrm{T}\) generowany przez gramatykę
-\begin{align*}
-  \mathrm{T} &:= U\ |\ (\mathrm{T}\to \mathrm{T})\\
-    \mathrm{U} &:= \mathrm{p}\ |\ \mathrm{U}'
-\end{align*}
-
-\item Napisy powstałe z produkcji U nazywamy \emph{zmiennymi typowymi}. 
+  \emph{Typami prostymi} \(\mathrm{T}\) nazywamy zbiór \(\Phi_{\to}\) wszystkich formuł języka logiki NJ(\(\to\)). 
+    Zamiast mówić o zmiennych zdaniowych, będziemy używali określenia \emph{zmienne typowe}.
 
 \begin{konwencja*}$ $\newline 
   \begin{enumerate}
     \item Zamiast \(\mathrm{p'},\, \mathrm{p''},\, \mathrm{p'''},\, \dots\) używamy kolejno liter \(\mathrm{p},\, \mathrm{q},\, \mathrm{r},\, \dots\)
-    \item Zmienne metasyntaktyczne oznaczamy późniejszymi literami greckiego alfabetu, tj. \(\varphi,\, \psi,\, \dots\)
-    \item \(\rightarrow\) jest łączna w prawo.
+    \item Zmienne metasyntaktyczne oznaczamy późniejszymi literami greckiego alfabetu, tj. \(\sigma,\, \tau,\, \rho\,\dots\)
+    \item ,,\(\rightarrow\)'' jest łączna w prawo.
     \item Pomijamy najbardziej zewnętrzne nawiasy.
   \end{enumerate}
 \end{konwencja*}
@@ -28,32 +23,46 @@ gramatykę 
 \[
   \Lambda_{\mathrm{T}} := \ \mathrm{V}\ | \ \left (\lambda V^{\mathrm{T}} . \Lambda_{\mathrm{T}}\right) \ | \ \left (\Lambda_{\mathrm{T}}\Lambda_{\mathrm{T}}\right)
 \]
-    gdzie V to przeliczalny zbiór zmiennych \(x, y, \dots\)
-  \item \emph{Otoczeniem} nazywamy funkcję częściową \(\Gamma:\:\mathrm{V}\to\mathrm{T}\) przeprowadzającą zbiór zmiennych zmiennych typowych w zbiór typów prostych.
+    gdzie V to przeliczalny zbiór \(\lambda\)-zmiennych \(x, y, \dots\)
     
-\item
-  Wprowadzamy relację \emph{typizacji} \(\vdash \subset \mathrm{C}\times\Lambda_{\mathrm{T}}\times\mathrm{T}\) jako najmniejszą (w sensie mnogościowym) relację spełniającą reguły
+    W języku podmiotowym będziemy używali późniejszych liter alfabetu łacińskiego (M, N, O, …) oznaczając pseudotermy.
+  \item \emph{Otoczeniem typowym} nazywamy skończoną funkcję częściową \(\Gamma:\:\mathrm{V}\to\mathrm{T}\) przeprowadzającą zbiór \(\lambda\)-zmiennych w zbiór typów prostych. Nadużywając notacji piszemy
+    \begin{itemize}
+      \item \(\Gamma=\{x_1\,:\,\tau_1,\,\dots,\,x_n\,:\,\tau_n\}\)
+      \item \(\mathrm{dom}(\Gamma) = \left\{x\in \mathrm{V}\,|\:\exists\tau.\,(x\,:\,\tau)\in\Gamma\right\}\)
+      \item \(\mathrm{rg}(\Gamma)=\left\{\tau\in\Phi_{\to}\,|\,\exists x.\,(x\,:\,\tau)\in\Gamma\right\}\)
+    \end{itemize}
 
+\item
+    \emph{Sądem} (\emph{asercją}) nazywamy każdą trójkę \((\Gamma ,\,M,\,\sigma )\in\mathcal{P}(\mathrm{V}\times \mathrm{T})\times\Lambda_{\mathrm{T}}\times\mathrm{T}\), gdzie \(\Gamma\) jest otoczeniem typowym i oznaczamy \(\Gamma\vdash M^{\sigma}\).
+
+  Piszemy: \begin{itemize}
+    \item \(\varphi_{1},\ \varphi_{2}\vdash\psi\) zamiast \(\{\varphi_{1},\ \varphi_{2}\}\vdash\psi\),
+    \item \(\Gamma, x^\varphi\) zamiast \(\Gamma\cup \{x^\varphi\}\), o ile \(x^\varphi\not\in \Gamma\).
+    \item \(\Gamma, \Delta\) zamiast \(\{\Gamma\cup \Delta\}\), o ile \(\Gamma\cap\Delta=\emptyset\).
+    \item \(\vdash\varphi\) zamiast \(\emptyset\vdash\varphi\).
+  \end{itemize}
+
+\item
+  Na zbiorze sądów wprowadzamy relacje określające reguły wyprowadzania termów
     \begin{center}
-      \begin{tabular}{ ccc}
-      {\begin{prooftree}
-        \Hypo{ \Gamma, x^{\varphi} \vdash x^{\varphi} \ (\mathrm{Ax}) }
-        \end{prooftree}},
-      &
+    \begin{tabular}{ cc}
       {\begin{prooftree}
         \Hypo{ \Gamma, x^{\varphi} \vdash M^{\psi} }
-        \Infer1[(\(\rightarrow\)I)]{\Gamma \vdash (\lambda\, x^{\varphi}.\, M)^{\varphi\to\psi}}
+        \Infer1[(Abs)]{\Gamma \vdash (\lambda\, x^{\varphi}.\, M)^{\varphi\to\psi}}
       \end{prooftree}},
       &
       {\begin{prooftree}
         \Hypo{\Gamma \vdash M^{\varphi \to \psi}} \Hypo{ \Gamma \vdash N^{\varphi}}
-        \Infer2[(\(\rightarrow\)E)]{\Gamma \vdash (MN)^{\psi}}
+        \Infer2[(App)]{\Gamma \vdash (MN)^{\psi}}
       \end{prooftree}}.
       \end{tabular}
     \end{center}
-    gdzie \(C\subset\mathcal{P}\left(\mathrm{V}\times\mathrm{T}\right)\) jest rodziną wszystkich otoczeń.
+    oraz wybieramy spośród sądów jeden aksjomat postaci \(\Gamma, x^\tau\vdash x^\tau\ (\mathrm{Var})\).
 
-Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeśli \(\Gamma \vdash M^{\tau}\).
+    Dowód sądu określamy analogicznie jak w logince NJ(\(\to\)).
+
+Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeśli istnieje dowód sądu \(\Gamma \vdash M^{\tau}\) w powyższym systemie dedukcyjnym.
 \end{itemize}
   
 \end{definicja}
