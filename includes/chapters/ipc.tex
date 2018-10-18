@@ -1,30 +1,26 @@
 \section{\(\mathrm{IPC}(\rightarrow)\)}
-\subsection{Język elementarny}
+\subsection{Język}
 
 \begin{definicja}$ $\newline
   \begin{itemize}
-    \item  Zbiorem \(\Phi\) formuł \(\mathrm{IPC}(\rightarrow)\) nazywamy język generowany przez gramatykę 
+    \item  Zbiorem \(\Phi_{\to}\) formuł \(\mathrm{IPC}(\rightarrow)\) nazywamy język generowany przez gramatykę
     \begin{align*}
     %\Phi &:= \mathrm{V}\ |\ \left ( \Phi \land \Phi \right )\ |\ \left ( \Phi \lor \Phi \right ) \ |\ \left ( \Phi \rightarrow \Phi \right )\ |\ \bot\\
-    \Phi &:= \mathrm{V}\ |\ \left ( \Phi \rightarrow \Phi \right )\ |\ \bot\\
+      \Phi_{\to} &:= \mathrm{V}\ |\ \left ( \Phi_{\to} \rightarrow \Phi_{\to} \right )\ |\ \bot\\
     \mathrm{V} &:= \mathrm{p}\ |\ \mathrm{V'}
     \end{align*}
 
-    \item Wyrażenia powstałe z produkcji V nazywamy \emph{zmiennymi zdaniowymi}. Zmienne zdaniowe oraz \(\bot\) są formułami \emph{atomowymi}. Pozostałe wyrażenia nazywamy formułami \emph{złożonymi}. 
+    \item Wyrażenia powstałe z produkcji V nazywamy \emph{zmiennymi zdaniowymi}. Zmienne zdaniowe oraz \(\bot\) są formułami \emph{atomowymi}. Pozostałe wyrażenia nazywamy formułami \emph{złożonymi}.
 
+
+\item  Konwencje: \begin{enumerate}
     \item W języku podmiotowym wprowadzamy następujące oznaczenia
     \begin{align*}
-      \left\ulcorner \lnot \varphi\right\urcorner\ &:=\ \left\ulcorner\varphi\rightarrow\bot\right\urcorner\\
+      \lnot \varphi &:=\ \left\ulcorner\varphi\rightarrow\bot\right\urcorner\\
     %  \left\ulcorner\varphi \leftrightarrow \psi \right\urcorner\ &:=\ \left\ulcorner\left(\varphi\rightarrow\psi\right)\land\left(\psi\rightarrow\varphi\right)\right\urcorner\\
-      \left\ulcorner\top\right\urcorner &:= \left\ulcorner\bot\rightarrow\bot\right\urcorner
+      \top &:=\ \left\ulcorner\bot\rightarrow\bot\right\urcorner
     \end{align*}
 
-  \end{itemize}
-
-\end{definicja}
-
-\begin{konwencja*}$ $\newline 
-  \begin{enumerate}
     \item Zamiast \(\mathrm{p'},\, \mathrm{p''},\, \mathrm{p'''},\, \dots\) używamy kolejno liter \(\mathrm{p},\, \mathrm{q},\, \mathrm{r},\, \dots\)
     \item Zmienne metasyntaktyczne oznaczamy późniejszymi literami greckiego alfabetu, tj. \(\varphi,\, \psi,\, \dots\)
     \item \(\rightarrow\) jest łączna w prawo.
@@ -32,45 +28,43 @@
     \item \(\lnot\) ma najwyższy priorytet, \(\rightarrow\) – najniższy.
     \item Pomijamy najbardziej zewnętrzne nawiasy.
   \end{enumerate}
-\end{konwencja*}
 
-\subsection{Implikacyjny fragment dedukcji naturalnej}
+\item
+  Każdą parę \((\Gamma, \varphi)\in\mathcal{P}\left(\Phi_{\to}\right)\times\Phi_{\to}\), gdzie \(\Gamma\) jest zbiorem skończonym nazywamy \emph{sądem} (\emph{asercją}) i oznaczamy \(\Gamma\vdash\varphi\).
 
-\begin{definicja}$ $\newline 
-  \begin{itemize}
-    \item Wprowadzamy relację \emph{wyprowadzalności} \(\vdash\,\subset\mathcal{P}\left(\Phi\right)\times\Phi\) spełniającą poniższe reguły:
-    \begin{center}
-      \begin{tabular}{ ccc}
-      {\begin{prooftree}
-        \Hypo{ \Gamma, \varphi \vdash \varphi \ (\mathrm{Ax}) }
-        \end{prooftree}},
-      &
-      {\begin{prooftree}
-        \Hypo{ \Gamma, \varphi \vdash \psi }
-        \Infer1[(\(\rightarrow\)I)]{\Gamma \vdash \varphi \to \psi}
-      \end{prooftree}},
-      &
-      {\begin{prooftree}
-        \Hypo{\Gamma \vdash \varphi \to \psi} \Hypo{ \Gamma \vdash \varphi}
-        \Infer2[(\(\rightarrow\)E)]{\Gamma \vdash \psi}
-      \end{prooftree}}.
-      \end{tabular}
-    \end{center}
+  Piszemy: \begin{itemize}
+    \item \(\varphi_{1},\ \varphi_{2}\vdash\psi\) zamiast \(\{\varphi_{1},\ \varphi_{2}\}\vdash\psi\),
+    \item \(\Gamma, \varphi\) zamiast \(\{\Gamma\cup \varphi\}\),
+    \item \(\Gamma, \Delta\) zamiast \(\{\Gamma\cup \Delta\}\),
+    \item \(\vdash\varphi\) zamiast \(\emptyset\vdash\varphi\).
+  \end{itemize}
 
-    Każdy element relacji \(\vdash\) nazywamy \emph{sądem}. 
+  \item Na zbiorze sądów \(\mathcal{P}(\Phi_{\to})\times\Phi_{\to}\) wprowadzamy relacje okreslające reguły wyprowadzania
+  \begin{center}
+    \begin{tabular}{ ccc}
+    {\begin{prooftree}
+      \Hypo{ \Gamma, \varphi \vdash \psi }
+      \Infer1[(\(\rightarrow\)I)]{\Gamma \vdash \varphi \to \psi}
+    \end{prooftree}},
+    &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash \varphi \to \psi} \Hypo{ \Gamma \vdash \varphi}
+      \Infer2[(\(\rightarrow\)E)]{\Gamma \vdash \psi}
+    \end{prooftree}}.
+    \end{tabular}
+  \end{center}
+  oraz wybieramy spośród nich jeden aksjomat postaci \(\Gamma, \varphi\vdash\varphi\ (\mathrm{Ax})\).
 
-    \item \emph{Dowodem} sądu \(\Gamma \vdash \varphi\) nazywamy skończone drzewo sądów spełniające poniższe warunki:
-
+  \item \emph{Dowodem} sądu \(\Gamma \vdash \varphi\) nazywamy skończone drzewo sądów spełniające poniższe warunki:
     \begin{enumerate}
-      \item W korzeniu drzewa znajduje się sąd \(\Gamma \vdash \varphi\).
+      \item W korzeniu drzewa znajduje się dowodzony sąd \(\Gamma \vdash \varphi\).
       \item Liście są \emph{aksjomatami}, tj. sądami postaci \(\Gamma, \varphi \vdash \varphi\).
       \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania nowych sądów.
-    \end{enumerate}
+  \end{enumerate}
+
+      Jeśli istnieje dowód sądu \(\Gamma\vdash\varphi\) to mówimy, że formuła \(\varphi\) jest \emph{wyprowadzalna} ze zbioru \emph{przesłanek} \(\Gamma\) i piszemy \(\Gamma\vdash_{N}\varphi\). Formułę \(\varphi\) nazywamy wówczas \emph{tezą} systemu NJ(\(\to\)).
 
   \end{itemize}
-\end{definicja}
-
-\begin{definicja} Dwójkę \(\left(\Phi,\, \vdash\right)\) nazywamy \emph{implikacyjnym fragmentem logiki intuicjonistycznej} i oznaczamy \(\mathrm{NJ(\to)}\).
 \end{definicja}
 
 \subsection{Semantyka}

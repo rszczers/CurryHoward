@@ -1,2 +1,60 @@
-/section{Typy proste w stylu Churcha}
+\section{Typy proste w stylu Churcha}
+
+\subsection{Język}
+
+\begin{definicja}
+\begin{itemize}
+\item
+\emph{Typami prostymi} nazywamy język \(\mathrm{T}\) generowany przez gramatykę
+\begin{align*}
+  \mathrm{T} &:= U\ |\ (\mathrm{T}\to \mathrm{T})\\
+    \mathrm{U} &:= \mathrm{p}\ |\ \mathrm{U}'
+\end{align*}
+
+\item Napisy powstałe z produkcji U nazywamy \emph{zmiennymi typowymi}. 
+
+\begin{konwencja*}$ $\newline 
+  \begin{enumerate}
+    \item Zamiast \(\mathrm{p'},\, \mathrm{p''},\, \mathrm{p'''},\, \dots\) używamy kolejno liter \(\mathrm{p},\, \mathrm{q},\, \mathrm{r},\, \dots\)
+    \item Zmienne metasyntaktyczne oznaczamy późniejszymi literami greckiego alfabetu, tj. \(\varphi,\, \psi,\, \dots\)
+    \item \(\rightarrow\) jest łączna w prawo.
+    \item Pomijamy najbardziej zewnętrzne nawiasy.
+  \end{enumerate}
+\end{konwencja*}
+
+\item
+  \emph{Pseudotermami} nazywamy język \(\Lambda_{\mathrm{T}}\) generowany przez
+gramatykę 
+\[
+  \Lambda_{\mathrm{T}} := \ \mathrm{V}\ | \ \left (\lambda V^{\mathrm{T}} . \Lambda_{\mathrm{T}}\right) \ | \ \left (\Lambda_{\mathrm{T}}\Lambda_{\mathrm{T}}\right)
+\]
+    gdzie V to przeliczalny zbiór zmiennych \(x, y, \dots\)
+  \item \emph{Otoczeniem} nazywamy funkcję częściową \(\Gamma:\:\mathrm{V}\to\mathrm{T}\) przeprowadzającą zbiór zmiennych zmiennych typowych w zbiór typów prostych.
+    
+\item
+  Wprowadzamy relację \emph{typizacji} \(\vdash \subset \mathrm{C}\times\Lambda_{\mathrm{T}}\times\mathrm{T}\) jako najmniejszą (w sensie mnogościowym) relację spełniającą reguły
+
+    \begin{center}
+      \begin{tabular}{ ccc}
+      {\begin{prooftree}
+        \Hypo{ \Gamma, x^{\varphi} \vdash x^{\varphi} \ (\mathrm{Ax}) }
+        \end{prooftree}},
+      &
+      {\begin{prooftree}
+        \Hypo{ \Gamma, x^{\varphi} \vdash M^{\psi} }
+        \Infer1[(\(\rightarrow\)I)]{\Gamma \vdash (\lambda\, x^{\varphi}.\, M)^{\varphi\to\psi}}
+      \end{prooftree}},
+      &
+      {\begin{prooftree}
+        \Hypo{\Gamma \vdash M^{\varphi \to \psi}} \Hypo{ \Gamma \vdash N^{\varphi}}
+        \Infer2[(\(\rightarrow\)E)]{\Gamma \vdash (MN)^{\psi}}
+      \end{prooftree}}.
+      \end{tabular}
+    \end{center}
+    gdzie \(C\subset\mathcal{P}\left(\mathrm{V}\times\mathrm{T}\right)\) jest rodziną wszystkich otoczeń.
+
+Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeśli \(\Gamma \vdash M^{\tau}\).
+\end{itemize}
+  
+\end{definicja}
 
