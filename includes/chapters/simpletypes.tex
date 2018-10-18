@@ -33,6 +33,41 @@ gramatykę 
       \item \(\mathrm{rg}(\Gamma)=\left\{\tau\in\Phi_{\to}\,|\,\exists x.\,(x\,:\,\tau)\in\Gamma\right\}\)
     \end{itemize}
 
+  \item Dla pseudotermu \(M\) następująco określamy zbiór \emph{termów wolnych} \(\mathrm{FV}\):
+    \begin{align*}
+      \mathrm{FV}(x) &= \{x\}\\
+      \mathrm{FV}(\lambda x^\sigma .\, P)  &= \mathrm{FV}(P)\setminus\{x\}\\
+      \mathrm{FV}(P Q) &= \mathrm{FV}(P)\cup\mathrm{FV}(Q)
+    \end{align*}
+
+\item \emph{Podstawieniem} pseudotermu \(N\) za \(\lambda\)-zmienną \(x\) w \(M\) nazwamy zdefiniowane następująco przekształcenie:
+  \begin{align*}
+    x[x/N] &= N,\\
+    y[x/N] &= y,\ &\text{o ile}\ x\neq y,\\
+    (PQ)[x/N] &= P[x/N]\,Q[x/N],\\
+    (\lambda y^\sigma.\, P)[x/N] &= \lambda y^\sigma .\,P[x/N],\ &\text{gdzie}\ x\neq y\ \text{i}\ y\not\in \mathrm{FV}(N).\\
+  \end{align*}
+ 
+%  \item Podstawieniem pseudotermu \(N\) za \(\lambda\)-zmienną \(x\) w pseudotermie \(M\), symbolicznie \(M[x/N]\), nazywamy przekształcenie pseudotermu zadane następującymi warunkami:
+%    \begin{enumerate}[label=({\alph*})]
+%    \item Podstawienie jest poprawne wtedy i tylko wtedy, gdy żadne wolne wystąpienie \(\lambda\)-zmiennej \(x\) w pseudotermie \(M\) nie występuje w podtermie \(M\) postaci \(\lambda y.\, L\), gdzie \(y\in\mathrm{FV}(N)\).
+%    \item
+%      \begin{align*}
+%        x[x/N] &= N,&\\
+%        y[x/N] &= y,\ &\text{o ile}\ x\neq y,&\\
+%        (PQ)[x/N] &= P[x/N]\,Q[x/N],&\\
+%        (\lambda x.\,P)[x/N] &= \lambda x.\,P,&\\
+%        (\lambda y.\,P)[x/N] &= \lambda y.\,P [x/N],\ &\text{o ile}\ x\neq y.
+%      \end{align*}
+%    \end{enumerate}
+
+\item \emph{\(\alpha\)-konwersją} \(=_\alpha\) nazywamy najmniejszą w sensie mnogościowym relację zwrotną i przechodnią określoną na zbiorze przeudotermów \(\Lambda_{\mathrm{T}}\) spełniającą poniższe warunki:
+    \begin{enumerate}[label=({\alph*})]
+      \item Jeśli \(y\not\in \mathrm{FV}(M)\) i \(M[x/y]\) jest poprawnym podstawieniem, to \(\lambda x.\, M  =_\alpha \lambda y.\, M[x/y]\).
+      \item Jeśli \(M=_\alpha N\), to dla każdej \(\lambda\)-zmiennej \(x\) mamy \(\lambda x.\, M =_\alpha \lambda x.\,N\).
+      \item Jeśli \(M=_\alpha N\), to \(M Z=_\alpha N Z\).
+      \item Jeśli \(M=_\alpha N\), to \(ZM =_\alpha ZN\).
+    \end{enumerate}
 \item
     \emph{Sądem} (\emph{asercją}) nazywamy każdą trójkę \((\Gamma ,\,M,\,\sigma )\in\mathcal{P}(\mathrm{V}\times \mathrm{T})\times\Lambda_{\mathrm{T}}\times\mathrm{T}\), gdzie \(\Gamma\) jest otoczeniem typowym i oznaczamy \(\Gamma\vdash M^{\sigma}\).
 
@@ -63,7 +98,8 @@ gramatykę 
     Dowód sądu określamy analogicznie jak w logince NJ(\(\to\)).
 
 Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeśli istnieje dowód sądu \(\Gamma \vdash M^{\tau}\) w powyższym systemie dedukcyjnym.
+
+ 
 \end{itemize}
-  
 \end{definicja}
 
