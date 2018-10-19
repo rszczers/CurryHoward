@@ -13,7 +13,7 @@
   \emph{Pseudotermami} nazywamy język \(\Lambda_{\mathrm{T}}\) generowany przez
 gramatykę 
 \[
-  \Lambda_{\mathrm{T}} := \ \mathrm{V}\ | \ \left (\lambda V^{\mathrm{T}} . \Lambda_{\mathrm{T}}\right) \ | \ \left (\Lambda_{\mathrm{T}}\Lambda_{\mathrm{T}}\right)
+  \Lambda^{-}_{\mathrm{T}} := \ \mathrm{V}\ | \ \left (\lambda V^{\mathrm{T}} . \Lambda^{-}_{\mathrm{T}}\right) \ | \ \left (\Lambda^{-}_{\mathrm{T}}\Lambda^{-}_{\mathrm{T}}\right)
 \]
     gdzie V to przeliczalny zbiór \(\lambda\)-zmiennych \(x, y, \dots\)
     
@@ -32,14 +32,14 @@ gramatykę 
       \mathrm{FV}(P Q) &= \mathrm{FV}(P)\cup\mathrm{FV}(Q)
     \end{align*}
 
-\item \emph{Podstawieniem} pseudotermu \(N\) za \(\lambda\)-zmienną \(x\) w \(M\) nazwamy zdefiniowane następująco przekształcenie:
+  \item \emph{Podstawieniem} \([x/N]\) pseudotermu \(N\) za \(\lambda\)-zmienną \(x\) w \(M\) nazwamy zdefiniowane następująco przekształcenie:
   \begin{align*}
     x[x/N] &= N,\\
     y[x/N] &= y,\ &\text{o ile}\ x\neq y,\\
     (PQ)[x/N] &= P[x/N]\,Q[x/N],\\
     (\lambda y^\sigma.\, P)[x/N] &= \lambda y^\sigma .\,P[x/N],\ &\text{gdzie}\ x\neq y\ \text{i}\ y\not\in \mathrm{FV}(N).\\
   \end{align*}
- 
+    Jesli \(\mathrm{FV}(M)=\emptyset\), to pseudoterm \(M\) nazywamy \emph{zamkniętym}. 
 %  \item Podstawieniem pseudotermu \(N\) za \(\lambda\)-zmienną \(x\) w pseudotermie \(M\), symbolicznie \(M[x/N]\), nazywamy przekształcenie pseudotermu zadane następującymi warunkami:
 %    \begin{enumerate}[label=({\alph*})]
 %    \item Podstawienie jest poprawne wtedy i tylko wtedy, gdy żadne wolne wystąpienie \(\lambda\)-zmiennej \(x\) w pseudotermie \(M\) nie występuje w podtermie \(M\) postaci \(\lambda y.\, L\), gdzie \(y\in\mathrm{FV}(N)\).
@@ -52,14 +52,48 @@ gramatykę 
 %        (\lambda y.\,P)[x/N] &= \lambda y.\,P [x/N],\ &\text{o ile}\ x\neq y.
 %      \end{align*}
 %    \end{enumerate}
+    \begin{fakt}$ $\\
+      \begin{enumerate}[label=({\alph*})]
+        \item Jeśli \(x\not\in\mathrm{FV}(M)\), to \(M[x/N]\) jest poprawnym podstawieniem i \(M[x/N]=M\).
+        \item Jeśli \(M[x/N]\) jest poprawnym podstawieniem, to \(y\in\mathrm{FV}(M[x/N]\) wtw, gdy albo \(y\in\mathrm{FV}(M)\)
+          i \(x\neq y\), albo \(y\in \mathrm{FV}(N)\) i \(x\in \mathrm{FV}(M)\). 
+        \item Podstawienie \(M[x/x]\) jest poprawne i \(M[x/x]=M\).
+        \item Jeśli \(M[x/y]\) jest poprawnym podstawieniem, to \(M[x/y]\) ma tę samą długość, co \(M\).
+      \end{enumerate}
+    \end{fakt}
+    \begin{fakt}
+      Powiedzmy, że \(M[x/N]\) jest poprawnym podstawieniem i \(N[y/L]\) i \(M[x/N][y/L]\) są poprawnymi podstawieniami, gdzie
+      \(x\neq y\). Jeśli \(x\not\in \mathrm{FV}(L)\) lub \(y\not\in\mathrm{FV}(M)\), to \(M[y/L]\) i \( M[y/L]\left[x/N[y/L]\right] \) jest poprawnym podstawieniem oraz
+      \[
+        M[x/N][y/L]=M[y/L][x/N[y/L]].
+      \]
+    \end{fakt}
 
-\item \emph{\(\alpha\)-konwersją} \(=_\alpha\) nazywamy najmniejszą w sensie mnogościowym relację zwrotną i przechodnią określoną na zbiorze przeudotermów \(\Lambda_{\mathrm{T}}\) spełniającą poniższe warunki:
+    \begin{fakt}
+      Jesli \(M[x/y]\) jest poprawnym postawieniem i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest poprawnym podstawieniem oraz
+      \(M[x/y][y/x]=M\).
+    \end{fakt}
+
+  \item \emph{\(\alpha\)-konwersją} \(=_\alpha\) nazywamy najmniejszą w sensie mnogościowym relację zwrotną i przechodnią określoną na zbiorze pseudotermów \(\Lambda^{-}_{\mathrm{T}}\) spełniającą poniższe warunki:
     \begin{enumerate}[label=({\alph*})]
       \item Jeśli \(y\not\in \mathrm{FV}(M)\) i \(M[x/y]\) jest poprawnym podstawieniem, to \(\lambda x.\, M  =_\alpha \lambda y.\, M[x/y]\).
       \item Jeśli \(M=_\alpha N\), to dla każdej \(\lambda\)-zmiennej \(x\) mamy \(\lambda x.\, M =_\alpha \lambda x.\,N\).
       \item Jeśli \(M=_\alpha N\), to \(M Z=_\alpha N Z\).
       \item Jeśli \(M=_\alpha N\), to \(ZM =_\alpha ZN\).
     \end{enumerate}
+    \begin{fakt}
+      Relacja \(=_{\alpha}\) jest symetryczna.
+    \end{fakt}
+    \begin{fakt}
+      \(=_{\alpha}\) jest relacją równoważności.
+    \end{fakt}
+    \begin{fakt}
+      Jeśli \(M=_\alpha N\), to \(\mathrm{FV}(M)=\mathrm{FV}(N)\).
+    \end{fakt}
+  \item \emph{\(\lambda\)-termami w stylu Churcha} nazywamy zbiór ilorazowy \(\Lambda_\mathrm{T}\) relacji \(\alpha\)-konwersji
+  \[
+    \Lambda_{\mathrm{T}}=\left\{[M]_\alpha\:|\: M\in\Lambda^{-}_\mathrm{T}\right\}
+  \]
 \item
     \emph{Sądem} (\emph{asercją}) nazywamy każdą trójkę \((\Gamma ,\,M,\,\sigma )\in\mathcal{P}(\mathrm{V}\times \mathrm{T})\times\Lambda_{\mathrm{T}}\times\mathrm{T}\), gdzie \(\Gamma\) jest otoczeniem typowym i oznaczamy \(\Gamma\vdash M^{\sigma}\).
 
@@ -91,7 +125,6 @@ gramatykę 
 
 Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeśli istnieje dowód sądu \(\Gamma \vdash M^{\tau}\) w powyższym systemie dedukcyjnym.
 
- 
+  
 \end{itemize}
 \end{definicja}
-
