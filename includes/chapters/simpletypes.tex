@@ -1,5 +1,9 @@
 \section{Typy proste w stylu Churcha}
 
+System \(\lambda_{\to}\) w stylu Churcha to zbiór typów \(\mathrm{T}\),
+zbiór pseudotermów \(\Lambda_{\mathrm{T}}\), rodzina otoczeń typowych,
+relacja \(\beta\)-kontrakcji \(\to_{\beta}\) i relacja przypisania typu \(\vdash\).
+
 \subsection{Język}
 
 \begin{definicja}$ $\newline
@@ -10,7 +14,7 @@
 
     Za zmienne podmiotowe dla oznaczeń formuł zdaniowych obieramy późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho\,\dots\)
 \item
-  \emph{Pseudotermami} nazywamy język \(\Lambda_{\mathrm{T}}\) generowany przez
+  \emph{Pseudo-pretermami} nazywamy język \(\Lambda_{\mathrm{T}}\) generowany przez
 gramatykę 
 \[
   \Lambda^{-}_{\mathrm{T}} := \ \mathrm{V}\ | \ \left (\lambda V^{\mathrm{T}} . \Lambda^{-}_{\mathrm{T}}\right) \ | \ \left (\Lambda^{-}_{\mathrm{T}}\Lambda^{-}_{\mathrm{T}}\right)
@@ -90,7 +94,7 @@ gramatykę 
     \begin{fakt}
       Jeśli \(M=_\alpha N\), to \(\mathrm{FV}(M)=\mathrm{FV}(N)\).
     \end{fakt}
-  \item \emph{\(\lambda\)-termami w stylu Churcha} nazywamy zbiór ilorazowy \(\Lambda_\mathrm{T}\) relacji \(\alpha\)-konwersji
+  \item \emph{Pseudotermami} nazywamy zbiór ilorazowy \(\Lambda_\mathrm{T}\) relacji \(\alpha\)-konwersji
   \[
     \Lambda_{\mathrm{T}}=\left\{[M]_\alpha\:|\: M\in\Lambda^{-}_\mathrm{T}\right\}
   \]
@@ -124,7 +128,51 @@ gramatykę 
     Dowód sądu określamy analogicznie jak w logince NJ(\(\to\)).
 
 Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeśli istnieje dowód sądu \(\Gamma \vdash M^{\tau}\) w powyższym systemie dedukcyjnym.
-
-  
 \end{itemize}
 \end{definicja}
+
+\subsection{Redukcja}
+\begin{definicja}
+\begin{itemize}
+
+  \item Relację \(\mathrm{R}\) na zbiorze pseudotermów \(\Lambda_{\mathrm{T}}\) nazywamy \emph{zgodną}, jeśli dla \(M,\,N,\,Z\in\Lambda_{\mathrm{T}}\) spełnia następujące warunki
+
+  \begin{enumerate}[label=({\alph*})]
+    \item Jeśli \(M\mathrm{R} N\), to \((\lambda x^\sigma.\,M)\, \mathrm{R}\, (\lambda x^\sigma.\, N)\) dla każdej \(\lambda\)-zmiennej \(x\) dla której istnieje \(\sigma\in \mathrm{T}\).
+    \item Jeśli \(M\mathrm{R} N\), to \((MZ)\,\mathrm{R}\, (NZ)\).
+    \item Jeśli \(M\mathrm{R} N\), to \((ZM)\,\mathrm{R}\, (ZN)\).
+  \end{enumerate}
+  \item \emph{Kongruencją} nazywamy zgodną relację równowazności na \(\Lambda_{\mathrm{T}}\).
+  \item \emph{Redukcją} nazywamy zgodną, zwrotną i przechodnią relację na \(\Lambda_{\mathrm{T}}\).
+
+\item \(\beta\)-redukcją nazywamy najmniejsza w sensie mnogościowym \emph{zgodną} relację „\(\longrightarrow_{\beta}\)” określoną zbiorze pseudotermów \(\Lambda_{\mathrm{T}}\) za pomocą podstawienia
+  \[
+    (\lambda x^\sigma.\,P)Q \longrightarrow_{\beta} P[x/Q].
+  \]
+
+
+    \(\longrightarrow^{+}_{\beta}\) jest przechodnim domknięciem relacji \(\longrightarrow_{\beta}\) w zbiorze pseudotermów \(\Lambda_{\mathrm{T}}\).
+
+    \(\longrightarrow^{*}_{\beta}\) jest domknięciem przechodnio-zwrotnim w \(\Lambda_{\mathrm{T}}\) relacji \(\longrightarrow_{\beta}\), a zatem jest \emph{redukcją}. 
+
+    \(=_{\beta}\) jest najmniejszą relację równowazności zawierającą relację \(\longrightarrow_{\beta}\), a zatem \emph{kongruencją}.
+
+
+  \begin{fakt}
+    Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\beta}N\), to
+    \(\Gamma\vdash N^\sigma\).
+  \end{fakt}
+\item \(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) \emph{zgodną} relację w \(\Lambda_{\mathrm{T}}\) taką, że
+  \[
+    \lambda x^\sigma.\, Mx\longrightarrow_{\eta} M,
+  \]
+    o ile \(x\not\in \mathrm{FV}(M)\).
+
+  \begin{fakt}
+    Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\eta}N\), to
+    \(\Gamma\vdash N^\sigma\).
+  \end{fakt}
+
+\end{itemize}
+\end{definicja}
+\subsection{Normalizacja}
