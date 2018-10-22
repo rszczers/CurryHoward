@@ -128,6 +128,11 @@ gramatykę 
     Dowód sądu określamy analogicznie jak w logince NJ(\(\to\)).
 
 Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeśli istnieje dowód sądu \(\Gamma \vdash M^{\tau}\) w powyższym systemie dedukcyjnym.
+
+  \begin{fakt}
+    Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
+  \end{fakt}
+
 \end{itemize}
 \end{definicja}
 
@@ -187,9 +192,25 @@ Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeś
 \item 
   \(\lambda\)-term \(M\) ma własność \emph{normalizacji} (co symbolicznie oznaczamy \(M\in\mathrm{WN_{\beta}}\)) wtw, gdy \emph{istnieje} ciąg \(\beta\)-redukcji rozpoczynający się od \(M\) i kończący się termem w postaci normalnej \(N\). \(\lambda\)-term \(M\) ma własność \emph{silnej normalizacji} (symbolicznie: \(M\in\mathrm{SN_{\beta}}\)), jeśli wszystkie ciągi \(\beta\)-redukcji rozpoczynające się \(M\) są skończone.
 
-      \emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\Lambda_{\mathrm{T}}\to\Lambda_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\to_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
+  \emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\Lambda_{\mathrm{T}}\to\Lambda_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\to_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
 
-\begin{twierdzenie}
-  Każdy \(\lambda\)-term w stylu Churcha ma postać normalną.
+\begin{twierdzenie} 
+  (\emph{Własność \(\mathrm{WN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha ma postać normalną.
 \end{twierdzenie}
-  \end{itemize}
+\begin{twierdzenie} 
+  (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
+\end{twierdzenie}
+
+\item WCR: \(\forall a,\,b,\,c\in A\, (a\longrightarrow b \land a\longrightarrow c)\to \exists d\in A\,(b\longrightarrow^{*} d \land c\longrightarrow^{*} d)\)
+\item CR: \(\forall a,\,b,\,c\in A\, (a\longrightarrow^{*} b \land a\longrightarrow^{*}c)\to \exists d\in A\,(b\longrightarrow^{*} d \land c\longrightarrow^{*} d)\)
+\begin{twierdzenie} 
+  \emph{(Lemat Newmana)} Niech \(\to\) bedzie relacją binarną spełniającą \(SN\). Jeśli \(\to\) spełnia WCR, to spełnia CR.
+\end{twierdzenie}
+
+\begin{twierdzenie} 
+  \\begin{twierdzenie} 
+  (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
+\end{twierdzenie}
+emph{(Własność \(\mathrm{SN}_{\beta}\))} Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
+\end{twierdzenie}
+\end{itemize}
