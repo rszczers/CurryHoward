@@ -1,49 +1,50 @@
-\section{Typy proste w stylu Churcha}
+\section{Rachunek \(\lambda\) z typami prostymi}
 
-System \(\lambda_{\to}\) w stylu Churcha to zbiór typów \(\mathrm{T}\),
-zbiór pseudotermów \(\Lambda_{\mathrm{T}}\), rodzina otoczeń typowych,
-relacja \(\beta\)-kontrakcji \(\to_{\beta}\) i relacja przypisania typu \(\vdash\).
+%System \(\lambda_{\to}\) w stylu Churcha to zbiór typów \(\mathrm{T}\),
+%zbiór pseudotermów \(\Lambda_{\mathrm{T}}\), rodzina otoczeń typowych,
+%relacja \(\beta\)-kontrakcji \(\to_{\beta}\) i relacja przypisania typu \(\vdash\).
 
-\subsection{Język}
+\subsection{Typy proste}
+\begin{definicja}(Typy proste)\\
+  Niech \(\mathrm{U}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(p,\ q,\ \dots\ \) (być może indeksowanych liczbami naturalnymi), które będziemy nazywali \emph{zmiennymi typowymi}. \emph{Typami prostymi} będziemy nazywali najmniejszy w sensie mnogościowym zbiór wyrażeń taki, że:
+\begin{enumerate}[label=\roman*)]
+  \item Jeśli \(p\) jest zmienną typową, to \(p\) jest typem prostym.
+  \item Jeśli \(\tau\) i \(\sigma\) są typami prostymi, to \(\left(\tau\to\sigma\right)\) jest typem prostym.
+\end{enumerate}
+\end{definicja}
 
-\begin{definicja}$ $\newline
-\begin{itemize}
-\item
-  \emph{Typami prostymi} \(\mathrm{T}\) nazywamy zbiór \(\Phi_{\to}\) wszystkich formuł języka logiki NJ(\(\to\)). 
-    Zamiast mówić o zmiennych zdaniowych, będziemy używali określenia \emph{zmienne typowe}.
+Typy proste zbudowane tylko wedle reguły i) nazywamy niekiedy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły ii) – typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbf{T_\to}\).
 
-    Za zmienne podmiotowe dla oznaczeń formuł zdaniowych obieramy późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho\,\dots\)
-\item
-  \emph{Pseudo-pretermami} nazywamy język \(\Lambda_{\mathrm{T}}\) generowany przez
-gramatykę 
-\[
-  \Lambda^{-}_{\mathrm{T}} := \ \mathrm{V}\ | \ \left (\lambda V^{\mathrm{T}} . \Lambda^{-}_{\mathrm{T}}\right) \ | \ \left (\Lambda^{-}_{\mathrm{T}}\Lambda^{-}_{\mathrm{T}}\right)
-\]
-    gdzie V to przeliczalny zbiór \(\lambda\)-zmiennych \(x, y, \dots\)
-    
-    W języku podmiotowym będziemy używali późniejszych liter alfabetu łacińskiego pisanych kursywą (\(M,\, N,\, O,\, \dots\)) oznaczając pseudotermy.
-  \item \emph{Otoczeniem typowym} nazywamy skończoną funkcję częściową \(\Gamma:\:\mathrm{V}\to\mathrm{T}\) przeprowadzającą zbiór \(\lambda\)-zmiennych w zbiór typów prostych. Nadużywając notacji piszemy
-    \begin{itemize}
-      \item \(\Gamma=\{x_1\,:\,\tau_1,\,\dots,\,x_n\,:\,\tau_n\}\)
-      \item \(\mathrm{dom}(\Gamma) = \left\{x\in \mathrm{V}\,|\:\exists\tau.\,(x\,:\,\tau)\in\Gamma\right\}\)
-      \item \(\mathrm{rg}(\Gamma)=\left\{\tau\in\Phi_{\to}\,|\,\exists x.\,(x\,:\,\tau)\in\Gamma\right\}\)
-    \end{itemize}
+Ustalmy w ramach konwencji, że późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho,\ \dots\) będą służyły nam za zmienne metasyntaktyczne do oznaczania typów prostych. Dla lepszej czytelności będziemy pomijali najbardziej zewnętrzne nawiasy. Symbol „\(\to\)”  (\emph{konstruktor typu}) jest prawostronnie łączny, co oznacza, że typy \(\tau\to\sigma\to\theta\) oraz \(\tau\to(\sigma\to\theta)\) będziemy uznawali za tożsame.
 
-  \item Dla pseudotermu \(M\) następująco określamy zbiór \emph{termów wolnych} \(\mathrm{FV}\):
+
+\subsection{Pseudotermy}
+Określimy teraz składnię \emph{pseudo-termów}, która będzie łączyła \(\lambda\)-termy beztypowego rachunku \(\lambda\) z wyżej określonymi typami prostymi.
+
+  Niech \(\mathrm{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\ \) (również być może indeksowanych liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \(\lambda\)-zmiennymi.
+ \begin{definicja}(Pseudo-pretermy)\\
+  \emph{Pseudo-pretermami} będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór \(\mathbf{\Lambda}^{-}_{\mathrm{T}}\) taki, że:
+  \begin{enumerate}[label=\roman*)]
+    \item Jeśli \(x\in \mathrm{V}\), to \(x\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\).
+    \item Jeśli \(M\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\) i \(N\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\), to \((MN)\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\).
+    \item Dla dowolnych \(x\in \mathrm{V}\), \(\sigma\in\mathbf{T}_\to\), \(M\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\) mamy, że \((\lambda x^{\sigma}.\,M)\in \mathbf{\Lambda}^{-}_{\mathrm{T}}\).
+  \end{enumerate}
+ \end{definicja}
+  Wyrażenia postaci ii) nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci iii) – \(\lambda\)-abstrakcjami, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest \emph{związana}.
+
+W dalszym ciągu będziemy chcięli utożsamić ze sobą wszystkie te pseudo-pretermy, które różnią się między sobią tylko zmiennymi związanymi(. 
+  
+
+  Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \)Podobnie jak poprzednio, stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów jest łączna lewostronnie, co oznacza, że będziemy utożsamiać wyrażenia \(MNP\) i \((MN)P\).
+
+\begin{definicja}(Zmienne wolne)
+  \item Dla pseudo-pretermu \(M\) określamy zbiór \emph{termów wolnych} \(\mathrm{FV}\) w nastepujący sposób:
     \begin{align*}
       \mathrm{FV}(x) &= \{x\}\\
       \mathrm{FV}(\lambda x^\sigma .\, P)  &= \mathrm{FV}(P)\setminus\{x\}\\
       \mathrm{FV}(P Q) &= \mathrm{FV}(P)\cup\mathrm{FV}(Q)
     \end{align*}
-
-  \item \emph{Podstawieniem} \([x/N]\) pseudotermu \(N\) za \(\lambda\)-zmienną \(x\) w \(M\) nazwamy zdefiniowane następująco przekształcenie:
-  \begin{align*}
-    x[x/N] &= N,\\
-    y[x/N] &= y,\ &\text{o ile}\ x\neq y,\\
-    (PQ)[x/N] &= P[x/N]\,Q[x/N],\\
-    (\lambda y^\sigma.\, P)[x/N] &= \lambda y^\sigma .\,P[x/N],\ &\text{gdzie}\ x\neq y\ \text{i}\ y\not\in \mathrm{FV}(N).\\
-  \end{align*}
-    Jesli \(\mathrm{FV}(M)=\emptyset\), to pseudoterm \(M\) nazywamy \emph{zamkniętym}. 
+\end{definicja}
 %  \item Podstawieniem pseudotermu \(N\) za \(\lambda\)-zmienną \(x\) w pseudotermie \(M\), symbolicznie \(M[x/N]\), nazywamy przekształcenie pseudotermu zadane następującymi warunkami:
 %    \begin{enumerate}[label=({\alph*})]
 %    \item Podstawienie jest poprawne wtedy i tylko wtedy, gdy żadne wolne wystąpienie \(\lambda\)-zmiennej \(x\) w pseudotermie \(M\) nie występuje w podtermie \(M\) postaci \(\lambda y.\, L\), gdzie \(y\in\mathrm{FV}(N)\).
@@ -56,7 +57,18 @@ gramatykę 
 %        (\lambda y.\,P)[x/N] &= \lambda y.\,P [x/N],\ &\text{o ile}\ x\neq y.
 %      \end{align*}
 %    \end{enumerate}
-    \begin{fakt}$ $\\
+\begin{definicja}(Podstawienie)\\
+\emph{Podstawieniem} \([x/N]\) pseudo-pretermu \(N\) za \(\lambda\)-zmienną \(x\) w \(M\) nazwamy zdefiniowane następująco przekształcenie:
+  \begin{align*}
+    x[x/N] &= N,\\
+    y[x/N] &= y,\ &\text{o ile}\ x\neq y,\\
+    (PQ)[x/N] &= P[x/N]\,Q[x/N],\\
+    (\lambda y^\sigma.\, P)[x/N] &= \lambda y^\sigma .\,P[x/N],\ &\text{gdzie}\ x\neq y\ \text{i}\ y\not\in \mathrm{FV}(N).\\
+  \end{align*}
+    Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{zamknięty}. 
+\end{definicja}
+
+    \begin{fakt}
       \begin{enumerate}[label=({\alph*})]
         \item Jeśli \(x\not\in\mathrm{FV}(M)\), to \(M[x/N]\) jest poprawnym podstawieniem i \(M[x/N]=M\).
         \item Jeśli \(M[x/N]\) jest poprawnym podstawieniem, to \(y\in\mathrm{FV}(M[x/N]\) wtw, gdy albo \(y\in\mathrm{FV}(M)\)
@@ -77,14 +89,16 @@ gramatykę 
       Jesli \(M[x/y]\) jest poprawnym postawieniem i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest poprawnym podstawieniem oraz
       \(M[x/y][y/x]=M\).
     \end{fakt}
-
-  \item \emph{\(\alpha\)-konwersją} \(=_\alpha\) nazywamy najmniejszą w sensie mnogościowym relację zwrotną i przechodnią określoną na zbiorze pseudotermów \(\Lambda^{-}_{\mathrm{T}}\) spełniającą poniższe warunki:
+    
+  \begin{definicja}(\(\alpha\)-konwersja)\\
+    \(\alpha\)-konwersją nazywamy najmniejszą (w sensie mnogościowym) zwrotną i przechodnią relację binarną \(=_\alpha\) określoną na zbiorze pseudotermów \(\Lambda^{-}_{\mathrm{T}}\) spełniającą poniższe warunki:
     \begin{enumerate}[label=({\alph*})]
       \item Jeśli \(y\not\in \mathrm{FV}(M)\) i \(M[x/y]\) jest poprawnym podstawieniem, to \(\lambda x.\, M  =_\alpha \lambda y.\, M[x/y]\).
       \item Jeśli \(M=_\alpha N\), to dla każdej \(\lambda\)-zmiennej \(x\) mamy \(\lambda x.\, M =_\alpha \lambda x.\,N\).
       \item Jeśli \(M=_\alpha N\), to \(M Z=_\alpha N Z\).
       \item Jeśli \(M=_\alpha N\), to \(ZM =_\alpha ZN\).
     \end{enumerate}
+  \end{definicja}
     \begin{fakt}
       Relacja \(=_{\alpha}\) jest symetryczna.
     \end{fakt}
@@ -94,6 +108,31 @@ gramatykę 
     \begin{fakt}
       Jeśli \(M=_\alpha N\), to \(\mathrm{FV}(M)=\mathrm{FV}(N)\).
     \end{fakt}
+
+
+  
+%\item
+%  \emph{Pseudo-pretermami} nazywamy język \(\Lambda_{\mathrm{T}}\) generowany przez
+%gramatykę 
+%\[
+%  \Lambda^{-}_{\mathrm{T}} := \ \mathrm{V}\ | \ \left (\lambda V^{\mathrm{T}} . \Lambda^{-}_{\mathrm{T}}\right) \ | \ \left (\Lambda^{-}_{\mathrm{T}}\Lambda^{-}_{\mathrm{T}}\right)
+%\]
+%    gdzie V to przeliczalny zbiór \(\lambda\)-zmiennych \(x, y, \dots\)
+    
+%    W języku podmiotowym będziemy używali późniejszych liter alfabetu łacińskiego pisanych kursywą (\(M,\, N,\, O,\, \dots\)) oznaczając pseudotermy.
+
+\begin{definicja}(Otoczenie typowe)\\
+  \emph{Otoczeniem typowym} nazywamy skończoną funkcję częściową \(\Gamma:\:\mathrm{V}\to\mathrm{T}\) przeprowadzającą zbiór \(\lambda\)-zmiennych w zbiór typów prostych. Nadużywając notacji piszemy
+    \begin{itemize}
+      \item \(\Gamma=\{x_1\,:\,\tau_1,\,\dots,\,x_n\,:\,\tau_n\}\)
+      \item \(\mathrm{dom}(\Gamma) = \left\{x\in \mathrm{V}\,|\:\exists\tau.\,(x\,:\,\tau)\in\Gamma\right\}\)
+      \item \(\mathrm{rg}(\Gamma)=\left\{\tau\in\Phi_{\to}\,|\,\exists x.\,(x\,:\,\tau)\in\Gamma\right\}\)
+    \end{itemize}
+\end{definicja}
+
+\begin{definicja}
+
+\begin{itemize}
   \item \emph{Pseudotermami} nazywamy zbiór ilorazowy \(\Lambda_\mathrm{T}\) relacji \(\alpha\)-konwersji
   \[
     \Lambda_{\mathrm{T}}=\left\{[M]_\alpha\:|\: M\in\Lambda^{-}_\mathrm{T}\right\}
@@ -197,20 +236,20 @@ Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeś
 \begin{twierdzenie} 
   (\emph{Własność \(\mathrm{WN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha ma postać normalną.
 \end{twierdzenie}
+
 \begin{twierdzenie} 
   (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
 \end{twierdzenie}
 
 \item WCR: \(\forall a,\,b,\,c\in A\, (a\longrightarrow b \land a\longrightarrow c)\to \exists d\in A\,(b\longrightarrow^{*} d \land c\longrightarrow^{*} d)\)
 \item CR: \(\forall a,\,b,\,c\in A\, (a\longrightarrow^{*} b \land a\longrightarrow^{*}c)\to \exists d\in A\,(b\longrightarrow^{*} d \land c\longrightarrow^{*} d)\)
+
 \begin{twierdzenie} 
   \emph{(Lemat Newmana)} Niech \(\to\) bedzie relacją binarną spełniającą \(SN\). Jeśli \(\to\) spełnia WCR, to spełnia CR.
 \end{twierdzenie}
 
 \begin{twierdzenie} 
-  \\begin{twierdzenie} 
   (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
 \end{twierdzenie}
-emph{(Własność \(\mathrm{SN}_{\beta}\))} Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
-\end{twierdzenie}
+
 \end{itemize}
