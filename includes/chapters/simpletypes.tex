@@ -32,8 +32,6 @@ Ustalmy w ramach konwencji, że późniejsze litery alfabetu greckiego, tj. \(\s
 
   Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \)Podobnie jak poprzednio, stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów jest łączna lewostronnie, co oznacza, że będziemy utożsamiać wyrażenia \(MNP\) i \((MN)P\).
 
-W dalszym ciągu będziemy chcieli utożsamić ze sobą wszystkie te pseudo-pretermy, które różnią się między sobią tylko zmiennymi związanymi tak, jak to ma miejsce w na przykład przypadku \(\lambda x.\,x\) i \(\lambda y.\,y\).
-
 \begin{definicja}(Zmienne wolne)
   \item Dla pseudo-pretermu \(M\) określamy zbiór \emph{termów wolnych} \(\mathrm{FV}\) w nastepujący sposób:
     \begin{align*}
@@ -43,7 +41,6 @@ W dalszym ciągu będziemy chcieli utożsamić ze sobą wszystkie te pseudo-pret
     \end{align*}
 Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{zamknięty}. 
 \end{definicja}
-
 %  \item Podstawieniem pseudotermu \(N\) za \(\lambda\)-zmienną \(x\) w pseudotermie \(M\), symbolicznie \(M[x/N]\), nazywamy przekształcenie pseudotermu zadane następującymi warunkami:
 %    \begin{enumerate}[label=({\alph*})]
 %    \item Podstawienie jest poprawne wtedy i tylko wtedy, gdy żadne wolne wystąpienie \(\lambda\)-zmiennej \(x\) w pseudotermie \(M\) nie występuje w podtermie \(M\) postaci \(\lambda y.\, L\), gdzie \(y\in\mathrm{FV}(N)\).
@@ -112,7 +109,7 @@ Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{zamknięty}
     \end{fakt}
 
 Dysponując powyższymi rozstrzygnięciami otrzymujemy wygodne utożsamienie pseudo-pretermów,
-które różnią się tylko zmienną związaną.
+które różnią się między sobą tylko zmiennymi związanymi.
 
 \begin{definicja}(Pseudotermy)\\
   \emph{Pseudotermami} nazywamy zbiór ilorazowy \(\mathbf{\Lambda}_\mathrm{T}\) relacji \(\alpha\)-konwersji
@@ -139,10 +136,17 @@ które różnią się tylko zmienną związaną.
   nazywamy \emph{dziedziną} kontekstu \(\Gamma\), zaś 
   \[\mathrm{rg}(\Gamma)=\left\{\tau\in\mathbf{T}_\to\,|\,\exists x(x^\tau\in\Gamma)\right\}\]
   -- \emph{zakresem} kontekstu \(\Gamma\).
+  Piszemy:
+  \begin{itemize}
+    \item \(x_{1}^{\tau_1},\,x_{2}^{\tau_2}\) zamiast \(\{x_{1}^{\tau_1},\, x_{2}^{\tau_2}\}\), o ile \(x_{1}^{\tau_1}\) i \(x_{2}^{\tau_2}\) są różne,
+    \item \(\Gamma,\, x^\varphi\) zamiast \(\Gamma\cup \{x^\varphi\}\), o ile \(x^\varphi\not\in \Gamma\),
+    \item \(\Gamma,\, \Delta\) zamiast \(\Gamma\cup \Delta\), o ile \(\Gamma\cap\Delta=\emptyset\).
+  \end{itemize}
 \end{definicja}
 
-\begin{definicja}(Typowalność)
-  Na zbiorze sądów wprowadzamy relacje określające reguły wyprowadzania termów
+Wprowadzimy teraz system w stylu dedukcji naturalnej. \emph{Sekwentami} będziemy nazywali wyrażenia postaci \(\Gamma\vdash M^{\sigma}\), gdzie \(M\in\mathbf{\Lambda}_{\mathrm{T}},\ \sigma\in\mathbf{T_\to}\), zaś \(\Gamma\) jest pewnym otoczeniem typowym. 
+
+Wprowadzamy następujące reguły dowodzenia:
     \begin{center}
     \begin{tabular}{ ccc}
       {\begin{prooftree}
@@ -162,47 +166,44 @@ które różnią się tylko zmienną związaną.
       \end{tabular}
     \end{center}
 
-Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeśli istnieje dowód sądu \(\Gamma \vdash M^{\tau}\) w powyższym systemie dedukcyjnym.
-
+\begin{definicja}(Typowalność)\\
+  Mówimy, że pseudoterm \(M\) jest typu \(\sigma\) w kontekście \(\Gamma\) (jest \emph{typowalny}), jeśli istnieje skończone drzewo sekwentów spełniające poniższe warunki:
+  \begin{enumerate}
+      \item W korzeniu drzewa znajduje się sekwent \(\Gamma \vdash M^\sigma\).
+      \item Liście są \emph{aksjomatami}, tj. sekwentami postaci \(\Gamma, x^\sigma \vdash x^\sigma\).
+      \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania nowych sekwentów.
+  \end{enumerate}
+  Wszystkie typowalne pseudotermy w pewnym kontekście \(\Gamma\) nazywamy \emph{\(\lambda\)-termami} (z typami prostymi).
+  \begin{uwaga*}
+    \(\lambda\)-term w kontekście \(\Gamma_1\) może nie być typowalny w innym kontekście \(\Gamma_2\).   
+  \end{uwaga*}
+\end{definicja}
   \begin{fakt}
     Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
   \end{fakt}
 
-
-\end{definicja}
-
-%\end{definicja}
-%\begin{definicja}(Asercja)\\
-%  \emph{Asercją} (ang. \emph{judgement}) nazywamy każdą trójkę \((\Gamma ,\,M,\,\sigma )\in\mathcal{P}(\mathrm{V}\times \mathbf{T_\to})\times\mathbf{\Lambda}_{\mathrm{T}}\times\mathbf{T_\to}\), gdzie \(\Gamma\) jest otoczeniem typowym i oznaczamy \(\Gamma\vdash M^{\sigma}\).
-%
-%  Piszemy: \begin{itemize}
-%    \item \(\varphi_{1},\ \varphi_{2}\vdash\psi\) zamiast \(\{\varphi_{1},\ \varphi_{2}\}\vdash\psi\),
-%    \item \(\Gamma, x^\varphi\) zamiast \(\Gamma\cup \{x^\varphi\}\), o ile \(x^\varphi\not\in \Gamma\).
-%    \item \(\Gamma, \Delta\) zamiast \(\{\Gamma\cup \Delta\}\), o ile \(\Gamma\cap\Delta=\emptyset\).
-%    \item \(\vdash\varphi\) zamiast \(\emptyset\vdash\varphi\).
-%  \end{itemize}
-%\end{definicja}
-
-\newpage
-
 \subsection{Redukcja}
-\begin{itemize}
-  \item Relację \(\mathrm{R}\) na zbiorze pseudotermów \(\Lambda_{\mathrm{T}}\) nazywamy \emph{zgodną}, jeśli dla \(M,\,N,\,Z\in\Lambda_{\mathrm{T}}\) spełnia następujące warunki
-
-  \begin{enumerate}[label=({\alph*})]
-    \item Jeśli \(M\mathrm{R} N\), to \((\lambda x^\sigma.\,M)\, \mathrm{R}\, (\lambda x^\sigma.\, N)\) dla każdej \(\lambda\)-zmiennej \(x\) dla której istnieje \(\sigma\in \mathrm{T}\).
+\begin{definicja}(Zgodność)\\
+  Relację \(\mathrm{R}\) na zbiorze termów \(\mathbf{\Lambda}_{\mathrm{T}}\) nazywamy \emph{zgodną}, jeśli dla \(M,\,N,\,Z\in\mathbf{\Lambda}_{\mathrm{T}}\) spełnia następujące warunki:
+  \begin{enumerate}[label=\roman*)]
+    \item Jeśli \(M\mathrm{R} N\), to \((\lambda x^\sigma.\,M)\, \mathrm{R}\, (\lambda x^\sigma.\, N)\) dla dowolnych \(x\in \mathrm{V}\) i \(\sigma\in \mathbf{T_\to}\).
     \item Jeśli \(M\mathrm{R} N\), to \((MZ)\,\mathrm{R}\, (NZ)\).
     \item Jeśli \(M\mathrm{R} N\), to \((ZM)\,\mathrm{R}\, (ZN)\).
   \end{enumerate}
-  \item \emph{Kongruencją} nazywamy zgodną relację równowazności na \(\Lambda_{\mathrm{T}}\).
-  \item \emph{Redukcją} nazywamy zgodną, zwrotną i przechodnią relację na \(\Lambda_{\mathrm{T}}\).
 
-\item \(\beta\)-redukcją nazywamy najmniejsza w sensie mnogościowym \emph{zgodną} relację „\(\longrightarrow_{\beta}\)” określoną zbiorze pseudotermów \(\Lambda_{\mathrm{T}}\) za pomocą podstawienia
+  \noindent \emph{Kongruencją} nazywamy zgodną relację równowazności na \(\mathbf{\Lambda}_{\mathrm{T}}\).
+
+  \noindent \emph{Redukcją} nazywamy zgodną, zwrotną i przechodnią relację na \(\mathbf{\Lambda}_{\mathrm{T}}\).
+\end{definicja}
+
+\begin{definicja}(\(\beta\)-redukcja)\\
+  \(\beta\)-redukcją nazywamy najmniejsza w sensie mnogościowym \emph{zgodną} relację binarną \(\longrightarrow_{\beta}\) określoną zbiorze na pseudotermów \(\mathbf{\Lambda}_{\mathrm{T}}\) za pomocą podstawienia
   \[
     (\lambda x^\sigma.\,P)Q \longrightarrow_{\beta} P[x/Q].
   \]
   
-    \emph{\(\beta\)-redeksem} nazywamy wyrażenia postaci \((\lambda x^\sigma.\, M)N\). Rezultatem \(\beta\)-redukcji jest term postaci \(M[x/N]\), który nazywamy \emph{\(\beta\)-reduktem}.
+  \noindent \emph{\(\beta\)-redeksem} nazywamy wyrażenia postaci \((\lambda x^\sigma.\, M)N\). Rezultatem \(\beta\)-redukcji jest term postaci \(M[x/N]\), który nazywamy \emph{\(\beta\)-reduktem}.
+\end{definicja}
 
     Mówimy, że \(\lambda\)-term \(M\) jest w \emph{postaci normalnej}, jeśli żadna jego podformuła nie jest \(\beta\)-redeksem. 
     
@@ -215,12 +216,11 @@ Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeś
 
     \(=_{\beta}\) jest najmniejszą relację równowazności zawierającą relację \(\longrightarrow_{\beta}\), a zatem \emph{kongruencją}.
 
-
   \begin{fakt}
     Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\beta}N\), to
     \(\Gamma\vdash N^\sigma\).
   \end{fakt}
-\item \(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) \emph{zgodną} relację w \(\Lambda_{\mathrm{T}}\) taką, że
+\(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) \emph{zgodną} relację w \(\Lambda_{\mathrm{T}}\) taką, że
   \[
     \lambda x^\sigma.\, Mx\longrightarrow_{\eta} M,
   \]
@@ -230,12 +230,12 @@ Mówimy, że \(M\) jest \emph{termem} typu \(\tau\) w otoczeniu \(\Gamma\), jeś
     Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\eta}N\), to
     \(\Gamma\vdash N^\sigma\).
   \end{fakt}
-\end{itemize}
+
 \subsection{Normalizacja}
 
-  \(\lambda\)-term \(M\) ma własność \emph{normalizacji} (co symbolicznie oznaczamy \(M\in\mathrm{WN_{\beta}}\)) wtw, gdy \emph{istnieje} ciąg \(\beta\)-redukcji rozpoczynający się od \(M\) i kończący się termem w postaci normalnej \(N\). \(\lambda\)-term \(M\) ma własność \emph{silnej normalizacji} (symbolicznie: \(M\in\mathrm{SN_{\beta}}\)), jeśli wszystkie ciągi \(\beta\)-redukcji rozpoczynające się \(M\) są skończone.
+\(\lambda\)-term \(M\) ma własność \emph{(słabej) normalizacji} (co symbolicznie oznaczamy \(M\in\mathrm{WN_{\beta}}\)) wtedy i tylko wtedy, gdy istnieje ciąg \(\beta\)-redukcji rozpoczynający się od \(M\) i kończący się termem w postaci normalnej \(N\). Powiemy, że \(\lambda\)-term \(M\) ma własność \emph{silnej normalizacji} (symbolicznie: \(M\in\mathrm{SN_{\beta}}\)), jeśli wszystkie ciągi \(\beta\)-redukcji rozpoczynające się \(M\) są skończone.
 
-  \emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\Lambda_{\mathrm{T}}\to\Lambda_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\to_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
+\emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\Lambda_{\mathrm{T}}\to\Lambda_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\to_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
 
 \begin{twierdzenie} 
   (\emph{Własność \(\mathrm{WN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha ma postać normalną.
