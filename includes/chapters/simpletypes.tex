@@ -4,8 +4,8 @@
 %zbiór pseudotermów \(\Lambda_{\mathrm{T}}\), rodzina otoczeń typowych,
 %relacja \(\beta\)-kontrakcji \(\to_{\beta}\) i relacja przypisania typu \(\vdash\).
 
-\subsection{Typy proste}
-\begin{definicja}(Typy proste)\\
+\subsection{Typy proste}\label{ssec:typy-proste}
+\begin{definicja}\label{def:typy-proste}(Typy proste)\\
   Niech \(\mathrm{U}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(p,\ q,\ \dots\ \) (być może indeksowanych liczbami naturalnymi), które będziemy nazywali \emph{zmiennymi typowymi}. \emph{Typami prostymi} będziemy nazywali najmniejszy w sensie mnogościowym zbiór wyrażeń taki, że:
 \begin{enumerate}[label=\roman*)]
   \item Jeśli \(p\) jest zmienną typową, to \(p\) jest typem prostym.
@@ -15,11 +15,19 @@
 
 Typy proste zbudowane tylko wedle reguły i) nazywamy niekiedy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły ii) -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbf{T_\to}\).
 
-Ustalmy w ramach konwencji, że późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho,\ \dots\) będą służyły nam za zmienne metasyntaktyczne do oznaczania typów prostych. Dla lepszej czytelności będziemy pomijali najbardziej zewnętrzne nawiasy. Symbol „\(\to\)”  (\emph{konstruktor typu}) jest prawostronnie łączny, co oznacza, że typy \(\tau\to\sigma\to\theta\) oraz \(\tau\to(\sigma\to\theta)\) będziemy uznawali za tożsame.
+Późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho,\ \dots\) będą służyły nam za zmienne metasyntaktyczne do oznaczania typów prostych. Dla lepszej czytelności będziemy pomijali najbardziej zewnętrzne nawiasy. Konstruktor typu \(\to\) jest prawostronnie łączny, co oznacza, że typy \(\tau\to\sigma\to\theta\) oraz \(\tau\to(\sigma\to\theta)\) będziemy uznawali za tożsame.
 
+Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa binarnego. Wysokość takiego drzewa będziemy nazywali \emph{stopniem} typu. Precyzyjnie ujmuje to pojęcie poniższa definicja.
+\begin{definicja}(Stopień typu)\\
+  Stopniem typu nazywamy funkcję 
+  \begin{align*}
+    \delta(p) &= 0,\\
+    \delta(\tau\to\sigma)&=1 + \max\left(\delta(\tau),\ \delta(\sigma)\right).
+  \end{align*}
+\end{definicja}
 
 \subsection{Pseudotermy}
-  Niech \(\mathrm{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\ \) (również być może indeksowanych liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}.
+  Niech \(\mathrm{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\ \) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}.
 \begin{definicja}(Pseudo-pretermy)\\
   \emph{Pseudo-pretermami} będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór \(\mathbf{\Lambda}^{-}_{\mathrm{T}}\) taki, że:
   \begin{enumerate}[label=\roman*)]
@@ -30,7 +38,7 @@ Ustalmy w ramach konwencji, że późniejsze litery alfabetu greckiego, tj. \(\s
 \end{definicja}
   Wyrażenia postaci ii) nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci iii) -- \(\lambda\)-abstrakcjami, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest \emph{związana}.
 
-  Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \)Podobnie jak poprzednio, stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów jest łączna lewostronnie, co oznacza, że będziemy utożsamiać wyrażenia \(MNP\) i \((MN)P\).
+  Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \) Podobnie jak w podrozdziale \ref{ssec:typy-proste} stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów jest łączna lewostronnie, co oznacza, że będziemy utożsamiali wyrażenia \(MNP\) oraz \((MN)P\).
 
 \begin{definicja}(Zmienne wolne)
   \item Dla pseudo-pretermu \(M\) określamy zbiór \emph{termów wolnych} \(\mathrm{FV}\) w nastepujący sposób:
@@ -88,7 +96,7 @@ Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{zamknięty}
     \end{fakt}
     
   \begin{definicja}(\(\alpha\)-konwersja)\\
-    \(\alpha\)-konwersją nazywamy najmniejszą (w sensie mnogościowym) zwrotną i przechodnią relację binarną \(=_\alpha\) określoną na zbiorze pseudotermów \(\Lambda^{-}_{\mathrm{T}}\) spełniającą poniższe warunki:
+    \(\alpha\)-konwersją nazywamy najmniejszą (w sensie mnogościowym) zwrotną i przechodnią relację binarną \(=_\alpha\) określoną na zbiorze pseudotermów \(\mathbf{\Lambda}^{-}_{\mathrm{T}}\) spełniającą poniższe warunki:
     \begin{enumerate}[label=({\alph*})]
       \item Jeśli \(y\not\in \mathrm{FV}(M)\) i \(M[x/y]\) jest poprawnym podstawieniem, to \(\lambda x.\, M  =_\alpha \lambda y.\, M[x/y]\).
       \item Jeśli \(M=_\alpha N\), to dla każdej \(\lambda\)-zmiennej \(x\) mamy \(\lambda x.\, M =_\alpha \lambda x.\,N\).
@@ -112,12 +120,12 @@ Dysponując powyższymi rozstrzygnięciami otrzymujemy wygodne utożsamienie pse
 które różnią się między sobą tylko zmiennymi związanymi.
 
 \begin{definicja}(Pseudotermy)\\
-  \emph{Pseudotermami} nazywamy zbiór ilorazowy \(\mathbf{\Lambda}_\mathrm{T}\) relacji \(\alpha\)-konwersji
+  Klasy abstrakcji relacji \(\alpha\)-konwersji nazywamy \emph{pseudotermami}. Zbiór wszystkich pseudotermów oznaczamy następująco:
 \[
   \mathbf{\Lambda}_{\mathrm{T}}=\left\{[M]_\alpha\:|\: M\in\mathbf{\Lambda}^{-}_\mathrm{T}\right\}
 \]
 \end{definicja}
-
+Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich reprezentantów.
 \subsection{Typowalność} 
 
 %\item
@@ -131,7 +139,7 @@ które różnią się między sobą tylko zmiennymi związanymi.
 %    W języku podmiotowym będziemy używali późniejszych liter alfabetu łacińskiego pisanych kursywą (\(M,\, N,\, O,\, \dots\)) oznaczając pseudotermy.
 
 \begin{definicja}(Kontekst)\\
-  \emph{Kontekstem} (ang. \emph{enviroment}) nazywamy skończoną funkcję częściową \(\Gamma:\:\mathrm{V}\to\mathbf{T_\to}\), czyli zbiór par postaci \(\Gamma=\{x_1^{\tau_1},\,\dots,\,x_n^{\tau_n}\},\ \text{gdzie}\ (x_i^{\tau_i})=(x_i,\, \tau_i)\ \text{oraz}\ x_i \neq x_j\ \text{dla}\ i\neq j\). Zbiór 
+  \emph{Kontekstem} nazywamy skończoną funkcję częściową \(\Gamma:\:\mathrm{V}\longrightarrow\mathbf{T_\to}\), czyli zbiór par postaci \(\Gamma=\{x_1^{\tau_1},\,\dots,\,x_n^{\tau_n}\},\ \text{gdzie}\ (x_i^{\tau_i})=(x_i,\, \tau_i)\ \text{oraz}\ x_i \neq x_j\ \text{dla}\ i\neq j\). Zbiór 
   \[\mathrm{dom}(\Gamma) = \left\{x\in \mathrm{V}\,|\,\exists\tau(x^\tau\in\Gamma)\right\}\]
   nazywamy \emph{dziedziną} kontekstu \(\Gamma\), zaś 
   \[\mathrm{rg}(\Gamma)=\left\{\tau\in\mathbf{T}_\to\,|\,\exists x(x^\tau\in\Gamma)\right\}\]
@@ -173,18 +181,21 @@ Wprowadzamy następujące reguły dowodzenia:
       \item Liście są \emph{aksjomatami}, tj. sekwentami postaci \(\Gamma, x^\sigma \vdash x^\sigma\).
       \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania nowych sekwentów.
   \end{enumerate}
-  Wszystkie typowalne pseudotermy w pewnym kontekście \(\Gamma\) nazywamy \emph{\(\lambda\)-termami} (z typami prostymi).
+\end{definicja}
+ \begin{definicja}\label{def:lambda-term}(\(\lambda\)-termy)\\ 
+   Wszystkie typowalne pseudotermy w pewnym kontekście \(\Gamma\) nazywamy \emph{\(\lambda\)-termami} (z typami prostymi w  kontekście \(\Gamma\)).
   \begin{uwaga*}
     \(\lambda\)-term w kontekście \(\Gamma_1\) może nie być typowalny w innym kontekście \(\Gamma_2\).   
   \end{uwaga*}
 \end{definicja}
+Mówiąc o \(\lambda\)-termach będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. Zakładamy również, że ustalone są typy dla wszystkich \(\lambda\)-zmiennych. Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając górnego indeksu. Dla przykładu, \(\lambda\)-term \(\left(M^{\sigma\to\tau}N^\sigma\right)^\tau\) jest w pewnym kontekście \(\Gamma\) typu \(\tau\).
   \begin{fakt}
     Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
   \end{fakt}
 
 \subsection{Redukcja}
 \begin{definicja}(Zgodność)\\
-  Relację \(\mathrm{R}\) na zbiorze termów \(\mathbf{\Lambda}_{\mathrm{T}}\) nazywamy \emph{zgodną}, jeśli dla \(M,\,N,\,Z\in\mathbf{\Lambda}_{\mathrm{T}}\) spełnia następujące warunki:
+  Relację \(\mathrm{R}\) na zbiorze termów \(\mathbf{\Lambda}_{\mathrm{T}}\) nazywamy \emph{zgodną}, jeśli dla \(M,\,N,\,Z\in\mathbf{\Lambda}_{\mathrm{T}}\) spełnia ona następujące warunki:
   \begin{enumerate}[label=\roman*)]
     \item Jeśli \(M\mathrm{R} N\), to \((\lambda x^\sigma.\,M)\, \mathrm{R}\, (\lambda x^\sigma.\, N)\) dla dowolnych \(x\in \mathrm{V}\) i \(\sigma\in \mathbf{T_\to}\).
     \item Jeśli \(M\mathrm{R} N\), to \((MZ)\,\mathrm{R}\, (NZ)\).
@@ -210,9 +221,9 @@ Wprowadzamy następujące reguły dowodzenia:
     \(M\) \emph{ma postać normalną}, jeśli \(M=_{\beta}N\) dla pewnego \(N\), który jest w postaci normalnej.
 
 
-    \(\longrightarrow^{+}_{\beta}\) jest przechodnim domknięciem relacji \(\longrightarrow_{\beta}\) w zbiorze pseudotermów \(\Lambda_{\mathrm{T}}\).
+    \(\longrightarrow^{+}_{\beta}\) jest przechodnim domknięciem relacji \(\longrightarrow_{\beta}\) w zbiorze pseudotermów \(\mathbf{\Lambda}_{\mathrm{T}}\).
 
-    \(\longrightarrow^{*}_{\beta}\) jest domknięciem przechodnio-zwrotnim w \(\Lambda_{\mathrm{T}}\) relacji \(\longrightarrow_{\beta}\), a zatem jest \emph{redukcją}. 
+    \(\longrightarrow^{*}_{\beta}\) jest domknięciem przechodnio-zwrotnim w \(\mathbf{\Lambda}_{\mathrm{T}}\) relacji \(\longrightarrow_{\beta}\), a zatem jest \emph{redukcją}. 
 
     \(=_{\beta}\) jest najmniejszą relację równowazności zawierającą relację \(\longrightarrow_{\beta}\), a zatem \emph{kongruencją}.
 
@@ -233,13 +244,18 @@ Wprowadzamy następujące reguły dowodzenia:
 
 \subsection{Normalizacja}
 
-\(\lambda\)-term \(M\) ma własność \emph{(słabej) normalizacji} (co symbolicznie oznaczamy \(M\in\mathrm{WN_{\beta}}\)) wtedy i tylko wtedy, gdy istnieje ciąg \(\beta\)-redukcji rozpoczynający się od \(M\) i kończący się termem w postaci normalnej \(N\). Powiemy, że \(\lambda\)-term \(M\) ma własność \emph{silnej normalizacji} (symbolicznie: \(M\in\mathrm{SN_{\beta}}\)), jeśli wszystkie ciągi \(\beta\)-redukcji rozpoczynające się \(M\) są skończone.
+Powiemy, że \(\lambda\)-term \(M\) ma własność \emph{(słabej) normalizacji} (co symbolicznie oznaczamy \(M\in\mathrm{WN_{\beta}}\)) wtedy i tylko wtedy, gdy istnieje ciąg \(\beta\)-redukcji rozpoczynający się od \(M\) i kończący się termem w postaci normalnej \(N\). Powiemy, że \(\lambda\)-term \(M\) ma własność \emph{silnej normalizacji} (symbolicznie: \(M\in\mathrm{SN_{\beta}}\)), jeśli wszystkie ciągi \(\beta\)-redukcji rozpoczynające się \(M\) są skończone.
 
-\emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\Lambda_{\mathrm{T}}\to\Lambda_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\to_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
+\begin{definicja}(Strategia redukcji)\\
+\emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\mathbf{\Lambda}_{\mathrm{T}}\longrightarrow\mathbf{\Lambda}_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\to_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
+\end{definicja}
 
 \begin{twierdzenie} 
   (\emph{Własność \(\mathrm{WN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha ma postać normalną.
 \end{twierdzenie}
+\begin{dowod}
+
+\end{dowod}
 
 \begin{twierdzenie} 
   (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
@@ -251,8 +267,12 @@ Wprowadzamy następujące reguły dowodzenia:
 \begin{twierdzenie} 
   \emph{(Lemat Newmana)} Niech \(\to\) bedzie relacją binarną spełniającą \(SN\). Jeśli \(\to\) spełnia WCR, to spełnia CR.
 \end{twierdzenie}
+\begin{dowod}
+\end{dowod}
 
 \begin{twierdzenie} 
   (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
 \end{twierdzenie}
+\begin{dowod}
+\end{dowod}
 
