@@ -5,15 +5,15 @@
 %relacja \(\beta\)-kontrakcji \(\to_{\beta}\) i relacja przypisania typu \(\vdash\).
 
 \subsection{Typy proste}\label{ssec:typy-proste}
-\begin{definicja}\label{def:typy-proste}(Typy proste)\\
-  Niech \(\mathrm{U}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(p,\ q,\ \dots\ \) (być może indeksowanych liczbami naturalnymi), które będziemy nazywali \emph{zmiennymi typowymi}. \emph{Typami prostymi} będziemy nazywali najmniejszy w sensie mnogościowym zbiór wyrażeń taki, że:
-\begin{enumerate}[label=\roman*)]
+Niech \(\mathrm{U}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(p,\ q,\ \dots\ \) (być może indeksowanych liczbami naturalnymi), które będziemy nazywali \emph{zmiennymi typowymi}.\begin{definicja}\label{def:typy-proste}(Typy proste)\\
+\emph{Typami prostymi} będziemy określali najmniejszy w sensie mnogościowym zbiór wyrażeń taki, że:
+\begin{enumerate}[label=T\arabic*.]
   \item Jeśli \(p\) jest zmienną typową, to \(p\) jest typem prostym.
   \item Jeśli \(\tau\) i \(\sigma\) są typami prostymi, to \(\left(\tau\to\sigma\right)\) jest typem prostym.
 \end{enumerate}
 \end{definicja}
 
-Typy proste zbudowane tylko wedle reguły i) nazywamy niekiedy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły ii) -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbf{T_\to}\).
+Typy proste zbudowane tylko wedle reguły T1 nazywamy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły T2 -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbf{T_\to}\).
 
 Późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho,\ \dots\) będą służyły nam za zmienne metasyntaktyczne do oznaczania typów prostych. Dla lepszej czytelności będziemy pomijali najbardziej zewnętrzne nawiasy. Konstruktor typu \(\to\) jest prawostronnie łączny, co oznacza, że typy \(\tau\to\sigma\to\theta\) oraz \(\tau\to(\sigma\to\theta)\) będziemy uznawali za tożsame.
 
@@ -30,13 +30,14 @@ Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa bina
   Niech \(\mathrm{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\ \) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}.
 \begin{definicja}(Pseudo-pretermy)\\
   \emph{Pseudo-pretermami} będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór \(\mathbf{\Lambda}^{-}_{\mathrm{T}}\) taki, że:
-  \begin{enumerate}[label=\roman*)]
+
+\begin{enumerate}[label=P\arabic*.]
     \item Jeśli \(x\in \mathrm{V}\), to \(x\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\).
     \item Jeśli \(M\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\) i \(N\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\), to \((MN)\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\).
     \item Dla dowolnych \(x\in \mathrm{V}\), \(\sigma\in\mathbf{T}_\to\), \(M\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\) mamy, że \((\lambda x^{\sigma}.\,M)\in \mathbf{\Lambda}^{-}_{\mathrm{T}}\).
   \end{enumerate}
 \end{definicja}
-  Wyrażenia postaci ii) nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci iii) -- \(\lambda\)-abstrakcjami, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest \emph{związana}.
+  Wyrażenia postaci P2 nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci P3 -- \(\lambda\)-abstrakcjami, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest \emph{związana}.
 
   Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \) Podobnie jak w podrozdziale \ref{ssec:typy-proste} stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów jest łączna lewostronnie, co oznacza, że będziemy utożsamiali wyrażenia \(MNP\) oraz \((MN)P\).
 
@@ -207,10 +208,7 @@ Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontek
     \item Jeśli \(M\mathrm{R} N\), to \((MZ)\,\mathrm{R}\, (NZ)\).
     \item Jeśli \(M\mathrm{R} N\), to \((ZM)\,\mathrm{R}\, (ZN)\).
   \end{enumerate}
-
-  \noindent \emph{Kongruencją} nazywamy zgodną relację równowazności na \(\mathbf{\Lambda}_{\mathrm{T}}\).
-
-  \noindent \emph{Redukcją} nazywamy zgodną, zwrotną i przechodnią relację na \(\mathbf{\Lambda}_{\mathrm{T}}\).
+Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgodną relację równowazności na \(\mathbf{\Lambda}_{\mathrm{T}}\), zaś \emph{redukcją} – każdą zgodną, zwrotną i przechodnią relację na \(\mathbf{\Lambda}_{\mathrm{T}}\).
 \end{definicja}
 
 \begin{definicja}(\(\beta\)-redukcja)\\
@@ -219,29 +217,37 @@ Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontek
     (\lambda x^\sigma.\,P)Q \longrightarrow_{\beta} P[x/Q].
   \]
   
-  \noindent \emph{\(\beta\)-redeksem} nazywamy wyrażenia postaci \((\lambda x^\sigma.\, M)N\). Rezultatem \(\beta\)-redukcji jest term postaci \(M[x/N]\), który nazywamy \emph{\(\beta\)-reduktem}.
+  \noindent \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x^\sigma.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}.
 \end{definicja}
+\noindent Określamy następujące relacje:
+\begin{enumerate}[label=B\arabic*.]
+\item    \(\longrightarrow^{+}_{\beta}\) jest przechodnim domknięciem relacji \(\longrightarrow_{\beta}\) w zbiorze pseudotermów \(\mathbf{\Lambda}_{\mathrm{T}}\).
 
-    Mówimy, że \(\lambda\)-term \(M\) jest w \emph{postaci normalnej}, jeśli żadna jego podformuła nie jest \(\beta\)-redeksem. 
-    
-    \(M\) \emph{ma postać normalną}, jeśli \(M=_{\beta}N\) dla pewnego \(N\), który jest w postaci normalnej.
+\item    \(\longrightarrow^{*}_{\beta}\) jest domknięciem przechodnio-zwrotnim w \(\mathbf{\Lambda}_{\mathrm{T}}\) relacji \(\longrightarrow_{\beta}\), a zatem jest \emph{redukcją}. 
 
+\item    \(=_{\beta}\) jest najmniejszą relację równowazności zawierającą relację \(\longrightarrow_{\beta}\), a zatem \emph{kongruencją}.
+\end{enumerate}
 
-    \(\longrightarrow^{+}_{\beta}\) jest przechodnim domknięciem relacji \(\longrightarrow_{\beta}\) w zbiorze pseudotermów \(\mathbf{\Lambda}_{\mathrm{T}}\).
+\begin{definicja}\label{def:postac-normalna}(Postać normalna)\\
+    Powiemy, że \(\lambda\)-term \(M\) jest w \emph{postaci normalnej}, jeśli żadna jego podformuła nie jest \(\beta\)-redeksem. 
+\end{definicja}    
 
-    \(\longrightarrow^{*}_{\beta}\) jest domknięciem przechodnio-zwrotnim w \(\mathbf{\Lambda}_{\mathrm{T}}\) relacji \(\longrightarrow_{\beta}\), a zatem jest \emph{redukcją}. 
-
-    \(=_{\beta}\) jest najmniejszą relację równowazności zawierającą relację \(\longrightarrow_{\beta}\), a zatem \emph{kongruencją}.
-
+Zachodzą następujące fakty:
+\begin{fakt}
+\(M\) \emph{ma postać normalną}, jeśli \(M=_{\beta}N\) dla pewnego \(N\), który jest w postaci normalnej.
+\end{fakt}
   \begin{fakt}
     Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\beta}N\), to
     \(\Gamma\vdash N^\sigma\).
   \end{fakt}
-\(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) \emph{zgodną} relację w \(\Lambda_{\mathrm{T}}\) taką, że
+  
+  \begin{definicja}(\(\eta\)-redukcja)\\
+\(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) \emph{zgodną} relację w \(\mathbf{\Lambda}_{\mathrm{T}}\) taką, że
   \[
     \lambda x^\sigma.\, Mx\longrightarrow_{\eta} M,
   \]
     o ile \(x\not\in \mathrm{FV}(M)\).
+  \end{definicja}
 
   \begin{fakt}
     Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\eta}N\), to
@@ -249,22 +255,26 @@ Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontek
   \end{fakt}
 
 \subsection{Normalizacja}
-
-Powiemy, że \(\lambda\)-term \(M\) ma własność \emph{(słabej) normalizacji} (co symbolicznie oznaczamy \(M\in\mathrm{WN_{\beta}}\)) wtedy i tylko wtedy, gdy istnieje ciąg \(\beta\)-redukcji rozpoczynający się od \(M\) i kończący się termem w postaci normalnej \(N\). Powiemy, że \(\lambda\)-term \(M\) ma własność \emph{silnej normalizacji} (symbolicznie: \(M\in\mathrm{SN_{\beta}}\)), jeśli wszystkie ciągi \(\beta\)-redukcji rozpoczynające się \(M\) są skończone.
+\noindent Powiemy, że \(\lambda\)-term \(M\) ma własność:
+\begin{easylist}
+  & \emph{(słabej) normalizacji} (symbolicznie: \(M\in\mathrm{WN_{\beta}}\)) wtedy i tylko wtedy, gdy istnieje ciąg \(\beta\)-redukcji rozpoczynający się od \(M\) i kończący się termem w postaci normalnej \(N\). 
+  &  \emph{silnej normalizacji} (symbolicznie: \(M\in\mathrm{SN_{\beta}}\)), jeśli wszystkie ciągi \(\beta\)-redukcji rozpoczynające się od \(M\) są skończone.
+\end{easylist}
+\noindent Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) pociąga za sobą własność \(\mathrm{WN}_{\beta}\).
 
 \begin{definicja}(Strategia redukcji)\\
 \emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\mathbf{\Lambda}_{\mathrm{T}}\longrightarrow\mathbf{\Lambda}_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\to_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
 \end{definicja}
 
 \begin{twierdzenie} 
-  (\emph{Własność \(\mathrm{WN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha ma postać normalną.
+  (\emph{Własność \(\mathrm{WN}_{\beta}\)}) Wszystkie \(\lambda\)-termy mają postać normalną.
 \end{twierdzenie}
 \begin{dowod}
 
 \end{dowod}
 
 \begin{twierdzenie} 
-  (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
+  (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Wszystkie \(\lambda\)-termy mają własność silnej normalizacji.
 \end{twierdzenie}
 \begin{itemize}
 \item WCR: \(\forall a,\,b,\,c\in A\, (a\longrightarrow b \land a\longrightarrow c)\to \exists d\in A\,(b\longrightarrow^{*} d \land c\longrightarrow^{*} d)\)
