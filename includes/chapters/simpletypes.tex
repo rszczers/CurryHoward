@@ -18,7 +18,7 @@ Typy proste zbudowane tylko wedle reguły i) nazywamy niekiedy typami \emph{atom
 Późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho,\ \dots\) będą służyły nam za zmienne metasyntaktyczne do oznaczania typów prostych. Dla lepszej czytelności będziemy pomijali najbardziej zewnętrzne nawiasy. Konstruktor typu \(\to\) jest prawostronnie łączny, co oznacza, że typy \(\tau\to\sigma\to\theta\) oraz \(\tau\to(\sigma\to\theta)\) będziemy uznawali za tożsame.
 
 Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa binarnego. Wysokość takiego drzewa będziemy nazywali \emph{stopniem} typu. Precyzyjnie ujmuje to pojęcie poniższa definicja.
-\begin{definicja}(Stopień typu)\\
+\begin{definicja}\label{def:stopien-typu}(Stopień typu)\\
   Stopniem typu nazywamy funkcję 
   \begin{align*}
     \delta(p) &= 0,\\
@@ -127,7 +127,6 @@ które różnią się między sobą tylko zmiennymi związanymi.
 \end{definicja}
 Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich reprezentantów.
 \subsection{Typowalność} 
-
 %\item
 %  \emph{Pseudo-pretermami} nazywamy język \(\Lambda_{\mathrm{T}}\) generowany przez
 %gramatykę 
@@ -152,7 +151,7 @@ Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich r
   \end{itemize}
 \end{definicja}
 
-Wprowadzimy teraz system w stylu dedukcji naturalnej. \emph{Sekwentami} będziemy nazywali wyrażenia postaci \(\Gamma\vdash M^{\sigma}\), gdzie \(M\in\mathbf{\Lambda}_{\mathrm{T}},\ \sigma\in\mathbf{T_\to}\), zaś \(\Gamma\) jest pewnym otoczeniem typowym. 
+Okreslimy teraz system przypisywania typów do pseudotermów w stylu dedukcji naturalnej. \emph{Sekwentami} będziemy nazywali wyrażenia postaci \(\Gamma\vdash M^{\sigma}\), gdzie \(M\in\mathbf{\Lambda}_{\mathrm{T}},\ \sigma\in\mathbf{T_\to}\), zaś \(\Gamma\) jest pewnym kontekstem. 
 
 Wprowadzamy następujące reguły dowodzenia:
     \begin{center}
@@ -188,11 +187,18 @@ Wprowadzamy następujące reguły dowodzenia:
     \(\lambda\)-term w kontekście \(\Gamma_1\) może nie być typowalny w innym kontekście \(\Gamma_2\).   
   \end{uwaga*}
 \end{definicja}
-Mówiąc o \(\lambda\)-termach będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. Zakładamy również, że ustalone są typy dla wszystkich \(\lambda\)-zmiennych. Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając górnego indeksu. Dla przykładu, \(\lambda\)-term \(\left(M^{\sigma\to\tau}N^\sigma\right)^\tau\) jest w pewnym kontekście \(\Gamma\) typu \(\tau\).
+Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontekstu \(\Gamma\) będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. Zakładamy również, że ustalone są typy dla wszystkich \(\lambda\)-zmiennych. Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając górnego indeksu. Dla przykładu, \(\lambda\)-term \(\left(M^{\sigma\to\tau}N^\sigma\right)^\tau\) jest w pewnym kontekście \(\Gamma\) typu \(\tau\). 
+
+   Przez \emph{stopień} \(\lambda\)-termu \(M^\sigma\) będziemy mieli na myśli stopień typu \(\sigma\). Nadużywając notacji będziemy pisali
+   \[
+     \delta(M^\sigma) = \delta(\sigma),
+   \]
+   gdzie \(\delta\) występująca po prawej stronie powyższej równości to funkcja określona w myśl Definicji \ref{def:stopien-typu}.
+
+
   \begin{fakt}
     Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
   \end{fakt}
-
 \subsection{Redukcja}
 \begin{definicja}(Zgodność)\\
   Relację \(\mathrm{R}\) na zbiorze termów \(\mathbf{\Lambda}_{\mathrm{T}}\) nazywamy \emph{zgodną}, jeśli dla \(M,\,N,\,Z\in\mathbf{\Lambda}_{\mathrm{T}}\) spełnia ona następujące warunki:
