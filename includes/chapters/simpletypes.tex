@@ -229,17 +229,17 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
 \end{enumerate}
 
 \begin{definicja}\label{def:postac-normalna}(Postać normalna)\\
-    Powiemy, że \(\lambda\)-term \(M\) jest w \emph{postaci normalnej}, jeśli żadna z jego podformuł nie jest \(\beta\)-redeksem. 
+  Powiemy, że \(\lambda\)-term \(M\) jest w \emph{postaci normalnej}, jeśli żadna z jego podformuł nie jest \(\beta\)-redeksem. Przez \(\mathrm{NF}_{\beta}\) będziemy oznaczali zbiór wszystkich \(\lambda\)-termów w postaci normalnej.
 \end{definicja}    
 
 Zachodzą następujące fakty:
 \begin{fakt}
 \(M\) \emph{ma postać normalną}, jeśli \(M=_{\beta}N\) dla pewnego \(N\), który jest w postaci normalnej.
 \end{fakt}
-  \begin{fakt}
-    Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\beta}N\), to
-    \(\Gamma\vdash N^\sigma\).
-  \end{fakt}
+\begin{fakt}
+  Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\beta}N\), to
+  \(\Gamma\vdash N^\sigma\).
+\end{fakt}
   
   \begin{definicja}(\(\eta\)-redukcja)\\
 \(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) \emph{zgodną} relację w \(\mathbf{\Lambda}_{\mathrm{T}}\) taką, że
@@ -266,10 +266,14 @@ Zachodzą następujące fakty:
 \emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\mathbf{\Lambda}_{\mathrm{T}}\longrightarrow\mathbf{\Lambda}_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\to_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
 \end{definicja}
 
-\begin{twierdzenie} 
-  (\emph{Własność \(\mathrm{WN}_{\beta}\)}) Wszystkie \(\lambda\)-termy mają postać normalną.
+\begin{twierdzenie}(\emph{Własność \(\mathrm{WN}_{\beta}\)}) Wszystkie \(\lambda\)-termy mają postać normalną.
 \end{twierdzenie}
 \begin{dowod}
+  Pokażemy, że dla dowolnego \(\lambda\)-termu \(M\) istnieje normalizująca strategia redukcji. 
+
+  Przypuśćmy, że \(M\) nie jest w postaci normalnej. Ponieważ \(M\) jest wyrażeniem o skończonej długości, to musi zawierać skończenie wiele redeksów. Oznaczmy przez \(\delta_M\) maksymalny stopień spośród nich. Ponieważ wiele redeksów w \(M\) może mieć ten sam stopień \(\delta_M\), przez \(n_M\) oznaczmy liczbę ich wystąpień. 
+
+  Niech \(\Delta\) będzie \(\beta\)-redeksem stopnia \(\delta_M\) położonym w \(M\) najbardziej na prawo i niech \(M'\) będzie \(\beta\)-reduktem otrzymanym przez zredukowanie \(\Delta\). Zauważmy, że \(n_M < n_{M'}\). Istotnie, \(\Delta\) nie wystepuje w \(M'\), zaś \(\beta\)-redukcja \(\Delta\) na podstawie Lematu \ref{l:redukcja-prawostronna} może prowadzić do powstania redeksów tylko mniejszego stopnia. Powtarzając otrzymujemy więc \(\lambda\)-term w postaci normalnej. \qed
 
 \end{dowod}
 
