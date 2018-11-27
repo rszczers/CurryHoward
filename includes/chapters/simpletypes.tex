@@ -21,7 +21,7 @@ Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa bina
 \begin{definicja}\label{def:stopien-typu}(Stopień typu)\\
   Stopniem typu nazywamy funkcję 
   \begin{align*}
-    \delta(p) &= 0,\\
+    \delta(p) &= 0,\ \text{gdzie \(p\) jest typem atomowym},\\
     \delta(\tau\to\sigma)&=1 + \max\left(\delta(\tau),\ \delta(\sigma)\right).
   \end{align*}
 \end{definicja}
@@ -191,13 +191,6 @@ Wprowadzamy następujące reguły dowodzenia:
 \end{definicja}
 Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontekstu \(\Gamma\) będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. Zakładamy również, że ustalone są typy dla wszystkich \(\lambda\)-zmiennych. Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając górnego indeksu. Dla przykładu, \(\lambda\)-term \(\left(M^{\sigma\to\tau}N^\sigma\right)^\tau\) jest w pewnym kontekście \(\Gamma\) typu \(\tau\). 
 
-   Przez \emph{stopień} \(\lambda\)-termu \(M^\sigma\) będziemy mieli na myśli stopień typu \(\sigma\). Nadużywając notacji będziemy pisali
-   \[
-     \delta(M^\sigma) = \delta(\sigma),
-   \]
-   gdzie \(\delta\) występująca po prawej stronie powyższej równości to funkcja określona w myśl Definicji \ref{def:stopien-typu}.
-
-
   \begin{fakt}
     Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
   \end{fakt}
@@ -219,6 +212,18 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
   \]
   
   \noindent \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x^\sigma.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}.
+
+\begin{definicja}(stopień \(\lambda\)-termu)\\
+  Niech \(M\) będzie dowolnym \(\lambda\)-termem. \emph{Stopniem} M nazywamy funkcję
+  \begin{align*}
+    \delta\left((\lambda x^\tau.\,P^\rho)Q^\tau\right) &=
+    \delta(\tau\to\rho),\quad \text{gdy}\ M=(\lambda x^\tau.\,P^\rho)Q^\tau\ \text{jest \(\beta\)-redeksem},\\ 
+    \delta(M) &= \sup\{\delta(N) \:|\: N\ \text{jest \(\beta\)-redeksem w}\ M\},
+  \end{align*}
+gdzie \(\delta\) występująca po prawej stronie równości określona jest w myśl Definicji \ref{def:stopien-typu}. 
+\end{definicja}
+
+
 \end{definicja}
 \noindent Określamy następujące relacje:
 \begin{enumerate}[label=B\arabic*.]
