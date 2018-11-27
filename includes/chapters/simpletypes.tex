@@ -272,7 +272,7 @@ Zachodzą następujące fakty:
 \begin{dowod}
   Pokażemy, że dla dowolnego \(\lambda\)-termu \(M\) istnieje normalizująca strategia redukcji. 
 
-  Przypuśćmy, że \(M\) nie jest w postaci normalnej. Oznaczmy przez \(\delta_M\) maksymalny stopień redeksów występujących w \(M\). Ponieważ wiele redeksów w \(M\) może mieć ten sam stopień \(\delta_M\), przez \(n_M\) oznaczmy liczbę ich wystąpień. 
+  Przypuśćmy, że \(M\) nie jest w postaci normalnej. Oznaczmy przez \(\delta_M\) maksymalny stopień redeksów występujących w \(M\). Ponieważ wiele redeksów w \(M\) może mieć ten sam stopień \(\delta_M\), przez \(n_M\) oznaczmy liczbę wystąpień redeksów stopnia \(\delta_M\) w \(M\). 
 
   Niech \(\Delta\) będzie \(\beta\)-redeksem stopnia \(\delta_M\) położonym w \(M\) najbardziej na prawo i niech \(M'\) będzie \(\beta\)-reduktem otrzymanym przez zredukowanie \(\Delta\). Zauważmy, że \(n_M < n_{M'}\), gdyż \(\Delta\) nie wystepuje już w \(M'\), zaś \(\beta\)-redukcja \(\Delta\) może prowadzić do powstania redeksów tylko mniejszego stopnia. Istotnie, ilość redeksów w \(M\) może zwiększyć się tylko na jeden z poniższych sposobów: 
   \begin{enumerate}[label=\roman*)]
@@ -284,7 +284,7 @@ Zachodzą następujące fakty:
   \centering
   \begin{subfigure}{0.55\textwidth}
     \includegraphics[width=1\linewidth]{../reduction1}
-    \caption{Redukcja \((\lambda x^{\rho\to\mu}.\,\overbrace{\dots x P^\rho \dots}^{M^\tau})(\lambda y^\rho.\, \overbrace{\dots y \dots}^{Q^\mu})^{\rho\to\mu}\) do nowego redeksu \((\lambda y^\rho.\underbrace{\,\dots x\dots}_{Q^\mu})P^\rho\).}
+    \caption{Redukcja \((\lambda x^{\rho\to\mu}.\,\overbrace{\dots x P^\rho \dots}^{M^\tau})(\lambda y^\rho.\, \overbrace{\dots y \dots}^{Q^\mu})^{\rho\to\mu}\) do nowego redeksu \((\lambda y^\rho.\underbrace{\,\dots y\dots}_{Q^\mu})P^\rho\).}
   \end{subfigure}
 
 \end{figure}
@@ -293,15 +293,25 @@ Zachodzą następujące fakty:
   \vspace{1em}
   \begin{subfigure}{0.55\textwidth}
     \includegraphics[width=1\linewidth]{../reduction2}
-    \caption{test}
+    \caption{Redukcja \((\lambda x^\tau y^\rho.\,\dots x \dots y\dots)M^\tau Q^\rho\) do nowego redeksu postaci \((\lambda y^\rho .\, \dots M^\tau \dots y \dots)Q^\rho\).}
   \end{subfigure}
+
+\end{figure}
+\begin{figure}[htb]\ContinuedFloat
+  \centering
+  \vspace{1em}
+  \begin{subfigure}{0.55\textwidth}
+    \includegraphics[width=1\linewidth]{../reduction2b}
+    \caption{Redukcja \((\lambda x^\tau y^\rho.\,\dots y \dots x\dots)M^\tau Q^\rho\) do nowego redeksu postaci \((\lambda y^\rho .\, \dots y \dots M^\tau \dots)Q^\rho\).}
+  \end{subfigure}
+
 
 \end{figure}
 \begin{figure}[htb]\ContinuedFloat
   \centering
   \begin{subfigure}{0.55\textwidth}
     \includegraphics[width=1\linewidth]{../reduction3}
-    \caption{test}
+    \caption{Redukcja \((\lambda x^{\rho\to\mu}.\,x)(\lambda y^\rho.\,\overbrace{\dots y \dots}^{M^{\rho\to\mu}}) N^\rho\) do nowego redeksu \((\lambda y^\rho.\,\underbrace{\dots y \dots}_{M^\mu})N^\rho\).}
   \end{subfigure}
   \caption{test}
 \end{figure}
