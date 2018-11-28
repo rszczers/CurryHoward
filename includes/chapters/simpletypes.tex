@@ -29,12 +29,12 @@ Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa bina
 \subsection{Pseudotermy}
   Niech \(\mathrm{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\ \) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}.
 \begin{definicja}(Pseudo-pretermy)\\
-  \emph{Pseudo-pretermami} będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór \(\mathbf{\Lambda}^{-}_{\mathrm{T}}\) taki, że:
+  \emph{Pseudo-pretermami} będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór \(\mathbf{\tilde\Lambda}_{\mathrm{T}}\) taki, że:
 
 \begin{enumerate}[label=P\arabic*.]
-    \item Jeśli \(x\in \mathrm{V}\), to \(x\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\).
-    \item Jeśli \(M\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\) i \(N\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\), to \((MN)\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\).
-    \item Dla dowolnych \(x\in \mathrm{V}\), \(\sigma\in\mathbf{T}_\to\), \(M\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\) mamy, że \((\lambda x^{\sigma}.\,M)\in \mathbf{\Lambda}^{-}_{\mathrm{T}}\).
+  \item Jeśli \(x\in \mathrm{V}\), to \(x\in{\mathbf{\tilde\Lambda}}_{\mathrm{T}}\).
+  \item Jeśli \(M\in\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\) i \(N\in\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\), to \((MN)\in\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\).
+  \item Dla dowolnych \(x\in \mathrm{V}\), \(\sigma\in\mathbf{T}_\to\), \(M\in\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\) mamy, że \((\lambda x^{\sigma}.\,M)\in \mathbf{\tilde{\Lambda}}_{\mathrm{T}}\).
   \end{enumerate}
 \end{definicja}
   Wyrażenia postaci P2 nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci P3 -- \emph{\(\lambda\)-abstrakcjami}, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest \emph{związana}.
@@ -97,7 +97,7 @@ Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{zamknięty}
     \end{fakt}
     
   \begin{definicja}(\(\alpha\)-konwersja)\\
-    \(\alpha\)-konwersją nazywamy najmniejszą (w sensie mnogościowym) zwrotną i przechodnią relację binarną \(=_\alpha\) określoną na zbiorze pseudotermów \(\mathbf{\Lambda}^{-}_{\mathrm{T}}\) spełniającą poniższe warunki:
+    \(\alpha\)-konwersją nazywamy najmniejszą (w sensie mnogościowym) zwrotną i przechodnią relację binarną \(=_\alpha\) określoną na zbiorze pseudotermów \(\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\) spełniającą poniższe warunki:
     \begin{enumerate}[label=({\alph*})]
       \item Jeśli \(y\not\in \mathrm{FV}(M)\) i \(M[x/y]\) jest poprawnym podstawieniem, to \(\lambda x.\, M  =_\alpha \lambda y.\, M[x/y]\).
       \item Jeśli \(M=_\alpha N\), to dla każdej \(\lambda\)-zmiennej \(x\) mamy \(\lambda x.\, M =_\alpha \lambda x.\,N\).
@@ -123,7 +123,7 @@ które różnią się między sobą tylko zmiennymi związanymi.
 \begin{definicja}(Pseudotermy)\\
   Klasy abstrakcji relacji \(\alpha\)-konwersji nazywamy \emph{pseudotermami}. Zbiór wszystkich pseudotermów oznaczamy następująco:
 \[
-  \mathbf{\Lambda}_{\mathrm{T}}=\left\{[M]_\alpha\:|\: M\in\mathbf{\Lambda}^{-}_\mathrm{T}\right\}
+  \mathbf{\Lambda}_{\mathrm{T}}=\left\{[M]_\alpha\:|\: M\in\mathbf{\tilde{\Lambda}}_\mathrm{T}\right\}
 \]
 \end{definicja}
 Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich reprezentantów.
@@ -181,23 +181,50 @@ Wprowadzamy następujące reguły dowodzenia:
       \item Liście są \emph{aksjomatami}, tj. sekwentami postaci \(\Gamma, x^\sigma \vdash x^\sigma\).
       \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania nowych sekwentów.
   \end{enumerate}
-  Tak określone drzewo będziemy nazywali \emph{wyprowadzeniem} typu.
-\end{definicja}
- \begin{definicja}\label{def:lambda-term}(\(\lambda\)-termy)\\ 
-   Wszystkie typowalne pseudotermy w pewnym kontekście \(\Gamma\) nazywamy \emph{\(\lambda\)-termami} (z typami prostymi w  kontekście \(\Gamma\)).
-  \begin{uwaga*}
-    \(\lambda\)-term w kontekście \(\Gamma_1\) może nie być typowalny w innym kontekście \(\Gamma_2\).   
-  \end{uwaga*}
+  Tak określone drzewo będziemy nazywali \emph{wyprowadzeniem} typu i pisali \(\Gamma \vdash M^\sigma\). W danym kontekście każdy \(\lambda\)-term ma jednoznacznie przypisany typ, co stwierdza następujące twierdzenie:
 \end{definicja}
 
 \begin{fakt}\label{thm:jedoznacznosc-typu}
 Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
 \end{fakt}
 
-Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontekstu \(\Gamma\) będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. 
+
+ \begin{definicja}\label{def:lambda-term}(\(\lambda\)-termy)\\ 
+   Wszystkie typowalne pseudotermy w pewnym kontekście \(\Gamma\) nazywamy \emph{\(\lambda\)-termami} (z typami prostymi w  kontekście \(\Gamma\)).
+  \begin{uwaga*}
+\(\lambda\)-term w kontekście \(\Gamma_1\) może nie być typowalny w innym kontekście \(\Gamma_2\).   
+  \end{uwaga*}
+\end{definicja}
+\begin{przyklad}
+  Niech \(\Gamma=\{x^\sigma,\, y^\tau\}\). Pokażemy, że \(\mathrm{K}=\lambda x^\sigma y^\tau .\, x\) ma typ \(\sigma\to\tau\to\sigma\). Istotnie,
+  \begin{center}
+  \begin{prooftree}
+    \Hypo{x^\sigma, y^\tau \vdash x^\sigma}
+    \Infer1[(Abs)]{x^\sigma \vdash (\lambda y^\tau.\,x)^{\tau\to\sigma}}
+    \Infer1[(Abs)]{\vdash (\lambda x^\sigma \lambda y^\tau .\, x)^{\sigma\to\tau\to\sigma}}
+\end{prooftree}
+  \end{center}
+\end{przyklad}
+
+
+\begin{przyklad}
+  Niech \(\Gamma=\{x^{\tau\to\rho},\, y^{\sigma\to\tau},\,z^{\sigma}\}\). Wówczas
+  \begin{center}
+\begin{prooftree}
+  \Hypo{ \Gamma \vdash z^{\sigma}} \Hypo{\Gamma \vdash y^{\sigma\to\tau}}
+  \Infer2[(App)]{\Gamma \vdash yz^{\tau}}
+  \Hypo{\Gamma\vdash x^{\tau\to\rho}} \Infer2[(App)]{\Gamma \vdash x(yz)^\rho}
+  \Infer1[(Abs)]{x^{\tau\to\sigma}, y^{\sigma\to\rho}\vdash (\lambda z^\sigma .\, x(yz))^{\sigma\to\rho}}
+  \Infer1[(Abs)]{x^{\tau\to\rho}\vdash (\lambda y^{\sigma\to\tau} \lambda z^{\sigma}.\,x(yz))^{(\sigma\to\tau)\to\sigma\to\rho}}
+  \Infer1[(Abs)]{\vdash (\lambda x^{\tau\to\rho} \lambda y^{\sigma\to\tau} \lambda z^\sigma .\, x(yz))^{(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho}}
+\end{prooftree}
+  \end{center}
+  Term \(\lambda x^{\tau\to\rho} y^{\sigma\to\tau} z^\sigma . x(yz)\) odpowiada operacji złożenia funkcji. Co więcej, można wykazać że typ \((\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\) może mieć tylko i wyłącznie operacja złożenia~\cite{Wadler1989}.
+\end{przyklad}
+
+Widzimy, że wyprowadzanie typu odpowiada w gruncie rzeczy konstrukcji \(\lambda\)-termu. Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontekstu \(\Gamma\) będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. 
 
 Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając adnotacji typowej umieszczonej w górnym indeksie. Dla przykładu, pisząc \(\left(M^{\sigma\to\tau}N^\sigma\right)^\tau\) będziemy mieli na myśli, że ten \(\lambda\)-term jest w pewnym kontekście \(\Gamma\) typu \(\tau\). 
-Ze względu na Fakt \ref{thm:jedoznacznosc-typu} możemy zakładać, że każdy \(\lambda\)-term ma w danym kontekście jednoznacznie określony typ.
 
 \subsection{Redukcja}
 \begin{definicja}(Zgodność)\\
@@ -221,7 +248,7 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
   Nadużywając notacji, z każdym \(\beta\)-redeksem \(\Delta\) postaci \((\lambda x^\tau .\,P^\rho)R\) będziemy wiązali jego \emph{stopień} i pisali \(\delta((\lambda x^\tau .\,P^\rho)R)=\delta(\tau\to\rho)\), gdzie występująca po prawej stronie równości \(\delta\) jest określona w myśl Definicji \ref{def:stopien-typu}. Dysponując tą konwencją możemy określić pojęcie stopnia dowolnego \(\lambda\)-termu, które będzie nam pomocne w określeniu jego złożoności.
 
 \begin{definicja}\label{def:stopien-termu}(stopień \(\lambda\)-termu)\\
-  Stopniem \(\mathrm{d}(M)\) \(\lambda\)-termu \(M\) nazywamy supremum stopni \(\beta\)-redekstów, które są w nim zawarte,
+  Stopniem \(\mathrm{d}(M)\) \(\lambda\)-termu \(M\) nazywamy supremum zbioru stopni \(\beta\)-redekstów, które są zawarte w \(M\), czyli
   \[\mathrm{d}(M)=\sup\{\delta(N) \:|\:N\ \text{jest \(\beta\)-redeksem w}\ M\}.\]
 \end{definicja}
 
@@ -249,16 +276,11 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
 \begin{definicja}\label{def:postac-normalna}(Postać normalna)\\
   Powiemy, że \(\lambda\)-term \(M\) jest w \emph{postaci normalnej}, jeśli żadna z jego podformuł nie jest \(\beta\)-redeksem. Przez \(\mathrm{NF}_{\beta}\) będziemy oznaczali zbiór wszystkich \(\lambda\)-termów w postaci normalnej.
 \end{definicja}    
-
-Zachodzą następujące fakty:
-\begin{fakt}
+Powyższą definicja można ująć alternatywnie w postaci następującego twierdzenia.
+\begin{fakt}\label{thm:postac-normalna-alt}
 \(M\) \emph{ma postać normalną}, jeśli \(M=_{\beta}N\) dla pewnego \(N\), który jest w postaci normalnej.
 \end{fakt}
-\begin{fakt}
-  Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\beta}N\), to
-  \(\Gamma\vdash N^\sigma\).
-\end{fakt}
-  
+ 
   \begin{definicja}(\(\eta\)-redukcja)\\
 \(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) \emph{zgodną} relację w \(\mathbf{\Lambda}_{\mathrm{T}}\) taką, że
   \[
@@ -267,11 +289,12 @@ Zachodzą następujące fakty:
     o ile \(x\not\in \mathrm{FV}(M)\).
   \end{definicja}
 
-  \begin{fakt}
-    Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\eta}N\), to
-    \(\Gamma\vdash N^\sigma\).
-  \end{fakt}
-
+Zdefiniowane powyżej  \(\beta\)- i \(\eta\)-redukcje zachowują typ, jak stwierdza Fakt \ref{thm:poprawnosc-redukcji}. Własność ta pozwala sensownie mówić o redukcji \(\lambda\)-termów pomimo, że te relacje są zdefiniowane dla pseudotermów.
+\begin{fakt}\label{thm:poprawnosc-redukcji}(O poprawności redukcji) 
+  Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\beta\eta}N\), to
+  \(\Gamma\vdash N^\sigma\).
+\end{fakt}
+ 
 \subsection{Normalizacja}
 \noindent Powiemy, że \(\lambda\)-term \(M\) ma własność:
 \begin{easylist}

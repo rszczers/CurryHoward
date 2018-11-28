@@ -3,6 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
+\usepackage
+[
+    backend=biber,
+    style=alphabetic,
+    sortlocale=pl_PL,
+    citestyle=alphabetic,
+]{biblatex}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{ebproof}
@@ -33,6 +40,9 @@
 \usepackage{blindtext}
 \usepackage{enumitem}
 \usepackage[ampersand]{easylist} 
+
+\addbibresource{bibdb.bib}
+
 \subimport{includes/}{def.tex}
 
 %\title{Izomorfizm Curry'ego-Howarda}
@@ -43,7 +53,7 @@
 %\maketitle
 %\subimport{includes/chapters/}{ipc.tex}
 \subimport{includes/chapters/}{simpletypes.tex}
-% \bibliographystyle{unsrt}
-% \bibliography{bibdb}
-%\printbibliography
+%\bibliographystyle{alpha}
+
+\printbibliography[title=Literatura]	
 \end{document}
