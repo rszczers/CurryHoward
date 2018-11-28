@@ -19,7 +19,7 @@ Późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho,\ \dots\) b
 
 Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa binarnego. Wysokość takiego drzewa będziemy nazywali \emph{stopniem} typu. Precyzyjnie ujmuje to pojęcie poniższa definicja.
 \begin{definicja}\label{def:stopien-typu}(Stopień typu)\\
-  Stopniem typu nazywamy funkcję 
+  Stopniem typu nazywamy funkcję \(\delta :\: \mathbf{T}_\to \longrightarrow \mathbb{N}\) taką, że
   \begin{align*}
     \delta(p) &= 0,\ \text{gdzie \(p\) jest typem atomowym},\\
     \delta(\tau\to\sigma)&=1 + \max\left(\delta(\tau),\ \delta(\sigma)\right).
@@ -37,7 +37,7 @@ Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa bina
     \item Dla dowolnych \(x\in \mathrm{V}\), \(\sigma\in\mathbf{T}_\to\), \(M\in\mathbf{\Lambda}^{-}_{\mathrm{T}}\) mamy, że \((\lambda x^{\sigma}.\,M)\in \mathbf{\Lambda}^{-}_{\mathrm{T}}\).
   \end{enumerate}
 \end{definicja}
-  Wyrażenia postaci P2 nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci P3 -- \(\lambda\)-abstrakcjami, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest \emph{związana}.
+  Wyrażenia postaci P2 nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci P3 -- \emph{\(\lambda\)-abstrakcjami}, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest \emph{związana}.
 
   Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \) Podobnie jak w podrozdziale \ref{ssec:typy-proste} stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów jest łączna lewostronnie, co oznacza, że będziemy utożsamiali wyrażenia \(MNP\) oraz \((MN)P\).
 
@@ -147,7 +147,7 @@ Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich r
   Piszemy:
   \begin{itemize}
     \item \(x_{1}^{\tau_1},\,x_{2}^{\tau_2}\) zamiast \(\{x_{1}^{\tau_1},\, x_{2}^{\tau_2}\}\), o ile \(x_{1}^{\tau_1}\) i \(x_{2}^{\tau_2}\) są różne,
-    \item \(\Gamma,\, x^\varphi\) zamiast \(\Gamma\cup \{x^\varphi\}\), o ile \(x^\varphi\not\in \Gamma\),
+    \item \(\Gamma,\, x^\tau\) zamiast \(\Gamma\cup \{x^\tau\}\), o ile \(x^\tau\not\in \Gamma\),
     \item \(\Gamma,\, \Delta\) zamiast \(\Gamma\cup \Delta\), o ile \(\Gamma\cap\Delta=\emptyset\).
   \end{itemize}
 \end{definicja}
@@ -189,11 +189,16 @@ Wprowadzamy następujące reguły dowodzenia:
     \(\lambda\)-term w kontekście \(\Gamma_1\) może nie być typowalny w innym kontekście \(\Gamma_2\).   
   \end{uwaga*}
 \end{definicja}
-Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontekstu \(\Gamma\) będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. Zakładamy również, że ustalone są typy dla wszystkich \(\lambda\)-zmiennych. Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając górnego indeksu. Dla przykładu, \(\lambda\)-term \(\left(M^{\sigma\to\tau}N^\sigma\right)^\tau\) jest w pewnym kontekście \(\Gamma\) typu \(\tau\). 
 
-  \begin{fakt}
-    Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
-  \end{fakt}
+\begin{fakt}\label{thm:jedoznacznosc-typu}
+Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
+\end{fakt}
+
+Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontekstu \(\Gamma\) będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. 
+
+Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając adnotacji typowej umieszczonej w górnym indeksie. Dla przykładu, pisząc \(\left(M^{\sigma\to\tau}N^\sigma\right)^\tau\) będziemy mieli na myśli, że ten \(\lambda\)-term jest w pewnym kontekście \(\Gamma\) typu \(\tau\). 
+Ze względu na Fakt \ref{thm:jedoznacznosc-typu} możemy zakładać, że każdy \(\lambda\)-term ma w danym kontekście jednoznacznie określony typ.
+
 \subsection{Redukcja}
 \begin{definicja}(Zgodność)\\
   Relację \(\mathrm{R}\) na zbiorze termów \(\mathbf{\Lambda}_{\mathrm{T}}\) nazywamy \emph{zgodną}, jeśli dla \(M,\,N,\,Z\in\mathbf{\Lambda}_{\mathrm{T}}\) spełnia ona następujące warunki:
@@ -211,18 +216,25 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
     (\lambda x^\sigma.\,P)Q \longrightarrow_{\beta} P[x/Q].
   \]
   
-  \noindent \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x^\sigma.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}.
+  \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x^\sigma.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}.
 
-\begin{definicja}(stopień \(\lambda\)-termu)\\
-  Niech \(M\) będzie dowolnym \(\lambda\)-termem. \emph{Stopniem} M nazywamy funkcję
-  \begin{align*}
-    \delta\left((\lambda x^\tau.\,P^\rho)Q^\tau\right) &=
-    \delta(\tau\to\rho),\quad \text{gdy}\ M=(\lambda x^\tau.\,P^\rho)Q^\tau\ \text{jest \(\beta\)-redeksem},\\ 
-    \delta(M) &= \sup\{\delta(N) \:|\: N\ \text{jest \(\beta\)-redeksem w}\ M\},
-  \end{align*}
-gdzie \(\delta\) występująca po prawej stronie równości określona jest w myśl Definicji \ref{def:stopien-typu}. 
+  Nadużywając notacji, z każdym \(\beta\)-redeksem \(\Delta\) postaci \((\lambda x^\tau .\,P^\rho)R\) będziemy wiązali jego \emph{stopień} i pisali \(\delta((\lambda x^\tau .\,P^\rho)R)=\delta(\tau\to\rho)\), gdzie występująca po prawej stronie równości \(\delta\) jest określona w myśl Definicji \ref{def:stopien-typu}. Dysponując tą konwencją możemy określić pojęcie stopnia dowolnego \(\lambda\)-termu, które będzie nam pomocne w określeniu jego złożoności.
+
+\begin{definicja}\label{def:stopien-termu}(stopień \(\lambda\)-termu)\\
+  Stopniem \(\mathrm{d}(M)\) \(\lambda\)-termu \(M\) nazywamy supremum stopni \(\beta\)-redekstów, które są w nim zawarte,
+  \[\mathrm{d}(M)=\sup\{\delta(N) \:|\:N\ \text{jest \(\beta\)-redeksem w}\ M\}.\]
 \end{definicja}
 
+\begin{uwaga*}
+  Z każdym \(\beta\)-redeksem \(\Delta\) związane są więc dwa rodzaje stopni: stopień \(\mathrm{d}(\Delta)\) jako \(\lambda\)-termu w myśl Defnicji \ref{def:stopien-termu} i stopień \(\beta\)-redeksu \(\delta(\Delta)\).
+\end{uwaga*}
+
+\begin{lemat}
+  Niech \(M\) i \(N\) będą dowolnymi \(\lambda\)-termami w kontekście \(\Gamma\) takimi, że \(x\in\mathrm{FV}(M)\) i \(x^\tau \in \Gamma\). Wówczas \(\mathrm{d}(M[x/N])\leq \max\left\{\mathrm{d}(M),\, \mathrm{d}(N),\, \delta(\tau)\right\}\).
+\end{lemat}
+\begin{dowod}
+
+\end{dowod}
 
 \end{definicja}
 \noindent Określamy następujące relacje:
@@ -269,7 +281,7 @@ Zachodzą następujące fakty:
 \noindent Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) pociąga za sobą własność \(\mathrm{WN}_{\beta}\).
 
 \begin{definicja}(Strategia redukcji)\\
-\emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\mathbf{\Lambda}_{\mathrm{T}}\longrightarrow\mathbf{\Lambda}_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\to_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
+  \emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\mathbf{\Lambda}_{\mathrm{T}}\longrightarrow\mathbf{\Lambda}_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\longrightarrow_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
 \end{definicja}
 
 \begin{twierdzenie}(\emph{Własność \(\mathrm{WN}_{\beta}\)}) Wszystkie \(\lambda\)-termy mają postać normalną.
