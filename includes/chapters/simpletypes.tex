@@ -37,7 +37,7 @@ Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa bina
   \item Dla dowolnych \(x\in \mathrm{V}\), \(\sigma\in\mathbf{T}_\to\), \(M\in\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\) mamy, że \((\lambda x^{\sigma}.\,M)\in \mathbf{\tilde{\Lambda}}_{\mathrm{T}}\).
   \end{enumerate}
 \end{definicja}
-  Wyrażenia postaci P2 nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci P3 -- \emph{\(\lambda\)-abstrakcjami}, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest \emph{związana}.
+  Wyrażenia postaci P2 nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci P3 -- \emph{\(\lambda\)-abstrakcjami}, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest nim \emph{związana}.
 
   Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \) Podobnie jak w podrozdziale \ref{ssec:typy-proste} stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów jest łączna lewostronnie, co oznacza, że będziemy utożsamiali wyrażenia \(MNP\) oraz \((MN)P\).
 
@@ -221,10 +221,18 @@ Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\)
   \end{center}
   Term \(\lambda x^{\tau\to\rho} y^{\sigma\to\tau} z^\sigma . x(yz)\) odpowiada operacji złożenia funkcji. Co więcej, można wykazać że typ \((\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\) może mieć tylko i wyłącznie operacja złożenia~\cite{Wadler1989}.
 \end{przyklad}
-
+\begin{uwaga*}
 Widzimy, że wyprowadzanie typu odpowiada w gruncie rzeczy konstrukcji \(\lambda\)-termu. Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontekstu \(\Gamma\) będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. 
 
 Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając adnotacji typowej umieszczonej w górnym indeksie. Dla przykładu, pisząc \(\left(M^{\sigma\to\tau}N^\sigma\right)^\tau\) będziemy mieli na myśli, że ten \(\lambda\)-term jest w pewnym kontekście \(\Gamma\) typu \(\tau\). 
+\end{uwaga*}
+
+\begin{przyklad}\label{ex:omega-kombinator}
+  Nie wszystkie pseudotermy są typizowalne w rachunku \(\lambda\) z typami prostymi. 
+  Istotnie, przypuśćmy że \(\omega=(\lambda x^{\sigma\to\sigma} .\, x x)\) jest typowalny. Wówczas dla kontekstu \(\Gamma\) mamy \(x^{\sigma\to\sigma}\in\Gamma\). Ponieważ \(\omega\) zawiera w sobie podterm \((xx)\), to w wyprowadzeniu musiał on zostać otrzymany przez zastosowanie reguły (App). Wówczas \(x^\sigma \in \Gamma\)  i \(x^{\sigma\to\sigma} \in \Gamma\), co nie jest możliwe, bo \(\Gamma\) musiałby nie być prawidłowo określonym kontekstem. 
+\end{przyklad}
+
+Przykład \ref{ex:omega-kombinator} wskazuje, że rachunek \(\lambda\) z typami prostymi nie ma wystarczających środków wyrazu, aby definiować w nim funkcje rekurencyjne. W rachunku \(\lambda\) bez typów definicje takie są osiągane za pomocą \emph{kombinatorów punktu stałego}, które w rachunku \(\lambda\) z typami prostymi nie są typowalne. 
 
 \subsection{Redukcja}
 \begin{definicja}(Zgodność)\\
@@ -276,11 +284,15 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
 \begin{definicja}\label{def:postac-normalna}(Postać normalna)\\
   Powiemy, że \(\lambda\)-term \(M\) jest w \emph{postaci normalnej}, jeśli żadna z jego podformuł nie jest \(\beta\)-redeksem. Przez \(\mathrm{NF}_{\beta}\) będziemy oznaczali zbiór wszystkich \(\lambda\)-termów w postaci normalnej.
 \end{definicja}    
-Powyższą definicja można ująć alternatywnie w postaci następującego twierdzenia.
+Definicję postaci normalnej można ująć w alternatywny sposób, którą prezentujemy w postaci Faktu \ref{thm:postac-normalna-alt}.
+
 \begin{fakt}\label{thm:postac-normalna-alt}
 \(M\) \emph{ma postać normalną}, jeśli \(M=_{\beta}N\) dla pewnego \(N\), który jest w postaci normalnej.
 \end{fakt}
- 
+\begin{uwaga*}
+Fakt, że \(=_{\beta}\) jest relacją równoważności może rodzić pokusę, aby utożsamić  ze sobą wszystkie postacie normalne danego \(\lambda\)-termu. Z Twierdzenia \ref{thm:church-rosser} wynika jednak, że jest to zupełnie zbędne, bowiem o ile tylko \(\lambda\)-term jest normalizowalny, to wiemy, że posiada dokładnie jedną postać normalną i każde takie utożsamienie byłoby trywialne. 
+\end{uwaga*}
+
   \begin{definicja}(\(\eta\)-redukcja)\\
 \(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) \emph{zgodną} relację w \(\mathbf{\Lambda}_{\mathrm{T}}\) taką, że
   \[
@@ -294,15 +306,15 @@ Zdefiniowane powyżej  \(\beta\)- i \(\eta\)-redukcje zachowują typ, jak stwie
   Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\beta\eta}N\), to
   \(\Gamma\vdash N^\sigma\).
 \end{fakt}
- 
 \subsection{Normalizacja}
 \noindent Powiemy, że \(\lambda\)-term \(M\) ma własność:
 \begin{easylist}
   & \emph{(słabej) normalizacji} (symbolicznie: \(M\in\mathrm{WN_{\beta}}\)) wtedy i tylko wtedy, gdy istnieje ciąg \(\beta\)-redukcji rozpoczynający się od \(M\) i kończący się termem w postaci normalnej \(N\). 
   &  \emph{silnej normalizacji} (symbolicznie: \(M\in\mathrm{SN_{\beta}}\)), jeśli wszystkie ciągi \(\beta\)-redukcji rozpoczynające się od \(M\) są skończone.
 \end{easylist}
-\noindent Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) pociąga za sobą własność \(\mathrm{WN}_{\beta}\).
-
+\begin{uwaga*}
+Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) pociąga za sobą własność \(\mathrm{WN}_{\beta}\).
+\end{uwaga*}
 \begin{definicja}(Strategia redukcji)\\
   \emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\mathbf{\Lambda}_{\mathrm{T}}\longrightarrow\mathbf{\Lambda}_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\longrightarrow_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
 \end{definicja}
@@ -371,6 +383,10 @@ Zdefiniowane powyżej  \(\beta\)- i \(\eta\)-redukcje zachowują typ, jak stwie
 \end{twierdzenie}
 \begin{dowod}
 \end{dowod}
+
+\begin{twierdzenie}\label{thm:church-rosser}
+  Rachunek \(\lambda\) z typami prostymi ma własność Churcha-Rossera.
+\end{twierdzenie}
 
 \begin{twierdzenie} 
   (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
