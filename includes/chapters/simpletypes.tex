@@ -189,7 +189,7 @@ Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\)
 \end{fakt}
 
 
- \begin{definicja}\label{def:lambda-term}(\(\lambda\)-termy)\\ 
+\begin{definicja}\label{def:lambda-term}(\(\lambda\)-termy)\\ 
    Wszystkie typowalne pseudotermy w pewnym kontekście \(\Gamma\) nazywamy \emph{\(\lambda\)-termami} (z typami prostymi w  kontekście \(\Gamma\)).
   \begin{uwaga*}
 \(\lambda\)-term w kontekście \(\Gamma_1\) może nie być typowalny w innym kontekście \(\Gamma_2\).   
@@ -221,11 +221,14 @@ Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\)
   \end{center}
   Term \(\lambda x^{\tau\to\rho} y^{\sigma\to\tau} z^\sigma . x(yz)\) odpowiada operacji złożenia funkcji. Co więcej, można wykazać że typ \((\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\) może mieć tylko i wyłącznie operacja złożenia~\cite{Wadler1989}.
 \end{przyklad}
-\begin{uwaga*}
-Widzimy, że wyprowadzanie typu odpowiada w gruncie rzeczy konstrukcji \(\lambda\)-termu. Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontekstu \(\Gamma\) będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. 
+\begin{uwaga}\label{rm:skonczonosc-lambdatermow}
+Widzimy, że wyprowadzanie typu odpowiada w gruncie rzeczy konstrukcji \(\lambda\)-termu. Ponieważ każde wyprowadzenie musi być skończone, typowalne są tylko pseudotermy skończonej długości.
+\end{uwaga} 
+\begin{uwaga}
+  Mówiąc o \(\lambda\)-termach i nie podając żadnego związanego z nimi kontekstu \(\Gamma\) będziemy implicite zakładali, że istnieje pewien kontekst w którym są one typowalne. 
 
 Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając adnotacji typowej umieszczonej w górnym indeksie. Dla przykładu, pisząc \(\left(M^{\sigma\to\tau}N^\sigma\right)^\tau\) będziemy mieli na myśli, że ten \(\lambda\)-term jest w pewnym kontekście \(\Gamma\) typu \(\tau\). 
-\end{uwaga*}
+\end{uwaga}
 
 \begin{przyklad}\label{ex:omega-kombinator}
   Nie wszystkie pseudotermy są typizowalne w rachunku \(\lambda\) z typami prostymi. 
@@ -256,7 +259,7 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
   Nadużywając notacji, z każdym \(\beta\)-redeksem \(\Delta\) postaci \((\lambda x^\tau .\,P^\rho)R\) będziemy wiązali jego \emph{stopień} i pisali \(\delta((\lambda x^\tau .\,P^\rho)R)=\delta(\tau\to\rho)\), gdzie występująca po prawej stronie równości \(\delta\) jest określona w myśl Definicji \ref{def:stopien-typu}. Dysponując tą konwencją możemy określić pojęcie stopnia dowolnego \(\lambda\)-termu, które będzie nam pomocne w określeniu jego złożoności.
 
 \begin{definicja}\label{def:stopien-termu}(stopień \(\lambda\)-termu)\\
-  Stopniem \(\mathrm{d}(M)\) \(\lambda\)-termu \(M\) nazywamy supremum zbioru stopni \(\beta\)-redekstów, które są zawarte w \(M\), czyli
+  Stopniem \(\mathrm{d}(M)\) \(\lambda\)-termu \(M\) nazywamy supremum zbioru stopni \(\beta\)-redeksów, które są zawarte w \(M\), czyli
   \[\mathrm{d}(M)=\sup\{\delta(N) \:|\:N\ \text{jest \(\beta\)-redeksem w}\ M\}.\]
 \end{definicja}
 
@@ -264,21 +267,21 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
   Z każdym \(\beta\)-redeksem \(\Delta\) związane są więc dwa rodzaje stopni: stopień \(\mathrm{d}(\Delta)\) jako \(\lambda\)-termu w myśl Defnicji \ref{def:stopien-termu} i stopień \(\beta\)-redeksu \(\delta(\Delta)\).
 \end{uwaga*}
 
-\begin{lemat}
-  Niech \(M\) i \(N\) będą dowolnymi \(\lambda\)-termami w kontekście \(\Gamma\) takimi, że \(x\in\mathrm{FV}(M)\) i \(x^\tau \in \Gamma\). Wówczas \(\mathrm{d}(M[x/N])\leq \max\left\{\mathrm{d}(M),\, \mathrm{d}(N),\, \delta(\tau)\right\}\).
-\end{lemat}
-\begin{dowod}
-
-\end{dowod}
+%\begin{lemat}
+%  Niech \(M\) i \(N\) będą dowolnymi \(\lambda\)-termami w kontekście \(\Gamma\) takimi, że \(x\in\mathrm{FV}(M)\) i \(x^\tau \in \Gamma\). Wówczas \(\mathrm{d}(M[x/N])\leq \max\left\{\mathrm{d}(M),\, \mathrm{d}(N),\, \delta(\tau)\right\}\).
+%\end{lemat}
+%\begin{dowod}
+%
+%\end{dowod}
 
 \end{definicja}
 \noindent Określamy następujące relacje:
 \begin{enumerate}[label=B\arabic*.]
-\item    \(\longrightarrow^{+}_{\beta}\) jest przechodnim domknięciem relacji \(\longrightarrow_{\beta}\) w zbiorze pseudotermów \(\mathbf{\Lambda}_{\mathrm{T}}\).
+  \item \(\longrightarrow^{+}_{\beta}\) jest przechodnim domknięciem relacji \(\longrightarrow_{\beta}\) w zbiorze pseudotermów \(\mathbf{\Lambda}_{\mathrm{T}}\).
 
-\item    \(\longrightarrow^{*}_{\beta}\) jest domknięciem przechodnio-zwrotnim w \(\mathbf{\Lambda}_{\mathrm{T}}\) relacji \(\longrightarrow_{\beta}\), a zatem jest \emph{redukcją}. 
+  \item \(\longrightarrow^{*}_{\beta}\) jest domknięciem przechodnio-zwrotnim w \(\mathbf{\Lambda}_{\mathrm{T}}\) relacji \(\longrightarrow_{\beta}\), a zatem jest \emph{redukcją}. 
 
-\item    \(=_{\beta}\) jest najmniejszą relację równowazności zawierającą relację \(\longrightarrow_{\beta}\), (czyli \emph{kongruencją}).
+  \item \(=_{\beta}\) jest najmniejszą relację równowazności zawierającą relację \(\longrightarrow_{\beta}\), (czyli \emph{kongruencją}).
 \end{enumerate}
 
 \begin{definicja}\label{def:postac-normalna}(Postać normalna)\\
@@ -301,7 +304,7 @@ Fakt, że \(=_{\beta}\) jest relacją równoważności może rodzić pokusę, 
     o ile \(x\not\in \mathrm{FV}(M)\).
   \end{definicja}
 
-Zdefiniowane powyżej  \(\beta\)- i \(\eta\)-redukcje zachowują typ, jak stwierdza Fakt \ref{thm:poprawnosc-redukcji}. Własność ta pozwala sensownie mówić o redukcji \(\lambda\)-termów pomimo, że te relacje są zdefiniowane dla pseudotermów.
+Zdefiniowane powyżej  \(\beta\)- i \(\eta\)-redukcje zachowują typ, jak stwierdza Fakt \ref{thm:poprawnosc-redukcji}. Własność ta pozwala sensownie mówić o redukcji \(\lambda\)-termów pomimo, że te relacje są zdefiniowane dla pseudotermów. 
 \begin{fakt}\label{thm:poprawnosc-redukcji}(O poprawności redukcji) 
   Jeśli \(\Gamma\vdash M^\sigma\) i \(M\longrightarrow^{*}_{\beta\eta}N\), to
   \(\Gamma\vdash N^\sigma\).
@@ -324,29 +327,36 @@ Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) poc
 \begin{dowod}
   Pokażemy, że dla dowolnego \(\lambda\)-termu \(M\) istnieje normalizująca strategia redukcji. 
 
-  Przypuśćmy, że \(M\) nie jest w postaci normalnej. Oznaczmy przez \(\delta_M\) maksymalny stopień redeksów występujących w \(M\). Ponieważ wiele redeksów w \(M\) może mieć ten sam stopień \(\delta_M\), przez \(n_M\) oznaczmy liczbę wystąpień redeksów stopnia \(\delta_M\) w \(M\). 
+  Oznaczmy przez \(\mathrm{R}_\beta(M)\) zbiór \(\beta\)-redeksów znajdujących się w \(M\). Jeśli \(M\in \mathrm{NF}_\beta\), to \(\mathrm{R}_\beta(M)=\emptyset\) i twierdzenie zachodzi w sposób trywialny. Jeśli \(M\not\in \mathrm{NF}_\beta\), to istnieje w \(M\) przynajmniej jeden \(\beta\)-redeks. Z Uwagi \ref{rm:skonczonosc-lambdatermow} \(M\) jest skończonej długości, więc \(\mathrm{R}_\beta(M)\) jest skończony. Możemy więc wybrać z \(M\) \(\beta\)-redeks znajdujący się (rozpoczynający się) w \(M\) najbardziej na prawo. Oznaczmy taki \(\beta\)-redeks przez \(\Delta\). 
 
-  Niech \(\Delta\) będzie \(\beta\)-redeksem stopnia \(\delta_M\) położonym w \(M\) najbardziej na prawo i niech \(M'\) będzie \(\beta\)-reduktem otrzymanym przez zredukowanie \(\Delta\). Zauważmy, że \(n_M < n_{M'}\), gdyż \(\Delta\) nie wystepuje już w \(M'\), zaś \(\beta\)-redukcja \(\Delta\) może prowadzić do powstania redeksów tylko mniejszego stopnia. Istotnie, ilość redeksów w \(M\) może zwiększyć się tylko na jeden z poniższych sposobów: 
+  Niech \(\delta_M\) będzie stopniem \(M\) (Definicja \ref{def:stopien-termu}). Ponieważ wiele redeksów w \(M\) może mieć ten sam stopień \(\delta_M\), przez \(n_M\) oznaczmy liczbę wystąpień redeksów stopnia \(\delta_M\) w \(M\). 
+
+  Niech \(F\) będzie strategią redukcji polegającą na \(\beta\)-redukowaniu redeksu \(\Delta\) wybranego jak wyżej i niech \(M'=F(M)\).
+
+  Zauważmy, że \(n_M < n_{M'}\), gdyż strategia \(F\) eliminuje \(\Delta\) z \(M'\) i może prowadzić do powstania redeksów tylko mniejszego stopnia.
+  
+  Istotnie, ilość redeksów w \(M\) może zwiększyć się na skutek \(\beta\)-redukcji tylko w jeden z poniższych sposobów: 
   \begin{enumerate}[label=\roman*)]
     \item powstanie nie występujących wcześniej redeksów.
     \item powielenie już istniejących redeksów.
   \end{enumerate}
 
+
   \begin{figure}[htb]
   \centering
   \begin{subfigure}{0.55\textwidth}
     \includegraphics[width=1\linewidth]{../reduction1}
-    \caption{Redukcja \((\lambda x^{\rho\to\mu}.\,\overbrace{\dots x P^\rho \dots}^{M^\tau})(\lambda y^\rho.\, \overbrace{\dots y \dots}^{Q^\mu})^{\rho\to\mu}\) do nowego redeksu \((\lambda y^\rho.\underbrace{\,\dots y\dots}_{Q^\mu})P^\rho\).}
+    \caption{Redukcja \((\lambda x^{\rho\to\mu}.\,\overbrace{\dots x P^\rho \dots}^{M^\tau})(\lambda y^\rho.\, Q^\mu)^{\rho\to\mu}\) do nowego redeksu \((\underbrace{\dots(\lambda y^\rho.\,Q^\mu)P^\rho\dots}_{M[x/Q]^\tau})\).}
   \end{subfigure}
 
-\end{figure}
-\begin{figure}[htb]\ContinuedFloat
-  \centering
-  \vspace{1em}
-  \begin{subfigure}{0.55\textwidth}
-    \includegraphics[width=1\linewidth]{../reduction2}
-    \caption{Redukcja \((\lambda x^\tau y^\rho.\,\dots x \dots y\dots)M^\tau Q^\rho\) do nowego redeksu postaci \((\lambda y^\rho .\, \dots M^\tau \dots y \dots)Q^\rho\).}
-  \end{subfigure}
+%\end{figure}
+%\begin{figure}[htb]\ContinuedFloat
+%  \centering
+%  \vspace{1em}
+%  \begin{subfigure}{0.55\textwidth}
+%    \includegraphics[width=1\linewidth]{../reduction2}
+%    \caption{Redukcja \((\lambda x^\tau y^\rho.\,\dots x \dots y\dots)M^\tau Q^\rho\) do nowego redeksu postaci \((\lambda y^\rho .\, \dots M^\tau \dots y \dots)Q^\rho\).}
+%  \end{subfigure}
 
 \end{figure}
 \begin{figure}[htb]\ContinuedFloat
@@ -354,7 +364,7 @@ Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) poc
   \vspace{1em}
   \begin{subfigure}{0.55\textwidth}
     \includegraphics[width=1\linewidth]{../reduction2b}
-    \caption{Redukcja \((\lambda x^\tau y^\rho.\,\dots y \dots x\dots)M^\tau Q^\rho\) do nowego redeksu postaci \((\lambda y^\rho .\, \dots y \dots M^\tau \dots)Q^\rho\).}
+    \caption{Redukcja \((\lambda x^\tau \lambda y^\rho.\,P^\sigma)M^\tau N^\rho\) do nowego redeksu postaci \((\lambda y^\rho .\, P[x/M]^\sigma)N^\rho\).}
   \end{subfigure}
 
 
@@ -363,11 +373,12 @@ Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) poc
   \centering
   \begin{subfigure}{0.55\textwidth}
     \includegraphics[width=1\linewidth]{../reduction3}
-    \caption{Redukcja \((\lambda x^{\rho\to\mu}.\,x)(\lambda y^\rho.\,\overbrace{\dots y \dots}^{M^{\rho\to\mu}}) N^\rho\) do nowego redeksu \((\lambda y^\rho.\,\underbrace{\dots y \dots}_{M^\mu})N^\rho\).}
+    \caption{Redukcja \((\lambda x^{\sigma}.\,x)(\lambda y^\tau.\,M^\rho) N^\tau\) do nowego redeksu \((\lambda y^\tau.\,M^\rho)N^\tau\).}
   \end{subfigure}
   \caption{test}
 \end{figure}
 \clearpage 
+
   Powtarzając otrzymujemy więc \(\lambda\)-term w postaci normalnej. \qed
 
 \end{dowod}
