@@ -1,4 +1,34 @@
 \section{Rachunek \(\lambda\) z typami prostymi}
+Przedstawimy system rachunku \(\lambda\) z typami prostymi w stylu de Bruijna \cite{barendregt_dekkers_statman_2013, Urzyczyn2006}. Zgodnie z \cite{Hindley:2008:LCI:1388400} odpowiada on najsłabszemu z \emph{czystych systemów typów}  (ang. \emph{pure type systems}, PTS) w myśl klasyfikacji zaproponowanej przez Henka Barendregta w \cite{barendregt_1991}. Klasyfikację tę obrazuje Rysunek \ref{fig:lambda-cube}; kierunek krawędzi oznacza na nim zawieranie w sensie możliwości wyrażenia słabszego systemu przez system wzbogacony o nowe typy.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\matrix (m) [matrix of math nodes,
+row sep=3em, column sep=3em,
+text height=1.5ex,
+text depth=0.25ex]{
+            & \lambda\omega             &              & \lambda\Pi\omega             \\
+\lambda 2   &                           & \lambda\Pi 2                                \\
+            & \lambda\underline{\omega} &              & \lambda\Pi\underline{\omega} \\
+\lambda{\to}&                           & \lambda\Pi  \\
+};
+\path[-{Latex[length=2.5mm, width=1.5mm]}]
+(m-1-2) edge (m-1-4)
+(m-2-1) edge (m-2-3)
+        edge (m-1-2)
+(m-3-2) edge (m-1-2)
+        edge (m-3-4)
+(m-4-1) edge (m-2-1)
+        edge (m-3-2)
+        edge (m-4-3)
+(m-3-4) edge (m-1-4)
+(m-2-3) edge (m-1-4)
+(m-4-3) edge (m-3-4)
+        edge (m-2-3);
+\end{tikzpicture}
+\caption{Kostka lambda H. Barendregta}
+\end{figure}\label{fig:lambda-cube}
 
 %System \(\lambda_{\to}\) w stylu Churcha to zbiór typów \(\mathrm{T}\),
 %zbiór pseudotermów \(\Lambda_{\mathrm{T}}\), rodzina otoczeń typowych,
@@ -125,7 +155,7 @@ które różnią się między sobą tylko zmiennymi związanymi.
   \mathbf{\Lambda}_{\mathrm{T}}=\left\{[M]_\alpha\:|\: M\in\mathbf{\tilde{\Lambda}}_\mathrm{T}\right\}
 \]
 \end{definicja}
-Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich reprezentantów.
+Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich reprezentantów, tj. zamiast \([\lambda x^\sigma. M]_{\alpha}\) będziemy pisali krótko: \(\lambda x^\sigma. M\).
 \subsection{Typowalność} 
 %\item
 %  \emph{Pseudo-pretermami} nazywamy język \(\Lambda_{\mathrm{T}}\) generowany przez
@@ -144,11 +174,11 @@ Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich r
   \[\mathrm{rg}(\Gamma)=\left\{\tau\in\mathbf{T}_\to\,|\,\exists x(x^\tau\in\Gamma)\right\}\]
   -- \emph{zakresem} kontekstu \(\Gamma\).
   Piszemy:
-  \begin{itemize}
-    \item \(x_{1}^{\tau_1},\,x_{2}^{\tau_2}\) zamiast \(\{x_{1}^{\tau_1},\, x_{2}^{\tau_2}\}\), o ile \(x_{1}^{\tau_1}\) i \(x_{2}^{\tau_2}\) są różne,
-    \item \(\Gamma,\, x^\tau\) zamiast \(\Gamma\cup \{x^\tau\}\), o ile \(x^\tau\not\in \Gamma\),
-    \item \(\Gamma,\, \Delta\) zamiast \(\Gamma\cup \Delta\), o ile \(\Gamma\cap\Delta=\emptyset\).
-  \end{itemize}
+  \begin{easylist}
+    & \(x_{1}^{\tau_1},\,x_{2}^{\tau_2}\) zamiast \(\{x_{1}^{\tau_1},\, x_{2}^{\tau_2}\}\), o ile \(x_{1}^{\tau_1}\) i \(x_{2}^{\tau_2}\) są różne,
+    & \(\Gamma,\, x^\tau\) zamiast \(\Gamma\cup \{x^\tau\}\), o ile \(x^\tau\not\in \Gamma\),
+    & \(\Gamma,\, \Delta\) zamiast \(\Gamma\cup \Delta\), o ile \(\Gamma\cap\Delta=\emptyset\).
+  \end{easylist}
 \end{definicja}
 
 Okreslimy teraz system przypisywania typów do pseudotermów w stylu dedukcji naturalnej. \emph{Sekwentami} w tym systemie będziemy nazywali wyrażenia postaci \(\Gamma\vdash M^{\sigma}\), gdzie \(M\in\mathbf{\Lambda}_{\mathrm{T}},\ \sigma\in\mathbf{T_\to}\), zaś \(\Gamma\) jest pewnym kontekstem. 
@@ -187,6 +217,7 @@ Wprowadzamy następujące reguły dowodzenia:
 Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
 \end{fakt}
 
+Otrzymujemy ostateczne określenie \(\lambda\)-termów w omawianym systemie.
 
 \begin{definicja}\label{def:lambda-term}(\(\lambda\)-termy)\\ 
    Wszystkie typowalne pseudotermy w pewnym kontekście \(\Gamma\) nazywamy \emph{\(\lambda\)-termami} (z typami prostymi w  kontekście \(\Gamma\)).
@@ -230,11 +261,11 @@ Typ dowolnego \(\lambda\)-termu będziemy w ramach konwencji notowali używając
 \end{uwaga}
 
 \begin{przyklad}\label{ex:omega-kombinator}
-  Nie wszystkie pseudotermy są typizowalne w rachunku \(\lambda\) z typami prostymi. 
+  Nie wszystkie pseudotermy są typowalne w rachunku \(\lambda\) z typami prostymi. 
   Istotnie, przypuśćmy że \(\omega=(\lambda x^{\sigma\to\sigma} .\, x x)\) jest typowalny. Wówczas dla kontekstu \(\Gamma\) mamy \(x^{\sigma\to\sigma}\in\Gamma\). Ponieważ \(\omega\) zawiera w sobie podterm \((xx)\), to w wyprowadzeniu musiał on zostać otrzymany przez zastosowanie reguły (App). Wówczas \(x^\sigma \in \Gamma\)  i \(x^{\sigma\to\sigma} \in \Gamma\), co nie jest możliwe, bo \(\Gamma\) musiałby nie być prawidłowo określonym kontekstem. 
 \end{przyklad}
 
-Przykład \ref{ex:omega-kombinator} wskazuje, że rachunek \(\lambda\) z typami prostymi nie ma wystarczających środków wyrazu, aby definiować w nim funkcje rekurencyjne. W rachunku \(\lambda\) bez typów definicje takie są osiągane za pomocą \emph{kombinatorów punktu stałego}, które w rachunku \(\lambda\) z typami prostymi nie są typowalne. 
+Przykład \ref{ex:omega-kombinator} wskazuje, że rachunek \(\lambda\) z typami prostymi nie ma wystarczających środków wyrazu, aby definiować w nim funkcje rekurencyjne. W rachunku \(\lambda\) bez typów definicje takie są osiągane za pomocą \emph{kombinatorów punktu stałego}, które w rachunku \(\lambda\) z typami prostymi nie są typowalne właśnie ze względu na fakt, że nie jest możliwe wyprowadzenie typu dla aplikacji termu do samego siebie.
 
 \subsection{Redukcja}
 \begin{definicja}(Zgodność)\\
@@ -255,7 +286,7 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
   
   \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x^\sigma.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}.
 
-  Nadużywając notacji, z każdym \(\beta\)-redeksem \(\Delta\) postaci \((\lambda x^\tau .\,P^\rho)R\) będziemy wiązali jego \emph{stopień} i pisali \(\delta((\lambda x^\tau .\,P^\rho)R)=\delta(\tau\to\rho)\), gdzie występująca po prawej stronie równości \(\delta\) jest określona w myśl Definicji \ref{def:stopien-typu}. Dysponując tą konwencją możemy określić pojęcie stopnia dowolnego \(\lambda\)-termu, które będzie nam pomocne w określeniu jego złożoności.
+  Nadużywając notacji, z każdym \(\beta\)-redeksem \(\Delta\) postaci \((\lambda x^\tau .\,P^\rho)R\) będziemy wiązali jego \emph{stopień} i pisali \(\delta((\lambda x^\tau .\,P^\rho)R)=\delta(\tau\to\rho)\), gdzie występująca po prawej stronie równości \(\delta\) jest określona w myśl Definicji \ref{def:stopien-typu}. Dysponując tą konwencją możemy określić pojęcie stopnia dowolnego \(\lambda\)-termu.
 
 \begin{definicja}\label{def:stopien-termu}(stopień \(\lambda\)-termu)\\
   Stopniem \(\mathrm{d}(M)\) \(\lambda\)-termu \(M\) nazywamy supremum zbioru stopni \(\beta\)-redeksów, które są zawarte w \(M\), czyli
@@ -286,7 +317,7 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
 \begin{definicja}\label{def:postac-normalna}(Postać normalna)\\
   Powiemy, że \(\lambda\)-term \(M\) jest w \emph{postaci normalnej}, jeśli żadna z jego podformuł nie jest \(\beta\)-redeksem. Przez \(\mathrm{NF}_{\beta}\) będziemy oznaczali zbiór wszystkich \(\lambda\)-termów w postaci normalnej.
 \end{definicja}    
-Definicję postaci normalnej można ująć w alternatywny sposób, którą prezentujemy w postaci Faktu \ref{thm:postac-normalna-alt}.
+Definicję postaci normalnej można ująć w alternatywny sposób w postaci Faktu \ref{thm:postac-normalna-alt}.
 
 \begin{fakt}\label{thm:postac-normalna-alt}
 \(M\) \emph{ma postać normalną}, jeśli \(M=_{\beta}N\) dla pewnego \(N\), który jest w postaci normalnej.
@@ -330,17 +361,15 @@ Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) poc
 
   Niech \(\delta_M\) będzie stopniem \(M\) (Definicja \ref{def:stopien-termu}). Ponieważ wiele redeksów w \(M\) może mieć ten sam stopień \(\delta_M\), przez \(n_M\) oznaczmy liczbę wystąpień redeksów stopnia \(\delta_M\) w \(M\). 
 
-  Niech \(F\) będzie strategią redukcji polegającą na \(\beta\)-redukowaniu redeksu \(\Delta\) wybranego jak wyżej i niech \(M'=F(M)\).
-
-  Zauważmy, że \(n_M < n_{M'}\), gdyż strategia \(F\) eliminuje \(\Delta\) z \(M'\) i może prowadzić do powstania redeksów tylko mniejszego stopnia.
-  
+  Niech \(F\) będzie strategią redukcji polegającą na \(\beta\)-redukowaniu redeksu \(\Delta\) wybranego jak wyżej i niech \(M'=F(M)\).  
+  Zauważmy, że \(n_M < n_{M'}\), gdyż strategia \(F\) eliminuje \(\Delta\) z \(M'\) i może prowadzić do powstania redeksów tylko mniejszego stopnia.  
   Istotnie, ilość redeksów w \(M\) może zwiększyć się na skutek \(\beta\)-redukcji tylko w jeden z poniższych sposobów: 
   \begin{enumerate}[label=\roman*)]
-    \item powstanie nie występujących wcześniej redeksów.
+    \item powstanie nie występujących wcześniej redeksów.\label{itm:wn-1}
     \item powielenie już istniejących redeksów.
   \end{enumerate}
 
-
+W przypadku \ref{itm:wn-1} 
   \begin{figure}[htb]
   \centering
   \begin{subfigure}{0.55\textwidth}
@@ -373,9 +402,6 @@ Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) poc
   Powtarzając otrzymujemy więc \(\lambda\)-term w postaci normalnej. \qed
 
 \end{dowod}
-\begin{twierdzenie} 
-  (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Wszystkie \(\lambda\)-termy mają własność silnej normalizacji.
-\end{twierdzenie}
 \begin{itemize}
 \item WCR: \(\forall a,\,b,\,c\in A\, (a\longrightarrow b \land a\longrightarrow c)\to \exists d\in A\,(b\longrightarrow^{*} d \land c\longrightarrow^{*} d)\)
 \item CR: \(\forall a,\,b,\,c\in A\, (a\longrightarrow^{*} b \land a\longrightarrow^{*}c)\to \exists d\in A\,(b\longrightarrow^{*} d \land c\longrightarrow^{*} d)\)
@@ -386,13 +412,14 @@ Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) poc
 \begin{dowod}
 \end{dowod}
 
-\begin{twierdzenie}\label{thm:church-rosser}
+\begin{twierdzenie}\label{thm:church-rosser}(Własność CR) 
   Rachunek \(\lambda\) z typami prostymi ma własność Churcha-Rossera.
 \end{twierdzenie}
 
 \begin{twierdzenie} 
-  (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Każdy \(\lambda\)-term w stylu Churcha własność silnej normalizacji.
+  (\emph{Własność \(\mathrm{SN}_{\beta}\)}) Wszystkie \(\lambda\)-termy mają własność silnej normalizacji.
 \end{twierdzenie}
+
 \begin{dowod}
 \end{dowod}
 
