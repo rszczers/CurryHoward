@@ -298,17 +298,17 @@ Przykład \ref{ex:omega-kombinator} wskazuje, że rachunek \(\lambda\) z typami 
 
 \subsection{Redukcja}
 \begin{definicja}(Zgodność)\\
-  Relację \(\mathrm{R}\) na zbiorze termów \(\mathbf{\Lambda}_{\mathrm{T}}\) nazywamy \emph{zgodną}, jeśli dla \(M,\,N,\,Z\in\mathbf{\Lambda}_{\mathrm{T}}\) spełnia ona następujące warunki:
+  Relację \(\mathrm{R}\) na zbiorze pseudotermów \(\mathbf{\tilde\Lambda}_{\mathrm{T}}\) nazywamy \emph{zgodną}, jeśli dla \(M,\,N,\,Z\in\mathbf{\tilde\Lambda}_{\mathrm{T}}\) spełnia ona następujące warunki:
   \begin{enumerate}[label=\roman*)]
     \item Jeśli \(M\mathrm{R} N\), to \((\lambda x^\sigma.\,M)\, \mathrm{R}\, (\lambda x^\sigma.\, N)\) dla dowolnych \(x\in \mathrm{V}\) i \(\sigma\in \mathbf{T_\to}\).
     \item Jeśli \(M\mathrm{R} N\), to \((MZ)\,\mathrm{R}\, (NZ)\).
     \item Jeśli \(M\mathrm{R} N\), to \((ZM)\,\mathrm{R}\, (ZN)\).
   \end{enumerate}
-Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgodną relację równowazności na \(\mathbf{\Lambda}_{\mathrm{T}}\), zaś \emph{redukcją} – każdą zgodną, zwrotną i przechodnią relację na \(\mathbf{\Lambda}_{\mathrm{T}}\).
+Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgodną relację równowazności na \(\mathbf{\tilde\Lambda}_{\mathrm{T}}\), zaś \emph{redukcją} – każdą zgodną, zwrotną i przechodnią relację na \(\mathbf{\tilde\Lambda}_{\mathrm{T}}\).
 \end{definicja}
 
 \begin{definicja}(\(\beta\)-redukcja)\\
-  \(\beta\)-redukcją nazywamy najmniejsza w sensie mnogościowym \emph{zgodną} relację binarną \(\longrightarrow_{\beta}\) określoną zbiorze na pseudotermów \(\mathbf{\Lambda}_{\mathrm{T}}\) za pomocą podstawienia
+  \(\beta\)-redukcją nazywamy najmniejsza w sensie mnogościowym \emph{zgodną} relację binarną \(\longrightarrow_{\beta}\) określoną zbiorze na pseudotermów \(\mathbf{\tilde\Lambda}_{\mathrm{T}}\) za pomocą podstawienia
   \[
     (\lambda x^\sigma.\,P)Q \longrightarrow_{\beta} P[x/Q].
   \]
@@ -336,11 +336,11 @@ Przy powyższych ustaleniach \emph{kongruencją} będziemy nazywali każdą zgod
 \end{definicja}
 \noindent Określamy następujące relacje:
 \begin{enumerate}[label=B\arabic*.]
-  \item \(\longrightarrow^{+}_{\beta}\) jest przechodnim domknięciem relacji \(\longrightarrow_{\beta}\) w zbiorze pseudotermów \(\mathbf{\Lambda}_{\mathrm{T}}\).
+  \item \(\longrightarrow^{+}_{\beta}\) jest przechodnim domknięciem relacji \(\longrightarrow_{\beta}\) w zbiorze pseudotermów \(\mathbf{\tilde\Lambda}_{\mathrm{T}}\).
 
-  \item \(\longrightarrow^{*}_{\beta}\) jest domknięciem przechodnio-zwrotnim w \(\mathbf{\Lambda}_{\mathrm{T}}\) relacji \(\longrightarrow_{\beta}\), a zatem jest \emph{redukcją}.
+  \item \(\longrightarrow^{*}_{\beta}\) jest domknięciem przechodnio-zwrotnim w \(\mathbf{\tilde\Lambda}_{\mathrm{T}}\) relacji \(\longrightarrow_{\beta}\) (jest \emph{redukcją}).
 
-  \item \(=_{\beta}\) jest najmniejszą relację równowazności zawierającą relację \(\longrightarrow_{\beta}\), (czyli \emph{kongruencją}).
+  \item \(=_{\beta}\) jest najmniejszą relację równowazności zawierającą relację \(\longrightarrow_{\beta}\) (jest \emph{kongruencją}).
 \end{enumerate}
 
 \begin{definicja}\label{def:postac-normalna}(Postać normalna)\\
