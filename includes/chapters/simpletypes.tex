@@ -45,7 +45,7 @@ Niech \(\mathrm{U}\) będzie przeliczalnie nieskończonym zbiorem zmiennych prze
 
 Typy proste zbudowane tylko wedle reguły \ref{def:t-1} nazywamy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły \ref{def:t-2} -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbf{T_\to}\).
 
-Późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho,\ \dots\) będą służyły nam za zmienne metasyntaktyczne do oznaczania typów prostych. Dla lepszej czytelności będziemy pomijali najbardziej zewnętrzne nawiasy. Konstruktor typu \(\to\) jest prawostronnie łączny, co oznacza, że typy \(\tau\to\sigma\to\theta\) oraz \(\tau\to(\sigma\to\theta)\) będziemy uznawali za tożsame.
+Późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho,\ \dots\) będą służyły nam za zmienne metasyntaktyczne do oznaczania typów prostych. Dla lepszej czytelności będziemy pomijali najbardziej zewnętrzne nawiasy. Konstruktor typu \(\to\) wiąże prawostronnie; oznacza to, że typy \(\tau\to\sigma\to\theta\) oraz \(\tau\to(\sigma\to\theta)\) będziemy uznawali za tożsame.
 
 Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa binarnego. Wysokość takiego drzewa będziemy nazywali \emph{stopniem} typu. Precyzyjnie ujmuje to pojęcie poniższa definicja.
 \begin{definicja}\label{def:stopien-typu}(Stopień typu)\\
@@ -69,18 +69,18 @@ Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa bina
 \end{definicja}
   Wyrażenia postaci \ref{def:pt-2} nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci \ref{def:pt-3} -- \emph{\(\lambda\)-abstrakcjami}, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest nim \emph{związana}.
 
-  Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \) Podobnie jak w podrozdziale \ref{ssec:typy-proste} stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów jest łączna lewostronnie, co oznacza, że będziemy utożsamiali wyrażenia \(MNP\) oraz \((MN)P\).
+  Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \) Podobnie jak w podrozdziale \ref{ssec:typy-proste} stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów wiąże lewostronnie; oznacza to, że będziemy utożsamiali ze sobą wyrażenia \(MNP\) oraz \((MN)P\).
 
 \newpage
 
 \begin{definicja}(Zmienne wolne)
-  \item Dla pseudo-pretermu \(M\) określamy zbiór \emph{termów wolnych} \(\mathrm{FV}\) w nastepujący sposób:
+  \item Dla pseudo-pretermu \(M\) określamy zbiór \emph{pseudo-pretermów wolnych} \(\mathrm{FV}\) w nastepujący sposób:
     \begin{align*}
       \mathrm{FV}(x) &= \{x\}\\
       \mathrm{FV}(\lambda x^\sigma .\, P)  &= \mathrm{FV}(P)\setminus\{x\}\\
       \mathrm{FV}(P Q) &= \mathrm{FV}(P)\cup\mathrm{FV}(Q)
     \end{align*}
-Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{zamknięty}.
+Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{domknięcite}.
 \end{definicja}
 %  \item Podstawieniem pseudotermu \(N\) za \(\lambda\)-zmienną \(x\) w pseudotermie \(M\), symbolicznie \(M[x/N]\), nazywamy przekształcenie pseudotermu zadane następującymi warunkami:
 %    \begin{enumerate}[label=({\alph*})]
@@ -157,7 +157,7 @@ które różnią się między sobą tylko zmiennymi związanymi.
   \mathbf{\Lambda}_{\mathrm{T}}=\left\{[M]_\alpha\:|\: M\in\mathbf{\tilde{\Lambda}}_\mathrm{T}\right\}
 \]
 \end{definicja}
-Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich reprezentantów, tj. zamiast \([\lambda x^\sigma. M]_{\alpha}\) będziemy pisali krótko: \(\lambda x^\sigma. M\).
+Nadużywając notacji będziemy odnosili się do pseudotermów tylko przez ich reprezentantów: zamiast \([\lambda x^\sigma. M]_{\alpha}\) będziemy pisali krótko \(\lambda x^\sigma. M\).
 \subsection{Typowalność}
 %\item
 %  \emph{Pseudo-pretermami} nazywamy język \(\Lambda_{\mathrm{T}}\) generowany przez
@@ -385,6 +385,27 @@ Z powyższego określenia  widzimy, że własność \(\mathrm{SN}_{\beta}\) poc
   \emph{Strategią redukcji} nazywamy odwzorowanie \(F:\:\mathbf{\Lambda}_{\mathrm{T}}\longrightarrow\mathbf{\Lambda}_{\mathrm{T}}\) takie, że \(F(M)=M\), gdy \(M\) jest w postaci normalnej i \(M\longrightarrow_{\beta}F(M)\) w przeciwnym wypadku. Mówimy, że strategia \(F\) jest \emph{normalizująca}, jeśli dla każdego \(M\in \mathrm{WN_\beta}\) istnieje \(i\in\mathbb{N}\) takie, że \(F^i (M)\) jest w postaci normalnej.
 \end{definicja}
 
+Z puktu widzenia praktyki obliczeniowej istotny jest podział strategi redukcji ze względu na kolejność w jakiej redukowane będą podwyrażenia \(\lambda\)-termów. Wyróżniamy:
+\begin{easylist}
+  & strategie ścisłe (ang. \emph{strict}), w których każdy \(\lambda\)-term przed aplikacją jest redukowany do postaci normalnej,
+  & strategie nieścisłe (ang. \emph{non-strict}), w których dopuszcza się aplikowanie \(\lambda\)-termów, które można dalej zredukować.
+\end{easylist}
+
+\begin{przyklad}
+  Niech \(\mathrm{K}=\lambda xy.\,x\), \(\mathrm{I}=\lambda x.\,x\), \(0 = \lambda x y.\, y\). 
+  Rozważmy następujące ciągi redukcji:
+
+  \begin{enumerate}[label=({\alph*})]
+    \item Redukcja strategią scisłą:\begin{multline*}
+              \mathrm{KI}((\lambda mnxy.\, m x (n x y))0 0) \longrightarrow_\beta \mathrm{KI}((\lambda nxy.\, 0 x (n x y)) 0) \longrightarrow_\beta \\
+              \longrightarrow_\beta \mathrm{KI}((\lambda xy.\, 0 x (0 x y)))\longrightarrow_\beta \mathrm{KI}((\lambda xy.\, 0 x y))\longrightarrow_\beta \mathrm{KI0})\longrightarrow_\beta \mathrm{I}
+          \end{multline*}
+
+    \item Redukcja strategią nieścisłą:
+      \[\mathrm{KI}((\lambda mnxy.\, m x (n x y))0 0) \longrightarrow_\beta \mathrm{I}\]
+
+  \end{enumerate}
+\end{przyklad}
 \begin{twierdzenie}\label{thm:wn}(\emph{Własność \(\mathrm{WN}_{\beta}\)}) Wszystkie \(\lambda\)-termy mają postać normalną.
 \end{twierdzenie}
 \begin{dowod}
@@ -435,6 +456,7 @@ W przypadku \ref{itm:wn-1}
 %  Powtarzając otrzymujemy więc \(\lambda\)-term w postaci normalnej. \qed
 \end{dowod}
 
+
 Twierdzenie \ref{thm:wn} można istotnie wzmocnić. Okazuje się, że biorąc dowolny \(\lambda\)-term możemy mieć nie tylko pewność, że można go zredukować do postaci normalnej, ale że obierając dowolną strategię redukcja zakończy się po skończonej liczbie kroków.
 
 \begin{twierdzenie}\label{thm:sn}
@@ -472,4 +494,6 @@ Twierdzenie \ref{thm:wn} można istotnie wzmocnić. Okazuje się, że biorąc do
   \end{dowod}
 \end{twierdzenie}
 
-Poprawność redukcji (Fakt \ref{thm:poprawnosc-redukcji}), własność silnej normalizacji (Twierdzenie \ref{thm:sn}) i własność Churcha-Russera (Twierdzenie \ref{thm:church-rosser}) razem oznaczają, że każda strategia redukcji będzie prowadziła do jednoznacznie określonej postaci normalnej.
+Poprawność redukcji (Fakt \ref{thm:poprawnosc-redukcji}), własność silnej normalizacji (Twierdzenie \ref{thm:sn}) i własność Churcha-Russera (Twierdzenie \ref{thm:church-rosser}) razem oznaczają, że każda strategia redukcji jest normalizująca, zaś konsekwentne redukowane \(\lambda\)-termu prowadzi zawsze do tej samej postaci normalnej. 
+
+
