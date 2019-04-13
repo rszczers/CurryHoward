@@ -398,7 +398,7 @@ Z puktu widzenia praktyki obliczeniowej istotny jest podział strategi redukcji 
   \begin{enumerate}[label=({\alph*})]
     \item Redukcja strategią scisłą:\begin{multline*}
               \mathrm{KI}((\lambda mnxy.\, m x (n x y))0 0) \longrightarrow_\beta \mathrm{KI}((\lambda nxy.\, 0 x (n x y)) 0) \longrightarrow_\beta \\
-              \longrightarrow_\beta \mathrm{KI}((\lambda xy.\, 0 x (0 x y)))\longrightarrow_\beta \mathrm{KI}((\lambda xy.\, 0 x y))\longrightarrow_\beta \mathrm{KI0})\longrightarrow_\beta \mathrm{I}
+              \longrightarrow_\beta \mathrm{KI}(\lambda xy.\, 0 x (0 x y))\longrightarrow_\beta \mathrm{KI}(\lambda xy.\, 0 x y)\longrightarrow_\beta \mathrm{KI0}\longrightarrow_\beta \mathrm{I}
           \end{multline*}
 
     \item Redukcja strategią nieścisłą:
@@ -438,7 +438,7 @@ W przypadku \ref{itm:wn-1}
   \vspace{1em}
   \begin{subfigure}{0.55\textwidth}
     \includegraphics[width=1\linewidth]{../reduction2}
-    \caption{Redukcja \((\lambda x^\tau \lambda y^\rho.\,P^\sigma)M^\tau N^\rho\) do nowego redeksu postaci \((\lambda y^\rho .\, P[x/M]^\sigma)N^\rho\).}
+    \caption{Redukcja \((\lambda x^{\tau\to\rho}.\,x)(\lambda y^\tau.\,M^\rho) N^\tau\) do nowego redeksu \((\lambda y^\tau.\,M^\rho)N^\tau\).}
   \end{subfigure}
 
 
@@ -447,7 +447,7 @@ W przypadku \ref{itm:wn-1}
   \centering
   \begin{subfigure}{0.55\textwidth}
     \includegraphics[width=1\linewidth]{../reduction3}
-    \caption{Redukcja \((\lambda x^{\tau\to\rho}.\,x)(\lambda y^\tau.\,M^\rho) N^\tau\) do nowego redeksu \((\lambda y^\tau.\,M^\rho)N^\tau\).}
+    \caption{Redukcja \((\lambda x^\tau \lambda y^\rho.\,P^\sigma)M^\tau N^\rho\) do nowego redeksu postaci \((\lambda y^\rho .\, P[x/M]^\sigma)N^\rho\).}
   \end{subfigure}
   \caption{Grafy odpowiadające wszystkim możliwościom w których powstają nowe \(\beta\)-redeksy}
 \end{figure}

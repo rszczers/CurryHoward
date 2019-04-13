@@ -40,7 +40,19 @@
 \usepackage{blindtext}
 \usepackage{enumitem}
 \usepackage[ampersand]{easylist} 
+\usepackage{mathbbol}
 
+\DeclareSymbolFontAlphabet{\amsmathbb}{AMSb}%
+
+\usepackage{listings}
+
+\lstset{
+  basicstyle=\itshape,
+  xleftmargin=3em,
+  literate={->}{$\rightarrow$}{2}
+           {α}{$\alpha$}{1}
+           {δ}{$\delta$}{1}
+}
 \addbibresource{bibdb.bib}
 
 \subimport{includes/}{def.tex}
@@ -51,8 +63,11 @@
 
 \begin{document}
 %\maketitle
+\subimport{includes/chapters/}{untyped.tex}
+%\subimport{includes/chapters/}{pure_type_systems.tex}
 %\subimport{includes/chapters/}{ipc.tex}
-\subimport{includes/chapters/}{simpletypes.tex}
+%\subimport{includes/chapters/}{simpletypes.tex}
+%\subimport{includes/chapters/}{denotational_semantics.tex}
 %\bibliographystyle{alpha}
 
 \printbibliography[title=Literatura]	

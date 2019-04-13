@@ -1,0 +1,20 @@
+Zastosowania rachunku λ
+
+0. Wstęp 
+  0.1. Ekstensjonalne i intensjonalne pojęcie funkcji
+  0.2. Rachunek λ jako formalizm obliczeniowy
+    0.2.1. Teza Churcha, definicja funkcji rekurencyjnych
+1. λ-teorie 
+  1.1. Rachunek λ bez typów
+       * Twierdzenie Rice'a i problem stopu.
+  1.2. Rachunek λ z typami prostymi
+2. Zastosowania  
+  3.1. Rachunek λ jako język zupełny w sensie Turinga
+    3.1.1. Podstawowe konstrukcje
+       * Liczebniki Churcha, operacje logiczne i arytmetyczne,
+       * Instrukcje warunkowe, pętle, krotki, listy,
+       * Funkcja minimum.
+    3.1.2. Rachunek λ jako język pośredni dla obliczeń szeregowych
+  3.2. Izomorfizm Curry'ego-Howarda
+       * Typy proste jako zdania implikacyjnej części IRZ,
+       * Redukcja λ-termów jako normalizacja dowodów dedukcji naturalnej (przykłady).

@@ -3,6 +3,7 @@ SOURCE=main
 OUTPUT_DIR=./temp/
 export BIBINPUTS=:.
 all:
+	make clean
 	latexmk -pdf \
 	-bibtex \
 	-pdflatex="pdflatex --shell-escape -interactive=nonstopmode" \

@@ -1,0 +1,14 @@
+\section{Semantyka denotacyjna}
+Pojęcie funkcji używa się w dwóch znaczeniach:
+\begin{enumerate}[label=(\alph*)]
+\item funkcji jako algorytmu, który zwraca wartość dla zadanego argumentu.\label{operational_sem}
+\item funkcji w rozumieniu teoriomnogościowym, jako zbioru par argument-wartość.
+\label{denotational_sem}
+\end{enumerate}
+
+Ujęcie \ref{operational_sem}, nazywane \emph{semantyką operacyjną}, oddaje dynamiczny charakter procesu obliczania wartości funkcji jako ciągu wykonywanych w czasie elementarnych operacji na zadanym argumenie. W kontekście teorii języków programowania przez operacje elementarne należy rozumieć wykonywanie podstawowych instrukcji procesora. W teorii obliczalności to samo rozumielibyśmy pod pojęciem \emph{funkcji obliczalnej}, zaś algorytmiczny proces otrzymywania wartości nazwalibyśmy \emph{efektywnym}.
+
+Ujęcie \ref{denotational_sem} odpowiada rozumieniu funkcji jako ustalonego, statycznego zbioru przyporządkowań z którego możemy odczytać wartość. Przypisanie funkcjom takiego znaczenia nazywamy semantyką \emph{denotacyjną}. Wymaga ono dostępu do pełnej informacji o funkcji w stałym czasie. Niestety, spełnienie tego wymogu nie może być efektywne ze względu na złożoność pamięciową konieczną do przeprowadzenia takiego procesu (\emph{memoizacji}).
+
+\section{Funkcja \emph{Eval}}
+
