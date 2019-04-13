@@ -3,45 +3,78 @@ Niech  \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowy
 
 \begin{definicja}(Zbiór \(\mathbf{\tilde\Lambda}\) pretermów)\\
 Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór wyrażeń \(\mathbf{\tilde\Lambda}\) taki, że:
-  \begin{enumerate}[label={P\arabic*.}, ref={(P\arabic*)}]
+  \begin{enumerate}[label={(P\arabic*)}, ref={(P\arabic*)}]
   \setlength\itemsep{0em}
   \item Jeśli \(x \in V\), to \(x\in\mathbf{\tilde\Lambda}\).\label{pret1}
   \item Jeśli \(M,\,N\in \mathbf{\tilde\Lambda}\), to \((M\,N)\in\mathbf{\tilde\Lambda}\).\label{pret2}
   \item Jeśli \(x\in V\) i \(M\in\mathbf{\tilde\Lambda}\), to \((\lambda x.\,M)\in\mathbf{\tilde\Lambda}\).\label{pret3}
   \end{enumerate}
 \end{definicja}\label{def:lambda-untyped}
-Korzystając z notacji Backusa-Naura induktywną definicję \ref{def:lambda-untyped} możemy równoznacznie wyrazić w postaci
+Korzystając z notacji Backusa-Naura induktywną definicję \ref{def:lambda-untyped} możemy równoznacznie wyrazić w postaci:
 \begin{align*}
-  \mathbf{\tilde\Lambda}\ \leftarrow \ V\quad |\quad (MN) \quad |\quad (\lambda V.\, \mathbf{\tilde\Lambda})
+  \mathbf{\tilde\Lambda}\ \leftarrow \ V\quad |\quad (\mathbf{\tilde\Lambda}\,\mathbf{\tilde\Lambda}) \quad |\quad (\lambda V.\, \mathbf{\tilde\Lambda})
 \end{align*}
-Wyrażenia postaci \ref{pret2} nazywamy \emph{aplikacjami} \(M\) do \(N\). Symbol \(\lambda\) występujący w \ref{pret3} nazywamy \emph{\(\lambda\)-abstraktorem}, zaś wyrażenia powstałe przez zastosowanie tej reguły to \emph{\(\lambda\)-abstrakcje}. W wyrażeniu postaci \((\lambda x.\,M)\) preterm \(M\) jest w \emph{zasięgu} \(\lambda\)-abstraktora, a zmienna \(x\) jest przez niego \emph{związana}. Ponadto, będziemy stosowali następujące konwencje notacyjne:
+
+Elementy \(\mathbf{\tilde\Lambda}\) oznaczamy literami \(L,\ M,\ N,\ P,\ Q,\ R\) i ich wariantami wzbogaconymi o indeksy. Wyrażenia postaci \ref{pret2} nazywamy \emph{aplikacjami} \(M\) do \(N\). Symbol \(\lambda\) występujący w \ref{pret3} nazywamy \emph{\(\lambda\)-abstraktorem}, zaś wyrażenia powstałe przez zastosowanie tej reguły to \emph{\(\lambda\)-abstrakcje}. W wyrażeniu postaci \((\lambda x.\,M)\) preterm \(M\) jest w \emph{zasięgu} \(\lambda\)-abstraktora, a zmienna \(x\) jest przez niego \emph{związana}. Ponadto, będziemy stosowali następujące konwencje notacyjne:
 \begin{easylist}
   & najbardziej zewnętrzne nawiasy bedą pomijane,
   & aplikacja wiąże lewostronnie; wyrażenia postaci \((PQ)R\) będą zapisywane w postaci \(PQR\),
   & \(\lambda\)-abstrakcja wiaże prawostronnie: \(\lambda x_1.\, (\lambda x_2.\,P)\) zapisujemy  \(\lambda x_1.\, \lambda x_2.\,P\),
-  & następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, (\lambda x_2 . \, \dots ( \lambda x_n .\, P) \dots )\) zapisujemy zbiorczo: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\).
+  & następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, \lambda x_2 . \, \dots  \lambda x_n .\, P\) zapisujemy pod wspólnym \(\lambda\)-abstraktorem: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\).
 \end{easylist}
 
-\begin{przyklad}(Konstrukcja \(\lambda\)-pretermów)
+Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli są identyczne rozumiane jako ciągi znaków. Równość syntaktyczną będziemy oznaczali znakiem \(\equiv\).
 
-  \begin{easylist}
-    & Pretermy z regułą \ref{pret1} ostatnią regułą konstrukcji: x, y, z,
-    & : \(x\,x,\ y\,x,\ x\,(x\,z)\),
-    & : \( (\lambda x . (x z)), (\lambda y . (\lambda z . x)), (\lambda x . (\lambda x . (x x))),\)
-    & : \(((\lambda x . (x z)) y), (y (\lambda x . (x z))), ((\lambda x . x)(\lambda x . x)).\)
-  \end{easylist}
+\begin{przyklad}
+  Podajmy kilka przykładów \(\lambda\)-pretermów pogrupowanych ze względu na konstrukcję.
+  \begin{enumerate}[label={(P\arabic*):}, ref={(P\arabic*)}]
+    \setlength\itemsep{0em}
+    \item \(x,\ y,\ z\).
+    \item \(x\,x,\ y\,x,\ x\,(x\,z)\),\\
+          \((\lambda x .\, (x z)) y,\ 
+             y\, (\lambda x .\, (x\, z)),\ (\lambda x .\, x)\,(\lambda x .\, x)\).
+    \item \( \lambda x .\, (x \, z),\ 
+             \lambda y z .\, x,\ 
+             \lambda x .\, (\lambda x .\, (x\, x))\).
+  \end{enumerate}
 \end{przyklad}
 
-\begin{definicja}(Zbiór \(FV\) zmiennych wolnych)\\
-  Z dowolnym pretermem \(M\) wiążemy zbiór \(FV(M)\) \emph{zmiennych wolnych} w \(M\) określony w poniższy sposób:
+Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występować wielokrotnie. Obserwację tę ujmuje następująca definicja.
+\begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów)
+  \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
+    \setlength\itemsep{0em}
+    \item \(\mathrm{Sub}(x)=\{x\}\) 
+    \item \(\mathrm{Sub}(MN)=\mathrm{Sub}(M)\cup\mathrm{Sub}(N)\cup\{M\,N\}\)
+    \item \(\mathrm{Sub}(\lambda x.\, M) = \mathrm{Sub}(M)\cup \{\lambda x.\, M\}\)  
+  \end{enumerate}
+  Elementy multizbioru \(\mathrm{Sub}(M)\) nazywamy \emph{podtermami} \(M\). Jeśli \(L\) jest podtermem \(M\), ale \(L\not\equiv M\), to \(L\) nazywamy podtermem \emph{właściwym}.
+\end{definicja}
+\begin{przyklad} Podtermy wybranych \(\lambda\)-pretermów.
+  \begin{align*}
+    \begin{split}
+      \mathrm{(a)}\quad & \mathrm{Sub}\left(\lambda x.\,x\, x\right)=\left\{\left(\lambda x.\,x\, x\right)^1,\  \left(x\, x\right)^1,\ x^2\right\}\\
+       \mathrm{(b)}\quad & \mathrm{Sub}\left(\left(\lambda x .\, x\, x\right)\,\left(\lambda x .\, x\, x\right)\right) = \\
+    & = \left\{((\lambda x .\, x\, x)\,(\lambda x .\, x\, x))^{1}, \ (\lambda x .\, x\, x)^2,\ (x\,x)^{2},\ x^{4}\right\}\\
+  \end{split}     
+  \end{align*}
+\end{przyklad}
+\begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)\\
+  Z dowolnym pretermem \(M\) wiążemy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\) określony w poniższy sposób:
 \begin{align*}
     \mathrm{FV}(x) &= \{x\}\\
     \mathrm{FV}(\lambda x .\, P)  &= \mathrm{FV}(P)\setminus\{x\}\\
     \mathrm{FV}(P Q) &= \mathrm{FV}(P)\cup\mathrm{FV}(Q)
 \end{align*}
-Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{domknięty}.
+  Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{domknięty} lub nazywamy \(M\) \emph{kombinatorem}.
 \end{definicja}
-
+\begin{przyklad}
+  \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{0em}
+    \item \(\mathrm{FV}(\lambda x.\,x\,y)=\left\{y\right\}\)
+    \item \(\mathrm{FV}(x\,(\lambda x.\, x\,y)) = \left\{x,\ y\right\}\)
+    \item \(\mathrm{FV}(\lambda x y z.\, x y) = \emptyset\)  
+  \end{enumerate}
+\end{przyklad}
 \begin{definicja}(Podstawienie)\\
 \emph{Podstawieniem} \([x/N]\) pretermu \(N\) za \(\lambda\)-zmienną \(x\) w \(M\) nazwamy następująco zdefiniowane przekształcenie:
   \begin{align*}
