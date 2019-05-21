@@ -1,7 +1,15 @@
+\begin{definicja}(Relacja zgodna)
+  Relację binarną \(\mathcal{R}\) na zbiorze \(G\) nazywamy \emph{zgodną}, jeśli dla dowolnych \(M,\,N,\,P \in G\) zachodzą następujące warunki:
+  \begin{enumerate}[label={(\alph*)}, ref={(\arabic*)}]
+    \setlength\itemsep{0em}
+    \item Jeśli \(M \mathcal{R} N\)  
+  \end{enumerate}
+\end{definicja}
+
 \section{Rachunek \(\lambda\)}
 Niech  \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}.
 
-\begin{definicja}(Zbiór \(\mathbf{\tilde\Lambda}\) pretermów)\\
+\begin{definicja}(Zbiór \(\mathbf{\tilde\Lambda}\) pretermów)
 Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór wyrażeń \(\mathbf{\tilde\Lambda}\) taki, że:
   \begin{enumerate}[label={(P\arabic*)}, ref={(P\arabic*)}]
   \setlength\itemsep{0em}
@@ -12,21 +20,21 @@ Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbió
 \end{definicja}\label{def:lambda-untyped}
 Korzystając z notacji Backusa-Naura induktywną definicję \ref{def:lambda-untyped} możemy równoznacznie wyrazić w postaci:
 \begin{align*}
-  \mathbf{\tilde\Lambda}\ \leftarrow \ V\quad |\quad (\mathbf{\tilde\Lambda}\,\mathbf{\tilde\Lambda}) \quad |\quad (\lambda V.\, \mathbf{\tilde\Lambda})
+  \mathbf{\tilde\Lambda}\ \leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}\,\mathbf{\tilde\Lambda}) \ |\ (\lambda V.\, \mathbf{\tilde\Lambda})
 \end{align*}
 
-Elementy \(\mathbf{\tilde\Lambda}\) oznaczamy literami \(L,\ M,\ N,\ P,\ Q,\ R\) i ich wariantami wzbogaconymi o indeksy. Wyrażenia postaci \ref{pret2} nazywamy \emph{aplikacjami} \(M\) do \(N\). Symbol \(\lambda\) występujący w \ref{pret3} nazywamy \emph{\(\lambda\)-abstraktorem}, zaś wyrażenia powstałe przez zastosowanie tej reguły to \emph{\(\lambda\)-abstrakcje}. W wyrażeniu postaci \((\lambda x.\,M)\) preterm \(M\) jest w \emph{zasięgu} \(\lambda\)-abstraktora, a zmienna \(x\) jest przez niego \emph{związana}. Ponadto, będziemy stosowali następujące konwencje notacyjne:
+Elementy \(\mathbf{\tilde\Lambda}\) oznaczamy literami \(L,\ M,\ N,\ P,\ Q,\ R\) i ich wariantami z górnymi lub dolnymi indeksami. Wyrażenia postaci \ref{pret2} nazywamy \emph{aplikacjami} \(M\) do \(N\). Symbol \(\lambda\) występujący w \ref{pret3} nazywamy \emph{\(\lambda\)-abstraktorem}, zaś wyrażenia powstałe przez zastosowanie tej reguły to \emph{\(\lambda\)-abstrakcje}. W wyrażeniu postaci \((\lambda x.\,M)\) preterm \(M\) jest w \emph{zasięgu} \(\lambda\)-abstraktora, a zmienna \(x\) jest przez niego \emph{związana}. Ponadto, będziemy stosowali następujące konwencje notacyjne:
 \begin{easylist}
-  & najbardziej zewnętrzne nawiasy bedą pomijane,
-  & aplikacja wiąże lewostronnie; wyrażenia postaci \((PQ)R\) będą zapisywane w postaci \(PQR\),
-  & \(\lambda\)-abstrakcja wiaże prawostronnie: \(\lambda x_1.\, (\lambda x_2.\,P)\) zapisujemy  \(\lambda x_1.\, \lambda x_2.\,P\),
-  & następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, \lambda x_2 . \, \dots  \lambda x_n .\, P\) zapisujemy pod wspólnym \(\lambda\)-abstraktorem: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\).
+  & \emph{najbardziej zewnętrzne nawiasy bedą pomijane,}
+  & \emph{aplikacja wiąże lewostronnie; wyrażenia postaci \((PQ)R\) będą zapisywane w postaci \(PQR\),}
+  & \emph{\(\lambda\)-abstrakcja wiaże prawostronnie: \(\lambda x_1.\, (\lambda x_2.\,P)\) zapisujemy  \(\lambda x_1.\, \lambda x_2.\,P\),}
+  & \emph{następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, \lambda x_2 . \, \dots  \lambda x_n .\, P\) zapisujemy pod wspólnym \(\lambda\)-abstraktorem: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\).}
 \end{easylist}
 
-Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli są identyczne rozumiane jako ciągi znaków. Równość syntaktyczną będziemy oznaczali znakiem \(\equiv\).
+Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli rozumiane jako ciągi znaków są w tym znaczeniu identyczne. Równość syntaktyczną będziemy oznaczali znakiem \(\equiv\).
 
 \begin{przyklad}
-  Podajmy kilka przykładów \(\lambda\)-pretermów pogrupowanych ze względu na konstrukcję.
+  Podajmy kilka przykładów \(\lambda\)-pretermów pogrupowanych ze względu na ich konstrukcję.
   \begin{enumerate}[label={(P\arabic*):}, ref={(P\arabic*)}]
     \setlength\itemsep{0em}
     \item \(x,\ y,\ z\).
@@ -57,9 +65,10 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
     & = \left\{((\lambda x .\, x\, x)\,(\lambda x .\, x\, x))^{1}, \ (\lambda x .\, x\, x)^2,\ (x\,x)^{2},\ x^{4}\right\}\\
   \end{split}     
   \end{align*}
+  W powyższych przykładach użyliśmy standardowej notacji w górnym indeksie umieszczając krotność wystąpienia elementu.
 \end{przyklad}
-\begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)\\
-  Z dowolnym pretermem \(M\) wiążemy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\) określony w poniższy sposób:
+\begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)
+  Dla dowolnego pretermu \(M\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\) w następujący sposób:
 \begin{align*}
     \mathrm{FV}(x) &= \{x\}\\
     \mathrm{FV}(\lambda x .\, P)  &= \mathrm{FV}(P)\setminus\{x\}\\
@@ -75,48 +84,70 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
     \item \(\mathrm{FV}(\lambda x y z.\, x y) = \emptyset\)  
   \end{enumerate}
 \end{przyklad}
-\begin{definicja}(Podstawienie)\\
-\emph{Podstawieniem} \([x/N]\) pretermu \(N\) za \(\lambda\)-zmienną \(x\) w \(M\) nazwamy następująco zdefiniowane przekształcenie:
-  \begin{align*}
-    x[x/N] &= N,\\
-    y[x/N] &= y,\ &\text{o ile}\ x\neq y,\\
-    (PQ)[x/N] &= P[x/N]\,Q[x/N],\\
-    (\lambda y.\, P)[x/N] &= \lambda y.\,P[x/N],\ &\text{gdzie}\ x\neq y\ \text{i}\ y\not\in \mathrm{FV}(N).\\
-  \end{align*}
+
+\begin{definicja}(Podstawienie)\label{def:substitution}
+Dla dowolnych \(\mathrm{M,\,N}\in\mathbf{\tilde\Lambda}\) i \(x\in V\) przez \(N[x/N]\) oznaczamy rezultat podstawienia termu \(N\) za wszystkie wolne wystąpienia zmiennej \(x\) w \(M\). \emph{Podstawienie} jest przekształceniem pretermów określonym w następujący sposób:
+  \begin{enumerate}[label={(\alph*)}, ref={(\arabic*)}]
+    \setlength\itemsep{0em}
+    \item \(x[x/N] \equiv N\)
+    \item \(y[x/N] \equiv y,\ \text{o ile}\ x\not\equiv y\)
+    \item \((PQ)[x/N] \equiv P[x/N]\,Q[x/N]\)
+    \item \((\lambda y.\, P)[x/N] \equiv \lambda y.\,P[x/N],\ \text{gdzie}\ x\not\equiv y\ \text{i}\ y\not\in \mathrm{FV}(N)\)
+    \item \((\lambda x.\, P)[x/N] \equiv \lambda x.\,P\)
+  \end{enumerate}
+  Zauważmy, że jest to funkcja częściowa w zbiorze \(\mathbf{\tilde\Lambda}\times V \times \mathbf{\tilde\Lambda}\). Powiemy, że \(M[x/N]\) jest \emph{poprawnym podstawieniem}, jeśli podstawienie \(M[x/N]\) jest określone w myśl Definicji \ref{def:substitution}. 
 \end{definicja}
 
-
-\noindent Zachodzą następujące fakty:
-\begin{fakt}
-  \begin{enumerate}[label=({\alph*})]
-    \item Jeśli \(x\not\in\mathrm{FV}(M)\), to \(M[x/N]\) jest poprawnym podstawieniem i \(M[x/N]=M\).
-    \item Jeśli \(M[x/N]\) jest poprawnym podstawieniem, to \(y\in\mathrm{FV}(M[x/N]\) wtw, gdy albo \(y\in\mathrm{FV}(M)\)
-      i \(x\neq y\), albo \(y\in \mathrm{FV}(N)\) i \(x\in \mathrm{FV}(M)\).
-    \item Podstawienie \(M[x/x]\) jest poprawne i \(M[x/x]=M\).
-    \item Jeśli \(M[x/y]\) jest poprawnym podstawieniem, to \(M[x/y]\) ma tę samą długość, co \(M\).
-  \end{enumerate}
-\begin{dowod}
-  \qed
-\end{dowod}
-\end{fakt}
-
-\begin{fakt}
-Powiedzmy, że \(M[x/N]\) jest poprawnym podstawieniem i \(N[y/L]\) i \(M[x/N][y/L]\) są poprawnymi podstawieniami, gdzie
-  \(x\neq y\). Jeśli \(x\not\in \mathrm{FV}(L)\) lub \(y\not\in\mathrm{FV}(M)\), to \(M[y/L]\) i \( M[y/L]\left[x/N[y/L]\right] \) jest poprawnym podstawieniem oraz
-  \[
-    M[x/N][y/L]=M[y/L][x/N[y/L]].
-  \]
-\begin{dowod}
-  \qed
-\end{dowod}
-\end{fakt}
-
-\begin{fakt}
+\begin{fakt}\label{def:odwracalnosc_podstawienia}
 Jesli \(M[x/y]\) jest poprawnym postawieniem i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest poprawnym podstawieniem oraz
   \(M[x/y][y/x]=M\).
 \begin{dowod}
-  \qed
+  \cite{Urzyczyn2006}
 \end{dowod}
 \end{fakt}
+
+\begin{definicja}(Relacja \(\alpha\)-konwersji)
+  Relacją \(=_{\alpha}\) (\(\alpha\)-konwersji) nazywamy najmniejszy w sensie mnogościowym praporządek na \(\mathbf{\tilde\Lambda}\) taki, że
+  \begin{enumerate}[label={(\(\alpha\)\arabic*)}, ref={(\(\alpha\)\arabic*)}]
+  \setlength\itemsep{0em}
+  \item Jeśli \(y\not\in \mathrm{FV}(M)\) oraz \(M[x/y]\) jest poprawnym podstawieniem, to \(\lambda x.\,M =_{\alpha} \lambda y.\,M[x/y]\)
+  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(x\in V\) zachodzi \(\lambda x.\,M =_{\alpha} \lambda x.\,N\)
+  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(MZ =_{\alpha} NZ\)
+  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(ZM =_{\alpha} ZN\)
+  \end{enumerate}
+\end{definicja}
+
+\begin{wniosek}
+Pokażemy, że relacja \(=_{\alpha}\) jest symetryczna. 
+  Relacja \(=_{\alpha}\) jest relacją równoważności.
+  \begin{dowod}Fakt \ref{def:odwracalnosc_podstawienia} 
+   \end{dowod}
+\end{wniosek}
+
+% \noindent Zachodzą następujące fakty:
+% \begin{fakt}
+%   \begin{enumerate}[label=({\alph*})]
+%     \item Jeśli \(x\not\in\mathrm{FV}(M)\), to \(M[x/N]\) jest poprawnym podstawieniem i \(M[x/N]=M\).
+%     \item Jeśli \(M[x/N]\) jest poprawnym podstawieniem, to \(y\in\mathrm{FV}(M[x/N]\) wtw, gdy albo \(y\in\mathrm{FV}(M)\)
+%       i \(x\neq y\), albo \(y\in \mathrm{FV}(N)\) i \(x\in \mathrm{FV}(M)\).
+%     \item Podstawienie \(M[x/x]\) jest poprawne i \(M[x/x]=M\).
+%     \item Jeśli \(M[x/y]\) jest poprawnym podstawieniem, to \(M[x/y]\) ma tę samą długość, co \(M\).
+%   \end{enumerate}
+% \begin{dowod}
+%   \qed
+% \end{dowod}
+% \end{fakt}
+
+% \begin{fakt}
+% Powiedzmy, że \(M[x/N]\) jest poprawnym podstawieniem i \(N[y/L]\) i \(M[x/N][y/L]\) są poprawnymi podstawieniami, gdzie
+%   \(x\neq y\). Jeśli \(x\not\in \mathrm{FV}(L)\) lub \(y\not\in\mathrm{FV}(M)\), to \(M[y/L]\) i \( M[y/L]\left[x/N[y/L]\right] \) jest poprawnym podstawieniem oraz
+%   \[
+%     M[x/N][y/L]=M[y/L][x/N[y/L]].
+%   \]
+% \begin{dowod}
+%   \qed
+% \end{dowod}
+% \end{fakt}
+
 
 
