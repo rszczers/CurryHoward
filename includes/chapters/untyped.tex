@@ -9,7 +9,7 @@
 \section{Rachunek \(\lambda\)}
 Niech  \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}.
 
-\begin{definicja}(Zbiór \(\mathbf{\tilde\Lambda}\) pretermów)
+\begin{definicja}(Zbiór \(\mathbf{\tilde\Lambda}\) pretermów)\label{def:lambda-untyped}
 Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór wyrażeń \(\mathbf{\tilde\Lambda}\) taki, że:
   \begin{enumerate}[label={(P\arabic*)}, ref={(P\arabic*)}]
   \setlength\itemsep{0em}
@@ -17,8 +17,8 @@ Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbió
   \item Jeśli \(M,\,N\in \mathbf{\tilde\Lambda}\), to \((M\,N)\in\mathbf{\tilde\Lambda}\).\label{pret2}
   \item Jeśli \(x\in V\) i \(M\in\mathbf{\tilde\Lambda}\), to \((\lambda x.\,M)\in\mathbf{\tilde\Lambda}\).\label{pret3}
   \end{enumerate}
-\end{definicja}\label{def:lambda-untyped}
-Korzystając z notacji Backusa-Naura induktywną definicję \ref{def:lambda-untyped} możemy równoznacznie wyrazić w postaci:
+\end{definicja}
+Definicję \ref{def:lambda-untyped} można równoznacznie wyrazić notację Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać postać:
 \begin{align*}
   \mathbf{\tilde\Lambda}\ \leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}\,\mathbf{\tilde\Lambda}) \ |\ (\lambda V.\, \mathbf{\tilde\Lambda})
 \end{align*}
@@ -31,7 +31,7 @@ Elementy \(\mathbf{\tilde\Lambda}\) oznaczamy literami \(L,\ M,\ N,\ P,\ Q,\ R\)
   & \emph{następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, \lambda x_2 . \, \dots  \lambda x_n .\, P\) zapisujemy pod wspólnym \(\lambda\)-abstraktorem: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\).}
 \end{easylist}
 
-Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli rozumiane jako ciągi znaków są w tym znaczeniu identyczne. Równość syntaktyczną będziemy oznaczali znakiem \(\equiv\).
+Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli rozumiane jako ciągi znaków są identyczne. Równość syntaktyczną będziemy oznaczali znakiem \(\equiv\).
 
 \begin{przyklad}
   Podajmy kilka przykładów \(\lambda\)-pretermów pogrupowanych ze względu na ich konstrukcję.
@@ -86,7 +86,7 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
 \end{przyklad}
 
 \begin{definicja}(Podstawienie)\label{def:substitution}
-Dla dowolnych \(\mathrm{M,\,N}\in\mathbf{\tilde\Lambda}\) i \(x\in V\) przez \(N[x/N]\) oznaczamy rezultat podstawienia termu \(N\) za wszystkie wolne wystąpienia zmiennej \(x\) w \(M\). \emph{Podstawienie} jest przekształceniem pretermów określonym w następujący sposób:
+  Dla dowolnych \(\mathrm{M,\,N}\in\mathbf{\tilde\Lambda}\) i \(x\in V\) przez \(N[x/N]\) oznaczamy rezultat podstawienia termu \(N\) za wszystkie wolne wystąpienia zmiennej \(x\) w \(M\), o ile w rezultacie podstawienia nie zostaną związane żadne zmienne wolne występujące w \(N\). W takim wypadku \emph{podstawienie} jest przekształceniem pretermów określonym w następujący sposób:
   \begin{enumerate}[label={(\alph*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
     \item \(x[x/N] \equiv N\)
@@ -97,6 +97,39 @@ Dla dowolnych \(\mathrm{M,\,N}\in\mathbf{\tilde\Lambda}\) i \(x\in V\) przez \(N
   \end{enumerate}
   Zauważmy, że jest to funkcja częściowa w zbiorze \(\mathbf{\tilde\Lambda}\times V \times \mathbf{\tilde\Lambda}\). Powiemy, że \(M[x/N]\) jest \emph{poprawnym podstawieniem}, jeśli podstawienie \(M[x/N]\) jest określone w myśl Definicji \ref{def:substitution}. 
 \end{definicja}
+
+\begin{lemat}(O podstawieniu)\label{lem:substitution}
+  Niech \(M,\,N,\,L\in \mathbf{\tilde\Lambda}\) i niech ponadto \(x\not\equiv y\) oraz \(x\not\in\mathrm{FV}(L)\). Wówczas
+  \begin{align}\label{eq:substitution}
+    M[x/N][y/L]\equiv M[y/L]\left[x/N\left[y/L\right]\right].
+  \end{align}
+  \begin{dowod}
+    Dowód przebiega przez indukcję strukturalną względem \(M\). Rozważmy następujące przypadki:
+    \begin{enumerate}[label={\roman*)}, ref={(\arabic*)}]  
+      \item \(M\) jest zmienną. Wówczas:
+        \begin{enumerate}[label={\alph*.}]
+        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\). 
+        \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i \(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \(M[x/N][y/L]\equiv L\). Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
+
+        \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne. 
+        \end{enumerate}
+
+      \item \(M\equiv P Q\) dla pewnych \(P,\,Q\in\mathbf{\tilde\Lambda}\). Wówczas korzystając z hipotezy indukcyjnej wnosimy, że 
+        \begin{align*}
+          P[x/N][y/L]\equiv P[y/L]\left[x/N\left[y/L\right]\right],\\
+          Q[x/N][y/L]\equiv Q[y/L]\left[x/N\left[y/L\right]\right].
+        \end{align*}
+        Mając na względzie punkt (c) Definicji \ref{def:substitution} widzimy, że twierdzenie zachodzi i w tym przypadku.
+        \item Jeśli \(M\equiv \lambda z.\,P\) oraz \(z\equiv x\) lub \(z\equiv y\), to z punktu (e) Definicji \ref{def:substitution} widzimy, że obydwie strony \eqref{eq:substitution} sa identyczne. Przypuśćmy, że \(z\not\equiv x\) i \(z\not\equiv y\) i \(z\not\in\mathrm{FV}(L)\). Wówczas na podstawie hipotezy indukcyjnej mamy: 
+      \begin{align*}
+        (\lambda z.\,P)[x/N][y/L] &= \lambda z.\,P[x/N][y/L] =\\
+                                  &= \lambda z.\,P[y/L][x/N[y/L]] =\\
+                                  &= (\lambda z.\,P)[y/L][x/N[y/L]]. 
+      \end{align*}
+    \qed
+    \end{enumerate}
+  \end{dowod}
+\end{lemat}
 
 \begin{fakt}\label{def:odwracalnosc_podstawienia}
 Jesli \(M[x/y]\) jest poprawnym postawieniem i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest poprawnym podstawieniem oraz
@@ -110,7 +143,7 @@ Jesli \(M[x/y]\) jest poprawnym postawieniem i \(y\not\in\mathrm{FV}(M)\), to \(
   Relacją \(=_{\alpha}\) (\(\alpha\)-konwersji) nazywamy najmniejszy w sensie mnogościowym praporządek na \(\mathbf{\tilde\Lambda}\) taki, że
   \begin{enumerate}[label={(\(\alpha\)\arabic*)}, ref={(\(\alpha\)\arabic*)}]
   \setlength\itemsep{0em}
-  \item Jeśli \(y\not\in \mathrm{FV}(M)\) oraz \(M[x/y]\) jest poprawnym podstawieniem, to \(\lambda x.\,M =_{\alpha} \lambda y.\,M[x/y]\)
+  \item Jeśli \(y\not\in \mathrm{FV}(M)\) oraz \(M[x/y]\) jest poprawnym podstawieniem,\\ to \(\lambda x.\,M~=_{\alpha}~\lambda y.\,M[x/y]\)
   \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(x\in V\) zachodzi \(\lambda x.\,M =_{\alpha} \lambda x.\,N\)
   \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(MZ =_{\alpha} NZ\)
   \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(ZM =_{\alpha} ZN\)
@@ -118,9 +151,10 @@ Jesli \(M[x/y]\) jest poprawnym postawieniem i \(y\not\in\mathrm{FV}(M)\), to \(
 \end{definicja}
 
 \begin{wniosek}
-Pokażemy, że relacja \(=_{\alpha}\) jest symetryczna. 
   Relacja \(=_{\alpha}\) jest relacją równoważności.
-  \begin{dowod}Fakt \ref{def:odwracalnosc_podstawienia} 
+  \begin{dowod}
+  Pokażemy, że relacja \(=_{\alpha}\) jest symetryczna. 
+    Fakt \ref{def:odwracalnosc_podstawienia} 
    \end{dowod}
 \end{wniosek}
 
