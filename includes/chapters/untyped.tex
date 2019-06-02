@@ -174,30 +174,16 @@ Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie
   \end{dowod}
 \end{wniosek}
 
-% \noindent Zachodzą następujące fakty:
-% \begin{fakt}
-%   \begin{enumerate}[label=({\alph*})]
-%     \item Jeśli \(x\not\in\mathrm{FV}(M)\), to \(M[x/N]\) jest poprawnym podstawieniem i \(M[x/N]=M\).
-%     \item Jeśli \(M[x/N]\) jest poprawnym podstawieniem, to \(y\in\mathrm{FV}(M[x/N]\) wtw, gdy albo \(y\in\mathrm{FV}(M)\)
-%       i \(x\neq y\), albo \(y\in \mathrm{FV}(N)\) i \(x\in \mathrm{FV}(M)\).
-%     \item Podstawienie \(M[x/x]\) jest poprawne i \(M[x/x]=M\).
-%     \item Jeśli \(M[x/y]\) jest poprawnym podstawieniem, to \(M[x/y]\) ma tę samą długość, co \(M\).
-%   \end{enumerate}
-% \begin{dowod}
-%   \qed
-% \end{dowod}
-% \end{fakt}
+\begin{definicja}(Zbiór \(\mathbf{\Lambda}\) \(\lambda\)-termów)
+  Każdą klasę abstrakcji relacji \(=_{\alpha}\) nazywamy \(\lambda\)-termem. Zbiór wszystkich \(\lambda\)-termów \(\mathbf{\Lambda}\) to zbiór ilorazowy relacji \(\alpha\)-konwersji:
+  \begin{align*}
+    \mathbf{\Lambda}=\left\{[M]_{=_\alpha}\ |\ M\in\mathbf{\tilde\Lambda}\right\}
+  \end{align*}
+\end{definicja}
 
-% \begin{fakt}
-% Powiedzmy, że \(M[x/N]\) jest poprawnym podstawieniem i \(N[y/L]\) i \(M[x/N][y/L]\) są poprawnymi podstawieniami, gdzie
-%   \(x\neq y\). Jeśli \(x\not\in \mathrm{FV}(L)\) lub \(y\not\in\mathrm{FV}(M)\), to \(M[y/L]\) i \( M[y/L]\left[x/N[y/L]\right] \) jest poprawnym podstawieniem oraz
-%   \[
-%     M[x/N][y/L]=M[y/L][x/N[y/L]].
-%   \]
-% \begin{dowod}
-%   \qed
-% \end{dowod}
-% \end{fakt}
-
-
+Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów. Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następującą relację:
+\[
+  \lambda x.\,zx=_{\alpha}\lambda y.\,zy
+\]
+Zauważmy, że traktując operację podstawienia w sposób naiwny, otrzymujemy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy porządaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby poprawne podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Szerszą dyskusję na ten temat można prześledzić w \cite{DBLP:journals/corr/abs-1303-5039}. Samo podejście definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Nasze rozważania opierają się w tej materii na na \cite{Urzyczyn2006}.
 
