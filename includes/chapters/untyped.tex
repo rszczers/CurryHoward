@@ -2,12 +2,12 @@
   Relację binarną \(\mathcal{R}\) na zbiorze \(G\) nazywamy \emph{zgodną}, jeśli dla dowolnych \(M,\,N,\,P \in G\) zachodzą następujące warunki:
   \begin{enumerate}[label={(\alph*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
-    \item Jeśli \(M \mathcal{R} N\)  
+    \item Jeśli \(M \mathcal{R} N\)
   \end{enumerate}
 \end{definicja}
 
 \section{Rachunek \(\lambda\)}
-Niech  \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}.
+Niech  \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}. Ponieważ \(V\) jest potencjalnie nieskończony, zastrzegamy sobie możliwość wybierania w razie potrzeby wcześniej nie użytej zmiennej.
 
 \begin{definicja}(Zbiór \(\mathbf{\tilde\Lambda}\) pretermów)\label{def:lambda-untyped}
 Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór wyrażeń \(\mathbf{\tilde\Lambda}\) taki, że:
@@ -18,12 +18,12 @@ Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbió
   \item Jeśli \(x\in V\) i \(M\in\mathbf{\tilde\Lambda}\), to \((\lambda x.\,M)\in\mathbf{\tilde\Lambda}\).\label{pret3}
   \end{enumerate}
 \end{definicja}
-Definicję \ref{def:lambda-untyped} można równoznacznie wyrazić notację Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać postać:
+Definicję \ref{def:lambda-untyped} można równoznacznie wyrazić przy pomocy notacji Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać postać:
 \begin{align*}
   \mathbf{\tilde\Lambda}\ \leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}\,\mathbf{\tilde\Lambda}) \ |\ (\lambda V.\, \mathbf{\tilde\Lambda})
 \end{align*}
 
-Elementy \(\mathbf{\tilde\Lambda}\) oznaczamy literami \(L,\ M,\ N,\ P,\ Q,\ R\) i ich wariantami z górnymi lub dolnymi indeksami. Wyrażenia postaci \ref{pret2} nazywamy \emph{aplikacjami} \(M\) do \(N\). Symbol \(\lambda\) występujący w \ref{pret3} nazywamy \emph{\(\lambda\)-abstraktorem}, zaś wyrażenia powstałe przez zastosowanie tej reguły to \emph{\(\lambda\)-abstrakcje}. W wyrażeniu postaci \((\lambda x.\,M)\) preterm \(M\) jest w \emph{zasięgu} \(\lambda\)-abstraktora, a zmienna \(x\) jest przez niego \emph{związana}. Ponadto, będziemy stosowali następujące konwencje notacyjne:
+Elementy \(\mathbf{\tilde\Lambda}\) będziemy oznaczali literami \(L,\ M,\ N,\ P,\ Q,\ R\) i ich wariantami z górnymi lub dolnymi indeksami. Wyrażenia postaci \ref{pret2} nazywamy \emph{aplikacjami} \(M\) do \(N\). Symbol \(\lambda\) występujący w \ref{pret3} nazywamy \emph{\(\lambda\)-abstraktorem}, zaś wyrażenia powstałe przez zastosowanie tej reguły to \emph{\(\lambda\)-abstrakcje}. W wyrażeniu postaci \((\lambda x.\,M)\) preterm \(M\) jest w \emph{zasięgu} \(\lambda\)-abstraktora, a zmienna \(x\) jest przez niego \emph{związana}. Ponadto, będziemy stosowali następujące konwencje notacyjne:
 \begin{easylist}
   & \emph{najbardziej zewnętrzne nawiasy bedą pomijane,}
   & \emph{aplikacja wiąże lewostronnie; wyrażenia postaci \((PQ)R\) będą zapisywane w postaci \(PQR\),}
@@ -39,10 +39,10 @@ Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli rozum
     \setlength\itemsep{0em}
     \item \(x,\ y,\ z\).
     \item \(x\,x,\ y\,x,\ x\,(x\,z)\),\\
-          \((\lambda x .\, (x z)) y,\ 
+          \((\lambda x .\, (x z)) y,\
              y\, (\lambda x .\, (x\, z)),\ (\lambda x .\, x)\,(\lambda x .\, x)\).
-    \item \( \lambda x .\, (x \, z),\ 
-             \lambda y z .\, x,\ 
+    \item \( \lambda x .\, (x \, z),\
+             \lambda y z .\, x,\
              \lambda x .\, (\lambda x .\, (x\, x))\).
   \end{enumerate}
 \end{przyklad}
@@ -51,9 +51,9 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
 \begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów)
   \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
-    \item \(\mathrm{Sub}(x)=\{x\}\) 
+    \item \(\mathrm{Sub}(x)=\{x\}\)
     \item \(\mathrm{Sub}(MN)=\mathrm{Sub}(M)\cup\mathrm{Sub}(N)\cup\{M\,N\}\)
-    \item \(\mathrm{Sub}(\lambda x.\, M) = \mathrm{Sub}(M)\cup \{\lambda x.\, M\}\)  
+    \item \(\mathrm{Sub}(\lambda x.\, M) = \mathrm{Sub}(M)\cup \{\lambda x.\, M\}\)
   \end{enumerate}
   Elementy multizbioru \(\mathrm{Sub}(M)\) nazywamy \emph{podtermami} \(M\). Jeśli \(L\) jest podtermem \(M\), ale \(L\not\equiv M\), to \(L\) nazywamy podtermem \emph{właściwym}.
 \end{definicja}
@@ -63,7 +63,7 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
       \mathrm{(a)}\quad & \mathrm{Sub}\left(\lambda x.\,x\, x\right)=\left\{\left(\lambda x.\,x\, x\right)^1,\  \left(x\, x\right)^1,\ x^2\right\}\\
        \mathrm{(b)}\quad & \mathrm{Sub}\left(\left(\lambda x .\, x\, x\right)\,\left(\lambda x .\, x\, x\right)\right) = \\
     & = \left\{((\lambda x .\, x\, x)\,(\lambda x .\, x\, x))^{1}, \ (\lambda x .\, x\, x)^2,\ (x\,x)^{2},\ x^{4}\right\}\\
-  \end{split}     
+  \end{split}
   \end{align*}
   W powyższych przykładach użyliśmy standardowej notacji w górnym indeksie umieszczając krotność wystąpienia elementu.
 \end{przyklad}
@@ -81,21 +81,21 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
     \setlength\itemsep{0em}
     \item \(\mathrm{FV}(\lambda x.\,x\,y)=\left\{y\right\}\)
     \item \(\mathrm{FV}(x\,(\lambda x.\, x\,y)) = \left\{x,\ y\right\}\)
-    \item \(\mathrm{FV}(\lambda x y z.\, x y) = \emptyset\)  
+    \item \(\mathrm{FV}(\lambda x y z.\, x y) = \emptyset\)
   \end{enumerate}
 \end{przyklad}
 
 \begin{definicja}(Podstawienie)\label{def:substitution}
   Dla dowolnych \(\mathrm{M,\,N}\in\mathbf{\tilde\Lambda}\) i \(x\in V\) przez \(N[x/N]\) oznaczamy rezultat podstawienia termu \(N\) za wszystkie wolne wystąpienia zmiennej \(x\) w \(M\), o ile w rezultacie podstawienia nie zostaną związane żadne zmienne wolne występujące w \(N\). W takim wypadku \emph{podstawienie} jest przekształceniem pretermów określonym w następujący sposób:
-  \begin{enumerate}[label={(\alph*)}, ref={(\arabic*)}]
+  \begin{enumerate}[label={(S\arabic*)}, ref={(S\arabic*)}]
     \setlength\itemsep{0em}
     \item \(x[x/N] \equiv N\)
     \item \(y[x/N] \equiv y,\ \text{o ile}\ x\not\equiv y\)
-    \item \((PQ)[x/N] \equiv P[x/N]\,Q[x/N]\)
+    \item \((PQ)[x/N] \equiv P[x/N]\,Q[x/N]\)\label{def:substitution_c}
     \item \((\lambda y.\, P)[x/N] \equiv \lambda y.\,P[x/N],\ \text{gdzie}\ x\not\equiv y\ \text{i}\ y\not\in \mathrm{FV}(N)\)
-    \item \((\lambda x.\, P)[x/N] \equiv \lambda x.\,P\)
+    \item \((\lambda x.\, P)[x/N] \equiv \lambda x.\,P\)\label{def:substitution_e}
   \end{enumerate}
-  Zauważmy, że jest to funkcja częściowa w zbiorze \(\mathbf{\tilde\Lambda}\times V \times \mathbf{\tilde\Lambda}\). Powiemy, że \(M[x/N]\) jest \emph{poprawnym podstawieniem}, jeśli podstawienie \(M[x/N]\) jest określone w myśl Definicji \ref{def:substitution}. 
+  Zauważmy, że jest to funkcja częściowa w zbiorze \(\mathbf{\tilde\Lambda}\times V \times \mathbf{\tilde\Lambda}\). Powiemy, że \(M[x/N]\) jest \emph{poprawnym podstawieniem}, jeśli podstawienie \(M[x/N]\) jest określone w myśl Definicji \ref{def:substitution}.
 \end{definicja}
 
 \begin{lemat}(O podstawieniu)\label{lem:substitution}
@@ -105,57 +105,73 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
   \end{align}
   \begin{dowod}
     Dowód przebiega przez indukcję strukturalną względem \(M\). Rozważmy następujące przypadki:
-    \begin{enumerate}[label={\roman*)}, ref={(\arabic*)}]  
+    \begin{enumerate}[label={\roman*)}, ref={(\arabic*)}]
       \item \(M\) jest zmienną. Wówczas:
         \begin{enumerate}[label={\alph*.}]
-        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\). 
+        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\).
         \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i \(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \(M[x/N][y/L]\equiv L\). Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
 
-        \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne. 
+        \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne.
         \end{enumerate}
 
-      \item \(M\equiv P Q\) dla pewnych \(P,\,Q\in\mathbf{\tilde\Lambda}\). Wówczas korzystając z hipotezy indukcyjnej wnosimy, że 
+      \item \(M\equiv P Q\) dla pewnych \(P,\,Q\in\mathbf{\tilde\Lambda}\). Wówczas korzystając z hipotezy indukcyjnej wnosimy, że
         \begin{align*}
           P[x/N][y/L]\equiv P[y/L]\left[x/N\left[y/L\right]\right],\\
           Q[x/N][y/L]\equiv Q[y/L]\left[x/N\left[y/L\right]\right].
         \end{align*}
-        Mając na względzie punkt (c) Definicji \ref{def:substitution} widzimy, że twierdzenie zachodzi i w tym przypadku.
-        \item Jeśli \(M\equiv \lambda z.\,P\) oraz \(z\equiv x\) lub \(z\equiv y\), to z punktu (e) Definicji \ref{def:substitution} widzimy, że obydwie strony \eqref{eq:substitution} sa identyczne. Przypuśćmy, że \(z\not\equiv x\) i \(z\not\equiv y\) i \(z\not\in\mathrm{FV}(L)\). Wówczas na podstawie hipotezy indukcyjnej mamy: 
+        Mając na względzie \ref{def:substitution_c} widzimy, że twierdzenie zachodzi i w tym przypadku.
+        \item Jeśli \(M\equiv \lambda z.\,P\) oraz \(z\equiv x\) lub \(z\equiv y\), to z \ref{def:substitution_e} widzimy, że obydwie strony \eqref{eq:substitution} sa identyczne. Przypuśćmy, że \(z\not\equiv x\) i \(z\not\equiv y\) i \(z\not\in\mathrm{FV}(L)\). Wówczas na podstawie hipotezy indukcyjnej mamy:
       \begin{align*}
         (\lambda z.\,P)[x/N][y/L] &= \lambda z.\,P[x/N][y/L] =\\
                                   &= \lambda z.\,P[y/L][x/N[y/L]] =\\
-                                  &= (\lambda z.\,P)[y/L][x/N[y/L]]. 
+                                  &= (\lambda z.\,P)[y/L][x/N[y/L]].
       \end{align*}
     \qed
     \end{enumerate}
   \end{dowod}
 \end{lemat}
 
-\begin{fakt}\label{def:odwracalnosc_podstawienia}
+\begin{wniosek}\label{thm:odwracalnosc_podstawienia}
 Jesli \(M[x/y]\) jest poprawnym postawieniem i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest poprawnym podstawieniem oraz
   \(M[x/y][y/x]=M\).
-\begin{dowod}
-  \cite{Urzyczyn2006}
-\end{dowod}
-\end{fakt}
+  \begin{dowod}
+    Mając na uwadze Lemat \ref{def:substitution} dowód przebiega przez indukcję strukturalną względem \(M\).
+    \qed
+  \end{dowod}
+\end{wniosek}
 
-\begin{definicja}(Relacja \(\alpha\)-konwersji)
+\subsection{Wyrażenia \(\lambda\)}
+Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie zmiennymi związanymi, tak jak w przypadku wyrażeń \(\lambda x. \,zx\) i \(\lambda y.zy\). W takim wypadku powiemy o nich, że są swoimi \emph{\(\alpha\)-wariantami} lub że są ze sobą w relacji \emph{\(\alpha\)-konwersji}.
+
+\begin{definicja}(Relacja \(\alpha\)-konwersji)\label{def:untyped_alpha}
   Relacją \(=_{\alpha}\) (\(\alpha\)-konwersji) nazywamy najmniejszy w sensie mnogościowym praporządek na \(\mathbf{\tilde\Lambda}\) taki, że
   \begin{enumerate}[label={(\(\alpha\)\arabic*)}, ref={(\(\alpha\)\arabic*)}]
   \setlength\itemsep{0em}
-  \item Jeśli \(y\not\in \mathrm{FV}(M)\) oraz \(M[x/y]\) jest poprawnym podstawieniem,\\ to \(\lambda x.\,M~=_{\alpha}~\lambda y.\,M[x/y]\)
-  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(x\in V\) zachodzi \(\lambda x.\,M =_{\alpha} \lambda x.\,N\)
-  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(MZ =_{\alpha} NZ\)
-  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(ZM =_{\alpha} ZN\)
+  \item Jeśli \(y\not\in \mathrm{FV}(M)\) oraz \(M[x/y]\) jest poprawnym podstawieniem,\\ to \(\lambda x.\,M~=_{\alpha}~\lambda y.\,M[x/y]\)\label{def:alpha_1}
+  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(x\in V\) zachodzi \(\lambda x.\,M =_{\alpha} \lambda x.\,N\)\label{def:alpha_2}
+  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(MZ =_{\alpha} NZ\)\label{def:alpha_3}
+  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(ZM =_{\alpha} ZN\)\label{def:alpha_4}
   \end{enumerate}
 \end{definicja}
 
 \begin{wniosek}
   Relacja \(=_{\alpha}\) jest relacją równoważności.
   \begin{dowod}
-  Pokażemy, że relacja \(=_{\alpha}\) jest symetryczna. 
-    Fakt \ref{def:odwracalnosc_podstawienia} 
-   \end{dowod}
+    Wystarczy, że pokażemy, że relacja \(=_{\alpha}\) jest symetryczna. Dowód przebiega przez indukcję względem Definicji \ref{def:untyped_alpha}. Rozważmy następujące przypadki:
+    %Fakt \ref{def:odwracalnosc_podstawienia}
+
+    \begin{enumerate}[label={\roman*)}, ref={(\roman*)}]
+      \item Jeśli \(M=_{\alpha} N\) w konsekwencji zwrotności \(=_{\alpha}\), to \(M\equiv N\), a zatem również \(N\equiv M\). Stąd \(N=_{\alpha} M\).
+      \item Jeśli \(M=_{\alpha} N\) w konsekwencji przechodniości \(=_{\alpha}\), to istnieje \(L\in\mathbf{\tilde\Lambda}\) takie, że \(M=_{\alpha}L\) i \(L=_{\alpha}N\). Wówczas z hipotezy indukcyjnej \(N=_{\alpha}L\) i \(L=_{\alpha}M\). Z przechodniości relacji \(=_{\alpha}\) otrzymujemy spodziewaną tezę.
+      \item Przypuśćmy, że \(M=_{\alpha} N\) w konsekwencji  \ref{def:alpha_1}  dla \(M\equiv\lambda x.\,M'\) i \(N\equiv\lambda y.\,M'[x/y]\). Ponieważ \(x\not\in\mathrm{FV}(M'[x/y])\), to ze względu na Wniosek \ref{thm:odwracalnosc_podstawienia} mamy, że \(M'[x/y][y/x]=M'\). Zatem, na podstawie \ref{def:alpha_1}:
+  \begin{align*}
+        \lambda y.\,M'[x/y] =_{\alpha} \lambda x.\,M'[x/y][y/x].
+      \end{align*}
+    \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_2}, gdzie \(M=\lambda x.\,M'\) i \(N=\lambda x.\,N'\) dla \(M'=_{\alpha} N'\), to z hipotezy indukcyjnej \(N' =_{\alpha} M'\) i w konsekwencji \ref{def:alpha_2} mamy, że \(N=_{\alpha} M\).
+    \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_3} dla \(M\equiv M'Z\) i \(N\equiv N'Z\) takich, że \(M'=_{\alpha}N'\), to z hipotezy indukcyjnej oczywiście \(N'=_{\alpha}M'\), a zatem z \ref{def:alpha_3} \(N=_{\alpha} M\).\label{proof:alpha_cases_4}
+    \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_3}, to postępujemy jak w przypadku \ref{proof:alpha_cases_4}.\qed
+    \end{enumerate}
+  \end{dowod}
 \end{wniosek}
 
 % \noindent Zachodzą następujące fakty:
