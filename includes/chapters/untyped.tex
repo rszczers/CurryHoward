@@ -189,6 +189,11 @@ Wprowadzamy następujące konwencje notacyjne:
   &\lambda x.\,M =  [\lambda x.\,M']_{=_\alpha},\  \text{gdzie}\ N=[N']_{=_\alpha}.
 \end{align*}
 \end{konwencja*}
+%Nie prowadzą one do niejednoznaczności, w czym upewnia nas Lemat \ref{lem:uniqueness}.
+
+%\begin{lemat}(O jednoznaczności)\label{lem:uniqueness}
+%  Dla dowolnych \(M,\,N
+%\end{lemat}
 
 Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów. Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następującą relację:
 \[
@@ -199,8 +204,8 @@ Zauważmy, że traktując operację podstawienia w sposób naiwny, otrzymujemy, 
   (\lambda x.\,M)[y/N] = \lambda x'.\,M[x/x'][y/N],
 \]
 w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not\in\mathrm{FV}(N)\).
-Szerszą dyskusję na ten temat można prześledzić w \cite{DBLP:journals/corr/abs-1303-5039}. Samo podejście do definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Nasze rozważania opierają się w tej materii na na \cite{Urzyczyn2006}.
-
+Szerszą dyskusję na ten temat można prześledzić w \cite{DBLP:journals/corr/abs-1303-5039}. Samo podejście do definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Nasze rozważania opierają się w tej materii na na \cite{Urzyczyn2006}. Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
+Konstrukcję taką należałoby powtarzać wprowadzając każdy kolejny system. 
 \begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów \(\lambda\)-termu)
   Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) okreslamy
   \[
