@@ -48,7 +48,7 @@ Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli rozum
 \end{przyklad}
 
 Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występować wielokrotnie. Obserwację tę ujmuje następująca definicja.
-\begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów)
+\begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów pretermu)\label{def:untyped_subterm}
   \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
     \item \(\mathrm{Sub}(x)=\{x\}\)
@@ -67,7 +67,7 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
   \end{align*}
   W powyższych przykładach użyliśmy standardowej notacji w górnym indeksie umieszczając krotność wystąpienia elementu.
 \end{przyklad}
-\begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)
+\begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)\label{def:untyped_fv}
   Dla dowolnego pretermu \(M\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\) w następujący sposób:
 \begin{align*}
     \mathrm{FV}(x) &= \{x\}\\
@@ -181,9 +181,46 @@ Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie
   \end{align*}
 \end{definicja}
 
-Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów. Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następującą relację:
+\begin{konwencja*}
+Wprowadzamy następujące konwencje notacyjne:
+\begin{align*}
+  &x = [x]_{=_\alpha},\\
+  &PQ = [M'N']_{=_\alpha},\ \text{gdzie}\ M=[M']_{=_\alpha}\ \text{i}\ N=[N']_{=_\alpha},\\
+  &\lambda x.\,M =  [\lambda x.\,M']_{=_\alpha},\  \text{gdzie}\ N=[N']_{=_\alpha}.
+\end{align*}
+\end{konwencja*}
+
+Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów. Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następującą relację:
 \[
   \lambda x.\,zx=_{\alpha}\lambda y.\,zy
 \]
-Zauważmy, że traktując operację podstawienia w sposób naiwny, otrzymujemy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy porządaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby poprawne podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Szerszą dyskusję na ten temat można prześledzić w \cite{DBLP:journals/corr/abs-1303-5039}. Samo podejście definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Nasze rozważania opierają się w tej materii na na \cite{Urzyczyn2006}.
+Zauważmy, że traktując operację podstawienia w sposób naiwny, otrzymujemy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy porządaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby poprawne podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Innym rozwiązaniem jest określenie podstawienia, które prowadziłoby do abstrachowania po wcześniej nie występujacych zmiennych, czyli
+\[
+  (\lambda x.\,M)[y/N] = \lambda x'.\,M[x/x'][y/N],
+\]
+w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not\in\mathrm{FV}(N)\).
+Szerszą dyskusję na ten temat można prześledzić w \cite{DBLP:journals/corr/abs-1303-5039}. Samo podejście do definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Nasze rozważania opierają się w tej materii na na \cite{Urzyczyn2006}.
+
+\begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów \(\lambda\)-termu)
+  Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) okreslamy
+  \[
+    \mathrm{Sub}(M)=\mathrm{Sub}(M'),
+  \]
+  gdzie \(\mathrm{Sub}(M')\) jest multizbiorem podwyrażeń pretermu \(M'\) zdefiniowanym w myśl Definicji \ref{def:untyped_subterm}.
+\end{definicja}
+
+\begin{definicja}(Zbiór zmiennych wolnych \(\mathrm{FV}\))
+  Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\) 
+  \[
+    \mathrm{FV}(M)=\mathrm{FV}(M'),
+  \]
+  gdzie \(\mathrm{FV}(M')\) jest zbiorem zmiennych wolnych pretermu \(M'\) zdefiniowanym w myśl Definicji \ref{def:untyped_fv}.
+\end{definicja}
+
+\begin{definicja}(Podstawienie)\label{def:untyped_lambda_substitution}
+  Niech \(M=[M']_{=_\alpha}\) i \(N=[N']_{=_\alpha}\) i niech \(M'[x/N']\) będzie poprawnym podstawieniem w myśl Definicji \ref{def:substitution}. Wówczas
+  \[
+    M[x/N]= [M'[x/N']]_{=_\alpha}.
+  \]
+\end{definicja}
 
