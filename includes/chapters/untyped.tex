@@ -188,26 +188,8 @@ Wprowadzamy następujące konwencje notacyjne:
 %  Dla dowolnych \(M,\,N
 %\end{lemat}
 
-Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów. Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następującą relację:
-\[
-  \lambda x.\,zx=_{\alpha}\lambda y.\,zy
-\]
-Zauważmy, że traktując operację podstawienia w sposób naiwny, otrzymujemy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy porządaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby poprawne podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Precyzyjniejszym rozwiązaniem jest określenie podstawienia, które prowadziłoby do abstrachowania po wcześniej nie występujacych zmiennych, czyli
-\[
-  (\lambda x.\,M)[y/N] = \lambda x'.\,M[x/x'][y/N],
-\]
-w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not\in\mathrm{FV}(N)\). Rozstrzygnięcie takie przytacza się w \cite{Hindley:2008:LCI:1388400,}. Precyzyjnie tę rzecz ujmuje Definicja \ref{def:untyped_substitution_hindley}.
-\begin{customdef}{4'}(Podstawienie')\label{def:untyped_substitution_hindley}
-  \begin{enumerate}[label={(S'\arabic*)}, ref={(S'\arabic*)}]
-    \setlength\itemsep{0em}
-    \item \(x[x/N] \equiv N\)
-    \item \(y[x/N] \equiv y,\ \text{o ile}\ x\not\equiv y\)
-    \item \((PQ)[x/N] \equiv P[x/N]\,Q[x/N]\)\label{def:substitution_c}
-    \item \((\lambda y.\, P)[x/N] \equiv \lambda y.\,P[x/N],\ \text{gdzie}\ x\not\equiv y\ \text{i}\ y\not\in \mathrm{FV}(N)\)
-    \item \((\lambda x.\, P)[x/N] \equiv \lambda x.\,P\)\label{def:substitution_e}
-  \end{enumerate}
-\end{customdef}
-Szerszą dyskusję na ten temat można prześledzić w \cite{DBLP:journals/corr/abs-1303-5039}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Samo podejście do definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
+Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów.
+
 \begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów \(\lambda\)-termu)
   Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) okreslamy
   \[
@@ -230,6 +212,32 @@ Szerszą dyskusję na ten temat można prześledzić w \cite{DBLP:journals/corr/
     M[x/N]= [M'[x/N']]_{=_\alpha}.
   \]
 \end{definicja}
+
+Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następującą relację:
+\[
+  \lambda x.\,zx=_{\alpha}\lambda y.\,zy
+\]
+Zauważmy, że traktując operację podstawienia w sposób naiwny, otrzymujemy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy porządaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby poprawne podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Precyzyjniejszym rozwiązaniem jest określenie podstawienia, które prowadziłoby do abstrachowania po wcześniej nie występujacych zmiennych, czyli
+\[
+  (\lambda x.\,M)[y/N] = \lambda x'.\,M[x/x'][y/N],
+\]
+w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not\in\mathrm{FV}(N)\). Rozstrzygnięcie takie przytacza się w \cite{Hindley:2008:LCI:1388400,}. Precyzyjnie tę ideę ujmuje Definicja \ref{def:untyped_substitution_hindley}.
+\begin{customdef}{4'}(Podstawienie')\label{def:untyped_substitution_hindley}
+  \begin{enumerate}[label={(S'\arabic*)}, ref={(S'\arabic*)}]
+    \setlength\itemsep{0em}
+    \item \(x[x/N] = N\)
+    \item \(y[x/N] = y,\ \text{o ile}\ x\not\equiv y\)
+    \item \((PQ)[x/N] = P[x/N]\,Q[x/N]\)
+    \item \((\lambda x.\, P)[x/N] = \lambda x.\,P\)
+    \item \((\lambda y.\, P)[x/N] = \lambda y.\,P\), jeśli \(x\not\in\mathrm{FV}(P)\)\label{def:substitution_e}\label{def:substitution_hindley_e}
+    \item \((\lambda y.\, P)[x/N] = \lambda y.\,P[x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\not\in\mathrm{FV}(N)\)\label{def:substitution_hindley_f}
+    \item \((\lambda y.\, P)[x/N] = \lambda z.\,P[y/z][x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\in\mathrm{FV}(N)\)\label{def:substitution_hindley_g}
+  \end{enumerate}
+  przy czym w \ref{def:substitution_hindley_g} wymagamy, aby zmienna \(z\) nie występowała wcześniej w termach \(N\) i \(P\) jako zmienna wolna, zaś dla \ref{def:substitution_hindley_e}-\ref{def:substitution_hindley_g} dodatkowo \(y\not\equiv x\). 
+\end{customdef}
+Pozornie błacha operacja podstawienie okazuje się centralnym pojęciem we wszystkich systemach rachunku \(\lambda\). To na niej opiera się sens obliczeniowy tych systemów, co jest naturalne, bo w istocie są to przecież systemy przepisujące. W literaturze znajdujemy mnogość propozycji, które w ten czy inny sposób starają się ułatwić rzeczywistą implementację tej operacji. Na szczególną uwagę zasługują tutaj tak zwane \emph{indeksy de Bruijna}. Zaproponowana przez de Brujina w \cite{deBruijnIndices}  notacja eliminuje bezpośrednie występowanie zmiennych w \(\lambda\)-termach i historycznie wiąże się z jego pracami nad systemem wspomaganego dowodzenia twierdzeń AUTOMATH.
+
+Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{DBLP:journals/corr/abs-1303-5039}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Samo podejście do definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
 
 Notowanie serii podstawień prędko staje się niezręczne, dlatego na gruncie Definicji \ref{def:untyped_lambda_substitution} potrzebujemy okreslić nieco więcej cukru syntaktycznego.
 
