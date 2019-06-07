@@ -40,6 +40,19 @@ Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli rozum
   \end{enumerate}
 \end{przyklad}
 
+ % \begin{konwencja*}
+% Przypomnijmy, że \emph{selektorem} w \(V\) nazywamy każdą funkcję \(s:\:\mathcal{P}(V)-\{\emptyset\}\rightarrow V\) taką, że \(s(X)\in X\) dla \(\emptyset\neq X\subseteq V\).
+
+
+%   Niech \(f:D\to E\) będzie dowolną funkcją i niech \(d\in D,\ e\in E\). Funkcję \(f[x/N]:\:D\to E\) określamy w następujący sposób:
+%   \[
+%     f[d/e]d' = \begin{cases}
+%       e, &\text{jeśli}\ d'\equiv d, \\
+%       fd', &\text{w przeciwnym wypadku.}
+%     \end{cases}
+%   \]
+ % \end{konwencja*}
+
 Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występować wielokrotnie. Obserwację tę ujmuje następująca definicja.
 \begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów pretermu)\label{def:untyped_subterm}
   \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
@@ -78,8 +91,9 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
   \end{enumerate}
 \end{przyklad}
 
+
 \begin{definicja}(Podstawienie)\label{def:substitution}
-  Dla dowolnych \(\mathrm{M,\,N}\in\mathbf{\tilde\Lambda}\) i \(x\in V\) przez \(N[x/N]\) oznaczamy rezultat podstawienia termu \(N\) za wszystkie wolne wystąpienia zmiennej \(x\) w \(M\), o ile w rezultacie podstawienia nie zostaną związane żadne zmienne wolne występujące w \(N\). W takim wypadku \emph{podstawienie} jest przekształceniem pretermów określonym w następujący sposób:
+  Dla dowolnych \(\mathrm{M,\,N}\in\mathbf{\tilde\Lambda}\) i \(x\in V\) przez \(N[x/N]\) oznaczamy rezultat podstawienia termu \(N\) za wszystkie wolne wystąpienia zmiennej \(x\) w \(M\), o ile w rezultacie podstawienia nie zostaną związane żadne zmienne wolne występujące w \(N\). W takim wypadku:
   \begin{enumerate}[label={(S\arabic*)}, ref={(S\arabic*)}]
     \setlength\itemsep{0em}
     \item \(x[x/N] = N\)
@@ -88,7 +102,6 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
     \item \((\lambda y.\, P)[x/N] = \lambda y.\,P[x/N],\ \text{gdzie}\ x\not\equiv y\ \text{i}\ y\not\in \mathrm{FV}(N)\)
     \item \((\lambda x.\, P)[x/N] = \lambda x.\,P\)\label{def:substitution_e}
   \end{enumerate}
-  Zauważmy, że jest to funkcja częściowa w zbiorze \(\mathbf{\tilde\Lambda}\times V \times \mathbf{\tilde\Lambda}\). Powiemy, że \(M[x/N]\) jest \emph{poprawnym podstawieniem}, jeśli podstawienie \(M[x/N]\) jest określone w myśl Definicji \ref{def:substitution}.
 \end{definicja}
 
 \begin{lemat}(O podstawieniu)\label{lem:substitution}
@@ -125,13 +138,15 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
 \end{lemat}
 
 \begin{wniosek}\label{thm:odwracalnosc_podstawienia}
-Jesli \(M[x/y]\) jest poprawnym postawieniem i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest poprawnym podstawieniem oraz
+Jesli \(M[x/y]\) jest określone i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest określone oraz
   \(M[x/y][y/x]=M\).
   \begin{dowod}
     Mając na uwadze Lemat \ref{def:substitution} dowód przebiega przez indukcję strukturalną względem \(M\).
     \qed
   \end{dowod}
 \end{wniosek}
+
+
 
 \subsection{Wyrażenia \(\lambda\)}
 Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie zmiennymi związanymi, tak jak w przypadku wyrażeń \(\lambda x. \,zx\) i \(\lambda y.zy\). W takim wypadku powiemy o nich, że są swoimi \emph{\(\alpha\)-wariantami} lub że są ze sobą w relacji \emph{\(\alpha\)-konwersji}.
@@ -140,7 +155,7 @@ Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie
   Relacją \(=_{\alpha}\) (\(\alpha\)-konwersji) nazywamy najmniejszy w sensie mnogościowym praporządek na \(\mathbf{\tilde\Lambda}\) taki, że
   \begin{enumerate}[label={(\(\alpha\)\arabic*)}, ref={(\(\alpha\)\arabic*)}]
   \setlength\itemsep{0em}
-  \item Jeśli \(y\not\in \mathrm{FV}(M)\) oraz \(M[x/y]\) jest poprawnym podstawieniem,\\ to \(\lambda x.\,M~=_{\alpha}~\lambda y.\,M[x/y]\)\label{def:alpha_1}
+  \item Jeśli \(y\not\in \mathrm{FV}(M)\) oraz \(M[x/y]\) jest określone,\\ to \(\lambda x.\,M~=_{\alpha}~\lambda y.\,M[x/y]\)\label{def:alpha_1}
   \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(x\in V\) zachodzi \(\lambda x.\,M =_{\alpha} \lambda x.\,N\)\label{def:alpha_2}
   \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(MZ =_{\alpha} NZ\)\label{def:alpha_3}
   \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(ZM =_{\alpha} ZN\)\label{def:alpha_4}
@@ -199,7 +214,7 @@ Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych woln
 \end{definicja}
 
 \begin{definicja}(Zbiór zmiennych wolnych \(\mathrm{FV}\))
-  Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\) 
+  Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\)
   \[
     \mathrm{FV}(M)=\mathrm{FV}(M'),
   \]
@@ -207,7 +222,7 @@ Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych woln
 \end{definicja}
 
 \begin{definicja}(Podstawienie)\label{def:untyped_lambda_substitution}
-  Niech \(M=[M']_{=_\alpha}\) i \(N=[N']_{=_\alpha}\) i niech \(M'[x/N']\) będzie poprawnym podstawieniem w myśl Definicji \ref{def:substitution}. Wówczas
+  Niech \(M=[M']_{=_\alpha}\) i \(N=[N']_{=_\alpha}\) i niech \(M'[x/N']\) będzie określone w myśl Definicji \ref{def:substitution}. Wówczas
   \[
     M[x/N]= [M'[x/N']]_{=_\alpha}.
   \]
@@ -217,11 +232,11 @@ Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następując
 \[
   \lambda x.\,zx=_{\alpha}\lambda y.\,zy
 \]
-Zauważmy, że traktując operację podstawienia w sposób naiwny, otrzymujemy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy porządaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby poprawne podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Precyzyjniejszym rozwiązaniem jest określenie podstawienia, które prowadziłoby do abstrachowania po wcześniej nie występujacych zmiennych, czyli
+Zauważmy, że traktując podstawienie w sposób naiwny, mamy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy porządaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Alternatywnym rozwiązaniem jest określenie podstawienia, które wprowadzałoby do wyrażenia nową zmienną i prowadziło w konsekwencji do abstrahowania po wcześniej nie występujacych zmiennych:
 \[
   (\lambda x.\,M)[y/N] = \lambda x'.\,M[x/x'][y/N],
 \]
-w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not\in\mathrm{FV}(N)\). Rozstrzygnięcie takie przytacza się w \cite{Hindley:2008:LCI:1388400,}. Precyzyjnie tę ideę ujmuje Definicja \ref{def:untyped_substitution_hindley}.
+w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not\in\mathrm{FV}(N)\). Rozstrzygnięcie takie przytacza się w \cite{Hindley:2008:LCI:1388400,}. Po uwzględneniu odpowiednich modyfikacji, Definicja \ref{def:substitution} przyjmuje następującą postać:
 \begin{customdef}{4'}(Podstawienie')\label{def:untyped_substitution_hindley}
   \begin{enumerate}[label={(S'\arabic*)}, ref={(S'\arabic*)}]
     \setlength\itemsep{0em}
@@ -233,44 +248,68 @@ w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not
     \item \((\lambda y.\, P)[x/N] = \lambda y.\,P[x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\not\in\mathrm{FV}(N)\)\label{def:substitution_hindley_f}
     \item \((\lambda y.\, P)[x/N] = \lambda z.\,P[y/z][x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\in\mathrm{FV}(N)\)\label{def:substitution_hindley_g}
   \end{enumerate}
-  przy czym w \ref{def:substitution_hindley_g} wymagamy, aby zmienna \(z\) nie występowała wcześniej w termach \(N\) i \(P\) jako zmienna wolna, zaś dla \ref{def:substitution_hindley_e}-\ref{def:substitution_hindley_g} dodatkowo \(y\not\equiv x\). 
+  przy czym w \ref{def:substitution_hindley_g} wymagamy, aby zmienna \(z\) nie występowała wcześniej w termach \(N\) i \(P\) jako zmienna wolna, zaś dla \ref{def:substitution_hindley_e}-\ref{def:substitution_hindley_g} dodatkowo \(y\not\equiv x\).
 \end{customdef}
-Pozornie błacha operacja podstawienie okazuje się centralnym pojęciem we wszystkich systemach rachunku \(\lambda\). To na niej opiera się sens obliczeniowy tych systemów, co jest naturalne, bo w istocie są to przecież systemy przepisujące. W literaturze znajdujemy mnogość propozycji, które w ten czy inny sposób starają się ułatwić rzeczywistą implementację tej operacji. Na szczególną uwagę zasługują tutaj tak zwane \emph{indeksy de Bruijna}. Zaproponowana przez de Brujina w \cite{deBruijnIndices}  notacja eliminuje bezpośrednie występowanie zmiennych w \(\lambda\)-termach i historycznie wiąże się z jego pracami nad systemem wspomaganego dowodzenia twierdzeń AUTOMATH.
+\begin{uwaga}
+Każde podstawienie \([x/N]\) jest funkcją z \(\mathbf{\Lambda}\to\mathbf{\Lambda}\), gdzie \(x\in V\) i \(N\in\mathbf{\Lambda}\) są dowolnymi parametrami. Zbiór \(S\) podstawień ma strukturę monoidu z działaniem składania
+  \begin{align*}
+    M([x_2/N_2]\circ[x_1/N_1]) = (M[x_1/N_1])[x_2/N_2] \equiv M[x_1/N_1][x_2/N_2]
+  \end{align*}
+  dla dowolnych \([x_1/N_1],\,[x_2/N_2]\in S\), o ile \(S\) posiada element neutralny \(\iota\) taki, że
+  \begin{align*}
+    M \iota = M,\ \text{gdzie}\ [x/x]=\iota\ \text{dla dowolnego}\ x\in V.
+  \end{align*}
+\end{uwaga}
 
-Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{DBLP:journals/corr/abs-1303-5039}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Samo podejście do definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
+W literaturze znajdujemy mnogość propozycji, które w ten czy inny sposób starają się ułatwić rzeczywistą implementację podstawienia. Na szczególną uwagę zasługują tutaj tak zwane \emph{indeksy de Bruijna}. Zaproponowana przez N. G. de Brujina w \cite{deBruijnIndices}  notacja eliminuje bezpośrednie występowanie symboli zmiennych w \(\lambda\)-termach, zastępując je liczbą naturalną wyrażającą głębokość zagnieżdżenia odpowiedniej \(\lambda\)-abstrakcji przez którą jest związana, przykładowo:
+\[
+  \lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx))) \equiv_{de Brujin} \lambda (\lambda 2 (1 1)) \lambda 2 (1 1)
+\]
+Historycznie wiąże się ta notacja z jego pracami nad systemem komputerowo wspomaganego dowodzenia twierdzeń AUTOMATH. Rozwiązanie takie, podobnie jak w przypadku tzw. logik kombinatorów, eliminuje konieczność utożsamiania termów przez \(\alpha\)-konwersję, ale istotnie zmniejsza ich czytelność.
 
-Notowanie serii podstawień prędko staje się niezręczne, dlatego na gruncie Definicji \ref{def:untyped_lambda_substitution} potrzebujemy okreslić nieco więcej cukru syntaktycznego.
+Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{txa:alpha-draft}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Samo podejście do definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
 
-\begin{definicja}(Podstawienie jednoczesne)
+% \subsection{Podstawienie jednoczesne}
+% Biorąc pod uwagę sens obliczeniowy rachunku \(\lambda\) interesujące okazuje się modyfikacja Definicji \ref{def:untyped_substitution_hindley} w  taki sposób, aby podstawienie miało miejsce dla wielu zmiennych równolegle w całym \(\lambda\)-termie. Za przykładem \cite{STOUGHTON1988317} wprowadzimy \emph{podstawienie jednoczesne}. W tym celu jednak uściślenia wymagają pewne pojęcia.
+
+\begin{definicja}(Podstawienie jednoczesne)\label{def:simult_substitution}
 Dla dowolnego \(M\in\mathbf{\Lambda}\), ciągu \(\lambda\)-zmiennych~\(\vec{x}\) i ciągu \(\lambda\)-termów \(\vec{N}\) określamy:
   \begin{enumerate}[label={(\(\vec{s}\)\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
     \item \(x_i[\vec{x}/\vec{N}]=N_i\) dla \(i\in\mathbb{N}\).
     \item \(y[\vec{x}/\vec{N}]=y\) o ile dla dowolnego \(i\in\mathbb{N},\ y\not\equiv x_i\).
     \item \((PQ)[\vec{x}/\vec{N}]=P[\vec{x}/\vec{N}]Q[\vec{x}/\vec{N}]\)
-    \item \((\lambda y.\,P)[\vec{x}/\vec{N}]=\lambda y'.\,P[y/y'][\vec{x}/\vec{N}]\), gdzie \(y'\) jest wcześniej nie występującą zmienną, \(y\not\equiv x_i\)  dla wszystkich \(i\in\mathbb{N}\) i \(y\not\in\bigcup_{i\in\mathbb{N}}FV(N_i)\).
-  \end{enumerate}
+%    \item \((\lambda y.\,P)[\vec{x}/\vec{N}]=\lambda y'.\,P[y/y'][\vec{x}/\vec{N}]\), gdzie \(y'\) jest wcześniej nie występującą zmienną, \(y\not\equiv x_i\)  dla wszystkich \(i\in\mathbb{N}\) i \(y\not\in\bigcup_{i\in\mathbb{N}}FV(N_i)\).
+    \item \((\lambda y.\,P)[\vec{x}/\vec{N}]=\lambda y.\,P[\vec{x}/\vec{N}]\), jeśli \(y\neq x_i\) dla wszystkich \(i\in\mathbb{N}\) i \(y\not\in\bigcup_{i\in\mathbb{N}}FV(N_i)\)
+ \end{enumerate}
 \end{definicja}
+
+\begin{konwencja*}
+  Jeśli \(N_i\equiv x_i\) dla wszystkich poza skończenie wieloma \(i_1,\,i_2,\,\dots,\,i_n\in~\mathbb{N}\), to \([x_{i_1}/N_{i_1},\,x_{i_2}/N_{i_2},\,\dots,\,x_{i_n}/N_{i_n}]\equiv [\vec{x}/\vec{N}]\).
+\end{konwencja*}
+
 \begin{przyklad}
-  Porównajmy następujące podstawienia:
-  \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
-    \item Niech \(\vec{x}=id\) i niech \(\vec{N}\) będzie ciągiem stałym o wyrazie 
-  \end{enumerate}
+  Zauważmy, że podstawienia w myśl Definicji \ref{def:substitution} i Definicji \ref{def:simult_substitution} mogą, ale nie muszą, prowadzić do różnych rezultatów.
+\begin{align*}
+  \text{a)}\quad &  (xy)[y/x][x/u] = uu, &\quad\text{b)}\quad & (\lambda x.\,yx)[x/y][y/z]=\lambda x.\,zx, \\
+                &  (xy)[y/x, x/u] = ux. & &(\lambda x.\,yx)[x/y,y/z]=\lambda x.\,zx.\\
+\end{align*}
+
 \end{przyklad}
 \subsection{Redukcja}
-Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\Lambda}\) operacji \(\beta\)- i \(\eta\)-redukcji. Pożądane jest, żeby operacje te wykonywane na podtermach pozostowały w \emph{zgodzie} ze strukturą całego \(\lambda\)-termu. 
+Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\Lambda}\) operacji \(\beta\)- i \(\eta\)-redukcji. Pożądane jest, żeby operacje te wykonywane na podtermach pozostowały w \emph{zgodzie} ze strukturą całego \(\lambda\)-termu.
 
 \begin{definicja}(Relacja zgodna)
   Relację binarną \(\mathcal{R}\) na zbiorze \(\mathbf{\Lambda}\) nazywamy \emph{zgodną}, jeśli dla dowolnych \(M,\,N,\,P \in \mathbf{\Lambda}\) zachodzą następujące warunki:
   \begin{enumerate}[label={(c\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
     \item Jeśli \(M \mathcal{R} N\), to \((\lambda x.\,M)\,\mathcal{R}\,(\lambda x.\,N)\) dla dowolnej \(\lambda\)-zmiennej \(x\).
-    \item Jeśli \(M \mathcal{R} N\), to \((MP)\,\mathcal{R}\,(NP)\). 
+    \item Jeśli \(M \mathcal{R} N\), to \((MP)\,\mathcal{R}\,(NP)\).
     \item Jeśli \(M \mathcal{R} N\), to \((PM)\,\mathcal{R}\,(PN)\).
   \end{enumerate}
 \end{definicja}
-Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) będziemy rozumieli najmniejszą (w sensie mnogościowym) relację \(\mathcal{R}_2\) taką, że \(\mathcal{R}_1\subset\mathcal{R}_2\). 
-  Z pewnego rodzaju domknięciami, ze względu na ich szczególną rolę, wiążemy następującą notację:  
+Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) będziemy rozumieli najmniejszą (w sensie mnogościowym) relację \(\mathcal{R}_2\) taką, że \(\mathcal{R}_1\subset\mathcal{R}_2\).
+  Z pewnego rodzaju domknięciami, ze względu na ich szczególną rolę, wiążemy następującą notację:
   \begin{enumerate}[label=(\alph*), ref={(\alph*)}]
     \setlength\itemsep{0em}
     \item Przez \(\mathcal{R}^{+}\) oznaczamy przechodnie domknięcie relacji \(\mathcal{R}\).\label{def:closure_a}
