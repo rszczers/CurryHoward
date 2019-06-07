@@ -359,9 +359,11 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
     \(\lambda x. ((+1) x) =_\eta (+1) \).
   \end{przyklad}
 
-  \subsection{Struktury danych}
-Pomimo prostotej składni, język rachunku \(\lambda\) pozwala na zaskakująco proste wyrażanie skomplikowanych struktur danych. Równie zaskakujący jest fakt, że struktury takie przenoszą się (\emph{modulo} składnia) do o wiele bardziej złożonych języków. Dla przykładu, za pomocą kodowania typów Scotta możliwe staje się określenie algebraicznch typów danych (w skrócie ADT) w jezyku Java. Są to koncepcje zupełnie egzotycznych dla tego języka. Takich złożonych już rozważań będzie dotyczyła dalsza część pracy. W tym miejscu zaprezentujemy dwa najbardziej znane rodzaje kodowania w rachunku \(\lambda\) – kodowanie Churcha i jego rekurencyjną wersję -- kodowanie Scotta.
- 
+  \subsection{Kodowanie typów danych}
+Prosta składnia języka rachunku \(\lambda\) pozwala wyrazić zaskakująco wiele struktur danych reprezentując je i operacje na nich jako funkcje. Z tego powodu, stanowiąc inspirację dla wielu projektantów języków, uchodzi za protoplastę rodziny funkcyjnych języków programowania, chociaż bezpośrednio nie ma on praktycznego zastosowania w praktyce programistycznej. Rozwój tej legendy dobrze oddaje cykl klasycznych artykułów (tzw. \emph{Lambda Papers}) zapoczątkowany przez dokumentację języka Scheme \cite{Sussman:1975:IEL:889230}.
+
+Najpopularniejszym sposobem reprezentacji danch przez funkcje w rachunku \(\lambda\) oparty jest na kodowaniu liczb Peano za pomocą tzw. liczebników Churcha. Metoda ta, ze względu na wynikające zeń problemy natury złożonościowej \cite{Koopman:2014:CED:2746325.2746330}, ma obecnie wyłącznie walory edukacyjne, dlatego w dalszej cześci pracy pokażemy tzw. kodowanie Scotta. Jest ona interesująca ze względu na praktyczną możliwość reprezentacji algebraicznych typów danych (ADT) znanych ze współczesnych języków funkcyjnych \cite{Jansen:2013:P9C:2941698.2941710}, pozwalając tym samym zaimplementować te konstrukcje w paradygmacie imperatywnym. Fakt, że każdy typ danych można zastąpić tym sposobem odpowiadającą mu funkcją wskazuje na metodę konstruowania prostych języków funkcyjnych, ale przede wszystkim na uniwersalność rachunku \(\lambda\) jako języka przejściowego dla kompilatorów języków wysokiego poziomu \cite[Rozdział 3]{PeytonJones:1992:IFL:129390}.
 
  \subsubsection{Kodowanie Churcha}
+
  \subsubsection{Kodowanie Scotta}
