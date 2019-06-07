@@ -162,6 +162,16 @@ Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie
   \end{enumerate}
 \end{definicja}
 
+\begin{przyklad}
+  \begin{align*}
+    \lambda x y.\,x(xy) &\equiv \lambda x.\,(\lambda y.\,x(xy)) \\
+                        &\equiv_\alpha \lambda x.\,(\lambda z.\,x(xz)) \\
+                        &\equiv_\alpha \lambda v.\,(\lambda z.\,v(vz)) \\
+                        &\equiv \lambda vz.\,v(vz).
+  \end{align*}
+
+\end{przyklad}
+
 \begin{wniosek}
   Relacja \(=_{\alpha}\) jest relacją równoważności.
   \begin{dowod}
@@ -317,5 +327,41 @@ Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) będziemy rozumieli najmniejs
     \item Przez \(=_{\mathcal{R}}\) oznaczamy symetryczne domknięcie relacji \(\mathcal{R}^{*}\).\label{def:closure_c}
 \end{enumerate}
 Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:closure_b} wyznacza praporzadek, który w odniesieniu do redukcji określonych na \(\mathbf{\Lambda}\) można rozumieć jako graf skierowany (w przypadku \(\mathbf{\Lambda}\) być może nieskończony) w którym krawędzie odpowiadają możliwym krokom obliczenia, zaś \ref{def:closure_c} -- kongruencję, która znów w szczególnym odniesieniu do \(\lambda\)-termów, będzie dokonywała podziału w \(\mathbf{\Lambda}\) ze względu na rezultat obliczenia.
-\begin{definicja}(Redukcja)
+\begin{definicja}(\(\beta\)-redukcja)
+  \(\beta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) zgodną na \(\mathbf{\Lambda}\) relację binarną \(\to_\beta\) taką, że
+  \[
+    (\lambda x.\,M)N\rightarrow_\beta M[x/N].
+  \]
+\emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}. \emph{Ciągiem} \(\beta\)-redukcji nazywamy skończony lub nieskończony ciąg postaci
+  \[
+    M_0 \to_\beta M_1 \to_\beta \dots 
+  \]
 \end{definicja}
+  \begin{przyklad}Oznaczmy \(\mathrm{Y}=\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))\) i niech \(F\) będzie dowolnym \(\lambda\)-termem. Wówczas otrzymujemy nieskończony ciąg redukcji postaci
+    \begin{align*}
+      \mathrm{Y}F &\equiv (\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx))))F\\
+                  &\to_\beta (\lambda x.\,F(xx))\lambda x.\,F(xx)\\
+                  &\to_\beta F((\lambda x.\,F(xx))\lambda x.\,F(xx))\\
+                  &\to_\beta F(F((\lambda x.\,F(xx))\lambda x.\,F(xx)))\\
+                  &\to_\beta \dots
+    \end{align*}
+  \end{przyklad}
+\begin{definicja}(\(\eta\)-redukcja)
+  \(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) zgodną na \(\mathbf{\Lambda}\) relację binarną \(\to_\eta\) taką, że
+  \[
+    \lambda x.\,Mx\to_\eta M,\ \text{o ile}\ x\not\in \mathrm{FV}(M).
+  \]
+
+  \(\eta\)-redukcja pozwala na pominięcie niczego nie wnoszącej \(\lambda\)-abstrakcji. Operację odwrotną nazywamy \emph{\(\eta\)-abstrakcją}, zaś \(\lambda\)-termy będące w którejkolwiek z tych relacji nazywamy \emph{\(\eta\)-konwersami}. Operacja ta nie ma wpływu na rezultat obliczenia, jedynie optymializuje zapis \(\lambda\)-termów i stąd ma duże znaczenie stylistyczne w programowaniu funkcyjnym.
+  \end{definicja}
+
+  \begin{przyklad}
+    \(\lambda x. ((+1) x) =_\eta (+1) \).
+  \end{przyklad}
+
+  \subsection{Struktury danych}
+Pomimo prostotej składni, język rachunku \(\lambda\) pozwala na zaskakująco proste wyrażanie skomplikowanych struktur danych. Równie zaskakujący jest fakt, że struktury takie przenoszą się (\emph{modulo} składnia) do o wiele bardziej złożonych języków. Dla przykładu, za pomocą kodowania typów Scotta możliwe staje się określenie algebraicznch typów danych (w skrócie ADT) w jezyku Java. Są to koncepcje zupełnie egzotycznych dla tego języka. Takich złożonych już rozważań będzie dotyczyła dalsza część pracy. W tym miejscu zaprezentujemy dwa najbardziej znane rodzaje kodowania w rachunku \(\lambda\) – kodowanie Churcha i jego rekurencyjną wersję -- kodowanie Scotta.
+ 
+
+ \subsubsection{Kodowanie Churcha}
+ \subsubsection{Kodowanie Scotta}
