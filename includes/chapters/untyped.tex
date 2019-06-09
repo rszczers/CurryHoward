@@ -334,7 +334,7 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
   \]
 \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}. \emph{Ciągiem} \(\beta\)-redukcji nazywamy skończony lub nieskończony ciąg postaci
   \[
-    M_0 \to_\beta M_1 \to_\beta \dots 
+    M_0 \to_\beta M_1 \to_\beta \dots
   \]
 \end{definicja}
   \begin{przyklad}Oznaczmy \(\mathrm{Y}=\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))\) i niech \(F\) będzie dowolnym \(\lambda\)-termem. Wówczas otrzymujemy nieskończony ciąg redukcji postaci
@@ -360,10 +360,52 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
   \end{przyklad}
 
   \subsection{Kodowanie typów danych}
-Prosta składnia języka rachunku \(\lambda\) pozwala wyrazić zaskakująco wiele struktur danych reprezentując je i operacje na nich jako funkcje. Z tego powodu, stanowiąc inspirację dla wielu projektantów języków, uchodzi za protoplastę rodziny funkcyjnych języków programowania, chociaż bezpośrednio nie ma on praktycznego zastosowania w praktyce programistycznej. Rozwój tej legendy dobrze oddaje cykl klasycznych artykułów (tzw. \emph{Lambda Papers}) zapoczątkowany przez dokumentację języka Scheme \cite{Sussman:1975:IEL:889230}.
+Prosta składnia języka rachunku \(\lambda\) pozwala wyrazić zaskakująco wiele struktur danych reprezentując je i operacje na nich jako funkcje. Z tego powodu, stanowiąc inspirację dla wielu projektantów języków programowania, uchodzi za protoplastę rodziny języków funkcyjnych, chociaż bezpośrednio nie ma on praktycznego zastosowania w praktyce programistycznej. Rozwój tej legendy dobrze oddaje cykl klasycznych artykułów (tzw. \emph{Lambda Papers}) zapoczątkowany przez dokumentację języka Scheme \cite{Sussman:1975:IEL:889230}.
 
-Najpopularniejszym sposobem reprezentacji danch przez funkcje w rachunku \(\lambda\) oparty jest na kodowaniu liczb Peano za pomocą tzw. liczebników Churcha. Metoda ta, ze względu na wynikające zeń problemy natury złożonościowej \cite{Koopman:2014:CED:2746325.2746330}, ma obecnie wyłącznie walory edukacyjne, dlatego w dalszej cześci pracy pokażemy tzw. kodowanie Scotta. Jest ona interesująca ze względu na praktyczną możliwość reprezentacji algebraicznych typów danych (ADT) znanych ze współczesnych języków funkcyjnych \cite{Jansen:2013:P9C:2941698.2941710}, pozwalając tym samym zaimplementować te konstrukcje w paradygmacie imperatywnym. Fakt, że każdy typ danych można zastąpić tym sposobem odpowiadającą mu funkcją wskazuje na metodę konstruowania prostych języków funkcyjnych, ale przede wszystkim na uniwersalność rachunku \(\lambda\) jako języka przejściowego dla kompilatorów języków wysokiego poziomu \cite[Rozdział 3]{PeytonJones:1992:IFL:129390}.
+Najpopularniejszym sposobem reprezentacji danych przez funkcje w rachunku \(\lambda\) oparty jest na kodowaniu liczb Peano za pomocą tzw. liczebników Churcha. Metoda ta, ze względu na wynikające zeń problemy natury złożonościowej \cite{Koopman:2014:CED:2746325.2746330}, ma obecnie wyłącznie walory edukacyjne, dlatego w dalszej cześci pracy pokażemy tzw. kodowanie Scotta. Jest ona interesująca ze względu na praktyczną możliwość reprezentacji algebraicznych typów danych (ADT\footnote{Skrót od angielskojęzycznego \emph{Algebraic Data Types}; nie należy mylić z \emph{Abstract Data Types}.}) znanych ze współczesnych języków funkcyjnych \cite{Jansen:2013:P9C:2941698.2941710}, pozwalając tym samym zaimplementować te konstrukcje w paradygmacie imperatywnym. Fakt, że każdy typ danych można zastąpić tym sposobem odpowiadającą mu funkcją wskazuje na metodę konstruowania prostych języków funkcyjnych, ale przede wszystkim na uniwersalność rachunku \(\lambda\) jako języka przejściowego dla kompilatorów języków wysokiego poziomu \cite[Rozdział 3]{PeytonJones:1992:IFL:129390}.
 
- \subsubsection{Kodowanie Churcha}
+\subsubsection{Algebraiczne typy danych}
+Algebraiczne typy danych są podstawowym środkiem współczesnych języków funkcyjnych do wyrażania struktur danych. Powstają one przy użyciu tzw. typów sumacyjnych i typów produktowych, jednak pojęcia te na gruncie formalnym będą szczegółowo omówione w późniejszej części pracy. Na potrzeby prezentacji poszczególnych kodowań wystarczą nam w tym rozdziale intuicje o ADT zbudowane na gruncie następujących definicji w języku Haskell:
 
- \subsubsection{Kodowanie Scotta}
+\begin{minted}{haskell}
+  data Boolean     = True
+                   | False
+  data Tuple a b   = Tuple a b
+  data Temperature = Fahrenheit Int
+                   | Celsius Int
+  data Maybe a     = Nothing
+                   | Just a
+  data Nat         = Zero
+                   | Suc Nat
+  data List t      = Nil
+                   | Cons t (List t)
+\end{minted}
+Definicja typu rozpoczynają się od słowa kluczowego \texttt{data}\footnote{Dyskusja ta ma na celu wyłącznie ustalenie uwagi; świadomi jesteśmy niuansów związanych z określaniem synonimów typów lub definiowaniem typów przy pomocy słowa kluczowego \texttt{newtype}.} po którym występuje \emph{konstruktor typu}. Na wzór notacji BNF, typy przyjmują jedną z \emph{wartości} odzielonych znakiem "|". Każda z wartości składa się z \emph{konstruktora wartości} i ewentualnie występujących po nim \emph{parametrów typowych}. Zauważmy, że umożliwia to rekurencyjnie konstruowanie typów, tak jak w wypadku \texttt{Nat} i \texttt{List}.
+
+Pokażemy, że algebraiczne typy danych możemy reprezentować w zwięzły sposób w rachunku \(\lambda\) bez typów. Przedstawione tutaj koncepcje w zaskakujący sposób przenoszą się do bardziej złożonych typowanych systemów rachunku \(\lambda\).
+
+\subsubsection{Typy wyliczeniowe}
+Typy wyliczeniowe to typy, które reprezentują możliwe warianty przyjmowanej wartości. Przykładem takiego typu jest \texttt{Boolean} z dwoma wartościami: \texttt{True}, \texttt{False}. Praca z tego rodzaju typami wymaga mechanizmu dopasowywania wzorców (ang. pattern-matching), który pozwala na wybór częściowej definicji funkcji w zależności od zadanego konstruktora wartości. Ponieważ w rachunku \(\lambda\), którym się tutaj zajmujemy wyrażenia nie mają typów (lub, przyjmując perspektywę systemów z typami: wszystkie mają ten sam typ), interesowało nas będzie nie bezpośrednie kodowanie typu, ale mechanizmu, który odpowiada za dopasowywanie wzorców. Posłużmy się znowu przykładem z języka Haskell i określmy funkcję odpowiadającą wykonaniu instrukcji warunkowej:
+\begin{minted}{haskell}
+if True  a b = a
+if False a b = b.
+\end{minted}
+gdzie \texttt{True} i \texttt{False} są wartościami typu \texttt{Boolean}. Właśnie ze względu na nie mechanizm dopasowywania wzorca wybiera odpowiednią implementację instrukcji warunkowej. Ten sam efekt osiągnęlibyśmy kodując \texttt{True} i \texttt{False} w rachunku \(\lambda\) w następujący sposób:
+\begin{align*}
+  \mathrm{True} &\equiv \lambda a b.\,a,\\
+  \mathrm{False} &\equiv \lambda a b.\,b
+\end{align*}
+Wówczas funkcję \texttt{if} możemy reprezentować wyrażeniem \(if\equiv\lambda x.\,x\). W ogólnym przypadku, mając nastepującą definicję ADT:
+\begin{minted}{haskell}
+  data type_constructor t1 t2 ... tk = C1 t11 ... t1n1
+                                     | C2 t21 ... t2n1
+                                     ...
+                                     | Cm tm1 ... tmnm
+\end{minted}
+dla \(m, n \in \mathbb{N}\), wiążemy z nią następującą reprezentację w rachunku \(\lambda\):
+\begin{gather*}
+  \mathrm{C_1} \equiv \lambda t_{11}\, t_{12}\, \dots t_{1n_1}\, f_1\, f_2 \dots f_m.\ f_1 t_{11} t_{12} \dots t_{1n_1}\\
+  \mathrm{C_2} \equiv \lambda t_{11}\, t_{12}\, \dots t_{1n_2}\, f_1\, f_2 \dots f_m.\ f_2 t_{11} t_{12} \dots t_{1n_2}\\
+ \vdots\\
+  \mathrm{C_m} \equiv \lambda t_{11}\, t_{12}\, \dots t_{1n_m}\, f_1\, f_m \dots f_m.\ f_1 t_{11} t_{12} \dots t_{1n_m}\\
+\end{gather*}

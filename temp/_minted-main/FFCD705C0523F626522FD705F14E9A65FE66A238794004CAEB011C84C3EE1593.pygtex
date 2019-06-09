@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{k+kr}{data} \PYG{k+kt}{Boolean}     \PYG{o+ow}{=} \PYG{k+kt}{True}
+                   \PYG{o}{|} \PYG{k+kt}{False}
+  \PYG{k+kr}{data} \PYG{k+kt}{Tuple} \PYG{n}{a} \PYG{n}{b}   \PYG{o+ow}{=} \PYG{k+kt}{Tuple} \PYG{n}{a} \PYG{n}{b}
+  \PYG{k+kr}{data} \PYG{k+kt}{Temperature} \PYG{o+ow}{=} \PYG{k+kt}{Fahrenheit} \PYG{k+kt}{Int}
+                   \PYG{o}{|} \PYG{k+kt}{Celsius} \PYG{k+kt}{Int}
+  \PYG{k+kr}{data} \PYG{k+kt}{Maybe} \PYG{n}{a}     \PYG{o+ow}{=} \PYG{k+kt}{Nothing}
+                   \PYG{o}{|} \PYG{k+kt}{Just} \PYG{n}{a}
+  \PYG{k+kr}{data} \PYG{k+kt}{Nat}         \PYG{o+ow}{=} \PYG{k+kt}{Zero}
+                   \PYG{o}{|} \PYG{k+kt}{Suc} \PYG{k+kt}{Nat}
+  \PYG{k+kr}{data} \PYG{k+kt}{List} \PYG{n}{t}      \PYG{o+ow}{=} \PYG{k+kt}{Nil}
+                   \PYG{o}{|} \PYG{k+kt}{Cons} \PYG{n}{t} \PYG{p}{(}\PYG{k+kt}{List} \PYG{n}{t}\PYG{p}{)}
+\end{Verbatim}

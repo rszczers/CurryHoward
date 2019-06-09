@@ -41,18 +41,17 @@
 \usepackage{enumitem}
 \usepackage[ampersand]{easylist} 
 \usepackage{mathbbol}
+\usepackage[outputdir=temp]{minted}
 
 \DeclareSymbolFontAlphabet{\amsmathbb}{AMSb}%
-
-\usepackage{listings}
-
-\lstset{
-  basicstyle=\itshape,
-  xleftmargin=3em,
-  literate={->}{$\rightarrow$}{2}
-           {α}{$\alpha$}{1}
-           {δ}{$\delta$}{1}
-}
+% \usepackage{listings}
+% \lstset{
+%   basicstyle=\itshape,
+%   xleftmargin=3em,
+%   literate={->}{$\rightarrow$}{2}
+%            {α}{$\alpha$}{1}
+%            {δ}{$\delta$}{1}
+% }
 \addbibresource{bibdb.bib}
 
 \subimport{includes/}{def.tex}
