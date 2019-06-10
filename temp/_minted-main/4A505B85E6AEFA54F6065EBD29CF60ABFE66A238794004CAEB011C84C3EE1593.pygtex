@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-  \PYG{k+kr}{data} \PYG{n}{type\PYGZus{}constructor} \PYG{n}{t1} \PYG{n}{t2} \PYG{o}{...} \PYG{n}{tk} \PYG{o+ow}{=} \PYG{k+kt}{C1} \PYG{n}{t11} \PYG{o}{...} \PYG{n}{t1n1}
-                                     \PYG{o}{|} \PYG{k+kt}{C2} \PYG{n}{t21} \PYG{o}{...} \PYG{n}{t2n1}
-                                     \PYG{o}{...}
-                                     \PYG{o}{|} \PYG{k+kt}{Cm} \PYG{n}{tm1} \PYG{o}{...} \PYG{n}{tmnm}
-\end{Verbatim}
