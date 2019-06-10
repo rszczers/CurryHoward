@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.9.22)  10 JUN 2019 04:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.9.22)  10 JUN 2019 04:20
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1634,7 +1634,11 @@ runsystem(which pygmentize && touch main.aex)...executed.
 runsystem(rm main.aex)...executed.
 
 
-(temp//main.aux)
+(temp//main.aux
+
+LaTeX Warning: Label `def:substitution_e' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
@@ -1661,11 +1665,11 @@ Package biblatex Info: Automatic encoding selection.
 \openout4 = `main.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'main.bbl' not found.
-
-No file main.bbl.
+Package biblatex Info: ... file 'main.bbl' found.
+ (temp//main.bbl)
 Package biblatex Info: Reference section=0 on input line 63.
 Package biblatex Info: Reference segment=0 on input line 63.
+
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count389
@@ -1740,178 +1744,21 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for U+bbold on input line 2.
 
-(/usr/share/texlive/texmf-dist/tex/latex/bbold/Ubbold.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/bbold/Ubbold.fd) [1
 
-LaTeX Warning: Reference `def:lambda-untyped' on page 1 undefined on input line
- 14.
-
-
-Overfull \hbox (2.44058pt too wide) in paragraph at lines 14--15
-[]\T1/cmr/m/n/12 Definicj¶ [] moª-na rÛw-no-znacz-nie wy-ra-zi¢ przy po-mo-cy n
-o-ta-cji Backusa-Naura.
- []
-
-
-LaTeX Warning: Reference `pret2' on page 1 undefined on input line 19.
-
-
-LaTeX Warning: Reference `pret3' on page 1 undefined on input line 19.
-
-[1
-
-{/home/fulgjon/.texlive2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2]
-
-LaTeX Warning: Reference `eq:substitution' on page 3 undefined on input line 11
-7.
-
-
-LaTeX Warning: Reference `lem:substitution' on page 3 undefined on input line 1
-18.
-
-
-LaTeX Warning: Reference `eq:substitution' on page 3 undefined on input line 12
-0.
-
-
-LaTeX Warning: Reference `def:substitution_c' on page 3 undefined on input line
- 128.
-
-
-LaTeX Warning: Reference `def:substitution_e' on page 3 undefined on input line
- 129.
-
-
-LaTeX Warning: Reference `eq:substitution' on page 3 undefined on input line 12
-9.
-
-
-LaTeX Warning: Reference `def:substitution' on page 3 undefined on input line 1
-44.
-
+{/home/fulgjon/.texlive2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] 
 [3]
-
-LaTeX Warning: Reference `def:untyped_alpha' on page 4 undefined on input line 
-178.
-
-
-LaTeX Warning: Reference `def:alpha_1' on page 4 undefined on input line 184.
-
-
-LaTeX Warning: Reference `thm:odwracalnosc_podstawienia' on page 4 undefined on
- input line 184.
-
-
-LaTeX Warning: Reference `def:alpha_1' on page 4 undefined on input line 184.
-
-
-Overfull \hbox (3.64415pt too wide) in paragraph at lines 184--185
+Overfull \hbox (13.45741pt too wide) in paragraph at lines 184--185
 []\T1/cmr/m/n/12 Przypu±¢my, ªe $\OML/cmm/m/it/12 M \U/MnSymbolD/m/n/12 ^^@[] \
-OML/cmm/m/it/12 N$ \T1/cmr/m/n/12 w kon-se-kwen-cji [] dla $\OML/cmm/m/it/12 M 
-\U/MnSymbolD/m/n/12 ^^A \OML/cmm/m/it/12 ^^Ux: M[]$ \T1/cmr/m/n/12 i $\OML/cmm/
-m/it/12 N \U/MnSymbolD/m/n/12 ^^A \OML/cmm/m/it/12 ^^Uy: M[]\OMX/MnSymbolE/m/n/
-12 ^^@\OML/cmm/m/it/12 x\OMX/MnSymbolE/m/n/12 ~\OML/cmm/m/it/12 y\OMX/MnSymbolE
-/m/n/12 ^^E$\T1/cmr/m/n/12 .
+OML/cmm/m/it/12 N$ \T1/cmr/m/n/12 w kon-se-kwen-cji ($\OML/cmm/m/it/12 $\T1/cm
+r/m/n/12 1)[] dla $\OML/cmm/m/it/12 M \U/MnSymbolD/m/n/12 ^^A \OML/cmm/m/it/12 
+^^Ux: M[]$ \T1/cmr/m/n/12 i $\OML/cmm/m/it/12 N \U/MnSymbolD/m/n/12 ^^A \OML/cm
+m/m/it/12 ^^Uy: M[]\OMX/MnSymbolE/m/n/12 ^^@\OML/cmm/m/it/12 x\OMX/MnSymbolE/m/
+n/12 ~\OML/cmm/m/it/12 y\OMX/MnSymbolE/m/n/12 ^^E$\T1/cmr/m/n/12 .
  []
 
 
-Overfull \hbox (28.291pt too wide) in paragraph at lines 184--185
+Overfull \hbox (21.41768pt too wide) in paragraph at lines 184--185
 \T1/cmr/m/n/12 Po-nie-waª $\OML/cmm/m/it/12 x [] []\OMX/MnSymbolE/m/n/12 à\OML/
 cmm/m/it/12 M[]\OMX/MnSymbolE/m/n/12 ^^@\OML/cmm/m/it/12 x\OMX/MnSymbolE/m/n/12
- ~\OML/cmm/m/it/12 y\OMX/MnSymbolE/m/n/12 ^^Eç$\T1/cmr/m/n/12 , to ze wzgl¶-du 
-na Wnio-sek [] ma-my, ªe $\OML/cmm/m/it/12 M[]\OMX/MnSymbolE/m/n/12 ^^@\OML/cmm
-/m/it/12 x\OMX/MnSymbolE/m/n/12 ~\OML/cmm/m/it/12 y\OMX/MnSymbolE/m/n/12 ^^E^^@
-\OML/cmm/m/it/12 y\OMX/MnSymbolE/m/n/12 ~\OML/cmm/m/it/12 x\OMX/MnSymbolE/m/n/1
-2 ^^E \U/MnSymbolD/m/n/12 ^^@
- []
-
-
-LaTeX Warning: Reference `def:alpha_2' on page 4 undefined on input line 188.
-
-
-LaTeX Warning: Reference `def:alpha_2' on page 4 undefined on input line 188.
-
-
-LaTeX Warning: Reference `def:alpha_3' on page 4 undefined on input line 189.
-
-
-LaTeX Warning: Reference `def:alpha_3' on page 4 undefined on input line 189.
-
-
-LaTeX Warning: Reference `def:alpha_3' on page 4 undefined on input line 190.
-
-
-LaTeX Warning: Reference `proof:alpha_cases_4' on page 4 undefined on input lin
-e 190.
-
-[4]
-
-LaTeX Warning: Reference `def:untyped_subterm' on page 5 undefined on input lin
-e 223.
-
-
-LaTeX Warning: Reference `def:untyped_fv' on page 5 undefined on input line 231
-.
-
-
-LaTeX Warning: Reference `def:substitution' on page 5 undefined on input line 2
-35.
-
-
-LaTeX Warning: Reference `def:substitution' on page 5 undefined on input line 2
-45.
-
-[5]
-
-LaTeX Warning: Citation 'Hindley:2008:LCI:1388400' on page 6 undefined on input
- line 249.
-
-
-LaTeX Warning: Reference `def:substitution' on page 6 undefined on input line 2
-49.
-
-
-LaTeX Warning: Reference `def:substitution_hindley_g' on page 6 undefined on in
-put line 261.
-
-
-LaTeX Warning: Reference `def:substitution_hindley_e' on page 6 undefined on in
-put line 261.
-
-
-LaTeX Warning: Reference `def:substitution_hindley_g' on page 6 undefined on in
-put line 261.
-
-
-LaTeX Warning: Citation 'deBruijnIndices' on page 6 undefined on input line 274
-.
-
-[6]
-
-LaTeX Warning: Citation 'txa:alpha-draft' on page 7 undefined on input line 280
-.
-
-
-LaTeX Warning: Citation 'Urzyczyn2006' on page 7 undefined on input line 280.
-
-
-Overfull \hbox (18.11197pt too wide) in paragraph at lines 285--287
-[]\T1/cmr/bx/n/12 Definicja 10. []\T1/cmr/m/n/12 (Pod-sta-wie-nie jed-no-cze-sn
-e)[] Dla do-wol-ne-go $\OML/cmm/m/it/12 M \U/MnSymbolD/m/n/12 > \OT1/cmr/bx/n/1
-2 ^^C$\T1/cmr/m/n/12 , ci°-gu $\OML/cmm/m/it/12 ^^U$\T1/cmr/m/n/12 -zmiennych $
-[]$
- []
-
-
-Overfull \hbox (0.59824pt too wide) in paragraph at lines 293--294
-[]$\OMX/MnSymbolE/m/n/12 à\OML/cmm/m/it/12 ^^Uy: P\OMX/MnSymbolE/m/n/12 ç^^@[]~
-[]^^E \U/MnSymbolD/m/n/12 ^^@ \OML/cmm/m/it/12 ^^Uy: P\OMX/MnSymbolE/m/n/12 ^^@
-[]~[]^^E$\T1/cmr/m/n/12 , je-±li $\OML/cmm/m/it/12 y \U/MnSymbolD/m/n/12 x \OML
-/cmm/m/it/12 x[]$ \T1/cmr/m/n/12 dla wszyst-kich $\OML/cmm/m/it/12 i \U/MnSymbo
-lD/m/n/12 > \U/bbold/m/n/12 N$ \T1/cmr/m/n/12 i $\OML/cmm/m/it/12 y [] [][] FV\
-OMX/MnSymbolE/m/n/12 à\OML/cmm/m/it/12 N[]\OMX/MnSymbolE/m/n/12 ç$ 
- []
-
-
-Overfull \hbox (6.05936pt too wide) in paragraph at lines 298--299
-[]\T1/cmr/bx/n/12 Konwencja. 
+ ~\OML/cmm/m/it/12 y\OMX/MnSymbol
