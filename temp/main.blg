@@ -1,0 +1,4 @@
+[1] Config.pm:354> INFO - This is Biber 2.7 (beta)
+[1] Config.pm:357> INFO - Logfile is 'temp/main.blg'
+[81] biber:303> INFO - === pon cze 10, 2019, 22:53:14
+[107] Biber.pm:360> INFO - Reading 'temp/main.bcf'

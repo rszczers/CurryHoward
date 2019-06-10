@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.9.22)  10 JUN 2019 16:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.9.22)  10 JUN 2019 22:53
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -2026,6 +2026,24 @@ EE1593.pygtex)
 \openout6 = `main.pyg'.
 
 runsystem(pygmentize -l haskell -f latex -P commandprefix=PYG -F tokenmerge -o 
+temp/_minted-main/A845D5A62CF63855C109FC8311C778E1FE66A238794004CAEB011C84C3EE1
+593.pygtex temp/main.pyg)...executed.
+
+
+(./temp/_minted-main/A845D5A62CF63855C109FC8311C778E1FE66A238794004CAEB011C84C3
+EE1593.pygtex) [12]
+\openout6 = `main.pyg'.
+
+runsystem(pygmentize -l haskell -f latex -P commandprefix=PYG -F tokenmerge -o 
+temp/_minted-main/8BAD5F7C5C14751201AAB533D4137557FE66A238794004CAEB011C84C3EE1
+593.pygtex temp/main.pyg)...executed.
+
+
+(./temp/_minted-main/8BAD5F7C5C14751201AAB533D4137557FE66A238794004CAEB011C84C3
+EE1593.pygtex [13])
+\openout6 = `main.pyg'.
+
+runsystem(pygmentize -l haskell -f latex -P commandprefix=PYG -F tokenmerge -o 
 temp/_minted-main/EDFF4159D68B762D17ADB769DE65D174FE66A238794004CAEB011C84C3EE1
 593.pygtex temp/main.pyg)...executed.
 
@@ -2035,7 +2053,7 @@ EE1593.pygtex))
 
 LaTeX Warning: Empty bibliography on input line 72.
 
-[12] (temp//main.aux)
+[14] (temp//main.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -2054,10 +2072,10 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28511 strings out of 493013
- 538069 string characters out of 6135682
+ 28519 strings out of 493013
+ 538727 string characters out of 6135682
  975016 words of memory out of 5000000
- 31439 multiletter control sequences out of 15000+600000
+ 31441 multiletter control sequences out of 15000+600000
  41155 words of font info for 126 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,15n,82p,1258b,1242s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2086,10 +2104,10 @@ pe1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/
 sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/s
 hare/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/typ
 e1/public/cm-super/sftt1200.pfb>
-Output written on temp//main.pdf (12 pages, 345289 bytes).
+Output written on temp//main.pdf (14 pages, 381136 bytes).
 PDF statistics:
- 156 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
+ 163 PDF objects out of 1000 (max. 8388607)
+ 123 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

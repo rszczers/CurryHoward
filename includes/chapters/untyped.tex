@@ -385,7 +385,7 @@ Definicja typu rozpoczynają się od słowa kluczowego \texttt{data}\footnote{Dy
 Pokażemy, że algebraiczne typy danych możemy reprezentować w zwięzły sposób w rachunku \(\lambda\) bez typów. Przedstawione tutaj koncepcje w zaskakujący sposób przenoszą się do bardziej złożonych typowanych systemów rachunku \(\lambda\).
 
 \subsubsection{Proste typy wyliczeniowe}\label{ref:untyped_simple_enumeration}
-Typy wyliczeniowe to typy, które reprezentują możliwe warianty przyjmowanej wartości. Przykładem takiego typu jest \texttt{Boolean} z dwoma wartościami: \texttt{True}, \texttt{False}. Praca z tego rodzaju typami wymaga mechanizmu dopasowywania wzorców (ang. \emph{pattern-matching}), który pozwala na wybór częściowej definicji funkcji w zależności od zadanego konstruktora wartości. Ponieważ w rachunku \(\lambda\) wyrażenia nie mają typów (lub, przyjmując perspektywę systemów z typami: wszystkie wyrażenia mają jeden, ten sam typ), interesowało nas będzie nie bezpośrednie kodowanie typu, ale kodowanie mechanizmu, który odpowiada za dopasowywanie wzorców. Posłużmy się znowu przykładem z języka Haskell i określmy funkcję odpowiadającą wykonaniu instrukcji warunkowej:
+Typy wyliczeniowe to typy, które reprezentują możliwe warianty przyjmowanej wartości. Najprostrzym nietrywialnym przykładem takiego typu jest \texttt{Boolean}. Ma on dwa konstruktory wartości: \texttt{True}, \texttt{False}. Praca z tego rodzaju typami wymaga mechanizmu dopasowywania wzorców (ang. \emph{pattern-matching}), który pozwala na wybór częściowej definicji funkcji w zależności od zadanego konstruktora wartości. Ponieważ w rachunku \(\lambda\) wyrażenia nie mają typów (lub, przyjmując perspektywę systemów z typami: wszystkie wyrażenia mają jeden, ten sam typ), interesowało nas będzie nie bezpośrednie kodowanie typu, ale kodowanie mechanizmu, który odpowiada za dopasowywanie wzorców. Posłużmy się znowu przykładem z języka Haskell i określmy funkcję odpowiadającą wykonaniu instrukcji warunkowej:
 \begin{minted}{haskell}
 if True  a b = a
 if False a b = b
@@ -397,7 +397,7 @@ gdzie \texttt{True} i \texttt{False} są wartościami typu \texttt{Boolean}. Wł
 \end{align*}
 Wówczas funkcję \texttt{if} możemy reprezentować wyrażeniem \(\mathrm{if}\equiv\lambda c t e.\, cte\) lub jego \(\eta\)-reduktem: \(\lambda c.\,c\).
 \subsubsection{Pary w rachunku \(\lambda\)}
-Parą nazywamy każdy nierekurencyjny typ, który posiada jeden konstruktor wartości parametryzowany przez dwa typy. W takim wypadku potrzebujemy dwóch funkcji zwracających odpowiednio pierwszy i drugi element pary. Przykładem takiego typu jest \texttt{Tuple}. Mamy wówczas:
+Parą nazywamy każdy nierekurencyjny typ, który posiada jeden konstruktor wartości parametryzowany przez dwa typy. W takim wypadku potrzebujemy dwóch projekcji zwracających odpowiednio pierwszy i drugi element pary. Przykładem takiego typu jest \texttt{Tuple}. Mamy wówczas:
 \begin{minted}{haskell}
   fst (Tuple a b) = a
   snd (Tuple a b) = b
@@ -430,7 +430,7 @@ Zauważmy, że wówczas reprezentacja \texttt{fst} i \texttt{snd} ma postać:
       \end{minted}
       Odpowiadająca jej reprezentacja to
       \begin{align*}
-        \mathrm{maybe} \equiv \lambda b f t.\, tb(\lambda a.\,fa) 
+        \mathrm{maybe} \equiv \lambda b f t.\, tb(\lambda a.\,fa)
       \end{align*}
     \item Rozważmy następującą funkcję
       \begin{minted}{haskell}
@@ -448,9 +448,61 @@ Zauważmy, że wówczas reprezentacja \texttt{fst} i \texttt{snd} ma postać:
         \mathrm{fromTemperature}\equiv\lambda t.\,t(\lambda f.\,f)(\lambda c.\,c)
       \end{align*}
   \end{enumerate}
-
 \end{przyklad}
-\subsubsection{Typy wyliczeniowe}
+
+\subsubsection{Kodowanie rekurencji}
+ Rozważmy następującą funkcję dodawania liczb Peano w języku Haskell:
+\begin{minted}{haskell}
+  add Zero     m = m
+  add (Succ n) m = Succ (add n m)
+\end{minted}
+Funkcję tę możemy wyrazić w rachunku \(\lambda\) przy pomocy kodowania Scotta w następujący sposób:
+\begin{align*}
+  \mathrm{add_0} \equiv \lambda n m.\:n\,m\,(\lambda n.\:\mathrm{Succ}(\mathrm{add_0}\,n\,m))
+\end{align*}
+Formalizm rachunku \(\lambda\) nie pozwala na okreslanie nowych nazw i rekurencyjne odnoszenie się przez nie do nich samych. Standardową techniką w rachunku \(\lambda\) do określania funkcji w ten sposób jest użycie operatora punktu stałego Y. Przypomnijmy:
+\begin{align*}
+  \mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))
+\end{align*}
+Wówczas określamy
+\begin{align*}
+  \mathrm{add_Y}\equiv \mathrm{Y}\,(\lambda a\,n\, m .\ n m\,(\lambda n.\ \mathrm{Succ} (a\,n\,m)))
+\end{align*}
+Mając na uwadze możliwość przeprowadzenia powyższej konstrukcji przy użyciu rekurencji, będziemy dopuszczali w notacji odnoszenie się wprowadzanych \(\lambda\)-termów do nich samych.
+
+\subsubsection{Kodowanie Scotta typów rekursywnych}
+Stosując metody kodowania prostych typów wyliczeniowych i par, łatwo odnajdujemy reprezentację konstruktorów wartości dla typów \texttt{Nat} i \texttt{List}:
+\begin{align*}
+  \mathrm{Zero} &\equiv \lambda z s .\, z     & \mathrm{Nil} &\equiv \lambda n c.\,n\\
+  \mathrm{Succ} &\equiv \lambda n z s.\,sn    & \mathrm{Cons} &\equiv \lambda x \, x_s \, n\, c.\ c \, x \, x_s
+\end{align*}
+  Zwróćmy uwagę, że konstruktory Nat i Maybe są swoimi \(\alpha\)-konwersami. Podobieństwo nie jest przypadkowe: na poziomie typów konstrukcja Maybe jest odpowiednikiem brania następnika. Określając dodatkowo \(\mathrm{Void}=\lambda x.x\) jako element neutralny działania łącznego, otrzymujemy na poziomie typów strukturę półpierścienia z działaniem mnożenia okresloną przez konstrukcję par i dzałaniem dodawania określonego przez konstrukcję typów wyliczeniowych. Stąd algebraicze typy danych biorą swoją nazwę.
+
+Z łatwością możemy określić teraz operacje brania poprzednika, głowy i ogona listy, odpowiednio:
+
+\begin{align*}
+  \mathrm{pred}&\equiv \lambda n .\, n\, \mathrm{undef}\, (\lambda m.\,m)\\
+  \mathrm{head}&\equiv \lambda x_s .\, x_s\, \mathrm{undef}\, (\lambda x_s . x)\\
+  \mathrm{tail}&\equiv \lambda x_s.\, \mathrm{undef}\, (\lambda x_s.\,x_s)
+\end{align*}
+gdzie undef jest stałą o którą rozszerzamy rachunek \(\lambda\) celem sygnalizowania błędnej aplikacji.
+
+
+\subsubsection{Kodowanie Churcha typów rekursywnych}
+Przedstawimy teraz klasyczny sposób kodowania typów przypisywany A. Churchowi. Różni się on od kodowania Scotta tylko w przypadku typów rekursywnych, w pozostałych przypadkach obydwa kodowania dają te same rezultaty. Rozpocznijmy od typu odpowiadającego liczbom naturalnym. W kodowaniu Churcha w następujący sposób reprezentujemy typ \texttt{Nat}:
+\begin{align*}
+  \mathrm{Zero} &\equiv \lambda f x.\,x\\
+  \mathrm{Succ} &\equiv \lambda n f x.\,f\,(n\,f\,x)
+\end{align*}
+Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w literaturze popularnie nazywa się \emph{liczebnikami Churcha}. Porównując je do kodowania Scotta widzimy, że zamiast aplikować
+
+  Celem lepszego porównania kodowania Churcha i Scotta podamy reprezentacje funkcji \texttt{foldl}\footnote{Przedstawione definicje mają jedyne charakter ilustracji. Staramy się używać jak najmniejszego podzbioru języka Haskell. Dla porządku należy zaznaczyć, że poprawne określenie klasy funkcji fold polegałoby na zdefiniuwaniu instancji klasy \texttt{Foldable} dla typów \texttt{Nat} i \texttt{List}} dla typów \texttt{Nat} i \texttt{List}. Określmy:
+\begin{minted}{haskell}
+  foldlNat f x Zero    = x
+  foldlNat f x (Suc n) = f (foldlNat f x n)
+\end{minted}
+
+\subsubsection{Ogólny przypadek typów wyliczeniowych}
 W ogólnym przypadku, mając nastepującą definicję ADT:
 \begin{minted}{haskell}
   data type_constructor t1 t2 ... tk = C1 t11 ... t1n1
