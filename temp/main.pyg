@@ -1,0 +1,3 @@
+        temperature :: Temperature -> Int
+        temperature (Fahrenheit a) = a
+        temperature (Celsius a) = a
