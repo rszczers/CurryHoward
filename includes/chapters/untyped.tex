@@ -388,11 +388,11 @@ Pokażemy, że algebraiczne typy danych możemy reprezentować w zwięzły spos�
 Typy wyliczeniowe to typy, które reprezentują możliwe warianty przyjmowanej wartości. Przykładem takiego typu jest \texttt{Boolean} z dwoma wartościami: \texttt{True}, \texttt{False}. Praca z tego rodzaju typami wymaga mechanizmu dopasowywania wzorców (ang. \emph{pattern-matching}), który pozwala na wybór częściowej definicji funkcji w zależności od zadanego konstruktora wartości. Ponieważ w rachunku \(\lambda\) wyrażenia nie mają typów (lub, przyjmując perspektywę systemów z typami: wszystkie wyrażenia mają jeden, ten sam typ), interesowało nas będzie nie bezpośrednie kodowanie typu, ale kodowanie mechanizmu, który odpowiada za dopasowywanie wzorców. Posłużmy się znowu przykładem z języka Haskell i określmy funkcję odpowiadającą wykonaniu instrukcji warunkowej:
 \begin{minted}{haskell}
 if True  a b = a
-if False a b = b.
+if False a b = b
 \end{minted}
 gdzie \texttt{True} i \texttt{False} są wartościami typu \texttt{Boolean}. Właśnie ze względu na nie, mechanizm dopasowywania wzorca wybiera odpowiednią implementację instrukcji warunkowej. Ten sam efekt osiągnęlibyśmy kodując \texttt{True} i \texttt{False} w rachunku \(\lambda\) w następujący sposób:
 \begin{align*}
-  \mathrm{True} &\equiv \lambda a b.\,a,\\
+  \mathrm{True} &\equiv \lambda a b.\,a\\
   \mathrm{False} &\equiv \lambda a b.\,b
 \end{align*}
 Wówczas funkcję \texttt{if} możemy reprezentować wyrażeniem \(\mathrm{if}\equiv\lambda c t e.\, cte\) lub jego \(\eta\)-reduktem: \(\lambda c.\,c\).
@@ -406,35 +406,47 @@ Tego rodzaju typy możemy reprezentować przez tak zwane \emph{domknięcie} (ang
 \begin{align*}
   \mathrm{Tuple}\equiv\lambda a b f .\,f a b
 \end{align*}
-Aplikując \(\mathrm{Tuple}\) tylko do dwóch termów (domykając) otrzymujemy reprezentację pary. Pozostały, trzeci argument \(f\) nazywamy \emph{kontynuacją}, gdyż aplikując \((\mathrm{Tuple}\ x\ y)\) dla dowolnych \(x, y\in\mathbf{\Lambda}\) do pewnego \(f\in\mathbf{\Lambda}\), w konsekwencji \(x\) i \(y\) zostają zaaplikowane do \(f\).
+Aplikując \(\mathrm{Tuple}\) tylko do dwóch termów (\emph{domykając} term Tuple) otrzymujemy reprezentację pary. Pozostały, trzeci argument \(f\) nazywamy \emph{kontynuacją}, gdyż aplikując \((\mathrm{Tuple}\ x\ y)\) dla dowolnych \(x, y\in\mathbf{\Lambda}\) do pewnego \(f\in\mathbf{\Lambda}\), w konsekwencji \(x\) i \(y\) zostają zaaplikowane do \(f\).
 Zauważmy, że wówczas reprezentacja \texttt{fst} i \texttt{snd} ma postać:
 \begin{align*}
   \mathrm{fst} \equiv \lambda t.\,t(\lambda a b.\,a) \\
   \mathrm{snd} \equiv \lambda t.\,t(\lambda a b.\,b)
 \end{align*}
 
-\begin{uwaga*}
-  Zauważmy, że konstrukcja prostego typu wyliczeniowego jest analogiczna do brania następnika, tyle tylko, że na poziomie typów. Stąd typy takie nazywamy również sumacyjnymi. Podobnie rzecz ma się w przypadku par: te odpowiadają na poziomie typów iloczynowi (produktowi). Razem te dwie konstrukcje mają szereg własności analogicznych do
-  działań algebraicznych (rozdzielność, łączność, przemienność itd.), stąd nazwa algebraicznych typów danych.
-\end{uwaga*}
-
 \begin{przyklad}
   Wprowadzone konstrukcje pozwalają nam na definicję skończonych (w sensie liczby konstruktorów) typów. Rozważmy następujące przykłady:
   \begin{enumerate}[label=\alph*)]
     \setlength\itemsep{0em}
-    \item Typ \texttt{Maybe} możemy reprezentować przez
+    \item Konstruktory wartości typu \texttt{Maybe} możemy reprezentować przez
+      \begin{align*}
+        \mathrm{Nothing}&\equiv \lambda nj.\,n\\
+        \mathrm{Just}&\equiv \lambda anj.\,j a
+      \end{align*}
+      Rozważmy następującą funkcję:
       \begin{minted}{haskell}
+        maybe :: b -> (a -> b) -> Maybe a -> b
+        maybe n _ Nothing  = n
+        maybe _ f (Just x) = f x
       \end{minted}
+      Odpowiadająca jej reprezentacja to
+      \begin{align*}
+        \mathrm{maybe} \equiv \lambda b f t.\, tb(\lambda a.\,fa) 
+      \end{align*}
     \item Rozważmy następującą funkcję
-      \begin{minted}{haskell} 
-        temperature :: Temperature -> Int
-        temperature (Fahrenheit a) = a
-        temperature (Celsius a) = a 
+      \begin{minted}{haskell}
+        fromTemperature :: Temperature -> Int
+        fromTemperature (Fahrenheit a) = a
+        fromTemperature (Celsius a) = a
       \end{minted}
       Ustalając reprezentację konstruktorów \texttt{Fahrenheit} i \texttt{Celsius}:
       \begin{align*}
+        \mathrm{Fahrenheit}\equiv \lambda tfc.\,ft\\
+        \mathrm{Celsius}\equiv \lambda tfc.\,ct
       \end{align*}
-      
+      otrzymujemy reprezentację funkcji \texttt{formTemperature} postaci:
+      \begin{align*}
+        \mathrm{fromTemperature}\equiv\lambda t.\,t(\lambda f.\,f)(\lambda c.\,c)
+      \end{align*}
   \end{enumerate}
 
 \end{przyklad}
@@ -442,14 +454,14 @@ Zauważmy, że wówczas reprezentacja \texttt{fst} i \texttt{snd} ma postać:
 W ogólnym przypadku, mając nastepującą definicję ADT:
 \begin{minted}{haskell}
   data type_constructor t1 t2 ... tk = C1 t11 ... t1n1
-                                     | C2 t21 ... t2n1
+                                     | C2 t21 ... t2n2
                                      ...
                                      | Cm tm1 ... tmnm
 \end{minted}
 dla \(m, n \in \mathbb{N}\), wiążemy z nią następującą reprezentację w rachunku \(\lambda\):
 \begin{gather*}
   \mathrm{C_1} \equiv \lambda t_{11}\, t_{12}\, \dots t_{1n_1}\, f_1\, f_2 \dots f_m.\ f_1 t_{11} t_{12} \dots t_{1n_1}\\
-  \mathrm{C_2} \equiv \lambda t_{11}\, t_{12}\, \dots t_{1n_2}\, f_1\, f_2 \dots f_m.\ f_2 t_{11} t_{12} \dots t_{1n_2}\\
+  \mathrm{C_2} \equiv \lambda t_{21}\, t_{22}\, \dots t_{2n_2}\, f_1\, f_2 \dots f_m.\ f_2 t_{21} t_{22} \dots t_{2n_2}\\
  \vdots\\
-  \mathrm{C_m} \equiv \lambda t_{11}\, t_{12}\, \dots t_{1n_m}\, f_1\, f_m \dots f_m.\ f_1 t_{11} t_{12} \dots t_{1n_m}\\
+  \mathrm{C_m} \equiv \lambda t_{m1}\, t_{m2}\, \dots t_{mn_m}\, f_1\, f_m \dots f_m.\ f_1 t_{m1} t_{m2} \dots t_{mn_m}\\
 \end{gather*}
