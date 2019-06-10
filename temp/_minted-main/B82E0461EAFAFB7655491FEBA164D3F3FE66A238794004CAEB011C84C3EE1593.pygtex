@@ -1,4 +1,7 @@
 \begin{Verbatim}[commandchars=\\\{\}]
   \PYG{n}{foldlNat} \PYG{n}{f} \PYG{n}{x} \PYG{k+kt}{Zero}    \PYG{o+ow}{=} \PYG{n}{x}
   \PYG{n}{foldlNat} \PYG{n}{f} \PYG{n}{x} \PYG{p}{(}\PYG{k+kt}{Suc} \PYG{n}{n}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{f} \PYG{p}{(}\PYG{n}{foldlNat} \PYG{n}{f} \PYG{n}{x} \PYG{n}{n}\PYG{p}{)}
+
+  \PYG{n}{foldlList} \PYG{n}{f} \PYG{n}{d} \PYG{k+kt}{[]}    \PYG{o+ow}{=} \PYG{n}{d}
+  \PYG{n}{foldlList} \PYG{n}{f} \PYG{n}{d} \PYG{p}{(}\PYG{n}{h}\PYG{k+kt}{:}\PYG{n}{t}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{f} \PYG{n}{h} \PYG{p}{(}\PYG{n}{foldlList} \PYG{n}{f} \PYG{n}{d} \PYG{n}{t}\PYG{p}{)}
 \end{Verbatim}

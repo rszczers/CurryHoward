@@ -487,6 +487,20 @@ Z łatwością możemy określić teraz operacje brania poprzednika, głowy i og
 \end{align*}
 gdzie undef jest stałą o którą rozszerzamy rachunek \(\lambda\) celem sygnalizowania błędnej aplikacji.
 
+  Celem lepszego porównania kodowania Churcha i Scotta podamy reprezentacje funkcji \texttt{foldl}\footnote{Przedstawione definicje mają jedyne charakter ilustracji. Staramy się używać jak najmniejszego podzbioru języka Haskell. Dla porządku należy zaznaczyć, że poprawne określenie klasy funkcji fold polegałoby na zdefiniuwaniu instancji klasy \texttt{Foldable} dla typów \texttt{Nat} i \texttt{List}} dla typów \texttt{Nat} i \texttt{List}. Określmy:
+\begin{minted}{haskell}
+  foldlNat f x Zero    = x
+  foldlNat f x (Suc n) = f (foldlNat f x n)
+
+  foldlList f d []    = d
+  foldlList f d (h:t) = f h (foldlList f d t)
+\end{minted}
+\texttt{foldlNat} i \texttt{foldlList} mogą być przy pomocy kodowania Scotta zapisane jako
+\begin{align*}
+  \mathrm{foldlNat}  &\equiv \lambda f\,x\,n.\ n\,x\,(\lambda n.\ (foldNat\ f\ x\ n))\\
+  \mathrm{foldlList} &\equiv \lambda f\,d\,x_s.\ x_s\, d\,(\lambda t.\ f\,h\,(foldList\ f\,d\,t))
+\end{align*}
+
 
 \subsubsection{Kodowanie Churcha typów rekursywnych}
 Przedstawimy teraz klasyczny sposób kodowania typów przypisywany A. Churchowi. Różni się on od kodowania Scotta tylko w przypadku typów rekursywnych, w pozostałych przypadkach obydwa kodowania dają te same rezultaty. Rozpocznijmy od typu odpowiadającego liczbom naturalnym. W kodowaniu Churcha w następujący sposób reprezentujemy typ \texttt{Nat}:
@@ -494,15 +508,9 @@ Przedstawimy teraz klasyczny sposób kodowania typów przypisywany A. Churchowi.
   \mathrm{Zero} &\equiv \lambda f x.\,x\\
   \mathrm{Succ} &\equiv \lambda n f x.\,f\,(n\,f\,x)
 \end{align*}
-Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w literaturze popularnie nazywa się \emph{liczebnikami Churcha}. Porównując je do kodowania Scotta widzimy, że zamiast aplikować
+Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w literaturze popularnie nazywa się \emph{liczebnikami Churcha}. Porównując je do kodowania Scotta widzimy, że różnica polega na aplikowaniu do kontynuacji termu \(n\,f\,x\).
 
-  Celem lepszego porównania kodowania Churcha i Scotta podamy reprezentacje funkcji \texttt{foldl}\footnote{Przedstawione definicje mają jedyne charakter ilustracji. Staramy się używać jak najmniejszego podzbioru języka Haskell. Dla porządku należy zaznaczyć, że poprawne określenie klasy funkcji fold polegałoby na zdefiniuwaniu instancji klasy \texttt{Foldable} dla typów \texttt{Nat} i \texttt{List}} dla typów \texttt{Nat} i \texttt{List}. Określmy:
-\begin{minted}{haskell}
-  foldlNat f x Zero    = x
-  foldlNat f x (Suc n) = f (foldlNat f x n)
-\end{minted}
-
-\subsubsection{Ogólny przypadek typów wyliczeniowych}
+\subsubsection{Ogólny schemat kodowania Scotta}
 W ogólnym przypadku, mając nastepującą definicję ADT:
 \begin{minted}{haskell}
   data type_constructor t1 t2 ... tk = C1 t11 ... t1n1
