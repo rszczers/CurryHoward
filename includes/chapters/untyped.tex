@@ -242,7 +242,7 @@ Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następując
 \[
   \lambda x.\,zx=_{\alpha}\lambda y.\,zy
 \]
-Zauważmy, że traktując podstawienie w sposób naiwny, mamy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy porządaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Alternatywnym rozwiązaniem jest określenie podstawienia, które wprowadzałoby do wyrażenia nową zmienną i prowadziło w konsekwencji do abstrahowania po wcześniej nie występujacych zmiennych:
+Zauważmy, że traktując podstawienie w sposób naiwny, mamy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy pożądaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Alternatywnym rozwiązaniem jest określenie podstawienia, które wprowadzałoby do wyrażenia nową zmienną i prowadziło w konsekwencji do abstrahowania po wcześniej nie występujacych zmiennych:
 \[
   (\lambda x.\,M)[y/N] = \lambda x'.\,M[x/x'][y/N],
 \]
