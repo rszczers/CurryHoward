@@ -73,6 +73,60 @@
       \verb 10.1016/1385-7258(72)90034-0
       \endverb
     \endentry
+    \entry{Church1941-CHUTCO-7}{book}{}
+      \name{author}{1}{}{%
+        {{hash=eb8fba5b5e50ff0f327f47041fe3f891}{%
+           family={Church},
+           familyi={C\bibinitperiod},
+           given={Alonzo},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{eb8fba5b5e50ff0f327f47041fe3f891}
+      \strng{fullhash}{eb8fba5b5e50ff0f327f47041fe3f891}
+      \strng{authornamehash}{eb8fba5b5e50ff0f327f47041fe3f891}
+      \strng{authorfullhash}{eb8fba5b5e50ff0f327f47041fe3f891}
+      \field{labelalpha}{Chu41}
+      \field{sortinit}{C}
+      \field{sortinithash}{095692fd22cc3c74d7fe223d02314dbd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Calculi of Lambda-Conversion}
+      \field{year}{1941}
+    \endentry
+    \entry{hinze_2005}{article}{}
+      \name{author}{1}{}{%
+        {{hash=64288410f1b399b2f9e2eb8e4d3899d3}{%
+           family={HINZE},
+           familyi={H\bibinitperiod},
+           given={RALF},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{64288410f1b399b2f9e2eb8e4d3899d3}
+      \strng{fullhash}{64288410f1b399b2f9e2eb8e4d3899d3}
+      \strng{authornamehash}{64288410f1b399b2f9e2eb8e4d3899d3}
+      \strng{authorfullhash}{64288410f1b399b2f9e2eb8e4d3899d3}
+      \field{labelalpha}{HIN05}
+      \field{sortinit}{H}
+      \field{sortinithash}{2f664b453ec75da1fe3804ca92633405}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Functional Programming}
+      \field{number}{1}
+      \field{title}{THEORETICAL PEARL Church numerals, twice!}
+      \field{volume}{15}
+      \field{year}{2005}
+      \field{pages}{1\bibrangedash 13}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1017/S0956796804005313
+      \endverb
+    \endentry
     \entry{Hindley:2008:LCI:1388400}{book}{}
       \name{author}{2}{}{%
         {{hash=aa2ef5fd51a9c06d212d0833e6e07ef2}{%
@@ -105,6 +159,45 @@
       \field{isbn}{0521898854, 9780521898850}
       \field{title}{Lambda-Calculus and Combinators: An Introduction}
       \field{year}{2008}
+    \endentry
+    \entry{Hutton:1999:TUE:968578.968579}{article}{}
+      \name{author}{1}{}{%
+        {{hash=5345326438d71d97c5ab18c94af1e6ca}{%
+           family={Hutton},
+           familyi={H\bibinitperiod},
+           given={Graham},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{5345326438d71d97c5ab18c94af1e6ca}
+      \strng{fullhash}{5345326438d71d97c5ab18c94af1e6ca}
+      \strng{authornamehash}{5345326438d71d97c5ab18c94af1e6ca}
+      \strng{authorfullhash}{5345326438d71d97c5ab18c94af1e6ca}
+      \field{labelalpha}{Hut99}
+      \field{sortinit}{H}
+      \field{sortinithash}{2f664b453ec75da1fe3804ca92633405}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0956-7968}
+      \field{journaltitle}{J. Funct. Program.}
+      \field{month}{7}
+      \field{number}{4}
+      \field{title}{A Tutorial on the Universality and Expressiveness of Fold}
+      \field{volume}{9}
+      \field{year}{1999}
+      \field{pages}{355\bibrangedash 372}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1017/S0956796899003500
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1017/S0956796899003500
+      \endverb
     \endentry
     \entry{Jansen:2013:P9C:2941698.2941710}{inproceedings}{}
       \name{author}{1}{}{%
@@ -141,6 +234,40 @@
       \verb{url}
       \verb https://doi.org/10.1007/978-3-642-40355-2_12
       \endverb
+    \endentry
+    \entry{Jensen_2006}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=1eb66625290c97d7d11119fffaf34489}{%
+           family={Jansen},
+           familyi={J\bibinitperiod},
+           given={Jan\bibnamedelima Martin},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=f1e02e175638949ebc1935ad33d80aef}{%
+           family={Koopman},
+           familyi={K\bibinitperiod},
+           given={Pieter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=205d79471d4e8f35cd05893515ce3764}{%
+           family={Plasmeijer},
+           familyi={P\bibinitperiod},
+           given={Rinus},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{66d2f22c82237085450561a015d7d70c}
+      \strng{fullhash}{66d2f22c82237085450561a015d7d70c}
+      \strng{authornamehash}{66d2f22c82237085450561a015d7d70c}
+      \strng{authorfullhash}{66d2f22c82237085450561a015d7d70c}
+      \field{labelalpha}{JKP06}
+      \field{sortinit}{J}
+      \field{sortinithash}{c86bd6cced82a15683b396c2169909ef}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Grana}
+      \field{month}{01}
+      \field{title}{Efficient Interpretation by Transforming Data Types and Patterns to Functions}
+      \field{year}{2006}
+      \field{pages}{73\bibrangedash 90}
+      \range{pages}{18}
     \endentry
     \entry{Koopman:2014:CED:2746325.2746330}{inproceedings}{}
       \name{author}{3}{}{%

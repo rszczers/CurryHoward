@@ -16,15 +16,18 @@ Definicję \ref{def:lambda-untyped} można równoznacznie wyrazić przy pomocy n
   \mathbf{\tilde\Lambda}\ \leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}\,\mathbf{\tilde\Lambda}) \ |\ (\lambda V.\, \mathbf{\tilde\Lambda})
 \end{align*}
 
+Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli rozumiane jako ciągi znaków są identyczne. Równość syntaktyczną będziemy oznaczali znakiem \(\equiv\).
+
 Elementy \(\mathbf{\tilde\Lambda}\) będziemy oznaczali literami \(L,\ M,\ N,\ P,\ Q,\ R\) i ich wariantami z górnymi lub dolnymi indeksami. Wyrażenia postaci \ref{pret2} nazywamy \emph{aplikacjami} \(M\) do \(N\). Symbol \(\lambda\) występujący w \ref{pret3} nazywamy \emph{\(\lambda\)-abstraktorem}, zaś wyrażenia powstałe przez zastosowanie tej reguły to \emph{\(\lambda\)-abstrakcje}. W wyrażeniu postaci \((\lambda x.\,M)\) preterm \(M\) jest w \emph{zasięgu} \(\lambda\)-abstraktora, a zmienna \(x\) jest przez niego \emph{związana}. Ponadto, będziemy stosowali następujące konwencje notacyjne:
 \begin{easylist}
   & \emph{najbardziej zewnętrzne nawiasy bedą pomijane,}
   & \emph{aplikacja wiąże lewostronnie; wyrażenia postaci \((PQ)R\) będą zapisywane w postaci \(PQR\),}
   & \emph{\(\lambda\)-abstrakcja wiaże prawostronnie: \(\lambda x_1.\, (\lambda x_2.\,P)\) zapisujemy  \(\lambda x_1.\, \lambda x_2.\,P\),}
   & \emph{następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, \lambda x_2 . \, \dots  \lambda x_n .\, P\) zapisujemy pod wspólnym \(\lambda\)-abstraktorem: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\).}
-\end{easylist}
+  & \emph{n-krotną aplikację \(P\in\mathbf{\tilde\Lambda}\) do siebie zapisujemy skrótowo: \(P^n\equiv \underbrace{P\,P\ \dots\ P}_{\text{n-razy}}\)}
 
-Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli rozumiane jako ciągi znaków są identyczne. Równość syntaktyczną będziemy oznaczali znakiem \(\equiv\).
+
+\end{easylist}
 
 \begin{przyklad}
   Podajmy kilka przykładów \(\lambda\)-pretermów pogrupowanych ze względu na ich konstrukcję.
@@ -114,7 +117,7 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
     \begin{enumerate}[label={\roman*)}, ref={(\arabic*)}]
       \item \(M\) jest zmienną. Wówczas:
         \begin{enumerate}[label={\alph*.}]
-        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\).
+        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są eostaci \(N[y/L]\).
         \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i \(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \(M[x/N][y/L]\equiv L\). Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
 
         \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne.
@@ -362,7 +365,7 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
   \subsection{Kodowanie typów danych}
 Prosta składnia języka rachunku \(\lambda\) pozwala wyrazić zaskakująco wiele struktur danych reprezentując je i operacje na nich jako funkcje. Z tego powodu, stanowiąc inspirację dla wielu projektantów języków programowania, uchodzi za protoplastę rodziny języków funkcyjnych, chociaż bezpośrednio nie ma on praktycznego zastosowania w praktyce programistycznej. Rozwój tej legendy dobrze oddaje cykl klasycznych artykułów (tzw. \emph{Lambda Papers}) zapoczątkowany przez dokumentację języka Scheme \cite{Sussman:1975:IEL:889230}.
 
-Najpopularniejszym sposobem reprezentacji danych przez funkcje w rachunku \(\lambda\) oparty jest na kodowaniu liczb Peano za pomocą tzw. liczebników Churcha. Metoda ta, ze względu na wynikające zeń problemy natury złożonościowej \cite{Koopman:2014:CED:2746325.2746330}, ma obecnie wyłącznie walory edukacyjne, dlatego w dalszej cześci pracy pokażemy tzw. kodowanie Scotta. Jest ona interesująca ze względu na praktyczną możliwość reprezentacji algebraicznych typów danych (ADT\footnote{Skrót od angielskojęzycznego \emph{Algebraic Data Types}; nie należy mylić z \emph{Abstract Data Types}.}) znanych ze współczesnych języków funkcyjnych \cite{Jansen:2013:P9C:2941698.2941710}, pozwalając tym samym zaimplementować te konstrukcje na przykład w paradygmacie imperatywnym. Fakt, że każdy typ danych można zastąpić tym sposobem odpowiadającą mu funkcją, wskazuje na metodę konstruowania prostych języków funkcyjnych, ale przede wszystkim na uniwersalność rachunku \(\lambda\) jako języka przejściowego dla kompilatorów języków wysokiego poziomu \cite[Rozdział 3]{PeytonJones:1992:IFL:129390}.
+Najpopularniejszym sposobem reprezentacji danych przez funkcje w rachunku \(\lambda\) oparty jest na kodowaniu liczb Peano za pomocą tzw. liczebników Churcha. Metoda ta, ze względu na wynikające zeń problemy natury złożonościowej \cite{Koopman:2014:CED:2746325.2746330}, ma obecnie wyłącznie walory edukacyjne, dlatego w dalszej cześci pracy pokażemy tzw. kodowanie Scotta. Jest ona interesująca ze względu na praktyczną możliwość reprezentacji algebraicznych typów danych (ADT\footnote{Skrót od angielskojęzycznego \emph{Algebraic Data Types}; nie należy mylić z \emph{Abstract Data Types}.}) znanych ze współczesnych języków funkcyjnych \cite{Jansen:2013:P9C:2941698.2941710}, pozwalając tym samym zaimplementować te konstrukcje na przykład w paradygmacie imperatywnym. Fakt, że każdy typ danych można zastąpić tym sposobem odpowiadającą mu funkcją, wskazuje na metodę konstruowania prostych języków funkcyjnych \cite{Jensen_2006} oraz na uniwersalność rachunku \(\lambda\) jako języka przejściowego dla kompilatorów języków funkcyjnych \cite[Rozdział 3]{PeytonJones:1992:IFL:129390}.
 
 \subsubsection{Algebraiczne typy danych}
 Algebraiczne typy danych są podstawowym środkiem współczesnych języków funkcyjnych do wyrażania struktur danych. Powstają one przy użyciu tzw. typów sumacyjnych i typów produktowych, jednak pojęcia te na gruncie formalnym będą szczegółowo omówione w późniejszej części pracy. Na potrzeby prezentacji poszczególnych kodowań wystarczą nam w tym rozdziale intuicje o ADT zbudowane na gruncie następujących definicji w języku Haskell:
@@ -396,6 +399,7 @@ gdzie \texttt{True} i \texttt{False} są wartościami typu \texttt{Boolean}. Wł
   \mathrm{False} &\equiv \lambda a b.\,b
 \end{align*}
 Wówczas funkcję \texttt{if} możemy reprezentować wyrażeniem \(\mathrm{if}\equiv\lambda c t e.\, cte\) lub jego \(\eta\)-reduktem: \(\lambda c.\,c\).
+
 \subsubsection{Pary w rachunku \(\lambda\)}
 Parą nazywamy każdy nierekurencyjny typ, który posiada jeden konstruktor wartości parametryzowany przez dwa typy. W takim wypadku potrzebujemy dwóch projekcji zwracających odpowiednio pierwszy i drugi element pary. Przykładem takiego typu jest \texttt{Tuple}. Mamy wówczas:
 \begin{minted}{haskell}
@@ -487,30 +491,47 @@ Z łatwością możemy określić teraz operacje brania poprzednika, głowy i og
 \end{align*}
 gdzie undef jest stałą o którą rozszerzamy rachunek \(\lambda\) celem sygnalizowania błędnej aplikacji.
 
-  Celem lepszego porównania kodowania Churcha i Scotta podamy reprezentacje funkcji \texttt{foldl}\footnote{Przedstawione definicje mają jedyne charakter ilustracji. Staramy się używać jak najmniejszego podzbioru języka Haskell. Dla porządku należy zaznaczyć, że poprawne określenie klasy funkcji fold polegałoby na zdefiniuwaniu instancji klasy \texttt{Foldable} dla typów \texttt{Nat} i \texttt{List}} dla typów \texttt{Nat} i \texttt{List}. Określmy:
+  Celem lepszego porównania kodowania Churcha i Scotta podamy reprezentacje funkcji \texttt{foldl} dla typu \texttt{Nat}. Określmy:
 \begin{minted}{haskell}
-  foldlNat f x Zero    = x
-  foldlNat f x (Suc n) = f (foldlNat f x n)
-
-  foldlList f d []    = d
-  foldlList f d (h:t) = f h (foldlList f d t)
+  foldl f x Zero     = x
+  foldl f x (Succ n) = f (foldl f x n)
 \end{minted}
-\texttt{foldlNat} i \texttt{foldlList} mogą być przy pomocy kodowania Scotta zapisane jako
+\texttt{foldl} może być przy pomocy kodowania Scotta zapisane jako
 \begin{align*}
-  \mathrm{foldlNat}  &\equiv \lambda f\,x\,n.\ n\,x\,(\lambda n.\ (foldNat\ f\ x\ n))\\
-  \mathrm{foldlList} &\equiv \lambda f\,d\,x_s.\ x_s\, d\,(\lambda t.\ f\,h\,(foldList\ f\,d\,t))
+  \mathrm{foldl}  &\equiv \lambda f\,x\,n.\ n\,x\,(\lambda n.\ (foldl\ f\ x\ n))
 \end{align*}
-
-
+Ogólnie, przy pomocy \texttt{foldl} wyabstrahowujemy pojęcie tzw. rekursji od strony ogona (ang. \emph{tail recrusion}), w teorii obliczalności nazywane rekursją prostą lub, popularnie, zwijaniem od lewej. Operator foldl spełnia następującą własność \cite{Hutton:1999:TUE:968578.968579}
+   \[
+     f = \mathrm{foldl}\ \varphi\  a \iff \begin{cases}
+       f\ \mathrm{Zero}\ =\ a\\
+       f\ (\mathrm{Succ}\ n) = \varphi\ (f\ n)
+     \end{cases}
+  \]
 \subsubsection{Kodowanie Churcha typów rekursywnych}
-Przedstawimy teraz klasyczny sposób kodowania typów przypisywany A. Churchowi. Różni się on od kodowania Scotta tylko w przypadku typów rekursywnych, w pozostałych przypadkach obydwa kodowania dają te same rezultaty. Rozpocznijmy od typu odpowiadającego liczbom naturalnym. W kodowaniu Churcha w następujący sposób reprezentujemy typ \texttt{Nat}:
+Przedstawimy teraz klasyczny sposób kodowania typów po raz pierwszy zaprezentowany dla liczb naturalnych przez A. Churcha w \cite{Church1941-CHUTCO-7}. Różni się on od kodowania Scotta tylko w przypadku typów rekursywnych, w pozostałych przypadkach obydwa kodowania dają te same rezultaty.  W kodowaniu Churcha w następujący sposób reprezentujemy typ \texttt{Nat}:
 \begin{align*}
-  \mathrm{Zero} &\equiv \lambda f x.\,x\\
-  \mathrm{Succ} &\equiv \lambda n f x.\,f\,(n\,f\,x)
+  \mathrm{Zero}_{Ch} &\equiv \lambda f x.\,x\\
+  \mathrm{Succ}_{Ch} &\equiv \lambda n f x.\,f\,(n\,f\,x)
 \end{align*}
-Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w literaturze popularnie nazywa się \emph{liczebnikami Churcha}. Porównując je do kodowania Scotta widzimy, że różnica polega na aplikowaniu do kontynuacji termu \(n\,f\,x\).
+Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w literaturze popularnie nazywa się \emph{liczebnikami Churcha} i oznacza następująco:
+\begin{align*}
+  \bar{1} &\equiv \mathrm{Succ\ Zero} \ =_\beta\ \lambda f x.\, fx\\
+  \bar{2} &\equiv \mathrm{Succ\ Succ\ Zero}\ =_\beta\ \lambda f x.\, f\,f\,x\\
+    &\vdots \\
+  \bar{n} &\equiv \mathrm{Succ}^n\ \mathrm{Zero}\  =_\beta\  \lambda f x.\, f^n\,x
+\end{align*}
 
-\subsubsection{Ogólny schemat kodowania Scotta}
+Liczba naturalna \(n\) jest kodowana przez funkcję w której jej pierwszy argument jest aplikowany \(n\) razy do drugiego argumentu.
+Porównując je do kodowania Scotta widzimy, że różnica polega na aplikowaniu do kontynuacji termu \((n\,f\,x)\) w przypadku brania następnika, podczas gdy w przypadku kodowania Scotta aplikowaliśmy tylko pierwszy z argumentów. Zauważmy, że w kodowaniu Churcha mamy wobec tego:
+\begin{align*}
+  \bar{0} &=_\beta\ \mathrm{Zero}_{Ch}\\
+  \bar{1} &=_\beta\ \mathrm{foldl\ Succ_{Ch}\ Zero_{Ch}\ \bar{0}}\\
+  \bar{2} &=_\beta\ \mathrm{foldl\ Succ_{Ch}\ Zero_{Ch}\ \bar{1}}\\
+    &\vdots \\
+  \overline{n} &=_\beta\ \mathrm{foldl\ Succ_{Ch}\ Zero_{Ch}\ \overline{n-1}}
+\end{align*}
+Szerszą dyskusję na temat operacji arytmetycznych jakie można wprowadzić na tak zdefiniowanych obiektach można prześledzić w \cite{hinze_2005}.
+\subsubsection{Ogólny schemat kodowania Scotta typów ADT}
 W ogólnym przypadku, mając nastepującą definicję ADT:
 \begin{minted}{haskell}
   data type_constructor t1 t2 ... tk = C1 t11 ... t1n1

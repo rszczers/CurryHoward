@@ -2152,7 +2152,11 @@
     <bcf:citekey order="5">Sussman:1975:IEL:889230</bcf:citekey>
     <bcf:citekey order="6">Koopman:2014:CED:2746325.2746330</bcf:citekey>
     <bcf:citekey order="7">Jansen:2013:P9C:2941698.2941710</bcf:citekey>
-    <bcf:citekey order="8">PeytonJones:1992:IFL:129390</bcf:citekey>
+    <bcf:citekey order="8">Jensen_2006</bcf:citekey>
+    <bcf:citekey order="9">PeytonJones:1992:IFL:129390</bcf:citekey>
+    <bcf:citekey order="10">Hutton:1999:TUE:968578.968579</bcf:citekey>
+    <bcf:citekey order="11">Church1941-CHUTCO-7</bcf:citekey>
+    <bcf:citekey order="12">hinze_2005</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

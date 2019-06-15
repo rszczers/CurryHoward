@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.9.22)  11 JUN 2019 00:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.9.22)  15 JUN 2019 02:32
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1748,7 +1748,7 @@ LaTeX Font Info:    Try loading font information for U+bbold on input line 2.
 
 {/home/fulgjon/.texlive2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] 
 [3]
-Overfull \hbox (13.45741pt too wide) in paragraph at lines 184--185
+Overfull \hbox (13.45741pt too wide) in paragraph at lines 187--188
 []\T1/cmr/m/n/12 Przypu±¢my, »e $\OML/cmm/m/it/12 M \U/MnSymbolD/m/n/12 ^^@[] \
 OML/cmm/m/it/12 N$ \T1/cmr/m/n/12 w kon-se-kwen-cji ($\OML/cmm/m/it/12 $\T1/cm
 r/m/n/12 1)[] dla $\OML/cmm/m/it/12 M \U/MnSymbolD/m/n/12 ^^A \OML/cmm/m/it/12 
@@ -1758,7 +1758,7 @@ n/12 ~\OML/cmm/m/it/12 y\OMX/MnSymbolE/m/n/12 ^^E$\T1/cmr/m/n/12 .
  []
 
 
-Overfull \hbox (21.41768pt too wide) in paragraph at lines 184--185
+Overfull \hbox (21.41768pt too wide) in paragraph at lines 187--188
 \T1/cmr/m/n/12 Po-nie-wa» $\OML/cmm/m/it/12 x [] []\OMX/MnSymbolE/m/n/12 ˆ\OML/
 cmm/m/it/12 M[]\OMX/MnSymbolE/m/n/12 ^^@\OML/cmm/m/it/12 x\OMX/MnSymbolE/m/n/12
  ~\OML/cmm/m/it/12 y\OMX/MnSymbolE/m/n/12 ^^E$\T1/cmr/m/n/12 , to ze wzgl¦-du 
@@ -1769,7 +1769,7 @@ m/m/it/12 x\OMX/MnSymbolE/m/n/12 ~\OML/cmm/m/it/12 y\OMX/MnSymbolE/m/n/12 ^^E^^
  []
 
 [4] [5] [6]
-Overfull \hbox (18.11197pt too wide) in paragraph at lines 285--287
+Overfull \hbox (18.11197pt too wide) in paragraph at lines 288--290
 []\T1/cmr/bx/n/12 Definicja 10. []\T1/cmr/m/n/12 (Pod-sta-wie-nie jed-no-cze-sn
 e)[] Dla do-wol-ne-go $\OML/cmm/m/it/12 M \U/MnSymbolD/m/n/12 > \OT1/cmr/bx/n/1
 2 ^^C$\T1/cmr/m/n/12 , ci¡-gu $\OML/cmm/m/it/12 ^^U$\T1/cmr/m/n/12 -zmiennych $
@@ -1777,7 +1777,7 @@ e)[] Dla do-wol-ne-go $\OML/cmm/m/it/12 M \U/MnSymbolD/m/n/12 > \OT1/cmr/bx/n/1
  []
 
 
-Overfull \hbox (0.59824pt too wide) in paragraph at lines 293--294
+Overfull \hbox (0.59824pt too wide) in paragraph at lines 296--297
 []$\OMX/MnSymbolE/m/n/12 ˆ\OML/cmm/m/it/12 ^^Uy: P\OMX/MnSymbolE/m/n/12 ^^@[]~
 []^^E \U/MnSymbolD/m/n/12 ^^@ \OML/cmm/m/it/12 ^^Uy: P\OMX/MnSymbolE/m/n/12 ^^@
 []~[]^^E$\T1/cmr/m/n/12 , je-±li $\OML/cmm/m/it/12 y \U/MnSymbolD/m/n/12 x \OML
@@ -1787,7 +1787,7 @@ OMX/MnSymbolE/m/n/12 ˆ\OML/cmm/m/it/12 N[]\OMX/MnSymbolE/m/n/12 $
  []
 
 
-Overfull \hbox (6.05936pt too wide) in paragraph at lines 298--299
+Overfull \hbox (6.05936pt too wide) in paragraph at lines 301--302
 []\T1/cmr/bx/n/12 Konwencja. []\T1/cmr/m/it/12 Je-±li $\OML/cmm/m/it/12 N[] \U/
 MnSymbolD/m/n/12 ^^A \OML/cmm/m/it/12 x[]$ \T1/cmr/m/it/12 dla wszyst-kich po-z
 a sko«-cze-nie wie-lo-ma $\OML/cmm/m/it/12 i[];  i[];  [] ;  i[] \U/MnSymbolD/m
@@ -1832,21 +1832,15 @@ EE1593.pygtex) [12]
 \openout6 = `main.pyg'.
 
 
-(./temp/_minted-main/B82E0461EAFAFB7655491FEBA164D3F3FE66A238794004CAEB011C84C3
+(./temp/_minted-main/FD6AA3FA22182CCA93CFC90553A5AA4FFE66A238794004CAEB011C84C3
 EE1593.pygtex) [13]
 \openout6 = `main.pyg'.
 
 
 (./temp/_minted-main/EDFF4159D68B762D17ADB769DE65D174FE66A238794004CAEB011C84C3
-EE1593.pygtex)) [14] [15] (temp//main.aux)
-
-LaTeX Warning: There were undefined references.
-
+EE1593.pygtex) [14]) [15] [16] (temp//main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
-
-
-Package biblatex Warning: Please rerun LaTeX.
 
 runsystem(rm temp//main.pyg)...executed.
 
@@ -1855,13 +1849,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28560 strings out of 493013
- 539981 string characters out of 6135682
- 977406 words of memory out of 5000000
- 31481 multiletter control sequences out of 15000+600000
+ 28568 strings out of 493013
+ 540327 string characters out of 6135682
+ 977720 words of memory out of 5000000
+ 31489 multiletter control sequences out of 15000+600000
  41830 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,15n,82p,1258b,1391s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,15n,82p,1254b,1391s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texliv
 e/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolS.enc}{/usr/share/texlive/texmf-d
 ist/fonts/enc/dvips/mnsymbol/MnSymbolF.enc}{/usr/share/texlive/texmf-dist/fonts
@@ -1884,14 +1878,14 @@ ype1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super
 /sfcc1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/
 share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/ty
 pe1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/
-sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/s
-hare/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/typ
-e1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
-ftt1200.pfb>
-Output written on temp//main.pdf (15 pages, 400852 bytes).
+sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0800.pfb></usr/s
+hare/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/typ
+e1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
+ftt1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on temp//main.pdf (16 pages, 392460 bytes).
 PDF statistics:
- 170 PDF objects out of 1000 (max. 8388607)
- 128 compressed objects within 2 object streams
+ 177 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
