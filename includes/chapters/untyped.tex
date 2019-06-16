@@ -483,7 +483,6 @@ Stosując metody kodowania prostych typów wyliczeniowych i par, łatwo odnajduj
   Zwróćmy uwagę, że konstruktory Nat i Maybe są swoimi \(\alpha\)-konwersami. Podobieństwo nie jest przypadkowe: na poziomie typów konstrukcja Maybe jest odpowiednikiem brania następnika. Określając dodatkowo \(\mathrm{Void}\equiv\lambda x.x\) jako element neutralny działania łącznego, otrzymujemy na poziomie typów strukturę półpierścienia z działaniem mnożenia okresloną przez konstrukcję par i dzałaniem dodawania określonego przez konstrukcję typów wyliczeniowych. Stąd algebraicze typy danych biorą swoją nazwę.
 
 Z łatwością możemy określić teraz operacje brania poprzednika, głowy i ogona listy, odpowiednio:
-
 \begin{align*}
   \mathrm{pred}&\equiv \lambda n .\, n\, \mathrm{undef}\, (\lambda m.\,m)\\
   \mathrm{head}&\equiv \lambda x_s .\, x_s\, \mathrm{undef}\, (\lambda x_s . x)\\
@@ -565,5 +564,5 @@ kodujemy przy za pomocą następujego \(\lambda\)-termu:
   \lambda x.\ x\,&(\lambda v_{11}\dots v_{1n_1}.\ y_1)\\
                  &\vdots\\
                  &(\lambda v_{m1}\dots v_{mn_m}.\ y_m)
-\end{align*})
-
+\end{align*}
+gdzie \(y_1\) są kodowaniami Scotta \texttt{yi} dla \(i\in\mathbb{N}\). 
