@@ -379,7 +379,7 @@ Algebraiczne typy danych są podstawowym środkiem współczesnych języków fun
   data Maybe a     = Nothing
                    | Just a
   data Nat         = Zero
-                   | Suc Nat
+                   | Succ Nat
   data List t      = Nil
                    | Cons t (List t)
 \end{minted}
@@ -480,7 +480,7 @@ Stosując metody kodowania prostych typów wyliczeniowych i par, łatwo odnajduj
   \mathrm{Zero} &\equiv \lambda z s .\, z     & \mathrm{Nil} &\equiv \lambda n c.\,n\\
   \mathrm{Succ} &\equiv \lambda n z s.\,sn    & \mathrm{Cons} &\equiv \lambda x \, x_s \, n\, c.\ c \, x \, x_s
 \end{align*}
-  Zwróćmy uwagę, że konstruktory Nat i Maybe są swoimi \(\alpha\)-konwersami. Podobieństwo nie jest przypadkowe: na poziomie typów konstrukcja Maybe jest odpowiednikiem brania następnika. Określając dodatkowo \(\mathrm{Void}=\lambda x.x\) jako element neutralny działania łącznego, otrzymujemy na poziomie typów strukturę półpierścienia z działaniem mnożenia okresloną przez konstrukcję par i dzałaniem dodawania określonego przez konstrukcję typów wyliczeniowych. Stąd algebraicze typy danych biorą swoją nazwę.
+  Zwróćmy uwagę, że konstruktory Nat i Maybe są swoimi \(\alpha\)-konwersami. Podobieństwo nie jest przypadkowe: na poziomie typów konstrukcja Maybe jest odpowiednikiem brania następnika. Określając dodatkowo \(\mathrm{Void}\equiv\lambda x.x\) jako element neutralny działania łącznego, otrzymujemy na poziomie typów strukturę półpierścienia z działaniem mnożenia okresloną przez konstrukcję par i dzałaniem dodawania określonego przez konstrukcję typów wyliczeniowych. Stąd algebraicze typy danych biorą swoją nazwę.
 
 Z łatwością możemy określić teraz operacje brania poprzednika, głowy i ogona listy, odpowiednio:
 
@@ -498,39 +498,47 @@ gdzie undef jest stałą o którą rozszerzamy rachunek \(\lambda\) celem sygnal
 \end{minted}
 \texttt{foldl} może być przy pomocy kodowania Scotta zapisane jako
 \begin{align*}
-  \mathrm{foldl}  &\equiv \lambda f\,x\,n.\ n\,x\,(\lambda n.\ (foldl\ f\ x\ n))
+  \mathrm{foldl}  &\equiv \lambda f\,x\,n.\ n\,x\,(\lambda n.\ (\mathrm{foldl}\ f\ x\ n))
 \end{align*}
 Ogólnie, przy pomocy \texttt{foldl} wyabstrahowujemy pojęcie tzw. rekursji od strony ogona (ang. \emph{tail recrusion}), w teorii obliczalności nazywane rekursją prostą lub, popularnie, zwijaniem od lewej. Operator foldl spełnia następującą własność \cite{Hutton:1999:TUE:968578.968579}
-   \[
+  \begin{align}\label{def:foldl} 
      f = \mathrm{foldl}\ \varphi\  a \iff \begin{cases}
        f\ \mathrm{Zero}\ =\ a\\
        f\ (\mathrm{Succ}\ n) = \varphi\ (f\ n)
      \end{cases}
-  \]
+  \end{align}
+% Zauważmy, że w myśl \eqref{def:foldl} mamy:
+% \begin{align*}
+%   \mathrm{foldl}\ \mathrm{Succ}\ \mathrm{Zero}\ \mathrm{Zero}\ &= \mathrm{Zero}\\
+%   \mathrm{foldl}\  \mathrm{Succ}\ \mathrm{Zero}\ (\mathrm{Succ}\ \mathrm{Zero}) &= \mathrm{Succ}\ (\mathrm{foldl}\ \mathrm{Succ\ Zero\ Zero}) \\
+%   &= \mathrm{Succ\ Zero} 
+% \end{align*}
+% oraz jesli \(\mathrm{foldl\ Succ_{Ch}\ Zero_{Ch}}\ n = m\), to wówczas
+
+
 \subsubsection{Kodowanie Churcha typów rekursywnych}
-Przedstawimy teraz klasyczny sposób kodowania typów po raz pierwszy zaprezentowany dla liczb naturalnych przez A. Churcha w \cite{Church1941-CHUTCO-7}. Różni się on od kodowania Scotta tylko w przypadku typów rekursywnych, w pozostałych przypadkach obydwa kodowania dają te same rezultaty.  W kodowaniu Churcha w następujący sposób reprezentujemy typ \texttt{Nat}:
+Przedstawimy teraz klasyczny sposób kodowania typów po raz pierwszy zaprezentowany dla liczb naturalnych przez A. Churcha w \cite{Church1941-CHUTCO-7}. Różni się on od kodowania Scotta tylko w przypadku typów rekursywnych, w pozostałych przypadkach obydwa kodowania dają te same rezultaty. Typ \texttt{Nat} ma dwa konstruktory: \texttt{Zero} i \texttt{Succ}. W kodowaniu Churcha reprezentujemy je w następujący sposób:
 \begin{align*}
   \mathrm{Zero}_{Ch} &\equiv \lambda f x.\,x\\
   \mathrm{Succ}_{Ch} &\equiv \lambda n f x.\,f\,(n\,f\,x)
 \end{align*}
 Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w literaturze popularnie nazywa się \emph{liczebnikami Churcha} i oznacza następująco:
 \begin{align*}
-  \bar{1} &\equiv \mathrm{Succ\ Zero} \ =_\beta\ \lambda f x.\, fx\\
-  \bar{2} &\equiv \mathrm{Succ\ Succ\ Zero}\ =_\beta\ \lambda f x.\, f\,f\,x\\
+  \bar{1} &\equiv \mathrm{Succ}_{Ch}\ \mathrm{Zero}_{Ch} \ =_\beta\ \lambda f x.\, fx\\
+  \bar{2} &\equiv \mathrm{Succ}_{Ch}\ \mathrm{Succ}_{Ch}\ \mathrm{Zero}_{Ch}\ =_\beta\ \lambda f x.\, f\,f\,x\\
     &\vdots \\
-  \bar{n} &\equiv \mathrm{Succ}^n\ \mathrm{Zero}\  =_\beta\  \lambda f x.\, f^n\,x
+  \bar{n} &\equiv \mathrm{Succ}_{Ch}^n\ \mathrm{Zero}_{Ch}\  =_\beta\  \lambda f x.\, f^n\,x
 \end{align*}
 
 Liczba naturalna \(n\) jest kodowana przez funkcję w której jej pierwszy argument jest aplikowany \(n\) razy do drugiego argumentu.
-Porównując je do kodowania Scotta widzimy, że różnica polega na aplikowaniu do kontynuacji termu \((n\,f\,x)\) w przypadku brania następnika, podczas gdy w przypadku kodowania Scotta aplikowaliśmy tylko pierwszy z argumentów. Zauważmy, że w kodowaniu Churcha mamy wobec tego:
+Porównując je do kodowania Scotta widzimy, że różnica polega na aplikowaniu do kontynuacji termu \((n\,f\,x)\) w przypadku brania następnika. Da się pokazać \cite{hinze_2005}, że liczebniki Churcha są w istocie operacją \texttt{foldl} na argumentach \texttt{Succ} i {Zero}. Istotnie, niech \(\mathrm{nat} \equiv \lambda c.\ c\ \mathrm{Succ}\ \mathrm{Zero}\). Wówczas \(\mathrm{nat}\ \bar{n} =_\beta \bar{n}\). Z tego powodu kodowanie operacji na liczebnikach Churcha, lub ogólnie – funkcji opartych na rekursji prostej po zbiorze liczb naturalnych – jest wyjątkowo proste przy użyciu tej metody. Przykładowo, używając metody Churcha, operację dodawania kodujemy w następujący sposób:
 \begin{align*}
-  \bar{0} &=_\beta\ \mathrm{Zero}_{Ch}\\
-  \bar{1} &=_\beta\ \mathrm{foldl\ Succ_{Ch}\ Zero_{Ch}\ \bar{0}}\\
-  \bar{2} &=_\beta\ \mathrm{foldl\ Succ_{Ch}\ Zero_{Ch}\ \bar{1}}\\
-    &\vdots \\
-  \overline{n} &=_\beta\ \mathrm{foldl\ Succ_{Ch}\ Zero_{Ch}\ \overline{n-1}}
+  \mathrm{add}_{Ch} \equiv \lambda n\, m.\ n\ \mathrm{Succ}_{Ch}\ m
 \end{align*}
-Szerszą dyskusję na temat operacji arytmetycznych jakie można wprowadzić na tak zdefiniowanych obiektach można prześledzić w \cite{hinze_2005}.
+Dla porównania, używając kodowania Scotta:
+\begin{align*}
+  \mathrm{add}_{S} \equiv \lambda n\,m.\ \mathrm{foldl}\ \mathrm{Succ}\ n\ m
+\end{align*}
 \subsubsection{Ogólny schemat kodowania Scotta typów ADT}
 W ogólnym przypadku, mając nastepującą definicję ADT:
 \begin{minted}{haskell}
