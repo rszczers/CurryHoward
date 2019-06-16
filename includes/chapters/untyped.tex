@@ -388,7 +388,7 @@ Definicja typu rozpoczynają się od słowa kluczowego \texttt{data}\footnote{Dy
 Pokażemy, że algebraiczne typy danych możemy reprezentować w zwięzły sposób w rachunku \(\lambda\) bez typów. Przedstawione tutaj koncepcje w zaskakujący sposób przenoszą się do bardziej złożonych typowanych systemów rachunku \(\lambda\).
 
 \subsubsection{Proste typy wyliczeniowe}\label{ref:untyped_simple_enumeration}
-Typy wyliczeniowe to typy, które reprezentują możliwe warianty przyjmowanej wartości. Najprostrzym nietrywialnym przykładem takiego typu jest \texttt{Boolean}. Ma on dwa konstruktory wartości: \texttt{True}, \texttt{False}. Praca z tego rodzaju typami wymaga mechanizmu dopasowywania wzorców (ang. \emph{pattern-matching}), który pozwala na wybór częściowej definicji funkcji w zależności od zadanego konstruktora wartości. Ponieważ w rachunku \(\lambda\) wyrażenia nie mają typów (lub, przyjmując perspektywę systemów z typami: wszystkie wyrażenia mają jeden, ten sam typ), interesowało nas będzie nie bezpośrednie kodowanie typu, ale kodowanie mechanizmu, który odpowiada za dopasowywanie wzorców. Posłużmy się znowu przykładem z języka Haskell i określmy funkcję odpowiadającą wykonaniu instrukcji warunkowej:
+Typy wyliczeniowe to typy, które reprezentują możliwe warianty przyjmowanej wartości. Najprostrzym nietrywialnym przykładem takiego typu jest \texttt{Boolean}. Ma on dwa konstruktory wartości: \texttt{True}, \texttt{False}. Praca z tego rodzaju typami wymaga mechanizmu dopasowywania wzorców (ang. \emph{pattern-matching}) \cite[Rozdział IV]{PeytonJones:1992:IFL:129390}, który pozwala na wybór częściowej definicji funkcji w zależności od zadanego konstruktora wartości. Ponieważ w rachunku \(\lambda\) wyrażenia nie mają typów (lub, przyjmując perspektywę systemów z typami: wszystkie wyrażenia mają jeden, ten sam typ), interesowało nas będzie nie bezpośrednie kodowanie typu, ale kodowanie mechanizmu, który odpowiada za dopasowywanie wzorców. Posłużmy się znowu przykładem z języka Haskell i określmy funkcję odpowiadającą wykonaniu instrukcji warunkowej:
 \begin{minted}{haskell}
 if True  a b = a
 if False a b = b
@@ -547,10 +547,23 @@ W ogólnym przypadku, mając nastepującą definicję ADT:
                                      ...
                                      | Cm tm1 ... tmnm
 \end{minted}
-dla \(m, n \in \mathbb{N}\), wiążemy z nią następującą reprezentację w rachunku \(\lambda\):
+dla \(m, n \in \mathbb{N}\), wiążemy z nią reprezentację każdego z konstruktorów:
 \begin{gather*}
   \mathrm{C_1} \equiv \lambda t_{11}\, t_{12}\, \dots t_{1n_1}\, f_1\, f_2 \dots f_m.\ f_1 t_{11} t_{12} \dots t_{1n_1}\\
   \mathrm{C_2} \equiv \lambda t_{21}\, t_{22}\, \dots t_{2n_2}\, f_1\, f_2 \dots f_m.\ f_2 t_{21} t_{22} \dots t_{2n_2}\\
  \vdots\\
-  \mathrm{C_m} \equiv \lambda t_{m1}\, t_{m2}\, \dots t_{mn_m}\, f_1\, f_m \dots f_m.\ f_1 t_{m1} t_{m2} \dots t_{mn_m}\\
+  \mathrm{C_m} \equiv \lambda t_{m1}\, t_{m2}\, \dots t_{mn_m}\, f_1\, f_m \dots f_m.\ f_1 t_{m1} t_{m2} \dots t_{mn_m}
 \end{gather*}
+Wówczas następującą definicję cześciową funkcji \texttt{f}:
+\begin{minted}{haskell}
+  f (C1 v11 ... v1n1) = y1
+  ...
+  f (Cm vm1 ... vmnm) = ym
+\end{minted}
+kodujemy przy za pomocą następujego \(\lambda\)-termu:
+\begin{align*}
+  \lambda x.\ x\,&(\lambda v_{11}\dots v_{1n_1}.\ y_1)\\
+                 &\vdots\\
+                 &(\lambda v_{m1}\dots v_{mn_m}.\ y_m)
+\end{align*})
+
