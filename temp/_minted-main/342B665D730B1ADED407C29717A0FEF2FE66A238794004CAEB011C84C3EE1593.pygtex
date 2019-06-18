@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-  \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{C1} \PYG{n}{v11} \PYG{o}{...} \PYG{n}{v1n1}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{y1}
-  \PYG{o}{...}
-  \PYG{n}{f} \PYG{p}{(}\PYG{k+kt}{Cm} \PYG{n}{vm1} \PYG{o}{...} \PYG{n}{vmnm}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{ym}
-\end{Verbatim}
