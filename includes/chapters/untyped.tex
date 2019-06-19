@@ -349,6 +349,9 @@ Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) będziemy rozumieli najmniejs
     \item Przez \(=_{\mathcal{R}}\) oznaczamy symetryczne domknięcie relacji \(\mathcal{R}^{*}\).\label{def:closure_c}
 \end{enumerate}
 Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:closure_b} wyznacza praporzadek, który w odniesieniu do redukcji określonych na \(\mathbf{\Lambda}\) można rozumieć jako graf skierowany (w przypadku \(\mathbf{\Lambda}\) być może nieskończony) w którym krawędzie odpowiadają możliwym krokom obliczenia, zaś \ref{def:closure_c} -- kongruencję, która znów w szczególnym odniesieniu do \(\lambda\)-termów, będzie dokonywała podziału w \(\mathbf{\Lambda}\) ze względu na rezultat obliczenia.
+
+\subimport{}{newman_lemma.tex}
+
 \begin{definicja}(\(\beta\)-redukcja)
   \(\beta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) zgodną na \(\mathbf{\Lambda}\) relację binarną \(\to_\beta\) taką, że
   \[
@@ -585,3 +588,4 @@ kodujemy przy za pomocą następujego \(\lambda\)-termu:
                  &(\lambda v_{m1}\dots v_{mn_m}.\ y_m)
 \end{align*}
 gdzie \(y_1\) są kodowaniami Scotta \texttt{yi} dla \(i\in\mathbb{N}\). 
+

@@ -28,8 +28,15 @@
   Element \(y\in A\) nazywamy \emph{postacią normalną} \(x\in A\), jesli \(x\to^{*}y\) i \(y\in\mathrm{NF}\). Jeśli \(y\) jest postacią normalną \(x\) i \(y\) jest jedyną postacią normalną \(x\), to piszemy \(x\downarrow y\). W przeciwnym wypadku, czyli jeśli istnieją \(y, z\in \mathrm{NF}, y\neq z\) takie, że \(x\to^{*} y\) i \(x\to^{*} z\), powiemy, że \(x\) jest \emph{niejednoznaczny}. 
 \end{definicja}
 
-\begin{definicja}(Własność silnej normalizacji)
-  Powiemy, że relacja \(\to\) jest \emph{silnie normalizowalna} (ma własność SN, od ang. \emph{strong normalizable}), jeśli nie istnieje nieskończony ciąg redukcji \(a_0 \to a_1 \to a_2 \to \dots\)
+\begin{definicja}
+  Niech \(\to\) będzie relacją binarną na zbiorze \(A\). 
+\begin{enumerate}
+  \setlength\itemsep{0em}
+  \item[(WN) ] Powiemy, że relacja \(\to\) jest \emph{słabo normalizująca}, jeśli
+    dla dowolnego \(a\in A\) istnieje \(a'\in \mathrm{NF}\) taki, że \(a\to^{*} a'\). W takim wypadku o \(a\in A\) będziemy mówili, że jest \emph{silnie normalizowalny} i pisali \(a\in \mathrm{WN}\).
+  \item[(SN)] Powiemy, że relacja \(\to\) jest \emph{silnie normalizująca}, jeśli nie istnieje nieskończony ciąg relacji \(a_0 \to a_1 \to a_2 \to \dots\). W takim wypadku o \(a\in A\) będziemy mówili, że jest \emph{słabo normalizowalny} i pisali \(a\in \mathrm{SN}\).
+
+\end{enumerate}
 \end{definicja}
 
 \begin{twierdzenie}(Lemat Newmana)\label{thm:newman_lemma}
