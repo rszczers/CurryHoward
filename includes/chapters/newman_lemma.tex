@@ -8,7 +8,7 @@
                takie, że \(b\to^{*} d\) i \(c\to^{*} d\).
 
   \item[(WCR)] Powiemy, że \(\to\) ma \emph{słabą własność 
-               Churcha-Rossera}a, jesli dla dowolnych \(a,\,b,\,c\in A\)
+               Churcha-Rossera}, jesli dla dowolnych \(a,\,b,\,c\in A\)
                takich, że \(a\to b\) oraz \(a\to c\) istnieje \(d\in A\) 
                takie, że \(b\to^{*} d\) i \(c\to^{*} d\).
 \end{enumerate}
@@ -37,45 +37,32 @@ Niech \(\to\) bedzie relacją binarną mającą własność SN. Jeśli \(\to\) m
 \end{twierdzenie}
 \begin{dowod}
 
+Niech \(\to\) będzie relacją binarną na \(A\) o własności SN i WCR. Ponieważ \(\to\) jest SN, to każdy \(a\) jest normalizowalny.
 
-Niech \(\to\) będzie relacją binarną na \(A\) o własności SN i WCR. Ponieważ \(\to\) jest SN, to każdy \(a\) jest normalizowalny. Rozważmy następujące przypadki:
-
-\begin{minipage}{.75\textwidth}
-\begin{enumerate}[label={\roman*)}, ref={\roman*)}]
-  \setlength\itemsep{0em}
-  \item Niech \(a\in A\). Jeśli \(a\) nie jest niejednoznaczny, to teza zachodzi.
-  \item
-      Przypuśćmy, że \(a\) jest niejednoznaczny. wówczas istnieje inny \(a'\in A\), który też jest niejednoznaczny oraz \(a\to a'\). Istotnie, przypuśćmy, że \(a\to^{*} b_1\), \(a \to^{*} b_2\) i niech \(b_1\) i \(b_2\) będą różnymi postaciami normalnymi. Ponieważ \(b_1\) i \(b_2\) są różne, to obydwie te redukcje składają się przynajmniej z jednego kroku. Mają więc postać:
+  Jeśli \(A\) nie zawiera elementów niejednoznacznych, to twierdzenie zachodzi w sposób trywialny. Przypuśćmy, że \(a\in A\) jest niejednoznaczny. Twierdzimy, że istnieje \(a'\in A\) taki, że \(a\to a'\) i \(a'\) jest niejednoznaczny. Niech \(b_1, b_2\in \mathrm{NF},\ b_1\neq b_2\) i \(a\to^{*} b_1\) oraz \(a\to^{*} b_2\). Ponieważ \(b_1\neq b_2\), to istnieją \(a_1,\,a_2\in A\) takie, że: 
       \begin{align*}
         a \to a_1 \to^{*} b_1 \quad \text{oraz} \quad a\to a_2 \to^{*} b_2
       \end{align*}
-    Jeśli \(a_1=a_2\), to \(a'=a_1=a_2\) i wystarczy wybrać \(a'=a_1\).
-    Jeśli jednak \(a_1 \neq a_2\), to z własności WCR istnieje
-    \(b_3 \in A\) taka, że \(a_1 \to^{*} b_3\) oraz \(a_2 \to^{*} b_3\).
-    Z własności SN możemy przyjąć, że \(b_3\) jest w postaci normalnej.
+Jeśli \(a_1=a_2\), to \(a'=a_1=a_2\) i wystarczy wybrać \(a'=a_1\).  Jeśli jednak \(a_1 \neq a_2\), to z własności WCR istnieje \(b_3 \in A\) taka, że \(a_1 \to^{*} b_3\) oraz \(a_2 \to^{*} b_3\).  Z własności SN możemy przyjąć, że \(b_3\) jest w postaci normalnej.  
+Zachodzą więc dwa przypadki:
 
-% \begin{figure}[htb]
-%   \centering
-%   \includegraphics[width=0.195\linewidth]{../newman_3}
-%   \caption{}
-% \end{figure}
-    \vspace{3em}
-    Ponieważ \(b_1 \neq b_2\), to albo \(b_1 \neq b_3\), albo \(b_2 \neq b_3\).
-    Możemy więc wybrać \(a'=a_1\) lub \(a'=a_2\). Kontynuując tę konstrukcję widzimy, że otrzymujemy nieskończoną redukcję, wbrew założeniu, że \(\to\) ma własność SN.
-
-    Zatem nie istnieją w \(A\) elementy niejednoznaczne.\qed
-\end{enumerate}
-\end{minipage}
-  \begin{minipage}{.25\textwidth}
+  \begin{enumerate}[label={\roman*)}, ref={\roman*)}]
+    \setlength\itemsep{0em}
+    \item \(a_1 = a_2\). Wówczas wystarczy ustalić \(a'=a_1\) albo \(a'=a_2\) (Rysunek \ref{fig:newman_a}).
+    \item \(a_1\neq a_2\) (Rysunek \ref{fig:newman_b}). Wówczas z WCR istnieje \(b_3\in A\) takie, że \(a_1 \to^{*} b_3\) oraz \(a_2\to^{*} b_3\) (Rysunek \ref{fig:newman_c}). Przypuśćmy, że \(b_3\in\mathrm{NF}\). Ponieważ \(b_1\neq b_3\), to \(b_3\neq b_1\) lub \(b_3\neq b_2\), zatem możemy wybrać \(a'=a_1\) albo \(a'=a_2\).  
     \begin{center}
-    \vspace{2em}
-    \includegraphics[width=0.41\linewidth]{../newman_1}
-    \vspace{4em}
-
-    \includegraphics[width=0.41\linewidth]{../newman_2}
-    \vspace{3em}
-
-    \includegraphics[width=0.71\linewidth]{../newman_3}
+      \begin{minipage}{0.75\linewidth}
+        \begin{figure}[H]
+          \centering
+          \subfloat[\label{fig:newman_a}]{\includegraphics[width=1.6cm]{../newman_2}}
+          \hspace{4em}
+          \subfloat[\label{fig:newman_b}]{\includegraphics[width=1.5cm]{../newman_1}}
+          \hspace{4em}
+          \subfloat[\label{fig:newman_c}]{\includegraphics[width=2.7cm]{../newman_3}}\hfill
+          \caption{Warianty konstruowania redukcji.} 
+        \end{figure}
+      \end{minipage}
     \end{center}
-  \end{minipage}
+  \end{enumerate}
+  Stosując powyższe rozumowanie do \(a'\) otrzymujemy kolejny element niejednoznaczny. a zatem możemy skontruować nieskończony ciąg redukcji, wbrew zalożeniu, że relacja \(\to\) jest SN. Zatem \(A\) nie zawiera elementów niejednoznacznych. \qed
 \end{dowod}
