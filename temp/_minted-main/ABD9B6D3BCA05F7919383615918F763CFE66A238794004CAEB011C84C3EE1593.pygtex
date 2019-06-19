@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+        \PYG{n}{fromTemperature} \PYG{o+ow}{::} \PYG{k+kt}{Temperature} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+        \PYG{n}{fromTemperature} \PYG{p}{(}\PYG{k+kt}{Fahrenheit} \PYG{n}{a}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{a}
+        \PYG{n}{fromTemperature} \PYG{p}{(}\PYG{k+kt}{Celsius} \PYG{n}{a}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{a}
+\end{Verbatim}

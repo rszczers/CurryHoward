@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{n}{fst} \PYG{p}{(}\PYG{k+kt}{Tuple} \PYG{n}{a} \PYG{n}{b}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{a}
+  \PYG{n}{snd} \PYG{p}{(}\PYG{k+kt}{Tuple} \PYG{n}{a} \PYG{n}{b}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{b}
+\end{Verbatim}

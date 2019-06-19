@@ -1,0 +1,205 @@
+  \subsection{Kodowanie typów danych}
+Prosta składnia języka rachunku \(\lambda\) pozwala wyrazić zaskakująco wiele struktur danych reprezentując je i operacje na nich jako funkcje. Z tego powodu, stanowiąc inspirację dla wielu projektantów języków programowania, uchodzi za protoplastę rodziny języków funkcyjnych, chociaż bezpośrednio nie ma on praktycznego zastosowania w praktyce programistycznej. Rozwój tej legendy dobrze oddaje cykl klasycznych artykułów (tzw. \emph{Lambda Papers}) zapoczątkowany przez dokumentację języka Scheme \cite{Sussman:1975:IEL:889230}.
+
+Najpopularniejszym sposobem reprezentacji danych przez funkcje w rachunku \(\lambda\) oparty jest na kodowaniu liczb Peano za pomocą tzw. liczebników Churcha. Metoda ta, ze względu na wynikające zeń problemy natury złożonościowej \cite{Koopman:2014:CED:2746325.2746330}, ma obecnie wyłącznie walory edukacyjne, dlatego w dalszej cześci pracy pokażemy tzw. kodowanie Scotta. Jest ona interesująca ze względu na praktyczną możliwość reprezentacji algebraicznych typów danych (ADT\footnote{Skrót od angielskojęzycznego \emph{Algebraic Data Types}; nie należy mylić z \emph{Abstract Data Types}.}) znanych ze współczesnych języków funkcyjnych \cite{Jansen:2013:P9C:2941698.2941710}, pozwalając tym samym zaimplementować te konstrukcje na przykład w paradygmacie imperatywnym. Fakt, że każdy typ danych można zastąpić tym sposobem odpowiadającą mu funkcją, wskazuje na metodę konstruowania prostych języków funkcyjnych \cite{Jensen_2006} oraz na uniwersalność rachunku \(\lambda\) jako języka przejściowego dla kompilatorów języków funkcyjnych \cite[Rozdział 3]{PeytonJones:1992:IFL:129390}.
+
+\subsubsection{Algebraiczne typy danych}
+Algebraiczne typy danych są podstawowym środkiem współczesnych języków funkcyjnych do wyrażania struktur danych. Powstają one przy użyciu tzw. typów sumacyjnych i typów produktowych, jednak pojęcia te na gruncie formalnym będą szczegółowo omówione w późniejszej części pracy. Na potrzeby prezentacji poszczególnych kodowań wystarczą nam w tym rozdziale intuicje o ADT zbudowane na gruncie następujących definicji w języku Haskell:
+
+\begin{minted}{haskell}
+  data Boolean     = True
+                   | False
+  data Tuple a b   = Tuple a b
+  data Temperature = Fahrenheit Int
+                   | Celsius Int
+  data Maybe a     = Nothing
+                   | Just a
+  data Nat         = Zero
+                   | Succ Nat
+  data List t      = Nil
+                   | Cons t (List t)
+\end{minted}
+Definicja typu rozpoczynają się od słowa kluczowego \texttt{data}\footnote{Dyskusja ta ma na celu wyłącznie ustalenie uwagi; świadomi jesteśmy niuansów związanych z określaniem synonimów typów lub definiowaniem typów przy pomocy słowa kluczowego \texttt{newtype}.} po którym występuje \emph{konstruktor typu}. Na wzór notacji BNF, typy przyjmują jedną z \emph{wartości} odzielonych znakiem "|". Każda z wartości składa się z \emph{konstruktora wartości} i ewentualnie występujących po nim \emph{parametrów typowych}. Zauważmy, że umożliwia to rekurencyjnie konstruowanie typów, tak jak w wypadku \texttt{Nat} i \texttt{List}.
+
+Pokażemy, że algebraiczne typy danych możemy reprezentować w zwięzły sposób w rachunku \(\lambda\) bez typów. Przedstawione tutaj koncepcje w zaskakujący sposób przenoszą się do bardziej złożonych typowanych systemów rachunku \(\lambda\).
+
+\subsubsection{Proste typy wyliczeniowe}\label{ref:untyped_simple_enumeration}
+Typy wyliczeniowe to typy, które reprezentują możliwe warianty przyjmowanej wartości. Najprostrzym nietrywialnym przykładem takiego typu jest \texttt{Boolean}. Ma on dwa konstruktory wartości: \texttt{True}, \texttt{False}. Praca z tego rodzaju typami wymaga mechanizmu dopasowywania wzorców (ang. \emph{pattern-matching}) \cite[Rozdział IV]{PeytonJones:1992:IFL:129390}, który pozwala na wybór częściowej definicji funkcji w zależności od zadanego konstruktora wartości. Ponieważ w rachunku \(\lambda\) wyrażenia nie mają typów (lub, przyjmując perspektywę systemów z typami: wszystkie wyrażenia mają jeden, ten sam typ), interesowało nas będzie nie bezpośrednie kodowanie typu, ale kodowanie mechanizmu, który odpowiada za dopasowywanie wzorców. Posłużmy się znowu przykładem z języka Haskell i określmy funkcję odpowiadającą wykonaniu instrukcji warunkowej:
+\begin{minted}{haskell}
+if True  a b = a
+if False a b = b
+\end{minted}
+gdzie \texttt{True} i \texttt{False} są wartościami typu \texttt{Boolean}. Właśnie ze względu na nie, mechanizm dopasowywania wzorca wybiera odpowiednią implementację instrukcji warunkowej. Ten sam efekt osiągnęlibyśmy kodując \texttt{True} i \texttt{False} w rachunku \(\lambda\) w następujący sposób:
+\begin{align*}
+  \mathrm{True} &\equiv \lambda a b.\,a\\
+  \mathrm{False} &\equiv \lambda a b.\,b
+\end{align*}
+Wówczas funkcję \texttt{if} możemy reprezentować wyrażeniem \(\mathrm{if}\equiv\lambda c t e.\, cte\) lub jego \(\eta\)-reduktem: \(\lambda c.\,c\).
+
+\subsubsection{Pary w rachunku \(\lambda\)}
+Parą nazywamy każdy nierekurencyjny typ, który posiada jeden konstruktor wartości parametryzowany przez dwa typy. W takim wypadku potrzebujemy dwóch projekcji zwracających odpowiednio pierwszy i drugi element pary. Przykładem takiego typu jest \texttt{Tuple}. Mamy wówczas:
+\begin{minted}{haskell}
+  fst (Tuple a b) = a
+  snd (Tuple a b) = b
+\end{minted}
+Tego rodzaju typy możemy reprezentować przez tak zwane \emph{domknięcie} (ang. \emph{closure}), czyli cześciową aplikację termu. Standardowym sposobem reprezentacji pary w rachunku \(\lambda\) jest:
+\begin{align*}
+  \mathrm{Tuple}\equiv\lambda a b f .\,f a b
+\end{align*}
+Aplikując \(\mathrm{Tuple}\) tylko do dwóch termów (\emph{domykając} term Tuple) otrzymujemy reprezentację pary. Pozostały, trzeci argument \(f\) nazywamy \emph{kontynuacją}, gdyż aplikując \((\mathrm{Tuple}\ x\ y)\) dla dowolnych \(x, y\in\mathbf{\Lambda}\) do pewnego \(f\in\mathbf{\Lambda}\), w konsekwencji \(x\) i \(y\) zostają zaaplikowane do \(f\).
+Zauważmy, że wówczas reprezentacja \texttt{fst} i \texttt{snd} ma postać:
+\begin{align*}
+  \mathrm{fst} \equiv \lambda t.\,t(\lambda a b.\,a) \\
+  \mathrm{snd} \equiv \lambda t.\,t(\lambda a b.\,b)
+\end{align*}
+
+\begin{przyklad}
+  Wprowadzone konstrukcje pozwalają nam na definicję skończonych (w sensie liczby konstruktorów) typów. Rozważmy następujące przykłady:
+  \begin{enumerate}[label=\alph*)]
+    \setlength\itemsep{0em}
+    \item Konstruktory wartości typu \texttt{Maybe} możemy reprezentować przez
+      \begin{align*}
+        \mathrm{Nothing}&\equiv \lambda nj.\,n\\
+        \mathrm{Just}&\equiv \lambda anj.\,j a
+      \end{align*}
+      Rozważmy następującą funkcję:
+      \begin{minted}{haskell}
+        maybe :: b -> (a -> b) -> Maybe a -> b
+        maybe n _ Nothing  = n
+        maybe _ f (Just x) = f x
+      \end{minted}
+      Odpowiadająca jej reprezentacja to
+      \begin{align*}
+        \mathrm{maybe} \equiv \lambda b f t.\, tb(\lambda a.\,fa)
+      \end{align*}
+    \item Rozważmy następującą funkcję
+      \begin{minted}{haskell}
+        fromTemperature :: Temperature -> Int
+        fromTemperature (Fahrenheit a) = a
+        fromTemperature (Celsius a) = a
+      \end{minted}
+      Ustalając reprezentację konstruktorów \texttt{Fahrenheit} i \texttt{Celsius}:
+      \begin{align*}
+        \mathrm{Fahrenheit}\equiv \lambda tfc.\,ft\\
+        \mathrm{Celsius}\equiv \lambda tfc.\,ct
+      \end{align*}
+      otrzymujemy reprezentację funkcji \texttt{formTemperature} postaci:
+      \begin{align*}
+        \mathrm{fromTemperature}\equiv\lambda t.\,t(\lambda f.\,f)(\lambda c.\,c)
+      \end{align*}
+  \end{enumerate}
+\end{przyklad}
+
+\subsubsection{Kodowanie rekurencji}
+ Rozważmy następującą funkcję dodawania liczb Peano w języku Haskell:
+\begin{minted}{haskell}
+  add Zero     m = m
+  add (Succ n) m = Succ (add n m)
+\end{minted}
+Funkcję tę możemy wyrazić w rachunku \(\lambda\) przy pomocy kodowania Scotta w następujący sposób:
+\begin{align*}
+  \mathrm{add_0} \equiv \lambda n m.\:n\,m\,(\lambda n.\:\mathrm{Succ}(\mathrm{add_0}\,n\,m))
+\end{align*}
+Formalizm rachunku \(\lambda\) nie pozwala na okreslanie nowych nazw i rekurencyjne odnoszenie się przez nie do nich samych. Standardową techniką w rachunku \(\lambda\) do określania funkcji w ten sposób jest użycie operatora punktu stałego Y. Przypomnijmy:
+\begin{align*}
+  \mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))
+\end{align*}
+Wówczas określamy
+\begin{align*}
+  \mathrm{add_Y}\equiv \mathrm{Y}\,(\lambda a\,n\, m .\ n m\,(\lambda n.\ \mathrm{Succ} (a\,n\,m)))
+\end{align*}
+Mając na uwadze możliwość przeprowadzenia powyższej konstrukcji przy użyciu rekurencji, będziemy dopuszczali w notacji odnoszenie się wprowadzanych \(\lambda\)-termów do nich samych.
+
+\subsubsection{Kodowanie Scotta typów rekursywnych}
+Stosując metody kodowania prostych typów wyliczeniowych i par, łatwo odnajdujemy reprezentację konstruktorów wartości dla typów \texttt{Nat} i \texttt{List}:
+\begin{align*}
+  \mathrm{Zero} &\equiv \lambda z s .\, z     & \mathrm{Nil} &\equiv \lambda n c.\,n\\
+  \mathrm{Succ} &\equiv \lambda n z s.\,sn    & \mathrm{Cons} &\equiv \lambda x \, x_s \, n\, c.\ c \, x \, x_s
+\end{align*}
+  Zwróćmy uwagę, że konstruktory Nat i Maybe są swoimi \(\alpha\)-konwersami. Podobieństwo nie jest przypadkowe: na poziomie typów konstrukcja Maybe jest odpowiednikiem brania następnika. Określając dodatkowo \(\mathrm{Void}\equiv\lambda x.x\) jako element neutralny działania łącznego, otrzymujemy na poziomie typów strukturę półpierścienia z działaniem mnożenia okresloną przez konstrukcję par i dzałaniem dodawania określonego przez konstrukcję typów wyliczeniowych. Stąd algebraicze typy danych biorą swoją nazwę.
+
+Z łatwością możemy określić teraz operacje brania poprzednika, głowy i ogona listy, odpowiednio:
+\begin{align*}
+  \mathrm{pred}&\equiv \lambda n .\, n\, \mathrm{undef}\, (\lambda m.\,m)\\
+  \mathrm{head}&\equiv \lambda x_s .\, x_s\, \mathrm{undef}\, (\lambda x_s . x)\\
+  \mathrm{tail}&\equiv \lambda x_s.\, \mathrm{undef}\, (\lambda x_s.\,x_s)
+\end{align*}
+gdzie undef jest stałą o którą rozszerzamy rachunek \(\lambda\) celem sygnalizowania błędnej aplikacji.
+
+  Celem lepszego porównania kodowania Churcha i Scotta podamy reprezentacje funkcji \texttt{foldl} dla typu \texttt{Nat}. Określmy:
+\begin{minted}{haskell}
+  foldl f x Zero     = x
+  foldl f x (Succ n) = f (foldl f x n)
+\end{minted}
+\texttt{foldl} może być przy pomocy kodowania Scotta zapisane jako
+\begin{align*}
+  \mathrm{foldl}  &\equiv \lambda f\,x\,n.\ n\,x\,(\lambda n.\ (\mathrm{foldl}\ f\ x\ n))
+\end{align*}
+Ogólnie, przy pomocy \texttt{foldl} wyabstrahowujemy pojęcie tzw. rekursji od strony ogona (ang. \emph{tail recrusion}), w teorii obliczalności nazywane rekursją prostą lub, popularnie, zwijaniem od lewej. Operator foldl spełnia następującą własność \cite{Hutton:1999:TUE:968578.968579}
+  \begin{align}\label{def:foldl} 
+     f = \mathrm{foldl}\ \varphi\  a \iff \begin{cases}
+       f\ \mathrm{Zero}\ =\ a\\
+       f\ (\mathrm{Succ}\ n) = \varphi\ (f\ n)
+     \end{cases}
+  \end{align}
+% Zauważmy, że w myśl \eqref{def:foldl} mamy:
+% \begin{align*}
+%   \mathrm{foldl}\ \mathrm{Succ}\ \mathrm{Zero}\ \mathrm{Zero}\ &= \mathrm{Zero}\\
+%   \mathrm{foldl}\  \mathrm{Succ}\ \mathrm{Zero}\ (\mathrm{Succ}\ \mathrm{Zero}) &= \mathrm{Succ}\ (\mathrm{foldl}\ \mathrm{Succ\ Zero\ Zero}) \\
+%   &= \mathrm{Succ\ Zero} 
+% \end{align*}
+% oraz jesli \(\mathrm{foldl\ Succ_{Ch}\ Zero_{Ch}}\ n = m\), to wówczas
+
+
+\subsubsection{Kodowanie Churcha typów rekursywnych}
+Przedstawimy teraz klasyczny sposób kodowania typów po raz pierwszy zaprezentowany dla liczb naturalnych przez A. Churcha w \cite{Church1941-CHUTCO-7}. Różni się on od kodowania Scotta tylko w przypadku typów rekursywnych, w pozostałych przypadkach obydwa kodowania dają te same rezultaty. Typ \texttt{Nat} ma dwa konstruktory: \texttt{Zero} i \texttt{Succ}. W kodowaniu Churcha reprezentujemy je w następujący sposób:
+\begin{align*}
+  \mathrm{Zero}_{Ch} &\equiv \lambda f x.\,x\\
+  \mathrm{Succ}_{Ch} &\equiv \lambda n f x.\,f\,(n\,f\,x)
+\end{align*}
+Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w literaturze popularnie nazywa się \emph{liczebnikami Churcha} i oznacza następująco:
+\begin{align*}
+  \bar{1} &\equiv \mathrm{Succ}_{Ch}\ \mathrm{Zero}_{Ch} \ =_\beta\ \lambda f x.\, fx\\
+  \bar{2} &\equiv \mathrm{Succ}_{Ch}\ \mathrm{Succ}_{Ch}\ \mathrm{Zero}_{Ch}\ =_\beta\ \lambda f x.\, f\,f\,x\\
+    &\vdots \\
+  \bar{n} &\equiv \mathrm{Succ}_{Ch}^n\ \mathrm{Zero}_{Ch}\  =_\beta\  \lambda f x.\, f^n\,x
+\end{align*}
+
+Liczba naturalna \(n\) jest kodowana przez funkcję w której jej pierwszy argument jest aplikowany \(n\) razy do drugiego argumentu.
+Porównując je do kodowania Scotta widzimy, że różnica polega na aplikowaniu do kontynuacji termu \((n\,f\,x)\) w przypadku brania następnika. Da się pokazać \cite{hinze_2005}, że liczebniki Churcha są w istocie operacją \texttt{foldl} na argumentach \texttt{Succ} i {Zero}. Istotnie, niech \(\mathrm{nat} \equiv \lambda c.\ c\ \mathrm{Succ}\ \mathrm{Zero}\). Wówczas \(\mathrm{nat}\ \bar{n} =_\beta \bar{n}\). Z tego powodu kodowanie operacji na liczebnikach Churcha, lub ogólnie – funkcji opartych na rekursji prostej po zbiorze liczb naturalnych – jest wyjątkowo proste przy użyciu tej metody. Przykładowo, używając metody Churcha, operację dodawania kodujemy w następujący sposób:
+\begin{align*}
+  \mathrm{add}_{Ch} \equiv \lambda n\, m.\ n\ \mathrm{Succ}_{Ch}\ m
+\end{align*}
+Dla porównania, używając kodowania Scotta:
+\begin{align*}
+  \mathrm{add}_{S} \equiv \lambda n\,m.\ \mathrm{foldl}\ \mathrm{Succ}\ n\ m
+\end{align*}
+\subsubsection{Ogólny schemat kodowania Scotta typów ADT}
+W ogólnym przypadku, mając nastepującą definicję ADT:
+\begin{minted}{haskell}
+  data type_constructor t1 t2 ... tk = C1 t11 ... t1n1
+                                     | C2 t21 ... t2n2
+                                     ...
+                                     | Cm tm1 ... tmnm
+\end{minted}
+dla \(m, n \in \mathbb{N}\), wiążemy z nią reprezentację każdego z konstruktorów:
+\begin{gather*}
+  \mathrm{C_1} \equiv \lambda t_{11}\, t_{12}\, \dots t_{1n_1}\, f_1\, f_2 \dots f_m.\ f_1 t_{11} t_{12} \dots t_{1n_1}\\
+  \mathrm{C_2} \equiv \lambda t_{21}\, t_{22}\, \dots t_{2n_2}\, f_1\, f_2 \dots f_m.\ f_2 t_{21} t_{22} \dots t_{2n_2}\\
+ \vdots\\
+  \mathrm{C_m} \equiv \lambda t_{m1}\, t_{m2}\, \dots t_{mn_m}\, f_1\, f_m \dots f_m.\ f_1 t_{m1} t_{m2} \dots t_{mn_m}
+\end{gather*}
+Wówczas następującą definicję cześciową funkcji \texttt{f}:
+\begin{minted}{haskell}
+  f (C1 v11 ... v1n1) = y1
+  ...
+  f (Cm vm1 ... vmnm) = ym
+\end{minted}
+kodujemy przy za pomocą następujego \(\lambda\)-termu:
+\begin{align*}
+  \lambda x.\ x\,&(\lambda v_{11}\dots v_{1n_1}.\ y_1)\\
+                 &\vdots\\
+                 &(\lambda v_{m1}\dots v_{mn_m}.\ y_m)
+\end{align*}
+gdzie \(y_1\) są kodowaniami Scotta \texttt{yi} dla \(i\in\mathbb{N}\). 
+

@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{n}{add} \PYG{k+kt}{Zero}     \PYG{n}{m} \PYG{o+ow}{=} \PYG{n}{m}
+  \PYG{n}{add} \PYG{p}{(}\PYG{k+kt}{Succ} \PYG{n}{n}\PYG{p}{)} \PYG{n}{m} \PYG{o+ow}{=} \PYG{k+kt}{Succ} \PYG{p}{(}\PYG{n}{add} \PYG{n}{n} \PYG{n}{m}\PYG{p}{)}
+\end{Verbatim}
