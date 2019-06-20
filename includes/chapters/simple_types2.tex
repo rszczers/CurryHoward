@@ -1,0 +1,53 @@
+\section{Rachunek \(\lambda\) z typami prostymi}
+\subsection{Typy proste}\label{ssec:typy-proste}
+Niech \(\mathrm{U}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(p,\ q,\ \dots\ \) (być może indeksowanych liczbami naturalnymi), które będziemy nazywali \emph{zmiennymi typowymi}.\begin{definicja}\label{def:typy-proste}(Typy proste)\\
+\emph{Typami prostymi} będziemy określali najmniejszy w sensie mnogościowym zbiór wyrażeń taki, że:
+\begin{enumerate}[label=(ST\arabic*)]
+  \setlength\itemsep{0em}
+  \item Jeśli \(p\) jest zmienną typową, to \(p\) jest typem prostym.\label{def:t-1}
+  \item Jeśli \(\tau\) i \(\sigma\) są typami prostymi, to \(\left(\tau\to\sigma\right)\) jest typem prostym.\label{def:t-2}
+\end{enumerate}
+\end{definicja}
+
+Typy proste zbudowane tylko wedle reguły \ref{def:t-1} nazywamy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły \ref{def:t-2} -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbf{T_\to}\).
+
+Późniejsze litery alfabetu greckiego, tj. \(\sigma,\, \tau,\, \rho,\ \dots\) będą służyły nam za zmienne metasyntaktyczne do oznaczania typów prostych. Dla lepszej czytelności będziemy pomijali najbardziej zewnętrzne nawiasy. Konstruktor typu \(\to\) wiąże prawostronnie; oznacza to, że typy \(\tau\to\sigma\to\theta\) oraz \(\tau\to(\sigma\to\theta)\) będziemy uznawali za tożsame.
+
+Typy proste ujęte Definicją \ref{def:typy-proste} mają strukturę drzewa binarnego. Wysokość takiego drzewa będziemy nazywali \emph{stopniem} typu. Precyzyjnie ujmuje to pojęcie poniższa definicja.
+\begin{definicja}\label{def:stopien-typu}(Stopień typu)\\
+  Stopniem typu nazywamy funkcję \(\delta :\: \mathbf{T}_\to \longrightarrow \mathbb{N}\) taką, że
+  \begin{align*}
+    \delta(p) &= 0,\ \text{gdzie \(p\) jest typem atomowym},\\
+    \delta(\tau\to\sigma)&=1 + \max\left(\delta(\tau),\ \delta(\sigma)\right).
+  \end{align*}
+\end{definicja}
+
+\subsection{Pseudotermy}
+  Niech \(\mathrm{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\ \) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}.
+\begin{definicja}(Pseudo-pretermy)\\
+  \emph{Pseudo-pretermami} będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór \(\mathbf{\tilde\Lambda}_{\mathrm{T}}\) taki, że:
+
+  \begin{enumerate}[label=(PT\arabic*)]
+  \setlength\itemsep{0em}
+  \item Jeśli \(x\in \mathrm{V}\), to \(x\in{\mathbf{\tilde\Lambda}}_{\mathrm{T}}\).\label{def:pt-1}
+  \item Jeśli \(M\in\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\) i \(N\in\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\), to \((MN)\in\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\).\label{def:pt-2}
+  \item Dla dowolnych \(x\in \mathrm{V}\), \(\sigma\in\mathbf{T}_\to\), \(M\in\mathbf{\tilde{\Lambda}}_{\mathrm{T}}\) mamy, że \((\lambda x:{\sigma}.\,M)\in \mathbf{\tilde{\Lambda}}_{\mathrm{T}}\).\label{def:pt-3}
+  \end{enumerate}
+\end{definicja}
+  Wyrażenia postaci \ref{def:pt-2} nazywamy \emph{aplikacjami} \(M\) do \(N\), zaś wyrażenia postaci \ref{def:pt-3} -- \emph{\(\lambda\)-abstrakcjami}, gdzie o wszystkich podtermach termu \(M\) mówi się, że są w \emph{zasięgu} \(\lambda\)-abstraktora, zaś o \(\lambda\)-zmiennej \(x\) mówi się, że jest nim \emph{związana}.
+
+  Za zmienne metasyntaktyczne obieramy duże litery alfabetu łacińskiego \(M,\ N,\ \dots\ \) Podobnie jak w podrozdziale \ref{ssec:typy-proste} stosujemy konwencję o opuszczaniu najbardziej zewnętrznych nawiasów. Aplikacja termów wiąże lewostronnie; oznacza to, że będziemy utożsamiali ze sobą wyrażenia \(MNP\) oraz \((MN)P\).
+
+\begin{definicja}(Stwierdzenie, deklaracja, kontekst, sąd)
+  \begin{enumerate}[label=(\arabic*)]
+  \setlength\itemsep{0em}
+  \item \emph{Stwierdzeniami} (ang. \emph{statement}) nazywamy napisy postaci \(M:\sigma\), gdzie \(M\in\mathbf{\Lambda}_{\mathbb{T}}\) i \(\sigma\in\mathbb{T}\). W stwierdzeniu \(M:\sigma\) \(\lambda\)-term \(M\) nazwamy \emph{podmiotem} (ang. \emph{subject}), zaś \(\sigma\) -- \emph{predykatem}.
+  \item \emph{Deklaracjami} (ang. \emph{declaration}) nazywamy stwierdzenia w których podmot jest zmienną termową.
+  \item \emph{Kontekstem} (ang. \emph{context}) nazywamy skończony liniowo uporządkowany zbiór deklaracji, w którym wszystkie podmioty są wzajemnie różne.
+  \item \emph{Sądami} (ang. \emph{judgement}) nazywamy napisy postaci \(\Gamma\vdash M:\sigma\), gdzie \(\Gamma\) jest kontekstem, zaś \(M:\sigma\) -- stwierdzeniem.  
+  \end{enumerate}
+\end{definicja}
+
+\begin{definicja}(Poprawność)
+  Preterm \(M\in\mathbf{\Lambda}_\mathbb{T}\) nazywamy \emph{poprawnym}, jeśli istnieje kontekst \(\Gamma\) i typ \(\rho\in\mathbb{T}\) taki, że \(\Gamma\vdash M:\rho\).
+\end{definicja}
