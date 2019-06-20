@@ -1,0 +1,30 @@
+Widzieliśmy, że \(\beta\)-redukcja może prowadzić do uzyskania rezultatu lub nie. Fakt \ref{thm:cr_untyped} i następujące po nim Wniosek \ref{thm:ch_wniosek1_untyped} i Wniosek \ref{thm:ch_wniosek2_untyped} stwierdzają, że jeśli tylko mamy pewność, że \(\lambda\)-term ma postać normalną, to jest ona wyznaczona jednoznacznie i doprowadzi nas do niej każda strategia normalizująca. Fakt \ref{thm:cr_untyped} to klasyczne twierdzenie, którego dowód można znaleźć w \cite{Barendregt_1992} i ze względu na jego obszerność pozwalamy sobie go pominąć. 
+
+\begin{fakt}(Twierdzenie Churcha-Rossera)\label{thm:cr_untyped}. 
+%Jeśli \(M_1\to^{*}_\beta M_2\) i \(M_1\to^{*}_\beta M_3\), to istnieje \(M_4\in\mathbf{\Lambda}\) takie, że \(M_2\to^{*}_\beta M_4\) i \(M_3\to^{*}_\beta M_4\).
+\(\beta\)-redukcja ma własność CR. 
+\end{fakt}
+Innymi słowy, przemienny jest diagram:
+\[ \begin{tikzcd}
+M_1 \arrow{r}{*} \arrow[swap]{d}{*} & M_2 \arrow{d}{*} \\%
+M_3 \arrow{r}{*}& M_4
+\end{tikzcd}
+\] 
+
+\begin{wniosek}\label{thm:ch_wniosek1_untyped}
+  Jeśli \(M=_\beta N\), to istnieje \(P\in\mathbf{\Lambda}\) takie, że \(M\to^{*}_\beta P\) i \(N\to^{*}_\beta P\).
+\end{wniosek}
+\begin{dowod}
+  \qed
+\end{dowod}
+
+\begin{wniosek}\label{thm:ch_wniosek2_untyped}
+    \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
+  \setlength\itemsep{0em}
+  \item Jeśli \(N\) to postać normalna \(M\), to \(M\to^{*}_\beta N\).
+  \item Każdy \(\lambda\)-term ma co najwyżej jedną postać normalną.
+  \end{enumerate}
+\end{wniosek}
+\begin{dowod}
+  \qed
+\end{dowod}

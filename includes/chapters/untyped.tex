@@ -357,12 +357,27 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
   \[
     (\lambda x.\,M)N\rightarrow_\beta M[x/N].
   \]
-\emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}. \emph{Ciągiem} \(\beta\)-redukcji nazywamy skończony lub nieskończony ciąg postaci
-  \[
+  \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}. 
+  
+  \emph{Ciągiem \(\beta\)-redukcji} nazywamy kazdy skończony lub nieskończony ciąg \(\lambda\)-termów \(M_0,\,M_1,\,\dots\) taki, że 
+  \(
     M_0 \to_\beta M_1 \to_\beta \dots
-  \]
+  \)
 \end{definicja}
-  \begin{przyklad}Oznaczmy \(\mathrm{Y}=\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))\) i niech \(F\) będzie dowolnym \(\lambda\)-termem. Wówczas otrzymujemy nieskończony ciąg redukcji postaci
+\begin{definicja}(Strategia redukcji)
+  Strategią redukcji nazywamy każde odwzorowanie \(S:\:\mathbf{\Lambda}\to\mathbf{\Lambda}\) postaci
+  \[
+     S(M) = \begin{cases}
+       M, &\text{jeśli}\ M\in \mathrm{NF}_\beta, \\
+       M', &\text{jeśli}\ M\to_\beta M'.
+     \end{cases}
+   \]
+   Strategię \(S\) nazywamy \emph{normalizującą}, jeśli dla każdego \(M\in \mathrm{WN}_\beta\) istnieje \(i\in \mathbb{N}\) takie, że \(F^{i}(M)\equiv \underbrace{F(F(\dots(F}_{i\text{-razy}}(M))\dots))\in \mathrm{NF_\beta}\).
+\end{definicja}
+  \begin{przyklad}
+    \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
+    \setlength\itemsep{0em} 
+    \item Oznaczmy \(\mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))\) i niech \(F\) będzie dowolnym \(\lambda\)-termem. Wówczas otrzymujemy nieskończony ciąg redukcji postaci
     \begin{align*}
       \mathrm{Y}F &\equiv (\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx))))F\\
                   &\to_\beta (\lambda x.\,F(xx))\lambda x.\,F(xx)\\
@@ -370,7 +385,18 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
                   &\to_\beta F(\underbrace{F((\lambda x.\,F(xx))\lambda x.\,F(xx))}_{=_\beta \mathrm{Y}F})\\
                   &\to_\beta \dots
     \end{align*}
-    Widzimy, że relacja \(\beta\)-redukcji nie jest silnie normalizująca.
+        Y nazywamy \emph{kombinatorem punktu stałego}. Widzimy, że relacja \(\beta\)-redukcji w rachunku \(\lambda\) nie jest ani słabo, ani silnie normalizująca. 
+      \item Niech \(\Omega\equiv (\lambda x.\ xx)(\lambda x.\ xx)\). \(\Omega\) jest \(\beta\)-redeksem, którego redukcja prowadzi do ponownego otrzymania termu \(\Omega\) i w konsekwencji do stałego ciągu redukcji postaci:
+      \begin{align*}
+        \Omega\to_\beta \Omega \to_\beta \Omega \to_\beta \dots
+      \end{align*}
+    \item Niech \(\Delta\equiv \lambda x.\ xxx\). Wówczas:
+      \begin{align*}
+        \Delta\Delta \to_\beta \Delta\Delta\Delta \to_\beta \Delta\Delta\Delta\Delta \to_\beta \dots
+      \end{align*}
+        Ponownie, ponieważ każda redukcja powoduje wydłużenie termu, \(\Delta\Delta\) nie ma postaci normalnej i w konsekwencji każdy powstały ciąg redukcji termu \(\Delta\Delta\) jest nieskończony.  
+      \item Redukcja \(\lambda\)-termu posiadającego więcej niż jeden redeks może prowadzić do różnych (choć \(\beta\)-równowaznych) reduktów. Zależy to od wyboru strategii redukcji. Rozważmy następujący term: \((\lambda u.\ v)\,\Omega\). Konsekwentne redukowanie podtermu \(\Omega\) prowadzić musi do niekończącego się stałego ciągu redukcji \[(\lambda u.\ v)\,\Omega\to_\beta(\lambda u.\ v)\,\Omega\to_\beta \dots\] Wybierając strategię polegającą na aplikacji \(\Omega\) do \((\lambda u.\ v)\) otrzymujemy natychmiastowo redeks w postaci normalnej.\label{ex:undeterministic_reduction_untyped}
+    \end{enumerate}
   \end{przyklad}
 \begin{definicja}(\(\eta\)-redukcja)
   \(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) zgodną na \(\mathbf{\Lambda}\) relację binarną \(\to_\eta\) taką, że
@@ -381,8 +407,10 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
   \(\eta\)-redukcja pozwala na pominięcie niczego nie wnoszącej \(\lambda\)-abstrakcji. Operację odwrotną nazywamy \emph{\(\eta\)-abstrakcją}, zaś \(\lambda\)-termy będące w którejkolwiek z tych relacji nazywamy \emph{\(\eta\)-konwersami}. Operacja ta nie ma wpływu na rezultat obliczenia, jedynie optymializuje zapis \(\lambda\)-termów i stąd ma duże znaczenie stylistyczne w programowaniu funkcyjnym.
   \end{definicja}
 
-  \begin{przyklad}
+  \begin{przyklad} 
+    Przypuśćmy, że \((+1)\in\mathbf{\Lambda}\). Wówczas 
     \(\lambda x. ((+1) x) =_\eta (+1) \).
   \end{przyklad}
 
+\subimport{}{church_rosser_untyped.tex}  
 \subimport{}{scott_encoding.tex}
