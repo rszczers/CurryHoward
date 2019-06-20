@@ -357,13 +357,36 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
   \[
     (\lambda x.\,M)N\rightarrow_\beta M[x/N].
   \]
-  \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}. 
+  \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}. Przez \(\to_\beta^{+}\), \(\to_\beta^{*}\), \(=_\beta\) oznaczamy odpowiednie domknięcia relacji \(\beta\)-redukcji.  Symbolem \(\leftarrow_\beta\) oznaczać będziemy relację odwrotną do \(\beta\)-redukcji, zaś przez \(\xleftrightarrow[\beta]{}\) jej symetryczne domknięcie. 
   
   \emph{Ciągiem \(\beta\)-redukcji} nazywamy kazdy skończony lub nieskończony ciąg \(\lambda\)-termów \(M_0,\,M_1,\,\dots\) taki, że 
   \(
     M_0 \to_\beta M_1 \to_\beta \dots
   \)
+
+  Relację \(=_\beta\) nazywamy \emph{\(\beta\)-konwersją}. Zauważmy, że \(M =_{\beta} N\) wtedy i tylko wtedy, gdy istnieje skończony ciąg \(\lambda\)-termów \(M\equiv M_0\), \(M_1\), \(\dots\), \(M_n \equiv N\) taki, że \(M_i \to_\beta M_{i+1}\) lub \(M_{i+1} \to_\beta M_i\) dla \(0\leq i \leq n\). 
+  
 \end{definicja}
+
+\begin{przyklad}
+  Wszystkie pary \(\lambda\)-termów ze zbioru
+  \[
+    \left\{
+      (\lambda x.\,(\lambda y.\,yx)\,z)\,v,\ 
+      (\lambda y.\,yv)\,z,\ 
+      (\lambda x.\,zx)\,v,\ 
+      zv
+    \right\}
+  \]
+  są swoimi \(\beta\)-konwersami. Mamy:
+  \begin{gather*}
+    (\lambda y.\,yv)z \to_\beta zv\ \leftarrow_\beta (\lambda x.\,zx)v,\\
+    (\lambda y.\,yv)z \leftarrow_\beta (\lambda x.\,(\lambda y.\,yx)z)v \to_\beta (\lambda x.\,zx)v.
+  \end{gather*}
+%  (λy . y v)z → β z v ← β (λx . z x)v
+%  (λy . y v)z ← β (λx . (λy . y x)z)v → β (λx . z x)v
+\end{przyklad}
+
 \begin{definicja}(Strategia redukcji)
   Strategią redukcji nazywamy każde odwzorowanie \(S:\:\mathbf{\Lambda}\to\mathbf{\Lambda}\) postaci
   \[
