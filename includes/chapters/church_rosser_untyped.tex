@@ -4,17 +4,35 @@ Widzieliśmy, że \(\beta\)-redukcja może prowadzić do uzyskania rezultatu lub
 %Jeśli \(M_1\to^{*}_\beta M_2\) i \(M_1\to^{*}_\beta M_3\), to istnieje \(M_4\in\mathbf{\Lambda}\) takie, że \(M_2\to^{*}_\beta M_4\) i \(M_3\to^{*}_\beta M_4\).
 \(\beta\)-redukcja ma własność CR. 
 \end{fakt}
-Innymi słowy, przemienny jest diagram:
-\[ \begin{tikzcd}
-M_1 \arrow{r}{*} \arrow[swap]{d}{*} & M_2 \arrow{d}{*} \\%
-M_3 \arrow{r}{*}& M_4
-\end{tikzcd}
-\] 
 
 \begin{wniosek}\label{thm:ch_wniosek1_untyped}
-  Jeśli \(M=_\beta N\), to istnieje \(P\in\mathbf{\Lambda}\) takie, że \(M\to^{*}_\beta P\) i \(N\to^{*}_\beta P\).
+  Jeśli \(M=_\beta N\), to istnieje \(L\in\mathbf{\Lambda}\) takie, że \(M\to^{*}_\beta L\) i \(N\to^{*}_\beta L\).
 \end{wniosek}
 \begin{dowod}
+  Niech \(M, N\in\mathbf{\Lambda}\) będą takie, że \(M=_\beta N\). Wówczas istnieje ciąg \(\lambda\)-termów \(M_0, M_1, \dots, M_{n-1}, M_n\) taki, że
+  \[
+    M_0\xleftrightarrow[\beta]{}M_1\xleftrightarrow[\beta]{}\ \dots\ \xleftrightarrow[\beta]{}M_{n-1}\xleftrightarrow[\beta]{}M_n,
+  \]
+  gdzie \(M_0\equiv M\) i \(M_n \equiv N\). Dowód przeprowadzimy przez indukcję względem \(n\). Rozważmy następujące przypadki:
+  \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
+    \setlength\itemsep{0em}
+    \item Jeśli \(n=0\), to \(M\equiv N\). Ustalając \(L\equiv M (\equiv N)\) w oczywisty sposób \(M\to^{*}_\beta L\) i \(N\to^{*}_\beta L\).
+    \item Jeśli \(n=k>0\), to istnieje \(M_{k-1}\in\mathbf{\Lambda}\) takie, że 
+   \[
+    M\equiv M_0\xleftrightarrow[\beta]{}M_1\xleftrightarrow[\beta]{}\ \dots\ \xleftrightarrow[\beta]{}M_{k-1}\xleftrightarrow[\beta]{}M_k\equiv N
+  \]
+      Z założenia indukcyjnego wiemy, że istnieje \(L'\in\mathbf{\Lambda}\) takie, że \(M_0 \to^{*}_\beta L'\) i \(M_{k-1} \to^{*}_\beta L'\). Ponieważ \(\xleftrightarrow[\beta]{}\) jest symetryczna, rozważmy osobno przypadki \(M_{k-1}\to_\beta M_k\) i \(M_{k}\to_\beta M_{k-1}\).
+  \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
+    \setlength\itemsep{0em}
+    \item Jeśli \(M_{k-1}\to_\beta M_k\), to tym bardziej \(M_{k-1}\to^{*}_\beta M_k\). Ponieważ \(M_{k-1}\to^{*}_\beta L'\), to korzystając Faktu \ref{thm:cr_untyped} wnosimy, że istnieje \(L\in\mathbf{\Lambda}\) taki, że \(L'\to^{*}_\beta L\) i \(M_k \to^{*}_\beta L\), czyli
+               \[ \begin{tikzcd}
+                 M_0 \arrow{r} \arrow{dr}{*} & \dots \arrow{l} \arrow{r} &  M_{k-1} \arrow{l}{} \arrow{r}{} \arrow[swap]{dl}{*} & M_k \arrow{d}{*} \\%
+                 & L' \arrow{rr}{*} & & L 
+               \end{tikzcd}
+               \] 
+             \item Jeśli \(M_{k}\to_\beta M_{k-1}\), to ponieważ \(M_{k-1}\to^{*}_\beta L'\), natychmiast otrzymujemy, że \(M_k \to^{*}_\beta L'\). Ustalając \(L\equiv L'\) otrzymujemy tezę.
+  \end{enumerate}
+  \end{enumerate}
   \qed
 \end{dowod}
 

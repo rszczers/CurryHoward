@@ -6,11 +6,23 @@
                dla dowolnych \(a,\,b,\,c\in A\) takich, że
                \(a\to^{*}b\) oraz \(a\to^{*} c\) istnieje \(d\in A\)
                takie, że \(b\to^{*} d\) i \(c\to^{*} d\).\label{def:cr_property_untyped}
+               Innymi słowy, przemienny jest diagram:
+               \[ \begin{tikzcd}
+               a \arrow{r}{*} \arrow[swap]{d}{*} & b \arrow{d}{*} \\%
+               c \arrow{r}{*}& d
+               \end{tikzcd}
+               \] 
 
   \item[(WCR)] Powiemy, że \(\to\) ma \emph{słabą własność 
                Churcha-Rossera}, jesli dla dowolnych \(a,\,b,\,c\in A\)
                takich, że \(a\to b\) oraz \(a\to c\) istnieje \(d\in A\) 
                takie, że \(b\to^{*} d\) i \(c\to^{*} d\).\label{def:wcr_property_untyped}
+               Innymi słowy, przemienny jest diagram:
+               \[ \begin{tikzcd}
+               a \arrow{r}{*} \arrow[swap]{d}{*} & b \arrow{d}{} \\%
+               c \arrow{r}{}& d
+               \end{tikzcd}
+               \] 
 
 \end{enumerate}
 \end{definicja}
