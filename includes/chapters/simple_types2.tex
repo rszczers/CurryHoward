@@ -96,7 +96,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
 
 \subsection{Silna normalizacja}
 
-\begin{lemat}
+\begin{lemat}\label{def:sn_lemat1}
   Niech \(\tau\in\mathbb{T}\) bedzie dowolnym typem prostym. Wówczas:
   \begin{enumerate}[label=(\arabic*)]
     \setlength\itemsep{0em}
@@ -128,28 +128,51 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   \qed
 \end{dowod}
 
-\begin{lemat}
+\begin{lemat}\label{def:sn_lemat2}
   Załóżmy, że:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
-  \item  \(M[x/N_0]N_1\dots N_k\in\mathrm{SN}\),
-  \item  \(N_0\in \mathrm{SN}\).
+    \item  \(M[x/N_0]N_1\dots N_k\in\mathrm{SN}\),\label{def:l2_a}
+    \item  \(N_0\in \mathrm{SN}\).\label{def:l2_b}
   \end{enumerate}
   Wówczas \((\lambda x.\,M)N_0 N_1 \dots N_k \in \mathrm{SN}\).
 \end{lemat}
 \begin{dowod}
+  (Ad  absurdum) Przypuśćmy,  że  \(P_0\equiv(\lambda  x.\, M)N_0  N_1
+  \dots N_k \not\in\mathrm{SN}\). Wówczas istnieje nieskończony ciąg redukcji
+  \[
+    P_0\to P_1 \to \dots
+  \]
+  Każdy podterm \(\lambda\)-termu silnie normalizowalnego jest silnie
+  normalizowalny. Ponieważ \(P_0\equiv M[x/N_0]N_0  N_1 \dots N_k
+  \in\mathrm{SN}\), to \(M[x/N_0],\,N_0,\,  N_1,\, \dots,\, N_k
+  \in\mathrm{SN}\). Na podstawie Lematu \ref{thm:sn_lem2'} mamy ponadto, że \(M\in\mathrm{SN}\). Wobec tego dla pewnego \(n\in\mathbb{N}\) redukcji ulega redeks czołowy:
+  \begin{align*}
+    P_n\equiv (\lambda x.\,M')N'_0 N'_1 \dots N'_k\to_\beta M'[x/N'_0]N'_0 N'_1\dots N'_k\equiv P_{n+1},
+  \end{align*}
+    gdzie \(M\to^{*}_\beta M'\) oraz \(N_i \to^{*}_\beta N'_i\) dla \(i\leq k\). Ale skoro tak, to prawdą jest również, że \(M[x/N_0]N_1\dots N_k \to^{*}_\beta P_{n+1}\), zaś \(M[x/N_0]N_1\dots N_k \in \mathrm{SN}\). Zatem \(P_{n+1}\in\mathrm{SN}\), co prowadzi do sprzeczonści.
   \qed
 \end{dowod}
-\begin{lemat}
+\begin{lemat}\label{def:sn_lemat3}
   Załóżmy, że:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
-    \item  \(M[x/N_0]N_1\dots N_k\in \llbracket \tau \rrbracket\),
-  \item  \(N_0\in \mathrm{SN}\).
+    \item  \(M[x/N_0]N_1\dots N_k\in \llbracket \tau \rrbracket\),\label{def:l3_a}
+    \item  \(N_0\in \mathrm{SN}\).\label{def:l3_b}
   \end{enumerate}
   Wówczas \((\lambda x.\,M)N_0 N_1 \dots N_k \in \llbracket \tau \rrbracket \).
 \end{lemat}
 \begin{dowod}
+  Dowód przebiega przez indukcję strukturalną względem \(\tau\). Rozważmy następujące przypadki:
+  \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{0em}
+    \item Jeśli \(\tau\) jest zmienną typową, to \(\llbracket \tau \rrbracket=\mathrm{SN}\). Wobec tego problem sprowadza się do Lematu \ref{def:sn_lemat2}.  
+    \item Przypuśćmy, że \(\tau\equiv \sigma\to\rho\) i niech \(M[x/N_0]N_1\dots N_k \in \llbracket \sigma\to \rho \rrbracket\). Wybierzmy dowolny \(P\in\llbracket\sigma\rrbracket\). Wówczas \(M[x/N_0] N_1 \dots N_k N_{k+1}\in\llbracket \rho\rrbracket\). Z założenia indukcyjnego mamy jednak, że 
+      \(
+        (\lambda x.\,M)N_0 N_1\dots N_k N_{k+1}\in\llbracket \rho \rrbracket.
+      \)
+      Wystarczy więc przyjąć \(N_{k+1}\equiv P\) i z definicji \(\llbracket \sigma \to \rho \rrbracket\) mamy, że \((\lambda x.\,M)N_0 N_1 \dots N_k \in \llbracket \sigma \to \rho \rrbracket\).
+  \end{enumerate}
   \qed
 \end{dowod}
 \begin{definicja}
@@ -162,5 +185,51 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   Jeśli \(\Gamma\vdash_{\mathbb{T}}M:\tau\), to \(\Gamma\models M:\tau\).
 \end{twierdzenie}
 \begin{dowod}
+  Dowód będzie przebiegał przez indukcję względem wyprowadzenia \(\Gamma\vdash M:\tau\). Niech \(\Gamma=(x_1:\tau_1,\,x_2:\tau_2,\,\dots,\,x_n:\tau_n)\) będzie kontekstem dla którego istnieje wyprowadzenie \(J:\:\Gamma\vdash M:\tau\). Wybierzmy \(N_1\in\llbracket\tau_1 \rrbracket,\,N_2\in\llbracket\tau_2\rrbracket,\,\dots,\,N_n\in\llbracket\tau_n\rrbracket\). Rozważmy następujące przypadki:
+  \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{0em}
+    \item \(J\) jest konsekwencją reguły \emph{var}. Wówczas \(J\) jest postaci \(\Gamma \vdash x_i:\tau\) dla pewnego \(i\in\mathbb{N}\), \(1\leq i\leq n\), gdzie \(x_i:\tau\in\Gamma\). Stąd \(M[\vec{x}/\vec{N}]=x_i[x_i/N_i]=N_i\in\llbracket \tau \rrbracket\). Z dowolności \(N_i\), \(\Gamma\vDash M:\tau\).
+    \item \(J\) jest konsekwencją reguły \emph{app}. Wówczas \(J\) jest postaci \(\Gamma\vdash PQ:\tau\). Z założenia indukcyjnego istnieje \(\sigma\in\mathbb{T}\) takie, że \(\Gamma\models P:\sigma\to\tau\) i \(\Gamma\models Q:\sigma\). Wobec tego \(P[\vec{x}/\vec{N}]\in\llbracket\sigma\to\tau\rrbracket\) i \(Q\llbracket \vec{x}/\vec{N} \rrbracket \in \llbracket \sigma \rrbracket\). Z definicji jednoczesnego podstawienia (Definicja \ref{def:simult_substitution}) mamy:
+      \begin{align*}
+        PQ[\vec{x}/\vec{N}]=P[\vec{x}/\vec{N}]Q[\vec{x}/\vec{N}]
+      \end{align*}
+      Z definicji \(\llbracket \sigma \to \tau \rrbracket\) wówczas \(M\in\llbracket \tau\rrbracket\).
+    \item \(J\) jest konsekwencją reguły \emph{abs}. Wówczas \(J\) jest postaci \(\Gamma\vdash \lambda y.\,P:\sigma \to\rho\), gdzie \(y\not\in\mathrm{dom}\Gamma\). Z założenia indukcyjnego mamy, że \(\Gamma,y:\sigma\models P:\rho\). Oznacza to, że dla dowolnych \(N_1\in\llbracket\tau_1\rrbracket\), \(N_2\in\llbracket\tau_2\rrbracket\), \(\dots\), \(N_n\in\llbracket\tau_n\rrbracket\) mamy
+    \begin{align} 
+      \forall N\in\llbracket \sigma \rrbracket\, \left(
+        P[\vec{x},y/\vec{N},N]\in\llbracket \rho \rrbracket \tag{\textasteriskcentered} \label{eq:poprawnosc}
+      \right)
+    \end{align} 
+      Ustalmy \(P'\equiv P[y/y'][\vec{x}/\vec{N}]\), gdzie \(y'\not\in \mathrm{dom}\Gamma\) i \(y'\not \in \mathrm{FV}(N_i)\) dla \(i\in\mathbb{N}\), \(1\leq i\leq n\). Wówczas z \eqref{eq:poprawnosc}:
+      \begin{align*}
+        \forall N\in\llbracket\sigma\rrbracket\, \left(
+        P'[y'/N]\in\llbracket \rho \rrbracket
+        \right )
+      \end{align*}
+      Ustalmy \(N_0\in\llbracket \sigma \rrbracket\). Wówczas z cześci \ref{def:l1_a} Lematu \ref{def:sn_lemat1} \(N_0\in\mathrm{SN}\). Wobec tego z Lematu \ref{def:sn_lemat3} wnioskujemy, że:
+      \begin{align}
+        (\lambda y'.\,P')N_0\in\llbracket \rho \rrbracket \tag{\textasteriskcentered\textasteriskcentered}\label{eq:sn_2}
+      \end{align}
+      Zauważmy teraz, że ponieważ \(\forall i\ y_i\not\in\mathrm{FV}(N_i) \)
+      \begin{equation}
+        \begin{aligned}
+        (\lambda y'.\,P')&=(\lambda y'.\,P[y/y'][\vec{x}/\vec{N}])\\
+                         &=(\lambda y'.\,P[y/y'])[\vec{x}/\vec{N}]
+                         =(\lambda y.\,P)[\vec{x}/\vec{N}] 
+        \end{aligned} \tag{\textasteriskcentered\textasteriskcentered\textasteriskcentered}\label{eq:sn_3}
+      \end{equation}
+      Z \eqref{eq:sn_2} i \eqref{eq:sn_3} otrzymujemy     
+      \[
+        \left(
+          (\lambda y.\,P)[\vec{x}/\vec{N}]
+        \right)
+        N_0 \in \llbracket \rho \rrbracket .
+      \]
+      Ponieważ \(N_0\in\llbracket \sigma \rrbracket\), to z definicji \(\llbracket \sigma \to \rho \rrbracket\) mamy, że 
+      \[
+        (\lambda y.\,P)[\vec{x}/\vec{N}]\in\llbracket \sigma \to \rho \rrbracket.
+      \]
+      Z dowolności \(\vec{N}\) otrzymujemy ostatecznie, że \(\Gamma\models \lambda y.\,P\).
+  \end{enumerate}
   \qed
 \end{dowod}
