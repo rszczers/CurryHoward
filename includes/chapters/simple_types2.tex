@@ -100,11 +100,31 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   Niech \(\tau\in\mathbb{T}\) bedzie dowolnym typem prostym. Wówczas:
   \begin{enumerate}[label=(\arabic*)]
     \setlength\itemsep{0em}
-    \item \(\llbracket \tau \rrbracket  \subseteq \mathrm{SN}\).
-    \item Jeśli \(N_1,\,N_2,\,\dots,\,N_k\in\mathrm{SN}\), to \(xN_1 N_2 \dots N_k \in \llbracket \tau \rrbracket\).
+    \item \(\llbracket \tau \rrbracket  \subseteq \mathrm{SN}\).\label{def:l1_a}
+    \item Jeśli \(N_1,\,N_2,\,\dots,\,N_k\in\mathrm{SN}\), to \(xN_1 N_2 \dots N_k \in \llbracket \tau \rrbracket\).\label{def:l1_b}
   \end{enumerate}
 \end{lemat}
 \begin{dowod}
+  Dowód przeprowadzimy przez indukcję strukturalną względem \(\tau\). Mamy do rozważenia następujące dwa przypadki:
+  \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{0em}
+    \item \(\tau\) jest zmienną typową.
+     \begin{enumerate}[label=(\arabic*)]
+      \setlength\itemsep{0em}
+     
+        \item Wynika bezpośrednio z definicji \(\llbracket \tau \rrbracket\in \mathrm{SN}\). 
+         
+        \item Niech \(N_1,\,N_2,\,\dots,\,N_k \in \mathrm{SN}\). Wówczas \(N_1,\,N_2,\,\dots,\,N_k\in\mathrm{SN}\). Z definicji \(\llbracket \tau \rrbracket\) mamy, że \(xN_1 N_2 \dots N_k \in\llbracket \tau \rrbracket\).
+      \end{enumerate}
+
+    \item Przypuśćmy, że \(\tau=\sigma\to\rho\) oraz twierdzenie zachodzi dla \(\sigma\) i \(\rho\).
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{0em}
+
+    \item Niech \(M\in\llbracket \sigma \to \rho\rrbracket\) i niech \(x\) bedzie dowolną \(\lambda\)-zmienną. Z części \ref{def:l1_b} założenia indukcyjnego mamy \(x\in\llbracket \sigma \rrbracket\), zatem z definicji \(\llbracket \sigma\to\rho\rrbracket\) mamy \(Mx\in\llbracket p\rrbracket\). Ponieważ z części \ref{def:l1_a} założenia indukcyjnego \(\llbracket\rho\rrbracket\in\mathrm{SN}\), to \(Mx\in\mathrm{SN}\) i w konsekwencji \(\llbracket\sigma\to\rho\rrbracket\subseteq \mathrm{SN}\).
+    \item Niech \(P\in\llbracket \sigma \rrbracket\). Wówczas z części \ref{def:l1_a} założenia indukcyjnego \(P\in\mathrm{SN}\). Chcemy pokazać, że \(xN_1 N_2 \dots N_k \in \llbracket \rho \rrbracket\). Z części \ref{def:l1_b} założenia indukcyjnego \[xN_1 N_2 \dots N_k N_{k+1} \in \llbracket \rho \rrbracket.\] Ustalając \(N_{k+1}\equiv P\) otrzymujemy tezę.
+     \end{enumerate}
+  \end{enumerate}
   \qed
 \end{dowod}
 
