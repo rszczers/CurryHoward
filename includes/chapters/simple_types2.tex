@@ -91,14 +91,14 @@ Wprowadzamy następujące reguły wyprowadzania typu:
 \vspace{0.5em}
 
 \begin{definicja}(Typowalność)\\
-  Mówimy, że \(\lambda\)-term \(M\) jest typu \(\sigma\) w kontekście \(\Gamma\) (jest \emph{typowalny}), jeśli istnieje skończone drzewo stwierdzeń spełniające poniższe warunki:
+  Mówimy, że \(\lambda\)-term \(M\) jest typu \(\sigma\) w kontekście \(\Gamma\) (jest \emph{typowalny}), jeśli istnieje skończone drzewo sądów spełniające poniższe warunki:
   \begin{enumerate}[label=(D\arabic*)]
       \setlength\itemsep{0em}
-      \item W korzeniu drzewa znajduje się stwierdzenie \(\Gamma \vdash M:\sigma\).
-      \item Liście są \emph{aksjomatami}, czyli stwierdzeniami postaci \(\Gamma, x:\sigma \vdash x:\sigma\).
+      \item W korzeniu drzewa znajduje się sąd \(\Gamma \vdash M:\sigma\).
+      \item Liście są \emph{aksjomatami}, czyli sądzie postaci \(\Gamma, x:\sigma \vdash x:\sigma\).
       \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania typu.
   \end{enumerate}
-  Tak określony obiekt będziemy nazywali \emph{wyprowadzeniem} typu i pisali \(\Gamma \vdash_\mathbb{T} M:\sigma\). O stwierdzeniu \(\Gamma \vdash M:\sigma\) będziemy mówili, że jest \emph{wyprowadzalne}. %Jeśli wyprowadzalność stwierdzenia będzie jednoznacznie wynikała z kontekstu, to będziemy omijać indeks \(\mathbb{T}\) przy symbolu \(\vdash_\mathbb{T}\).
+  Tak określony obiekt będziemy nazywali \emph{wyprowadzeniem} typu i pisali \(\Gamma \vdash_\mathbb{T} M:\sigma\). O sądzie \(\Gamma \vdash M:\sigma\) będziemy mówili, że jest \emph{wyprowadzalne}. %Jeśli wyprowadzalność stwierdzenia będzie jednoznacznie wynikała z kontekstu, to będziemy omijać indeks \(\mathbb{T}\) przy symbolu \(\vdash_\mathbb{T}\).
 \end{definicja}
 
 \begin{definicja}(Poprawność)
@@ -109,7 +109,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   % (Given as Proposition 3.2.9 (see also 3.1.9) in Barendregt, 1992.)
 \end{lemat}
 \begin{dowod}
-  Załóżmy, że stwierdzenie \(J: \Gamma\vdash M:\sigma\) jest wyprowadzalne. Dowód przebiega przez indukcję wględem długosci wyprowadzenia \(J\). Rozważmy następujące przypadki:
+  Załóżmy, że sąd \(J: \Gamma\vdash M:\sigma\) jest wyprowadzalne. Dowód przebiega przez indukcję wględem długosci wyprowadzenia \(J\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
     \item Jeśli \(J\) jest konsekwencją reguły \emph{var}, to \(\mathrm{Sub}(M)=\{M\}\) (Definicja~\ref{def:untyped_subterm}.\ref{def:untyped_subterm_1}), a zatem teza jest trywialnie spełniona.
@@ -124,10 +124,10 @@ Wprowadzamy następujące reguły wyprowadzania typu:
 \end{dowod}
 
 \begin{lemat}(O zmiennych wolnych)
-  Jeśli stwierdzenie \(J: \Gamma \vdash L:\sigma\) jest wyprowadzalne, to \(\mathrm{FV}(L)\subseteq \mathrm{dom}\,\Gamma\).
+  Jeśli sad \(J: \Gamma \vdash L:\sigma\) jest wyprowadzalne, to \(\mathrm{FV}(L)\subseteq \mathrm{dom}\,\Gamma\).
 \end{lemat}
 \begin{dowod}
-  Prosty dowód przeprowadzamy przez indukcję względem długości wyprowadzenia stwierdzenia \(J\). Rozważmy następujące przypadki:
+  Prosty dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(J\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
     \item Jeśli \(J\) jest konsekwencą reguły \emph{var}, to \(L\equiv x\) dla pewnej \(\lambda\)-zmiennej \(x\). Wobec tego \(x:\sigma\in\Gamma\), a zatem \(\mathrm{FV}(x)\subseteq\mathrm{dom}\,\Gamma\).
@@ -149,6 +149,13 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   Dowody przebiegają przez indukcję względem długości wyprowadzenia. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Tw. 3.1.7]{Barendregt_1992}. 
   \qed
 \end{dowod}
+
+\begin{lemat}(O generowaniu)
+  \begin{enumerate}[label=(\alph*)]
+     \setlength\itemsep{0em}
+     \item  
+  \end{enumerate} 
+\end{lemat}
 
 \begin{lemat}(Redukcja podmiotu)
   Jeśli \(\Gamma\vdash_\mathbb{T} L:\rho\) i \(L\to^{*}_\beta L'\), to \(\Gamma\vdash_\mathbb{T}L':\rho\).
