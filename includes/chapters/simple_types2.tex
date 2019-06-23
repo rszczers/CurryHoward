@@ -51,11 +51,22 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
   \setlength\itemsep{0em}
   \item \emph{Stwierdzeniem} (ang. \emph{statement}) nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\mathbf{\Lambda}\) i \(\sigma\in\mathbb{T}\). W stwierdzeniu \(M:\sigma\) \(\lambda\)-term \(M\) nazwamy \emph{podmiotem} (ang. \emph{subject}), zaś \(\sigma\) -- \emph{predykatem}.
   \item \emph{Deklaracją} (ang. \emph{declaration}) nazywamy każde stwierdzenie w którym podmot jest zmienną termową.
-  \item \emph{Kontekstem} (ang. \emph{context}) nazywamy skończony liniowo uporządkowany zbiór deklaracji, w którym wszystkie podmioty są wzajemnie różne.
+  \item \emph{Kontekstem} (ang. \emph{context}) nazywamy skończony liniowo uporządkowany zbiór (\emph{listę}) deklaracji, w którym wszystkie podmioty są wzajemnie różne.
   \item \emph{Sądem} (ang. \emph{judgement}) nazywamy kazdy napis postaci \(\Gamma\vdash M:\sigma\), gdzie \(\Gamma\) jest kontekstem, zaś \(M:\sigma\) -- stwierdzeniem.  
   \end{enumerate}
 \end{definicja}
 
+\begin{definicja}
+  \begin{enumerate}[label=(\arabic*)]
+  \setlength\itemsep{0em}
+  \item Jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_n:\sigma_n)\), to liniowo
+    uporządkowany zbiór \( \mathrm{dom} \Gamma = (x_1,\dots,x_n) \) nazywamy
+      \emph{dziedziną} kontekstu \(\Gamma\).
+    \item Kontekst \(\Gamma'\) nazywamy \emph{podkontekstem} \(\Gamma\) i piszemy \(\Gamma'\subseteq\Gamma\), jeśli wszystkie deklaracje występujące w \(\Gamma\) występują również w \(\Gamma\) z zachowaniem tego samego porządku.
+    \item Kontekst \(\Gamma'\) nazywamy \emph{permutacją} kontekstu \(\Gamma\), jeśli wszystkie deklaracje w \(\Gamma'\) występują w \(\Gamma\) i odwrotnie.
+    \item Jeśli \(\Gamma\) jest kontekstem i \(\Phi\) jest zbiorem \(\lambda\)-zmiennych, wówczas \emph{projekcją} \(\Gamma\) na \(\Phi\) (symbolicznie \(\Gamma \upharpoonright \Phi\)) nazywamy podkontekst \(\Gamma'\) kontekstu \(\Gamma\) taki, że \(\mathrm{dom} \Gamma' = (\mathrm{dom} \Gamma) \cap \Phi\)  
+  \end{enumerate}
+\end{definicja}
 Wprowadzamy następujące reguły wyprowadzania typu:
 \vspace{0.5em}
     \begin{center}
@@ -72,7 +83,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
       \vspace{1em}
       \\ 
       {\begin{prooftree}
-        \Hypo{ \Gamma, x:\varphi \vdash M:\psi }
+        \Hypo{ \Gamma, x \vdash M:\psi }
         \Infer1[(Abs)]{\Gamma \vdash (\lambda\, x:\varphi.\, M):\varphi\to\psi}
       \end{prooftree}}.
       \end{tabular}
@@ -93,10 +104,45 @@ Wprowadzamy następujące reguły wyprowadzania typu:
 \begin{definicja}(Poprawność)
   \(\lambda\)-term \(M\in\mathbf{\Lambda}\) nazywamy \emph{poprawnym} (ang. \emph{legal}), jeśli istnieje wyprowadzenie \(\Gamma\vdash M:\rho\) dla pewnego kontekstu \(\Gamma\) i typu \(\rho\in\mathbb{T}\). 
 \end{definicja}
+\begin{lemat}(O podtermie)
+  Podterm poprawnego \(\lambda\)-termu jest poprawny.
+  % (Given as Proposition 3.2.9 (see also 3.1.9) in Barendregt, 1992.)
+\end{lemat}
+
+\begin{lemat}(O zmiennych wolnych)
+  Jeśli stwierdzenie \(J: \Gamma \vdash L:\sigma\) jest wyprowadzalne, to \(\mathrm{FV}(L)\subseteq \mathrm{dom}\,\Gamma\).
+\end{lemat}
+\begin{dowod}
+  Prosty dowód przeprowadzamy przez indukcję względem wyprowadzenia stwierdzenia \(J\). Rozważmy następujące przypadki:
+  \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{0em}
+    \item Jeśli \(J\) jest konsekwencą reguły \emph{var}, to \(L\equiv x\) dla pewnej \(\lambda\)-zmiennej \(x\). Wobec tego \(x:\sigma\in\Gamma\), a zatem \(\mathrm{FV}(x)\subseteq\Gamma\).
+    \item Jesli \(J\) jest konsekwencją reguły \emph{app}, to \(J\) musi mieć postać \(\Gamma\vdash MN:\sigma\). Z założenia indukcyjnego: \(\mathrm{FV}(M)\subseteq \mathrm{dom}\,\Gamma\) i  \(\mathrm{FV}(N)\subseteq \mathrm{dom}\,\Gamma\). Z Definicji \ref{def:untyped_fv}: \(\mathrm{FV}(MN)=\mathrm{FV}(M)\cup\mathrm{FV}(N)\). Stąd \(\mathrm{FV}(MN)\subseteq \mathrm{dom}\,\Gamma\).
+    \item Jesli \(J\) jest konsekwencją reguły \emph{abs}, to \(J\) musi mieć postać \(\Gamma\vdash \lambda x.\,M:\sigma\). Z założenia indukcyjnego \(FV(M)\subseteq\mathrm{dom}\,\Gamma\). Ponieważ \(\mathrm{FV}(\lambda x.\,M)=\mathrm{FV}(M)\setminus\{x\}\subseteq\mathrm{FV}(M)\), to \(\mathrm{FV}(M)\subseteq\mathrm{dom}\,\Gamma\). 
+  \end{enumerate}  
+  \qed
+\end{dowod}
+
+\begin{lemat}(Redukcja podmiotu)
+  Jeśli \(\Gamma\vdash_\mathbb{T} L:\rho\) i \(L\to^{*}_\beta L'\), to \(\Gamma\vdash_\mathbb{T}L':\rho\).
+\end{lemat}
+\begin{dowod}
+\end{dowod}
+
+\begin{lemat}(O podstawieniu)
+Jeśli jednocześnie
+  \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{0em}
+    \item \(\Gamma',\,x:\sigma,\,\Gamma''\vdash M:\tau\)
+    \item \(\Gamma' \vdash N:\sigma\)
+  \end{enumerate}
+  Wówczas \(\Gamma',\,\Gamma''\vdash M[x/N]:\tau\).
+\end{lemat}
+\subsection{Słaba normalizacja}
 
 \subsection{Silna normalizacja}
 
-\begin{lemat}\label{def:sn_lemat1}
+\begin{lemat}\label{thm:sn_lemat1}
   Niech \(\tau\in\mathbb{T}\) bedzie dowolnym typem prostym. Wówczas:
   \begin{enumerate}[label=(\arabic*)]
     \setlength\itemsep{0em}
@@ -128,7 +174,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   \qed
 \end{dowod}
 
-\begin{lemat}\label{def:sn_lemat2}
+\begin{lemat}\label{thm:sn_lemat2}
   Załóżmy, że:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
@@ -153,7 +199,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
     gdzie \(M\to^{*}_\beta M'\) oraz \(N_i \to^{*}_\beta N'_i\) dla \(i\leq k\). Ale skoro tak, to prawdą jest również, że \(M[x/N_0]N_1\dots N_k \to^{*}_\beta P_{n+1}\), zaś \(M[x/N_0]N_1\dots N_k \in \mathrm{SN}\). Zatem \(P_{n+1}\in\mathrm{SN}\), co prowadzi do sprzeczonści.
   \qed
 \end{dowod}
-\begin{lemat}\label{def:sn_lemat3}
+\begin{lemat}\label{thm:sn_lemat3}
   Załóżmy, że:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
@@ -166,7 +212,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   Dowód przebiega przez indukcję strukturalną względem \(\tau\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
-    \item Jeśli \(\tau\) jest zmienną typową, to \(\llbracket \tau \rrbracket=\mathrm{SN}\). Wobec tego problem sprowadza się do Lematu \ref{def:sn_lemat2}.  
+    \item Jeśli \(\tau\) jest zmienną typową, to \(\llbracket \tau \rrbracket=\mathrm{SN}\). Wobec tego problem sprowadza się do Lematu \ref{thm:sn_lemat2}.  
     \item Przypuśćmy, że \(\tau\equiv \sigma\to\rho\) i niech \(M[x/N_0]N_1\dots N_k \in \llbracket \sigma\to \rho \rrbracket\). Wybierzmy dowolny \(P\in\llbracket\sigma\rrbracket\). Wówczas \(M[x/N_0] N_1 \dots N_k N_{k+1}\in\llbracket \rho\rrbracket\). Z założenia indukcyjnego mamy jednak, że 
       \(
         (\lambda x.\,M)N_0 N_1\dots N_k N_{k+1}\in\llbracket \rho \rrbracket.
@@ -181,9 +227,9 @@ Wprowadzamy następujące reguły wyprowadzania typu:
     M[x_1/N_1,\,x_2/N_2,\,\dots,\,x_n/N_n]\in\llbracket \tau \rrbracket.
   \]
 \end{definicja}
-\begin{twierdzenie}(O poprawności)
+\begin{lemat}\label{thm:o_poprawnosci}
   Jeśli \(\Gamma\vdash_{\mathbb{T}}M:\tau\), to \(\Gamma\models M:\tau\).
-\end{twierdzenie}
+\end{lemat}
 \begin{dowod}
   Dowód będzie przebiegał przez indukcję względem wyprowadzenia \(\Gamma\vdash M:\tau\). Niech \(\Gamma=(x_1:\tau_1,\,x_2:\tau_2,\,\dots,\,x_n:\tau_n)\) będzie kontekstem dla którego istnieje wyprowadzenie \(J:\:\Gamma\vdash M:\tau\). Wybierzmy \(N_1\in\llbracket\tau_1 \rrbracket,\,N_2\in\llbracket\tau_2\rrbracket,\,\dots,\,N_n\in\llbracket\tau_n\rrbracket\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
@@ -206,7 +252,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
         P'[y'/N]\in\llbracket \rho \rrbracket
         \right )
       \end{align*}
-      Ustalmy \(N_0\in\llbracket \sigma \rrbracket\). Wówczas z cześci \ref{def:l1_a} Lematu \ref{def:sn_lemat1} \(N_0\in\mathrm{SN}\). Wobec tego z Lematu \ref{def:sn_lemat3} wnioskujemy, że:
+      Ustalmy \(N_0\in\llbracket \sigma \rrbracket\). Wówczas z cześci \ref{def:l1_a} Lematu \ref{thm:sn_lemat1} \(N_0\in\mathrm{SN}\). Wobec tego z Lematu \ref{thm:sn_lemat3} wnioskujemy, że:
       \begin{align}
         (\lambda y'.\,P')N_0\in\llbracket \rho \rrbracket \tag{\textasteriskcentered\textasteriskcentered}\label{eq:sn_2}
       \end{align}
@@ -232,4 +278,10 @@ Wprowadzamy następujące reguły wyprowadzania typu:
       Z dowolności \(\vec{N}\) otrzymujemy ostatecznie, że \(\Gamma\models \lambda y.\,P\).
   \end{enumerate}
   \qed
+\end{dowod}
+\begin{twierdzenie}(O silnej normalizacji)
+  Jeżeli \(\Gamma\vdash_\mathbb{T}M:\tau\), to \(M\in\mathrm{SN_\beta}\).
+\end{twierdzenie}
+\begin{dowod}
+  Na podstawie Lematu \ref{thm:o_poprawnosci}, jeśli \(\Gamma\vdash_\mathbb{T} M:\tau\), to \(M\in\llbracket \tau \llbracket\). Stosując Lemat \ref{thm:sn_lemat1} otrzymujemy tezę. \qed
 \end{dowod}
