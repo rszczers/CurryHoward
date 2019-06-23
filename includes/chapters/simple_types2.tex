@@ -67,24 +67,34 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
     \item Jeśli \(\Gamma\) jest kontekstem i \(\Phi\) jest zbiorem \(\lambda\)-zmiennych, wówczas \emph{projekcją} \(\Gamma\) na \(\Phi\) (symbolicznie \(\Gamma \upharpoonright \Phi\)) nazywamy podkontekst \(\Gamma'\) kontekstu \(\Gamma\) taki, że \(\mathrm{dom} \Gamma' = (\mathrm{dom} \Gamma) \cap \Phi\)  
   \end{enumerate}
 \end{definicja}
+\begin{przyklad}
+  Niech \(\Gamma\equiv(y:\sigma,\,x_1:\rho_1,\,x_2:\rho_2,\,z:\tau,\,x_3:\rho_3)\). Wówczas:
+  \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{0em}
+    \item \(\mathrm{dom}\,\Gamma=(y,\,x_1,\,x_2,\,z,\,x_3)\).
+    \item \(\emptyset \subseteq (x_1:\rho_1,\,z:\tau)\subseteq\Gamma\)
+    \item \((x_1:\rho_1,\,x_2:\rho_2,\,x_3:\rho_3,\,y:\sigma,\,z:\tau)\) jest permutacją \(\Gamma\).
+    \item \(\Gamma\upharpoonright \{z,\,u,\,x_1\}=(x_1:\rho_1,\,z:\tau).\)
+  \end{enumerate}
+\end{przyklad}
 Wprowadzamy następujące reguły wyprowadzania typu:
 \vspace{0.5em}
     \begin{center}
     \begin{tabular}{ ccc}
       {\begin{prooftree}
         \Hypo{}
-        \Infer1[(Var)]{\Gamma, x:\sigma\vdash x:\sigma}
+        \Infer1[(var)]{\Gamma, x:\sigma\vdash x:\sigma}
       \end{prooftree}},
       \quad 
       {\begin{prooftree}
         \Hypo{\Gamma \vdash M:\varphi \to \psi} \Hypo{ \Gamma \vdash N:\varphi}
-        \Infer2[(App)]{\Gamma \vdash (MN):\psi}
+        \Infer2[(app)]{\Gamma \vdash (MN):\psi}
       \end{prooftree}},
       \vspace{1em}
       \\ 
       {\begin{prooftree}
-        \Hypo{ \Gamma, x \vdash M:\psi }
-        \Infer1[(Abs)]{\Gamma \vdash (\lambda\, x:\varphi.\, M):\varphi\to\psi}
+        \Hypo{ \Gamma, x:\varphi \vdash M:\psi }
+        \Infer1[(abs)]{\Gamma \vdash (\lambda\, x.\, M):\varphi\to\psi}
       \end{prooftree}}.
       \end{tabular}
 \end{center}
@@ -98,7 +108,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
       \item Liście są \emph{aksjomatami}, czyli sądami postaci \(\Gamma, x:\sigma \vdash x:\sigma\).
       \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania typu.
   \end{enumerate}
-  Tak określony obiekt będziemy nazywali \emph{wyprowadzeniem} typu i pisali \(\Gamma \vdash_\mathbb{T} M:\sigma\). O sądzie \(\Gamma \vdash M:\sigma\) będziemy mówili, że jest \emph{wyprowadzalne}. %Jeśli wyprowadzalność stwierdzenia będzie jednoznacznie wynikała z kontekstu, to będziemy omijać indeks \(\mathbb{T}\) przy symbolu \(\vdash_\mathbb{T}\).
+  Tak określony obiekt będziemy nazywali \emph{wyprowadzeniem} sądu i pisali \(\Gamma \vdash_\mathbb{T} M:\sigma\). O sądzie \(\Gamma \vdash M:\sigma\) będziemy mówili, że jest \emph{wyprowadzalny}. %Jeśli wyprowadzalność stwierdzenia będzie jednoznacznie wynikała z kontekstu, to będziemy omijać indeks \(\mathbb{T}\) przy symbolu \(\vdash_\mathbb{T}\).
 \end{definicja}
 
 \begin{definicja}(Poprawność)
@@ -109,7 +119,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   % (Given as Proposition 3.2.9 (see also 3.1.9) in Barendregt, 1992.)
 \end{lemat}
 \begin{dowod}
-  Załóżmy, że sąd \(J: \Gamma\vdash M:\sigma\) jest wyprowadzalne. Dowód przebiega przez indukcję wględem długosci wyprowadzenia \(J\). Rozważmy następujące przypadki:
+  Załóżmy, że sąd \(J: \Gamma\vdash M:\sigma\) jest wyprowadzalny. Dowód przebiega przez indukcję wględem długosci wyprowadzenia \(J\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
     \item Jeśli \(J\) jest konsekwencją reguły \emph{var}, to \(\mathrm{Sub}(M)=\{M\}\) (Definicja~\ref{def:untyped_subterm}.\ref{def:untyped_subterm_1}), a zatem teza jest trywialnie spełniona.
@@ -124,7 +134,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
 \end{dowod}
 
 \begin{lemat}(O zmiennych wolnych)
-  Jeśli sad \(J: \Gamma \vdash L:\sigma\) jest wyprowadzalne, to \(\mathrm{FV}(L)\subseteq \mathrm{dom}\,\Gamma\).
+  Jeśli sąd \(J: \Gamma \vdash L:\sigma\) jest wyprowadzalny, to \(\mathrm{FV}(L)\subseteq \mathrm{dom}\,\Gamma\).
 \end{lemat}
 \begin{dowod}
   Prosty dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(J\). Rozważmy następujące przypadki:
@@ -138,7 +148,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
 \end{dowod}
 
 \begin{lemat}
-  \begin{enumerate}[label=(\alph*)]
+  \begin{enumerate}[label=(\arabic*)]
     \setlength\itemsep{0em}
     \item Niech \(\Gamma'\) i \(\Gamma''\) bedą kontekstami takimi, że \(\Gamma' \subseteq \Gamma''\). Jeśli \(\Gamma'\vdash M:\sigma\), to \(\Gamma''\vdash M:\sigma\).
     \item Jeśli \(\Gamma\vdash M:\sigma\), to \(\Gamma \upharpoonright \mathrm{FV}(M)\vdash M:\sigma\).
@@ -150,12 +160,18 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   \qed
 \end{dowod}
 
-\begin{lemat}(O generowaniu)
-  \begin{enumerate}[label=(\alph*)]
+\begin{lemat}(O generowaniu)\label{thm:generation}
+  \begin{enumerate}[label=(\arabic*)]
      \setlength\itemsep{0em}
-     \item  
+     \item Jeśli \(\Gamma\vdash_{\mathbb{T}} x:\sigma\), to \(x:\sigma\in\Gamma\).\label{thm:generation_1}
+     \item Jeśli \(\Gamma\vdash_{\mathbb{T}}MN:\tau\), to \(\Gamma\vdash M:\sigma\to\tau\) i \(\Gamma\vdash N:\sigma\) dla pewnego \(\sigma\in\mathbb{T}\).\label{thm:generation_2}
+     \item Jeśli \(\Gamma\vdash_{\mathbb{T}}\lambda x.\, M:\tau\) i \(x\not\in\mathrm{dom}\,\Gamma\), to \(\tau\equiv \tau_1\to\tau_2\) oraz \(\Gamma,x:\tau_1\vdash N:\tau_2\). \label{thm:generation_3}
   \end{enumerate} 
 \end{lemat}
+\begin{dowod}
+  
+  \qed
+\end{dowod}
 
 \begin{lemat}(Redukcja podmiotu)
   Jeśli \(\Gamma\vdash_\mathbb{T} L:\rho\) i \(L\to^{*}_\beta L'\), to \(\Gamma\vdash_\mathbb{T}L':\rho\).
@@ -166,7 +182,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
 
 \begin{lemat}(O podstawieniu)
 Załóżmy, że
-  \begin{enumerate}[label=(\alph*)]
+  \begin{enumerate}[label=(\roman*)]
     \setlength\itemsep{0em}
     \item \(\Gamma',\,x:\sigma,\,\Gamma''\vdash M:\tau\)
     \item \(\Gamma' \vdash N:\sigma\)
