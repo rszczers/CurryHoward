@@ -57,12 +57,14 @@ Elementy \(\mathbf{\tilde\Lambda}\) będziemy oznaczali literami \(L,\ M,\ N,\ P
 
 
 Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występować wielokrotnie. Obserwację tę ujmuje następująca definicja.
-\begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów pretermu)\label{def:untyped_subterm}
-  \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
+\begin{definicja}\label{def:untyped_subterm}(Multizbiór \(\mathrm{Sub}\) podtermów pretermu)
+  \begin{enumerate}[label={(\arabic*)}, ref={\arabic*}]
     \setlength\itemsep{0em}
-    \item \(\mathrm{Sub}(x)=\{x\}\)
-    \item \(\mathrm{Sub}(MN)=\mathrm{Sub}(M)\cup\mathrm{Sub}(N)\cup\{M\,N\}\)
-    \item \(\mathrm{Sub}(\lambda x.\, M) = \mathrm{Sub}(M)\cup \{\lambda x.\, M\}\)
+    \item \(\mathrm{Sub}(x)=\{x\}\)\label{def:untyped_subterm_1}
+    \item \(\mathrm{Sub}(MN)=\mathrm{Sub}(M)\cup\mathrm{Sub}(N)\cup\{M\,N\}\)\label{def:untyped_subterm_2}
+
+    \item \(\mathrm{Sub}(\lambda x.\, M) = \mathrm{Sub}(M)\cup \{\lambda x.\, M\}\)\label{def:untyped_subterm_3}
+
   \end{enumerate}
   Elementy multizbioru \(\mathrm{Sub}(M)\) nazywamy \emph{podtermami} \(M\). Jeśli \(L\) jest podtermem \(M\), ale \(L\not\equiv M\), to \(L\) nazywamy podtermem \emph{właściwym}.
 \end{definicja}
@@ -116,7 +118,7 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
     \begin{enumerate}[label={\roman*)}, ref={(\arabic*)}]
       \item \(M\) jest zmienną. Wówczas:
         \begin{enumerate}[label={\alph*.}]
-        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są eostaci \(N[y/L]\).
+        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\).
         \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i \(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \(M[x/N][y/L]\equiv L\). Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
 
         \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne.

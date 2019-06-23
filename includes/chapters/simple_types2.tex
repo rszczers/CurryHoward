@@ -98,7 +98,7 @@ Wprowadzamy następujące reguły wyprowadzania typu:
       \item Liście są \emph{aksjomatami}, czyli stwierdzeniami postaci \(\Gamma, x:\sigma \vdash x:\sigma\).
       \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania typu.
   \end{enumerate}
-  Tak określone drzewo będziemy nazywali \emph{wyprowadzeniem} typu i pisali \(\Gamma \vdash_\mathbb{T} M:\sigma\). O stwierdzeniu \(\Gamma \vdash M:\sigma\) będziemy mówili, że jest \emph{wyprowadzalne}.
+  Tak określony obiekt będziemy nazywali \emph{wyprowadzeniem} typu i pisali \(\Gamma \vdash_\mathbb{T} M:\sigma\). O stwierdzeniu \(\Gamma \vdash M:\sigma\) będziemy mówili, że jest \emph{wyprowadzalne}. %Jeśli wyprowadzalność stwierdzenia będzie jednoznacznie wynikała z kontekstu, to będziemy omijać indeks \(\mathbb{T}\) przy symbolu \(\vdash_\mathbb{T}\).
 \end{definicja}
 
 \begin{definicja}(Poprawność)
@@ -108,18 +108,45 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   Podterm poprawnego \(\lambda\)-termu jest poprawny.
   % (Given as Proposition 3.2.9 (see also 3.1.9) in Barendregt, 1992.)
 \end{lemat}
+\begin{dowod}
+  Załóżmy, że stwierdzenie \(J: \Gamma\vdash M:\sigma\) jest wyprowadzalne. Dowód przebiega przez indukcję wględem długosci wyprowadzenia \(J\). Rozważmy następujące przypadki:
+  \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{0em}
+    \item Jeśli \(J\) jest konsekwencją reguły \emph{var}, to \(\mathrm{Sub}(M)=\{M\}\) (Definicja~\ref{def:untyped_subterm}.\ref{def:untyped_subterm_1}), a zatem teza jest trywialnie spełniona.
+     \item Jesli \(J\) jest konsekwencją reguły \emph{app}, to \(M\equiv PQ\) dla \(P,\,Q\) dla których twierdzenie zachodzi. Ponieważ \(\mathrm{Sub}(M)=\mathrm{Sub}(P)\cup\mathrm{Sub}(Q)\cup\{PQ\}\) (Definicja~\ref{def:untyped_subterm}.\ref{def:untyped_subterm_2}), to teza również zachodzi.
+    \item Jeśli \(J\) jest konsekwencją reguły \emph{abs}, to \(M\equiv \lambda
+      x.\,P\) dla pewnego \(P\) dla którego twierdzenie zachodzi. Ponieważ
+      \(\mathrm{Sub}(\lambda x.\,M) = \mathrm{Sub}(M) \cup \{\lambda x.\,M\}\),
+      (Definicja~\ref{def:untyped_subterm}.\ref{def:untyped_subterm_3})
+      to teza zachodzi również w tym przypadku.
+  \end{enumerate}
+  \qed
+\end{dowod}
 
 \begin{lemat}(O zmiennych wolnych)
   Jeśli stwierdzenie \(J: \Gamma \vdash L:\sigma\) jest wyprowadzalne, to \(\mathrm{FV}(L)\subseteq \mathrm{dom}\,\Gamma\).
 \end{lemat}
 \begin{dowod}
-  Prosty dowód przeprowadzamy przez indukcję względem wyprowadzenia stwierdzenia \(J\). Rozważmy następujące przypadki:
+  Prosty dowód przeprowadzamy przez indukcję względem długości wyprowadzenia stwierdzenia \(J\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
-    \item Jeśli \(J\) jest konsekwencą reguły \emph{var}, to \(L\equiv x\) dla pewnej \(\lambda\)-zmiennej \(x\). Wobec tego \(x:\sigma\in\Gamma\), a zatem \(\mathrm{FV}(x)\subseteq\Gamma\).
+    \item Jeśli \(J\) jest konsekwencą reguły \emph{var}, to \(L\equiv x\) dla pewnej \(\lambda\)-zmiennej \(x\). Wobec tego \(x:\sigma\in\Gamma\), a zatem \(\mathrm{FV}(x)\subseteq\mathrm{dom}\,\Gamma\).
     \item Jesli \(J\) jest konsekwencją reguły \emph{app}, to \(J\) musi mieć postać \(\Gamma\vdash MN:\sigma\). Z założenia indukcyjnego: \(\mathrm{FV}(M)\subseteq \mathrm{dom}\,\Gamma\) i  \(\mathrm{FV}(N)\subseteq \mathrm{dom}\,\Gamma\). Z Definicji \ref{def:untyped_fv}: \(\mathrm{FV}(MN)=\mathrm{FV}(M)\cup\mathrm{FV}(N)\). Stąd \(\mathrm{FV}(MN)\subseteq \mathrm{dom}\,\Gamma\).
-    \item Jesli \(J\) jest konsekwencją reguły \emph{abs}, to \(J\) musi mieć postać \(\Gamma\vdash \lambda x.\,M:\sigma\). Z założenia indukcyjnego \(FV(M)\subseteq\mathrm{dom}\,\Gamma\). Ponieważ \(\mathrm{FV}(\lambda x.\,M)=\mathrm{FV}(M)\setminus\{x\}\subseteq\mathrm{FV}(M)\), to \(\mathrm{FV}(M)\subseteq\mathrm{dom}\,\Gamma\). 
+    \item Jesli \(J\) jest konsekwencją reguły \emph{abs}, to \(J\) musi mieć postać \(\Gamma\vdash \lambda x.\,M:\sigma\). Z założenia indukcyjnego \(FV(M)\subseteq\mathrm{dom}\,\Gamma\). Ponieważ \(\mathrm{FV}(\lambda x.\,M)=\mathrm{FV}(M)\setminus\{x\}\subseteq\mathrm{FV}(M)\) (z Definicji \ref{def:untyped_fv}), to \(\mathrm{FV}(M)\subseteq\mathrm{dom}\,\Gamma\). 
   \end{enumerate}  
+  \qed
+\end{dowod}
+
+\begin{lemat}
+  \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{0em}
+    \item Niech \(\Gamma'\) i \(\Gamma''\) bedą kontekstami takimi, że \(\Gamma' \subseteq \Gamma''\). Jeśli \(\Gamma'\vdash M:\sigma\), to \(\Gamma''\vdash M:\sigma\).
+    \item Jeśli \(\Gamma\vdash M:\sigma\), to \(\Gamma \upharpoonright \mathrm{FV}(M)\vdash M:\sigma\).
+    \item Jeśli \(\Gamma\vdash M:\sigma\) i \(\Gamma'\) jest permutacją \(\Gamma\), to \(\Gamma'\vdash M:\sigma\).
+  \end{enumerate}
+\end{lemat}
+\begin{dowod}
+  Dowody przebiegają przez indukcję względem długości wyprowadzenia. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Tw. 3.1.7]{Barendregt_1992}. 
   \qed
 \end{dowod}
 
@@ -127,10 +154,11 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   Jeśli \(\Gamma\vdash_\mathbb{T} L:\rho\) i \(L\to^{*}_\beta L'\), to \(\Gamma\vdash_\mathbb{T}L':\rho\).
 \end{lemat}
 \begin{dowod}
+  \qed
 \end{dowod}
 
 \begin{lemat}(O podstawieniu)
-Jeśli jednocześnie
+Załóżmy, że
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
     \item \(\Gamma',\,x:\sigma,\,\Gamma''\vdash M:\tau\)
@@ -138,10 +166,10 @@ Jeśli jednocześnie
   \end{enumerate}
   Wówczas \(\Gamma',\,\Gamma''\vdash M[x/N]:\tau\).
 \end{lemat}
-\subsection{Słaba normalizacja}
+\begin{dowod}
+\end{dowod}
 
 \subsection{Silna normalizacja}
-
 \begin{lemat}\label{thm:sn_lemat1}
   Niech \(\tau\in\mathbb{T}\) bedzie dowolnym typem prostym. Wówczas:
   \begin{enumerate}[label=(\arabic*)]
