@@ -65,6 +65,10 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
     \item Kontekst \(\Gamma'\) nazywamy \emph{podkontekstem} \(\Gamma\) i piszemy \(\Gamma'\subseteq\Gamma\), jeśli wszystkie deklaracje występujące w \(\Gamma\) występują również w \(\Gamma\) z zachowaniem tego samego porządku.
     \item Kontekst \(\Gamma'\) nazywamy \emph{permutacją} kontekstu \(\Gamma\), jeśli wszystkie deklaracje w \(\Gamma'\) występują w \(\Gamma\) i odwrotnie.
     \item Jeśli \(\Gamma\) jest kontekstem i \(\Phi\) jest zbiorem \(\lambda\)-zmiennych, wówczas \emph{projekcją} \(\Gamma\) na \(\Phi\) (symbolicznie \(\Gamma \upharpoonright \Phi\)) nazywamy podkontekst \(\Gamma'\) kontekstu \(\Gamma\) taki, że \(\mathrm{dom} \Gamma' = (\mathrm{dom} \Gamma) \cap \Phi\)  
+    \item Dla kontekstów \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_k:\sigma_m)\) i \(\Gamma'=(y_1:\rho_1,\,\dots\,y_n:\rho_n)\) takich, że \(\mathrm{dom}(\Gamma)\cap\mathrm{dom}(\Gamma')=\emptyset\) \emph{konkatenacją} \(\Gamma\) i \(\Gamma'\) nazywamy kontekst
+      \[
+        \Gamma \concat \Gamma' = (x_1:\sigma_1,\,\dots,\,x_k:\sigma_m,\,y_1:\rho_1,\,\dots\,y_n:\rho_n).
+      \]
   \end{enumerate}
 \end{definicja}
 \begin{przyklad}
@@ -169,7 +173,11 @@ Wprowadzamy następujące reguły wyprowadzania typu:
   \end{enumerate} 
 \end{lemat}
 \begin{dowod}
-  
+   \begin{enumerate}[label=(\arabic*)]
+     \setlength\itemsep{0em}
+     \item \label{proof:generation_1}
+     \item[(2,3)] Analogicznie do \ref{proof:generation_1}.
+   \end{enumerate}
   \qed
 \end{dowod}
 
@@ -231,6 +239,8 @@ sposób.
     Wówczas \(\Gamma\vdash_\mathbb{T}N:\sigma\).
 \end{lemat}
 \begin{dowod}
+  Pokażemy, że twierdzenie zachodzi dla jednego kroku redukcji \(\to_\beta\). Dowód zwrotności jest trywialny, zaś aby pokazać przechodniość wystarczy skorzystać z indukcji wzgledem długości ciągu redukcji.
+
   Niech \(M\to_\beta N\). Dowód przeprowadzimy przez indukcję względem długości wyprowadzenia \(\Gamma\vdash M:\sigma\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
@@ -266,7 +276,14 @@ sposób.
     \(\rho,\,\tau\in\mathbb{T}\) mamy  \(\sigma\equiv \rho\to\tau\)
     oraz   istnieje  wyprowadzenie   sądu  \(\Gamma,\,x:\rho\vdash
       P:\tau\). Ponadto zakładamy, że dla pewnego \(P'\in\mathbf{\Lambda}\)
-    mamy \(P\to_\beta P'\).  
+      mamy \(P\to_\beta P'\). \(\beta\)-redukcja \(M\to_\beta N\) musi prowadzić w tym wypadku do \(N\equiv \lambda x.\,P'\). Ponieważ \(\Gamma, x:\rho\vdash P':\tau\) (założenie indukcyjne), to możemy zastosowac regułę \emph{abs}:
+      \begin{center}  
+        {\begin{prooftree}
+          \Hypo{ \Gamma', x:\rho\vdash P':\tau}
+          \Infer1[(abs)]{\Gamma \vdash \lambda\, x.\, P':\rho\to\tau}
+        \end{prooftree}}
+      \end{center}
+
   \end{enumerate}
   \qed
 \end{dowod}
