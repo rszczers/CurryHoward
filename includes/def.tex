@@ -34,7 +34,8 @@ Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )
     {\setlength\itemindent{15pt} \item[-] #1}
 }
 
-\newcommand{\concat}{\ensuremath{+\!\!\!\!+\,}}
+%\newcommand{\concat}{\ensuremath{+\!\!\!\!+\,}}
+\newcommand\concat{\mathbin{+\mkern-10mu+}}
 
 \newtheorem{innercustomdef}{Definicja}
 \newenvironment{customdef}[1]

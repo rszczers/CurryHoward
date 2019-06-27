@@ -132,10 +132,8 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
     Niech \(\Gamma=(x:{\tau\to\rho},\, y:{\sigma\to\tau},\,z:{\sigma})\). Wówczas:
   \begin{center}
 \begin{prooftree}
-  \Hypo{\Gamma \vdash y:{\sigma\to\tau}} \Hypo{ \Gamma \vdash z:{\sigma}}
-  \Infer2[(App)]{\Gamma \vdash yz:{\tau}}
-
-  \Hypo{\Gamma\vdash x:{\tau\to\rho}} \Infer2[(App)]{\Gamma \vdash x(yz):\rho}
+  \Hypo{\Gamma\vdash x:{\tau\to\rho}}   \Hypo{\Gamma \vdash y:{\sigma\to\tau}} \Hypo{ \Gamma \vdash z:{\sigma}} \Infer2[(App)]{\Gamma \vdash yz:{\tau}}
+  \Infer2[(App)]{\Gamma \vdash x(yz):\rho}
   \Infer1[(Abs)]{x:{\tau\to\sigma}, y:{\sigma\to\rho}\vdash \lambda z .\, x(yz):{\sigma\to\rho}}
   \Infer1[(Abs)]{x:{\tau\to\rho}\vdash \lambda y z.\,x(yz):{(\sigma\to\tau)\to\sigma\to\rho}}
   \Infer1[(Abs)]{\vdash \lambda x y z .\, x(yz):{(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho}}
@@ -223,7 +221,7 @@ Przedstawimy teraz szereg lematów ustalających związki między rachunkiem \(\
 \end{dowod}
 
 \begin{lemat}\label{thm:permutation_simple}
-  \begin{enumerate}[label=(\arabic*), ref=\arabic*]
+  \begin{enumerate}[label=(\arabic*), ref=(\arabic*)]
     \setlength\itemsep{0em}
     \item Niech \(\Gamma'\) i \(\Gamma''\) bedą kontekstami takimi, że \(\Gamma' \subseteq \Gamma''\). Jeśli \(\Gamma'\vdash M:\sigma\), to \(\Gamma''\vdash M:\sigma\).
     \item Jeśli \(\Gamma\vdash M:\sigma\), to \(\Gamma \upharpoonright \mathrm{FV}(M)\vdash M:\sigma\).
@@ -243,16 +241,17 @@ Przedstawimy teraz szereg lematów ustalających związki między rachunkiem \(\
   Załóżmy, że
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
-    \item \(\Gamma,\,x,\,\Gamma':\sigma\vdash M:\rho\) 
-    \item \(\Gamma\vdash N:\sigma\)
+    \item \(\Gamma_1,\,x:\sigma,\,\Gamma_2\vdash M:\rho\) 
+    \item \(\Gamma_1\vdash N:\sigma\)
   \end{enumerate}
-  Wówczas \(\Gamma \vdash M[x/N]:\rho\).
+  Wówczas \(\Gamma_1,\Gamma_2 \vdash M[x/N]:\rho\).
 \end{lemat}
 \begin{dowod}
 %  Dowód przebiega przez indukcję względem długości wyprowadzenia typu \(M\). 
 %   \begin{enumerate}[label=(\roman*)]
 %    \setlength\itemsep{0em}
-  Dowód przeprowadzimy przez indukcję względem długości wyprowadzenia \(\Gamma,\,x:\sigma\vdash M:\rho\). Rozważmy następujące przypadki:
+  Niech \(\Gamma=\Gamma_1 \concat \Gamma_2\). Korzystając z części \ref{thm:permutation_3} Lematu \ref{thm:permutation_simple}
+  dowód przeprowadzimy przez indukcję względem długości wyprowadzenia \(\Gamma,\,x:\sigma\vdash M:\rho\). Rozważmy następujące przypadki:
     \begin{enumerate}[label=(\roman*)]
       \setlength\itemsep{0em}
       \item   Jeśli    \(\Gamma,\,x:\sigma\vdash   M:\rho\)   jest

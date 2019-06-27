@@ -1,4 +1,34 @@
 \subsubsection{Silna normalizacja}
+Pokażemy, że wszystkie typowalne \(\lambda\)-termy redukują się do postaci \(\beta\)-normalnej przez skończony ciąg \(\beta\)-redukcji. Oznacza to, że nie ma możliwości otrzymania nieskończonego ciągu \(\beta\)-redukcji, tak jak to miało miejsce w Przykładzie \ref{ex:beta_reduction} \ref{ex:Y} \ref{ex:Delta} i to bez względu na przyjętą strategię redukcji. 
+
+Ponieważ wszystkie \(\lambda\)-termy samorepliujące się przy \(\beta\)-redukcji nie są typowalne, nie jest możliwe  w rachunku \(\lambda\) z typami prostymi reprezentowanie rekurencyjnych typów ADT w myśl podrozdziału \ref{sec:adt_recurrency}. Wynika to z faktu, że dodanie typów prostych do rachunku \(\lambda\) bez typów znacznie zmniejsza ekspresywność systemu, uniemożliwiając wyrażenie operacji rekursji prostej. Okazuje się, że stosujac reprezentację Churcha dla liczb naturalnych i utożsamiajac \(\lambda\)-termy za pomocą \(\beta\)-konwersji, rachunek \(\lambda\) z typami prostymi równoważny jest zbiorowi \emph{wielomianów rozszerzonych} \cite{DBLP:journals/corr/abs-cs-0701022}.
+
+Ponieważ wszystkie ciągi redukcji są w tym systemie skończone, to relacja \(\beta\)-konwersji jest rozstrzygalna, wystarczy bowiem sprowadzić jej argumenty do postaci normalnej. Podejście to rodzi jednak nietrywialne problemy natury złożonościowej \cite[Podrozdział 3.7]{Urzyczyn2006}.
+ 
+Opracowany tutaj dowód pochodzi z \cite{Hindley:2008:LCI:1388400}. Polega on na:
+\begin{enumerate}
+  \setlength\itemsep{0em}
+  \item Konstrukcji interpretacji dla typów prostych: termów redukowalnych.
+  \item Wykazaniu, że każdy term redukowalny jest silnie normalizowalny.
+  \item Wykazaniu, że każdy typowalny term jest redukowalny.
+\end{enumerate}
+Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} oryginalnie przypisywane W. Taitowi \cite{Tait67}, z odpowiednimi zmianami stosuje się w dowodach własności silnej normalizacji dla innych systemów typów \cite[Podrozdział 11.5]{Urzyczyn2006}.
+
+\begin{definicja}(Termy redukowalne)
+  Niech \(\Gamma\vdash_\mathbb{T} M:\sigma\). Powiemy, że \(M\) jest \emph{redukowalny} (także \emph{silnie obliczalny}), jesli jeśli spełnia poniższe warunki:
+  \begin{enumerate}[label=(R\arabic*), ref=(R\arabic*)]
+    \item Jesli \(\sigma\) jest zmienną typową, to \(M\) jest silnie normalizowalny. Określamy:
+      \[
+        \llbracket \sigma \rrbracket = \mathrm{SN}.
+      \]
+    \item Jesli \(\sigma\) jest typem funkcyjnym postaci \(\sigma\equiv \rho\to\tau\), to dla wszystkich termów redukowalnych \(N\) takich, że \(\Gamma'\vdash_\mathbb{T}MN:\tau\), \(MN\) jest redukowalny. Określamy:
+      \[
+        \llbracket \rho \to \tau\rrbracket = \{M\ |\ \forall N (N\in\llbracket \rho \rrbracket)\implies MN\in\llbracket \tau \rrbracket\}.
+      \]
+
+  \end{enumerate}
+\end{definicja}
+
 \begin{lemat}\label{thm:sn_lemat1}
   Niech \(\tau\in\mathbb{T}\) bedzie dowolnym typem prostym. Wówczas:
   \begin{enumerate}[label=(\arabic*)]

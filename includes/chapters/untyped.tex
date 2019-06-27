@@ -405,10 +405,10 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
    \]
    Strategię \(S\) nazywamy \emph{normalizującą}, jeśli dla każdego \(M\in \mathrm{WN}_\beta\) istnieje \(i\in \mathbb{N}\) takie, że \(F^{i}(M)\equiv \underbrace{F(F(\dots(F}_{i\text{-razy}}(M))\dots))\in \mathrm{NF_\beta}\).
 \end{definicja}
-  \begin{przyklad}
+  \begin{przyklad}\label{ex:beta_reduction}
     \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
     \setlength\itemsep{0em} 
-    \item Oznaczmy \(\mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))\) i niech \(F\) będzie dowolnym \(\lambda\)-termem. Wówczas otrzymujemy nieskończony ciąg redukcji postaci
+    \item Oznaczmy \(\mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))\) i niech \(F\) będzie dowolnym \(\lambda\)-termem. Wówczas otrzymujemy nieskończony ciąg redukcji postaci\label{ex:Y}
     \begin{align*}
       \mathrm{Y}F &\equiv (\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx))))F\\
                   &\to_\beta (\lambda x.\,F(xx))\lambda x.\,F(xx)\\
@@ -417,7 +417,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
                   &\to_\beta \dots
     \end{align*}
         Y nazywamy \emph{kombinatorem punktu stałego}. Widzimy, że relacja \(\beta\)-redukcji w rachunku \(\lambda\) nie jest ani słabo, ani silnie normalizująca. 
-      \item Niech \(\Omega\equiv (\lambda x.\ xx)(\lambda x.\ xx)\). \(\Omega\) jest \(\beta\)-redeksem, którego redukcja prowadzi do ponownego otrzymania termu \(\Omega\) i w konsekwencji do stałego ciągu redukcji postaci:
+      \item Niech \(\Omega\equiv (\lambda x.\ xx)(\lambda x.\ xx)\). \(\Omega\) jest \(\beta\)-redeksem, którego redukcja prowadzi do ponownego otrzymania termu \(\Omega\) i w konsekwencji do stałego ciągu redukcji postaci:\label{ex:Delta}
       \begin{align*}
         \Omega\to_\beta \Omega \to_\beta \Omega \to_\beta \dots
       \end{align*}
