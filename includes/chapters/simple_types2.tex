@@ -115,7 +115,7 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
   Tak określony obiekt będziemy nazywali \emph{wyprowadzeniem} typu dla \(M\) (w kontekście \(\Gamma\)) i pisali \(\Gamma \vdash_\mathbb{T} M:\sigma\). O sądzie \(\Gamma \vdash M:\sigma\) będziemy wówczas mówili, że jest \emph{wyprowadzalny}. %Jeśli wyprowadzalność sądu będzie jednoznacznie wynikała z kontekstu, to będziemy omijać indeks \(\mathbb{T}\) przy symbolu \(\vdash_\mathbb{T}\).
 \end{definicja}
 
-\begin{przyklad}
+\begin{przyklad}\label{ex:typing}
  \begin{enumerate}[label=(\alph*)]
   \setlength\itemsep{0em}
   \item
@@ -128,7 +128,7 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 \end{prooftree}
   \end{center}
 
-  \item
+\item\label{ex:typing_2}
     Niech \(\Gamma=(x:{\tau\to\rho},\, y:{\sigma\to\tau},\,z:{\sigma})\). Wówczas:
   \begin{center}
 \begin{prooftree}
@@ -169,11 +169,17 @@ W teorii typów spotykamy trzy rodzaje problemów dotyczące sądów:
     \]
 \end{enumerate}
 
-Wszystkie wymione problemy są w rachunku \(\lambda\) z typami prostymi są rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć słynny wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Millnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Rozdział 3.2]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
+W wielu systemach problem typowalności można sprowadzić do problemu weryfikacji typu. Istotnie, przypuśćmy, że \(M\) jest poprawnym termem i \(\mathrm{FV}(M)=\{x_1,\,\dots\,x_n\}\). Zauważmy, że \(M\) jest typowalny, jeśli wyprowadzalny jest sąd
+\[
+  x_0:p\vdash \mathrm{K} x_0 (\lambda x_1 \dots x_n.\,M):p,
+\]
+gdzie \(p\in U\) jest zmienną typową, zaś kombinator \(K\equiv \lambda xy.\,x\).
+
+Wszystkie wymione problemy są w rachunku \(\lambda\) z typami prostymi są rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć słynny wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Millnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
 
 \subsection{Własności}
 
-Przedstawimy teraz szereg lematów ustalających związki między rachunkiem \(\lambda\) bez typów wprowadzonym w Rozdziale \ref{sec:untyped_lambda}, a rachunkiem \(\lambda\) z typami prostymi.
+Przedstawimy teraz szereg lematów ustalających między innymi związki między rachunkiem \(\lambda\) bez typów wprowadzonym w Rozdziale \ref{sec:untyped_lambda}, a rachunkiem \(\lambda\) z typami prostymi.
 
 \begin{lemat}(O generowaniu)\label{thm:generation}
   \begin{enumerate}[label=(\arabic*)]
@@ -366,6 +372,9 @@ sposób.
   Wynika to bezpośrednio z Twierdzenia \ref{thm:cr_untyped} i Lematu \ref{thm:subject_reduction}. \qed
 \end{dowod}
 
+\subimport{includes/chapters/}{polymorphism.tex}
+
+\subimport{includes/chapters/}{strong_normalization.tex}
 % \begin{fakt}\label{thm:uniqueness}
 % Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
 % \begin{dowod}

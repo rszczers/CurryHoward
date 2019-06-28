@@ -1,11 +1,11 @@
 \subsubsection{Silna normalizacja}
 Pokażemy, że wszystkie typowalne \(\lambda\)-termy redukują się do postaci \(\beta\)-normalnej przez skończony ciąg \(\beta\)-redukcji. Oznacza to, że nie ma możliwości otrzymania nieskończonego ciągu \(\beta\)-redukcji, tak jak to miało miejsce w Przykładzie \ref{ex:beta_reduction} \ref{ex:Y} \ref{ex:Delta} i to bez względu na przyjętą strategię redukcji. 
 
-Ponieważ wszystkie \(\lambda\)-termy samorepliujące się przy \(\beta\)-redukcji nie są typowalne, nie jest możliwe  w rachunku \(\lambda\) z typami prostymi reprezentowanie rekurencyjnych typów ADT w myśl podrozdziału \ref{sec:adt_recurrency}. Wynika to z faktu, że dodanie typów prostych do rachunku \(\lambda\) bez typów znacznie zmniejsza ekspresywność systemu, uniemożliwiając wyrażenie operacji rekursji prostej. Okazuje się, że stosujac reprezentację Churcha dla liczb naturalnych i utożsamiajac \(\lambda\)-termy za pomocą \(\beta\)-konwersji, rachunek \(\lambda\) z typami prostymi równoważny jest zbiorowi \emph{wielomianów rozszerzonych} \cite{DBLP:journals/corr/abs-cs-0701022}.
+Ponieważ wszystkie \(\lambda\)-termy samorepliujące się przy \(\beta\)-redukcji nie są typowalne, nie jest możliwe  w rachunku \(\lambda\) z typami prostymi reprezentowanie rekurencyjnych typów ADT w myśl podrozdziału \ref{sec:adt_recurrency}. Wynika to z faktu, że dodanie typów prostych do rachunku \(\lambda\) bez typów znacznie zmniejsza ekspresywność systemu, uniemożliwiając wyrażenie operacji rekursji prostej. Okazuje się, że stosujac reprezentację Churcha dla liczb naturalnych i utożsamiajac \(\lambda\)-termy za pomocą \(\beta\)-konwersji, rachunek \(\lambda\) z typami prostymi równoważny jest zbiorowi \emph{wielomianów rozszerzonych} \cite{DBLP:journals/corr/abs-cs-0701022}. Liczebnikom Churcha odpowiada wówczas typ postaci \((\sigma\to\sigma)\to\sigma\to\sigma\) i możliwe jest określenie na nich dodawania i mnożenia.
 
 Ponieważ wszystkie ciągi redukcji są w tym systemie skończone, to relacja \(\beta\)-konwersji jest rozstrzygalna, wystarczy bowiem sprowadzić jej argumenty do postaci normalnej. Podejście to rodzi jednak nietrywialne problemy natury złożonościowej \cite[Podrozdział 3.7]{Urzyczyn2006}.
  
-Opracowany tutaj dowód pochodzi z \cite{Hindley:2008:LCI:1388400}. Polega on na:
+Opracowany tutaj dowód pochodzi z \cite[Dodatek A3]{Hindley:2008:LCI:1388400}. Polega on na:
 \begin{enumerate}
   \setlength\itemsep{0em}
   \item Konstrukcji interpretacji dla typów prostych: termów redukowalnych.
@@ -38,7 +38,7 @@ Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} orygi
   \end{enumerate}
 \end{lemat}
 \begin{dowod}
-  Dowód przeprowadzimy przez indukcję strukturalną względem \(\tau\). Mamy do rozważenia następujące dwa przypadki:
+  Dowód przeprowadzimy przez indukcję strukturalną względem typu \(\tau\). Mamy do rozważenia następujące dwa przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
     \item \(\tau\) jest zmienną typową.

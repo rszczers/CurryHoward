@@ -36,7 +36,7 @@ gdzie \texttt{True} i \texttt{False} są wartościami typu \texttt{Boolean}. Wł
 \end{align*}
 Wówczas funkcję \texttt{if} możemy reprezentować wyrażeniem \(\mathrm{if}\equiv\lambda c t e.\, cte\) lub jego \(\eta\)-reduktem: \(\lambda c.\,c\).
 
-\subsubsection{Pary w rachunku \(\lambda\)}
+\subsubsection{Pary w rachunku \(\lambda\)}\label{subsec:pairs}
 Parą nazywamy każdy nierekurencyjny typ, który posiada jeden konstruktor wartości parametryzowany przez dwa typy. W takim wypadku potrzebujemy dwóch projekcji zwracających odpowiednio pierwszy i drugi element pary. Przykładem takiego typu jest \texttt{Tuple}. Mamy wówczas:
 \begin{minted}{haskell}
   fst (Tuple a b) = a
