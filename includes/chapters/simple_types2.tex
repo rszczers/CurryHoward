@@ -139,6 +139,8 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
   \Infer1[(Abs)]{\vdash \lambda x y z .\, x(yz):{(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho}}
 \end{prooftree}
   \end{center}
+\item
+  Nie wszystkie \(\lambda\)-termy są typowalne. Niech \(\omega\equiv (\lambda x.\, x x)\) i przypuśćmy, że \(\omega\) ma typ \(\sigma\) w kontekście \(\Gamma\). Zauważmy, że wówczas w \(x:{\sigma\to\sigma}\in\Gamma\). Ponieważ \(\omega\) zawiera w sobie podterm \((xx)\), to w wyprowadzeniu musiał on zostać otrzymany przez zastosowanie reguły (app). Wówczas \(x:\sigma \in \Gamma\)  i \(x:{\sigma\to\sigma} \in \Gamma\), co nie jest możliwe, bo wszystkie deklaracje w \(\Gamma\) muszą mieć różne podmioty.
   %Co więcej, można wykazać że typ \((\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\) może mieć tylko i wyłącznie operacja złożenia~\cite{Wadler1989}.
 \end{enumerate}
 %  Zauważmy, że term \(\lambda x^{\tau\to\rho}\lambda y^{\sigma\to\tau}\lambda z^\sigma . x(yz)\) odpowiada operacji złożenia funkcji.
