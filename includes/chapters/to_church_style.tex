@@ -1,0 +1,19 @@
+\subsection{Typy w stylu Churcha}
+Przypisanie typu \(\lambda\)-termowi rozpoczynamy zawsze od określenia typów dla \(\lambda\)-zmiennych. Zasadniczo możemy to rozwiązać na dwa sposoby:
+
+\begin{enumerate}
+  \item Możemy przypisać unikalny typ każdej \(\lambda\)-zmiennej przed jej wprowadzeniem. Takie podejście nazywamy \emph{stylem Churcha} albo typowaniem \emph{explicite}, ponieważ deklaracje typowe zmiennych występują jawnie w składni \(\lambda\)-termów. W konsekwencji w podejściu tym nie spotykamy problemu typowalności. Stąd systemy w tym stylu nazywa się również systemami {typowanymi} (ang. \emph{typed systems}).
+  \item Inny sposób polega na nie ustalaniu typów zmiennych. Składnia \(\lambda\)-termów nie ulega wówczas zmianie, zaś o typie rozstrzyga algorytm rekonstrukcji typu. Typy w tym stylu były przedmotem Rozdziału \ref{sec:simple_types}. W literaturze powszechnie nazywa się to podejście \emph{stylem Currego} albo typowaniem \emph{implicite}, zaś systemy w takim stylu określa się systemami \emph{przypisywania typu} (ang. \emph{type assignment systems}).
+\end{enumerate}
+
+Obydwa podejścia dają w rezultacie takie same systemy typów \cite[3.4]{Urzyczyn2006}. Systemy w stylu Currego odpowiadają językom programowania funkcyjnego takim jak ML, Clean czy Haskell. Programując w takich językach rolę wyprowadzania typu w istocie przejmuje kompilator, zaś deklaracje typów mają tylko charakter dokumentacji. 
+
+Rozwiązaniem kompromisowym jest tzw. typowanie w stylu de Brujina\footnote{W \cite{Urzyczyn2006} nazywa się to podejście \emph{nieortodoksyjnym stylem Churcha}} \cite[1A.33]{barendregt_dekkers_statman_2013} w którym nie ustala się typu wszystkich zmiennych, jednak adnotacje typowe są częścią składni (tak jak w stylu Churcha) i zależą od ustalonego kontekstu. 
+
+Przedstawimy składnię oraz reguły wyprowadzania typu dla systemu w stylu Churcha. Wszystkie twierdzenia występujące dotychczas w Rozdziale \ref{sec:simple_types} mają swoje odpowiedniki dla systemu w stylu Churcha \cite[Rozdział 2.10]{nederpelt_geuvers_2014}. Wyjątek stanowi Twierdzenie \ref{thm:polymorphism} którego odpowiednikiem jest Twierdzenie \ref{thm:type_uniqueness} o jednoznaczności typu.
+
+\subsubsection{Składnia}
+
+
+\begin{twierdzenie}\label{thm:type_uniqueness}
+\end{twierdzenie}

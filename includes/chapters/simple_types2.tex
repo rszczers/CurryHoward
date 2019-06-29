@@ -179,6 +179,8 @@ gdzie \(p\in U\) jest zmienną typową, zaś kombinator \(K\equiv \lambda xy.\,x
 
 Wszystkie wymione problemy są w rachunku \(\lambda\) z typami prostymi są rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć słynny wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Millnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
 
+\subimport{includes/chapters/}{unification.tex}
+
 \subsection{Własności}
 
 Przedstawimy teraz szereg lematów ustalających między innymi związki między rachunkiem \(\lambda\) bez typów wprowadzonym w Rozdziale \ref{sec:untyped_lambda}, a rachunkiem \(\lambda\) z typami prostymi.
@@ -383,3 +385,5 @@ sposób.
 %   Dowód przez indukcję strukturalną względem M. \qed
 % \end{dowod}
 % \end{fakt}
+
+\subimport{includes/chapters/}{to_church_style.tex}
