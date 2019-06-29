@@ -83,10 +83,9 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
 \end{przyklad}
 
 \subsection{Typowanie}
-
 Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 \vspace{0.5em}
-    \begin{center}
+\begin{center}
     \begin{tabular}{ ccc}
       {\begin{prooftree}
         \Hypo{}
@@ -94,17 +93,18 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
       \end{prooftree}}, jeśli \(x:\sigma\in\Gamma\),
       \vspace{1em}\\
       {\begin{prooftree}
-        \Hypo{\Gamma \vdash M:\varphi \to \psi} \Hypo{ \Gamma \vdash N:\varphi}
-        \Infer2[(app)]{\Gamma \vdash (MN):\psi}
+        \Hypo{\Gamma \vdash M:\sigma \to \tau} \Hypo{ \Gamma \vdash N:\sigma}
+        \Infer2[(app)]{\Gamma \vdash (MN):\tau}
       \end{prooftree}},
       \vspace{1em}
       \\ 
       {\begin{prooftree}
-        \Hypo{ \Gamma, x:\varphi \vdash M:\psi }
-        \Infer1[(abs)]{\Gamma \vdash (\lambda\, x.\, M):\varphi\to\psi}
+        \Hypo{ \Gamma, x:\sigma \vdash M:\tau}
+        \Infer1[(abs)]{\Gamma \vdash (\lambda\, x.\, M):\sigma\to\tau}
       \end{prooftree}}.
       \end{tabular}
 \end{center}
+
 \vspace{0.5em}
 
 \begin{definicja}(Typowalność)\\
@@ -390,3 +390,4 @@ sposób.
 % \end{fakt}
 
 \subimport{includes/chapters/}{to_church_style.tex}
+\subimport{includes/chapters/}{extending_simple_types.tex}
