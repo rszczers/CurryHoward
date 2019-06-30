@@ -33,10 +33,18 @@ Na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt
   (m-4-3) edge (m-3-4)
           edge (m-2-3);
   \end{tikzpicture}
-  \caption{Poszczególne systemy klasyfikacji \emph{kostki \(\lambda\)} H. Barendregta. Kierunek krawędzi \(\to\)  oznacza relację \(\subseteq\).}\label{fig:lambda-cube}
+  \caption{Poszczególne systemy klasyfikacji H. Barendregta; kierunek krawędzi \(\to\)  oznacza relację \(\subseteq\).}\label{fig:lambda-cube}
 \end{figure}
 
 \subsection{System \(\lambda{\to}\)}
-Przez system \(\lambda{\to}\) rozumiemy rachunek \(\lambda\)  z typami prostymi w stylu Churcha (Rozdział \ref{subsec:church_style}). W rachunku tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplkować do innego termu, odpowiednio. Innych możliwości nie ma. Dlatego mówimy, że w systemie \(\lambda{\to}\) termy \emph{zależą} od termów. 
+Przez system \(\lambda{\to}\) rozumiemy rachunek \(\lambda\)  z typami prostymi w stylu Churcha (Rozdział \ref{subsec:church_style}). W rachunku tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplkować do innego termu, odpowiednio. Innych możliwości nie ma. Dlatego mówimy, że w systemie \(\lambda{\to}\) termy \emph{zależą} od termów. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność jest \emph{pierwszego rzędu}.
 
+\begin{przyklad}
+  \begin{enumerate}[label=(\alph*)]
+    \item
+  Zauważmy, że nie istnieje jeden typ dla reprezentacji funkcji identycznościowej. Jeśli \(nat\) jest stałą typową, którą reprezentujemy liczby naturalne, to identyczność na zbiorze liczb naturalnych będziemy reprezentowali termem \(\lambda x:nat.\,x\), na zbiorze funkcji \(\mathbb{N}\to\mathbb{N}\), \(\lambda x:\mathrm{nat}\to\mathrm{nat}.\,x\) i tak dalej.
+  Aby okreslić ogólną postać identyczności, musimy móc abstrahować po zbiorze typów, czyli parametryzować postać termu typem. Własność tę miał w pewnym sensie rachunek \(\lambda\) w stylu Currego (Podrozdział \ref{subsec:polymorphism}). 
+    \item
+  \end{enumerate}
+\end{przyklad}
 
