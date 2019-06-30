@@ -14,10 +14,10 @@ Na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt
   row sep=3em, column sep=3em,
   text height=1.5ex,
   text depth=0.25ex]{
-              & \lambda\omega             &              & \lambda\Pi\omega             \\
-  \lambda 2   &                           & \lambda\Pi 2                                \\
-              & \lambda\underline{\omega} &              & \lambda\Pi\underline{\omega} \\
-  \lambda{\to}&                           & \lambda\Pi  \\
+              & \lambda\omega             &              & \lambda P \omega             \\
+  \lambda 2   &                           & \lambda P 2                                \\
+              & \lambda\underline{\omega} &              & \lambda P \underline{\omega} \\
+  \lambda{\to}&                           & \lambda P  \\
   };
   \path[-{Latex[length=2.5mm, width=1.5mm]}]
   (m-1-2) edge (m-1-4)
@@ -43,8 +43,18 @@ Przez system \(\lambda{\to}\) rozumiemy rachunek \(\lambda\)  z typami prostymi 
   \begin{enumerate}[label=(\alph*)]
     \item
   Zauważmy, że nie istnieje jeden typ dla reprezentacji funkcji identycznościowej. Jeśli \(nat\) jest stałą typową, którą reprezentujemy liczby naturalne, to identyczność na zbiorze liczb naturalnych będziemy reprezentowali termem \(\lambda x:nat.\,x\), na zbiorze funkcji \(\mathbb{N}\to\mathbb{N}\), \(\lambda x:\mathrm{nat}\to\mathrm{nat}.\,x\) i tak dalej.
-  Aby okreslić ogólną postać identyczności, musimy móc abstrahować po zbiorze typów, czyli parametryzować postać termu typem. Własność tę miał w pewnym sensie rachunek \(\lambda\) w stylu Currego (Podrozdział \ref{subsec:polymorphism}). 
+  Aby okreslić ogólną postać identyczności, musimy móc abstrahować po zbiorze typów, czyli parametryzować postać termu typem. Wymaga to dodania kolejnej abstrakcji:
+      \begin{align*}
+        \lambda \sigma:* .\,\lambda x:\sigma.\,x,
+      \end{align*}
+      gdzie symbolem \(*\) oznaczamy typ obiektów będących typami (szczegóły omówimy w Rozdziale \ref{subsec:lambda2}).
+      Własność tę (polimorfizm parametryczny) miał w pewnym sensie rachunek \(\lambda\) w stylu Currego (Podrozdział \ref{subsec:polymorphism}). 
     \item
+      Przykład dotyczy iteracji. Przypuśćmy, że term \(F\) jest typu \(\sigma\to\sigma\) i okreslamy \(D_{\sigma F}\equiv\lambda x:\nobreak\sigma.\,F(Fx)\).
   \end{enumerate}
 \end{przyklad}
 
+\subsection{System \(\lambda 2\)}\label{subsec:lambda2}
+\subsection{System \(\lambda \protect\underline{\omega}\)}\label{subsec:lambdaw}
+\subsection{System \(\lambda P\)}\label{subsec:lambdaP}
+\subsection{Podsumowanie}
