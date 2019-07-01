@@ -1,0 +1,61 @@
+\subsection{System \(\lambda \protect\underline{\omega}\)}\label{subsec:lambdaw}
+  \subsubsection{Typowanie}
+
+  Typizacja: \(\Gamma \vdash M : A\)\\
+  \begin{center}
+  \begin{tabular}{r c c }
+
+    \vspace{0.2cm}
+    (ax) &
+    {\begin{prooftree}
+      \Hypo{}
+      \Infer1[]{<>\vdash *:\Box}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (start) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash A:s}
+      \Infer1[]{\Gamma, x:A \vdash x:A}
+    \end{prooftree}} &
+    \(x\not\in\Gamma\) \\
+    \vspace{0.2cm}
+
+    (weak) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma, A:B \vdash C:s }
+      \Infer1[]{\Gamma, x:C \vdash A:B}
+    \end{prooftree}} &
+    \(x\not\in\Gamma\)\\
+    \vspace{0.2cm}
+
+    (form) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma \vdash A:s} \Hypo{\Gamma \vdash B:s}
+      \Infer2[]{\Gamma \vdash (A\to B):s }
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (App) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash F:A\to B } \Hypo{\Gamma \vdash (A\to B) : s}
+      \Infer2[]{\Gamma \vdash Fa:B}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Abs) &
+    {\begin{prooftree}
+      \Hypo{\Gamma, x:A \vdash b:B } \Hypo{\Gamma \vdash (A\to B) : s}
+      \Infer2[]{\Gamma \vdash (\lambda x:A.\,b):(A\to B)}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Conv) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash A:B} \Hypo{\Gamma \vdash B':s } \Hypo{B =_{\beta} B'}
+      \Infer3[]{\Gamma \vdash A:B'}
+    \end{prooftree}} & \\
+  \end{tabular}
+  \end{center}
+  \subsubsection{Redukcja}
+
