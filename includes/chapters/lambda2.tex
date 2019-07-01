@@ -36,7 +36,7 @@ F i w literaturze szerzej znany jest pod tą nazwą.
 
 \subsection{Typy polimorficzne}
 
-\begin{definicja}(Typów \(\mathbb{T}2\))
+\begin{definicja}(Typy \(\mathbb{T}2\))
   Niech \(\mathbb{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi typowymi} i oznaczali literami alfabetu greckiego (\(\alpha, \beta, \gamma, \dots\)). Zbiór typów \(\mathbb{T}2\) systemu \(\lambda 2\) okreslamy w notacji BNF następującym zapisem:
   \begin{align*}
     \mathbb{T2}\ &\leftarrow\ \mathbb{V}\ |\ (\mathbb{T2}\to\mathbb{T2})\ |\ (\Pi \mathbb{V}:*.\,\mathbb{T2})
@@ -121,7 +121,7 @@ Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abs
       \(\Gamma\vdash B:*\), & jeśli \(B\in\mathbb{T}2\) i  \(\mathrm{FV}(B)\subseteq \mathrm{rg}\,\Gamma\)\\
     \vspace{0.5cm}
 
-    (\(\Pi\)e) &
+    (\(\Pi\)-e) &
     {\begin{prooftree}
       \Hypo{ \Gamma \vdash M:(\Pi \alpha:*.\,A)}
       \Hypo{ \Gamma \vdash B:* }
@@ -130,7 +130,7 @@ Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abs
      \\
     \vspace{0.5cm}
 
-    (\(\Pi\)i) &
+    (\(\Pi\)-i) &
     {\begin{prooftree}
       \Hypo{\Gamma, \alpha : * \vdash M:A } 
       \Infer1[]{\Gamma \vdash \lambda \alpha:*.\,M:\Pi \alpha:*.\,A}
@@ -139,12 +139,24 @@ Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abs
   \end{center}
 
   \begin{definicja}(Poprawność, typowalność)
-    Powiemy, że term \(M\in\mathbf{\Lambda}_\mathbb{T2}\) jest \emph{poprawny} lub \emph{typowalny}, jeśli istnieje \(\lambda 2\)-kontekst \(\Gamma\) i typ \(\rho\in T2\) taki, że \(\Gamma\vdash M:\rho\).
+    Powiemy, że term \(M\in\mathbf{\Lambda}_{\mathbb{T}2}\) jest \emph{poprawny} lub \emph{typowalny}, jeśli istnieje \(\lambda 2\)-kontekst \(\Gamma\) i typ \(\rho\in \mathbb{T}2\) taki, że \(\Gamma\vdash M:\rho\).
   \end{definicja}
   \subsection{Redukcja}
   \begin{definicja}(\(\beta\)-redukcja)
   \end{definicja}
 
-
-
+\begin{przyklad}
+  \begin{equation*}
+  \begin{fitch}
+  \fh \alpha : * & \\
+  \fa \fh f: \alpha \to \alpha & \\
+  \fa \fa \fh x : \alpha & \\
+  \fa\fa \fa f x : \alpha & (app) 2 3 \\
+  \fa \fa \fa f(f x) : \alpha  & (app) 2 1 \\
+  \fa \fa \lambda x : \alpha .\, f(fx) : \alpha \to \alpha & (abs) 5 \\
+  \fa \lambda f : \alpha \to \alpha .\, \lambda x :\, \alpha .\, f (fx) : (\alpha \to \alpha) \to \alpha \to \alpha &  (abs) 6 \\
+  \lambda \alpha : * .\, \lambda f : \alpha \to \alpha .\, \lambda x : \alpha .\, f (f x) : \Pi \alpha : * .\, (\alpha \to \alpha) \to \alpha \to \alpha & (\(\Pi\)-i) 7 \\
+  \end{fitch}
+  \end{equation*}
+\end{przyklad}
 
