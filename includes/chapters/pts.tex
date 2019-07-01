@@ -1,4 +1,4 @@
-\section{Uogólnione systemy typów}
+\section{Kostka \(\lambda\)}
 %Od tej pory rozważać będziemy wyłącznie systemy w stylu Churcha.
 
 System typów, który był przedmiotem Rozdziału \ref{sec:simple_types} jest najbardziej elementarnym przypadkiem typowanego rachunku \(\lambda\)\footnote{Patologicznym przypadkiem jest rachunek \(\lambda\) bez typów, jeśli przyjmiemy, że wszystkie wyrażenia mają w nim dokładnie jeden typ. Argument ten często podejmowany jest na rzecz statycznie typowanych języków programowania.}. W literaturze często spotyka się być może jeszcze prostszy, równoważny wariant typów prostych, w którym wszystkie typy buduje się wyłącznie z jednej stałej typowej. Pod pojęciem typów prostych rozumie się także szereg rozszerzeń przedstawionego przez nas systemu. Ich celem jest zwiększenie ekspresji, np. o odpowiednie konstrukcje dla par, w których pierwszy element może być innego typu niż drugi. Konstrukcja ta jest bowiem niemożliwa w naszym, elementarnym ujęciu.
@@ -40,21 +40,289 @@ Na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt
 Przez system \(\lambda{\to}\) rozumiemy rachunek \(\lambda\)  z typami prostymi w stylu Churcha (Rozdział \ref{subsec:church_style}). W rachunku tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplkować do innego termu, odpowiednio. Innych możliwości nie ma. Dlatego mówimy, że w systemie \(\lambda{\to}\) termy \emph{zależą} od termów. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność jest \emph{pierwszego rzędu}.
 
 \begin{przyklad}
-  \begin{enumerate}[label=(\alph*)]
-    \item
+%    \begin{enumerate}[label=(\alph*)]
+%    \item
   Zauważmy, że nie istnieje jeden typ dla reprezentacji funkcji identycznościowej. Jeśli \(nat\) jest stałą typową, którą reprezentujemy liczby naturalne, to identyczność na zbiorze liczb naturalnych będziemy reprezentowali termem \(\lambda x:nat.\,x\), na zbiorze funkcji \(\mathbb{N}\to\mathbb{N}\), \(\lambda x:\mathrm{nat}\to\mathrm{nat}.\,x\) i tak dalej.
-  Aby okreslić ogólną postać identyczności, musimy móc abstrahować po zbiorze typów, czyli parametryzować postać termu typem. Wymaga to dodania kolejnej abstrakcji:
+  Aby okreslić ogólną postać identyczności, musimy móc abstrahować po zbiorze typów, czyli parametryzować postać termu typem. %Wymaga to dodania kolejnej abstrakcji:
       \begin{align*}
         \lambda \sigma:* .\,\lambda x:\sigma.\,x,
       \end{align*}
       gdzie symbolem \(*\) oznaczamy typ obiektów będących typami (szczegóły omówimy w Rozdziale \ref{subsec:lambda2}).
       Własność tę (polimorfizm parametryczny) miał w pewnym sensie rachunek \(\lambda\) w stylu Currego (Podrozdział \ref{subsec:polymorphism}). 
-    \item
-      Przykład dotyczy iteracji. Przypuśćmy, że term \(F\) jest typu \(\sigma\to\sigma\) i okreslamy \(D_{\sigma F}\equiv\lambda x:\nobreak\sigma.\,F(Fx)\).
-  \end{enumerate}
+%    \item
+%      Przykład dotyczy iteracji. Przypuśćmy, że term \(F\) jest typu \(\sigma\to\sigma\) i okreslamy \(D_{\sigma F}\equiv\lambda x:\nobreak\sigma.\,F(Fx)\). Chcąc określić \(D\) dla dowolnych \(F\) i \(\sigma\)
+%  \end{enumerate}
 \end{przyklad}
-
 \subsection{System \(\lambda 2\)}\label{subsec:lambda2}
+
+  \begin{definicja}(\(\alpha\)-konwersja)
+  \end{definicja}
+  \subsubsection{Typowanie}
+  Typizacja: \(\Gamma \vdash M : A\)\\
+  \begin{center}
+  \begin{tabular}{r c c}
+
+    \vspace{0.5cm}
+    (var) &
+      \(\Gamma \vdash x:\sigma\) & jesli \(x:\sigma\in\Gamma\)\\
+    \vspace{0.5cm}
+
+    (app) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash M:\sigma \to \tau} \Hypo{ \Gamma \vdash N:\sigma}
+      \Infer2[]{\Gamma \vdash (MN):B}
+    \end{prooftree}} & \\
+    \vspace{0.5cm}
+
+    (abs) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma, a:\sigma \vdash M:\tau }
+      \Infer1[]{\Gamma \vdash (\lambda\, a:\sigma.\, M):\sigma\to \tau}
+    \end{prooftree}} & \\
+    \vspace{0.5cm}
+
+    (\(form)\) &
+    \(\Gamma\vdash B:*\), jesli \(B\in\mathbb{T}2\) i wszystkie\\
+    & zmienne wolne w \(B\) są zadeklarowane w \(\Gamma\).\\
+
+    (\(\forall\)E) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma \vdash M:(\forall \alpha.\,A)}
+      \Infer1[]{\Gamma \vdash M B : A[\alpha:=B]}
+    \end{prooftree}} &
+    \(B \in \mathbb{T}\)  \\
+    \vspace{0.5cm}
+
+    (\(\forall\)I) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash M:A }
+      \Infer1[]{\Gamma \vdash (\Lambda \alpha.\,M):(\forall \alpha.\,A)}
+    \end{prooftree}} &
+    \(\alpha\not\in \mathrm{FV}(\Gamma)\)  \\
+  \end{tabular}
+  \end{center}
+  \subsubsection{Redukcja}
+
 \subsection{System \(\lambda \protect\underline{\omega}\)}\label{subsec:lambdaw}
+  \subsubsection{Typowanie}
+
+  Typizacja: \(\Gamma \vdash M : A\)\\
+  \begin{center}
+  \begin{tabular}{r c c }
+
+    \vspace{0.2cm}
+    (ax) &
+    {\begin{prooftree}
+      \Hypo{}
+      \Infer1[]{<>\vdash *:\Box}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (start) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash A:s}
+      \Infer1[]{\Gamma, x:A \vdash x:A}
+    \end{prooftree}} &
+    \(x\not\in\Gamma\) \\
+    \vspace{0.2cm}
+
+    (weak) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma, A:B \vdash C:s }
+      \Infer1[]{\Gamma, x:C \vdash A:B}
+    \end{prooftree}} &
+    \(x\not\in\Gamma\)\\
+    \vspace{0.2cm}
+
+    (form) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma \vdash A:s} \Hypo{\Gamma \vdash B:s}
+      \Infer2[]{\Gamma \vdash (A\to B):s }
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (App) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash F:A\to B } \Hypo{\Gamma \vdash (A\to B) : s}
+      \Infer2[]{\Gamma \vdash Fa:B}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Abs) &
+    {\begin{prooftree}
+      \Hypo{\Gamma, x:A \vdash b:B } \Hypo{\Gamma \vdash (A\to B) : s}
+      \Infer2[]{\Gamma \vdash (\lambda x:A.\,b):(A\to B)}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Conv) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash A:B} \Hypo{\Gamma \vdash B':s } \Hypo{B =_{\beta} B'}
+      \Infer3[]{\Gamma \vdash A:B'}
+    \end{prooftree}} & \\
+  \end{tabular}
+  \end{center}
+  \subsubsection{Redukcja}
 \subsection{System \(\lambda P\)}\label{subsec:lambdaP}
-\subsection{Podsumowanie}
+  \subsubsection{Typowanie}
+  Typizacja: \(\Gamma \vdash M : A\)\\
+  \begin{center}
+  \begin{tabular}{r c c }
+
+    \vspace{0.2cm}
+    (Ax) &
+    {\begin{prooftree}
+      \Hypo{}
+      \Infer1[]{<>\vdash *:\Box}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Start) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash A:s}
+      \Infer1[]{\Gamma, x:A \vdash x:A}
+    \end{prooftree}} &
+    \(x\not\in\Gamma\) \\
+    \vspace{0.2cm}
+
+    (Weak) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma, A:B \vdash C:s }
+      \Infer1[]{\Gamma, x:C \vdash A:B}
+    \end{prooftree}} &
+    \(x\not\in\Gamma\)\\
+    \vspace{0.2cm}
+
+    (Form) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma \vdash A:*} \Hypo{\Gamma, x:A \vdash B:s}
+      \Infer2[]{\Gamma \vdash (\Pi x:A.\, B):s }
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (App) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash F:(\Pi x:A.\, B)} \Hypo{\Gamma \vdash a : A}
+      \Infer2[]{\Gamma \vdash Fa:B[x:=a]}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Abs) &
+    {\begin{prooftree}
+      \Hypo{\Gamma, x:A \vdash b:B } \Hypo{\Gamma \vdash (\Pi x:A.\, B) : s}
+      \Infer2[]{\Gamma \vdash (\lambda x:A.\,b):(\Pi x:A.\, B)}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Conv) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash A:B} \Hypo{\Gamma \vdash B':s } \Hypo{B =_{\beta} B'}
+      \Infer3[]{\Gamma \vdash A:B'}
+    \end{prooftree}} & \\
+  \end{tabular}
+  \end{center}
+  \subsubsection{Redukcja}
+\subsection{Uogólniony system typów (GTS)}
+  \subsubsection{Typowanie}
+  Typizacja: \(\Gamma \vdash M : A\)\\
+
+  Schematy reguł dzielimy na dwie grupy:
+
+%  \begin{enumerate}
+%      \item Reguły ogólne
+%      \item Reguły wyróżniające
+%  \end{enumerate}
+
+\begin{enumerate}
+\item  Reguły ogólne
+  \begin{center}
+  \begin{tabular}{r c c }
+
+    \vspace{0.2cm}
+    (Ax) &
+    {\begin{prooftree}
+      \Hypo{}
+      \Infer1[]{<>\vdash *:\Box}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Start) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash A:s}
+      \Infer1[]{\Gamma, x:A \vdash x:A}
+    \end{prooftree}} &
+    \(x\not\in\Gamma\) \\
+    \vspace{0.2cm}
+
+    (Weak) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma, A:B \vdash C:s }
+      \Infer1[]{\Gamma, x:C \vdash A:B}
+    \end{prooftree}} &
+    \(x\not\in\Gamma\)\\
+    \vspace{0.2cm}
+
+%    (Type/Kind) &
+%    {\begin{prooftree}
+%      \Hypo{ \Gamma \vdash A:*} \Hypo{\Gamma, x:A \vdash B:s}
+%      \Infer2[]{\Gamma \vdash (\Pi x:A.\, B):s }
+%    \end{prooftree}} & \\
+%    \vspace{0.2cm}
+
+    (App) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash F:(\Pi x:A.\, B)} \Hypo{\Gamma \vdash a : A}
+      \Infer2[]{\Gamma \vdash Fa:B[x:=a]}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Abs) &
+    {\begin{prooftree}
+      \Hypo{\Gamma, x:A \vdash b:B } \Hypo{\Gamma \vdash (\Pi x:A.\, B) : s}
+      \Infer2[]{\Gamma \vdash (\lambda x:A.\,b):(\Pi x:A.\, B)}
+    \end{prooftree}} & \\
+    \vspace{0.2cm}
+
+    (Conv) &
+    {\begin{prooftree}
+      \Hypo{\Gamma \vdash A:B} \Hypo{\Gamma \vdash B':s } \Hypo{B =_{\beta} B'}
+      \Infer3[]{\Gamma \vdash A:B'}
+    \end{prooftree}} & \\
+
+  \end{tabular}
+  \end{center}
+
+\item Reguły wyróżniające
+  \begin{center}
+  \begin{tabular}{r c c }
+    (\((s_1, s_2)\)-reguła ) &
+    {\begin{prooftree}
+      \Hypo{ \Gamma \vdash A:s_1} \Hypo{\Gamma, x:A \vdash B:s_2}
+      \Infer2[]{\Gamma \vdash (\Pi x:A.\, B):s_2 }
+    \end{prooftree}} & \\
+
+  \end{tabular}
+  \end{center}
+  \subsubsection{Redukcja}
+\end{enumerate}
+  \begin{center}
+  \begin{tabular}{r | l | c c c c}
+    0 & \(\lambda_{\to}\)                 & \((*,\,*)\) \\
+    1 & \(\lambda 2\)                     & \((*,\,*)\) & \((\Box,\,*)\) \\
+    2 & \(\lambda P\)                     & \((*,\,*)\) & & \((*,\,\Box)\) \\
+    1+2 & \(\lambda P2\)                  & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) \\
+    3 & \(\lambda \underline{\omega}\)    & \((*,\,*)\) & & & \((\Box,\,\Box)\)\\
+    1+3 & \(\lambda \omega\)              & \((*,\,*)\) & \((\Box,\,*)\) & & \((\Box,\,\Box)\)\\
+    2+3 & \(\lambda P\underline{\omega}\) & \((*,\,*)\) & & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
+    1+2+3 & \(\lambda C\)                 & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
+  \end{tabular}
+
+  \begin{itemize}
+    \item \((*,*)\) - termy zależne od termów (typy funkcyjne),
+    \item \((\Box,*)\) - termy zalezne od typów (typy polimorficzne),
+    \item \((*,\Box)\) - typy zależne od termów (typy zależne),
+    \item \((\Box, \Box)\) - typy zależne od typów (rodziny typów, higher-kinded types).
+  \end{itemize}
+  \end{center}
+
+
