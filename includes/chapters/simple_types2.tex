@@ -60,8 +60,12 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
   \begin{enumerate}[label=(\arabic*)]
   \setlength\itemsep{0em}
   \item Jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_n:\sigma_n)\), to liniowo
-    uporządkowany zbiór \( \mathrm{dom} \Gamma = (x_1,\dots,x_n) \) nazywamy
-      \emph{dziedziną} kontekstu \(\Gamma\).
+    uporządkowany zbiór \( \mathrm{dom}\, \Gamma = (x_1,\dots,x_n) \) nazywamy
+      \emph{dziedziną} kontekstu \(\Gamma\), zaś \( \mathrm{rg}\, \Gamma =(\sigma_1,\,\dots,\,\sigma_n)\) -- zakresem kontekstu \(\Gamma\) oraz
+      \begin{align*}
+        \mathrm{dom}\,\Gamma &= \{M\in\mathbf{\Lambda}\ |\ (x:\sigma) \in \Gamma \},\\
+        \mathrm{rg}\,\Gamma &= \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}.
+      \end{align*}
     \item Kontekst \(\Gamma'\) nazywamy \emph{podkontekstem} \(\Gamma\) i piszemy \(\Gamma'\subseteq\Gamma\), jeśli wszystkie deklaracje występujące w \(\Gamma\) występują również w \(\Gamma\) z zachowaniem tego samego porządku.
     \item Kontekst \(\Gamma'\) nazywamy \emph{permutacją} kontekstu \(\Gamma\), jeśli wszystkie deklaracje w \(\Gamma'\) występują w \(\Gamma\) i odwrotnie.
     \item Jeśli \(\Gamma\) jest kontekstem i \(\Phi\) jest zbiorem \(\lambda\)-zmiennych, wówczas \emph{projekcją} \(\Gamma\) na \(\Phi\) (symbolicznie \(\Gamma \upharpoonright \Phi\)) nazywamy podkontekst \(\Gamma'\) kontekstu \(\Gamma\) taki, że \(\mathrm{dom} \Gamma' = (\mathrm{dom} \Gamma) \cap \Phi\)  
