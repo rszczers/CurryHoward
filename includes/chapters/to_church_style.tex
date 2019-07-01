@@ -51,3 +51,18 @@ Istotną różnica, którą wprowadza styl Churcha polega na tym, że mając zad
   Dowód przebiega przez indukcję względem długości wyprowadzenia \(\Gamma\vdash M:\sigma\). Szczegóły pomijamy.\qed
 \end{dowod}
 
+\begin{przyklad}
+%    \begin{enumerate}[label=(\alph*)]
+%    \item
+Zauważmy, że nie istnieje jeden typ dla reprezentacji funkcji identycznościowej. Jeśli \(nat\) jest stałą typową, którą reprezentujemy liczby naturalne, to identyczność na zbiorze liczb naturalnych będziemy reprezentowali termem \(\lambda x:nat.\,x\), na zbiorze funkcji \(\mathbb{N}\to\mathbb{N}\), \(\lambda x:\mathrm{nat}\to\mathrm{nat}.\,x\) i tak dalej.
+  Aby okreslić ogólną postać identyczności, musimy móc abstrahować po zbiorze typów, czyli parametryzować postać termu typem. %Wymaga to dodania kolejnej abstrakcji:
+      \begin{align*}
+        \lambda \sigma:* .\,\lambda x:\sigma.\,x,
+      \end{align*}
+      gdzie symbolem \(*\) oznaczamy typ obiektów będących typami (szczegóły omówimy w Rozdziale \ref{subsec:lambda2}).
+      Własność tę (polimorfizm parametryczny) miał w pewnym sensie rachunek \(\lambda\) w stylu Currego (Podrozdział \ref{subsec:polymorphism}). 
+%    \item
+%      Przykład dotyczy iteracji. Przypuśćmy, że term \(F\) jest typu \(\sigma\to\sigma\) i okreslamy \(D_{\sigma F}\equiv\lambda x:\nobreak\sigma.\,F(Fx)\). Chcąc określić \(D\) dla dowolnych \(F\) i \(\sigma\)
+%  \end{enumerate}
+\end{przyklad}
+

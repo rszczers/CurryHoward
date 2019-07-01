@@ -91,25 +91,24 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 \vspace{0.5em}
 \begin{center}
     \begin{tabular}{ ccc}
-      {\begin{prooftree}
-        \Hypo{}
-        \Infer1[(var)]{\Gamma \vdash x:\sigma}
-      \end{prooftree}}, jeśli \(x:\sigma\in\Gamma\),
+      \(\Gamma \vdash x:\sigma\ \text{(var)}\), & jeśli \(x:\sigma\in\Gamma\),
       \vspace{1em}\\
       {\begin{prooftree}
         \Hypo{\Gamma \vdash M:\sigma \to \tau} \Hypo{ \Gamma \vdash N:\sigma}
         \Infer2[(app)]{\Gamma \vdash (MN):\tau}
-      \end{prooftree}},
+      \end{prooftree}},&
       \vspace{1em}
       \\ 
       {\begin{prooftree}
         \Hypo{ \Gamma, x:\sigma \vdash M:\tau}
         \Infer1[(abs)]{\Gamma \vdash (\lambda\, x.\, M):\sigma\to\tau}
-      \end{prooftree}}.
+      \end{prooftree}}.&
       \end{tabular}
 \end{center}
 
 \vspace{0.5em}
+
+W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplkować do innego termu, odpowiednio. Dlatego mówimy, że w rachunku \(\lambda\) z typami prostymi termy \emph{zależą} od termów. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność (abstrakcja) jest \emph{pierwszego rzędu}.
 
 \begin{definicja}(Typowalność)\\
   Mówimy, że \(\lambda\)-term \(M\) jest typu \(\sigma\) w kontekście \(\Gamma\), jeśli istnieje skończone drzewo sądów spełniające poniższe warunki:
@@ -130,8 +129,8 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
   \begin{center}
   \begin{prooftree}
     \Hypo{x:\sigma, y:\tau \vdash x:\sigma}
-    \Infer1[(Abs)]{x:\sigma \vdash \lambda y.\,x:{\tau\to\sigma}}
-    \Infer1[(Abs)]{\vdash \lambda x y.\, x:{\sigma\to\tau\to\sigma}}
+    \Infer1[(abs)]{x:\sigma \vdash \lambda y.\,x:{\tau\to\sigma}}
+    \Infer1[(abs)]{\vdash \lambda x y.\, x:{\sigma\to\tau\to\sigma}}
 \end{prooftree}
   \end{center}
 
@@ -139,11 +138,11 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
     Niech \(\Gamma=(x:{\tau\to\rho},\, y:{\sigma\to\tau},\,z:{\sigma})\). Wówczas:
   \begin{center}
 \begin{prooftree}
-  \Hypo{\Gamma\vdash x:{\tau\to\rho}}   \Hypo{\Gamma \vdash y:{\sigma\to\tau}} \Hypo{ \Gamma \vdash z:{\sigma}} \Infer2[(App)]{\Gamma \vdash yz:{\tau}}
-  \Infer2[(App)]{\Gamma \vdash x(yz):\rho}
-  \Infer1[(Abs)]{x:{\tau\to\sigma}, y:{\sigma\to\rho}\vdash \lambda z .\, x(yz):{\sigma\to\rho}}
-  \Infer1[(Abs)]{x:{\tau\to\rho}\vdash \lambda y z.\,x(yz):{(\sigma\to\tau)\to\sigma\to\rho}}
-  \Infer1[(Abs)]{\vdash \lambda x y z .\, x(yz):{(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho}}
+  \Hypo{\Gamma\vdash x:{\tau\to\rho}}   \Hypo{\Gamma \vdash y:{\sigma\to\tau}} \Hypo{ \Gamma \vdash z:{\sigma}} \Infer2[(app)]{\Gamma \vdash yz:{\tau}}
+  \Infer2[(app)]{\Gamma \vdash x(yz):\rho}
+  \Infer1[(abs)]{x:{\tau\to\sigma}, y:{\sigma\to\rho}\vdash \lambda z .\, x(yz):{\sigma\to\rho}}
+  \Infer1[(abs)]{x:{\tau\to\rho}\vdash \lambda y z.\,x(yz):{(\sigma\to\tau)\to\sigma\to\rho}}
+  \Infer1[(abs)]{\vdash \lambda x y z .\, x(yz):{(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho}}
 \end{prooftree}
   \end{center}
 \item
@@ -154,7 +153,7 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 \end{przyklad}
 
 \begin{uwaga*}
-  Notacja dowodowa zaproponowana w Przykładzie \ref{ex:typing} wprowadza wiele redundancji, która utrudnia zorientowanie się w dłuższych wyprowadzeniach, zaś zlinearyzowanie go pozwala na notowanie kolejnych sądów w arbitralnym porządku. Nic nie stoi na przeszkodzie abyśmy ograniczyli się tylko do rozpatrywania wyprowadzeń, w których zależności pomiędzy sądami ustalają ścisły porządek częściowy, tzn. takich, że:
+  Notacja dowodowa zaproponowana w Przykładzie \ref{ex:typing} wprowadza wiele redundancji, która utrudnia zorientowanie się w dłuższych wyprowadzeniach, zaś zlinearyzowanie dowodów pozwala na notowanie kolejnych sądów w arbitralnym porządku. Nic nie stoi na przeszkodzie abyśmy ograniczyli się tylko do rozpatrywania wyprowadzeń, w których zależności pomiędzy sądami ustalają ścisły porządek częściowy, tzn. takich, że:
   \begin{easylist}
     &   żaden sąd nie poprzedza sam siebie (antyzwrotność),
    
@@ -192,6 +191,7 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
   \(\lambda\)-term \(M\in\mathbf{\Lambda}\) nazywamy \emph{poprawnym} (ang. \emph{legal}) lub \emph{typowalnym} (ang. \emph{typable}), jeśli istnieje wyprowadzenie \(\Gamma\vdash M:\rho\) dla pewnego kontekstu \(\Gamma\) i typu \(\rho\in\mathbb{T}\). 
 \end{definicja}
 
+\subsubsection{Rodzaje problemów} 
 W teorii typów spotykamy trzy rodzaje problemów dotyczące sądów:
 \begin{enumerate}
   \setlength\itemsep{0em}
@@ -429,3 +429,7 @@ sposób.
 % \end{fakt}
 
 \subimport{includes/chapters/}{to_church_style.tex}
+\subsection{Podsumowanie}
+System typów, który był przedmiotem Rozdziału \ref{sec:simple_types} jest najbardziej elementarnym przypadkiem typowanego rachunku \(\lambda\)\footnote{Patologicznym przypadkiem jest rachunek \(\lambda\) bez typów, jeśli przyjmiemy, że wszystkie wyrażenia mają w nim dokładnie jeden typ. Argument ten często podejmowany jest na rzecz statycznie typowanych języków programowania.}. W literaturze często spotyka się być może jeszcze prostszy, równoważny wariant typów prostych, w którym wszystkie typy buduje się wyłącznie z jednej stałej typowej. Pod pojęciem typów prostych rozumie się także szereg rozszerzeń przedstawionego przez nas systemu. Ich celem jest zwiększenie ekspresji, np. o odpowiednie konstrukcje dla par, w których pierwszy element może być innego typu niż drugi. Konstrukcja ta jest bowiem niemożliwa w naszym, elementarnym ujęciu.
+
+Rozszerzenia takie mają na ogół szczególny cel praktyczny: rozszerzenie o typ dla par umożliwiają na przykład elegancką prezentację analogii między intuicjonistycznym rachunkiem zdań, typowanym rachunkiem \(\lambda\) i kategoriami kartezjańsko domkniętymi, znanej szerzej jako izomorfizm Currego-Howarda-Lambeka \cite[Rozdział 3.1]{Girard:1989:PT:64805}. Nie wpływa to jednak na samą istotę typowania.  

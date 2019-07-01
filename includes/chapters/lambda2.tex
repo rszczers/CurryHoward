@@ -1,6 +1,40 @@
-\subsection{System \(\lambda 2\) (System F)}\label{subsec:lambda2}
+\section{System F}
+
+Na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt_1992} klasyfikacji rozszerzeń rachunku \(\lambda\) z typami prostymi (tzw. \emph{kostki \(\lambda\)}, Rysunek \ref{fig:lambda-cube}), rozdział ten poświęcimy omówieniu wzajemnych zależności jakie mogą łączyć \(\lambda\)-termy i typy. Zajmować będziemy się wyłącznie systemami w stylu Churcha.
+
+\begin{figure}[!h]
+  \centering
+  \begin{tikzpicture}
+  \matrix (m) [matrix of math nodes,
+  row sep=3em, column sep=3em,
+  text height=1.5ex,
+  text depth=0.25ex]{
+              & \lambda\omega             &              & \lambda P \omega             \\
+  \lambda 2   &                           & \lambda P 2                                \\
+              & \lambda\underline{\omega} &              & \lambda P \underline{\omega} \\
+  \lambda{\to}&                           & \lambda P  \\
+  };
+  \path[-{Latex[length=2.5mm, width=1.5mm]}]
+  (m-1-2) edge (m-1-4)
+  (m-2-1) edge (m-2-3)
+          edge (m-1-2)
+  (m-3-2) edge (m-1-2)
+          edge (m-3-4)
+  (m-4-1) edge (m-2-1)
+          edge (m-3-2)
+          edge (m-4-3)
+  (m-3-4) edge (m-1-4)
+  (m-2-3) edge (m-1-4)
+  (m-4-3) edge (m-3-4)
+          edge (m-2-3);
+  \end{tikzpicture}
+  \caption{Poszczególne systemy klasyfikacji H. Barendregta; kierunek krawędzi \(\to\)  oznacza relację \(\subseteq\).}\label{fig:lambda-cube}
+\end{figure}
+
 System \(\lambda  2\) wprowadzony został przez J.-Y.  Girarda jako System
 F i w literaturze szerzej znany jest pod tą nazwą. 
+
+\subsection{Typy polimorficzne}
 
 \begin{definicja}(Typów \(\mathbb{T}2\))
   Niech \(\mathbb{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi typowymi} i oznaczali literami alfabetu greckiego (\(\alpha, \beta, \gamma, \dots\)). Zbiór typów \(\mathbb{T}2\) systemu \(\lambda 2\) okreslamy w notacji BNF następującym zapisem:
@@ -56,7 +90,8 @@ Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abs
       \(\mathrm{dom}(\Gamma)\) i \(\mathrm{rg}(\Gamma)\) nazywamy odpowiednio \emph{dziedziną} i \emph{zakresem} \(\lambda 2\)-kontekstu \(\Gamma\).
   \end{enumerate}
 \end{definicja}
-  \subsubsection{Typowanie}
+
+  \subsection{Typowanie}
   \begin{definicja}(Kontekst)
   \end{definicja}
   Typowanie: \(\Gamma \vdash M : A\)\\
@@ -106,7 +141,7 @@ Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abs
   \begin{definicja}(Poprawność, typowalność)
     Powiemy, że term \(M\in\mathbf{\Lambda}_\mathbb{T2}\) jest \emph{poprawny} lub \emph{typowalny}, jeśli istnieje \(\lambda 2\)-kontekst \(\Gamma\) i typ \(\rho\in T2\) taki, że \(\Gamma\vdash M:\rho\).
   \end{definicja}
-  \subsubsection{Redukcja}
+  \subsection{Redukcja}
   \begin{definicja}(\(\beta\)-redukcja)
   \end{definicja}
 
