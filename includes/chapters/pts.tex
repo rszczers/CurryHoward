@@ -1,4 +1,4 @@
-\section{Rozszerzenia rachunku \(\lambda\) z typami prostymi}
+\section{System F}
 %Od tej pory rozważać będziemy wyłącznie systemy w stylu Churcha.
 
 System typów, który był przedmiotem Rozdziału \ref{sec:simple_types} jest najbardziej elementarnym przypadkiem typowanego rachunku \(\lambda\)\footnote{Patologicznym przypadkiem jest rachunek \(\lambda\) bez typów, jeśli przyjmiemy, że wszystkie wyrażenia mają w nim dokładnie jeden typ. Argument ten często podejmowany jest na rzecz statycznie typowanych języków programowania.}. W literaturze często spotyka się być może jeszcze prostszy, równoważny wariant typów prostych, w którym wszystkie typy buduje się wyłącznie z jednej stałej typowej. Pod pojęciem typów prostych rozumie się także szereg rozszerzeń przedstawionego przez nas systemu. Ich celem jest zwiększenie ekspresji, np. o odpowiednie konstrukcje dla par, w których pierwszy element może być innego typu niż drugi. Konstrukcja ta jest bowiem niemożliwa w naszym, elementarnym ujęciu.
@@ -55,110 +55,7 @@ Przez system \(\lambda{\to}\) rozumiemy rachunek \(\lambda\)  z typami prostymi 
 \end{przyklad}
 
 \subimport{}{lambda2.tex}
-\subimport{}{lambdaw.tex}
-\subimport{}{lambdap.tex}
-
-\subsection{Uogólniony system typów (GTS)}
-  \subsubsection{Typowanie}
-  Typizacja: \(\Gamma \vdash M : A\)\\
-
-  Schematy reguł dzielimy na dwie grupy:
-
-%  \begin{enumerate}
-%      \item Reguły ogólne
-%      \item Reguły wyróżniające
-%  \end{enumerate}
-
-\begin{enumerate}
-\item  Reguły ogólne
-  \begin{center}
-  \begin{tabular}{r c c }
-
-    \vspace{0.2cm}
-    (Ax) &
-    {\begin{prooftree}
-      \Hypo{}
-      \Infer1[]{<>\vdash *:\Box}
-    \end{prooftree}} & \\
-    \vspace{0.2cm}
-
-    (Start) &
-    {\begin{prooftree}
-      \Hypo{\Gamma \vdash A:s}
-      \Infer1[]{\Gamma, x:A \vdash x:A}
-    \end{prooftree}} &
-    \(x\not\in\Gamma\) \\
-    \vspace{0.2cm}
-
-    (Weak) &
-    {\begin{prooftree}
-      \Hypo{ \Gamma, A:B \vdash C:s }
-      \Infer1[]{\Gamma, x:C \vdash A:B}
-    \end{prooftree}} &
-    \(x\not\in\Gamma\)\\
-    \vspace{0.2cm}
-
-%    (Type/Kind) &
-%    {\begin{prooftree}
-%      \Hypo{ \Gamma \vdash A:*} \Hypo{\Gamma, x:A \vdash B:s}
-%      \Infer2[]{\Gamma \vdash (\Pi x:A.\, B):s }
-%    \end{prooftree}} & \\
-%    \vspace{0.2cm}
-
-    (App) &
-    {\begin{prooftree}
-      \Hypo{\Gamma \vdash F:(\Pi x:A.\, B)} \Hypo{\Gamma \vdash a : A}
-      \Infer2[]{\Gamma \vdash Fa:B[x:=a]}
-    \end{prooftree}} & \\
-    \vspace{0.2cm}
-
-    (Abs) &
-    {\begin{prooftree}
-      \Hypo{\Gamma, x:A \vdash b:B } \Hypo{\Gamma \vdash (\Pi x:A.\, B) : s}
-      \Infer2[]{\Gamma \vdash (\lambda x:A.\,b):(\Pi x:A.\, B)}
-    \end{prooftree}} & \\
-    \vspace{0.2cm}
-
-    (Conv) &
-    {\begin{prooftree}
-      \Hypo{\Gamma \vdash A:B} \Hypo{\Gamma \vdash B':s } \Hypo{B =_{\beta} B'}
-      \Infer3[]{\Gamma \vdash A:B'}
-    \end{prooftree}} & \\
-
-  \end{tabular}
-  \end{center}
-
-\item Reguły wyróżniające
-  \begin{center}
-  \begin{tabular}{r c c }
-    (\((s_1, s_2)\)-reguła ) &
-    {\begin{prooftree}
-      \Hypo{ \Gamma \vdash A:s_1} \Hypo{\Gamma, x:A \vdash B:s_2}
-      \Infer2[]{\Gamma \vdash (\Pi x:A.\, B):s_2 }
-    \end{prooftree}} & \\
-
-  \end{tabular}
-  \end{center}
-  \subsubsection{Redukcja}
-\end{enumerate}
-  \begin{center}
-  \begin{tabular}{r | l | c c c c}
-    0 & \(\lambda_{\to}\)                 & \((*,\,*)\) \\
-    1 & \(\lambda 2\)                     & \((*,\,*)\) & \((\Box,\,*)\) \\
-    2 & \(\lambda P\)                     & \((*,\,*)\) & & \((*,\,\Box)\) \\
-    1+2 & \(\lambda P2\)                  & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) \\
-    3 & \(\lambda \underline{\omega}\)    & \((*,\,*)\) & & & \((\Box,\,\Box)\)\\
-    1+3 & \(\lambda \omega\)              & \((*,\,*)\) & \((\Box,\,*)\) & & \((\Box,\,\Box)\)\\
-    2+3 & \(\lambda P\underline{\omega}\) & \((*,\,*)\) & & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
-    1+2+3 & \(\lambda C\)                 & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
-  \end{tabular}
-
-  \begin{itemize}
-    \item \((*,*)\) - termy zależne od termów (typy funkcyjne),
-    \item \((\Box,*)\) - termy zalezne od typów (typy polimorficzne),
-    \item \((*,\Box)\) - typy zależne od termów (typy zależne),
-    \item \((\Box, \Box)\) - typy zależne od typów (rodziny typów, higher-kinded types).
-  \end{itemize}
-  \end{center}
-
+% \subimport{}{lambdaw.tex}
+% \subimport{}{lambdap.tex}
+% \subimport{}{gts.tex}
 

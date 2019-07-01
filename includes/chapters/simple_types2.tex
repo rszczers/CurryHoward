@@ -11,7 +11,7 @@ Niech \(U\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowyc
 \end{enumerate}
 \end{definicja}
 
-Typy proste zbudowane tylko wedle reguły \ref{def:t-1} nazywamy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły \ref{def:t-2} -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbb{T}\). Definicję \ref{def:typy-proste} można równoznacznie wyrazić przy pomocy notacji Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać:
+Zmienne typowe nazywa się w literaturze niekiedy \emph{stałymi typowymi}\footnote{Podkresla to fakt, że w systemie tym abstrakcja nie może odbywać się po zmiennych.}. Typy proste zbudowane tylko wedle reguły \ref{def:t-1} nazywamy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły \ref{def:t-2} -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbb{T}\). Definicję \ref{def:typy-proste} można równoznacznie wyrazić przy pomocy notacji Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać:
 \begin{align*}
   \mathbb{T}\ \leftarrow \ U\ |\ (\mathbb{T}\to\mathbb{T})
 \end{align*}
@@ -46,7 +46,7 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
 
 % Stosujemy analogiczne konwencje notacyjne do tych proponowanych przy Definicji \ref{def:lambda-untyped}.
 
-\begin{definicja}(Stwierdzenie, deklaracja, kontekst, sąd)
+\begin{definicja}(Stwierdzenie, deklaracja, kontekst, sąd)\label{def:statement_simple}
   \begin{enumerate}[label=(\arabic*)]
   \setlength\itemsep{0em}
   \item \emph{Stwierdzeniem} (ang. \emph{statement}) nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\mathbf{\Lambda}\) i \(\sigma\in\mathbb{T}\). W stwierdzeniu \(M:\sigma\) \(\lambda\)-term \(M\) nazwamy \emph{podmiotem} (ang. \emph{subject}), zaś \(\sigma\) -- \emph{predykatem}.
@@ -152,6 +152,41 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 \end{enumerate}
 %  Zauważmy, że term \(\lambda x^{\tau\to\rho}\lambda y^{\sigma\to\tau}\lambda z^\sigma . x(yz)\) odpowiada operacji złożenia funkcji.
 \end{przyklad}
+
+\begin{uwaga*}
+  Notacja dowodowa zaproponowana w Przykładzie \ref{ex:typing} wprowadza wiele redundancji, która utrudnia zorientowanie się w dłuższych wyprowadzeniach, zaś zlinearyzowanie go pozwala na notowanie kolejnych sądów w arbitralnym porządku. Nic nie stoi na przeszkodzie abyśmy ograniczyli się tylko do rozpatrywania wyprowadzeń, w których zależności pomiędzy sądami ustalają ścisły porządek częściowy, tzn. takich, że:
+  \begin{easylist}
+    &   żaden sąd nie poprzedza sam siebie (antyzwrotność),
+   
+    &  jeśli jeden sąd poprzedza drugi, to drugi nie poprzedza pierwszego (antysymetryczność),
+    & jeśli sąd \(J_k\) poprzedza \(J_l\) i \(J_l\) poprzedza \(J_m\), to \(J_k\) poprzedza \(J_m\) (przechodzniość).
+  \end{easylist}
+  Taki charakter dowodów oddaje wariant notacji w postaci drzew wprowadzony przez Pravitza i proponowany w \cite{Hindley:2008:LCI:1388400}. Powtarzanie się kontekstów eliminuje się w niej przez wprowadzanie każdej deklaracji do dowodu przed użyciem i wykreślanie jej po użyciu. W dalszej części pracy będziemy korzystać z analogicznej pod wieloma względami notacji Fitcha (tzw. notacji flagowej). Poniżej pokazujemy wyprowadzenia typu z Przykładu \ref{ex:typing} w tej notacji.
+  \begin{enumerate}[label=(\alph*)]
+   \item
+  \begin{equation*}
+    \begin{fitch}
+      \fh x:\sigma & (var) \\
+      \fa \fh y:\sigma & (var) \\
+      \fa \lambda y.\,x:\tau\to\sigma:\sigma & (abs) 1 \\
+      \lambda x y.\,x:\sigma\to\tau\to\sigma & (abs) 3
+    \end{fitch}
+  \end{equation*}
+  \item
+  \begin{equation*}
+    \begin{fitch}
+      \fh x:\tau\to\rho & (var) \\
+      \fa \fh y:\sigma\to\tau & (var) \\
+      \fa \fa \fh z:\sigma & (var) \\
+      \fa \fa \fa yz:\tau & (app)\ 2\ 3 \\
+      \fa \fa \fa x(yz):\rho & (app) 1 4 \\
+      \fa \fa \lambda z.\,x(yz):\sigma\to\rho & (abs) 5 \\
+      \fa \lambda yz.x(yz):(\sigma\to\tau)\to\sigma\to\rho & (abs) 6\\
+      \lambda x y z.\,x(yz):(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho & (abs) 7 
+    \end{fitch}
+  \end{equation*}
+ \end{enumerate}
+\end{uwaga*}
 
 \begin{definicja}(Poprawność, typowalność)
   \(\lambda\)-term \(M\in\mathbf{\Lambda}\) nazywamy \emph{poprawnym} (ang. \emph{legal}) lub \emph{typowalnym} (ang. \emph{typable}), jeśli istnieje wyprowadzenie \(\Gamma\vdash M:\rho\) dla pewnego kontekstu \(\Gamma\) i typu \(\rho\in\mathbb{T}\). 

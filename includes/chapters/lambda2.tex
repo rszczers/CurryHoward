@@ -1,6 +1,6 @@
 \subsection{System \(\lambda 2\) (System F)}\label{subsec:lambda2}
-System \(\lambda  2\), wprowadzony przez J.-Y.  Girarda jako System
-F i w literaturze szerzej znany pod tą nazwą. 
+System \(\lambda  2\) wprowadzony został przez J.-Y.  Girarda jako System
+F i w literaturze szerzej znany jest pod tą nazwą. 
 
 \begin{definicja}(Typów \(\mathbb{T}2\))
   Niech \(\mathbb{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi typowymi} i oznaczali literami alfabetu greckiego (\(\alpha, \beta, \gamma, \dots\)). Zbiór typów \(\mathbb{T}2\) systemu \(\lambda 2\) okreslamy w notacji BNF następującym zapisem:
@@ -13,19 +13,49 @@ F i w literaturze szerzej znany pod tą nazwą.
   \begin{align*}
       \mathbf{\tilde\Lambda}_\mathbb{T2}\ &\leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbf{\tilde\Lambda}_\mathbb{T2}) \ |\ (\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbb{T2}) \ |\ (\lambda V:\mathbb{T2}.\, \mathbf{\tilde\Lambda}_\mathbb{T2})\ |\ (\lambda V:*.\, \mathbf{\tilde\Lambda}_\mathbb{T2})
   \end{align*}
+  Wyrażenia postaci \((\lambda V:*.\, \mathbf{\tilde\Lambda}_\mathbb{T2})\) i \((\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbb{T2})\) nazywamy \emph{polimorficzną abstrakcją} i \emph{polimorficzną aplikacją}, odpowiednio. Stosujemy standardowe konwencje notacyjne. O zmiennej (termowej lub typowej) występującej bezpośrednio po znaku \(\lambda\) powiemy, że jest związana. 
 \end{definicja}
 
-Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja jest analogiczna do zaprezentowanej w Rozdziale \ref{subsec:lambda_terms_untyped}. Oczywistej modyfikacji ulega relacja \(\alpha\)-konwersji.
+Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja jest analogiczna do zaprezentowanej w Rozdziale \ref{subsec:lambda_terms_untyped}, ale aby nie wchodzić w szczegóły, ustalmy, że utożsamiać będziemy wyrażenia, które różnią się między sobią wyłącznie zmiennymi związanymi.
 
-  \begin{definicja}(\(\alpha\)-konwersja)
+\begin{definicja}(Stwierdzenie, deklaracja)
+  Odpowiedniej modyfikacji ulegają pojęcia wprowadzone w Definicji \ref{def:statement_simple}.
+  \begin{enumerate}
+  \setlength\itemsep{0em}
+    \item Stwierdzeniem nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\Lambda_\mathbb{T2}\) i \(\sigma\in \mathbb{T2}\) lub \(\sigma:*\), gdzie \(\sigma\in\mathbb{T2}\).
+    \item  Deklaracją nazywamy każde stwierdzenie ze zmienna typowa lub zmienna termowa w miejscu podmiotu.
+  \end{enumerate}
+\end{definicja}
+\begin{definicja}(\(\lambda 2\)-kontekst, dziedzina, zakres)
+  \begin{enumerate}
+  \setlength\itemsep{0em}
+  \item \(\emptyset\) jest \(\lambda 2\)-kontekstem; oznaczamy go parą nawiasów 
+    \(()\).
+  \item Jeśli:
     \begin{enumerate}
-      \item
-        \(\lambda x:\sigma.\,M =_\alpha \lambda y:\sigma.\,M\)
-      \item
-      \item
+    \item \(\Gamma\) jest \(\lambda 2\)-kontekstem,
+    \item \(\alpha\in\mathbb{V}\) jest zmienną typową taką, że \(\alpha\not\in \mathrm{dom}(\Gamma)\),
     \end{enumerate}
-  \end{definicja}
-
+    to \(\Gamma, \alpha:*\) jest \(\lambda 2\)-kontekstem, gdzie 
+      \begin{align*} 
+        \mathrm{dom}(\Gamma, \alpha:*)&=(\mathrm{dom}(\Gamma),\, \alpha),\\
+        \mathrm{rg}(\Gamma, \alpha:*)&=\mathrm{rg}(\Gamma)\cup\{*\}.
+      \end{align*}
+  \item Jeśli:
+    \begin{enumerate}
+     \setlength\itemsep{0em}
+     \item \(\Gamma\) jest \(\lambda 2\)-kontekstem,
+     \item \(\rho\in\mathbb{T}2\) jest typem takim, że \(\alpha\in\mathrm{dom}(\Gamma)\) dla wszystkich \(\alpha\in\mathrm{FV}(\rho)\),
+     \item \(x\in V\) jest zmienną termową taką, że \(x\not\in\mathrm{dom}\,\Gamma\),
+    \end{enumerate}
+      to \(\Gamma, x:\rho\) jest \(\lambda 2\)-kontekstem, gdzie 
+      \begin{align*} 
+        \mathrm{dom}(\Gamma, x:\rho)&=(\mathrm{dom}(\Gamma), x),\\
+      \mathrm{rg}(\Gamma, \alpha:*)&=\mathrm{rg}(\Gamma)\cup\{\rho\}.
+      \end{align*}
+      \(\mathrm{dom}(\Gamma)\) i \(\mathrm{rg}(\Gamma)\) nazywamy odpowiednio \emph{dziedziną} i \emph{zakresem} \(\lambda 2\)-kontekstu \(\Gamma\).
+  \end{enumerate}
+\end{definicja}
   \subsubsection{Typowanie}
   \begin{definicja}(Kontekst)
   \end{definicja}
@@ -72,6 +102,10 @@ Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abs
     \end{prooftree}} & \\
   \end{tabular}
   \end{center}
+
+  \begin{definicja}(Poprawność, typowalność)
+    Powiemy, że term \(M\in\mathbf{\Lambda}_\mathbb{T2}\) jest \emph{poprawny} lub \emph{typowalny}, jeśli istnieje \(\lambda 2\)-kontekst \(\Gamma\) i typ \(\rho\in T2\) taki, że \(\Gamma\vdash M:\rho\).
+  \end{definicja}
   \subsubsection{Redukcja}
   \begin{definicja}(\(\beta\)-redukcja)
   \end{definicja}
