@@ -209,34 +209,34 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
     \item Polimorficzna iteracja.
       \begin{equation*}
       \begin{fitch}
-        \fh \alpha : * & (form) \\
-        \fa \fh f: \alpha \to \alpha & (var) \\
-        \fa \fa \fh x : \alpha & (var) \\
-        \fa\fa \fa f x\ :\ \alpha & (app) 2 3 \\
-        \fa \fa \fa f(f x)\ :\ \alpha  & (app) 2 1 \\
-        \fa \fa \lambda x : \alpha .\, f(fx)\ :\ \alpha \to \alpha & (abs) 5 \\
-        \fa \lambda f : \alpha \to \alpha .\, \lambda x :\, \alpha .\, f (fx)\ :\ (\alpha \to \alpha) \to \alpha \to \alpha &  (abs) 6 \\
-      \lambda \alpha : * .\, \lambda f : \alpha \to \alpha .\, \lambda x : \alpha .\, f (f x)\ :\ \Pi \alpha : * .\, (\alpha \to \alpha) \to \alpha \to \alpha & (\(\Pi\)-i) 7 \\
+        \fh \sigma : * & (form) \\
+        \fa \fh f: \sigma \to \sigma & (var) \\
+        \fa \fa \fh x : \sigma & (var) \\
+        \fa\fa \fa f x\ :\ \sigma & (app) 2 3 \\
+        \fa \fa \fa f(f x)\ :\ \sigma  & (app) 2 1 \\
+        \fa \fa \lambda x : \sigma .\, f(fx)\ :\ \sigma \to \sigma & (abs) 5 \\
+        \fa \lambda f : \sigma \to \sigma .\, \lambda x :\, \sigma .\, f (fx)\ :\ (\sigma \to \sigma) \to \sigma \to \sigma &  (abs) 6 \\
+      \lambda \sigma : * .\, \lambda f : \sigma \to \sigma .\, \lambda x : \sigma .\, f (f x)\ :\ \Pi \sigma : * .\, (\sigma \to \sigma) \to \sigma \to \sigma & (\(\Pi\)-i) 7 \\
       \end{fitch}
       \end{equation*}
     \item Polimorficzne złożenie funkcji.
       \begin{equation*}
       \begin{fitch}
-        \fh \gamma: * & (form) \\
-        \fa \fh \beta: * & (form) \\
-        \fa \fa \fh \alpha : * & (form) \\
-        \fa \fa \fa \fh g : \beta\to\gamma & (var) \\
-        \fa \fa \fa \fa \fh f : \alpha\to\beta & (var) \\
-        \fa \fa \fa \fa \fa \fh x : \alpha & (var) \\
-        \fa \fa \fa \fa \fa \fa f a\ :\ \beta & (app) 5 6 \\
-        \fa \fa \fa \fa \fa \fa g (f a)\ :\ \gamma & (app) 4 7 \\
-        \fa \fa \fa \fa \fa \lambda x:\alpha.\,g(f a)\ :\ \alpha \to \gamma & (abs) 8 \\
+        \fh \rho: * & (form) \\
+        \fa \fh \tau: * & (form) \\
+        \fa \fa \fh \sigma : * & (form) \\
+        \fa \fa \fa \fh g : \tau\to\rho & (var) \\
+        \fa \fa \fa \fa \fh f : \sigma\to\tau & (var) \\
+        \fa \fa \fa \fa \fa \fh x : \sigma & (var) \\
+        \fa \fa \fa \fa \fa \fa f a\ :\ \tau & (app) 5 6 \\
+        \fa \fa \fa \fa \fa \fa g (f a)\ :\ \rho & (app) 4 7 \\
+        \fa \fa \fa \fa \fa \lambda x:\sigma.\,g(f a)\ :\ \sigma \to \rho & (abs) 8 \\
         \fa \fa \fa \fa \begin{gathered}
-        \lambda f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ (\alpha\to\beta)\to\alpha\to\gamma \end{gathered} & (abs) 9 \\ 
-        \fa \fa \fa \begin{gathered}\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ (\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 10\\ 
-      \fa \fa \begin{gathered} \lambda \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ \Pi\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 11\\ 
-      \fa \begin{gathered} \lambda \beta \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ \Pi\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 11\\ 
-      \begin{gathered} \lambda \gamma \beta \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ \Pi\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 11\\ 
+        \lambda f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ (\sigma\to\tau)\to\sigma\to\rho \end{gathered} & (abs) 9 \\ 
+        \fa \fa \fa \begin{gathered}\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ (\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 10\\ 
+      \fa \fa \begin{gathered} \lambda \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11\\ 
+      \fa \begin{gathered} \lambda \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11\\ 
+      \begin{gathered} \lambda \rho \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11\\ 
       \end{fitch}
       \end{equation*}
   \end{enumerate}

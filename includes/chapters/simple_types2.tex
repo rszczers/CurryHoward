@@ -436,7 +436,5 @@ System typów, który był przedmiotem Rozdziału \ref{sec:simple_types} jest na
 % \begin{align*}
 %   \mathrm{pair}&\equiv\lambda x:\sigma\, \lambda y:\tau.\ z x y \\
 %   \mathrm{fst} &\equiv \lambda p:\sigma\to\sigma.\ p\,(\lambda x:\sigma\, \lambda y:\tau.\ x) \\
-%   \mathrm{snd} &\equiv \lambda p:\tau\to\tau.\ p\,(\lambda x:\sigma\, \lambda y:\tau.\ y) 
-% \end{align*}
-
-Mają one na ogół szczególny cel praktyczny: na przykład rozszerzenie o typ dla par umożliwiają elegancką prezentację analogii między intuicjonistycznym rachunkiem zdań, typowanym rachunkiem \(\lambda\) i kategoriami kartezjańsko domkniętymi, znanej szerzej jako izomorfizm Currego-Howarda-Lambeka \cite[Rozdział 3.1]{Girard:1989:PT:64805}. Nie wpływa to jednak na samą istotę typowania.  
+%   \mathrm{snd} &\equiv \lambda p:\tau\to\tau.\ p\,(\lambda x:\sigma\, \lambda y:\tau.\ y) % \end{align*} 
+Mają one na ogół szczególny cel praktyczny: na przykład rozszerzenie o typ dla par umożliwiają elegancką prezentację analogii między intuicjonistycznym rachunkiem zdań, typowanym rachunkiem \(\lambda\) i kategoriami kartezjańsko domkniętymi, znanej szerzej jako izomorfizm Currego-Howarda-Lambeka \cite[Rozdział 3.1]{Girard:1989:PT:64805}. Nie wpływa to jednak na samą istotę typowania, która polega na zależności termów od termów. Jak przekonamy się w Rozdziale \ref{sec:system_f} zależność tę można rozszerzyć, pozwalając typom na decydowanie o postaci termu. 
