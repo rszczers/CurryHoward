@@ -47,10 +47,18 @@ F i w literaturze szerzej znany jest pod tą nazwą.
   \begin{align*}
       \mathbf{\tilde\Lambda}_\mathbb{T2}\ &\leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbf{\tilde\Lambda}_\mathbb{T2}) \ |\ (\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbb{T2}) \ |\ (\lambda V:\mathbb{T2}.\, \mathbf{\tilde\Lambda}_\mathbb{T2})\ |\ (\lambda V:*.\, \mathbf{\tilde\Lambda}_\mathbb{T2})
   \end{align*}
-  Wyrażenia postaci \((\lambda V:*.\, \mathbf{\tilde\Lambda}_\mathbb{T2})\) i \((\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbb{T2})\) nazywamy \emph{polimorficzną abstrakcją} i \emph{polimorficzną aplikacją}, odpowiednio. Stosujemy standardowe konwencje notacyjne. O zmiennej (termowej lub typowej) występującej bezpośrednio po znaku \(\lambda\) powiemy, że jest związana. 
+  Wyrażenia postaci \((\lambda V:*.\, \mathbf{\tilde\Lambda}_\mathbb{T2})\) i \((\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbb{T2})\) nazywamy \emph{polimorficzną abstrakcją} i \emph{polimorficzną aplikacją}, odpowiednio. O zmiennej (termowej lub typowej) występującej bezpośrednio po znaku \(\lambda\) powiemy, że jest związana.  
 \end{definicja}
 
-Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja jest analogiczna do zaprezentowanej w Rozdziale \ref{subsec:lambda_terms_untyped}, ale aby nie wchodzić w szczegóły, ustalmy, że utożsamiać będziemy wyrażenia, które różnią się między sobią wyłącznie zmiennymi związanymi.
+Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja jest analogiczna do zaprezentowanej w Rozdziale \ref{subsec:lambda_terms_untyped}, ale aby nie wchodzić w szczegóły, ustalmy, że utożsamiać będziemy wyrażenia, które różnią się między sobią wyłącznie zmiennymi związanymi. Stosujemy standardowe konwencje notacyjne
+\begin{easylist}
+  & Opuszczamy najbardziej zewnętrzne nawiasy,
+  & Aplikacja wiąże prawostronnie,
+  & Aplikacja i \(\to\) wiążą mocniej niż \(\lambda-\) i \(\Pi\)-abstrakcja,
+  & Kolejne \(\lambda\)- i \(\Pi\)-abstrakcje zmiennych tych samych typów mogą występować pod wspónym znakiem i wiążą prawostronnie,
+  & Konstruktor typu \(\to\) wiaże prawostronnie.
+\end{easylist}
+
 
 \begin{definicja}(Stwierdzenie, deklaracja)
   Odpowiedniej modyfikacji ulegają pojęcia wprowadzone w Definicji \ref{def:statement_simple}.
