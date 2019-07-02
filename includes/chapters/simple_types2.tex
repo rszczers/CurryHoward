@@ -11,7 +11,7 @@ Niech \(U\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowyc
 \end{enumerate}
 \end{definicja}
 
-Zmienne typowe nazywa się w literaturze niekiedy \emph{stałymi typowymi}\footnote{Podkresla to fakt, że w systemie tym abstrakcja nie może odbywać się po zmiennych.}. Typy proste zbudowane tylko wedle reguły \ref{def:t-1} nazywamy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły \ref{def:t-2} -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbb{T}\). Definicję \ref{def:typy-proste} można równoznacznie wyrazić przy pomocy notacji Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać:
+Zmienne typowe nazywa się w literaturze niekiedy \emph{stałymi typowymi}\footnote{Ta raczej nieszczęśliwa konwencja podkreśla fakt, że abstrakcja nie może odbywać się po zmiennych typowych.}. Typy proste zbudowane tylko wedle reguły \ref{def:t-1} nazywamy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły \ref{def:t-2} -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbb{T}\). Definicję \ref{def:typy-proste} można równoznacznie wyrazić przy pomocy notacji Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać:
 \begin{align*}
   \mathbb{T}\ \leftarrow \ U\ |\ (\mathbb{T}\to\mathbb{T})
 \end{align*}
@@ -49,7 +49,7 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
 \begin{definicja}(Stwierdzenie, deklaracja, kontekst, sąd)\label{def:statement_simple}
   \begin{enumerate}[label=(\arabic*)]
   \setlength\itemsep{0em}
-  \item \emph{Stwierdzeniem} (ang. \emph{statement}) nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\mathbf{\Lambda}\) i \(\sigma\in\mathbb{T}\). W stwierdzeniu \(M:\sigma\) \(\lambda\)-term \(M\) nazwamy \emph{podmiotem} (ang. \emph{subject}), zaś \(\sigma\) -- \emph{predykatem}.
+  \item \emph{Stwierdzeniem} (ang. \emph{statement}) nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\mathbf{\Lambda}\) i \(\sigma\in\mathbb{T}\). W stwierdzeniu \(M:\sigma\) \(\lambda\)-term \(M\) nazwamy \emph{podmiotem}  (ang. \emph{subject}), zaś \(\sigma\) -- \emph{predykatem}\footnote{Nazwy te historycznie sięgają prac nad semantyką formalną języków naturalnych R. Montague'a.}.
   \item \emph{Deklaracją} (ang. \emph{declaration}) nazywamy każde stwierdzenie w którym podmot jest zmienną termową.
   \item \emph{Kontekstem} (ang. \emph{context}) nazywamy skończony liniowo uporządkowany zbiór (\emph{listę}) deklaracji, w którym wszystkie podmioty są wzajemnie różne.
   \item \emph{Sądem} (ang. \emph{judgement}) nazywamy kazdy napis postaci \(\Gamma\vdash M:\sigma\), gdzie \(\Gamma\) jest kontekstem, zaś \(M:\sigma\) -- stwierdzeniem.  
@@ -219,7 +219,7 @@ W wielu systemach problem typowalności można sprowadzić do problemu weryfikac
 \]
 gdzie \(p\in U\) jest zmienną typową, zaś kombinator \(K\equiv \lambda xy.\,x\).
 
-Wszystkie wymione problemy są w rachunku \(\lambda\) z typami prostymi są rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć słynny wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Millnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
+Wszystkie wymione problemy są w rachunku \(\lambda\) z typami prostymi są rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć słynny wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Milnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
 
 \subimport{includes/chapters/}{unification.tex}
 

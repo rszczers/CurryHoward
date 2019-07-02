@@ -394,6 +394,13 @@ Dla dowolnych \(N, Q\in\mathbf{\Lambda}\), jeśli \(N[y/Q]\in\mathrm{SN}_\beta\)
 \begin{dowod}
 Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_substitution_hindley}.\qed
 \end{dowod}
+\begin{konwencja*}
+  Składnię rachunku \(\lambda\) często rozszerza się o wyrażenia let pozwalające konstruować \(\beta\)-redeksy w czytelny sposób. Rozszerzenie ma następującą postąć:
+  \begin{align*}
+    \mathrm{let}\ x\ \mathrm{in}\ M {=} N \equiv (\lambda x.\,M) N
+  \end{align*}
+  Jest to przykład tzw. \emph{cukru syntaktycznego}, czyli wtórnych rozszerzeń języka, które ułatwiają jego użycie. 
+\end{konwencja*}
 
 \begin{definicja}(Strategia redukcji)
   Strategią redukcji nazywamy każde odwzorowanie \(S:\:\mathbf{\Lambda}\to\mathbf{\Lambda}\) postaci
