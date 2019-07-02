@@ -42,11 +42,15 @@ Parą nazywamy każdy nierekurencyjny typ, który posiada jeden konstruktor wart
   fst (Tuple a b) = a
   snd (Tuple a b) = b
 \end{minted}
-Tego rodzaju typy możemy reprezentować przez tak zwane \emph{domknięcie} (ang. \emph{closure}), czyli cześciową aplikację termu. Standardowym sposobem reprezentacji pary w rachunku \(\lambda\) jest:
+Tego rodzaju typy możemy reprezentować przez domknięcie. Standardowym sposobem reprezentacji pary w rachunku \(\lambda\) jest:
 \begin{align*}
   \mathrm{Tuple}\equiv\lambda a b f .\,f a b
 \end{align*}
-Aplikując \(\mathrm{Tuple}\) tylko do dwóch termów (\emph{domykając} term Tuple) otrzymujemy reprezentację pary. Pozostały, trzeci argument \(f\) nazywamy \emph{kontynuacją}, gdyż aplikując \((\mathrm{Tuple}\ x\ y)\) dla dowolnych \(x, y\in\mathbf{\Lambda}\) do pewnego \(f\in\mathbf{\Lambda}\), w konsekwencji \(x\) i \(y\) zostają zaaplikowane do \(f\).
+Uzywając wyrażeń let, powyższą reprezentację możemy przepisać w postaci:
+\begin{align*}
+  \mathrm{let}\ a = a\ b = b\ \mathrm{in}\ f
+\end{align*}
+Aplikując \(\mathrm{Tuple}\) tylko do dwóch termów (\emph{domykając} term Tuple) otrzymujemy reprezentację pary. Argument \(f\) nazywamy \emph{kontynuacją}, gdyż aplikując \((\mathrm{Tuple}\ x\ y)\) dla dowolnych \(x, y\in\mathbf{\Lambda}\) do pewnego \(f\in\mathbf{\Lambda}\), w konsekwencji \(x\) i \(y\) zostają zaaplikowane do \(f\).
 Zauważmy, że wówczas reprezentacja \texttt{fst} i \texttt{snd} ma postać:
 \begin{align*}
   \mathrm{fst} \equiv \lambda t.\,t(\lambda a b.\,a) \\
@@ -70,7 +74,7 @@ Zauważmy, że wówczas reprezentacja \texttt{fst} i \texttt{snd} ma postać:
       \end{minted}
       Odpowiadająca jej reprezentacja to
       \begin{align*}
-        \mathrm{maybe} \equiv \lambda b f t.\, tb(\lambda a.\,fa)
+        \mathrm{maybe} &\equiv \lambda b f t.\, tb(\lambda a.\,fa) 
       \end{align*}
     \item Rozważmy następującą funkcję
       \begin{minted}{haskell}

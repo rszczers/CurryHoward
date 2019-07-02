@@ -394,12 +394,13 @@ Dla dowolnych \(N, Q\in\mathbf{\Lambda}\), jeśli \(N[y/Q]\in\mathrm{SN}_\beta\)
 \begin{dowod}
 Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_substitution_hindley}.\qed
 \end{dowod}
+
 \begin{konwencja*}
   Składnię rachunku \(\lambda\) często rozszerza się o wyrażenia let pozwalające konstruować \(\beta\)-redeksy w czytelny sposób. Rozszerzenie ma następującą postąć:
   \begin{align*}
-    \mathrm{let}\ x\ \mathrm{in}\ M {=} N \equiv (\lambda x.\,M) N
+    \mathrm{let}\ x{=}N\ \mathrm{in}\ M \equiv (\lambda x.\,M) N
   \end{align*}
-  Jest to przykład tzw. \emph{cukru syntaktycznego}, czyli wtórnych rozszerzeń języka, które ułatwiają jego użycie. 
+  Jest to przykład tzw. \emph{cukru syntaktycznego}, czyli wtórnych rozszerzeń języka, które ułatwiają jego użycie. Wyrażenia let w których \(M\equiv\lambda y.M'\) dla pewnego \(M'\in\mathbf{\Lambda}\) nazywamy \emph{domknięciami}\footnote{Idiom ten w literaturze poświęconej językom programowania z rodziny Lisp powszechnie występuje pod nazwą wyrażeń \emph{let-over-lambda}.} (ang. \emph{closure}). Nieformalnie, pozwalają one na przypisywanie wartości zmiennym o tzw. \emph{zakresie leksykalnym}.
 \end{konwencja*}
 
 \begin{definicja}(Strategia redukcji)
