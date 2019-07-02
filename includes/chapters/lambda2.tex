@@ -1,8 +1,7 @@
 \section{System F}\label{sec:system_f}
-System \(\lambda  2\) wprowadzony został przez J.-Y.  Girarda jako System
-F i w literaturze szerzej znany jest pod tą nazwą. 
+W rozdziale tym przedstawimy rachunek \(\lambda\) drugiego rzędu w stylu Churcha. System ten wprowadzony został przez J.-Y.  Girarda jako System F i w literaturze szerzej znany jest pod tą nazwą. 
 
-\subsection{Typy polimorficzne}
+\subsection{Wyrażenia \(\lambda\)}
 
 \begin{definicja}(Typy \(\mathbb{T}2\))
   Niech \(\mathbb{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi typowymi} i oznaczali literami alfabetu greckiego (\(\alpha, \beta, \gamma, \dots\)). Zbiór typów \(\mathbb{T}2\) systemu \(\lambda 2\) okreslamy w notacji BNF następującym zapisem:
@@ -21,10 +20,9 @@ F i w literaturze szerzej znany jest pod tą nazwą.
 \begin{uwaga*}
   Zakładamy, że \(V\cap\mathbb{V}=\emptyset\).
 \end{uwaga*}
-Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja jest analogiczna do zaprezentowanej w Rozdziale \ref{subsec:lambda_terms_untyped}, ale aby nie wchodzić w szczegóły, ustalmy, że utożsamiać będziemy wyrażenia, które różnią się między sobią wyłącznie zmiennymi związanymi. 
 
 \begin{konwencja*}
-Stosujemy standardowe konwencje notacyjne
+Stosujemy standardowe konwencje notacyjne:
 \begin{easylist}
   & Opuszczamy najbardziej zewnętrzne nawiasy,
   & Aplikacja wiąże prawostronnie,
@@ -35,14 +33,18 @@ Stosujemy standardowe konwencje notacyjne
   Przykładowo: \(\Pi\alpha\,\beta:*.\,\alpha\to\beta\to\alpha\ \equiv\ \Pi\alpha:*.(\Pi\beta:*.\,(\alpha\to(\beta\to\alpha))))\).
 \end{konwencja*}
 
+Wyrażenia \(\lambda\) (\(\lambda\)-termy) w Systemie F to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja ta jest analogiczna do zaprezentowanej w Rozdziale \ref{subsec:lambda_terms_untyped}. 
+
+%, ale aby nie wchodzić w szczegóły, ustalmy, że utożsamiać będziemy wyrażenia, które różnią się między sobią wyłącznie zmiennymi związanymi. 
+
   \begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)
     Przez \(\mathrm{FV}(M)\) oznaczamy zbiór wszystkich wolnych zmiennych termowych i typowych wystepujących w \(M\in\mathbf{\Lambda}_{\mathtt{T}2}\).
     \begin{align*}
-      \mathrm{FV}(x) &= {x}\\
-      \mathrm{FV}(\lambda x:\sigma.\,M) &= \mathrm{FV}(\sigma)\cup(\mathrm{FV}(M)\setminus \{x\})\\
-      \mathrm{FV}(MN) &= \mathrm{FV}(M) \cup \mathrm{FV}(N)\\
-      \mathrm{FV}(\lambda \alpha : *.\,M) &= \mathrm{FV}(M)\setminus \{\alpha\}\\
-      \mathrm{FV}(M\sigma) &= \mathrm{FV}(M)\cup \mathrm{FV}(\sigma)
+      \mathrm{FV}(x) &= {x},\\
+      \mathrm{FV}(\lambda x:\sigma.\,M) &= \mathrm{FV}(\sigma)\cup(\mathrm{FV}(M)\setminus \{x\}),\\
+      \mathrm{FV}(MN) &= \mathrm{FV}(M) \cup \mathrm{FV}(N),\\
+      \mathrm{FV}(\lambda \alpha : *.\,M) &= \mathrm{FV}(M)\setminus \{\alpha\},\\
+      \mathrm{FV}(M\sigma) &= \mathrm{FV}(M)\cup \mathrm{FV}(\sigma).
     \end{align*}
   \end{definicja}
 
@@ -62,20 +64,41 @@ Stosujemy standardowe konwencje notacyjne
   \end{align*}
   \end{definicja}
 
-Odpowiednim modyfikacjom ulegają pojęcia wprowadzone w Definicji \ref{def:statement_simple} i Definicji \ref{def:context_simple}.
+  \begin{definicja}(\(\alpha\)-konwersja) 
+    Relacją \(=_{\alpha}\) (\(\alpha\)-konwersji) nazywamy najmniejszą w sensie mnogościowym zgodną relację równowazności na \(\mathbf{\tilde\Lambda}_{\mathbb{T}2}\) taką, że
+    \begin{enumerate}[label=(\(\alpha\)\arabic*), ref=(\(\alpha\)\arabic*)]
+      \setlength\itemsep{0em}
+      \item \(\lambda x:\sigma.\,M =_\alpha \lambda y:\sigma.\,M[x/y]\), jeśli \(M[x/y]\) jest określone i \(y\not\in \mathrm{FV}(M)\).
+      \item \(\lambda \alpha:*.\,M =_\alpha \lambda \beta:*.\,M[\alpha/\beta]\), jeśli \(\beta\) nie występuje w \(M\).
+      \item \(\Pi \alpha:*.\,M =_\alpha \Pi \beta:*.\,M[\alpha/\beta]\), jeśli \(\beta\) nie występuje w \(M\).
+    \end{enumerate}
+  \end{definicja}
+
+\begin{przyklad} Rozważmy następujące przykłady \(\alpha\)-konwertów:
+  \begin{align*}
+    \text{a)}\quad &\lambda \alpha:*.\,\lambda x:\alpha.\,x=_\alpha 
+              & \text{b)} \quad& \Pi \alpha:*.\,\alpha\to\alpha =_\alpha\\
+    &\lambda \beta:*.\,\lambda x:\beta.\, x=_\alpha 
+              & &\Pi\beta:*.\,\beta\to\beta  =_\alpha\\ 
+    &\lambda \beta:*.\,\lambda y:\beta.\, y. 
+              & &\Pi\beta:*.\,\beta\to\beta.
+  \end{align*}
+\end{przyklad}
+
+Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji \ref{def:statement_simple} i Definicji \ref{def:context_simple}.
 \begin{definicja}(Stwierdzenie, deklaracja)
     \begin{enumerate}
   \setlength\itemsep{0em}
     \item Stwierdzeniem nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\Lambda_\mathbb{T2}\) i \(\sigma\in \mathbb{T2}\) lub \(\sigma:*\), gdzie \(\sigma\in\mathbb{T2}\).
-    \item  Deklaracją nazywamy każde stwierdzenie ze zmienna typowa lub zmienna termowa w miejscu podmiotu.
+    \item  Deklaracją nazywamy każde stwierdzenie ze zmienną typową lub zmienną termową w miejscu podmiotu.
   \end{enumerate}
 
 \end{definicja}
 \begin{definicja}(\(\lambda 2\)-kontekst, dziedzina, zakres)\label{def:f_statement}
   \begin{enumerate}[label=(E\arabic*), ref=(E\arabic*)]
   \setlength\itemsep{0em}
-  \item \(\emptyset\) jest \(\lambda 2\)-kontekstem; oznaczamy go parą nawiasów 
-    \(()\).\label{def:f_context_1}
+  \item \(\emptyset\) jest \(\lambda 2\)-kontekstem; oznaczamy go parą nawiasów
+    \(()\)  lub pomijamy, jeśli nie prowadzi to do niejednoznaczności.\label{def:f_context_1}
   \item Jeśli:\label{def:f_context_2}
     \begin{enumerate}
     \item \(\Gamma\) jest \(\lambda 2\)-kontekstem,    \item \(\alpha\in\mathbb{V}\) jest zmienną typową taką, że \(\alpha\not\in \mathrm{dom}(\Gamma)\),
@@ -118,14 +141,12 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
 
     \item \(\alpha:*,\,x:\alpha\to\alpha,\,\beta:*\) jest \(\lambda 2\)-kontekstem na podstawie \ref{def:f_context_2}.\label{ex:f_context_d}
 
-    \item \(\Gamma\equiv(\alpha:*,\,x:\alpha\to\alpha,\,\beta:*,\,y:(\alpha\to\alpha)\to\beta)\) jest \(\lambda 2\)-kontekstem na podstawie \ref{def:f_context_3}. Wówczas \(\mathrm{dom}(\Gamma)=(\alpha,\,x,\,\beta,y)\) i \(\mathrm{rg}(\Gamma)=\{*,\,\alpha\to\alpha\, \beta,\,(\alpha\to\alpha)\to\beta\}\).\label{ex:f_context_e}
+    \item \(\Gamma\equiv(\alpha:*,\,x:\alpha\to\alpha,\,\beta:*,\,y:(\alpha\to\alpha)\to\beta)\) jest \(\lambda 2\)-kontekstem na podstawie \ref{def:f_context_3}. Wówczas \(\mathrm{dom}(\Gamma)=(\alpha,\,x,\,\beta,y)\) i \(\mathrm{rg}(\Gamma)=\{*,\,\alpha\to\alpha,\, \beta,\,(\alpha\to\alpha)\to\beta\}\).\label{ex:f_context_e}
   \end{enumerate}
 \end{przyklad}
 
   \subsection{Typowanie}
-  \begin{definicja}(Kontekst)
-  \end{definicja}
-  Typowanie: \(\Gamma \vdash M : A\)\\
+  Wprowadzamy następujące reguły wyprowadzania typu:
   \begin{center}
   \begin{tabular}{r c c}
 
@@ -174,25 +195,54 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
   \end{definicja}
 
 \begin{przyklad}
-  \begin{equation*}
-  \begin{fitch}
-    \fh \alpha : * & (form) \\
-    \fa \fh f: \alpha \to \alpha & (var) \\
-    \fa \fa \fh x : \alpha & (var) \\
-    \fa\fa \fa f x : \alpha & (app) 2 3 \\
-    \fa \fa \fa f(f x) : \alpha  & (app) 2 1 \\
-    \fa \fa \lambda x : \alpha .\, f(fx) : \alpha \to \alpha & (abs) 5 \\
-    \fa \lambda f : \alpha \to \alpha .\, \lambda x :\, \alpha .\, f (fx) : (\alpha \to \alpha) \to \alpha \to \alpha &  (abs) 6 \\
-  \lambda \alpha : * .\, \lambda f : \alpha \to \alpha .\, \lambda x : \alpha .\, f (f x) : \Pi \alpha : * .\, (\alpha \to \alpha) \to \alpha \to \alpha & (\(\Pi\)-i) 7 \\
-  \end{fitch}
-  \end{equation*}
+  \begin{enumerate}[label=(\alph*), ref=(\alph*)]
+    \setlength\itemsep{0em}
+    \item Polimorficzna funkcja identycznościowa.
+      \begin{equation*}
+      \begin{fitch}
+        \fh \sigma : * & (form)\\
+        \fa \fa x : \sigma & (var)\\
+        \fa \lambda x:\sigma .\ x\ :\ \sigma\to\sigma & (abs) 2\\
+        \lambda \sigma : *.\,\lambda x:\sigma.\ x\ :\ \Pi\sigma:*.\,\sigma\to\sigma & (\(\Pi-i\)) 3
+      \end{fitch}
+      \end{equation*}
+    \item Polimorficzna iteracja.
+      \begin{equation*}
+      \begin{fitch}
+        \fh \alpha : * & (form) \\
+        \fa \fh f: \alpha \to \alpha & (var) \\
+        \fa \fa \fh x : \alpha & (var) \\
+        \fa\fa \fa f x\ :\ \alpha & (app) 2 3 \\
+        \fa \fa \fa f(f x)\ :\ \alpha  & (app) 2 1 \\
+        \fa \fa \lambda x : \alpha .\, f(fx)\ :\ \alpha \to \alpha & (abs) 5 \\
+        \fa \lambda f : \alpha \to \alpha .\, \lambda x :\, \alpha .\, f (fx)\ :\ (\alpha \to \alpha) \to \alpha \to \alpha &  (abs) 6 \\
+      \lambda \alpha : * .\, \lambda f : \alpha \to \alpha .\, \lambda x : \alpha .\, f (f x)\ :\ \Pi \alpha : * .\, (\alpha \to \alpha) \to \alpha \to \alpha & (\(\Pi\)-i) 7 \\
+      \end{fitch}
+      \end{equation*}
+    \item Polimorficzne złożenie funkcji.
+      \begin{equation*}
+      \begin{fitch}
+        \fh \gamma: * & (form) \\
+        \fa \fh \beta: * & (form) \\
+        \fa \fa \fh \alpha : * & (form) \\
+        \fa \fa \fa \fh g : \beta\to\gamma & (var) \\
+        \fa \fa \fa \fa \fh f : \alpha\to\beta & (var) \\
+        \fa \fa \fa \fa \fa \fh x : \alpha & (var) \\
+        \fa \fa \fa \fa \fa \fa f a\ :\ \beta & (app) 5 6 \\
+        \fa \fa \fa \fa \fa \fa g (f a)\ :\ \gamma & (app) 4 7 \\
+        \fa \fa \fa \fa \fa \lambda x:\alpha.\,g(f a)\ :\ \alpha \to \gamma & (abs) 8 \\
+        \fa \fa \fa \fa \begin{gathered}
+        \lambda f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ (\alpha\to\beta)\to\alpha\to\gamma \end{gathered} & (abs) 9 \\ 
+        \fa \fa \fa \begin{gathered}\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ (\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 10\\ 
+      \fa \fa \begin{gathered} \lambda \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ \Pi\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 11\\ 
+      \fa \begin{gathered} \lambda \beta \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ \Pi\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 11\\ 
+      \begin{gathered} \lambda \gamma \beta \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ \Pi\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 11\\ 
+      \end{fitch}
+      \end{equation*}
+  \end{enumerate}
 \end{przyklad}
-  \
+ Jak widzimy procedura wyprowadzania typu odpowiada w istocie rekonstrukcji wyrażenia. Problem typowania w (ortodoksyjnym) stylu Churcha jest trywialny, gdyż zgodnie z Rozdziałem \ref{subsec:church_style} założyliśmy, że mamy pełną informację typową o wszystkich zmiennych przedmiotowych. 
   \subsection{Redukcja}
-
-  \begin{definicja}(\(\alpha\)-konwersja)
-
-  \end{definicja}
 
   \begin{definicja}(\(\beta\)-redukcja)
     \(\beta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) zgodną na \(\mathbf{\Lambda}_{\mathbb{T}2}\) relację binarną \(\to_\beta\) taką, że
