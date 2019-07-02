@@ -156,13 +156,13 @@ Wyrażenia \(\lambda\) (\(\lambda\)-termy) w systemie \(\lambda 2\) to klasy abs
 \begin{przyklad}
   \begin{equation*}
   \begin{fitch}
-  \fh \alpha : * & \\
-  \fa \fh f: \alpha \to \alpha & \\
-  \fa \fa \fh x : \alpha & \\
-  \fa\fa \fa f x : \alpha & (app) 2 3 \\
-  \fa \fa \fa f(f x) : \alpha  & (app) 2 1 \\
-  \fa \fa \lambda x : \alpha .\, f(fx) : \alpha \to \alpha & (abs) 5 \\
-  \fa \lambda f : \alpha \to \alpha .\, \lambda x :\, \alpha .\, f (fx) : (\alpha \to \alpha) \to \alpha \to \alpha &  (abs) 6 \\
+    \fh \alpha : * & (form) \\
+    \fa \fh f: \alpha \to \alpha & (var) \\
+    \fa \fa \fh x : \alpha & (var) \\
+    \fa\fa \fa f x : \alpha & (app) 2 3 \\
+    \fa \fa \fa f(f x) : \alpha  & (app) 2 1 \\
+    \fa \fa \lambda x : \alpha .\, f(fx) : \alpha \to \alpha & (abs) 5 \\
+    \fa \lambda f : \alpha \to \alpha .\, \lambda x :\, \alpha .\, f (fx) : (\alpha \to \alpha) \to \alpha \to \alpha &  (abs) 6 \\
   \lambda \alpha : * .\, \lambda f : \alpha \to \alpha .\, \lambda x : \alpha .\, f (f x) : \Pi \alpha : * .\, (\alpha \to \alpha) \to \alpha \to \alpha & (\(\Pi\)-i) 7 \\
   \end{fitch}
   \end{equation*}
