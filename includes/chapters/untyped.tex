@@ -217,7 +217,7 @@ Wprowadzamy następujące konwencje notacyjne:
 %  Dla dowolnych \(M,\,N
 %\end{lemat}
 
-\begin{twierdzenie}
+\begin{twierdzenie}\label{thm:head_normal_forms}
  Każdy \(M\in\mathbf{\Lambda}\) ma jedną z poniższych postaci:
  \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
@@ -225,7 +225,7 @@ Wprowadzamy następujące konwencje notacyjne:
     \item \(M \equiv \lambda x_1\dots x_n.\ (\lambda y.\ N_0)\,N_1\dots N_m\), gdzie \(n\geq 0\) i \(m\geq 1\)\label{def:HNF2}
   \end{enumerate}
 \end{twierdzenie}
-\noindent O \(\lambda\)-termach postaci \ref{def:HNF} i \ref{def:HNF2} mówimy, że są w \emph{czołowej postaci normalnej} (HNF, ang. \emph{head normal form}) albo w \emph{słabej czołowej postaci normalnej} (WHNF, ang. \emph{weak head normal form}), odpowiednio. 
+\noindent O \(\lambda\)-termach postaci \ref{def:HNF} i \ref{def:HNF2} mówimy, że są w \emph{czołowej postaci normalnej} (HNF, ang. \emph{head normal form}) albo w \emph{słabej czołowej postaci normalnej} (WHNF, ang.~\emph{weak head normal form}), odpowiednio. 
 \begin{dowod}
   Z definicji \(\lambda\)-term \(M\) jest albo zmienną, albo aplikacją postaci \(PQ\), albo abstrakcją postaci \((\lambda x.\,P)\). Wówczas mamy nastepujące przypadki:
   \begin{enumerate}[label={\roman*)}, ref={\roman*)}]
@@ -443,7 +443,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
     \lambda x.\,Mx\to_\eta M,\ \text{o ile}\ x\not\in \mathrm{FV}(M).
   \]
 
-  \(\eta\)-redukcja pozwala na pominięcie niczego nie wnoszącej \(\lambda\)-abstrakcji. Operację odwrotną nazywamy \emph{\(\eta\)-abstrakcją}, zaś \(\lambda\)-termy będące w którejkolwiek z tych relacji nazywamy \emph{\(\eta\)-konwersami}. Operacja ta nie ma wpływu na rezultat obliczenia, jedynie optymializuje zapis \(\lambda\)-termów i stąd ma duże znaczenie stylistyczne w programowaniu funkcyjnym.
+  \(\eta\)-redukcja pozwala na pominięcie niczego nie wnoszącej \(\lambda\)-abstrakcji. Operację odwrotną nazywamy \emph{\(\eta\)-abstrakcją}, zaś \(\lambda\)-termy będące w którejkolwiek z tych relacji nazywamy \emph{\(\eta\)-konwersami}. Operacja ta nie ma wpływu na rezultat obliczenia, jedynie optymializuje zapis \(\lambda\)-termów i stąd ma duże znaczenie stylistyczne w~programowaniu funkcyjnym.
   \end{definicja}
 
   \begin{przyklad} 

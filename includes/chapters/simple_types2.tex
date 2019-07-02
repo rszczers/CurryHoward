@@ -56,12 +56,12 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
   \end{enumerate}
 \end{definicja}
 
-\begin{definicja}
+\begin{definicja}\label{def:context_simple}
   \begin{enumerate}[label=(\arabic*)]
   \setlength\itemsep{0em}
   \item Jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_n:\sigma_n)\), to liniowo
     uporządkowany zbiór \( \mathrm{dom}\, \Gamma = (x_1,\dots,x_n) \) nazywamy
-      \emph{dziedziną} kontekstu \(\Gamma\), zaś \( \mathrm{rg}\, \Gamma =(\sigma_1,\,\dots,\,\sigma_n)\) -- zakresem kontekstu \(\Gamma\) oraz
+      \emph{dziedziną} kontekstu \(\Gamma\), zaś \( \mathrm{rg},\Gamma\) -- zakresem kontekstu \(\Gamma\) oraz
       \begin{align*}
         \mathrm{dom}\,\Gamma &= \{M\in\mathbf{\Lambda}\ |\ (x:\sigma) \in \Gamma \},\\
         \mathrm{rg}\,\Gamma &= \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}.

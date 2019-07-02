@@ -24,10 +24,7 @@ Zauważmy, że \(\lambda\)-termy w stylu Churcha różnią się od stylu Currego
 
 \begin{center}
     \begin{tabular}{ ccc}
-      {\begin{prooftree}
-        \Hypo{}
-        \Infer1[(var)]{\Gamma \vdash x:\sigma}
-      \end{prooftree}}, jeśli \(x:\sigma\in\Gamma\),
+      \(\Gamma \vdash x:\sigma\ \text{(var)}\), & jeśli \(x:\sigma\in\Gamma\),
       \vspace{1em}\\
       {\begin{prooftree}
         \Hypo{\Gamma \vdash M:\sigma \to \tau} \Hypo{ \Gamma \vdash N:\sigma}
@@ -59,7 +56,7 @@ Zauważmy, że nie istnieje jeden typ dla reprezentacji funkcji identycznościow
       \begin{align*}
         \lambda \sigma:* .\,\lambda x:\sigma.\,x,
       \end{align*}
-      gdzie symbolem \(*\) oznaczamy typ obiektów będących typami (szczegóły omówimy w Rozdziale \ref{subsec:lambda2}).
+      gdzie symbolem \(*\) oznaczamy typ obiektów będących typami (szczegóły omówimy w Rozdziale \ref{sec:system_f}).
       Własność tę (polimorfizm parametryczny) miał w pewnym sensie rachunek \(\lambda\) w stylu Currego (Podrozdział \ref{subsec:polymorphism}). 
 %    \item
 %      Przykład dotyczy iteracji. Przypuśćmy, że term \(F\) jest typu \(\sigma\to\sigma\) i okreslamy \(D_{\sigma F}\equiv\lambda x:\nobreak\sigma.\,F(Fx)\). Chcąc określić \(D\) dla dowolnych \(F\) i \(\sigma\)
