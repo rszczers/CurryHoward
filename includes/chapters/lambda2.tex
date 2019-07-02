@@ -35,6 +35,33 @@ Stosujemy standardowe konwencje notacyjne
   Przykładowo: \(\Pi\alpha\,\beta:*.\,\alpha\to\beta\to\alpha\ \equiv\ \Pi\alpha:*.(\Pi\beta:*.\,(\alpha\to(\beta\to\alpha))))\).
 \end{konwencja*}
 
+  \begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)
+    Przez \(\mathrm{FV}(M)\) oznaczamy zbiór wszystkich wolnych zmiennych termowych i typowych wystepujących w \(M\in\mathbf{\Lambda}_{\mathtt{T}2}\).
+    \begin{align*}
+      \mathrm{FV}(x) &= {x}\\
+      \mathrm{FV}(\lambda x:\sigma.\,M) &= \mathrm{FV}(\sigma)\cup(\mathrm{FV}(M)\setminus \{x\})\\
+      \mathrm{FV}(MN) &= \mathrm{FV}(M) \cup \mathrm{FV}(N)\\
+      \mathrm{FV}(\lambda \alpha : *.\,M) &= \mathrm{FV}(M)\setminus \{\alpha\}\\
+      \mathrm{FV}(M\sigma) &= \mathrm{FV}(M)\cup \mathrm{FV}(\sigma)
+    \end{align*}
+  \end{definicja}
+
+  \begin{definicja}(Podstawienie) Rozszerzamy definicję podstawienia o reguły obejmujące zmienne typowe.
+  \begin{align*}
+    x[x/P] &= P,\\
+    y[x/P] &= y,\\
+    (MN)[x/P] &= M[x/P]N[x/P],\\
+    (\lambda y:\sigma.\,M)[x/P] &= \lambda y:\sigma.\,M[x/P],\ \text{gdzie}\, y\not\in FV(P)\cup\{x\},\\
+    (M\sigma)[x/P] &= M[x/P]\sigma,\\
+    (\lambda \beta:*.\,M)[x/P] &= \lambda \beta:*.\,M[x/P],\ \text{gdzie}\ p\not\in\mathrm{FV}(P),\\
+    x[\alpha/\sigma]&=x,\\
+    (MN)[\alpha/\sigma] &= M[\alpha/\sigma]N[\alpha/\sigma],\\
+    (\lambda y:\sigma.\,M)[\alpha/\sigma] &= \lambda y:\sigma.\,M[\alpha/\sigma],\\
+    (M\rho)[\alpha/\sigma] &= M\rho[\alpha/\sigma],\\
+    (\lambda \beta:*.\,M)[\alpha/\sigma] &= \lambda \beta:*.\,M[\alpha/\sigma],\ \text{gdzie}\ \beta\not\in\mathrm{FV}(\sigma)\cup\{\alpha\}.\\
+  \end{align*}
+  \end{definicja}
+
 Odpowiednim modyfikacjom ulegają pojęcia wprowadzone w Definicji \ref{def:statement_simple} i Definicji \ref{def:context_simple}.
 \begin{definicja}(Stwierdzenie, deklaracja)
     \begin{enumerate}
@@ -72,6 +99,7 @@ Odpowiednim modyfikacjom ulegają pojęcia wprowadzone w Definicji \ref{def:stat
       \end{align*}
       \(\mathrm{dom}(\Gamma)\) i \(\mathrm{rg}(\Gamma)\) nazywamy odpowiednio \emph{dziedziną} i \emph{zakresem} \(\lambda 2\)-kontekstu \(\Gamma\).
   \end{enumerate}
+    Jesli \(\Gamma=(a_{11}: a_{12},\,\dots,\,a_{n1}:a_{n2})\) jest \(\lambda 2\)-kontekstem, to przez \(\Gamma[\alpha/\sigma]\) oznaczamy \(\lambda 2\)-kontekst, w którym jesli \(a_{i1}\in V\), to \(a_{i2}\) zamieniamy na \(x_{i2}[\alpha/\sigma]\)  dla \(1\leq i \leq n\).
 \end{definicja}
 
 \begin{przyklad}
@@ -161,25 +189,6 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
 \end{przyklad}
   \
   \subsection{Redukcja}
-  \begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)
-
-  \end{definicja}
-
-  \begin{definicja}(Podstawienie)
-  \begin{align*}
-    x[x/P] &= P,\\
-    y[x/P] &= y,\\
-    (MN)[x/P] &= M[x/P]N[x/P],\\
-    (\lambda y:\sigma.\,M)[x/P] &= \lambda y:\sigma.\,M[x/P],\ \text{gdzie}\, y\not\in FV(P)\cup\{x\},\\
-    (M\sigma)[x/P] &= M[x/P]\sigma\\
-    (\lambda \beta:*.\,A)[x/P] &= \lambda \beta:*.\,A[x/P],\ \text{gdzie}\ p\not\in\mathrm{FV}(P),\\
-    x[\alpha/\sigma]&=x,\\
-    (MN)[\alpha/\sigma] &= M[\alpha/\sigma]N[\alpha/\sigma],\\
-    (\lambda y:\sigma.\,M)[\alpha/\sigma] &= \lambda y:\sigma.\,M[\alpha/\sigma],\\
-    (M\rho)[\alpha/\sigma] &= M\rho[\alpha/\sigma]\\
-    (\lambda \beta:*.\,A)[\alpha/\sigma] &= \lambda \beta:*.\,A[\alpha/\sigma],\ \text{gdzie}\ \beta\not\in\mathrm{FV}(\sigma)\cup\{\alpha\},\\
-  \end{align*}
-  \end{definicja}
 
   \begin{definicja}(\(\alpha\)-konwersja)
 
