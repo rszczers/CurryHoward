@@ -334,14 +334,6 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
     (\lambda \alpha:*.\,M) T &\to_\beta M[\alpha/T]
   \end{align*}
   \end{definicja}
-  \begin{przyklad}
-    \begin{align*}
-    \lambda \alpha : *.\,\lambda f:\alpha\to\alpha.\,\lambda x:\alpha.\,f(f x))\,\mathrm{nat\  suc\  two} \to_\beta\\
-      \lambda f : \mathrm{nat}\to\mathrm{nat}.\,\lambda x :\mathrm{nat} .\, f\,(f\,x))\, \mathrm{suc\  two} \to_\beta\\
-      (\lambda x:\mathrm{nat}.\,\mathrm{suc}\,(\mathrm{suc}\ x))\,\mathrm{two} \to_\beta \\
-      \mathrm{suc}\,(\mathrm{suc}\ \mathrm{two}).
-    \end{align*}
-  \end{przyklad}
 
 Lemat \ref{thm:uniqueness_f} (podobnie jak Lemat \ref{thm:type_uniqueness}) zapewnia nas, że typ termu zachowuje się przy \(\beta\)-redukcji. Praktyczny sens tego twierdzenia polega na tym, że relacja posiadania tego samego typu jest zamknięta na \(\beta\)-konwersję i aby rozstrzygnąć o typie danego termu wystarczy, że znamy typ któregokolwiek jego \(\beta\)-konwersa.
 
@@ -352,7 +344,17 @@ Lemat \ref{thm:uniqueness_f} (podobnie jak Lemat \ref{thm:type_uniqueness}) zape
   Dowód przeprowadzamy analogicznie do dowodu Lematu \ref{thm:subject_reduction}, przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M;\tau\). Szczegóły pomijamy. \qed
 \end{dowod}
 
-Odpowiedniej modyfikacji ulega również pojęcie \(\beta\)-redukcji.
+  \begin{przyklad}
+    \begin{align*}
+    \lambda \alpha : *.\,\lambda f:\alpha\to\alpha.\,\lambda x:\alpha.\,f(f x))\,\mathrm{nat\  suc\  two} \to_\beta\\
+      \lambda f : \mathrm{nat}\to\mathrm{nat}.\,\lambda x :\mathrm{nat} .\, f\,(f\,x))\, \mathrm{suc\  two} \to_\beta\\
+      (\lambda x:\mathrm{nat}.\,\mathrm{suc}\,(\mathrm{suc}\ x))\,\mathrm{two} \to_\beta \\
+      \mathrm{suc}\,(\mathrm{suc}\ \mathrm{two}).
+    \end{align*}
+  \end{przyklad}
+
+
+Odpowiedniej modyfikacji ulega również pojęcie \(\eta\)-redukcji.
   \begin{definicja}(\(\eta\)-redukcja)
     \(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) zgodną na \(\mathbf{\Lambda}_{\mathbb{T}2}\) relację binarną \(\to_\beta\) taką, że
   \begin{align*}
@@ -374,6 +376,21 @@ Zachodzi oczywiście również odpowiednik Lematu \ref{thm:eta_uniqueness_simple
 \end{przyklad}
 
 Biorąc pod rozwagę wszystkie powyższe rozstrzygnięcia definicyjne, zachodzą również w odpowiednich wersjach Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów~\ref{sec:untyped_lambda}~i~\ref{sec:simple_types}.
+
+Kolejnym ważnym twierdzeniem, które zachodzi dla Systemu F jest silna normalizacja \(\beta\)-redukcji.
+
+\begin{twierdzenie}(O silnej normalizacji)
+  Jeżeli \(\Gamma\vdash_\mathbb{T}M:\tau\), to \(M\in\mathrm{SN_\beta}\).
+\end{twierdzenie}
+\begin{dowod}
+  Metoda dowodu jest analogiczna do przedstawionej w Rozdziale \ref{subsec:strong_normalization}. Szczegółowe uzupełnienie dowodu można znaleźć w \cite[Rozdział 11.5]{Urzyczyn2006}.\qed
+\end{dowod}
+
+Jako Fakt \ref{fact:cr_f} przedstawimy własność Churcha-Rossera upewniającą nas, że \(\beta\)-redukcja, bez względu na przyjętą strategię, zawsze prowadzi do tych samych rezultatów, a zatem ma sens obliczeniowy. Fakt ten otrzymujemy jako wniosek z lematu Newmana \ref{thm:newman_lemma}, wykazując, że \(\beta\)-redukcja ma słabą własność Churcha-Rossera (WCR) \cite[Twierdzenie 11.2.12]{Urzyczyn2006}.
+
+\begin{fakt}(Własność Churcha-Rossera)\label{fact:cr_f}
+  Relacja \(\beta\)-redukcji ma własność CR.
+\end{fakt}
 
 % O generowaniu
 % O podtermie
