@@ -258,7 +258,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
     %   \end{fitch}
     % \end{equation*}
 
-    \item \(\Gamma=(\beta:*,y:\beta, x:\perp)\).
+    \item \(\Gamma=(\beta:*,y:\beta, x:\perp)\).\label{ex:f_typing_2}
       % \begin{equation*}
       % \begin{fitch}
       %   \fh x : \perp & (var)\\
@@ -279,7 +279,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
       \end{fitch}
     \end{equation*}
 %      Zauważmy, że nie istnieje \(\lambda\)-term typu \(\perp\). Typ, który nie ma inhabitantów nazywamy typem \emph{początkowym} (ang. \emph{initial}), \emph{zerowym} albo typem \emph{bottom}.
-    \item Polimorficzna funkcja identycznościowa.
+    \item Polimorficzna funkcja identycznościowa.\label{ex:f_typing_3}
       \begin{equation*}
       \begin{fitch}
         \fh \alpha : * & (form)\\
@@ -288,7 +288,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
         \lambda \alpha : *.\,\lambda x:\alpha.\ x\ :\ \Pi\alpha:*.\,\alpha\to\alpha & (\(\Pi\)-i) 3
       \end{fitch}
       \end{equation*}
-    \item Polimorficzna iteracja.
+    \item Polimorficzna iteracja.\label{ex:f_typing_4}
       \begin{equation*}
       \begin{fitch}
         \fh \alpha : * & (form) \\
@@ -301,7 +301,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
       \lambda \alpha : * .\, \lambda f : \alpha \to \alpha .\, \lambda x : \alpha .\, f (f x)\ :\ \Pi \alpha : * .\, (\alpha \to \alpha) \to \alpha \to \alpha & (\(\Pi\)-i) 7 
       \end{fitch}
       \end{equation*}
-    \item Polimorficzne złożenie funkcji.
+    \item Polimorficzne złożenie funkcji.\label{ex:f_typing_5}
       \begin{equation*}
       \begin{fitch}
         \fh \gamma: * & (form) \\
@@ -337,19 +337,47 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
 
 Lemat \ref{thm:uniqueness_f} (podobnie jak Lemat \ref{thm:type_uniqueness}) zapewnia nas, że typ termu zachowuje się przy \(\beta\)-redukcji. Praktyczny sens tego twierdzenia polega na tym, że relacja posiadania tego samego typu jest zamknięta na \(\beta\)-konwersję i aby rozstrzygnąć o typie danego termu wystarczy, że znamy typ któregokolwiek jego \(\beta\)-konwersa.
 
-\begin{lemat}(O jednoznaczności)\label{thm:uniqueness_f}
+\begin{lemat}(O redukcji podmiotu)\label{thm:uniqueness_f}
   Jeśli \(\Gamma\vdash M:\tau\) i \(M\to^{*}_\beta N\), to \(\Gamma\vdash N:\tau\).
 \end{lemat}
 \begin{dowod}
   Dowód przeprowadzamy analogicznie do dowodu Lematu \ref{thm:subject_reduction}, przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M;\tau\). Szczegóły pomijamy. \qed
 \end{dowod}
 
-  \begin{przyklad}
+  \begin{przyklad}(Liczebniki Churcha)
+    Wróćmy do Przykładu \ref{ex:f_typing} \ref{ex:f_typing_4}. Wyprowadziliśmy w nim sąd:
+    \[\vdash\lambda \alpha : * .\, \lambda f : \alpha \to \alpha .\, \lambda x : \alpha .\, f (f x)\ :\ \Pi \alpha : * .\, (\alpha \to \alpha) \to \alpha \to \alpha\]
+    Stosując lemat o zwężaniu (Lemat \ref{thm:thinning_f}), dla dowolnego \(\lambda 2\)-kontekstu \(\Gamma\) wyprowadzalny jest również sąd:
+    \begin{align}
+      \Gamma\vdash\lambda \alpha : * .\, \lambda f : \alpha \to \alpha .\, \lambda x : \alpha .\, f (f x)\ :\ \Pi \alpha : * .\, (\alpha \to \alpha) \to \alpha \to \alpha\tag{1}\label{ex:f_church_1}
+    \end{align}
+    Niech \(\Gamma\) będzie takim \(\lambda 2\)-kontekstem, że 
+    \[\left\{
+      \mathrm{nat}:*,\ 
+      \mathrm{zero}:\mathrm{nat},\ 
+      \mathrm{succ}:\mathrm{nat}\to\mathrm{nat}
+    \right\} \subseteq \Gamma,
+    \]
+    gdzie przez nat, zero i succ oznaczamy dowolnie wybrane zmienne termowe i typowe, odpowiednio.
+    Stosując regułę (\(\Pi\)-e) do (\ref{ex:f_church_1}) i \(\Gamma\vdash \mathrm{nat}:*\) otrzymujemy:
+    \begin{align}
+      \Gamma\vdash\lambda f : \mathrm{nat} \to \mathrm{nat}.\, \lambda x : \mathrm{nat}.\, f (f x)\ \mathrm{nat}\ :\ (\mathrm{nat} \to \mathrm{nat}) \to \mathrm{nat} \to \mathrm{nat}\tag{2}\label{ex:f_church_2}
+    \end{align}
+    Dalej, stosując regułę (app) do (\ref{ex:f_church_2}) i \(\Gamma\vdash \mathrm{succ}:\mathrm{nat}\to\mathrm{nat}\) mamy, że
+    \begin{align}
+      \Gamma \vdash \lambda x : \mathrm{nat}.\, f (f x)\ \mathrm{nat}\ \mathrm{succ}\ :\ \mathrm{nat} \to \mathrm{nat}\tag{3}\label{ex:f_church_3}
+    \end{align}
+    Ponownie aplikując (\ref{ex:f_church_3}) do \(\Gamma\vdash zero:nat\) mamy:
+    \begin{align}
+      \Gamma \vdash f (f x)\ \mathrm{nat}\ \mathrm{succ}\ \mathrm{zero}\ :\ \mathrm{nat} \tag{4}\label{ex:f_church_4}
+    \end{align}
+
+    Na podstawie lematu o redukcji podmiotu (Lemat \ref{thm:uniqueness_f}) widzimy, że każdy kolejny redukt poniższej redukcji ma typ nat. 
     \begin{align*}
-    \lambda \alpha : *.\,\lambda f:\alpha\to\alpha.\,\lambda x:\alpha.\,f(f x))\,\mathrm{nat\  suc\  two} \to_\beta\\
-      \lambda f : \mathrm{nat}\to\mathrm{nat}.\,\lambda x :\mathrm{nat} .\, f\,(f\,x))\, \mathrm{suc\  two} \to_\beta\\
-      (\lambda x:\mathrm{nat}.\,\mathrm{suc}\,(\mathrm{suc}\ x))\,\mathrm{two} \to_\beta \\
-      \mathrm{suc}\,(\mathrm{suc}\ \mathrm{two}).
+    \lambda \alpha : *.\,\lambda f:\alpha\to\alpha.\,\lambda x:\alpha.\,f(f x))\,\mathrm{nat\  suc\  zero} \to_\beta\\
+      \lambda f : \mathrm{nat}\to\mathrm{nat}.\,\lambda x :\mathrm{nat} .\, f\,(f\,x))\, \mathrm{suc\  zero} \to_\beta\\
+      (\lambda x:\mathrm{nat}.\,\mathrm{suc}\,(\mathrm{suc}\ x))\,\mathrm{zero} \to_\beta \\
+      \mathrm{suc}\,(\mathrm{suc}\ \mathrm{zero}).
     \end{align*}
   \end{przyklad}
 
@@ -368,7 +396,7 @@ Zachodzi oczywiście również odpowiednik Lematu \ref{thm:eta_uniqueness_simple
   Jeśli \(\Gamma\vdash M:\tau\) i \(M\to^{*}_\eta N\), to \(\Gamma\vdash N:\tau\).
 \end{lemat}
 \begin{dowod}
-  Dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M;\tau\). Szczegóły pomijamy. \qed
+  Dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M:\tau\). Szczegóły pomijamy. \qed
 \end{dowod}
 
 \begin{przyklad} Zwróćmy ponownie uwagę na Przykład \ref{ex:f_typing}\ref{ex:f_typing_1}. Mamy
