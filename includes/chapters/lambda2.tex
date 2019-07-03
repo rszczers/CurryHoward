@@ -48,6 +48,17 @@ Wyrażenia \(\lambda\) (\(\lambda\)-termy) w Systemie F to klasy abstrakcji \(\a
     \end{align*}
   \end{definicja}
 
+\begin{definicja}\label{def:f_subterm}(Multizbiór \(\mathrm{Sub}\) podtermów pretermu)
+  %W oczywity sposób rozszerzamy Definicję \ref{def:untyped_subterm}.
+  \begin{enumerate}[label={(\arabic*)}, ref={\arabic*}]
+    \setlength\itemsep{0em}
+    \item \(\mathrm{Sub}(x)=\{x\}\)\label{def:untyped_subterm_1}    \item \(\mathrm{Sub}(MN)=\mathrm{Sub}(M)\cup\mathrm{Sub}(N)\cup\{M\,N\}\)\label{def:untyped_subterm_2}
+    \item \(\mathrm{Sub}(M\sigma)=\mathrm{Sub}(M)\cup\{M\sigma\}\)\label{def:untyped_subterm_2}
+    \item \(\mathrm{Sub}(\lambda x:\sigma.\, M) = \mathrm{Sub}(M)\cup \{\lambda x:\sigma.\, M\}\)\label{def:untyped_subterm_3}
+    \item \(\mathrm{Sub}(\lambda \sigma:*.\, M) = \mathrm{Sub}(M)\cup \{\lambda \sigma:*.\, M\}\)\label{def:untyped_subterm_3}
+  \end{enumerate}
+\end{definicja}
+
   \begin{definicja}(Podstawienie) Rozszerzamy definicję podstawienia o reguły obejmujące zmienne typowe.
   \begin{align*}
     x[x/P] &= P,\\
@@ -289,8 +300,8 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
         \lambda f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ (\sigma\to\tau)\to\sigma\to\rho \end{gathered} & (abs) 9 \\ 
         \fa \fa \fa \begin{gathered}\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ (\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 10\\ 
       \fa \fa \begin{gathered} \lambda \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11\\ 
-      \fa \begin{gathered} \lambda \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11\\ 
-      \begin{gathered} \lambda \rho \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11 
+      \fa \begin{gathered} \lambda \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\tau\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 12\\ 
+      \begin{gathered} \lambda \rho \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\rho\tau\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 13 
       \end{fitch}
       \end{equation*}
   \end{enumerate}
