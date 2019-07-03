@@ -11,13 +11,13 @@ Podstawienie typu \(\tau\) za zmienną typową \(p\) w typie \(\sigma\) nazywamy
   Jeśli \(\Gamma\) jest kontekstem, to przez \(\Gamma[p/\tau]\) oznaczamy podstawienie \(\tau\) za zmienną \(p\) dla wszystkich typów występujących w \(\Gamma\).
 \end{definicja}
 
-\begin{twierdzenie}\label{thm:polymorphism}
+\begin{lemat}\label{thm:polymorphism}
   Jeśli \(\Gamma\vdash_\mathbb{T} M:\sigma\), to \(\Gamma [p/\tau]\vdash_\mathbb{T} M:\sigma[p/\tau]\) dla dowolnego \(\tau\in\mathbb{T}\) i zmiennej \(p\in U\).
-\end{twierdzenie}
+\end{lemat}
 \begin{dowod}
   Dowód przebiega przez indukcję względem długości wyprowadzenia \(\Gamma\vdash M:\sigma\). Szczegóły pomijamy. \qed
 \end{dowod}
 
-Mając na uwadze Twierdzenie \ref{thm:polymorphism} możemy wnioskować o wielu własnościach funkcji reprezentowanych przez \(\lambda\)-termy tylko na podstawie typu. Na przykład typowi \(\sigma\to\sigma\) odpowiada dokładnie jeden (z dokładnością do \(\alpha\)-konwersji) term \(\lambda x.\,x\) i reprezentuje on funkcję identycznościową; typom \(\sigma\to\rho\to\sigma\) i \(\sigma\to\rho\to\rho\) odpowiednio przypisać możemy wyłącznie projekcje fst i snd (określone w \ref{subsec:pairs}), zaś typowi \((\rho\to\tau) \to (\sigma\to\rho)\to\sigma\to\tau\) term \(\lambda g f x. g (f x)\) reprezentujący złożenie funkcji (Przykład \ref{ex:typing} \ref{ex:typing_2}), co do której wiemy z kolei, że jest łączna.
+Mając na uwadze Lemat \ref{thm:polymorphism} możemy wnioskować o wielu własnościach funkcji reprezentowanych przez \(\lambda\)-termy tylko na podstawie typu. Na przykład typowi \(\sigma\to\sigma\) odpowiada dokładnie jeden (z dokładnością do \(\alpha\)-konwersji) term \(\lambda x.\,x\) i reprezentuje on funkcję identycznościową; typom \(\sigma\to\rho\to\sigma\) i \(\sigma\to\rho\to\rho\) odpowiednio przypisać możemy wyłącznie projekcje fst i snd (określone w \ref{subsec:pairs}), zaś typowi \((\rho\to\tau) \to (\sigma\to\rho)\to\sigma\to\tau\) term \(\lambda g f x. g (f x)\) reprezentujący złożenie funkcji (Przykład \ref{ex:typing} \ref{ex:typing_2}), co do której wiemy z kolei, że jest łączna.
 Jest to wraz ogólnej zależności: dysponując dowolnym typem polimorficznym otrzymujemy \emph{twierdzenie za darmo} \cite{Wadler1989} dotyczące termów, które mają ten typ. 
 

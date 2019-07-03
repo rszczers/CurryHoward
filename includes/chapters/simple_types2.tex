@@ -239,7 +239,7 @@ Przedstawimy teraz szereg lematów ustalających między innymi związki między
   Wynika natychmiast z postaci \(\lambda\)-termu.  \qed
 \end{dowod}
 
-\begin{lemat}(O podtermie)
+\begin{lemat}(O podtermie)\label{thm:subterm}
   Podterm poprawnego \(\lambda\)-termu jest poprawny.
   % (Given as Proposition 3.2.9 (see also 3.1.9) in Barendregt, 1992.)
 \end{lemat}
@@ -258,7 +258,7 @@ Przedstawimy teraz szereg lematów ustalających między innymi związki między
   \qed
 \end{dowod}
 
-\begin{lemat}(O zmiennych wolnych)
+\begin{lemat}(O zmiennych wolnych)\label{thm:fv}
   Jeśli sąd \(J: \Gamma \vdash L:\sigma\) jest wyprowadzalny, to \(\mathrm{FV}(L)\subseteq \mathrm{dom}\,\Gamma\).
 \end{lemat}
 \begin{dowod}
@@ -275,8 +275,8 @@ Przedstawimy teraz szereg lematów ustalających między innymi związki między
 \begin{lemat}\label{thm:permutation_simple}
   \begin{enumerate}[label=(\arabic*), ref=(\arabic*)]
     \setlength\itemsep{0em}
-    \item Niech \(\Gamma'\) i \(\Gamma''\) bedą kontekstami takimi, że \(\Gamma' \subseteq \Gamma''\). Jeśli \(\Gamma'\vdash M:\sigma\), to \(\Gamma''\vdash M:\sigma\).
-    \item Jeśli \(\Gamma\vdash M:\sigma\), to \(\Gamma \upharpoonright \mathrm{FV}(M)\vdash M:\sigma\).
+    \item Niech \(\Gamma'\) i \(\Gamma''\) bedą kontekstami takimi, że \(\Gamma' \subseteq \Gamma''\). Jeśli \(\Gamma'\vdash M:\sigma\), to \(\Gamma''\vdash M:\sigma\).\label{thm:permutation_1}
+    \item Jeśli \(\Gamma\vdash M:\sigma\), to \(\Gamma \upharpoonright \mathrm{FV}(M)\vdash M:\sigma\).\label{thm:permutation_2}
     \item Jeśli \(\Gamma\vdash M:\sigma\) i \(\Gamma'\) jest permutacją \(\Gamma\), to \(\Gamma'\vdash M:\sigma\).\label{thm:permutation_3}
   \end{enumerate}
 \end{lemat}
@@ -397,7 +397,7 @@ sposób.
   \qed
 \end{dowod}
 
-\begin{lemat}(Zachowawczość \(\eta\)-redukcji)
+\begin{lemat}(Zachowawczość \(\eta\)-redukcji)\label{thm:eta_uniqueness_simple}
     Załóżmy, że
     \begin{enumerate}[label=(\roman*), ref=\roman*]
       \setlength\itemsep{0em}
