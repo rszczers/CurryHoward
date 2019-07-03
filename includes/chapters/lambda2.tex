@@ -56,7 +56,7 @@ Oczywistemu rozszerzeniu ulega szereg pojęć z Rozdziału \ref{sec:simple_types
     \setlength\itemsep{0em}
     \item \(\mathrm{Sub}(x)=\{x\}\)\label{def:untyped_subterm_1}    \item \(\mathrm{Sub}(MN)=\mathrm{Sub}(M)\cup\mathrm{Sub}(N)\cup\{M\,N\}\)\label{def:untyped_subterm_2}
     \item \(\mathrm{Sub}(M\sigma)=\mathrm{Sub}(M)\cup\{M\sigma\}\)\label{def:untyped_subterm_2}
-    \item \(\mathrm{Sub}(\lambda x:\sigma.\, M) = \mathrm{Sub}(M)\cup \{\lambda x:\sigma.\, M\}\)\label{def:untyped_subterm_3}
+    \item \(\mathrm{Sub}(\lambda x:\alpha.\, M) = \mathrm{Sub}(M)\cup \{\lambda x:\alpha.\, M\}\)\label{def:untyped_subterm_3}
     \item \(\mathrm{Sub}(\lambda \sigma:*.\, M) = \mathrm{Sub}(M)\cup \{\lambda \sigma:*.\, M\}\)\label{def:untyped_subterm_3}
   \end{enumerate}
 \end{definicja}
@@ -282,43 +282,43 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
     \item Polimorficzna funkcja identycznościowa.
       \begin{equation*}
       \begin{fitch}
-        \fh \sigma : * & (form)\\
-        \fa \fa x : \sigma & (var)\\
-        \fa \lambda x:\sigma .\ x\ :\ \sigma\to\sigma & (abs) 2\\
-        \lambda \sigma : *.\,\lambda x:\sigma.\ x\ :\ \Pi\sigma:*.\,\sigma\to\sigma & (\(\Pi\)-i) 3
+        \fh \alpha : * & (form)\\
+        \fa \fa x : \alpha & (var)\\
+        \fa \lambda x:\alpha .\ x\ :\ \alpha\to\alpha & (abs) 2\\
+        \lambda \alpha : *.\,\lambda x:\alpha.\ x\ :\ \Pi\alpha:*.\,\alpha\to\alpha & (\(\Pi\)-i) 3
       \end{fitch}
       \end{equation*}
     \item Polimorficzna iteracja.
       \begin{equation*}
       \begin{fitch}
-        \fh \sigma : * & (form) \\
-        \fa \fh f: \sigma \to \sigma & (var) \\
-        \fa \fa \fh x : \sigma & (var) \\
-        \fa\fa \fa f x\ :\ \sigma & (app) 2 3 \\
-        \fa \fa \fa f(f x)\ :\ \sigma  & (app) 2 1 \\
-        \fa \fa \lambda x : \sigma .\, f(fx)\ :\ \sigma \to \sigma & (abs) 5 \\
-        \fa \lambda f : \sigma \to \sigma .\, \lambda x :\, \sigma .\, f (fx)\ :\ (\sigma \to \sigma) \to \sigma \to \sigma &  (abs) 6 \\
-      \lambda \sigma : * .\, \lambda f : \sigma \to \sigma .\, \lambda x : \sigma .\, f (f x)\ :\ \Pi \sigma : * .\, (\sigma \to \sigma) \to \sigma \to \sigma & (\(\Pi\)-i) 7 
+        \fh \alpha : * & (form) \\
+        \fa \fh f: \alpha \to \alpha & (var) \\
+        \fa \fa \fh x : \alpha & (var) \\
+        \fa\fa \fa f x\ :\ \alpha & (app) 2 3 \\
+        \fa \fa \fa f(f x)\ :\ \alpha  & (app) 2 1 \\
+        \fa \fa \lambda x : \alpha .\, f(fx)\ :\ \alpha \to \alpha & (abs) 5 \\
+        \fa \lambda f : \alpha \to \alpha .\, \lambda x :\, \alpha .\, f (fx)\ :\ (\alpha \to \alpha) \to \alpha \to \alpha &  (abs) 6 \\
+      \lambda \alpha : * .\, \lambda f : \alpha \to \alpha .\, \lambda x : \alpha .\, f (f x)\ :\ \Pi \alpha : * .\, (\alpha \to \alpha) \to \alpha \to \alpha & (\(\Pi\)-i) 7 
       \end{fitch}
       \end{equation*}
     \item Polimorficzne złożenie funkcji.
       \begin{equation*}
       \begin{fitch}
-        \fh \rho: * & (form) \\
-        \fa \fh \tau: * & (form) \\
-        \fa \fa \fh \sigma : * & (form) \\
-        \fa \fa \fa \fh g : \tau\to\rho & (var) \\
-        \fa \fa \fa \fa \fh f : \sigma\to\tau & (var) \\
-        \fa \fa \fa \fa \fa \fh x : \sigma & (var) \\
-        \fa \fa \fa \fa \fa \fa f a\ :\ \tau & (app) 5 6 \\
-        \fa \fa \fa \fa \fa \fa g (f a)\ :\ \rho & (app) 4 7 \\
-        \fa \fa \fa \fa \fa \lambda x:\sigma.\,g(f a)\ :\ \sigma \to \rho & (abs) 8 \\
+        \fh \gamma: * & (form) \\
+        \fa \fh \beta: * & (form) \\
+        \fa \fa \fh \alpha : * & (form) \\
+        \fa \fa \fa \fh g : \beta\to\gamma & (var) \\
+        \fa \fa \fa \fa \fh f : \alpha\to\beta & (var) \\
+        \fa \fa \fa \fa \fa \fh x : \alpha & (var) \\
+        \fa \fa \fa \fa \fa \fa f a\ :\ \beta & (app) 5 6 \\
+        \fa \fa \fa \fa \fa \fa g (f a)\ :\ \gamma & (app) 4 7 \\
+        \fa \fa \fa \fa \fa \lambda x:\alpha.\,g(f a)\ :\ \alpha \to \gamma & (abs) 8 \\
         \fa \fa \fa \fa \begin{gathered}
-        \lambda f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ (\sigma\to\tau)\to\sigma\to\rho \end{gathered} & (abs) 9 \\ 
-        \fa \fa \fa \begin{gathered}\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ (\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 10\\ 
-      \fa \fa \begin{gathered} \lambda \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11\\ 
-      \fa \begin{gathered} \lambda \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\tau\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 12\\ 
-      \begin{gathered} \lambda \rho \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\rho\tau\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 13 
+        \lambda f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ (\alpha\to\beta)\to\alpha\to\gamma \end{gathered} & (abs) 9 \\ 
+        \fa \fa \fa \begin{gathered}\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ (\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 10\\ 
+      \fa \fa \begin{gathered} \lambda \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ \Pi\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 11\\ 
+      \fa \begin{gathered} \lambda \beta \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ \Pi\beta\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 12\\ 
+      \begin{gathered} \lambda \gamma \beta \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\ \Pi\gamma\beta\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma\end{gathered} & (abs) 13 
       \end{fitch}
       \end{equation*}
   \end{enumerate}
@@ -349,7 +349,7 @@ Lemat \ref{thm:uniqueness_f} (podobnie jak Lemat \ref{thm:type_uniqueness}) zape
   Jeśli \(\Gamma\vdash M:\tau\) i \(M\to^{*}_\beta N\), to \(\Gamma\vdash N:\tau\).
 \end{lemat}
 \begin{dowod}
-  Analogicznie do Lematu \ref{thm:subject_reduction}, dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M;\tau\). Szczegóły pomijamy. \qed
+  Dowód przeprowadzamy analogicznie do dowodu Lematu \ref{thm:subject_reduction}, przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M;\tau\). Szczegóły pomijamy. \qed
 \end{dowod}
 
 Odpowiedniej modyfikacji ulega również pojęcie \(\beta\)-redukcji.
@@ -357,7 +357,7 @@ Odpowiedniej modyfikacji ulega również pojęcie \(\beta\)-redukcji.
     \(\eta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) zgodną na \(\mathbf{\Lambda}_{\mathbb{T}2}\) relację binarną \(\to_\beta\) taką, że
   \begin{align*}
     \lambda x:\sigma.\,Mx &\to_\eta M,\\
-    \lambda \sigma:*.\,M\sigma &\to_\eta M.
+    \lambda \alpha:*.\,M\alpha &\to_\eta M.
   \end{align*}
   \end{definicja}
 
@@ -373,7 +373,7 @@ Zachodzi oczywiście również odpowiednik Lematu \ref{thm:eta_uniqueness_simple
   \(\lambda \beta : *.\,x\beta\ \to_\eta x\).
 \end{przyklad}
 
-Biorąc pod rozwagę wszystkie powyższe rozstrzygnięcia definicyjne, zachodzą również w odpowiednich wersjach Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów \ref{sec:untyped_lambda} i \ref{sec:simple_types}.
+Biorąc pod rozwagę wszystkie powyższe rozstrzygnięcia definicyjne, zachodzą również w odpowiednich wersjach Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów~\ref{sec:untyped_lambda}~i~\ref{sec:simple_types}.
 
 % O generowaniu
 % O podtermie
