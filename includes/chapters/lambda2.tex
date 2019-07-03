@@ -125,6 +125,10 @@ Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji \re
     Jesli \(\Gamma=(a_{11}: a_{12},\,\dots,\,a_{n1}:a_{n2})\) jest \(\lambda 2\)-kontekstem, to przez \(\Gamma[\alpha/\sigma]\) oznaczamy \(\lambda 2\)-kontekst, w którym jesli \(a_{i1}\in V\), to \(a_{i2}\) zamieniamy na \(x_{i2}[\alpha/\sigma]\)  dla \(1\leq i \leq n\).
 \end{definicja}
 
+ \begin{uwaga*}
+   Zauważmy, że przy powyższych rozstrzygnięciach definicyjnych nie zachodzi odpowiednik Twierdzenia \ref{thm:permutation_simple} \ref{thm:permutation_3}: nie możemy rozpatrywać dowolnych permutacji kontekstów w sądach \(\Gamma\vdash M:T\), ponieważ w myśl Definicji \ref{def:f_statement} deklaracje zmiennych termowych w poprawnie zbudowanych \(\lambda 2\)-kontekstach są uzależnione od poprzedzających je deklaracji typowych.
+ \end{uwaga*}
+
 \begin{przyklad}
   \begin{enumerate}[label=(\alph*), ref=(\alph*)]
     \setlength\itemsep{0em}
@@ -197,13 +201,63 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
 \begin{przyklad}
   \begin{enumerate}[label=(\alph*), ref=(\alph*)]
     \setlength\itemsep{0em}
+    \item Niech \(\perp\ \mathrel{\equiv}\ \Pi \sigma: *.\, \sigma\) i \(\Gamma=(\beta:*,x:\perp)\).
+      % \begin{equation*}
+      % \begin{fitch}
+      %   \fh \beta : * & (form) \\
+      %   \fa \fh x : \perp & (var) \\
+      %   \fa \lambda x :\perp .\, x\ :\ \perp \to \perp & (abs) 2 \\
+      %   \lambda \beta : *.\, \lambda x :\perp .\, x\ :\ \Pi \beta : *.\,\perp \to \perp & (\(\Pi\)-i) 3 \\
+      % \end{fitch}
+    % \end{equation*}
+
+    % \item 
+      \begin{equation*}
+      \begin{fitch}
+        \fh \beta : * & (form) \\
+        \fa \fh x : \perp & (var) \\
+        \fa x\beta\ :\ \beta & (\(\Pi\)-e) 2 1 \\
+        \lambda \beta : *.\,x\beta\ :\ \underbrace{\Pi \beta:*.\,\beta}_{\perp} & (\(\Pi\)-i) 3
+      \end{fitch}
+    \end{equation*}
+    % \item \(\Gamma=(x:\perp,\beta:*)\).
+    %   \begin{equation*}
+    %   \begin{fitch}
+    %     \fh x : \perp & (var) \\
+    %     \fa \fh \beta : * & (form) \\
+    %     \fa \lambda \beta : * .\, x\ :\ \Pi \beta:*.\,\perp & (\(\Pi\)-i) 1 \\
+    %     \lambda x:\perp.\,\lambda \beta:*.\, x\ :\ \perp \to \Pi \beta:*.\,\perp &  (abs) 3
+    %   \end{fitch}
+    % \end{equation*}
+
+    \item \(\Gamma=(\beta:*,y:\beta, x:\perp)\).
+      % \begin{equation*}
+      % \begin{fitch}
+      %   \fh x : \perp & (var)\\
+      %   \fa \fh \beta: * & (form)\\
+      %   \fa \fa x\beta\ :\ \beta & (\(\Pi\)-e) 1 2\\
+      %   \fa \lambda \beta:*.\,x\beta\ :\ \Pi \beta:*.\,\beta\ (=_\alpha \perp) & (\(\Pi\)-i) 3\\
+      %   \lambda x:\perp.\lambda \beta:*.\,x\beta\ :\ \perp \to \perp  & (abs) 4
+      % \end{fitch}
+    % \end{equation*}
+      \begin{equation*}
+      \begin{fitch}
+        \fh \beta: * & (form)\\
+        \fa \fh y : \beta & (var) \\
+        \fa \fa \fh x : \perp & (var)\\
+        \fa \fa \lambda x:\perp.\,y\ : \perp \to \beta & (abs) 2\\ 
+        \fa \lambda y:\beta\ x:\perp.\, y\ :\ \perp \to \beta & (abs) 4 \\
+        \lambda \beta :*.\,\lambda y:\beta\ x:\perp.\, y\ :\ \Pi \beta :*.\,\perp \to \beta & (\(\Pi\)-i) 1 \\
+      \end{fitch}
+    \end{equation*}
+%      Zauważmy, że nie istnieje \(\lambda\)-term typu \(\perp\). Typ, który nie ma inhabitantów nazywamy typem \emph{początkowym} (ang. \emph{initial}), \emph{zerowym} albo typem \emph{bottom}.
     \item Polimorficzna funkcja identycznościowa.
       \begin{equation*}
       \begin{fitch}
         \fh \sigma : * & (form)\\
         \fa \fa x : \sigma & (var)\\
         \fa \lambda x:\sigma .\ x\ :\ \sigma\to\sigma & (abs) 2\\
-        \lambda \sigma : *.\,\lambda x:\sigma.\ x\ :\ \Pi\sigma:*.\,\sigma\to\sigma & (\(\Pi-i\)) 3
+        \lambda \sigma : *.\,\lambda x:\sigma.\ x\ :\ \Pi\sigma:*.\,\sigma\to\sigma & (\(\Pi\)-i) 3
       \end{fitch}
       \end{equation*}
     \item Polimorficzna iteracja.
@@ -216,7 +270,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
         \fa \fa \fa f(f x)\ :\ \sigma  & (app) 2 1 \\
         \fa \fa \lambda x : \sigma .\, f(fx)\ :\ \sigma \to \sigma & (abs) 5 \\
         \fa \lambda f : \sigma \to \sigma .\, \lambda x :\, \sigma .\, f (fx)\ :\ (\sigma \to \sigma) \to \sigma \to \sigma &  (abs) 6 \\
-      \lambda \sigma : * .\, \lambda f : \sigma \to \sigma .\, \lambda x : \sigma .\, f (f x)\ :\ \Pi \sigma : * .\, (\sigma \to \sigma) \to \sigma \to \sigma & (\(\Pi\)-i) 7 \\
+      \lambda \sigma : * .\, \lambda f : \sigma \to \sigma .\, \lambda x : \sigma .\, f (f x)\ :\ \Pi \sigma : * .\, (\sigma \to \sigma) \to \sigma \to \sigma & (\(\Pi\)-i) 7 
       \end{fitch}
       \end{equation*}
     \item Polimorficzne złożenie funkcji.
@@ -236,12 +290,13 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
         \fa \fa \fa \begin{gathered}\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ (\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 10\\ 
       \fa \fa \begin{gathered} \lambda \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11\\ 
       \fa \begin{gathered} \lambda \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11\\ 
-      \begin{gathered} \lambda \rho \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11\\ 
+      \begin{gathered} \lambda \rho \tau \sigma:*.\,\lambda g: \tau \to \rho\  f:\sigma\to\tau\ x:\sigma.\ g(f a)\ :\\ \Pi\sigma:*.(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\end{gathered} & (abs) 11 
       \end{fitch}
       \end{equation*}
   \end{enumerate}
 \end{przyklad}
  Jak widzimy procedura wyprowadzania typu odpowiada w istocie rekonstrukcji wyrażenia. Problem typowania w (ortodoksyjnym) stylu Churcha jest trywialny, gdyż zgodnie z Rozdziałem \ref{subsec:church_style} założyliśmy, że mamy pełną informację typową o wszystkich zmiennych przedmiotowych. 
+
   \subsection{Redukcja}
 
   \begin{definicja}(\(\beta\)-redukcja)
@@ -259,7 +314,23 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
       \mathrm{suc}\,(\mathrm{suc}\ \mathrm{two}).
     \end{align*}
   \end{przyklad}
+
+Twierdzenie \ref{thm:uniqueness_f} (podobnie jak Twierdzenie \ref{thm:type_uniqueness}) zapewnia nas, że typ termu zachowuje się przy \(\beta\)-redukcji. Praktyczny sens tego twierdzenia polega na tym, że relacja posiadania tego samego typu jest zamknięta na \(\beta\)-konwersję i aby rozstrzygnąć o typie danego termu wystarczy, że znamy typ któregokolwiek jego \(\beta\)-konwersa.
+
+\begin{twierdzenie}(O jednoznaczności)\label{thm:uniqueness_f}
+  Jeśli \(\Gamma\vdash M:\tau\) i \(M\to^{*}_\beta N\), to \(\Gamma\vdash N:\tau\).
+\end{twierdzenie}
+\begin{dowod}
+  Dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M;\tau\). Szczegóły pomijamy. \qed
+\end{dowod}
+
+
 \subsection{Własności}
+
+O generowaniu
+O podtermie
+O zmiennych wolnych
+
 \subsection{System Hindleya-Milnera}
 \subsection{Podsumowanie}
 Na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt_1992} klasyfikacji rozszerzeń rachunku \(\lambda\) z typami prostymi (tzw. \emph{kostki \(\lambda\)}, Rysunek \ref{fig:lambda-cube}), rozdział ten poświęcimy omówieniu wzajemnych zależności jakie mogą łączyć \(\lambda\)-termy i typy. Zajmować będziemy się wyłącznie systemami w stylu Churcha.
