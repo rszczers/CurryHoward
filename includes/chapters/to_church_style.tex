@@ -48,7 +48,7 @@ Zauważmy, że mając zadany kontekst, typ każdego poprawnego \(\lambda\)-termu
   Dowód przebiega przez indukcję względem długości wyprowadzenia \(\Gamma\vdash M:\sigma\). Szczegóły pomijamy.\qed
 \end{dowod}
 
-\begin{przyklad}
+\begin{przyklad}\label{ex:church_identity}
 %    \begin{enumerate}[label=(\alph*)]
 %    \item
 Zauważmy, że nie istnieje jeden typ dla reprezentacji funkcji identycznościowej. Jeśli \(nat\) jest stałą typową, którą reprezentujemy liczby naturalne, to identyczność na zbiorze liczb naturalnych będziemy reprezentowali termem \(\lambda x:nat.\,x\), na zbiorze funkcji \(\mathbb{N}\to\mathbb{N}\), \(\lambda x:\mathrm{nat}\to\mathrm{nat}.\,x\) i tak dalej.
