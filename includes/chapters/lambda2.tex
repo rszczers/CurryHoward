@@ -399,11 +399,10 @@ Zachodzi oczywiście również odpowiednik Lematu \ref{thm:eta_uniqueness_simple
   Dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M:\tau\). Szczegóły pomijamy. \qed
 \end{dowod}
 
-\begin{przyklad} Zwróćmy ponownie uwagę na Przykład \ref{ex:f_typing}\ref{ex:f_typing_1}. Mamy
-  \(\lambda \beta : *.\,x\beta\ \to_\eta x\).
+\begin{przyklad} Zwróćmy ponownie uwagę na Przykład \ref{ex:f_typing}\ref{ex:f_typing_1}. Ponieważ \(\lambda \beta : *.\,x\beta\ \to_\eta x\), to ze względu Lemat \ref{thm:eta_uniqueness_f} wyprowadzalny jest również \(\Gamma\vdash x:\perp\).
 \end{przyklad}
 
-Biorąc pod rozwagę wszystkie powyższe rozstrzygnięcia definicyjne, zachodzą również w odpowiednich wersjach Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów~\ref{sec:untyped_lambda}~i~\ref{sec:simple_types}.
+W odpowiednich wersjach zachodzą również Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów~\ref{sec:untyped_lambda}~i~\ref{sec:simple_types}.
 
 Kolejnym ważnym twierdzeniem, które zachodzi dla Systemu F jest silna normalizacja \(\beta\)-redukcji.
 
