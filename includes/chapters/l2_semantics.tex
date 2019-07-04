@@ -1,0 +1,13 @@
+\subsection{Semantyka relacyjna}
+\subsubsection{Typy}
+Oznaczmy przez \(\mathbf{U}\) uniwersum interpretacji typów \(\mathbb{T}2\). Symbole \(\to\) i \(\forall\) denotować będą odpowiednie konstruktory typów. Przez \([\mathbf{U}\to \mathbf{U}]\) oznaczać będziemy zbiór funkcji \(\mathbf{U}\to \mathbf{U}\). Niech \(A\in \mathbf{U}\) i \(B\in \mathbf{U}\). Wówczas \(A\to B\in \mathbf{U}\) oraz \(\forall F\in \mathbf{U}\) dla dowolnego \(F\in[\mathbf{U}\to \mathbf{U}]\).
+
+%Niech \(T\in\mathbb{T}2\) i niech \(\vec{T}\subset\mathrm{FV}(T)\) będzie listą zmiennych wolnych występujących w \(T\).
+Niech \(\Gamma\) będzie \(\lambda 2\)-kontekstem i niech \(\sigma\in\mathbb{T}2\) będzie typem takim, że  \(\alpha : * \in \Gamma \) dla wszystkich \(\alpha\in \mathrm{FV}(\sigma)\). Wartościowanie \(\mu:\mathrm{dom}(\Gamma)\to\mathbf{U}\) nazywać będziemy \emph{kontekstem typowym} względem \(\Gamma\).  Przez \(\llbracket \sigma \rrbracket \vec{A}\) oznaczamy denotację typu \(\sigma\) w kontekście typowym \(\vec{A}\)  i określamy ją następującą definicją indukcyjną:
+\begin{align*}
+  \llbracket \alpha \rrbracket\vec{A} &= \vec{A}\llbracket{\alpha}\rrbracket \\
+  \llbracket \tau\to \rho\rrbracket \vec{A} &= \llbracket \tau\rrbracket \vec{A}\to\llbracket \rho \rrbracket \vec{A} \\
+  \llbracket \Pi \alpha : *.\ M \rrbracket \vec{A} &= \forall (\lambda A. \llbracket \sigma\rrbracket \vec{A} [\beta/A])
+\end{align*}
+% \emph{kontekstem typowym} dla \(\vec{T}\), jeśli  
+\subsubsection{Termy}
