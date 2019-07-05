@@ -332,8 +332,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
       \end{equation*}
   \end{enumerate}
 \end{przyklad}
- Jak widzimy procedura wyprowadzania typu odpowiada w istocie rekonstrukcji wyrażenia. Problem typowania w (ortodoksyjnym) stylu Churcha jest trywialny, gdyż zgodnie z Rozdziałem \ref{subsec:church_style} założyliśmy, że mamy pełną informację typową o wszystkich zmiennych przedmiotowych. 
-
+ Jak widzimy procedura wyprowadzania typu odpowiada w istocie rekonstrukcji wyrażenia. Problem typowania w (ortodoksyjnym) stylu Churcha jest trywialny, gdyż zgodnie z Rozdziałem \ref{subsec:church_style} założyliśmy, że mamy pełną informację typową o zmiennych przedmiotowych. Czytająć wyprowadzenia od dołu do góry rekonstruujemy również kontekst. Mówimy, że składnia Systemu F w stylu Churcha \emph{koduje typowanie}.
   \subsection{Redukcja}
 
   \begin{definicja}(\(\beta\)-redukcja)
@@ -418,6 +417,7 @@ Kolejnym ważnym twierdzeniem, które zachodzi dla Systemu F jest silna normaliz
   Jeżeli \(\Gamma\vdash_\mathbb{T}M:\tau\), to \(M\in\mathrm{SN_\beta}\).
 \end{twierdzenie}
 \begin{dowod}
+
 %  Metoda dowodu jest analogiczna do przedstawionej w Rozdziale \ref{subsec:strong_normalization}. Szczegółowe uzupełnienie dowodu można znaleźć w \cite[Rozdział 11.5]{Urzyczyn2006}.\qed
 \end{dowod}
 
@@ -433,7 +433,7 @@ Jako Fakt \ref{fact:cr_f} przedstawimy własność Churcha-Rossera upewniającą
   Relacja \(\beta\)-redukcji ma własność CR.
 \end{fakt}
 
-\subimport{includes/chapters/}{l2_semantics.tex}
+%\subimport{includes/chapters/}{l2_semantics.tex}
 % O generowaniu
 % O podtermie
 % O zmiennych wolnych

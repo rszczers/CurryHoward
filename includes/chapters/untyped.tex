@@ -231,10 +231,14 @@ Wprowadzamy następujące konwencje notacyjne:
   \begin{enumerate}[label={\roman*)}, ref={\roman*)}]
     \setlength\itemsep{0em}
     \item Jeśli \(M\) jest zmienną, to wówczas \(M\) jest postaci \ref{def:HNF}.
-    \item Jeśli \(M\) jest aplikacją, to wówczas \(M \equiv P_{0} P_{1} \dots P_{m} \), gdzie \(P_{0}\) nie jest aplikacją. Wówczas \(M\) jest postaci \ref{def:HNF} albo postaci \ref{def:HNF2} dla \(n=0\), w zależności od tego czy \(P_0\) jest zmienną (wówczas jest to przypadek \ref{def:HNF}) czy abstrakcja (wówczas jest to przypadek \ref{def:HNF2}).
-    \item Jeśli \(M\) jest abstrakcją, to wówczas \(M\equiv \lambda x_1\,x_2\dots x_m.\ P_0\,P_1\dots P_n\), gdzie \(P_0\) abstrakcją już nie jest. Wówczas \(P_0\) jest ablo zmienną (przypadek \ref{def:HNF}) albo aplikacją (przypadek \ref{def:HNF2}).\qedhere
+    \item Jeśli \(M\) jest aplikacją, to wówczas \(M \equiv P_{0} P_{1} \dots P_{m} \), gdzie \(P_{0}\) nie jest aplikacją. Wówczas \(M\) jest postaci \ref{def:HNF} albo postaci \ref{def:HNF2} dla \(n=0\), w zależności od tego czy \(P_0\) jest zmienną (wówczas jest to przypadek \ref{def:HNF}) czy abstrakcją (wówczas jest to przypadek \ref{def:HNF2}).
+    \item Jeśli \(M\) jest abstrakcją, to wówczas \(M\equiv \lambda x_1\,x_2\dots x_m.\ P_0\,P_1\dots P_n\), gdzie \(P_0\) abstrakcją już nie jest. Wówczas \(P_0\) jest albo zmienną (przypadek \ref{def:HNF}) albo aplikacją (przypadek \ref{def:HNF2}).\qed
   \end{enumerate}
 \end{dowod}
+
+\begin{przyklad}
+  \(\lambda x.(\lambda y.\,y)\,M\) jest w w postaci WHNF, ale nie jest w postaci HNF, ponieważ zawiera redeks czołowy \((\lambda y.\,y)M\).
+\end{przyklad}
 
 Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów.
 
@@ -300,7 +304,7 @@ W literaturze znajdujemy mnogość propozycji, które w ten czy inny sposób sta
 \]
 Historycznie wiąże się ta notacja z jego pracami nad systemem komputerowo wspomaganego dowodzenia twierdzeń AUTOMATH. Rozwiązanie takie, podobnie jak w przypadku tzw. logik kombinatorów (np. rachunku SKI), eliminuje konieczność utożsamiania termów przez \(\alpha\)-konwersję, ale istotnie zmniejsza ich czytelność.
 
-Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{txa:alpha-draft}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Samo podejście do definiowania \(\lambda\)-termow przez operację \(\alpha\)-konwersji nie jest powszechne w literaturze przedmiotu. Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
+Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{txa:alpha-draft}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Technikalia definiowania \(\lambda\)-termow jako klas \(\alpha\)-konwersji są na ogół w literaturze pomijane. %nie jest w literaturze przedmiotu. %Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
 
 % \subsection{Podstawienie jednoczesne}
 % Biorąc pod uwagę sens obliczeniowy rachunku \(\lambda\) interesujące okazuje się modyfikacja Definicji \ref{def:untyped_substitution_hindley} w  taki sposób, aby podstawienie miało miejsce dla wielu zmiennych równolegle w całym \(\lambda\)-termie. Za przykładem \cite{STOUGHTON1988317} wprowadzimy \emph{podstawienie jednoczesne}. W tym celu jednak uściślenia wymagają pewne pojęcia.
@@ -327,8 +331,8 @@ Dla dowolnego \(M\in\mathbf{\Lambda}\), ciągu \(\lambda\)-zmiennych~\(\vec{x}\)
   \text{a)}\quad &  (xy)[y/x][x/u] = uu, &\quad\text{b)}\quad & (\lambda x.\,yx)[x/y][y/z]=\lambda x.\,zx, \\
                 &  (xy)[y/x, x/u] = ux. & &(\lambda x.\,yx)[x/y,y/z]=\lambda x.\,zx.\\
 \end{align*}
-
 \end{przyklad}
+
 \subsection{Redukcja}
 Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\Lambda}\) operacji \(\beta\)- i \(\eta\)-redukcji. Pożądane jest, żeby operacje te wykonywane na podtermach pozostowały w \emph{zgodzie} ze strukturą całego \(\lambda\)-termu.
 
@@ -451,7 +455,14 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
     \(\lambda x. ((+1) x) =_\eta (+1) \).
   \end{przyklad}
 
+
 \subimport{}{church_rosser_untyped.tex}  
+
+%\subsection{Leniwe strategie ewaluacji}
+
+\subimport{}{untyped_models.tex}
+
 \subimport{}{scott_encoding.tex}
+
 \subimport{}{untyped_summary.tex}
 
