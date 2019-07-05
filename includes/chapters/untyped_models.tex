@@ -31,6 +31,7 @@ Powiemy, że \(a\) jest \emph{ekstensjonalnie równoważne} \(b\), jeśli \(a\si
 
 \begin{definicja}% kombinacja zmiennycha, 3.7
 \begin{enumerate}
+  \setlength\itemsep{0em}
 \item
 Powiemy, że term \(M\) jest \emph{kombinacją zmiennych}, jeśli \(M\equiv x\) dla pewnej zmiennej \(x\) albo \(M\equiv (PQ)\) dla pewnych kombinacji zmiennych \(P\) i \(Q\). 
 \item 
@@ -66,7 +67,8 @@ Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorycznie
 
 \begin{definicja}[Model bezsyntaktyczny]%3.9
   Modelem bezsyntaktycznym rachunku \(\lambda\) nazywamy trójkę \((D,\,\bullet, \Lambda)\), gdzie \(\mathbb{D}=(D,\,\bullet)\) jest strukturą aplikatywną, \(\Lambda: D \to D\) i spełnione są poniższe własności:
-  \begin{enumerate}
+  \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
+  \setlength\itemsep{0em}
     \item \(\mathbb{D}\) jest kombinatorycznie zupełny.
     \item \(\Lambda (a) \sim a\) dla wszystkich \(a\in D\).
     \item Jeśli \(a\sim b\), to \(\Lambda(a) = \Lambda(b)\) dla wszystkich \(a,\,b\in D\).
@@ -78,28 +80,41 @@ Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorycznie
 Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jesli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kres górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
 
 \begin{definicja}[Zupełny porządek częściowy]%5.1
-Porządek częściowy \((D,\sqsubseteq)\) taki, że
-\begin{enumerate}
-  \item \(\perp\in D\) oraz
-  \item każdy skierowany poddzbiór \(X\subset D\) ma kres górny \((\bigsqcup \in X)\)
+Porządek częściowy \((D,\,\sqsubseteq)\) taki, że
+\begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
+  \setlength\itemsep{0em}
+  \item posiada element najmniejszy oraz
+  \item każdy skierowany poddzbiór \(X\subset D\) ma kres górny,
 \end{enumerate}
   nazywamy \emph{zupełnym porządkiem częściowym} (w skrócie: \emph{cpo}).
 \end{definicja}
 
 Ustalmy, że jeśli \(D'\), \(D''\), \(\dots\)  są cpo, to odpowiadające im porządki częściowe będziemy notowali symbolami \(\sqsubseteq'\), \(\sqsubseteq''\), \(\dots\)
 
-\begin{definicja}(Monotonoczność, ciągłość)\label{def:m_cont}%5.3
+\begin{przyklad}
+  Ustalmy \(\perp\not\in \mathbb{N}\) i niech \(\mathbb{N}^{+}=\mathbb{N}\cup{\perp}\). Określmy:
+  \begin{align*}
+    a \sqsubseteq b \quad \Leftrightarrow\quad (a=\perp\ \land\ b\in \mathbb{N})\ \lor\ a = b
+  \end{align*}
+Tak określona relacja jest oczywiście zwrotna, przechodnia i antysymetryczna. 
+\end{przyklad}
+
+\begin{definicja}[Monotonoczność, ciągłość]\label{def:m_cont}%5.3
 Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).
-\begin{enumerate}
+\begin{enumerate}[label={(\alph*)}, ref={(\alph*)}] 
+  \setlength\itemsep{0em}
 \item Powiemy, że \(\varphi\) jest \emph{monotoniczna}, jeśli \(\varphi(a) \sqsubseteq' \varphi(b)\) dla \(a\sqsubseteq b\).
-\item Powiemy, że \(\varphi\) jest \emph{ciągła}, jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X).\)\label{def:m_cont_2}
+\item Powiemy, że \(\varphi\) jest \emph{ciągła (w sensie Scotta}\footnote{Funkcje te są ciągłe w topologicznym sensie względem topologii Scotta.}), jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X).\)\label{def:m_cont_2}
 \end{enumerate}
 Symbolem \([D\to D']\) oznaczamy zbiór wszystkich funkcji ciągłych ze zbioru \(D\)~do~\(D'\).
 \end{definicja}
 
+Zauważmy, że jeśli \(\varphi\) jest ciągła, to jest również monotoniczna.
+
 \begin{twierdzenie}%5.4
 Jeśli \(D\) i \(D'\) są cpo, to
-  \begin{enumerate}
+  \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+  \setlength\itemsep{0em}
     % \item \(([D\to D'], \preceq)\) jest cpo.
     % \item \(([D\to D'], \preceq)\) ma element najmniejszy.
     % \item Każdy skierowany podzbiór \(\Phi \in [D\to D']\) ma supremum.
@@ -109,7 +124,8 @@ Jeśli \(D\) i \(D'\) są cpo, to
   \end{enumerate} 
 \end{twierdzenie}
 \begin{dowod}
-  \begin{enumerate}
+  \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+  \setlength\itemsep{0em}
     \item 
       Określmy na \([D\to D']\) relację  \(\preceq\):
 \[
@@ -128,7 +144,7 @@ Jeśli \(D\) i \(D'\) są cpo, to
 \begin{definicja}[Projekcja]%5.5
 Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy parę \((\varphi, \psi)\) funkcji \(\varphi \in [D\to D']\), \(\psi \in [D'\to D]\) takich, że
 \begin{align}
-\psi\circ \varphi = I_D\ \text{oraz}\ \varphi\circ \psi \preceq I_{D'} \tag{\textasteriskcentered},
+\psi\circ \varphi = I_D\quad \text{oraz}\quad \varphi\circ \psi \preceq I_{D'} \tag{\textasteriskcentered},
 \end{align}
 gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorze \(D\) i \(D\), odpowiednio.
 \end{definicja}
@@ -140,14 +156,15 @@ Dla \(m,\,n\geq 0\) określamy \(\varphi_{mn}:D_m \to D_n\) w następujący spos
 \begin{cases}
 \varphi_{n-1} \circ \varphi_{n-2} \circ \dots \varphi_{m+1} \circ \varphi_m, & \text{jeśli}\ m\leq n,\\
 I_{D_n}, & \text{jeśli}\ m=n,\\
-\psi_n \circ \psi_{n+1} \circ \dots \circ \psi_{m-2}\circ \psi_{m-1} & \text{jeśli} m\geq n.
+\psi_n \circ \psi_{n+1} \circ \dots \circ \psi_{m-2}\circ \psi_{m-1} & \text{jeśli}\ m\geq n.
 \end{cases}
 \end{align*}
 \end{definicja}
 
 \begin{fakt}[{\cite[Lemat 16.33]{Hindley:2008:LCI:1388400}}]%5.7
 Niech \(m,\,n\geq 0\). Wówczas
-\begin{enumerate}
+\begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
+  \setlength\itemsep{0em}
 \item \(\varphi_{mn}\in [D_m\to D_n]\),
 \item jeśli \(m\leq n\), to \(\varphi_{nm}\circ \varphi_{mn} = I_{D_m}\),
 \item jeśli \(m>n\), to \(\varphi_{nm}\circ \varphi_{mn} \preceq I_{D_m}\),
@@ -172,7 +189,8 @@ Na \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący sposób:
 \end{definicja}
 
 \begin{fakt}[{\cite[Lemat 16.36]{Hindley:2008:LCI:1388400}}]%5.10
-\begin{enumerate}
+\begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
+  \setlength\itemsep{0em}
 \item \(D_\infty\) jest cpo.
 \item \(D_\infty\) zawiera element najmniejszy \(\perp=(\perp_0,\,\perp_1,\,\dots)\), gdzie przez \(\perp_n\) oznaczamy najmniejszy element \(D_n\).
 \item Kres górny każdego skierowany zbioru \(X\subset D_\infty\) ma postać
@@ -192,8 +210,9 @@ Dla \(n\geq 0\) okreslamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\
 
 \begin{fakt}[{\cite[Lematy 16.38, 16.39, 16.42]{Hindley:2008:LCI:1388400}}]%5.12
 Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
-\begin{enumerate}
-\item \((\varphi_{n\infty},\,\varphi{\infty n})\) jest projekcją z \(D_\infty\) do \(D_n\),
+\begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
+  \setlength\itemsep{0em}
+\item \((\varphi_{n\infty},\,\varphi_{\infty n})\) jest projekcją z \(D_\infty\) do \(D_n\),
 \item \(\varphi_{mn}(a_m)\sqsubseteq a_n\),
 \item \(\varphi_{m\infty}(a_m)\sqsubseteq \varphi_{n\infty}(a_n)\),
 \item \(a=\bigsqcup_{n\geq 0}\varphi_{n\infty}(a_n),\),
