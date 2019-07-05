@@ -442,36 +442,5 @@ Jako Fakt \ref{fact:cr_f} przedstawimy własność Churcha-Rossera upewniającą
 % Zachowawczość \(\eta\)-redukcji
 % Własność Churcha-Rossera
 
-\subsection{Podsumowanie}
-Na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt_1992} klasyfikacji rozszerzeń rachunku \(\lambda\) z typami prostymi (tzw. \emph{kostki \(\lambda\)}, Rysunek \ref{fig:lambda-cube}), rozdział ten poświęcimy omówieniu wzajemnych zależności jakie mogą łączyć \(\lambda\)-termy i typy. Zajmować będziemy się wyłącznie systemami w stylu Churcha.
-
-\begin{figure}[!h]
-  \centering
-  \begin{tikzpicture}
-  \matrix (m) [matrix of math nodes,
-  row sep=3em, column sep=3em,
-  text height=1.5ex,
-  text depth=0.25ex]{
-              & \lambda\omega             &              & \lambda P \omega             \\
-  \lambda 2   &                           & \lambda P 2                                \\
-              & \lambda\underline{\omega} &              & \lambda P \underline{\omega} \\
-  \lambda{\to}&                           & \lambda P  \\
-  };
-  \path[-{Latex[length=2.5mm, width=1.5mm]}]
-  (m-1-2) edge (m-1-4)
-  (m-2-1) edge (m-2-3)
-          edge (m-1-2)
-  (m-3-2) edge (m-1-2)
-          edge (m-3-4)
-  (m-4-1) edge (m-2-1)
-          edge (m-3-2)
-          edge (m-4-3)
-  (m-3-4) edge (m-1-4)
-  (m-2-3) edge (m-1-4)
-  (m-4-3) edge (m-3-4)
-          edge (m-2-3);
-  \end{tikzpicture}
-  \caption{Poszczególne systemy klasyfikacji H. Barendregta; kierunek krawędzi \(\to\)  oznacza relację \(\subseteq\).}\label{fig:lambda-cube}
-\end{figure}
-
+\subimport{includes/chapters/}{l2_summary.tex}
 
