@@ -1,12 +1,9 @@
 \subsection{Modele}
-\subsubsection{Model kombinatoryczny}
-\subsubsection{Model Scotta \(D_\infty\)}
 Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny, czyli istnieje nieskończony zstępujący ciąg zbiorów \[A\times f(A)\ \supset\ A\times f(A)\times f(A)\ \supset\ A\times f(A)\times f(A)\times f(A)\ \supset\ \dots\] Istnienie takiego ciągu narusza aksjomat ufundowania na gruncie aksjomatyki ZFC, a to wyklucza możliwość określenia takich modeli.
 
-\subsubsection{Wprowadzenie}
-
+\subsubsection{Model kombinatoryczny}
 \begin{definicja}(Struktura aplikatywna)
-Parę \((D,\, \bullet)\), gdzie \(D\) jest zbiorem zawierającym przynajmniej dwa elementy i \(\bullet\) oznacza działanie binarne na \(D\), nazywamy \emph{strukturą aplikatywną}.
+Parę \((D,\, \bullet)\), gdzie \(D\) jest zbiorem zawierającym przynajmniej dwa elementy i symbol \(\bullet\) oznacza działanie binarne na \(D\), nazywamy \emph{strukturą aplikatywną}.
 \end{definicja}
 
 \begin{definicja}
@@ -34,7 +31,7 @@ Niech \(M\) będzie kombinacją zmiennych taką, że \(\mathrm{FV}(M)=\{x_1,\,x_
 \begin{align*}
 f_M (d_1,\,d_2,\,\dots,\,d_n) = \begin{cases}
 d_k,\ &\text{jeśli}\ M\equiv x_k, \\
-f_Q (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n),\ & \text{jeśli}\ M\equiv (QR).
+f_Q (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n),\ & \text{jeśli}\ M\equiv (PQ).
 \end{cases}
 \end{align*}
 
@@ -53,7 +50,8 @@ k\bullet a\bullet b = a\quad \text{oraz}\quad s\bullet a \bullet b \bullet c = a
 \end{align*}
 \end{twierdzenie}
 
-
+\subsubsection{Model Scotta \(D_\infty\)}
+\paragraph{Elementy teorii porządku}
 Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jesli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Kresem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Supremum} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq\). 
 
 \begin{definicja}(Zupełny porządek częściowy)
@@ -114,7 +112,7 @@ Niech \(m,\,n\geq 0\). Wówczas
 \end{enumerate}
 \end{lemat}
 
-\subsubsection{Konstrukcja \(D_\infty\)}
+\paragraph{Konstrukcja \(D_\infty\)}
 
 \begin{definicja}
 Niech \(D_\infty\) oznacza zbiór wszystkich nieskończonych ciągów postaci
