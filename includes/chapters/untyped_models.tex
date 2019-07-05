@@ -1,72 +1,85 @@
-\subsection{Modele}
+\subsection{Model Scotta \(D_\infty\)}
+W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność i topologiczny charakter modelu szczegółowe wyprowadzenia zostaną pominięte.
+
 Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny, czyli istnieje nieskończony zstępujący ciąg zbiorów \[A\times f(A)\ \supset\ A\times f(A)\times f(A)\ \supset\ A\times f(A)\times f(A)\times f(A)\ \supset\ \dots\] Istnienie takiego ciągu narusza aksjomat ufundowania na gruncie aksjomatyki ZFC, a to wyklucza możliwość określenia takich modeli.
 
-\subsubsection{Model kombinatoryczny}
+% \subsubsection{Wprowadzenie}
 \begin{definicja}(Struktura aplikatywna)
 Parę \((D,\, \bullet)\), gdzie \(D\) jest zbiorem zawierającym przynajmniej dwa elementy i w którym symbol \(\bullet\) oznacza działanie binarne na \(D\), nazywamy \emph{strukturą aplikatywną}.
 \end{definicja}
 
-\begin{definicja}
-Niech \((D,\,\bullet)\) będzie strukturą aplikatywną i niech \(a,\,b\in D\). Określamy relację: 
-\begin{align*}
-a \sim b \quad \Leftrightarrow\quad \forall d \in D \left(a \bullet b = b \bullet d\right).
-\end{align*}
-Powiemy, że \(a\) jest \emph{ekstensjonalnie równoważne} \(b\), jeśli \(a\sim b\).
-\end{definicja}
+% \begin{definicja}(Model syntaktyczny)%3.3
+%   Trójkę \((D,\,\bullet,\,\llbracket\,\rrbracket)\), gdzie \((D,\,\bullet)\) jest strukturą aplikatywną, \(\llbracket\,\rrbracket\) jest funkcją przyporządkowującą elementy 
+%   \(\llbracket M\rrbracket \in D\) termowi \(M\) przy wartościowaniu \(\rho\), nazywamy \emph{\(\lambda\)-modelem}, jeśli spełnia poniższe własności:
+%   \begin{enumerate}
+%     \item \(\forall x \in V\ \left(\llbracket x \rrbracket_\rho = \rho(x)\right)\).
+%     \item \(\forall M,\,N \in \mathbf{\Lambda}\ (\llbracket MN \rrbracket_\rho = \llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho)\).
+%     \item \(\forall x \in V\,\forall M\in \mathbf{\Lambda}\,\forall d\in D\ (\, \llbracket \lambda x.\,M\rrbracket_\rho \bullet d = \llbracket M \rrbracket_{\rho[x/d]})\).
+%     \item Dla dowolnych wartościowań \(\rho\),  \(\sigma\) i dowolnego termu \(M\in\nobreak\mathbf{\Lambda}\), jeśli \[\forall x\in\nobreak\mathrm{FV}(M)\ (\rho(x) =\nobreak \sigma(x)),\] to \(\llbracket M\rrbracket_\rho =\nobreak\llbracket M \rrbracket_\sigma\).
+%     \item \(\forall M\in\mathbf{\Lambda}\,\forall x, y\in V\ (y\not\in\mathrm{FV}(M)\implies \llbracket[\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\sigma) \).
+%     \item \(\forall M,\,N\in\mathbf{\Lambda}\,\left(\forall d\in D\,(\llbracket M\rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]} ) \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\).
+%   \end{enumerate}
+% \end{definicja}
 
+% \begin{definicja}%3.4
+% Niech \((D,\,\bullet)\) będzie strukturą aplikatywną i niech \(a,\,b\in D\). Określamy relację: 
+% \begin{align*}
+% a \sim b \quad \Leftrightarrow\quad \forall d \in D \left(a \bullet b = b \bullet d\right).
+% \end{align*}
+% Powiemy, że \(a\) jest \emph{ekstensjonalnie równoważne} \(b\), jeśli \(a\sim b\).
+% \end{definicja}
 
-\begin{definicja}
-\begin{enumerate}
-\item
-Powiemy, że term \(M\) jest \emph{kombinacją zmiennych}, jeśli \(M\equiv x\) dla pewnej zmiennej \(x\) albo \(M\equiv (PQ)\) dla pewnych kombinacji zmiennych \(P\) i \(Q\). 
-\item 
-Niech \(M\) będzie kombinacją zmiennych taką, że \(\mathrm{FV}(M)=\{x_1,\,x_2,\,\dots,\,x_n\}\). Względem \(M\) określamy funkcję \(f_M: D^n\to D\) następującym wzorem:
+% \begin{definicja}% kombinacja zmiennycha, 3.7
+% \begin{enumerate}
+% \item
+% Powiemy, że term \(M\) jest \emph{kombinacją zmiennych}, jeśli \(M\equiv x\) dla pewnej zmiennej \(x\) albo \(M\equiv (PQ)\) dla pewnych kombinacji zmiennych \(P\) i \(Q\). 
+% \item 
+% Niech \(M\) będzie kombinacją zmiennych taką, że \(\mathrm{FV}(M)=\{x_1,\,x_2,\,\dots,\,x_n\}\). Względem \(M\) określamy funkcję \(f_M: D^n\to D\) następującym wzorem:
 
+% % \begin{align*}
+% % f_M (d_1,\,d_2,\,\dots,\,d_n) = \begin{cases}
+% % d_k,\ \text{jeśli}\ M\equiv x_k \text{dla pewnego}\ 1\leq k \leq n,\\
+% % f_Q (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n)\  \text{jeśli}\ M\equiv (QR)\ \text{dla pewnych kombinacji zmiennych QR}.
+% % \end{cases}
+% % \end{align*}
 % \begin{align*}
 % f_M (d_1,\,d_2,\,\dots,\,d_n) = \begin{cases}
-% d_k,\ \text{jeśli}\ M\equiv x_k \text{dla pewnego}\ 1\leq k \leq n,\\
-% f_Q (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n)\  \text{jeśli}\ M\equiv (QR)\ \text{dla pewnych kombinacji zmiennych QR}.
+% d_k,\ &\text{jeśli}\ M\equiv x_k, \\
+% f_Q (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n),\ & \text{jeśli}\ M\equiv (PQ).
 % \end{cases}
 % \end{align*}
-\begin{align*}
-f_M (d_1,\,d_2,\,\dots,\,d_n) = \begin{cases}
-d_k,\ &\text{jeśli}\ M\equiv x_k, \\
-f_Q (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n),\ & \text{jeśli}\ M\equiv (PQ).
-\end{cases}
-\end{align*}
 
-\item
-Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorycznie zupelna}, jeśli dla każdej kombinacji zmiennych \(M\) istnieje \(a_M\in D\) taki, że dla wszystkich \(d_1\),\(d_2\),\(\dots\),\(d_n\in D\)
-\[
-  a_M\bullet d_1 \bullet d_2 \bullet \dots \bullet d_n = f_M(d_1,\, d_2,\,\dots,\,d_n).
-\]
-\end{enumerate}
-\end{definicja}
+% \item
+% Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorycznie zupelna}, jeśli dla każdej kombinacji zmiennych \(M\) istnieje \(a_M\in D\) taki, że dla wszystkich \(d_1\),\(d_2\),\(\dots\),\(d_n\in D\)
+% \[
+%   a_M\bullet d_1 \bullet d_2 \bullet \dots \bullet d_n = f_M(d_1,\, d_2,\,\dots,\,d_n).
+% \]
+% \end{enumerate}
+% \end{definicja}
 
-\begin{twierdzenie}
-Struktura aplikatywna \((D,\,\bullet)\) jest kombinatorycznie zupełna wtedy i tylko wtedy, gdy istnieją takie \(k,\,s\in D\), że dla wszystkich \(a,\,b,\,c\in D\) mamy: 
-\begin{align*}
-k\bullet a\bullet b = a\quad \text{oraz}\quad s\bullet a \bullet b \bullet c = a\bullet c \bullet (b \bullet c).
-\end{align*}
-\end{twierdzenie}
+% \begin{twierdzenie}%3.8
+% Struktura aplikatywna \((D,\,\bullet)\) jest kombinatorycznie zupełna wtedy i tylko wtedy, gdy istnieją takie \(k,\,s\in D\), że dla wszystkich \(a,\,b,\,c\in D\) mamy: 
+% \begin{align*}
+% k\bullet a\bullet b = a\quad \text{oraz}\quad s\bullet a \bullet b \bullet c = a\bullet c \bullet (b \bullet c).
+% \end{align*}
+% \end{twierdzenie}
 
-\subsubsection{Model Scotta \(D_\infty\)}
-\paragraph{Elementy teorii porządku}
-Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jesli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Kresem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Supremum} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq\). 
+\paragraph{Elementy teorii porządku} 
+Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jesli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Kresem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Supremum} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
 
-\begin{definicja}(Zupełny porządek częściowy)
+\begin{definicja}(Zupełny porządek częściowy)%5.1
 Porządek częściowy \((D,\sqsubset)\) taki, że
 \begin{enumerate}
   \item \(\perp\in D\) oraz
   \item każdy skierowany poddzbiór \(X\subset D\) ma supremum \((\bigsqcup \in X)\)
 \end{enumerate}
-nazywamy \emph{zupełnym porzadkiem częściowym} (w skrócie: cpo).
+nazywamy \emph{zupełnym porządkiem częściowym} (w skrócie: cpo).
 \end{definicja}
 
 Ustalmy, że jeśli \(D'\), \(D''\), \(\dots\)  są cpo, to odpowiadające im porządki częściowe będziemy notowali symbolami \(\sqsubseteq'\), \(\sqsubseteq''\), \(\dots\)
 
-\begin{definicja}(Monotonoczność, ciągłość)\label{def:m_cont}
-Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\) będzie funkcją.
+\begin{definicja}(Monotonoczność, ciągłość)\label{def:m_cont}%5.3
+Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).
 \begin{enumerate}
 \item Powiemy, że \(\varphi\) jest \emph{monotoniczna}, jeśli \(\varphi(a) \sqsubseteq' \varphi(b)\) dla \(a\sqsubseteq b\).
 \item Powiemy, że \(\varphi\) jest \emph{ciągła}, jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X).\)\label{def:m_cont_2}
@@ -74,14 +87,35 @@ Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\) będzie funkcją.
 Symbolem \([D\to D']\) oznaczamy zbiór wszystkich funkcji ciągłych ze zbioru \(D\)~do~\(D'\).
 \end{definicja}
 
-\begin{twierdzenie}
-Jeśli \(D\) i \(D'\) są cpo, to \(([D\to D'], \preceq)\) jest cpo, gdzie
-\[
-\varphi \preceq \psi\quad \Leftrightarrow\quad \forall d\in D \left(\varphi(d) \sqsubseteq' \psi(d)\right).
-\]
+\begin{twierdzenie}%5.4
+Jeśli \(D\) i \(D'\) są cpo, to
+  \begin{enumerate}
+    % \item \(([D\to D'], \preceq)\) jest cpo.
+    % \item \(([D\to D'], \preceq)\) ma element najmniejszy.
+    % \item Każdy skierowany podzbiór \(\Phi \in [D\to D']\) ma supremum.
+     \item \([D\to D']\) jest cpo.
+     \item \([D\to D']\) ma element najmniejszy.
+     \item Każdy skierowany podzbiór \(\Phi \in [D\to D']\) ma supremum.
+  \end{enumerate} 
 \end{twierdzenie}
+\begin{dowod}
+  \begin{enumerate}
+    \item 
+      Określmy na \([D\to D']\) relację  \(\preceq\):
+\[
+\varphi \preceq \psi\quad \Leftrightarrow\quad \forall d\in D \left(\varphi(d) \sqsubseteq' \psi(d)\right),
+\]
+\item Ponieważ \(D'\) jest cpo, wystarczy, że określimy \(\perp(d)=\perp'\) dla \(d\in D\).
+\item Niech \(\Phi\) będzie skierowanym podzbiorem \([D\to D']\). Wówczas dla wszystkich 
+  \(d\in D\) zbiór \(\{\varphi(d)\ |\ \varphi\in\Phi\}\) jest skierowanym podzbiorem \(D'\). Określmy funkcję \(\psi: D\to D'\) następującym wzorem:
+      \begin{align*}
+        \psi(d) = \bigsqcup\{\varphi(d)\ |\ \varphi \in \Phi\}
+      \end{align*}
+      Wystarczy pokazać, że \(\psi\) jest ciągla i jest supremum \(\Phi\).
+  \end{enumerate}\qed
+\end{dowod}
 
-\begin{definicja}(Projekcja)
+\begin{definicja}(Projekcja)%5.5
 Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy parę \((\varphi, \psi)\) funkcji \(\varphi \in [D\to D']\), \(\psi \in [D'\to D]\) takich, że
 \begin{align}
 \psi\circ \varphi = I_D\ \text{oraz}\ \varphi\circ \psi \preceq I_{D'} \tag{\textasteriskcentered},
@@ -89,7 +123,7 @@ Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy pa
 gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorze \(D\) i \(D\), odpowiednio.
 \end{definicja}
 
-\begin{definicja}
+\begin{definicja}%5.6
 Dla \(m,\,n\geq 0\) określamy \(\varphi_{mn}:D_m \to D_n\) w następujący sposób:
 \begin{align}
 \varphi_{mn} =
@@ -101,7 +135,7 @@ I_{D_n}, & \text{jeśli}\ m=n,\\
 \end{align}
 \end{definicja}
 
-\begin{lemat}
+\begin{lemat}%5.7
 Niech \(m,\,n\geq 0\). Wówczas
 \begin{enumerate}
 \item \(\varphi_{mn}\in [D_m\to D_n]\),
@@ -114,10 +148,10 @@ Niech \(m,\,n\geq 0\). Wówczas
 
 \paragraph{Konstrukcja \(D_\infty\)}
 
-\begin{definicja}
+\begin{definicja}%5.8
 Niech \(D_\infty\) oznacza zbiór wszystkich nieskończonych ciągów postaci
 \[
-d=(d_0,\,d1,\,\dots)
+d=(d_0,\,d_1,\,\dots)
 \]
 takich, że dla wszystkich \(n\geq 0\) mamy, że \(d_n\in D_n\) oraz \(\psi_n (d_{n+1}) = d_n\). Przez \(d_n\) oznaczać będziemy \(n\)-ty element ciągu \(d\). Jeśli \(X\subset D_\infty\), to okreslamy \(X_n=\{ d_n\ |\ d\in X\).
 
@@ -127,7 +161,7 @@ Na \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący sposób:
 \]
 \end{definicja}
 
-\begin{twierdzenie}
+\begin{twierdzenie}%5.10
 \begin{enumerate}
 \item \(D_\infty\) jest cpo.
 \item \(D_\infty\) zawiera element najmniejszy \(\perp=(\perp_0,\,\perp_1,\,\dots)\), gdzie przez \(\perp_n\) oznaczamy najmniejszy element \(D_n\).
@@ -138,7 +172,7 @@ Na \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący sposób:
 \end{enumerate}
 \end{twierdzenie}
 
-\begin{definicja}
+\begin{definicja}%5.11
 Dla \(n\geq 0\) okreslamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\varphi_{\infty n}: D_\infty \to D_n\), gdzie 
 \begin{align*}
 \varphi_{n\infty}(d) &= (\varphi_{n0}(d),\,\varphi_{n1}(d),\,\dots)\ \text{dla}\ d\in D_n,\\
@@ -146,7 +180,7 @@ Dla \(n\geq 0\) okreslamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\
 \end{align*}
 \end{definicja}
 
-\begin{twierdzenie}
+\begin{twierdzenie}%5.12
 Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
 \begin{enumerate}
 \item \((\varphi_{n\infty},\,\varphi{\infty n})\) jest projekcją z \(D_\infty\) do \(D_n\),
@@ -157,10 +191,15 @@ Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
 \end{enumerate}
 \end{twierdzenie}
 
-\begin{definicja}
-Określamy
+\begin{definicja}%5.13
+  Dla \(a,\,b\in D_\infty\) określamy:
 \begin{align*}
 a \bullet b = \bigsqcup\left\{\varphi_{n\infty}(a_{n+1}(b_n))\ |\ n\geq 0\right\}\tag{\textasteriskcentered}
 \end{align*}
 \end{definicja}
 
+% \begin{definicja}%5.14
+%   \begin{enumerate}
+%     \item 
+%   \end{enumerate}
+% \end{definicja}
