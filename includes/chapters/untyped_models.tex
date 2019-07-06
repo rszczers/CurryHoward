@@ -1,5 +1,5 @@
 \subsection{Model Scotta \(D_\infty\)}
-W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność i topologiczny charakter modelu szczegółowe wyprowadzenia zostaną pominięte.
+W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
 
 Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny, czyli istnieje nieskończony zstępujący ciąg zbiorów \[A\times f(A)\ \supset\ A\times f(A)\times f(A)\ \supset\ A\times f(A)\times f(A)\times f(A)\ \supset\ \dots\] Istnienie takiego ciągu narusza aksjomat ufundowania na gruncie aksjomatyki ZFC, a to wyklucza możliwość określenia takich modeli.
 
@@ -138,13 +138,11 @@ Niech teraz \(\Phi\) będzie skierowanym podzbiorem \([D\to D']\).
 Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\ 
       \varphi\in\Phi\}\) jest  skierowanym podzbiorem  \(D'\). 
 
-      Istotnie, wybierzmy \(y_1,\,y_2\in\{\varphi(d)\ |\ \varphi\in\Phi\}\). Wówczas dla pewnych \(\varphi_1, \varphi_2\in\Phi\) mamy, że \(y_1=\varphi_1(d)\) oraz \(y_2=\varphi_2(d)\). Ponieważ \(\Phi\) jest skierowany, to istnieje \(\varphi_3\) taki, że \(\varphi_1\sqsubseteq \varphi_3\) i \(\varphi_2\sqsubseteq \varphi_3\). Z monotonicznośc funkcji ciągłych i faktu, że \(d\sqsubseteq d\) widzimy, że \(\{\varphi(d)\  |\ \varphi\in\Phi\}\) jest skierowanym podzbiorem \(D'\).
-
-      Określmy funkcję \(\Psi_\Phi: D\to D'\) następującym wzorem:
+      Istotnie, wybierzmy \(y_1,\,y_2\in\{\varphi(d)\ |\ \varphi\in\Phi\}\). Wówczas dla pewnych \(\varphi_1, \varphi_2\in\Phi\) mamy, że \(y_1=\varphi_1(d)\) oraz \(y_2=\varphi_2(d)\). Ponieważ \(\Phi\) jest skierowany, to istnieje \(\varphi_3\) taki, że \(\varphi_1\sqsubseteq \varphi_3\) i \(\varphi_2\sqsubseteq \varphi_3\). Z monotonicznośc funkcji ciągłych i faktu, że \(d\sqsubseteq d\) widzimy, że \(\{\varphi(d)\  |\ \varphi\in\Phi\}\) jest skierowanym podzbiorem \(D'\). Ponieważ zaś \(D'\) jest cpo, to dla każdego \(d\in D\) istnieje kres górny  \(\{\varphi(d)\  |\ \varphi\in\Phi\}\). Określmy więc funkcję \(\Psi_\Phi: D\to D'\) następującym wzorem:
       \begin{align*}
         \Psi_\Phi(d) = \bigsqcup \Phi d,
       \end{align*}
-      gdzie \(\Phi d=\{\varphi(d)\ |\ \varphi \in \Phi\}\). Wystarczy pokazać, że \(\Psi_\Phi\) jest ciągla i jest kresem górnym zbioru \(\Phi\).
+      gdzie \(\Phi d=\{\varphi(d)\ |\ \varphi \in \Phi\}\). Wystarczy teraz pokazać, że \(\Psi_\Phi\) jest ciągla i jest kresem górnym zbioru \(\Phi\).
       \begin{enumerate}
         \item Pokażemy najpierw, że \(\Psi_\Phi\) jest ciągła. Niech \(X\) będzie dowolnym skierowanym podzbiorem \(D\). Wówczas:
           \begin{align*}
@@ -159,11 +157,19 @@ Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\
                         &= \bigsqcup \left\{\bigsqcup \Phi d\ |\ d\in X\right\}
                         = \bigsqcup \Psi_\Phi(X).
           \end{align*}
-        \item 
-      \end{enumerate}
-      \qed
-\end{dowod}
+        \item \(\Phi\) jest ograniczony w \([D\to D']\). Istotnie, przypuśćmy, że dla dowolnego \(f\in[D\to D']\) istnieje \(g\in\Phi\) taki, że \(f\preceq g\). Wówczas w szczególnosci \(\Psi_\Phi \preceq g\) i stąd również
+          \[
+            \bigsqcup \Phi d \subseteq' g(d)\quad \text{dla wszystkich}\ d\in D.
+          \]
+          Ponieważ \(g\in\Phi\), to \(g(d)\subseteq \bigsqcup\{g(d)\ |\ g\in\Phi\}=\bigsqcup\Phi d\). Zatem \(\Psi_\Phi\) jest ograniczeniem górnym \(\Phi\).
 
+          Przypuśćmy teraz, że \(\Phi\) nie ma kresu górnego. Wówczas dla dowolnego ograniczenia górnego \(f\) zbioru \(\Phi\) istnieje \(g\) takie, że \(g\preceq f\) i które jest również ograniczeniem górnym. Wówczas w szczególności mamy, że \(g\preceq \Psi_\Phi\), czyli dla dowolnego \(d\in D\)
+          \[
+            g(d) \subseteq' \bigsqcup \Phi  d\in D'.
+          \]
+          Ale \(\bigsqcup \Phi d\) jest kresem górnym \(\Phi d\) (wykazaliśmy bowiem, że \(\Phi d\) jest skierowany, zaś \(D'\) jest cpo), a zatem \(g(d)\) nie może być ograniczeniem \(\Phi d\). Istnieje stąd \(z\in \Phi d\) taki, że \(g(d)\subseteq' z\). Wówczas istnieje \(\tilde\varphi\in\Phi\) taki, że \(z=\tilde\varphi(d)\) oraz \(g(d)\subseteq' \tilde\varphi(d)\). Z dowolności \(d\) mamy, że \(g\preceq \tilde\varphi\). Zatem \(g\) nie jest ograniczeniem górnym \(\Phi\), co jest sprzeczne z założeniem. Stąd \(\Psi_\Phi\) musi być kresem górnym \(\Phi\).\qed
+      \end{enumerate}
+\end{dowod}
 \begin{definicja}[Projekcja]%5.5
 Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy parę \((\varphi, \psi)\) funkcji \(\varphi \in [D\to D']\), \(\psi \in [D'\to D]\) takich, że
 \begin{align}
