@@ -195,6 +195,11 @@ Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy pa
 gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorze \(D\) i \(D'\), odpowiednio.
 \end{definicja}
 
+\begin{figure}[h]
+  \centering
+\includegraphics[width=0.32\linewidth]{../embeding_i}
+  \caption{Projekcja \((\varphi_n,\psi_n)\) z \(D_{n+1}\) do \(D_n\)}.\label{fig:projection}
+\end{figure}
 
   Okazuje się, że ciąg cpo \(\{D_n\}_{n=0}^\infty\) skonstruowany w myśl Wniosku \ref{thm:scott_seq} można określić definiując dla każdego \(n\in\mathbb{N}\) projekcję \((\varphi_n,\psi_n)\) z \(D_{n+1}\) do \(D_n\). Istotnie, spróbujmy skonstruować taką rodzinę projekcji. Wybierzmy \(d\in D_0\) i niech \(\kappa_d\) oznacza funkcję stałą 
   \[\kappa_d(c)=d\quad \text{dla wszystkich}\ c\in D_0.\]
@@ -212,7 +217,7 @@ Dla \(n>0\) okreslamy teraz \(\varphi_n : D_n \to D_{n+1}\) i \(\psi_{n+1}: D_{n
 \end{align*}
 Wówczas \(\varphi_n\in[D_n\to D_{n+1}]\), \(\psi_n\in[D_{n+1}\to D_n]\) i \(\psi_n\circ\varphi_n=I_{D_n}\) oraz \(\varphi_n\circ\psi_n\preceq I_{D_{n+1}}.\) \cite[Lemat 16.28]{Hindley:2008:LCI:1388400}. A zatem \((\varphi_n,\psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\).
 
-Ponieważ projekcje \((\varphi_n, \psi_n)\) przenoszą nas tylko pomiędzy następującymi po sobie cpo ciągu \(\{D_n\}_{n=0}^\infty\), określamy następujące złożenie pozwalające na projekcje między dowolnymi dwoma cpo z powyższego ciągu.
+Ponieważ projekcje \((\varphi_n, \psi_n)\) przenoszą nas tylko pomiędzy następującymi po sobie cpo w ciągu \(\{D_n\}_{n=0}^\infty\), (Rysunek \ref{fig:projection}) określamy następujące złożenie pozwalające na projekcje między dowolnymi dwoma wyrazami ciągu.
 
 \begin{definicja}%5.6
 Dla \(m,\,n\geq 0\) określamy \(\varphi_{mn}:D_m \to D_n\) w następujący sposób:
@@ -240,10 +245,11 @@ Niech \(m,\,n\geq 0\). Wówczas
 \end{enumerate}
 \end{fakt}
 
-%\paragraph{Konstrukcja \(D_\infty\)}
-\subsubsection{Konstrukcja \(D_\infty\)}
+\paragraph{Konstrukcja \(D_\infty\)}
+%\subsubsection{Konstrukcja \(D_\infty\)}
 
 Mając zadane dwa cpo \(D\), \(D'\) możemy zapytać czy istnieje włożenie jednego z nich w drugi. Zauważmy, że jeśli \(\varphi,\,\psi\) jest projekcją z \(D'\) do \(D\), to \(\phi\) jest włożeniem \(D\) w \(D'\) (w sensie topologii Scotta). Ciąg \(\{D_n\}_{n=0}^\infty\) intuicyjnie przypomina więc wstępujący ciąg zbiorów.
+
 
 \begin{definicja}%5.8
 Niech \(D_\infty\) oznacza zbiór wszystkich nieskończonych ciągów postaci
@@ -292,12 +298,14 @@ Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
 \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
   \setlength\itemsep{0em}
   \item \((\varphi_{n\infty},\,\varphi_{\infty n})\) jest projekcją z \(D_\infty\) do \(D_n\),\label{fact:projection_1}
-\item \(\varphi_{mn}(a_m)\sqsubseteq a_n\),
-\item \(\varphi_{m\infty}(a_m)\sqsubseteq \varphi_{n\infty}(a_n)\),
-\item \(a=\bigsqcup_{n\geq 0}\varphi_{n\infty}(a_n),\),
-\item \(\varphi_{n\infty}(a_{n+1}(b_n))\sqsubseteq\varphi_{(n+1)\infty}(a_{n+2}(b_{n+1}))\).
+\item \(\varphi_{mn}(a_m)\sqsubseteq a_n\),\label{fact:projection_2}
+\item \(\varphi_{m\infty}(a_m)\sqsubseteq \varphi_{n\infty}(a_n)\),\label{fact:projection_3}
+\item \(a=\bigsqcup_{n\geq 0}\varphi_{n\infty}(a_n),\),\label{fact:projection_4}
+\item \(\varphi_{n\infty}(a_{n+1}(b_n))\sqsubseteq\varphi_{(n+1)\infty}(a_{n+2}(b_{n+1}))\).\label{fact:projection_5}
 \end{enumerate}
 \end{fakt}
+
+%Punkty \ref{fact:projection_3} i \ref{fact:projection_4}
 
 \begin{definicja}%5.13
   Dla \(a,\,b\in D_\infty\) określamy:
