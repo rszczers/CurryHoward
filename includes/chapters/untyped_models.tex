@@ -1,9 +1,22 @@
 \subsection{Model Scotta \(D_\infty\)}
+Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny, czyli istnieje nieskończony zstępujący ciąg zbiorów \[A\times f(A)\ \supset\ A\times f(A)\times f(A)\ \supset\ A\times f(A)\times f(A)\times f(A)\ \supset\ \dots\] Istnienie takiego ciągu narusza aksjomat ufundowania na gruncie aksjomatyki ZF, a to wyklucza możliwość określenia takich modeli.
+
+Rozwiązanie Scotta polega na tym, aby zamiast próbować interpretować termy jako funkcje, przypisać im nieskończone ciągi funkcji postaci 
+\[
+  \varphi = (\varphi_0,\,\varphi_1,\,\varphi_2,\,\dots),
+\]
+gdzie \(\varphi \in D_\infty\) i \(\varphi_n\in D_n\). Określając na takiej strukturze aplikację następująco
+\[
+  \varphi\bullet\psi = (\varphi_1(\psi_0),\,\varphi_2(\psi_1),\,\varphi_3(\psi_2),\,\dots),
+\]
+widzimy, że samoaplikacja jest poprawnie określona: 
+\[
+  \varphi\bullet\varphi = (\varphi_1(\varphi_0),\,\varphi_2(\varphi_1),\,\varphi_3(\varphi_2),\,\dots).
+\]
+
 W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
 
-Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny, czyli istnieje nieskończony zstępujący ciąg zbiorów \[A\times f(A)\ \supset\ A\times f(A)\times f(A)\ \supset\ A\times f(A)\times f(A)\times f(A)\ \supset\ \dots\] Istnienie takiego ciągu narusza aksjomat ufundowania na gruncie aksjomatyki ZFC, a to wyklucza możliwość określenia takich modeli.
-
-% \subsubsection{Wprowadzenie}
+%\subsubsection{Wprowadzenie}
 \begin{definicja}[Struktura aplikatywna]
 Parę \((D,\, \bullet)\), gdzie \(D\) jest zbiorem zawierającym przynajmniej dwa elementy i w którym symbol \(\bullet\) oznacza działanie binarne na \(D\), nazywamy \emph{strukturą aplikatywną}.
 \end{definicja}
@@ -91,7 +104,7 @@ Porządek częściowy \((D,\,\sqsubseteq)\) taki, że
 
 Ustalmy, że jeśli \(D'\), \(D''\), \(\dots\)  są cpo, to odpowiadające im porządki częściowe będziemy notowali symbolami \(\sqsubseteq'\), \(\sqsubseteq''\), \(\dots\)
 
-\begin{przyklad}
+\begin{przyklad}\label{ex:scott_d0}
   Ustalmy \(\perp\not\in \mathbb{N}\) i niech \(\mathbb{N}^{+}=\mathbb{N}\cup{\perp}\). Określmy na \(\mathbb{N}^+\) następującą relację:
   \begin{align*}
     a \sqsubseteq b \quad \Leftrightarrow\quad (a=\perp\ \land\ b\in \mathbb{N})\ \lor\ a = b
@@ -109,8 +122,9 @@ Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).l
 Symbolem \([D\to D']\) oznaczamy zbiór wszystkich funkcji ciągłych ze zbioru \(D\)~do~\(D'\).
 \end{definicja}
 
+\begin{uwaga*}
 Zauważmy, że jeśli \(\varphi\) jest ciągła, to jest również monotoniczna. Istotnie, jeśli \(a\sqsubseteq b\), to w szczególności \(\{a, b\}\subseteq D\) jest skierowanym podzbiorem \(D\). Wówczas \(\bigsqcup\{a, b\}=b\) i ponieważ \(\bigsqcup \varphi(\{a\,b\})=\varphi(\bigsqcup\{a,\,b\})\), to otrzymujemy, że \(\varphi(a)\sqsubseteq \varphi(\bigsqcup\{a,\,b\}) = \varphi(b)\).
-
+\end{uwaga*}
 
 \begin{twierdzenie}%5.4
 Jeśli \(D\) i \(D'\) są cpo, to \([D\to D']\) jest cpo.
@@ -157,7 +171,7 @@ Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\
                         &= \bigsqcup \left\{\bigsqcup \Phi d\ |\ d\in X\right\}
                         = \bigsqcup \Psi_\Phi(X).
           \end{align*}
-        \item \(\Phi\) jest ograniczony w \([D\to D']\). Istotnie, przypuśćmy, że dla dowolnego \(f\in[D\to D']\) istnieje \(g\in\Phi\) taki, że \(f\preceq g\). Wówczas w szczególnosci \(\Psi_\Phi \preceq g\) i stąd również
+        \item \(\Phi\) jest ograniczony w \([D\to D']\). Istotnie, przypuśćmy, że dla dowolnego \(f\in[D\to D']\) istnieje \(g\in\Phi\) taki, że \(f\preceq g\). Wówczas w szczególności \(\Psi_\Phi \preceq g\) i stąd również
           \[
             \bigsqcup \Phi d \subseteq' g(d)\quad \text{dla wszystkich}\ d\in D.
           \]
@@ -170,13 +184,35 @@ Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\
           Ale \(\bigsqcup \Phi d\) jest kresem górnym \(\Phi d\) (wykazaliśmy bowiem, że \(\Phi d\) jest skierowany, zaś \(D'\) jest cpo), a zatem \(g(d)\) nie może być ograniczeniem \(\Phi d\). Istnieje stąd \(z\in \Phi d\) taki, że \(g(d)\subseteq' z\). Wówczas istnieje \(\tilde\varphi\in\Phi\) taki, że \(z=\tilde\varphi(d)\) oraz \(g(d)\subseteq' \tilde\varphi(d)\). Z dowolności \(d\) mamy, że \(g\preceq \tilde\varphi\). Zatem \(g\) nie jest ograniczeniem górnym \(\Phi\), co jest sprzeczne z założeniem. Stąd \(\Psi_\Phi\) musi być kresem górnym \(\Phi\).\qed
       \end{enumerate}
 \end{dowod}
+  \begin{wniosek}\label{thm:scott_seq}
+    Dla danego cpo \(D_0\) możemy skonstruować ciąg cpo \(\{D_n\}_{n=0}^{\infty}\) okreslając \(D_{n+1}=[D_n\to D_n]\) dla \(n\geq 0\). Tak określony ciąg dla \(D_0=\mathbb{N}^{+}\) (patrz Przykład \ref{ex:scott_d0}) nazywamy modelem Scotta.
+  \end{wniosek}
 \begin{definicja}[Projekcja]%5.5
 Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy parę \((\varphi, \psi)\) funkcji \(\varphi \in [D\to D']\), \(\psi \in [D'\to D]\) takich, że
 \begin{align}
 \psi\circ \varphi = I_D\quad \text{oraz}\quad \varphi\circ \psi \preceq I_{D'} \tag{\textasteriskcentered},
 \end{align}
-gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorze \(D\) i \(D\), odpowiednio.
+gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorze \(D\) i \(D'\), odpowiednio.
 \end{definicja}
+
+
+  Okazuje się, że ciąg cpo \(\{D_n\}_{n=0}^\infty\) skonstruowany w myśl Wniosku \ref{thm:scott_seq} można określić definiując dla każdego \(n\in\mathbb{N}\) projekcję \((\varphi_n,\psi_n)\) z \(D_{n+1}\) do \(D_n\). Istotnie, spróbujmy skonstruować taką rodzinę projekcji. Wybierzmy \(d\in D_0\) i niech \(\kappa_d\) oznacza funkcję stałą 
+  \[\kappa_d(c)=d\quad \text{dla wszystkich}\ c\in D_0.\]
+  Określmy \(D_1=[D_0\to D_0]\). Ponieważ \(\kappa_d\) jest funkcją ciągłą, to \(\kappa_d\in D_1\). Niech teraz
+  \begin{align*}
+    \varphi_0 (d) &= \kappa_d  \quad \text{dla wszystkich}\ d\in D_0,\\
+    \psi_0(c) &= c(\perp_0) \quad \text{dla wszystkich}\ c\in D_1,
+  \end{align*}
+gdzie \(\perp_0\) jest elementem najmniejszym \(D_0\). Widzimy, że \(\varphi_0: D_0 \to D_1\) i \(\psi_0:\nobreak D_1\to\nobreak D_0\). Funkcje \(\varphi_0\) i \(\psi_0\) są ciągłe, zaś \(\psi_0\circ\varphi_0 = I_{D_0}\) (dowód pomijamy), zatem \((\varphi_0,\,\psi_0)\) jest projekcją z \(D_1\) do \(D_0\).
+
+Dla \(n>0\) okreslamy teraz \(\varphi_n : D_n \to D_{n+1}\) i \(\psi_{n+1}: D_{n+1}\to D_n\) następującym wzorem:
+\begin{align*}
+  \varphi_n(\sigma) &= \varphi_{n-1}\circ\sigma\circ\psi_{n-1}\quad \text{dla}\ \sigma\in D_n,\\ 
+  \psi_n(\tau) &= \psi_{n-1}\circ\varphi_{n-1}\quad &\text{dla}\ \tau \in D_{n+1}
+\end{align*}
+Wówczas \(\varphi_n\in[D_n\to D_{n+1}]\), \(\psi_n\in[D_{n+1}\to D_n]\) i \(\psi_n\circ\varphi_n=I_{D_n}\) oraz \(\varphi_n\circ\psi_n\preceq I_{D_{n+1}}.\) \cite[Lemat 16.28]{Hindley:2008:LCI:1388400}. A zatem \((\varphi_n,\psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\).
+
+Ponieważ projekcje \((\varphi_n, \psi_n)\) przenoszą nas tylko pomiędzy następującymi po sobie cpo ciągu \(\{D_n\}_{n=0}^\infty\), określamy następujące złożenie pozwalające na projekcje między dowolnymi dwoma cpo z powyższego ciągu.
 
 \begin{definicja}%5.6
 Dla \(m,\,n\geq 0\) określamy \(\varphi_{mn}:D_m \to D_n\) w następujący sposób:
@@ -190,6 +226,8 @@ I_{D_n}, & \text{jeśli}\ m=n,\\
 \end{align*}
 \end{definicja}
 
+Ponieważ dla każdego \(n\in \mathbb{N}\) para \((\varphi_n, \psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\), to zachodzi następujący fakt.
+
 \begin{fakt}[{\cite[Lemat 16.33]{Hindley:2008:LCI:1388400}}]%5.7
 Niech \(m,\,n\geq 0\). Wówczas
 \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
@@ -198,24 +236,31 @@ Niech \(m,\,n\geq 0\). Wówczas
 \item jeśli \(m\leq n\), to \(\varphi_{nm}\circ \varphi_{mn} = I_{D_m}\),
 \item jeśli \(m>n\), to \(\varphi_{nm}\circ \varphi_{mn} \preceq I_{D_m}\),
 \item jeśli \(m<n\), to \((\varphi_{mn},\varphi_{nm})\) jest projekcją z \(D_n\) do \(D_m\),
-\item jeśli \(m<k<n\) lub \(n<k<m\), to \(\varphi_{kn}\circ\varphi{mk}=\varphi_{mn}\).
+\item jeśli \(m<k<n\) lub \(n<k<m\), to \(\varphi_{kn}\circ\varphi_{mk}=\varphi_{mn}\).
 \end{enumerate}
 \end{fakt}
 
-\paragraph{Konstrukcja \(D_\infty\)}
+%\paragraph{Konstrukcja \(D_\infty\)}
+\subsubsection{Konstrukcja \(D_\infty\)}
+
+Mając zadane dwa cpo \(D\), \(D'\) możemy zapytać czy istnieje włożenie jednego z nich w drugi. Zauważmy, że jeśli \(\varphi,\,\psi\) jest projekcją z \(D'\) do \(D\), to \(\phi\) jest włożeniem \(D\) w \(D'\) (w sensie topologii Scotta). Ciąg \(\{D_n\}_{n=0}^\infty\) intuicyjnie przypomina więc wstępujący ciąg zbiorów.
 
 \begin{definicja}%5.8
 Niech \(D_\infty\) oznacza zbiór wszystkich nieskończonych ciągów postaci
 \[
 d=(d_0,\,d_1,\,\dots)
 \]
-takich, że dla wszystkich \(n\geq 0\) mamy, że \(d_n\in D_n\) oraz \(\psi_n (d_{n+1}) = d_n\). Przez \(d_n\) oznaczać będziemy \(n\)-ty element ciągu \(d\). Jeśli \(X\subset D_\infty\), to okreslamy \(X_n=\{ d_n\ |\ d\in X\).
-
-Na \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący sposób:
+takich, że dla wszystkich \(n\geq 0\) mamy, że \(d_n\in D_n\) oraz \(\psi_n (d_{n+1}) = d_n\). 
+Na zbiorze \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący sposób:
 \[
 (d_0,\,d_1,\,\dots) \sqsubseteq (d_0',\,d_1',\,\dots) \quad \Leftrightarrow\quad  \forall n\geq 0\  (d_n\sqsubseteq d_n') 
 \]
+
+  Przez \(d_n\) oznaczać będziemy \(n\)-ty element ciągu \(d\). Jeśli \(X\subset D_\infty\), to okreslamy \(X_n=\{ d_n\ |\ d\in X\}\).
+
 \end{definicja}
+
+Przy powyższym określeniu \(D_\infty\) okazuje się być cpo.
 
 \begin{fakt}[{\cite[Lemat 16.36]{Hindley:2008:LCI:1388400}}]%5.10
 \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
@@ -229,7 +274,10 @@ Na \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący sposób:
 \end{enumerate}
 \end{fakt}
 
-\begin{definicja}%5.11
+Dodatkowo, określamy projekcję z \(D_\infty\) do \(D_n\) dla każdego \(n\in\mathbb{N}\).
+Wymaga to oczywiście dowodu (patrz Fakt \ref{fact:projection}\ref{fact:projection_1}), który pomijamy.
+
+\begin{definicja}[\(D_\infty\)]%5.11
 Dla \(n\geq 0\) okreslamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\varphi_{\infty n}: D_\infty \to D_n\), gdzie 
 \begin{align*}
 \varphi_{n\infty}(d) &= (\varphi_{n0}(d),\,\varphi_{n1}(d),\,\dots)\ \text{dla}\ d\in D_n,\\
@@ -237,11 +285,13 @@ Dla \(n\geq 0\) okreslamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\
 \end{align*}
 \end{definicja}
 
-\begin{fakt}[{\cite[Lematy 16.38, 16.39, 16.42]{Hindley:2008:LCI:1388400}}]%5.12
+Określona para funkcji spełnia poniższy szereg własności.
+
+\begin{fakt}[{\cite[Lematy 16.38, 16.39, 16.42]{Hindley:2008:LCI:1388400}}]\label{fact:projection}%5.12
 Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
 \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
   \setlength\itemsep{0em}
-\item \((\varphi_{n\infty},\,\varphi_{\infty n})\) jest projekcją z \(D_\infty\) do \(D_n\),
+  \item \((\varphi_{n\infty},\,\varphi_{\infty n})\) jest projekcją z \(D_\infty\) do \(D_n\),\label{fact:projection_1}
 \item \(\varphi_{mn}(a_m)\sqsubseteq a_n\),
 \item \(\varphi_{m\infty}(a_m)\sqsubseteq \varphi_{n\infty}(a_n)\),
 \item \(a=\bigsqcup_{n\geq 0}\varphi_{n\infty}(a_n),\),
