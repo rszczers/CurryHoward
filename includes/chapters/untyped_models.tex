@@ -92,53 +92,76 @@ Porządek częściowy \((D,\,\sqsubseteq)\) taki, że
 Ustalmy, że jeśli \(D'\), \(D''\), \(\dots\)  są cpo, to odpowiadające im porządki częściowe będziemy notowali symbolami \(\sqsubseteq'\), \(\sqsubseteq''\), \(\dots\)
 
 \begin{przyklad}
-  Ustalmy \(\perp\not\in \mathbb{N}\) i niech \(\mathbb{N}^{+}=\mathbb{N}\cup{\perp}\). Określmy:
+  Ustalmy \(\perp\not\in \mathbb{N}\) i niech \(\mathbb{N}^{+}=\mathbb{N}\cup{\perp}\). Określmy na \(\mathbb{N}^+\) następującą relację:
   \begin{align*}
     a \sqsubseteq b \quad \Leftrightarrow\quad (a=\perp\ \land\ b\in \mathbb{N})\ \lor\ a = b
   \end{align*}
-Tak określona relacja jest oczywiście zwrotna, przechodnia i antysymetryczna. 
+  \(\sqsubseteq\) jest oczywiście zwrotna, przechodnia i antysymetryczna. Widzimy, że \(\mathbb{N}^{+}\) ma względem niej element najmniejszy (jest nim  \(\perp\)) i oczywiście każdy podzbiór \(\mathbb{N}^{+}\) jest skierowany. 
 \end{przyklad}
 
-\begin{definicja}[Monotonoczność, ciągłość]\label{def:m_cont}%5.3
-Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).
+\begin{definicja}[Monotoniczność, ciągłość]\label{def:m_cont}%5.3
+Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).l
 \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}] 
   \setlength\itemsep{0em}
 \item Powiemy, że \(\varphi\) jest \emph{monotoniczna}, jeśli \(\varphi(a) \sqsubseteq' \varphi(b)\) dla \(a\sqsubseteq b\).
-\item Powiemy, że \(\varphi\) jest \emph{ciągła (w sensie Scotta}\footnote{Funkcje te są ciągłe w topologicznym sensie względem topologii Scotta.}), jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X).\)\label{def:m_cont_2}
+\item Powiemy, że \(\varphi\) jest \emph{ciągła (w sensie Scotta}\footnote{Funkcje te są ciągłe w topologicznym sensie względem topologii Scotta.}), jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X)\) dla wszystkich skierowanych podzbioru \(X\subseteq D\).\label{def:m_cont_2}
 \end{enumerate}
 Symbolem \([D\to D']\) oznaczamy zbiór wszystkich funkcji ciągłych ze zbioru \(D\)~do~\(D'\).
 \end{definicja}
 
-Zauważmy, że jeśli \(\varphi\) jest ciągła, to jest również monotoniczna.
+Zauważmy, że jeśli \(\varphi\) jest ciągła, to jest również monotoniczna. Istotnie, jeśli \(a\sqsubseteq b\), to w szczególności \(\{a, b\}\subseteq D\) jest skierowanym podzbiorem \(D\). Wówczas \(\bigsqcup\{a, b\}=b\) i ponieważ \(\bigsqcup \varphi(\{a\,b\})=\varphi(\bigsqcup\{a,\,b\})\), to otrzymujemy, że \(\varphi(a)\sqsubseteq \varphi(\bigsqcup\{a,\,b\}) = \varphi(b)\).
+
 
 \begin{twierdzenie}%5.4
-Jeśli \(D\) i \(D'\) są cpo, to
-  \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
-  \setlength\itemsep{0em}
+Jeśli \(D\) i \(D'\) są cpo, to \([D\to D']\) jest cpo.
+  % \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+  % \setlength\itemsep{0em}
     % \item \(([D\to D'], \preceq)\) jest cpo.
     % \item \(([D\to D'], \preceq)\) ma element najmniejszy.
     % \item Każdy skierowany podzbiór \(\Phi \in [D\to D']\) ma supremum.
-     \item \([D\to D']\) jest cpo.
-     \item \([D\to D']\) ma element najmniejszy.
-     \item Każdy skierowany podzbiór \(\Phi \in [D\to D']\) ma kres górny.
-  \end{enumerate} 
+     % \item \([D\to D']\) jest cpo.
+     % \item \([D\to D']\) ma element najmniejszy.
+     % \item Każdy skierowany podzbiór \(\Phi \in [D\to D']\) ma kres górny.
+  % \end{enumerate} 
 \end{twierdzenie}
 \begin{dowod}
-  \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
-  \setlength\itemsep{0em}
-    \item 
+  % \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+  % \setlength\itemsep{0em}
+  %   \item 
       Określmy na \([D\to D']\) relację  \(\preceq\):
 \[
 \varphi \preceq \psi\quad \Leftrightarrow\quad \forall d\in D \left(\varphi(d) \sqsubseteq' \psi(d)\right),
 \]
-\item Ponieważ \(D'\) jest cpo, wystarczy, że określimy \(\perp(d)=\perp'\) dla \(d\in D\).
-\item Niech \(\Phi\) będzie skierowanym podzbiorem \([D\to D']\). Wówczas dla wszystkich 
-  \(d\in D\) zbiór \(\{\varphi(d)\ |\ \varphi\in\Phi\}\) jest skierowanym podzbiorem \(D'\). Określmy funkcję \(\psi: D\to D'\) następującym wzorem:
+Ponieważ \(D'\) jest cpo, to aby wykazać, że \([D\to D']\) ma element najmniejszy, wystarczy, że rozpatrzymy \(\perp(d)=\perp'\) dla \(d\in D\).
+
+Niech teraz \(\Phi\) będzie skierowanym podzbiorem \([D\to D']\). 
+Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\ 
+      \varphi\in\Phi\}\) jest  skierowanym podzbiorem  \(D'\). 
+
+      Istotnie, wybierzmy \(y_1,\,y_2\in\{\varphi(d)\ |\ \varphi\in\Phi\}\). Wówczas dla pewnych \(\varphi_1, \varphi_2\in\Phi\) mamy, że \(y_1=\varphi_1(d)\) oraz \(y_2=\varphi_2(d)\). Ponieważ \(\Phi\) jest skierowany, to istnieje \(\varphi_3\) taki, że \(\varphi_1\sqsubseteq \varphi_3\) i \(\varphi_2\sqsubseteq \varphi_3\). Z monotonicznośc funkcji ciągłych i faktu, że \(d\sqsubseteq d\) widzimy, że \(\{\varphi(d)\  |\ \varphi\in\Phi\}\) jest skierowanym podzbiorem \(D'\).
+
+      Określmy funkcję \(\Psi_\Phi: D\to D'\) następującym wzorem:
       \begin{align*}
-        \psi(d) = \bigsqcup\{\varphi(d)\ |\ \varphi \in \Phi\}
+        \Psi_\Phi(d) = \bigsqcup \Phi d,
       \end{align*}
-      Wystarczy pokazać, że \(\psi\) jest ciągla i jest kresem górnym \(\Phi\).
-  \end{enumerate}\qed
+      gdzie \(\Phi d=\{\varphi(d)\ |\ \varphi \in \Phi\}\). Wystarczy pokazać, że \(\Psi_\Phi\) jest ciągla i jest kresem górnym zbioru \(\Phi\).
+      \begin{enumerate}
+        \item Pokażemy najpierw, że \(\Psi_\Phi\) jest ciągła. Niech \(X\) będzie dowolnym skierowanym podzbiorem \(D\). Wówczas:
+          \begin{align*}
+  \Psi_\Phi(\bigsqcup X)&= \bigsqcup \Phi (\bigsqcup X)\\
+                        &= \bigsqcup \{\varphi(\bigsqcup X)\ |\ \varphi\in\Phi\}\\
+                        &= \bigsqcup \left\{\bigsqcup\left\{\varphi(d)\ |\ d\in X\right\}\ |\ \varphi\in \Phi\right\}\\
+                        &= \bigsqcup \left\{\bigcup\limits_{\varphi\in\Phi}\{\varphi(d)\ |\ d\in X\}\right\}\\
+                        &= \bigsqcup \left\{\bigcup\limits_{\varphi\in\Phi}\bigcup\limits_{d\in X}\{\varphi(d)\}\right\}
+                         =\bigsqcup \left\{\bigcup\limits_{d\in X}\bigcup\limits_{\varphi\in\Phi}\{\varphi(d)\}\right\}\\
+                        &= \bigsqcup \left\{\bigcup\limits_{d\in X}\{\varphi(d)\ |\ \varphi\in\Phi \}\right\}\\
+                        &= \bigsqcup \left\{\bigsqcup \{\varphi(d)\ |\ \varphi\in\Phi \}\ |\ d\in X\right\}\\
+                        &= \bigsqcup \left\{\bigsqcup \Phi d\ |\ d\in X\right\}
+                        = \bigsqcup \Psi_\Phi(X).
+          \end{align*}
+        \item 
+      \end{enumerate}
+      \qed
 \end{dowod}
 
 \begin{definicja}[Projekcja]%5.5
