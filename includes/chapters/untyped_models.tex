@@ -15,7 +15,7 @@ widzimy, że samoaplikacja jest poprawnie określona:
   \varphi\bullet\varphi = (\varphi_1(\varphi_0),\,\varphi_2(\varphi_1),\,\varphi_3(\varphi_2),\,\dots).
 \]
 
-W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) milcząco traktując jej topologiczny charakter. %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
+W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) milcząco traktując jego topologiczny charakter. %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
 
 %\subsubsection{Wprowadzenie}
 Celem wprowadzenia ustalmy szereg następujących pojęć.
@@ -122,12 +122,13 @@ Ustalmy, że jeśli \(D'\), \(D''\), \(\dots\)  są cpo, to odpowiadające im po
   \(\sqsubseteq\) jest oczywiście zwrotna, przechodnia i antysymetryczna. Widzimy, że \(\mathbb{N}^{+}\) ma względem niej element najmniejszy (jest nim  \(\perp\)) i oczywiście każdy podzbiór \(\mathbb{N}^{+}\) jest skierowany. 
 \end{przyklad}
 
-\begin{definicja}[Monotoniczność, ciągłość]\label{def:m_cont}%5.3
+\begin{definicja}[Monotoniczność, ciągłość, ścisłość]\label{def:m_cont}%5.3
 Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).l
 \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}] 
   \setlength\itemsep{0em}
 \item Powiemy, że \(\varphi\) jest \emph{monotoniczna}, jeśli \(\varphi(a) \sqsubseteq' \varphi(b)\) dla \(a\sqsubseteq b\).
 \item Powiemy, że \(\varphi\) jest \emph{ciągła (w sensie Scotta}\footnote{Funkcje te są ciągłe w topologicznym sensie względem topologii Scotta.}), jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X)\) dla wszystkich skierowanych podzbioru \(X\subseteq D\).\label{def:m_cont_2}
+\item Powiemy, że \(\varphi\) jest \emph{ścisła} (ang. \emph{strict}), jeśli \(\varphi(\perp)=\perp'\).
 \end{enumerate}
 Symbolem \([D\to D']\) oznaczamy zbiór wszystkich funkcji ciągłych ze zbioru \(D\)~do~\(D'\).
 \end{definicja}
@@ -315,7 +316,7 @@ Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
 \end{enumerate}
 \end{fakt}
 
-Zauważmy, że \(\varphi_{n\infty}\) jest izomorficznym włożeniem \(D_n\) w \(D_\infty\). Oznacza to, że każdy element \(a\in D_n\) możemy utożsamiać z odpowiednim \(\varphi_{n\infty}(a)\in D_\infty\). Biorąc \(a\in D_\infty\) i stosując tę odpowiedniość jako konwencję notacyjną, na podstawie \ref{fact:projection}\ref{fact:projection_3} mamy, że
+Zauważmy, że \(\varphi_{n\infty}\) jest izomorficznym włożeniem \(D_n\) w \(D_\infty\). Oznacza to, że każdy \(a\in D_n\) możemy utożsamiać z odpowiadającym mu \(\varphi_{n\infty}(a)\in D_\infty\). Biorąc \(a\in D_\infty\) i stosując tę odpowiedniość jako konwencję notacyjną, na podstawie \ref{fact:projection}\ref{fact:projection_3} mamy, że
 \begin{align*}
  a_0 \sqsubseteq  a_1 \sqsubseteq a_2 \sqsubseteq a_3 \sqsubseteq \dots\,,
 \end{align*}
@@ -323,9 +324,9 @@ zaś na podstawie \ref{fact:projection}\ref{fact:projection_4}:
 \begin{align*}
   a=\bigsqcup\{a_0,\,a_1,\,a_2,\,a_3,\,\dots\}.
 \end{align*}
-Zatem wyrazy \(a_0,\,a_1,\,a_2,\,a_3,\,\dots\) możemy traktowac jako kolejne przybliżenia elementu \(a\). Zauwazmy, że na podstawie Faktu \ref{fact:projection_5} ciąg ten jest zawsze rosnący. Traktując nieformalnie \(D_\infty\) jako pewną przestrzeń informacji i w niej: element \(\perp\) jako brak informacji, zaś relację \(\sqsubseteq\) odczytując jako „więcej informacji”, kolejne przybliżenia możemy odczytąc jako proces poznawczy prowadzący do stanu pełnej informacji o jakimś fakcie.
+Zatem wyrazy \(a_0,\,a_1,\,a_2,\,a_3,\,\dots\) możemy traktowac jako kolejne przybliżenia elementu \(a\). Zauwazmy, że na podstawie Faktu \ref{fact:projection_5} ciąg ten jest zawsze rosnący. Traktując nieformalnie \(D_\infty\) jako pewną przestrzeń informacji i w niej: element \(\perp\) jako brak informacji, zaś relację \(\sqsubseteq\) odczytując jako „więcej informacji”, kolejne przybliżenia możemy odczytąc jako proces poznawczy prowadzący do stanu pełnej informacji o jakimś fakcie.  
 
-Fakty \ref{fact:projection}\ref{fact:projection_4} i \ref{fact:projection}\ref{fact:projection_5} sugerują metodę określenia struktury aplikatywnej na \(D\). Przypuśćmy bowiem, że \(a,\,b\in D_\infty\). Wówczas dla każdego \(n\in\mathbb{N}\) wyrazy \(a_n\) i \(b_n\) są przybliżeniami \(a\) i \(b\), odpowiednio. Ponieważ \(a_{n+1}\in  D_{n+1}=[D_n\to D_n]\), to \(a_{n+1}(b_n)\) jest określony. A zatem \(a_{n+1}(b_n)\) jest pewnym przybliżeniem aplikacji \(a\) do \(b\). Widzimy jednocześnie, że rozwiązuje to problem samoaplikacji wymieniony na wstępie. 
+Kolejną istotną obserwacją jest fakt, że dziedzina każdej funkcji z \(D_n\) zawiera się w powyższym sensie również w \(D_n\). Fakty \ref{fact:projection}\ref{fact:projection_4} i \ref{fact:projection}\ref{fact:projection_5} sugerują metodę określenia struktury aplikatywnej na \(D_\infty\). Przypuśćmy bowiem, że \(a,\,b\in D_\infty\). Wówczas dla każdego \(n\in\mathbb{N}\) wyrazy \(a_n\) i \(b_n\) są przybliżeniami \(a\) i \(b\), odpowiednio. Ponieważ \(a_{n+1}\in  D_{n+1}=[D_n\to D_n]\), to \(a_{n+1}(b_n)\) jest określony. A zatem \(a_{n+1}(b_n)\) jest pewnym przybliżeniem aplikacji \(a\) do \(b\). Widzimy jednocześnie, że rozwiązuje to problem samoaplikacji wymieniony na wstępie. 
 
 \begin{definicja}%5.13
   Dla \(a,\,b\in D_\infty\) określamy:
