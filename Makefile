@@ -6,7 +6,7 @@ all:
 	make clean
 	latexmk -pdf \
 	-bibtex \
-	-pdflatex="pdflatex --shell-escape -interactive=nonstopmode" \
+	-pdflatex="xelatex --shell-escape -interactive=nonstopmode" \
 	-use-make \
 	-output-directory=$(OUTPUT_DIR) \
 	-aux-directory=$(OUTPUT_DIR) \

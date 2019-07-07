@@ -1,0 +1,39 @@
+\begin{definicja}
+Strategię nazywamy:
+\begin{enumerate}
+\item \emph{normalną} (ang. \emph{normal-order}), gdy redukujemy redeksy pojedyńczo, rozpoczynając najbardziej zewnętrznego redeksu od lewej strony wyrażenia.
+\item \emph{aplikatywną} (ang. \emph{applicative-order}), jeśli redukujemy redeksy pojedyńczo, rozpoczynając od najbardziej zagnieżdżonego redeksu występującego najbardziej po lewej stronie wyrażenia.
+\end{enumerate}
+\end{definicja}
+
+W przeciwieństwie do strategii aplikatywnej (patrz Przykład \ref{ex:beta_reduction}\ref{ex:undeterministic_reduction_untyped}), okazuje się, że strategia normalna jest zawsze strategią normalizującą \cite[Rozdział 1.5]{Urzyczyn2006}. Niestety, narzuca ona w presymistycznym przypadku wykładniczą złożoność obliczeniową. Zobserwujmy następującą redukcję:
+\begin{align*}
+\left(\lambda x.(+\ x\ x)\right)(*\ 5\ 4)\ &\to_\beta (+\ (*\ 5\ 4)(*\ 5\ 4))\tag{R1}\\
+  &\to_\beta (+\ 20\ (*\ 5\ 4))\\
+  &\to_\beta (+\ 20\ 20)\\
+  &\to_\beta 40.
+\end{align*}
+Widzimy, że redeksy są niepotrzebnie zwielokratniane, podczas gdy przy podejściu aplikatywnym zostałyby wpierw zredukowane. Obydwie strategie mają więc poważne wady.
+
+Udanym kompromisem jest przeprowadzanie redukcji strategią normalną aż do uzyskania słabej czołowej postaci normalnej i wówczas kontynuowanie redukcji strategią aplikatywną. \cite[Rozdział 11.3]{PeytonJones:1987:IFP:1096899}. Używając grafowej reprezentacji \(\lambda\)-termów możemy zamiast powielania wierzchołków ustawiać wskaźnik do aplikowanego termu. 
+
+\[
+\psmatrix[colsep=0.4cm,rowsep=0.4cm]
+    &    &          & @ \\
+    &    & \lambda  &   & (*\ 5\ 4) \\
+    &    & @           \\
+    &  @ & & \circ         \\
+(+) &    & \circ           \\
+\endpsmatrix
+\everypsbox{\scriptstyle}%
+\psset{nodesep=3pt,arrows=->}
+\ncline{1,4}{2,3}
+\ncline{2,3}{3,3}
+\ncline{3,3}{4,2}
+\ncline{4,2}{5,1}
+\ncline{4,2}{5,3}
+\ncline{3,3}{4,4}
+\ncline{1,4}{2,5}
+\nccurve[ncurvA=1.5,ncurvB=4,angleA=-120,angleB=200]{5,3}{2,3}
+\nccurve[ncurvA=1,ncurvB=2.5,angleA=-60,angleB=-30]{4,4}{2,3}
+\]
