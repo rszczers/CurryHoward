@@ -22,7 +22,7 @@ W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \
 Parę \((D,\, \bullet)\), gdzie \(D\) jest zbiorem zawierającym przynajmniej dwa elementy i w którym symbol \(\bullet\) oznacza działanie binarne na \(D\), nazywamy \emph{strukturą aplikatywną}.
 \end{definicja}
 \begin{konwencja*}
-  Ponieważ nie zakładamy, że działanie \(\bullet\) jest łączne, to celem ograniczenia ilości nawiasów przyjmijmy, że \(a\bullet b\bullet c\bullet d \equiv \left(\left(a\bullet b\right)\bullet c\right)\bullet d\).
+  Ponieważ nie zakładamy, że działanie \(\bullet\) jest łączne, to celem ograniczenia ilości nawiasów przyjmijmy, że \(\bullet\) wiąże lewostronnie, czyli \(a\bullet b\bullet c\bullet d \equiv \left(\left(a\bullet b\right)\bullet c\right)\bullet d\).
 \begin{definicja}[Ekstensjonala równoważność]%3.4
 Niech \((D,\,\bullet)\) będzie strukturą aplikatywną i niech \(a,\,b\in D\). Określamy relację: 
 \begin{align*}
@@ -239,7 +239,7 @@ I_{D_n}, & \text{jeśli}\ m=n,\\
 \end{align*}
 \end{definicja}
 
-Ponieważ dla każdego \(n\in \mathbb{N}\) para \((\varphi_n, \psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\), to zachodzi następujący fakt.
+Ponieważ dla każdego \(n\in \mathbb{N}\) para \((\varphi_n, \psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\), to zachodzi następujący szereg własności.
 
 \begin{fakt}[{\cite[16.33]{Hindley:2008:LCI:1388400}}]%5.7
 Niech \(m,\,n\geq 0\). Wówczas
@@ -335,22 +335,26 @@ a \bullet b = \bigsqcup\left\{\varphi_{n\infty}(a_{n+1}(b_n))\ |\ n\geq 0\right\
 Zauważmy, że na podstawie Faktu \ref{fact:projection}\ref{fact:projection_5} \(D_\infty\) jest łańcuchem, a zatem zbiorem skierowanym. Ponieważ \(D_\infty\) jest cpo, to supremum takiego zbioru zawsze istnieje. Zatem działanie \(\bullet\) jest poprawnie określone.
 Dowód, że operacja ta nie wyprowadza poza zbiór funkcji ciągłych pomijamy. 
 
-Podamy teraz następujące Fakty:
-
-\begin{fakt}[{\cite[14.29]{Hindley:2008:LCI:1388400}}]%3.8
+\begin{fakt}[{\cite[14.29]{Hindley:2008:LCI:1388400}}]\label{fact:model_a}%3.8
 Struktura aplikatywna \((D,\,\bullet)\) jest kombinatorycznie zupełna wtedy i tylko wtedy, gdy istnieją takie \(k,\,s\in D\), że dla wszystkich \(a,\,b,\,c\in D\) mamy: 
 \begin{align*}
 k\bullet a\bullet b = a\quad \text{oraz}\quad s\bullet a \bullet b \bullet c = a\bullet c \bullet (b \bullet c).
 \end{align*}
 \end{fakt}
 
-\begin{fakt}[{\cite[15.30]{Hindley:2008:LCI:1388400}}]%3.12
+\begin{fakt}[{\cite[15.30]{Hindley:2008:LCI:1388400}}]\label{fact:model}%3.12
   Niech \((D,\bullet)\) będzie kombinatorycznie zupełną strukturą aplikatywną taką, że
   dla dowolnych \(a,\,b\in D\) jeśli \(a\sim b\), to \(a=b\).
   Określmy \(\Lambda(a)=a\) dla wszystkich \(a\in D\). Wówczas \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym. 
 \end{fakt}
 
-Określmy teraz:
+Ostatecznie, na podstawie Faktu \ref{fact:model_a} i Faktu \ref{fact:model} zachodzi następujące twierdzenie.
+
+\begin{twierdzenie}
+  \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym.
+\end{twierdzenie}
+\begin{dowod}
+Określmy:
 \begin{align*}
   k &=(\perp_0,\,I_{D_0},\,k_2,\,k_3,\,\dots),\\
   s &=(\perp_0,\,I_{D_0},\,\psi_2(s_3),\,s_3,\,s_4,\,\dots).
@@ -360,6 +364,14 @@ Okazuje się \cite[Tw. 16.51, 16.53]{Hindley:2008:LCI:1388400}, że \(k,\,s\in D
   k\bullet a \bullet b = a\quad \text{oraz}\quad s\bullet a\bullet b\bullet c = a\bullet c\bullet (b\bullet c).
 \end{align*}
 
+Struktura \((D,\,\bullet)\) jest ekstensjonalna. Istotnie, niech \(a,\,b\in D_\infty\) takie, że \(a\sim b\) i \(m\geq 0\). Wybierzmy \(d\in D_m\) oraz ustalmy \(c=\varphi_{m\infty}(d)\). Wówczas \cite[Tw. 16.54]{Hindley:2008:LCI:1388400}
+\begin{align*}
+  (a\bullet c)_m = a_{m+1}(d)\quad\text{oraz}\quad (b\bullet c)_m = b_{m+1}(d).
+\end{align*}
+Stąd \(a_{m+1}(d)=(a\bullet c)_m = (b\bullet c)_m = b_{m+1}(d)\), a zatem \(a_n = b_n\) dla \(n>0\). Wówczas również \(a_0=\psi_0(a_1)=\psi_0(b_1)=b_0\) i stąd \(a=b\).
+
+  A zatem na podstawie Faktu \ref{fact:model} \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym. \qed
+\end{dowod}
 % \begin{definicja}%5.14
 %   \begin{enumerate}
 %     \item 
