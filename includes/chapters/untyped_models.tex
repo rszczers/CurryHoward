@@ -15,9 +15,11 @@ widzimy, że samoaplikacja jest poprawnie określona:
   \varphi\bullet\varphi = (\varphi_1(\varphi_0),\,\varphi_2(\varphi_1),\,\varphi_3(\varphi_2),\,\dots).
 \]
 
-W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}). %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
+W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) milcząco traktując jej topologiczny charakter. %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
 
 %\subsubsection{Wprowadzenie}
+Celem wprowadzenia ustalmy szereg następujących pojęć.
+
 \begin{definicja}[Struktura aplikatywna]
 Parę \((D,\, \bullet)\), gdzie \(D\) jest zbiorem zawierającym przynajmniej dwa elementy i w którym symbol \(\bullet\) oznacza działanie binarne na \(D\), nazywamy \emph{strukturą aplikatywną}.
 \end{definicja}
@@ -98,7 +100,7 @@ Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorycznie
 \end{definicja}
 
 \paragraph{Elementy teorii porządku} 
-Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jesli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kres górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
+Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jesli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kresem górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
 
 \begin{definicja}[Zupełny porządek częściowy]%5.1
 Porządek częściowy \((D,\,\sqsubseteq)\) taki, że
@@ -256,7 +258,7 @@ Niech \(m,\,n\geq 0\). Wówczas
 \paragraph{Konstrukcja \(D_\infty\)}
 %\subsubsection{Konstrukcja \(D_\infty\)}
 
-Mając zadane dwa cpo \(D\), \(D'\) możemy zapytać czy istnieje włożenie jednego z nich w drugi. Zauważmy, że jeśli \(\varphi,\,\psi\) jest projekcją z \(D'\) do \(D\), to \(\phi\) jest włożeniem \(D\) w \(D'\) (w sensie topologii Scotta). Ciąg \(\{D_n\}_{n=0}^\infty\) intuicyjnie przypomina więc wstępujący ciąg zbiorów.
+Mając zadane dwa cpo \(D\), \(D'\) możemy zapytać czy istnieje włożenie jednego z nich w drugi. Zauważmy, że jeśli \(\varphi,\,\psi\) jest projekcją z \(D'\) do \(D\), to \(\phi\) jest włożeniem \(D\) w \(D'\) (w sensie topologii Scotta). Ciąg \(\{D_n\}_{n=0}^\infty\) intuicyjnie przypomina więc wstępujący ciąg zbiorów. Formalizuje to następująca definicja.
 
 
 \begin{definicja}%5.8
@@ -289,7 +291,7 @@ Przy powyższym określeniu \(D_\infty\) okazuje się być cpo.
 \end{fakt}
 
 Dodatkowo, określamy projekcję z \(D_\infty\) do \(D_n\) dla każdego \(n\in\mathbb{N}\).
-Wymaga to oczywiście dowodu (patrz Fakt \ref{fact:projection}\ref{fact:projection_1}), który pomijamy.
+Wymaga to dowodu (patrz Fakt \ref{fact:projection}\ref{fact:projection_1}), który pomijamy.
 
 \begin{definicja}[\(D_\infty\)]%5.11
 Dla \(n\geq 0\) okreslamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\varphi_{\infty n}: D_\infty \to D_n\), gdzie 
