@@ -1,4 +1,5 @@
 \subsection{Model Scotta \(D_\infty\)}
+\paragraph{Wprowadzenie}
 Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny, czyli istnieje nieskończony zstępujący ciąg zbiorów \[A\times f(A)\ \supset\ A\times f(A)\times f(A)\ \supset\ A\times f(A)\times f(A)\times f(A)\ \supset\ \dots\] Istnienie takiego ciągu narusza aksjomat ufundowania na gruncie aksjomatyki ZF, a to wyklucza możliwość określenia takich modeli.
 
 Rozwiązanie Scotta polega na tym, aby zamiast próbować interpretować termy jako funkcje, przypisać im nieskończone ciągi funkcji postaci 
@@ -14,26 +15,14 @@ widzimy, że samoaplikacja jest poprawnie określona:
   \varphi\bullet\varphi = (\varphi_1(\varphi_0),\,\varphi_2(\varphi_1),\,\varphi_3(\varphi_2),\,\dots).
 \]
 
-W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
+W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}). %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
 
 %\subsubsection{Wprowadzenie}
 \begin{definicja}[Struktura aplikatywna]
 Parę \((D,\, \bullet)\), gdzie \(D\) jest zbiorem zawierającym przynajmniej dwa elementy i w którym symbol \(\bullet\) oznacza działanie binarne na \(D\), nazywamy \emph{strukturą aplikatywną}.
 \end{definicja}
-
-% \begin{definicja}(Model syntaktyczny)%3.3
-%   Trójkę \((D,\,\bullet,\,\llbracket\,\rrbracket)\), gdzie \((D,\,\bullet)\) jest strukturą aplikatywną, \(\llbracket\,\rrbracket\) jest funkcją przyporządkowującą elementy 
-%   \(\llbracket M\rrbracket \in D\) termowi \(M\) przy wartościowaniu \(\rho\), nazywamy \emph{\(\lambda\)-modelem}, jeśli spełnia poniższe własności:
-%   \begin{enumerate}
-%     \item \(\forall x \in V\ \left(\llbracket x \rrbracket_\rho = \rho(x)\right)\).
-%     \item \(\forall M,\,N \in \mathbf{\Lambda}\ (\llbracket MN \rrbracket_\rho = \llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho)\).
-%     \item \(\forall x \in V\,\forall M\in \mathbf{\Lambda}\,\forall d\in D\ (\, \llbracket \lambda x.\,M\rrbracket_\rho \bullet d = \llbracket M \rrbracket_{\rho[x/d]})\).
-%     \item Dla dowolnych wartościowań \(\rho\),  \(\sigma\) i dowolnego termu \(M\in\nobreak\mathbf{\Lambda}\), jeśli \[\forall x\in\nobreak\mathrm{FV}(M)\ (\rho(x) =\nobreak \sigma(x)),\] to \(\llbracket M\rrbracket_\rho =\nobreak\llbracket M \rrbracket_\sigma\).
-%     \item \(\forall M\in\mathbf{\Lambda}\,\forall x, y\in V\ (y\not\in\mathrm{FV}(M)\implies \llbracket[\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\sigma) \).
-%     \item \(\forall M,\,N\in\mathbf{\Lambda}\,\left(\forall d\in D\,(\llbracket M\rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]} ) \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\).
-%   \end{enumerate}
-% \end{definicja}
-
+\begin{konwencja*}
+  Ponieważ nie zakładamy, że działanie \(\bullet\) jest łączne, to celem ograniczenia ilości nawiasów przyjmijmy, że \(a\bullet b\bullet c\bullet d \equiv \left(\left(a\bullet b\right)\bullet c\right)\bullet d\).
 \begin{definicja}[Ekstensjonala równoważność]%3.4
 Niech \((D,\,\bullet)\) będzie strukturą aplikatywną i niech \(a,\,b\in D\). Określamy relację: 
 \begin{align*}
@@ -41,6 +30,31 @@ a \sim b \quad \Leftrightarrow\quad \forall d \in D \left(a \bullet d = b \bulle
 \end{align*}
 Powiemy, że \(a\) jest \emph{ekstensjonalnie równoważne} \(b\), jeśli \(a\sim b\).
 \end{definicja}
+
+\end{konwencja*}
+% Ustalmy teraz co rozumiemy przez \(\lambda\)-model.
+
+% \begin{definicja}[Model syntaktyczny]%3.3
+%   Trójkę \((D,\,\bullet,\,\llbracket\,\rrbracket)\), gdzie \((D,\,\bullet)\) jest strukturą aplikatywną, \(\llbracket\,\rrbracket_\rho\) jest funkcją przyporządkowującą elementy 
+%   \(\llbracket M\rrbracket \in D\) termowi \(M\) przy wartościowaniu \(\rho\) (\emph{interpretacją} względem \(\rho\)), nazywamy \emph{\(\lambda\)-modelem}, jeśli spełnia poniższe własności:
+%   \begin{enumerate}
+%     \item \(\forall x \in V\ \left(\llbracket x \rrbracket_\rho = \rho(x)\right)\).
+%     \item \(\forall M,\,N \in \mathbf{\Lambda}\ (\llbracket MN \rrbracket_\rho = \llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho)\).
+%     \item \(\forall x \in V\,\forall M\in \mathbf{\Lambda}\,\forall d\in D\ (\, \llbracket \lambda x.\,M\rrbracket_\rho \bullet d = \llbracket M \rrbracket_{\rho[x/d]})\).
+%     \item Dla dowolnych wartościowań \(\rho\),  \(\sigma\) i dowolnego termu \(M\in\nobreak\mathbf{\Lambda}\), jeśli \[\forall x\in\nobreak\mathrm{FV}(M)\ (\rho(x) =\nobreak \sigma(x)),\] to \(\llbracket M\rrbracket_\rho =\nobreak\llbracket M \rrbracket_\sigma\).
+%     \item \(\forall M\in\mathbf{\Lambda}\,\forall x, y\in V\ (y\not\in\mathrm{FV}(M)\implies \llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho) \).
+% %    \item \(\forall M,\,N\in\mathbf{\Lambda}\,\left(\forall d\in D\,(\llbracket M\rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]} ) \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\).
+%     \item \(\forall M,\,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\).
+%   \end{enumerate}
+% \end{definicja}
+
+% Żądamy przede wszystkim, aby interpretacja \(\lambda\)-termów była zachowawcza ze względu na \(\beta\)-konwersję: chcemy utożsamiać ze sobą interpretacje \(\beta\)-konwersów tak aby ich znaczeniem była postać normalna (lub jej brak). Aplikacja jest w istocie działaniem binarnym na termach. Dlatego na uniwersum interpretacji wprowadzamy działanie \(\bullet\) tak, aby \(\llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho = \llbracket MN \rrbracket_\rho\) (Warunek 2). Warunek 3 jest konsekwencją obserwacji, że \((\lambda x.\,M) N =_\beta M[x/N]\), a zatem oczekujemy, aby 
+% \[
+%   \llbracket \lambda x.\,M \rrbracket_\rho \bullet \llbracket N \rrbracket_\rho =
+%   \llbracket (\lambda x.\,M) N\rrbracket_\rho = \llbracket M[x/N \rrbracket_\rho.
+% \]
+% Interpretacja rezultatu operacji podstawienia termu \(N\) za zmienną \(x\) nie różni się jednak w tym wypadku niczym od zmiany wartościowania zmiennej \(x\) przez interpretację termu \(\llbracket N\rrbracket_\rho\) (symbolicznie: \(\rho[x/\llbracket N \rrbracket_\rho])\), bowiem w wyniku \(\beta\)-redukcji żadna nowa zmienna nie zostaje związana i zastąpione przez \(N\) zostają wszystkie wolne wystąpienia \(x\) w \(M\). Waruneki 4 i 5 odpowiadają utożsamieniu \(\alpha\)-konwersów.
+
 
 \begin{definicja}% kombinacja zmiennycha, 3.7
 \begin{enumerate}
@@ -71,12 +85,6 @@ Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorycznie
 \end{enumerate}
 \end{definicja}
 
-% \begin{twierdzenie}%3.8
-% Struktura aplikatywna \((D,\,\bullet)\) jest kombinatorycznie zupełna wtedy i tylko wtedy, gdy istnieją takie \(k,\,s\in D\), że dla wszystkich \(a,\,b,\,c\in D\) mamy: 
-% \begin{align*}
-% k\bullet a\bullet b = a\quad \text{oraz}\quad s\bullet a \bullet b \bullet c = a\bullet c \bullet (b \bullet c).
-% \end{align*}
-% \end{twierdzenie}
 
 \begin{definicja}[Model bezsyntaktyczny]%3.9
   Modelem bezsyntaktycznym rachunku \(\lambda\) nazywamy trójkę \((D,\,\bullet, \Lambda)\), gdzie \(\mathbb{D}=(D,\,\bullet)\) jest strukturą aplikatywną, \(\Lambda: D \to D\) i spełnione są poniższe własności:
@@ -190,7 +198,7 @@ Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\
 \begin{definicja}[Projekcja]%5.5
 Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy parę \((\varphi, \psi)\) funkcji \(\varphi \in [D\to D']\), \(\psi \in [D'\to D]\) takich, że
 \begin{align}
-\psi\circ \varphi = I_D\quad \text{oraz}\quad \varphi\circ \psi \preceq I_{D'} \tag{\textasteriskcentered},
+\psi\circ \varphi = I_D\quad \text{oraz}\quad \varphi\circ \psi \preceq I_{D'} %\tag{\textasteriskcentered},
 \end{align}
 gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorze \(D\) i \(D'\), odpowiednio.
 \end{definicja}
@@ -233,7 +241,7 @@ I_{D_n}, & \text{jeśli}\ m=n,\\
 
 Ponieważ dla każdego \(n\in \mathbb{N}\) para \((\varphi_n, \psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\), to zachodzi następujący fakt.
 
-\begin{fakt}[{\cite[Lemat 16.33]{Hindley:2008:LCI:1388400}}]%5.7
+\begin{fakt}[{\cite[16.33]{Hindley:2008:LCI:1388400}}]%5.7
 Niech \(m,\,n\geq 0\). Wówczas
 \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
   \setlength\itemsep{0em}
@@ -268,7 +276,7 @@ Na zbiorze \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący spos
 
 Przy powyższym określeniu \(D_\infty\) okazuje się być cpo.
 
-\begin{fakt}[{\cite[Lemat 16.36]{Hindley:2008:LCI:1388400}}]%5.10
+\begin{fakt}[{\cite[16.36]{Hindley:2008:LCI:1388400}}]%5.10
 \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
   \setlength\itemsep{0em}
 \item \(D_\infty\) jest cpo.
@@ -293,7 +301,7 @@ Dla \(n\geq 0\) okreslamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\
 
 Określona para funkcji spełnia poniższy szereg własności.
 
-\begin{fakt}[{\cite[Lematy 16.38, 16.39, 16.42]{Hindley:2008:LCI:1388400}}]\label{fact:projection}%5.12
+\begin{fakt}[{\cite[16.38, 16.39, 16.42]{Hindley:2008:LCI:1388400}}]\label{fact:projection}%5.12
 Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
 \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
   \setlength\itemsep{0em}
@@ -305,14 +313,52 @@ Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
 \end{enumerate}
 \end{fakt}
 
-%Punkty \ref{fact:projection_3} i \ref{fact:projection_4}
+Zauważmy, że \(\varphi_{n\infty}\) jest izomorficznym włożeniem \(D_n\) w \(D_\infty\). Oznacza to, że każdy element \(a\in D_n\) możemy utożsamiać z odpowiednim \(\varphi_{n\infty}(a)\in D_\infty\). Biorąc \(a\in D_\infty\) i stosując tę odpowiedniość jako konwencję notacyjną, na podstawie \ref{fact:projection}\ref{fact:projection_3} mamy, że
+\begin{align*}
+ a_0 \sqsubseteq  a_1 \sqsubseteq a_2 \sqsubseteq a_3 \sqsubseteq \dots\,,
+\end{align*}
+zaś na podstawie \ref{fact:projection}\ref{fact:projection_4}:
+\begin{align*}
+  a=\bigsqcup\{a_0,\,a_1,\,a_2,\,a_3,\,\dots\}.
+\end{align*}
+Zatem wyrazy \(a_0,\,a_1,\,a_2,\,a_3,\,\dots\) możemy traktowac jako kolejne przybliżenia elementu \(a\). Zauwazmy, że na podstawie Faktu \ref{fact:projection_5} ciąg ten jest zawsze rosnący. Traktując nieformalnie \(D_\infty\) jako pewną przestrzeń informacji i w niej: element \(\perp\) jako brak informacji, zaś relację \(\sqsubseteq\) odczytując jako „więcej informacji”, kolejne przybliżenia możemy odczytąc jako proces poznawczy prowadzący do stanu pełnej informacji o jakimś fakcie.
+
+Fakty \ref{fact:projection}\ref{fact:projection_4} i \ref{fact:projection}\ref{fact:projection_5} sugerują metodę określenia struktury aplikatywnej na \(D\). Przypuśćmy bowiem, że \(a,\,b\in D_\infty\). Wówczas dla każdego \(n\in\mathbb{N}\) wyrazy \(a_n\) i \(b_n\) są przybliżeniami \(a\) i \(b\), odpowiednio. Ponieważ \(a_{n+1}\in  D_{n+1}=[D_n\to D_n]\), to \(a_{n+1}(b_n)\) jest określony. A zatem \(a_{n+1}(b_n)\) jest pewnym przybliżeniem aplikacji \(a\) do \(b\). Widzimy jednocześnie, że rozwiązuje to problem samoaplikacji wymieniony na wstępie. 
 
 \begin{definicja}%5.13
   Dla \(a,\,b\in D_\infty\) określamy:
 \begin{align*}
-a \bullet b = \bigsqcup\left\{\varphi_{n\infty}(a_{n+1}(b_n))\ |\ n\geq 0\right\}\tag{\textasteriskcentered}
+a \bullet b = \bigsqcup\left\{\varphi_{n\infty}(a_{n+1}(b_n))\ |\ n\geq 0\right\}%\tag{\textasteriskcentered}
 \end{align*}
 \end{definicja}
+
+Zauważmy, że na podstawie Faktu \ref{fact:projection}\ref{fact:projection_5} \(D_\infty\) jest łańcuchem, a zatem zbiorem skierowanym. Ponieważ \(D_\infty\) jest cpo, to supremum takiego zbioru zawsze istnieje. Zatem działanie \(\bullet\) jest poprawnie określone.
+Dowód, że operacja ta nie wyprowadza poza zbiór funkcji ciągłych pomijamy. 
+
+Podamy teraz następujące Fakty:
+
+\begin{fakt}[{\cite[14.29]{Hindley:2008:LCI:1388400}}]%3.8
+Struktura aplikatywna \((D,\,\bullet)\) jest kombinatorycznie zupełna wtedy i tylko wtedy, gdy istnieją takie \(k,\,s\in D\), że dla wszystkich \(a,\,b,\,c\in D\) mamy: 
+\begin{align*}
+k\bullet a\bullet b = a\quad \text{oraz}\quad s\bullet a \bullet b \bullet c = a\bullet c \bullet (b \bullet c).
+\end{align*}
+\end{fakt}
+
+\begin{fakt}[{\cite[15.30]{Hindley:2008:LCI:1388400}}]%3.12
+  Niech \((D,\bullet)\) będzie kombinatorycznie zupełną strukturą aplikatywną taką, że
+  dla dowolnych \(a,\,b\in D\) jeśli \(a\sim b\), to \(a=b\).
+  Określmy \(\Lambda(a)=a\) dla wszystkich \(a\in D\). Wówczas \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym. 
+\end{fakt}
+
+Określmy teraz:
+\begin{align*}
+  k &=(\perp_0,\,I_{D_0},\,k_2,\,k_3,\,\dots),\\
+  s &=(\perp_0,\,I_{D_0},\,\psi_2(s_3),\,s_3,\,s_4,\,\dots).
+\end{align*}
+Okazuje się \cite[Tw. 16.51, 16.53]{Hindley:2008:LCI:1388400}, że \(k,\,s\in D_\infty\) oraz, że dla dowolnych \(a,\,b,\,c\in\nobreak D_\infty\) mamy
+\begin{align*}
+  k\bullet a \bullet b = a\quad \text{oraz}\quad s\bullet a\bullet b\bullet c = a\bullet c\bullet (b\bullet c).
+\end{align*}
 
 % \begin{definicja}%5.14
 %   \begin{enumerate}
