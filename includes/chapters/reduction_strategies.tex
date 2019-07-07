@@ -1,3 +1,5 @@
+Wprowadzamy następującą klasyfikację strategii redukcji.
+
 \begin{definicja}
 Strategię nazywamy:
 \begin{enumerate}
@@ -7,33 +9,68 @@ Strategię nazywamy:
 \end{definicja}
 
 W przeciwieństwie do strategii aplikatywnej (patrz Przykład \ref{ex:beta_reduction}\ref{ex:undeterministic_reduction_untyped}), okazuje się, że strategia normalna jest zawsze strategią normalizującą \cite[Rozdział 1.5]{Urzyczyn2006}. Niestety, narzuca ona w presymistycznym przypadku wykładniczą złożoność obliczeniową. Zobserwujmy następującą redukcję:
+
 \begin{align*}
-\left(\lambda x.(+\ x\ x)\right)(*\ 5\ 4)\ &\to_\beta (+\ (*\ 5\ 4)(*\ 5\ 4))\tag{R1}\\
+  \left(\lambda x.(+\ x\ x)\right)(*\ 5\ 4)\ &\to_\beta (+\ (*\ 5\ 4)(*\ 5\ 4))\tag{\(\blacktriangledown\)}\label{ex:normal_reduction}\\
   &\to_\beta (+\ 20\ (*\ 5\ 4))\\
   &\to_\beta (+\ 20\ 20)\\
   &\to_\beta 40.
 \end{align*}
+
 Widzimy, że redeksy są niepotrzebnie zwielokratniane, podczas gdy przy podejściu aplikatywnym zostałyby wpierw zredukowane. Obydwie strategie mają więc poważne wady.
 
-Udanym kompromisem jest przeprowadzanie redukcji strategią normalną aż do uzyskania słabej czołowej postaci normalnej i wówczas kontynuowanie redukcji strategią aplikatywną. \cite[Rozdział 11.3]{PeytonJones:1987:IFP:1096899}. Używając grafowej reprezentacji \(\lambda\)-termów możemy zamiast powielania wierzchołków ustawiać wskaźnik do aplikowanego termu. 
+Udanym kompromisem jest przeprowadzanie redukcji strategią normalną aż do uzyskania słabej czołowej postaci normalnej i wówczas kontynuowanie redukcji strategią aplikatywną. \cite[Rozdział 11.3]{PeytonJones:1987:IFP:1096899}. Zauważmy również, że używając grafowej reprezentacji \(\lambda\)-termów możemy zamiast powielania wierzchołków redukować graf ustawiając wskaźniki do aplikowanych termów (patrz Rysunek \ref{fig:reduction_strategy}). 
 
-\[
-\psmatrix[colsep=0.4cm,rowsep=0.4cm]
-    &    &          & @ \\
-    &    & \lambda  &   & (*\ 5\ 4) \\
-    &    & @           \\
-    &  @ & & \circ         \\
-(+) &    & \circ           \\
-\endpsmatrix
-\everypsbox{\scriptstyle}%
-\psset{nodesep=3pt,arrows=->}
-\ncline{1,4}{2,3}
-\ncline{2,3}{3,3}
-\ncline{3,3}{4,2}
-\ncline{4,2}{5,1}
-\ncline{4,2}{5,3}
-\ncline{3,3}{4,4}
-\ncline{1,4}{2,5}
-\nccurve[ncurvA=1.5,ncurvB=4,angleA=-120,angleB=200]{5,3}{2,3}
-\nccurve[ncurvA=1,ncurvB=2.5,angleA=-60,angleB=-30]{4,4}{2,3}
-\]
+\begin{figure}
+\begin{align*}
+\psset{arrows=->}
+\pstree[levelsep=125pt,arrowsize=4pt 3]
+{
+  \TR{\begin{psmatrix}[colsep=0.4cm,rowsep=0.4cm,arrowsize=2pt 2]
+        &    &          & @ \\
+        &    & \lambda  &   & (*\ 5\ 4) \\
+        &    & @           \\
+        &  @ & & \circ         \\
+    (+) &    & \circ           \\
+    \everypsbox{\scriptstyle}%
+    \psset{nodesep=3pt,arrows=->}
+    \ncline{1,4}{2,3}
+    \ncline{2,3}{3,3}
+    \ncline{3,3}{4,2}
+    \ncline{4,2}{5,1}
+    \ncline{4,2}{5,3}
+    \ncline{3,3}{4,4}
+    \ncline{1,4}{2,5}
+    \nccurve[ncurvA=1.5,ncurvB=4,angleA=-120,angleB=200]{5,3}{2,3}
+    \nccurve[ncurvA=1,ncurvB=2.5,angleA=-60,angleB=-30]{4,4}{2,3}
+  \end{psmatrix}}
+}
+{
+  \TR{\begin{psmatrix}[colsep=0.4cm,rowsep=0.4cm,arrowsize=2pt 2]
+        &    & @           \\
+        &  @ & &(*\ 5\ 4)         \\
+    (+) &    & (*\ 5\ 4)           \\
+    \everypsbox{\scriptstyle}%
+    \psset{nodesep=2pt,arrows=->}
+    \ncline{1,3}{2,2}
+    \ncline{1,3}{2,4}
+    \ncline{2,2}{3,1}
+    \ncline{2,2}{3,3}
+  \end{psmatrix}}\nbput{\text{Normalna}}
+  \TR{\begin{psmatrix}[colsep=0.4cm,rowsep=0.4cm,arrowsize=2pt 2]
+        &    & @           \\
+        &  @ & &(*\ 5\ 4)         \\
+    (+) &    & &           \\
+    \everypsbox{\scriptstyle}%
+    \psset{nodesep=2pt,arrows=->}
+    \ncline{1,3}{2,2}
+    \ncline{1,3}{2,4}
+    \ncline{2,2}{3,1}
+    \nccurve[ncurvA=1.2,ncurvB=1,angleA=-90,angleB=-90]{2,2}{2,4}
+  \end{psmatrix}}\naput{\text{Leniwa}}
+}
+\end{align*}
+\caption{\(\beta\)-redukcja normalna wyrażenia (\ref{ex:normal_reduction}) (po lewej) i ze wspólnymi wierzchołkami (po prawej).}\label{fig:reduction_strategy}
+\end{figure}
+
+Strategie redukcji, które opierają się na współdzieleniu rezultatu redukcji nazywamy \emph{leniwymi} (ang. \emph{lazy evaluation}, także \emph{call-by-need}). Ich istotą jest redukowanie argumentów dokładnie raz. Przesądzają one o praktycznym zastosowaniu języków funkcyjnych w programowaniu.
