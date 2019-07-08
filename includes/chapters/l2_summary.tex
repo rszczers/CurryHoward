@@ -2,12 +2,12 @@
 
 Języki programowania to narzędzia służące do reprezentowania pojęć i łączących je wzajemnie zależności w sposób umożliwiający efektywne tłumaczenie ich na język maszynowy. Myśleć można o nich jak o uproszczonych środkach komunikacji człowieka z maszyną.
 
-GHC (ang. \emph{Glasgow Haskell Compiler}) to otwartoźródłowy kompilator języka Haskell. Kompilatorem nazywamy program, którego zadaniem jest tłumaczenie kodu programu napisanego w danym języku (\emph{kodu źródłowego}) na kod w innym języku z zachowaniem własności programu wejściowego. GHC jest stosunkowo wyjątkowym kompilatorem, gdyż kompilację do kodu wyjściowego poprzedza w nim kompilacja do kodu \emph{pośredniego}, który jest rozszerzonym wariantem Systemu F w stylu Churcha \cite{Sulzmann2007}. 
+GHC (ang. \emph{Glasgow Haskell Compiler}) to otwartoźródłowy kompilator języka Haskell. Kompilatorem nazywamy program, którego zadaniem jest tłumaczenie kodu programu napisanego w danym języku (w \emph{języku kodu źródłowego}) na kod w innym języku (języku \emph{wyjściowym}) z zachowaniem własności programu wejściowego. GHC jest stosunkowo wyjątkowym kompilatorem, gdyż kompilację do kodu wyjściowego poprzedza w nim kompilacja do kodu \emph{pośredniego}, który jest rozszerzonym wariantem Systemu F w stylu Churcha \cite{Sulzmann2007}. 
 
-Język Haskell to polimorficzny statycznie typowany, leniwy, czysto funkcyjny język programowania. Leniwość odnosi się do strategii ewaluacji nakreślonej w Rozdziale \ref{subsec:lazy_eval}. Funkcyjność języka polega na tym, że funkcje są w nim obiektami pierwszego rzędu, tzn. można z nich budować struktury danych i przesyłać jako argument tak jak jak pozostałe obiekty języka. Czystość oznacza ograniczenie efektów ubocznych: funkcje nie współdzielą stanu, zwracają tylko i wyłącznie wartość obliczenia. 
+Język Haskell to polimorficzny statycznie typowany, leniwy, czysto funkcyjny język programowania. Leniwość odnosi się do strategii ewaluacji nakreślonej w Rozdziale \ref{subsec:lazy_eval}. Funkcyjność języka polega na tym, że funkcje są w nim obiektami pierwszego rzędu, tzn. można z nich budować struktury danych i przesyłać jako argument tak jak pozostałe obiekty języka. Czystość oznacza ograniczenie efektów ubocznych: funkcje nie współdzielą stanu, zwracają tylko i wyłącznie wartość obliczenia. 
 
 \paragraph{Statyczność}
-Określenie \emph{statyczny} oznacza, że na etapie kompilacji do kodu wyjściowego wszystkie typy wyrażeń są ustalone właśnie na gruncie języka pośredniego. Jest to całkiem niezwykła kontynuacja wywodzącej się z lat '60 idei oparcia języków programowania na czystym rachunku \(\lambda\) wspomnianej w Rozdziale \ref{subsec:scott_encoding}.
+Określenie \emph{statyczny} oznacza, że na etapie kompilacji do kodu wyjściowego wszystkie typy wyrażeń są ustalone właśnie na gruncie języka pośredniego. Jest to całkiem niezwykła kontynuacja wywodzącej się z lat '70 idei oparcia języków programowania na czystym rachunku \(\lambda\) wspomnianej w Rozdziale \ref{subsec:scott_encoding}.
 
 Rozważmy następujący przykładowy kod źródłowy w języku Haskell. Funkcja \texttt{comp} to polimorficzne złożenie funkcji.
 
@@ -16,7 +16,7 @@ module Fnord where
   comp = \g f x -> g (f x)
 \end{minted}
 
-Przypomnijmy Przykład \ref{ex:f_typing_5}, którego rezultatem był następujące przypisanie typu:
+Przypomnijmy Przykład \ref{ex:f_typing_5}, którego rezultatem było następujące przypisanie typu:
 \begin{align}
   \begin{aligned}[t]
 \lambda \gamma \beta \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\
@@ -47,7 +47,7 @@ Haskell jest \emph{słabo} typowanym językiem: kod źródłowy może być zupe�
 \newpage
 
 \subsection{Podsumowanie}
-System F, który był przedmiotem Rozdziału \ref{sec:system_f} można umiescić na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt_1992} klasyfikacji rozszerzeń rachunku \(\lambda\) z typami prostymi (tzw. \emph{kostki \(\lambda\)}, Rysunek \ref{fig:lambda-cube}) w miejscu systemu \(\lambda 2\). 
+System F, który był przedmiotem Rozdziału \ref{sec:system_f} można umieścić na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt_1992} klasyfikacji rozszerzeń rachunku \(\lambda\) z typami prostymi (tzw. \emph{kostki \(\lambda\)}, Rysunek \ref{fig:lambda-cube}) w miejscu systemu \(\lambda 2\). 
 
 Wszystkie części kostki \(\lambda\) są systemami w stylu Churcha. System \(\lambda{\to}\) to omawiany przez nas w Rozdziale \ref{sec:simple_types} rachunek \(\lambda\) z typami prostymi. Jak widzieliśmy, rozszerzenie go o typy polimorficzne prowadzi do systemu \(\lambda 2\). 
 
@@ -115,7 +115,7 @@ Mamy   więc    \(\ast:\square\),   \(\ast\to\ast    :   \square\),
 
 System \(\lambda P\) rozszerza typy proste o abstrakcję umożliwiającą uzależnienie typów od termów. Typy takie mają postać \(\lambda x:A.\,M\), gdzie \(M\) jest typem, a \(x\) zmienną typową. 
 
-Jak zauwazył Barendregt, rozszerzenia \(\lambda 2\), \(\lambda{\underline{\omega}}\) i \(\lambda P\) są od siebie w pewnym sensie niezależne i można je ze sobą składać. Intuicję tę można sformalizować  w ten sposób, aby wybierając tylko odpowiednią kombinację zależności, otrzymać odpowiadającą jej teorię \cite{barendregt_1991}. Ponieważ przybliżenie tego uogólnionego systemu wykracza poza zamierzony zakres tej pracy, prezentujemy tylko zestawienie systemów kostki \(\lambda\).
+Jak zauważył Barendregt, rozszerzenia \(\lambda 2\), \(\lambda{\underline{\omega}}\) i \(\lambda P\) są od siebie w pewnym sensie niezależne i można je ze sobą składać. Intuicję tę można sformalizować  w ten sposób, aby wybierając tylko odpowiednią kombinację zależności, otrzymać odpowiadającą jej teorię \cite{barendregt_1991}. Ponieważ przybliżenie tego uogólnionego systemu wykracza poza zamierzony zakres tej pracy, prezentujemy tylko zestawienie systemów kostki \(\lambda\).
 
   \begin{center}
   \begin{tabular}{r | l | c c c c}
