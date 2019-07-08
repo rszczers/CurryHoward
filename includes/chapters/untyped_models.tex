@@ -1,4 +1,6 @@
 \subsection{Model Scotta \(D_\infty\)}
+W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) przemilczając jego topologiczny charakter. %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
+
 \paragraph{Wprowadzenie}
 Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny, czyli istnieje nieskończony zstępujący ciąg zbiorów \[A\times f(A)\ \supset\ A\times f(A)\times f(A)\ \supset\ A\times f(A)\times f(A)\times f(A)\ \supset\ \dots\] Istnienie takiego ciągu narusza aksjomat ufundowania na gruncie aksjomatyki ZF, a to wyklucza możliwość określenia takich modeli.
 
@@ -14,8 +16,6 @@ widzimy, że samoaplikacja jest poprawnie określona:
 \[
   \varphi\bullet\varphi = (\varphi_1(\varphi_0),\,\varphi_2(\varphi_1),\,\varphi_3(\varphi_2),\,\dots).
 \]
-
-W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) przemilczając jego topologiczny charakter. %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
 
 %\subsubsection{Wprowadzenie}
 Celem wprowadzenia ustalmy szereg następujących pojęć.
@@ -100,7 +100,7 @@ Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorycznie
 \end{definicja}
 
 \paragraph{Elementy teorii porządku} 
-Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jesli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kresem górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
+Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jeśli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kresem górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
 
 \begin{definicja}[Zupełny porządek częściowy]%5.1
 Porządek częściowy \((D,\,\sqsubseteq)\) taki, że
@@ -123,7 +123,7 @@ Ustalmy, że jeśli \(D'\), \(D''\), \(\dots\)  są cpo, to odpowiadające im po
 \end{przyklad}
 
 \begin{definicja}[Monotoniczność, ciągłość, ścisłość]\label{def:m_cont}%5.3
-Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).l
+Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).
 \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}] 
   \setlength\itemsep{0em}
 \item Powiemy, że \(\varphi\) jest \emph{monotoniczna}, jeśli \(\varphi(a) \sqsubseteq' \varphi(b)\) dla \(a\sqsubseteq b\).
@@ -196,7 +196,7 @@ Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\
       \end{enumerate}
 \end{dowod}
   \begin{wniosek}\label{thm:scott_seq}
-    Dla danego cpo \(D_0\) możemy skonstruować ciąg cpo \(\{D_n\}_{n=0}^{\infty}\) okreslając \(D_{n+1}=[D_n\to D_n]\) dla \(n\geq 0\). Tak określony ciąg dla \(D_0=\mathbb{N}^{+}\) (patrz Przykład \ref{ex:scott_d0}) nazywamy modelem Scotta.
+    Dla danego cpo \(D_0\) możemy skonstruować ciąg cpo \(\{D_n\}_{n=0}^{\infty}\) określając \(D_{n+1}=[D_n\to D_n]\) dla \(n\geq 0\). Tak określony ciąg dla \(D_0=\mathbb{N}^{+}\) (patrz Przykład \ref{ex:scott_d0}) nazywamy modelem Scotta.
   \end{wniosek}
 \begin{definicja}[Projekcja]%5.5
 Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy parę \((\varphi, \psi)\) funkcji \(\varphi \in [D\to D']\), \(\psi \in [D'\to D]\) takich, że
@@ -221,7 +221,7 @@ gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorz
   \end{align*}
 gdzie \(\perp_0\) jest elementem najmniejszym \(D_0\). Widzimy, że \(\varphi_0: D_0 \to D_1\) i \(\psi_0:\nobreak D_1\to\nobreak D_0\). Funkcje \(\varphi_0\) i \(\psi_0\) są ciągłe, zaś \(\psi_0\circ\varphi_0 = I_{D_0}\) (dowód pomijamy), zatem \((\varphi_0,\,\psi_0)\) jest projekcją z \(D_1\) do \(D_0\).
 
-Dla \(n>0\) okreslamy teraz \(\varphi_n : D_n \to D_{n+1}\) i \(\psi_{n+1}: D_{n+1}\to D_n\) następującym wzorem:
+Dla \(n>0\) określamy teraz \(\varphi_n : D_n \to D_{n+1}\) i \(\psi_{n+1}: D_{n+1}\to D_n\) następującym wzorem:
 \begin{align*}
   \varphi_n(\sigma) &= \varphi_{n-1}\circ\sigma\circ\psi_{n-1}\quad \text{dla}\ \sigma\in D_n,\\ 
   \psi_n(\tau) &= \psi_{n-1}\circ\varphi_{n-1}\quad &\text{dla}\ \tau \in D_{n+1}
@@ -273,7 +273,7 @@ Na zbiorze \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący spos
 (d_0,\,d_1,\,\dots) \sqsubseteq (d_0',\,d_1',\,\dots) \quad \Leftrightarrow\quad  \forall n\geq 0\  (d_n\sqsubseteq d_n') 
 \]
 
-  Przez \(d_n\) oznaczać będziemy \(n\)-ty element ciągu \(d\). Jeśli \(X\subset D_\infty\), to okreslamy \(X_n=\{ d_n\ |\ d\in X\}\).
+  Przez \(d_n\) oznaczać będziemy \(n\)-ty element ciągu \(d\). Jeśli \(X\subset D_\infty\), to określamy \(X_n=\{ d_n\ |\ d\in X\}\).
 
 \end{definicja}
 
@@ -295,7 +295,7 @@ Dodatkowo, określamy projekcję z \(D_\infty\) do \(D_n\) dla każdego \(n\in\m
 Wymaga to dowodu (patrz Fakt \ref{fact:projection}\ref{fact:projection_1}), który pomijamy.
 
 \begin{definicja}[\(D_\infty\)]%5.11
-Dla \(n\geq 0\) okreslamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\varphi_{\infty n}: D_\infty \to D_n\), gdzie 
+Dla \(n\geq 0\) określamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\varphi_{\infty n}: D_\infty \to D_n\), gdzie 
 \begin{align*}
 \varphi_{n\infty}(d) &= (\varphi_{n0}(d),\,\varphi_{n1}(d),\,\dots)\ \text{dla}\ d\in D_n,\\
 \varphi_{\infty n}(d) &= d_n.

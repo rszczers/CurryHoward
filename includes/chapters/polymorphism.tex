@@ -19,5 +19,5 @@ Podstawienie typu \(\tau\) za zmienną typową \(p\) w typie \(\sigma\) nazywamy
 \end{dowod}
 
 Mając na uwadze Lemat \ref{thm:polymorphism} możemy wnioskować o wielu własnościach funkcji reprezentowanych przez \(\lambda\)-termy tylko na podstawie typu. Na przykład typowi \(\sigma\to\sigma\) odpowiada dokładnie jeden (z dokładnością do \(\alpha\)-konwersji) term \(\lambda x.\,x\) i reprezentuje on funkcję identycznościową; typom \(\sigma\to\rho\to\sigma\) i \(\sigma\to\rho\to\rho\) odpowiednio przypisać możemy wyłącznie projekcje fst i snd (określone w \ref{subsec:pairs}), zaś typowi \((\rho\to\tau) \to (\sigma\to\rho)\to\sigma\to\tau\) term \(\lambda g f x. g (f x)\) reprezentujący złożenie funkcji (Przykład \ref{ex:typing} \ref{ex:typing_2}), co do której wiemy z kolei, że jest łączna.
-Jest to wraz ogólnej zależności: dysponując dowolnym typem polimorficznym otrzymujemy \emph{twierdzenie za darmo} \cite{Wadler1989} dotyczące termów, które mają ten typ. 
+Jest to wyraz ogólnej zależności: dysponując dowolnym typem polimorficznym otrzymujemy \emph{twierdzenie za darmo} \cite{Wadler1989} dotyczące termów, które mają ten typ. 
 

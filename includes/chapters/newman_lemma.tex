@@ -14,7 +14,7 @@
                \] 
 
   \item[(WCR)] Powiemy, że \(\to\) ma \emph{słabą własność 
-               Churcha-Rossera}, jesli dla dowolnych \(a,\,b,\,c\in A\)
+               Churcha-Rossera}, jeśli dla dowolnych \(a,\,b,\,c\in A\)
                takich, że \(a\to b\) oraz \(a\to c\) istnieje \(d\in A\) 
                takie, że \(b\to^{*} d\) i \(c\to^{*} d\).\label{def:wcr_property_untyped}
                Innymi słowy, przemienny jest diagram:
@@ -25,18 +25,19 @@
                \] 
 
 \end{enumerate}
+  Widzimy, że własność CR pociąga za sobą własność WCR. Odwrotna zależność nie zachodzi (patrz Rysunek \ref{fig:wcrnotcr}).
 \end{definicja}
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.32\linewidth]{../wcrnotcr_example}
-  \caption{Rozważmy graf skierowany, w którym krawędzie odpowiadają relacji \(\to\) w zbiorze \(\{a,b,c,d\}\). Widzimy, że relacja \(\to\) ma własnosność WCR, ale nie ma własności CR.}
+  \caption{Rozważmy graf skierowany, w którym krawędzie odpowiadają relacji \(\to\) w zbiorze \(\{a,b,c,d\}\). Widzimy, że relacja \(\to\) ma własnosność WCR, ale nie ma własności CR.}\label{fig:wcrnotcr}
 \end{figure}
 
 \begin{definicja}(Postać normalna)
   Powiemy, że \(x\in A\) jest \emph{redukowalny}, jeśli istnieje \(y\in A\) takie, że \(x\to y\). W przeciwnym wypadku powiemy, że \(x\) jest w \emph{postaci normalnej} i będziemy pisali \(x\in\mathrm{NF}\). 
   
-  Element \(y\in A\) nazywamy \emph{postacią normalną} \(x\in A\), jesli \(x\to^{*}y\) i \(y\in\mathrm{NF}\). Jeśli \(y\) jest postacią normalną \(x\) i \(y\) jest jedyną postacią normalną \(x\), to piszemy \(x\downarrow y\). W przeciwnym wypadku, czyli jeśli istnieją \(y, z\in \mathrm{NF}, y\neq z\) takie, że \(x\to^{*} y\) i \(x\to^{*} z\), powiemy, że \(x\) jest \emph{niejednoznaczny}. 
+  Element \(y\in A\) nazywamy \emph{postacią normalną} \(x\in A\), jeśli \(x\to^{*}y\) i \(y\in\mathrm{NF}\). Jeśli \(y\) jest postacią normalną \(x\) i \(y\) jest jedyną postacią normalną \(x\), to piszemy \(x\downarrow y\). W przeciwnym wypadku, czyli jeśli istnieją \(y, z\in \mathrm{NF}, y\neq z\) takie, że \(x\to^{*} y\) i \(x\to^{*} z\), powiemy, że \(x\) jest \emph{niejednoznaczny}. 
 \end{definicja}
 
 \begin{definicja}

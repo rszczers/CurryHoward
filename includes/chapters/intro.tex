@@ -9,3 +9,11 @@ verification of it. \cite{Lof_96}}{\emph{\small{{P. Martin-Löf}}}}
 \section*{Wstęp}
 \subimport{includes/chapters/}{denotational_semantics.tex}
 
+Obydwa ujęcia są wspólne dla programowania funkcyjnego. Refleksja nad rachunkiem \(\lambda\) D. Scotta i Ch. Strachey'a prowadziła do powstania semantyki denotacyjnej dla rachunku \(\lambda\) i w ogóle pozwoliła wyodrębnić się dziedzinie formalnej semantyki języków programowania. Przyjmując drugą perspektywę, wynosimy z bogatych teorii matematycznych abstrakcje, które które kształtują techniki, którymi przetwarzamy informacje: funkcje wyższego rzędu, leniwa ewaluacja, dopasowywanie wzorców, różnorodne metody abstrakcji danych. 
+Celem tej pracy jest wyłożenie minimalnych podstaw teoretycznych koniecznych do zrozumienia powyższych haseł. Bardzo konkretnym zamiarem tej pracy jest przygotowanie bazy wiedzy koniecznej do rozpoczęcia studiowania kompilatora GHC języka Haskell.
+
+Pierwszy rozdział o rachunku \(\lambda\) bez typów to podstawa, na której opierały będą się pozostałe. Omówiona jest składnia rachunku \(\lambda\) i jego operacyjny charakter oraz elementy semantyki denotacyjnej. Rozdział kończy omówienie alternatywnej do kodowania Churcha metody reprezentowania struktur danych -- kodowania Scotta.
+
+Drugi rozdział uzupełnia rachunek \(\lambda\) o typy. Omawiamy własności tego systemu: związki jego operacyjnego charakteru z typowaniem i ewaluacją. Główny wynik to własność silnej normalizacji.
+
+W pracy przechodzimy z systemu nietypowanego, przez system w którym termy mają arbitralny (dynamiczny) charakter, do systemu, w którym typy wyrażeń są z góry ustalone (statyczne). System F w Rozdziale \ref{sec:system_f} zarysowany jest tak, by wskazać różnice pomiędzy systemami w stylu Currego i systemami w stylu Churcha. Składnia systemu wybrana została tak, aby zasugerować możliwe rozszerzenia systemu i z łatwością odnieść go do tzw. kostki \(\lambda\) H. P. Barendregta. Informacje tu zgromadzone są punktem wyjścia do zrozumienia technikaliów związanymi z kompilowaniem języka Haskell do języka pośredniego, który oparty jest w przeważającej mierze na Systemie F w stylu Churcha. 

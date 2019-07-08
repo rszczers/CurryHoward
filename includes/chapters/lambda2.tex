@@ -4,14 +4,14 @@ W rozdziale tym przedstawimy rachunek \(\lambda\) drugiego rzędu w stylu Church
 \subsection{Termy zależne od typów}
 
 \begin{definicja}(Typy \(\mathbb{T}2\))
-  Niech \(\mathbb{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi typowymi} i oznaczali literami alfabetu greckiego (\(\alpha, \beta, \gamma, \dots\)). Zbiór typów \(\mathbb{T}2\) Systemu F okreslamy w notacji BNF następującym zapisem:
+  Niech \(\mathbb{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi typowymi} i oznaczali literami alfabetu greckiego (\(\alpha, \beta, \gamma, \dots\)). Zbiór typów \(\mathbb{T}2\) Systemu F określamy w notacji BNF następującym zapisem:
   \begin{align*}
     \mathbb{T2}\ &\leftarrow\ \mathbb{V}\ |\ (\mathbb{T2}\to\mathbb{T2})\ |\ (\Pi \mathbb{V}:*.\,\mathbb{T2})
   \end{align*}
-Za oznaczenia metazmienych przebiegających zbiór typów \(\mathbb{T}2\) posłużą nam późniejsze litery alfabetu greckiego: \(\sigma,\tau,\rho,\dots\) lub następujące litery alfabetu łacińskiego: \(A,\, B,\, T\).
+Za oznaczenia metazmiennych przebiegających zbiór typów \(\mathbb{T}2\) posłużą nam późniejsze litery alfabetu greckiego: \(\sigma,\tau,\rho,\dots\) lub następujące litery alfabetu łacińskiego: \(A,\, B,\, T\).
 \end{definicja}
 \begin{definicja}(Pretermy \(\mathbf{\tilde\Lambda}_\mathbb{T2}\))
-  Niech \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi termowymi} i oznaczali literami alfabetu łacińskiego (\(x,\, y,\, z,\,\dots\)). Zbiór pretermów \(\mathbf{\tilde\Lambda}_\mathbb{T2}\) Systemu F okreslamy w notacji BNF następującym zapisem:
+  Niech \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi termowymi} i oznaczali literami alfabetu łacińskiego (\(x,\, y,\, z,\,\dots\)). Zbiór pretermów \(\mathbf{\tilde\Lambda}_\mathbb{T2}\) Systemu F określamy w notacji BNF następującym zapisem:
   \begin{align*}
       \mathbf{\tilde\Lambda}_\mathbb{T2}\ &\leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbf{\tilde\Lambda}_\mathbb{T2}) \ |\ (\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbb{T2}) \ |\ (\lambda V:\mathbb{T2}.\, \mathbf{\tilde\Lambda}_\mathbb{T2})\ |\ (\lambda V:*.\, \mathbf{\tilde\Lambda}_\mathbb{T2})
   \end{align*}
@@ -34,7 +34,7 @@ Stosujemy standardowe konwencje notacyjne:
   Przykładowo: \(\Pi\alpha\,\beta:*.\,\alpha\to\beta\to\alpha\ \equiv\ \Pi\alpha:*.(\Pi\beta:*.\,(\alpha\to(\beta\to\alpha))))\).
 \end{konwencja*}
 
-Wyrażenia \(\lambda\) (\(\lambda\)-termy) w Systemie F to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja ta jest analogiczna do zaprezentowanej w Rozdziale \ref{subsec:lambda_terms_untyped}. Za oznaczenia metazmienych przebiegające zbiór wyrażeń Systemu F posłużą nam późniejsze litery alfabetu łacińskiego: \(M\), \(N\), \(P\), \(\dots\).
+Wyrażenia \(\lambda\) (\(\lambda\)-termy) w Systemie F to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja ta jest analogiczna do zaprezentowanej w Rozdziale \ref{subsec:lambda_terms_untyped}. Za oznaczenia metazmiennych przebiegające zbiór wyrażeń Systemu F posłużą nam późniejsze litery alfabetu łacińskiego: \(M\), \(N\), \(P\), \(\dots\).
 
 Oczywistemu rozszerzeniu ulega szereg pojęć z Rozdziału \ref{sec:simple_types}. Poniżej umieszczamy najistotniejsze z nich. 
 %, ale aby nie wchodzić w szczegóły, ustalmy, że utożsamiać będziemy wyrażenia, które różnią się między sobią wyłącznie zmiennymi związanymi. 
@@ -135,7 +135,7 @@ Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji \re
       \end{align*}
       \(\mathrm{dom}(\Gamma)\) i \(\mathrm{rg}(\Gamma)\) nazywamy odpowiednio \emph{dziedziną} i \emph{zakresem} \(\lambda 2\)-kontekstu \(\Gamma\).
   \end{enumerate}
-    Jesli \(\Gamma=(a_{11}: a_{12},\,\dots,\,a_{n1}:a_{n2})\) jest \(\lambda 2\)-kontekstem, to przez \(\Gamma[\alpha/\sigma]\) oznaczamy \(\lambda 2\)-kontekst, w którym jesli \(a_{i1}\in V\), to \(a_{i2}\) zamieniamy na \(x_{i2}[\alpha/\sigma]\)  dla \(1\leq i \leq n\).
+    Jeśli \(\Gamma=(a_{11}: a_{12},\,\dots,\,a_{n1}:a_{n2})\) jest \(\lambda 2\)-kontekstem, to przez \(\Gamma[\alpha/\sigma]\) oznaczamy \(\lambda 2\)-kontekst, w którym jeśli \(a_{i1}\in V\), to \(a_{i2}\) zamieniamy na \(x_{i2}[\alpha/\sigma]\)  dla \(1\leq i \leq n\).
 \end{definicja}
 
  \begin{uwaga*}
@@ -288,7 +288,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
         \lambda \alpha : *.\,\lambda x:\alpha.\ x\ :\ \Pi\alpha:*.\,\alpha\to\alpha & (\(\Pi\)-i) 3
       \end{fitch}
       \end{equation*}
-    \item\label{ex:f_typing_4} W systemie Girarda/Reynoldsa możemy okreslić polimorficzne liczebniki Churcha ustalając:
+    \item\label{ex:f_typing_4} W systemie Girarda/Reynoldsa możemy określić polimorficzne liczebniki Churcha ustalając:
       \begin{align*}
         \mathrm{Nat} &\equiv\Pi \alpha:*.\,(\alpha\to\alpha)\to\alpha\to\alpha\\
         \bar{0}      &\equiv \lambda \alpha:*.\,\lambda f:\alpha \to\alpha\ x:\alpha.\,x\\
@@ -310,7 +310,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
       \end{fitch}
       \end{equation*}
       Za pomocą łatwej indukcji względem długości wyprowadzenia możemy przekonać się, że w istocie wszystkie polimorficzne liczebniki Churcha są typu Nat.
-    \item Typować możemy równieżi polimorficzne złożenie funkcji.\label{ex:f_typing_5}
+    \item Typować możemy również polimorficzne złożenie funkcji.\label{ex:f_typing_5}
       \begin{equation*}
       \begin{fitch}
         \fh \gamma: * & (form) \\
@@ -332,7 +332,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
       \end{equation*}
   \end{enumerate}
 \end{przyklad}
- Jak widzimy procedura wyprowadzania typu odpowiada w istocie rekonstrukcji wyrażenia. Problem typowania w (ortodoksyjnym) stylu Churcha jest trywialny, gdyż zgodnie z Rozdziałem \ref{subsec:church_style} założyliśmy, że mamy pełną informację typową o zmiennych przedmiotowych. Czytająć wyprowadzenia od dołu do góry rekonstruujemy również kontekst. Mówimy, że składnia Systemu F w stylu Churcha \emph{koduje typowanie}.
+ Jak widzimy procedura wyprowadzania typu odpowiada w istocie rekonstrukcji wyrażenia. Problem typowania w (ortodoksyjnym) stylu Churcha jest trywialny, gdyż zgodnie z Rozdziałem \ref{subsec:church_style} założyliśmy, że mamy pełną informację typową o zmiennych przedmiotowych. Czytając wyprowadzenia od dołu do góry rekonstruujemy również kontekst. Mówimy, że składnia Systemu F w stylu Churcha \emph{koduje typowanie}.
   \subsection{Redukcja}
 
   \begin{definicja}(\(\beta\)-redukcja)
@@ -343,13 +343,13 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
   \end{align*}
   \end{definicja}
 
-Lemat \ref{thm:uniqueness_f} (podobnie jak Lemat \ref{thm:type_uniqueness}) zapewnia nas, że typ termu zachowuje się przy \(\beta\)-redukcji. Praktyczny sens tego twierdzenia polega na tym, że relacja posiadania tego samego typu jest zamknięta na \(\beta\)-konwersję i aby rozstrzygnąć o typie danego termu wystarczy, że znamy typ któregokolwiek jego \(\beta\)-konwersa.
+Lemat \ref{thm:uniqueness_f} (podobnie jak Lemat \ref{thm:type_uniqueness}) zapewnia nas, że typ termu zachowuje się przy \(\beta\)-redukcji. Praktyczny sens tego twierdzenia polega na tym, że relacja posiadania tego samego typu jest zamknięta na \(\beta\)-konwersję i aby rozstrzygnąć o typie danego termu wystarczy, że znamy typ któregokolwiek jego \(\beta\)-konwersu.
 
 \begin{lemat}(O redukcji podmiotu)\label{thm:uniqueness_f}
   Jeśli \(\Gamma\vdash M:\tau\) i \(M\to^{*}_\beta N\), to \(\Gamma\vdash N:\tau\).
 \end{lemat}
 \begin{dowod}
-  Dowód przeprowadzamy analogicznie do dowodu Lematu \ref{thm:subject_reduction}, przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M;\tau\). Szczegóły pomijamy. \qed
+  Dowód przeprowadzamy analogicznie do dowodu Lematu \ref{thm:subject_reduction}, przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M:\tau\). Szczegóły pomijamy. \qed
 \end{dowod}
 
   \begin{przyklad}
@@ -406,7 +406,7 @@ Zachodzi oczywiście również odpowiednik Lematu \ref{thm:eta_uniqueness_simple
   Dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M:\tau\). Szczegóły pomijamy. \qed
 \end{dowod}
 
-\begin{przyklad} Zwróćmy ponownie uwagę na Przykład \ref{ex:f_typing}\ref{ex:f_typing_1}. Ponieważ \(\lambda \beta : *.\,x\beta\ \to_\eta x\), to ze względu Lemat \ref{thm:eta_uniqueness_f} wyprowadzalny jest również \(\Gamma\vdash x:\perp\).
+\begin{przyklad} Zwróćmy ponownie uwagę na Przykład \ref{ex:f_typing}\ref{ex:f_typing_1}. Ponieważ \(\lambda \beta : *.\,x\beta\nobreak\to_\eta\nobreak x\), to ze względu Lemat \ref{thm:eta_uniqueness_f} wyprowadzalny jest również \(\Gamma\vdash x:\perp\).
 \end{przyklad}
 
 W odpowiednich wersjach zachodzą również Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów~\ref{sec:untyped_lambda}~i~\ref{sec:simple_types}.
@@ -427,7 +427,7 @@ Kolejnym ważnym twierdzeniem, które zachodzi dla Systemu F jest silna normaliz
 nie jest typowalny w tym systemie.
 \end{wniosek*}
 
-Jako Fakt \ref{fact:cr_f} przedstawimy własność Churcha-Rossera upewniającą nas, że \(\beta\)-redukcja, bez względu na przyjętą strategię, zawsze prowadzi do tych samych rezultatów, a zatem ma sens obliczeniowy. Fakt ten otrzymujemy jako wniosek z lematu Newmana \ref{thm:newman_lemma}, wykazując, że \(\beta\)-redukcja ma słabą własność Churcha-Rossera (WCR) \cite[Twierdzenie 11.2.12]{Urzyczyn2006}.
+Jako Fakt \ref{fact:cr_f} przedstawimy własność Churcha-Rossera upewniającą nas, że \(\beta\)-redukcja, bez względu na przyjętą strategię, zawsze prowadzi do tych samych rezultatów, a zatem ma sens obliczeniowy. Fakt ten otrzymujemy jako wniosek z lematu Newmana (Twierdzenie \ref{thm:newman_lemma}), wykazując, że \(\beta\)-redukcja ma słabą własność Churcha-Rossera (WCR) \cite[Twierdzenie 11.2.12]{Urzyczyn2006}.
 
 \begin{fakt}(Własność Churcha-Rossera)\label{fact:cr_f}
   Relacja \(\beta\)-redukcji ma własność CR.
@@ -443,4 +443,3 @@ Jako Fakt \ref{fact:cr_f} przedstawimy własność Churcha-Rossera upewniającą
 % Własność Churcha-Rossera
 
 \subimport{includes/chapters/}{l2_summary.tex}
-

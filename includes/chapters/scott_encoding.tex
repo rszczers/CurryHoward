@@ -1,7 +1,7 @@
   \subsection{Kodowanie typów danych}
 Prosta składnia języka rachunku \(\lambda\) pozwala wyrazić zaskakująco wiele struktur danych reprezentując je i operacje na nich jako funkcje. Z tego powodu, stanowiąc inspirację dla wielu projektantów języków programowania, uchodzi za protoplastę rodziny języków funkcyjnych. Rozwój tej legendy dobrze oddaje cykl klasycznych artykułów (tzw. \emph{Lambda Papers}) zapoczątkowany przez dokumentację języka Scheme \cite{Sussman:1975:IEL:889230}.
 
-Najpopularniejszym sposobem reprezentacji danych przez funkcje w rachunku \(\lambda\) oparty jest na kodowaniu liczb Peano za pomocą tzw. liczebników Churcha. Metoda ta, ze względu na wynikające zeń problemy natury złożonościowej \cite{Koopman:2014:CED:2746325.2746330}, ma obecnie wyłącznie walory edukacyjne, dlatego w dalszej cześci pracy pokażemy tzw. kodowanie Scotta. Jest ona interesująca ze względu na praktyczną możliwość reprezentacji algebraicznych typów danych (ADT, ang. \emph{Algebraic Data Types}\footnote{Nie należy mylić z \emph{Abstract Data Types}.}) znanych ze współczesnych języków funkcyjnych \cite{Jansen:2013:P9C:2941698.2941710}, pozwalając tym samym zaimplementować te konstrukcje w dowolnym języku, w którym dostępne są wyrażenia \(\lambda\). Fakt, że każdy typ danych można zastąpić tym sposobem odpowiadającą mu funkcją, wskazuje na metodę konstruowania prostych języków funkcyjnych \cite{Jensen_2006} oraz na uniwersalność rachunku \(\lambda\) jako języka przejściowego dla kompilatorów języków funkcyjnych \cite[Rozdział 3]{PeytonJones:1992:IFL:129390}. Druga z tych idei znajduje dziś bardzo praktyczne zastosowanie w przypadku Systemu F -- rozszerzenia rachunku \(\lambda\), który będzie tematem Rozdziału \ref{sec:system_f} -- i kompilatora GHC języka Haskell.
+Najpopularniejszym sposobem reprezentacji danych przez funkcje w rachunku \(\lambda\) oparty jest na kodowaniu liczb Peano za pomocą tzw. liczebników Churcha. Metoda ta, ze względu na wynikające zeń problemy natury złożonościowej \cite{Koopman:2014:CED:2746325.2746330}, ma obecnie wyłącznie walory edukacyjne, dlatego w dalszej części pracy pokażemy tzw. kodowanie Scotta. Jest ona interesująca ze względu na praktyczną możliwość reprezentacji algebraicznych typów danych (ADT, ang. \emph{Algebraic Data Types}\footnote{Nie należy mylić z \emph{Abstract Data Types}.}) znanych ze współczesnych języków funkcyjnych \cite{Jansen:2013:P9C:2941698.2941710}, pozwalając tym samym zaimplementować te konstrukcje w dowolnym języku, w którym dostępne są wyrażenia \(\lambda\). Fakt, że każdy typ danych można zastąpić tym sposobem odpowiadającą mu funkcją, wskazuje na metodę konstruowania prostych języków funkcyjnych \cite{Jensen_2006} oraz na uniwersalność rachunku \(\lambda\) jako języka przejściowego dla kompilatorów języków funkcyjnych \cite[Rozdział 3]{PeytonJones:1992:IFL:129390}. Druga z tych idei znajduje dziś bardzo praktyczne zastosowanie w przypadku Systemu F -- rozszerzenia rachunku \(\lambda\), który będzie tematem Rozdziału \ref{sec:system_f} -- i kompilatora GHC języka Haskell.
 
 \subsubsection{Algebraiczne typy danych}
 Algebraiczne typy danych są podstawowym środkiem służącym do określania struktur danych we współczesnych funkcyjnych językach programowania. Na potrzeby prezentacji poszczególnych kodowań posłużymy się intuicjami o ADT zbudowanymi na gruncie następujących definicji w języku Haskell:
@@ -103,9 +103,9 @@ Funkcję tę możemy wyrazić w rachunku \(\lambda\) przy pomocy kodowania Scott
 \begin{align*}
   \mathrm{add_0} \equiv \lambda n m.\:n\,m\,(\lambda n.\:\mathrm{Succ}(\mathrm{add_0}\,n\,m))
 \end{align*}
-Formalizm rachunku \(\lambda\) nie pozwala na okreslanie nowych nazw i rekurencyjne odnoszenie się przez nie do nich samych. Standardową techniką w rachunku \(\lambda\) do określania funkcji w ten sposób jest użycie operatora punktu stałego Y. Przypomnijmy:
+Formalizm rachunku \(\lambda\) nie pozwala na określanie nowych nazw i rekurencyjne odnoszenie się przez nie do nich samych. Standardową techniką w rachunku \(\lambda\) do określania funkcji w ten sposób jest użycie operatora punktu stałego Y. Przypomnijmy:
 \begin{align*}
-  \mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))
+  \mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx))).
 \end{align*}
 Wówczas określamy
 \begin{align*}
@@ -119,7 +119,7 @@ Stosując metody kodowania prostych typów wyliczeniowych i par, łatwo odnajduj
   \mathrm{Zero} &\equiv \lambda z s .\, z     & \mathrm{Nil} &\equiv \lambda n c.\,n\\
   \mathrm{Succ} &\equiv \lambda n z s.\,sn    & \mathrm{Cons} &\equiv \lambda x \, x_s \, n\, c.\ c \, x \, x_s
 \end{align*}
-  Zwróćmy uwagę, że konstruktory Nat i Maybe są swoimi \(\alpha\)-konwersami. Podobieństwo nie jest przypadkowe: na poziomie typów konstrukcja Maybe jest odpowiednikiem brania następnika. Określając dodatkowo \(\mathrm{Void}\equiv\lambda x.x\) jako element neutralny działania łącznego, otrzymujemy na poziomie typów strukturę półpierścienia z działaniem mnożenia okresloną przez konstrukcję par i dzałaniem dodawania określonego przez konstrukcję typów wyliczeniowych. Stąd algebraicze typy danych biorą swoją nazwę.
+  Zwróćmy uwagę, że konstruktory Nat i Maybe są swoimi \(\alpha\)-konwersami. Podobieństwo nie jest przypadkowe: na poziomie typów konstrukcja Maybe jest odpowiednikiem brania następnika. Określając dodatkowo \(\mathrm{Void}\equiv\lambda x.x\) jako element neutralny działania łącznego, otrzymujemy na poziomie typów strukturę półpierścienia z działaniem mnożenia określoną przez konstrukcję par i dzałaniem dodawania określonego przez konstrukcję typów wyliczeniowych. Stąd algebraicze typy danych biorą swoją nazwę.
 
 Z łatwością możemy określić teraz operacje brania poprzednika, głowy i ogona listy, odpowiednio:
 \begin{align*}
@@ -192,7 +192,7 @@ dla \(m, n \in \mathbb{N}\), wiążemy z nią reprezentację każdego z konstru
  \vdots\\
   \mathrm{C_m} \equiv \lambda t_{m1}\, t_{m2}\, \dots t_{mn_m}\, f_1\, f_m \dots f_m.\ f_1 t_{m1} t_{m2} \dots t_{mn_m}
 \end{gather*}
-Wówczas następującą definicję cześciową funkcji \texttt{f}:
+Wówczas następującą definicję częściową funkcji \texttt{f}:
 \begin{minted}{haskell}
   f (C1 v11 ... v1n1) = y1
   ...

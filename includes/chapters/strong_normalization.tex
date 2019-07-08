@@ -15,7 +15,7 @@ Opracowany tutaj dowód pochodzi z \cite[Dodatek A3]{Hindley:2008:LCI:1388400}. 
 Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} oryginalnie przypisywane W. Taitowi \cite{Tait67}, z odpowiednimi zmianami stosuje się w dowodach własności silnej normalizacji dla innych systemów typów \cite[Podrozdział 11.5]{Urzyczyn2006}.
 
 \begin{definicja}(Termy redukowalne)
-  Niech \(\Gamma\vdash_\mathbb{T} M:\sigma\). Powiemy, że \(M\) jest \emph{redukowalny} (także \emph{silnie obliczalny}), jesli jeśli spełnia poniższe warunki:
+  Niech \(\Gamma\vdash_\mathbb{T} M:\sigma\). Powiemy, że \(M\) jest \emph{redukowalny} (także \emph{silnie obliczalny}), jeśli spełnia poniższe warunki:
   \begin{enumerate}[label=(R\arabic*), ref=(R\arabic*)]
     \item Jesli \(\sigma\) jest zmienną typową, to \(M\) jest silnie normalizowalny. Określamy:
       \[
@@ -141,7 +141,7 @@ Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} orygi
         P'[y'/N]\in\llbracket \rho \rrbracket
         \right )
       \end{align*}
-      Ustalmy \(N_0\in\llbracket \sigma \rrbracket\). Wówczas z cześci \ref{def:l1_a} Lematu \ref{thm:sn_lemat1} \(N_0\in\mathrm{SN}\). Wobec tego z Lematu \ref{thm:sn_lemat3} wnioskujemy, że:
+      Ustalmy \(N_0\in\llbracket \sigma \rrbracket\). Wówczas z części \ref{def:l1_a} Lematu \ref{thm:sn_lemat1} \(N_0\in\mathrm{SN}\). Wobec tego z Lematu \ref{thm:sn_lemat3} wnioskujemy, że:
       \begin{align}
         (\lambda y'.\,P')N_0\in\llbracket \rho \rrbracket \tag{\textasteriskcentered\textasteriskcentered}\label{eq:sn_2}
       \end{align}

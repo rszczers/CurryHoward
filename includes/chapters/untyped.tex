@@ -1,7 +1,7 @@
 \section{Rachunek \(\lambda\) bez typów}\label{sec:untyped_lambda}
 Niech  \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}. Ponieważ \(V\) jest potencjalnie nieskończony, zastrzegamy sobie możliwość wybierania w razie potrzeby wcześniej nie użytej zmiennej.
 
-\begin{definicja}(Zbiór \(\mathbf{\tilde\Lambda}\) pretermów)\label{def:lambda-untyped}
+\begin{definicja}[Zbiór \(\mathbf{\tilde\Lambda}\) pretermów]\label{def:lambda-untyped}
 Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór wyrażeń \(\mathbf{\tilde\Lambda}\) taki, że:
   \begin{enumerate}[label={(P\arabic*)}, ref={(P\arabic*)}]
   \setlength\itemsep{0em}
@@ -78,14 +78,14 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
   \end{align*}
   W powyższych przykładach użyliśmy standardowej notacji w górnym indeksie umieszczając krotność występowania elementu.
 \end{przyklad}
-\begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)\label{def:untyped_fv}
+\begin{definicja}[Zbiór \(\mathrm{FV}\) zmiennych wolnych]\label{def:untyped_fv}
   Dla dowolnego pretermu \(M\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\) w następujący sposób:
 \begin{align*}
     \mathrm{FV}(x) &= \{x\}\\
     \mathrm{FV}(\lambda x .\, P)  &= \mathrm{FV}(P)\setminus\{x\}\\
     \mathrm{FV}(P Q) &= \mathrm{FV}(P)\cup\mathrm{FV}(Q)
 \end{align*}
-  Jesli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{domknięty} lub nazywamy \(M\) \emph{kombinatorem}.
+  Jeśli \(\mathrm{FV}(M)=\emptyset\), to mówimy, że \(M\) jest \emph{domknięty} lub nazywamy \(M\) \emph{kombinatorem}.
 \end{definicja}
 \begin{przyklad}
   \begin{enumerate}[label=(\alph*)]
@@ -108,47 +108,6 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
   \end{enumerate}
 \end{definicja}
 
-\begin{lemat}(O podstawieniu)\label{lem:substitution}
-  Niech \(M,\,N,\,L\in \mathbf{\tilde\Lambda}\) i niech ponadto \(x\not\equiv y\) oraz \(x\not\in\mathrm{FV}(L)\). Wówczas
-  \begin{align}\label{eq:substitution}
-    M[x/N][y/L]\equiv M[y/L]\left[x/N\left[y/L\right]\right].
-  \end{align}
-  \begin{dowod}
-    Dowód przebiega przez indukcję strukturalną względem \(M\). Rozważmy następujące przypadki:
-    \begin{enumerate}[label={\roman*)}, ref={(\arabic*)}]
-      \item \(M\) jest zmienną. Wówczas:
-        \begin{enumerate}[label={\alph*.}]
-        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\).
-        \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i \(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \(M[x/N][y/L]\equiv L\). Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
-
-        \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne.
-        \end{enumerate}
-
-      \item \(M\equiv P Q\) dla pewnych \(P,\,Q\in\mathbf{\tilde\Lambda}\). Wówczas korzystając z założenia indukcyjnego wnosimy, że
-        \begin{align*}
-          P[x/N][y/L] &= P[y/L]\left[x/N\left[y/L\right]\right],\\
-          Q[x/N][y/L] &= Q[y/L]\left[x/N\left[y/L\right]\right].
-        \end{align*}
-        Mając na względzie \ref{def:substitution_c} widzimy, że twierdzenie zachodzi i w tym przypadku.
-        \item Jeśli \(M\equiv \lambda z.\,P\) oraz \(z\equiv x\) lub \(z\equiv y\), to z \ref{def:substitution_e} widzimy, że obydwie strony \eqref{eq:substitution} sa identyczne. Przypuśćmy, że \(z\not\equiv x\) i \(z\not\equiv y\) i \(z\not\in\mathrm{FV}(L)\). Wówczas na podstawie założenia indukcyjnego mamy:
-      \begin{align*}
-        (\lambda z.\,P)[x/N][y/L] &= \lambda z.\,P[x/N][y/L] =\\
-                                  &= \lambda z.\,P[y/L][x/N[y/L]] =\\
-                                  &= (\lambda z.\,P)[y/L][x/N[y/L]].
-      \end{align*}
-    \qed
-    \end{enumerate}
-  \end{dowod}
-\end{lemat}
-
-\begin{wniosek}\label{thm:odwracalnosc_podstawienia}
-Jesli \(M[x/y]\) jest określone i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest określone oraz
-  \(M[x/y][y/x]=M\).
-  \begin{dowod}
-    Mając na uwadze Lemat \ref{def:substitution} dowód przebiega przez indukcję strukturalną względem \(M\).
-    \qed
-  \end{dowod}
-\end{wniosek}
 
 
 
@@ -256,7 +215,7 @@ Wprowadzamy następujące konwencje notacyjne:
 Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów.
 
 \begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów \(\lambda\)-termu)
-  Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) okreslamy
+  Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) określamy
   \[
     \mathrm{Sub}(M)=\mathrm{Sub}(M'),
   \]
@@ -322,6 +281,49 @@ Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawie
 % \subsection{Podstawienie jednoczesne}
 % Biorąc pod uwagę sens obliczeniowy rachunku \(\lambda\) interesujące okazuje się modyfikacja Definicji \ref{def:untyped_substitution_hindley} w  taki sposób, aby podstawienie miało miejsce dla wielu zmiennych równolegle w całym \(\lambda\)-termie. Za przykładem \cite{STOUGHTON1988317} wprowadzimy \emph{podstawienie jednoczesne}. W tym celu jednak uściślenia wymagają pewne pojęcia.
 
+\begin{lemat}(O podstawieniu)\label{lem:substitution}
+  Niech \(M,\,N,\,L\in \mathbf{\tilde\Lambda}\) i niech ponadto \(x\not\equiv y\) oraz \(x\not\in\mathrm{FV}(L)\). Wówczas
+  \begin{align}\label{eq:substitution}
+    M[x/N][y/L]\equiv M[y/L]\left[x/N\left[y/L\right]\right].
+  \end{align}
+  \begin{dowod}
+    Dowód przebiega przez indukcję strukturalną względem \(M\). Rozważmy następujące przypadki:
+    \begin{enumerate}[label={\roman*)}, ref={(\arabic*)}]
+      \item \(M\) jest zmienną. Wówczas:
+        \begin{enumerate}[label={\alph*.}]
+        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\).
+        \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i \(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \(M[x/N][y/L]\equiv L\). Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
+
+        \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne.
+        \end{enumerate}
+
+      \item \(M\equiv P Q\) dla pewnych \(P,\,Q\in\mathbf{\tilde\Lambda}\). Wówczas korzystając z założenia indukcyjnego wnosimy, że
+        \begin{align*}
+          P[x/N][y/L] &= P[y/L]\left[x/N\left[y/L\right]\right],\\
+          Q[x/N][y/L] &= Q[y/L]\left[x/N\left[y/L\right]\right].
+        \end{align*}
+        Mając na względzie \ref{def:substitution_c} widzimy, że twierdzenie zachodzi i w tym przypadku.
+        \item Jeśli \(M\equiv \lambda z.\,P\) oraz \(z\equiv x\) lub \(z\equiv y\), to z \ref{def:substitution_e} widzimy, że obydwie strony \eqref{eq:substitution} sa identyczne. Przypuśćmy, że \(z\not\equiv x\) i \(z\not\equiv y\) i \(z\not\in\mathrm{FV}(L)\). Wówczas na podstawie założenia indukcyjnego mamy:
+      \begin{align*}
+        (\lambda z.\,P)[x/N][y/L] &= \lambda z.\,P[x/N][y/L] =\\
+                                  &= \lambda z.\,P[y/L][x/N[y/L]] =\\
+                                  &= (\lambda z.\,P)[y/L][x/N[y/L]].
+      \end{align*}
+    \qed
+    \end{enumerate}
+  \end{dowod}
+\end{lemat}
+
+\begin{wniosek}\label{thm:odwracalnosc_podstawienia}
+Jeśli \(M[x/y]\) jest określone i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest określone oraz
+  \(M[x/y][y/x]=M\).
+  \begin{dowod}
+    Mając na uwadze Lemat \ref{def:substitution} dowód przebiega przez indukcję strukturalną względem \(M\).
+    \qed
+  \end{dowod}
+\end{wniosek}
+
+
 \begin{definicja}(Podstawienie jednoczesne)\label{def:simult_substitution}
 Dla dowolnego \(M\in\mathbf{\Lambda}\), ciągu \(\lambda\)-zmiennych~\(\vec{x}\) i ciągu \(\lambda\)-termów \(\vec{N}\) określamy:
   \begin{enumerate}[label={(\(\vec{s}\)\arabic*)}, ref={(\arabic*)}]
@@ -377,7 +379,7 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
   \]
   \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}. Przez \(\to_\beta^{+}\), \(\to_\beta^{*}\), \(=_\beta\) oznaczamy odpowiednie domknięcia relacji \(\beta\)-redukcji.  Symbolem \(\leftarrow_\beta\) oznaczać będziemy relację odwrotną do \(\beta\)-redukcji, zaś przez \(\xleftrightarrow[\beta]{}\) jej symetryczne domknięcie. 
   
-  \emph{Ciągiem \(\beta\)-redukcji} nazywamy kazdy skończony lub nieskończony ciąg \(\lambda\)-termów \(M_0,\,M_1,\,\dots\) taki, że 
+  \emph{Ciągiem \(\beta\)-redukcji} nazywamy każdy skończony lub nieskończony ciąg \(\lambda\)-termów \(M_0,\,M_1,\,\dots\) taki, że 
   \(
     M_0 \to_\beta M_1 \to_\beta \dots
   \)
@@ -451,7 +453,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
         \Delta\Delta \to_\beta \Delta\Delta\Delta \to_\beta \Delta\Delta\Delta\Delta \to_\beta \dots
       \end{align*}
         Ponownie, ponieważ każda redukcja powoduje wydłużenie termu, \(\Delta\Delta\) nie ma postaci normalnej i w konsekwencji każdy powstały ciąg redukcji termu \(\Delta\Delta\) jest nieskończony.  
-      \item Redukcja \(\lambda\)-termu posiadającego więcej niż jeden redeks może prowadzić do różnych (choć \(\beta\)-równowaznych) reduktów. Zależy to od wyboru strategii redukcji. Rozważmy następujący term: \((\lambda u.\ v)\,\Omega\). Konsekwentne redukowanie podtermu \(\Omega\) prowadzić musi do niekończącego się stałego ciągu redukcji \[(\lambda u.\ v)\,\Omega\to_\beta(\lambda u.\ v)\,\Omega\to_\beta \dots\] Wybierając strategię polegającą na aplikacji \(\Omega\) do \((\lambda u.\ v)\) otrzymujemy natychmiastowo redeks w postaci normalnej.\label{ex:undeterministic_reduction_untyped}
+      \item Redukcja \(\lambda\)-termu posiadającego więcej niż jeden redeks może prowadzić do różnych (choć \(\beta\)-równoważnych) reduktów. Zależy to od wyboru strategii redukcji. Rozważmy następujący term: \((\lambda u.\ v)\,\Omega\). Konsekwentne redukowanie podtermu \(\Omega\) prowadzić musi do niekończącego się stałego ciągu redukcji \[(\lambda u.\ v)\,\Omega\to_\beta(\lambda u.\ v)\,\Omega\to_\beta \dots\] Wybierając strategię polegającą na aplikacji \(\Omega\) do \((\lambda u.\ v)\) otrzymujemy natychmiastowo redeks w postaci normalnej.\label{ex:undeterministic_reduction_untyped}
     \end{enumerate}
   \end{przyklad}
 \begin{definicja}(\(\eta\)-redukcja)

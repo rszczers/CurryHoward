@@ -9,10 +9,10 @@ Przypisanie typu \(\lambda\)-termowi rozpoczynamy zawsze od określenia typów d
 Obydwa podejścia dają w rezultacie takie same systemy typów \cite[Rozdział 3.4]{Urzyczyn2006}.  % Systemy w stylu Currego odpowiadają językom programowania funkcyjnego takim jak ML, Clean czy Haskell. Programując w takich językach rolę wyprowadzania typu w istocie przejmuje kompilator, zaś deklaracje typów mają tylko charakter dokumentacji.  
 Rozwiązaniem kompromisowym jest tzw. typowanie w \emph{stylu de Brujina}\footnote{W \cite{Urzyczyn2006} nazywa się to podejście \emph{nieortodoksyjnym stylem Churcha}} \cite[1A.33]{barendregt_dekkers_statman_2013} w którym nie ustala się typu wszystkich zmiennych, jednak adnotacje typowe są częścią składni (tak jak w stylu Churcha) i zależą od ustalonego kontekstu. 
 
-Zaprezentujemy teraz alternatywną składnię oraz reguły wyprowadzania typów dla systemu typów prostych w stylu Churcha. Wszystkie określenia oraz twierdzenia występujące dotychczas w Rozdziale \ref{sec:simple_types} mają swoje odpowiedniki dla systemu w stylu Churcha \cite[Rozdział 2.10]{nederpelt_geuvers_2014}. Wyjątek stanowi Lemat \ref{thm:polymorphism}, które jest zastąpione w tym systemie Lematem \ref{thm:type_uniqueness} o jednoznaczności typu.
+Zaprezentujemy teraz alternatywną składnię oraz reguły wyprowadzania typów dla systemu typów prostych w stylu Churcha. Wszystkie określenia oraz twierdzenia występujące dotychczas w Rozdziale \ref{sec:simple_types} mają swoje odpowiedniki dla systemu w stylu Churcha \cite[Rozdział 2.10]{nederpelt_geuvers_2014}. Wyjątek stanowi Lemat \ref{thm:polymorphism}, który jest zastąpiony w tym systemie Lematem \ref{thm:type_uniqueness} o jednoznaczności typu.
 
 \subsubsection{Składnia}
-Zbiór typów \(\mathbb{T}\) definiujemy w myśl Definicji \ref{def:typy-proste}. Niech \(U,\,V\) będą przeliczalnie nieskończonymi zbiorem zmiennych przedmiotowych, odpowiednio: zmiennych typowych i (\(\lambda\)-zmiennych). Celem zdefiniowania \(\lambda\)-termów w stylu Churcha przeprowadzamy konstrukcję analogiczną do tej przedstawionej w Rozdziale \ref{sec:untyped_lambda}: okreslamy zbiór pretermów \(\mathbb{\tilde\Lambda}_\mathbb{T}\), a następnie definiujemy \(\lambda\)-termy jako klasy abstrakcji \(\alpha\)-konwersji.
+Zbiór typów \(\mathbb{T}\) definiujemy w myśl Definicji \ref{def:typy-proste}. Niech \(U,\,V\) będą przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych, odpowiednio: zmiennych typowych i (\(\lambda\)-zmiennych). Celem zdefiniowania \(\lambda\)-termów w stylu Churcha przeprowadzamy konstrukcję analogiczną do tej przedstawionej w Rozdziale \ref{sec:untyped_lambda}: określamy zbiór pretermów \(\mathbb{\tilde\Lambda}_\mathbb{T}\), a następnie definiujemy \(\lambda\)-termy jako klasy abstrakcji \(\alpha\)-konwersji.
 \begin{align*}
   \mathbb{T}\ &\leftarrow \ U\ |\ (\mathbb{T}\to\mathbb{T})\\
   \mathbf{\tilde\Lambda}_\mathbb{T}\ &\leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}_\mathbb{T}\,\mathbf{\tilde\Lambda}_\mathbb{T}) \ |\ (\lambda V:\mathbb{T}.\, \mathbf{\tilde\Lambda}_\mathbb{T})
@@ -52,7 +52,7 @@ Zauważmy, że mając zadany kontekst, typ każdego poprawnego \(\lambda\)-termu
 %    \begin{enumerate}[label=(\alph*)]
 %    \item
 Zauważmy, że nie istnieje jeden typ dla reprezentacji funkcji identycznościowej. Jeśli \(nat\) jest stałą typową, którą reprezentujemy liczby naturalne, to identyczność na zbiorze liczb naturalnych będziemy reprezentowali termem \(\lambda x:nat.\,x\), na zbiorze funkcji \(\mathbb{N}\to\mathbb{N}\), \(\lambda x:\mathrm{nat}\to\mathrm{nat}.\,x\) i tak dalej.
-  Aby okreslić ogólną postać identyczności, musimy móc abstrahować po zbiorze typów, czyli parametryzować postać termu typem. %Wymaga to dodania kolejnej abstrakcji:
+  Aby określić ogólną postać identyczności, musimy mieć możliwość abstrahować względen nie tylko zmiennych, ale także typów, czyli parametryzować postać termu typem w następujcy sposób: %Wymaga to dodania kolejnej abstrakcji:
       \begin{align*}
         \lambda \sigma:* .\,\lambda x:\sigma.\,x,
       \end{align*}

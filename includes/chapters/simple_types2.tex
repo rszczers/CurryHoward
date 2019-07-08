@@ -52,7 +52,7 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
   \item \emph{Stwierdzeniem} (ang. \emph{statement}) nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\mathbf{\Lambda}\) i \(\sigma\in\mathbb{T}\). W stwierdzeniu \(M:\sigma\) \(\lambda\)-term \(M\) nazwamy \emph{podmiotem}  (ang. \emph{subject}), zaś \(\sigma\) -- \emph{predykatem}\footnote{Nazwy te historycznie sięgają prac nad semantyką formalną języków naturalnych R. Montague'a.}.
   \item \emph{Deklaracją} (ang. \emph{declaration}) nazywamy każde stwierdzenie w którym podmot jest zmienną termową.
   \item \emph{Kontekstem} (ang. \emph{context}) nazywamy skończony liniowo uporządkowany zbiór (\emph{listę}) deklaracji, w którym wszystkie podmioty są wzajemnie różne.
-  \item \emph{Sądem} (ang. \emph{judgement}) nazywamy kazdy napis postaci \(\Gamma\vdash M:\sigma\), gdzie \(\Gamma\) jest kontekstem, zaś \(M:\sigma\) -- stwierdzeniem.  
+  \item \emph{Sądem} (ang. \emph{judgement}) nazywamy każdy napis postaci \(\Gamma\vdash M:\sigma\), gdzie \(\Gamma\) jest kontekstem, zaś \(M:\sigma\) -- stwierdzeniem.  
   \end{enumerate}
 \end{definicja}
 
@@ -108,7 +108,7 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 
 \vspace{0.5em}
 
-W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplkować do innego termu, odpowiednio. Dlatego mówimy, że w rachunku \(\lambda\) z typami prostymi termy \emph{zależą} od termów. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność (abstrakcja) jest \emph{pierwszego rzędu}.
+W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplikować do innego termu, odpowiednio. Dlatego mówimy, że w rachunku \(\lambda\) z typami prostymi termy \emph{zależą} od termów. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność (abstrakcja) jest \emph{pierwszego rzędu}.
 
 \begin{definicja}(Typowalność)\\
   Mówimy, że \(\lambda\)-term \(M\) jest typu \(\sigma\) w kontekście \(\Gamma\), jeśli istnieje skończone drzewo sądów spełniające poniższe warunki:
@@ -219,7 +219,7 @@ W wielu systemach problem typowalności można sprowadzić do problemu weryfikac
 \]
 gdzie \(p\in U\) jest zmienną typową, zaś kombinator \(K\equiv \lambda xy.\,x\).
 
-Wszystkie wymione problemy są w rachunku \(\lambda\) z typami prostymi są rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć słynny wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Milnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
+Wszystkie wymione problemy są w rachunku \(\lambda\) z typami prostymi rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć słynny wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F (w stylu Currego) są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Milnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
 
 \subimport{includes/chapters/}{unification.tex}
 
@@ -244,11 +244,11 @@ Przedstawimy teraz szereg lematów ustalających między innymi związki między
   % (Given as Proposition 3.2.9 (see also 3.1.9) in Barendregt, 1992.)
 \end{lemat}
 \begin{dowod}
-  Załóżmy, że sąd \(J: \Gamma\vdash M:\sigma\) jest wyprowadzalny. Dowód przebiega przez indukcję wględem długosci wyprowadzenia \(J\). Rozważmy następujące przypadki:
+  Załóżmy, że sąd \(J: \Gamma\vdash M:\sigma\) jest wyprowadzalny. Dowód przebiega przez indukcję względem długości wyprowadzenia \(J\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
     \item Jeśli \(J\) jest konsekwencją reguły \emph{var}, to \(\mathrm{Sub}(M)=\{M\}\) (Definicja~\ref{def:untyped_subterm}.\ref{def:untyped_subterm_1}), a zatem teza jest trywialnie spełniona.
-     \item Jesli \(J\) jest konsekwencją reguły \emph{app}, to \(M\equiv PQ\) dla \(P,\,Q\) dla których twierdzenie zachodzi. Ponieważ \(\mathrm{Sub}(M)=\mathrm{Sub}(P)\cup\mathrm{Sub}(Q)\cup\{PQ\}\) (Definicja~\ref{def:untyped_subterm}.\ref{def:untyped_subterm_2}), to teza również zachodzi.
+     \item Jeśli \(J\) jest konsekwencją reguły \emph{app}, to \(M\equiv PQ\) dla \(P,\,Q\) dla których twierdzenie zachodzi. Ponieważ \(\mathrm{Sub}(M)=\mathrm{Sub}(P)\cup\mathrm{Sub}(Q)\cup\{PQ\}\) (Definicja~\ref{def:untyped_subterm}.\ref{def:untyped_subterm_2}), to teza również zachodzi.
     \item Jeśli \(J\) jest konsekwencją reguły \emph{abs}, to \(M\equiv \lambda
       x.\,P\) dla pewnego \(P\) dla którego twierdzenie zachodzi. Ponieważ
       \(\mathrm{Sub}(\lambda x.\,M) = \mathrm{Sub}(M) \cup \{\lambda x.\,M\}\),
@@ -266,8 +266,8 @@ Przedstawimy teraz szereg lematów ustalających między innymi związki między
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
     \item Jeśli \(J\) jest konsekwencą reguły \emph{var}, to \(L\equiv x\) dla pewnej \(\lambda\)-zmiennej \(x\). Wobec tego \(x:\sigma\in\Gamma\), a zatem \(\mathrm{FV}(x)\subseteq\mathrm{dom}\,\Gamma\).
-    \item Jesli \(J\) jest konsekwencją reguły \emph{app}, to \(J\) musi mieć postać \(\Gamma\vdash MN:\sigma\). Z założenia indukcyjnego: \(\mathrm{FV}(M)\subseteq \mathrm{dom}\,\Gamma\) i  \(\mathrm{FV}(N)\subseteq \mathrm{dom}\,\Gamma\). Z Definicji \ref{def:untyped_fv}: \(\mathrm{FV}(MN)=\mathrm{FV}(M)\cup\mathrm{FV}(N)\). Stąd \(\mathrm{FV}(MN)\subseteq \mathrm{dom}\,\Gamma\).
-    \item Jesli \(J\) jest konsekwencją reguły \emph{abs}, to \(J\) musi mieć postać \(\Gamma\vdash \lambda x.\,M:\sigma\). Z założenia indukcyjnego \(FV(M)\subseteq\mathrm{dom}\,\Gamma\). Ponieważ \(\mathrm{FV}(\lambda x.\,M)=\mathrm{FV}(M)\setminus\{x\}\subseteq\mathrm{FV}(M)\) (z Definicji \ref{def:untyped_fv}), to \(\mathrm{FV}(M)\subseteq\mathrm{dom}\,\Gamma\). 
+    \item Jeśli \(J\) jest konsekwencją reguły \emph{app}, to \(J\) musi mieć postać \(\Gamma\vdash MN:\sigma\). Z założenia indukcyjnego: \(\mathrm{FV}(M)\subseteq \mathrm{dom}\,\Gamma\) i  \(\mathrm{FV}(N)\subseteq \mathrm{dom}\,\Gamma\). Z Definicji \ref{def:untyped_fv}: \(\mathrm{FV}(MN)=\mathrm{FV}(M)\cup\mathrm{FV}(N)\). Stąd \(\mathrm{FV}(MN)\subseteq \mathrm{dom}\,\Gamma\).
+    \item Jeśli \(J\) jest konsekwencją reguły \emph{abs}, to \(J\) musi mieć postać \(\Gamma\vdash \lambda x.\,M:\sigma\). Z założenia indukcyjnego \(FV(M)\subseteq\mathrm{dom}\,\Gamma\). Ponieważ \(\mathrm{FV}(\lambda x.\,M)=\mathrm{FV}(M)\setminus\{x\}\subseteq\mathrm{FV}(M)\) (z Definicji \ref{def:untyped_fv}), to \(\mathrm{FV}(M)\subseteq\mathrm{dom}\,\Gamma\). 
   \end{enumerate}  
   \qed
 \end{dowod}
@@ -422,7 +422,7 @@ sposób.
 
 \subimport{includes/chapters/}{strong_normalization.tex}
 % \begin{fakt}\label{thm:uniqueness}
-% Jesli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
+% Jeśli \(\Gamma\vdash M^\sigma\) oraz \(\Gamma\vdash M^\tau\), to \(\sigma=\tau\).
 % \begin{dowod}
 %   Dowód przez indukcję strukturalną względem M. \qed
 % \end{dowod}
