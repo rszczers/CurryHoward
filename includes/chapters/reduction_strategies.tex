@@ -1,15 +1,15 @@
 \subsubsection{Leniwa ewaluacja}\label{subsec:lazy_eval}
-Wprowadzamy następującą klasyfikację strategii redukcji.
+Wyróżniamy nastepujące rodzaje strategii redukcji.
 
 \begin{definicja}
 Strategię nazywamy:
 \begin{enumerate}
-\item \emph{normalną} (ang. \emph{normal-order}), gdy redukujemy redeksy pojedyńczo, rozpoczynając od najbardziej zewnętrznego redeksu od lewej strony wyrażenia.
-\item \emph{aplikatywną} (ang. \emph{applicative-order}), jeśli redukujemy redeksy pojedyńczo, rozpoczynając od najbardziej zagnieżdżonego redeksu występującego najbardziej po lewej stronie wyrażenia.
+\item \emph{normalną} (ang. \emph{normal-order}), gdy zawsze redukujemy redeksy pojedyńczo, rozpoczynając od najbardziej zewnętrznego redeksu od lewej strony wyrażenia.
+\item \emph{aplikatywną} (ang. \emph{applicative-order}), jeśli zawsze redukujemy redeksy pojedyńczo, rozpoczynając od najbardziej zagnieżdżonego redeksu występującego najbardziej po lewej stronie wyrażenia.
 \end{enumerate}
 \end{definicja}
 
-W przeciwieństwie do strategii aplikatywnej (patrz Przykład \ref{ex:beta_reduction}\ref{ex:undeterministic_reduction_untyped}), okazuje się, że strategia normalna jest zawsze strategią normalizującą \cite[Rozdział 1.5]{Urzyczyn2006}. Niestety, narzuca ona w presymistycznym przypadku wykładniczą złożoność obliczeniową. Zobserwujmy następującą redukcję:
+Klasyfikacja ta nie jest oczywiście wyczerpująca. W przeciwieństwie do strategii aplikatywnej (patrz Przykład \ref{ex:beta_reduction}\ref{ex:undeterministic_reduction_untyped}), okazuje się, że strategia normalna jest zawsze strategią normalizującą \cite[Rozdział 1.5]{Urzyczyn2006}. Niestety, narzuca ona w presymistycznym przypadku wykładniczą złożoność obliczeniową. Zobserwujmy następującą redukcję:
 
 \begin{figure}[h]
 \begin{align*}
