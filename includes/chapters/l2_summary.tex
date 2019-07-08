@@ -1,16 +1,36 @@
-\subsection{Podsumowanie}
+\subsection{Język pośredni GHC}
 
+Języki programowania to narzędzia służące do reprezentowania pojęć i łączących je wzajemnie zależności w sposób umożliwiający efektywne tłumaczenie ich na język maszynowy. Myśleć można o nich jak o uproszczonych środkach komunikacji człowieka z maszyną.
+
+GHC (ang. \emph{Glasgow Haskell Compiler}) to otwartoźródłowy kompilator języka Haskell. Kompilatorem nazywamy program, którego zadaniem jest tłumaczenie kodu programu napisanego w danym języku (\emph{kodu źródłowego}) na kod w innym języku z zachowaniem własności programu wejściowego. GHC jest stosunkowo wyjątkowym kompilatorem, gdyż kompilację do kodu wyjściowego poprzedza w nim kompilacja do kodu \emph{pośredniego}, który jest rozszerzonym wariantem Systemu F w stylu Churcha \cite{Sulzmann2007}. 
+
+Język Haskell to polimorficzny statycznie typowany, leniwy, czysto funkcyjny język programowania. Leniwość odnosi się do strategii ewaluacji nakreślonej w Rozdziale \ref{subsec:lazy_eval}. Funkcyjność języka polega na tym, że funkcje są w nim obiektami pierwszego rzędu, tzn. można z nich budować struktury danych i przesyłać jako argument tak jak jak pozostałe obiekty języka. Czystość oznacza ograniczenie efektów ubocznych: funkcje nie współdzielą stanu, zwracają tylko i wyłącznie wartość obliczenia. 
+
+Haskell jest \emph{słabo} typowanym językiem: kod źródłowy może być zupełnie pozbawiony deklaracji typowych (chociaż nie musi), zaś kompilacja przebiega przez proces przypisywania wyrażeniom typu.\footnote{Może to prowadzić do nieporozumień. Na przykład język C jest \emph{silnie} statycznie typowanym językiem, ale za typowanie odpowiada wyłącznie programista. Kod zostaje sprawdzony pod względem składni i kompilacja zaciera wszystkie deklaracje typowe.}.
+
+\paragraph{Statyczność}
+Określenie \emph{statyczny} oznacza, że na etapie kompilacji do kodu wyjściowego wszystkie typy wyrażeń są ustalone właśnie na gruncie języka pośredniego. Jest to całkiem niezwykła kontynuacja wywodzącej się z lat '60 idei oparcia języków programowania na czystym rachunku \(\lambda\) wspomnianej w Rozdziale \ref{subsec:scott_encoding}.
+
+Rozważmy następujący przykładowy kod w języku Haskell. Funkcja \texttt{comp} to polimorficzne złożenie funkcji.
 
 \begin{minted}{haskell}
 module Fnord where
   comp = \g f x -> g (f x)
 \end{minted}
 
+Przypomnijmy Przykład \ref{ex:f_typing_5}, którego rezultatem był następujący sąd:
+\begin{align}
+  \begin{aligned}[t]
+\lambda \gamma \beta \alpha:*.\,\lambda g: \beta \to \gamma\  f:\alpha\to\beta\ x:\alpha.\ g(f a)\ :\\
+\Pi\gamma\beta\alpha:*.(\beta\to\gamma)\to(\alpha\to\beta)\to\alpha\to\gamma
+  \end{aligned}\tag{\(\blacklozenge\)}\label{ex:typing_compar}
+\end{align}
+Kompilacja powyższego programu do języka pośredniego za pomocą kompilatora ghc z dodatkowym argumentem \texttt{-ddump-simpl} prowadzi do następującego kodu. 
+
 \begin{minted}{haskell}
 comp
   :: forall t_aqz t1_aqB t2_aqD.
      (t_aqz -> t1_aqB) -> (t2_aqD -> t_aqz) -> t2_aqD -> t1_aqB
-
 comp =
   \ (@ t_aqz)
     (@ t1_aqB)
@@ -21,7 +41,9 @@ comp =
     g_aqg (f_aqh x_aqi)
 \end{minted}
 
+Pierwsza, druga i trzecia linia to rezultat przypisania typu. Symbolowi \texttt{forall} odpowiada symbol polimorficznej abstrakcji \(\Pi\). Dalej widzimy ciało funkcji: symbol \texttt{\textbackslash} odpowiada w nim \(\lambda\)-abstraktorowi, zaś symbol \texttt{@} wyróżnia zmienne typowe, które oznaczaliśmy symbolem \(\ast\). Widzimy, że (\ref{ex:typing_compar}) i powyższy kod to dokładnie to samo.
 
+\subsection{Podsumowanie}
 Na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt_1992} klasyfikacji rozszerzeń rachunku \(\lambda\) z typami prostymi (tzw. \emph{kostki \(\lambda\)}, Rysunek \ref{fig:lambda-cube}), rozdział ten poświęcimy omówieniu wzajemnych zależności jakie mogą łączyć \(\lambda\)-termy i typy. Zajmować będziemy się wyłącznie systemami w stylu Churcha.
 
 \begin{figure}[!h]
@@ -53,4 +75,23 @@ Na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt
   \caption{Poszczególne systemy klasyfikacji H. Barendregta; kierunek krawędzi \(\to\)  oznacza relację \(\subseteq\).}\label{fig:lambda-cube}
 \end{figure}
 
+  \begin{center}
+  \begin{tabular}{r | l | c c c c}
+    0 & \(\lambda_{\to}\)                 & \((*,\,*)\) \\
+    1 & \(\lambda 2\)                     & \((*,\,*)\) & \((\Box,\,*)\) \\
+    2 & \(\lambda P\)                     & \((*,\,*)\) & & \((*,\,\Box)\) \\
+    1+2 & \(\lambda P2\)                  & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) \\
+    3 & \(\lambda \underline{\omega}\)    & \((*,\,*)\) & & & \((\Box,\,\Box)\)\\
+    1+3 & \(\lambda \omega\)              & \((*,\,*)\) & \((\Box,\,*)\) & & \((\Box,\,\Box)\)\\
+    2+3 & \(\lambda P\underline{\omega}\) & \((*,\,*)\) & & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
+    1+2+3 & \(\lambda C\)                 & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
+  \end{tabular}
+
+  \begin{itemize}
+    \item \((*,*)\) - termy zależne od termów (typy funkcyjne),
+    \item \((\Box,*)\) - termy zalezne od typów (typy polimorficzne),
+    \item \((*,\Box)\) - typy zależne od termów (typy zależne),
+    \item \((\Box, \Box)\) - typy zależne od typów (rodziny typów, higher-kinded types).
+  \end{itemize}
+  \end{center}
 

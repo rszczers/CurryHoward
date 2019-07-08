@@ -1,3 +1,4 @@
+\subsubsection{Leniwa ewaluacja}\label{subsec:lazy_eval}
 Wprowadzamy następującą klasyfikację strategii redukcji.
 
 \begin{definicja}
@@ -10,18 +11,7 @@ Strategię nazywamy:
 
 W przeciwieństwie do strategii aplikatywnej (patrz Przykład \ref{ex:beta_reduction}\ref{ex:undeterministic_reduction_untyped}), okazuje się, że strategia normalna jest zawsze strategią normalizującą \cite[Rozdział 1.5]{Urzyczyn2006}. Niestety, narzuca ona w presymistycznym przypadku wykładniczą złożoność obliczeniową. Zobserwujmy następującą redukcję:
 
-\begin{align*}
-  \left(\lambda x.(+\ x\ x)\right)(*\ 5\ 4)\ &\to_\beta (+\ (*\ 5\ 4)(*\ 5\ 4))\tag{\(\blacktriangledown\)}\label{ex:normal_reduction}\\
-  &\to_\beta (+\ 20\ (*\ 5\ 4))\\
-  &\to_\beta (+\ 20\ 20)\\
-  &\to_\beta 40.
-\end{align*}
-
-Widzimy, że redeksy są niepotrzebnie zwielokratniane, podczas gdy przy podejściu aplikatywnym zostałyby wpierw zredukowane. Obydwie strategie mają więc poważne wady.
-
-Udanym kompromisem jest przeprowadzanie redukcji strategią normalną aż do uzyskania słabej czołowej postaci normalnej i wówczas kontynuowanie redukcji strategią aplikatywną. \cite[Rozdział 11.3]{PeytonJones:1987:IFP:1096899}. Zauważmy również, że używając grafowej reprezentacji \(\lambda\)-termów możemy zamiast powielania wierzchołków redukować graf ustawiając wskaźniki do aplikowanych termów (patrz Rysunek \ref{fig:reduction_strategy}). 
-
-\begin{figure}
+\begin{figure}[h]
 \begin{align*}
 \psset{arrows=->}
 \pstree[levelsep=125pt,arrowsize=4pt 3]
@@ -72,5 +62,17 @@ Udanym kompromisem jest przeprowadzanie redukcji strategią normalną aż do uzy
 \end{align*}
 \caption{\(\beta\)-redukcja normalna wyrażenia (\ref{ex:normal_reduction}) (po lewej) i ze wspólnymi wierzchołkami (po prawej).}\label{fig:reduction_strategy}
 \end{figure}
+
+
+\begin{align*}
+  \left(\lambda x.(+\ x\ x)\right)(*\ 5\ 4)\ &\to_\beta (+\ (*\ 5\ 4)(*\ 5\ 4))\tag{\(\blacktriangledown\)}\label{ex:normal_reduction}\\
+  &\to_\beta (+\ 20\ (*\ 5\ 4))\\
+  &\to_\beta (+\ 20\ 20)\\
+  &\to_\beta 40.
+\end{align*}
+
+Widzimy, że redeksy są niepotrzebnie zwielokratniane, podczas gdy przy podejściu aplikatywnym zostałyby wpierw zredukowane. Obydwie strategie mają więc poważne wady.
+
+Udanym kompromisem jest przeprowadzanie redukcji strategią normalną aż do uzyskania słabej czołowej postaci normalnej i wówczas kontynuowanie redukcji strategią aplikatywną. \cite[Rozdział 11.3]{PeytonJones:1987:IFP:1096899}. Zauważmy również, że używając grafowej reprezentacji \(\lambda\)-termów możemy zamiast powielania wierzchołków redukować graf ustawiając wskaźniki do aplikowanych termów (patrz Rysunek \ref{fig:reduction_strategy}). 
 
 Strategie redukcji, które opierają się na współdzieleniu rezultatu redukcji nazywamy \emph{leniwymi} (ang. \emph{lazy evaluation}, także \emph{call-by-need}). Ich istotą jest redukowanie argumentów dokładnie raz. Przesądzają one o praktycznym zastosowaniu języków funkcyjnych w programowaniu.
