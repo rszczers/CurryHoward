@@ -1,4 +1,5 @@
-\documentclass[a4paper,oneside,reqno,12pt]{article}
+%\documentclass[a4paper,oneside,twoside,reqno,12pt,openright]{book}
+\documentclass[a4paper,oneside,twoside,reqno,12pt]{article}
 %\usepackage[a4paper,left=4cm,right=3cm,top=3cm,bottom=3cm,head=0cm,headsep=0cm]{geometry}
 %\usepackage[utf8]{inputenc}
 %\usepackage[T1]{fontenc}
@@ -13,15 +14,18 @@
     citestyle=alphabetic,
 ]{biblatex}
 \usepackage{amssymb}
+\usepackage{setspace}
 \usepackage{amsthm}
 \usepackage{ebproof}
+\usepackage{afterpage}
 \usepackage{graphics}
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{inputenc}
 \usepackage{MnSymbol}
 \usepackage{mathtools}
-\usepackage{geometry}
+\usepackage[lmargin=142pt,rmargin=95pt,tmargin=127pt,bmargin=123pt]{geometry}
+%\usepackage{geometry}
 \usepackage{polski}
 \usepackage{plain}
 \usepackage{float}
@@ -41,7 +45,7 @@
 \usepackage{braket}
 \usepackage{blindtext}
 \usepackage{enumitem}
-\usepackage[ampersand]{easylist} 
+\usepackage[ampersand]{easylist}
 \usepackage{mathbbol}
 \usepackage[outputdir=temp]{minted}
 \usepackage{wrapfig}
@@ -70,13 +74,21 @@
 
 %\title{Izomorfizm Curry'ego-Howarda}
 %\date{2018\\ Październik}
-%\author{Rafał Szczerski} 
+%\author{Rafał Szczerski}
 
 \begin{document}
-\tableofcontents
-\newpage
 
-%\maketitle
+% \frontmatter
+% \subimport{}{title.tex}
+% \newpage
+% \null
+% \newpage
+% \subimport{}{oswiadczenie.tex}
+% \newpage
+% \subimport{}{abstract.tex}
+
+\tableofcontents
+%\mainmatter
 \subimport{includes/chapters/}{intro.tex}
 \newpage
 \subimport{includes/chapters/}{untyped.tex}
@@ -91,6 +103,6 @@
 %\bibliographystyle{alpha}
 
 \newpage
-
-\printbibliography[title=Literatura]	
+%\backmatter
+\printbibliography[title=Literatura]
 \end{document}

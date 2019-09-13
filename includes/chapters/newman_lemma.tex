@@ -6,7 +6,7 @@
                dla dowolnych \(a,\,b,\,c\in A\) takich, że
                \(a\to^{*}b\) oraz \(a\to^{*} c\) istnieje \(d\in A\)
                takie, że \(b\to^{*} d\) i \(c\to^{*} d\).\label{def:cr_property_untyped}
-               Innymi słowy, przemienny jest diagram:
+               Własność tę przedstawia poniższy diagram:
                \[ \begin{tikzcd}
                a \arrow{r}{*} \arrow[swap]{d}{*} & b \arrow{d}{*} \\%
                c \arrow{r}{*}& d
@@ -17,13 +17,12 @@
                Churcha-Rossera}, jeśli dla dowolnych \(a,\,b,\,c\in A\)
                takich, że \(a\to b\) oraz \(a\to c\) istnieje \(d\in A\) 
                takie, że \(b\to^{*} d\) i \(c\to^{*} d\).\label{def:wcr_property_untyped}
-               Innymi słowy, przemienny jest diagram:
+               Własność tę przedstawia poniższy diagram:
                \[ \begin{tikzcd}
                a \arrow{r}{} \arrow[swap]{d}{} & b \arrow{d}{*} \\%
                c \arrow{r}{*}& d
                \end{tikzcd}
                \] 
-
 \end{enumerate}
   Widzimy, że własność CR pociąga za sobą własność WCR. Odwrotna zależność nie zachodzi (patrz Rysunek \ref{fig:wcrnotcr}).
 \end{definicja}
@@ -37,19 +36,25 @@
 \begin{definicja}(Postać normalna)
   Powiemy, że \(x\in A\) jest \emph{redukowalny}, jeśli istnieje \(y\in A\) takie, że \(x\to y\). W przeciwnym wypadku powiemy, że \(x\) jest w \emph{postaci normalnej} i będziemy pisali \(x\in\mathrm{NF}\). 
   
-  Element \(y\in A\) nazywamy \emph{postacią normalną} \(x\in A\), jeśli \(x\to^{*}y\) i \(y\in\mathrm{NF}\). Jeśli \(y\) jest postacią normalną \(x\) i \(y\) jest jedyną postacią normalną \(x\), to piszemy \(x\downarrow y\). W przeciwnym wypadku, czyli jeśli istnieją \(y, z\in \mathrm{NF}, y\neq z\) takie, że \(x\to^{*} y\) i \(x\to^{*} z\), powiemy, że \(x\) jest \emph{niejednoznaczny}. 
+  Element \(y\in A\) nazywamy \emph{postacią normalną} \(x\in A\), jeśli \(x\to^{*}y\) i \(y\in\mathrm{NF}\). Jeśli \(y\) jest jedyną postacią normalną \(x\), to piszemy \(x\downarrow y\). W przeciwnym wypadku, czyli jeśli istnieją \(y, z\in \mathrm{NF}, y\neq z\) takie, że \(x\to^{*} y\) i \(x\to^{*} z\), powiemy, że \(x\) jest \emph{niejednoznaczny}. 
 \end{definicja}
 
 \begin{definicja}
   Niech \(\to\) będzie relacją binarną na zbiorze \(A\). 
 \begin{enumerate}
   \setlength\itemsep{0em}
-  \item[(WN) ] Powiemy, że relacja \(\to\) jest \emph{słabo normalizująca}, jeśli
-    dla dowolnego \(a\in A\) istnieje \(a'\in \mathrm{NF}\) taki, że \(a\to^{*} a'\). W takim wypadku o \(a\in A\) będziemy mówili, że jest \emph{słabo normalizowalny} i pisali \(a\in \mathrm{WN}\).
-  \item[(SN)] Powiemy, że relacja \(\to\) jest \emph{silnie normalizująca}, jeśli nie istnieje nieskończony ciąg relacji \(a_0 \to a_1 \to a_2 \to \dots\). W takim wypadku o \(a\in A\) będziemy mówili, że jest \emph{silnie normalizowalny} i pisali \(a\in \mathrm{SN}\).
-
+  \item[(WN) ] Powiemy, że element \(a\in A\) jest \emph{słabo normalizowany} i pisali \(a\in \mathrm{WN}\), jeśli
+    istnieje \(a'\in \mathrm{NF}\) taki, że \(a\to^{*} a'\). Jeśli każdy element z dziedziny
+    relacji \(\to\) jest słabo normalizowalny, to o relacji \(\to\) powiemy, że jest
+    \emph{słabo normalizująca}.
+  \item[(SN)] Powiemy, że element \(a\in A\) jest \emph{silnie normalizowalny}  i pisali \(a\in \mathrm{SN}\), jeśli dla pewnego \(a'\in \mathrm{NF}\) każdy ciąg relacji \(a \to a_1 \to a_2 \to \dots \to a'\) jest skończony. Jeśli każdy element z dziedziny relacji 
+    \(\to\) jest silnie normalizowalny, to o relacji \(\to\) powiemy, że jest \emph{silnie normalizująca}.
 \end{enumerate}
 \end{definicja}
+
+\begin{uwaga*}
+  Zbiory \(\lambda\)-termów słabo i silnie normalizowalnych względem relacji \(\beta\)-redukcji będziemy oznaczali symbolami \(\mathrm{WN}_\beta\) i \(\mathrm{SN}_\beta\) odpowiednio.
+\end{uwaga*}
 
 \begin{twierdzenie}(Lemat Newmana)\label{thm:newman_lemma}
 Niech \(\to\) bedzie relacją binarną mającą własność SN. Jeśli \(\to\) ma własność WCR, to \(\to\) ma własność CR.
@@ -62,13 +67,11 @@ Niech \(\to\) będzie relacją binarną na \(A\) o własności SN i WCR. Poniewa
       \begin{align*}
         a \to a_1 \to^{*} b_1 \quad \text{oraz} \quad a\to a_2 \to^{*} b_2
       \end{align*}
-Jeśli \(a_1=a_2\), to \(a'=a_1=a_2\) i wystarczy wybrać \(a'=a_1\).  Jeśli jednak \(a_1 \neq a_2\), to z własności WCR istnieje \(b_3 \in A\) taka, że \(a_1 \to^{*} b_3\) oraz \(a_2 \to^{*} b_3\).  Z własności SN możemy przyjąć, że \(b_3\) jest w postaci normalnej.  
 Zachodzą więc dwa przypadki:
-
   \begin{enumerate}[label={\roman*)}, ref={\roman*)}]
     \setlength\itemsep{0em}
     \item \(a_1 = a_2\). Wówczas wystarczy ustalić \(a'=a_1\) albo \(a'=a_2\) (Rysunek \ref{fig:newman_a}).
-    \item \(a_1\neq a_2\) (Rysunek \ref{fig:newman_b}). Wówczas z WCR istnieje \(b_3\in A\) takie, że \(a_1 \to^{*} b_3\) oraz \(a_2\to^{*} b_3\) (Rysunek \ref{fig:newman_c}). Przypuśćmy, że \(b_3\in\mathrm{NF}\). Ponieważ \(b_1\neq b_3\), to \(b_3\neq b_1\) lub \(b_3\neq b_2\), zatem możemy wybrać \(a'=a_1\) albo \(a'=a_2\).  
+    \item \(a_1\neq a_2\) (Rysunek \ref{fig:newman_b}). Wówczas z WCR istnieje \(b_3\in A\) takie, że \(a_1 \to^{*} b_3\) oraz \(a_2\to^{*} b_3\) (Rysunek \ref{fig:newman_c}). Przypuśćmy, że \(b_3\in\mathrm{NF}\). Ponieważ \(b_1\neq b_2\), więc \(b_3\neq b_1\) lub \(b_3\neq b_2\), zatem możemy wybrać \(a'=a_1\) albo \(a'=a_2\).  
     \begin{center}
       \begin{minipage}{0.75\linewidth}
         \begin{figure}[H]

@@ -21,7 +21,7 @@ Elementy \(\mathbf{\tilde\Lambda}\) będziemy oznaczali literami \(L,\ M,\ N,\ P
 \begin{easylist}
   & \emph{najbardziej zewnętrzne nawiasy bedą pomijane,}
   & \emph{aplikacja wiąże lewostronnie; wyrażenia postaci \((PQ)R\) będą zapisywane w postaci \(PQR\),}
-  & \emph{\(\lambda\)-abstrakcja wiaże prawostronnie: \(\lambda x_1.\, (\lambda x_2.\,P)\) zapisujemy  \(\lambda x_1.\, \lambda x_2.\,P\),}
+  & \emph{\(\lambda\)-abstrakcja wiąże prawostronnie: \(\lambda x_1.\, (\lambda x_2.\,P)\) zapisujemy  \(\lambda x_1.\, \lambda x_2.\,P\),}
   & \emph{następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, \lambda x_2 . \, \dots  \lambda x_n .\, P\) zapisujemy pod wspólnym \(\lambda\)-abstraktorem: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\).}
   & \emph{n-krotną aplikację \(P\in\mathbf{\tilde\Lambda}\) do siebie zapisujemy skrótowo: \(P^n\equiv \underbrace{P\,P\ \dots\ P}_{\text{n-razy}}\)}
 
@@ -150,7 +150,7 @@ Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie
       \end{align*}
     \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_2}, gdzie \(M=\lambda x.\,M'\) i \(N=\lambda x.\,N'\) dla \(M'=_{\alpha} N'\), to z założenia indukcyjnego \(N' =_{\alpha} M'\) i w konsekwencji \ref{def:alpha_2} mamy, że \(N=_{\alpha} M\).
     \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_3} dla \(M\equiv M'Z\) i \(N\equiv N'Z\) takich, że \(M'=_{\alpha}N'\), to z założenia indukcyjnego oczywiście \(N'=_{\alpha}M'\), a zatem z \ref{def:alpha_3} \(N=_{\alpha} M\).\label{proof:alpha_cases_4}
-    \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_3}, to postępujemy jak w przypadku \ref{proof:alpha_cases_4}.\qed
+    \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_4}, to postępujemy jak w przypadku \ref{proof:alpha_cases_4}.\qed
     \end{enumerate}
   \end{dowod}
 \end{wniosek}
@@ -166,8 +166,8 @@ Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie
 Wprowadzamy następujące konwencje notacyjne:
 \begin{align*}
   &x = [x]_{=_\alpha},\\
-  &PQ = [M'N']_{=_\alpha},\ \text{gdzie}\ M=[M']_{=_\alpha}\ \text{i}\ N=[N']_{=_\alpha},\\
-  &\lambda x.\,M =  [\lambda x.\,M']_{=_\alpha},\  \text{gdzie}\ N=[N']_{=_\alpha}.
+  &MN = [M'N']_{=_\alpha},\ \text{gdzie}\ M=[M']_{=_\alpha}\ \text{i}\ N=[N']_{=_\alpha},\\
+  &\lambda x.\,M =  [\lambda x.\,M']_{=_\alpha},\  \text{gdzie}\ M=[M']_{=_\alpha}.
 \end{align*}
 \end{konwencja*}
 %Nie prowadzą one do niejednoznaczności, w czym upewnia nas Lemat \ref{lem:uniqueness}.
@@ -191,7 +191,13 @@ Wprowadzamy następujące konwencje notacyjne:
     \setlength\itemsep{0em}
     \item Jeśli \(M\) jest zmienną, to wówczas \(M\) jest postaci \ref{def:HNF}.
     \item Jeśli \(M\) jest aplikacją, to wówczas \(M \equiv P_{0} P_{1} \dots P_{m} \), gdzie \(P_{0}\) nie jest aplikacją. Wówczas \(M\) jest postaci \ref{def:HNF} albo postaci \ref{def:HNF2} dla \(n=0\), w zależności od tego czy \(P_0\) jest zmienną (wówczas jest to przypadek \ref{def:HNF}) czy abstrakcją (wówczas jest to przypadek \ref{def:HNF2}).
-    \item Jeśli \(M\) jest abstrakcją, to wówczas \(M\equiv \lambda x_1\,x_2\dots x_m.\ P_0\,P_1\dots P_n\), gdzie \(P_0\) abstrakcją już nie jest. Wówczas \(P_0\) jest albo zmienną (przypadek \ref{def:HNF}) albo aplikacją (przypadek \ref{def:HNF2}).\qed
+%    \item Jeśli \(M\) jest abstrakcją, to wówczas \(M\equiv \lambda x_1\,x_2\dots x_m.\ P_0\,P_1\dots P_n\), gdzie \(P_0\) abstrakcją już nie jest. Wówczas \(P_0\) jest albo zmienną (przypadek \ref{def:HNF}) albo aplikacją (przypadek \ref{def:HNF2}).\qed
+    \item Jeśli \(M\) jest abstrakcją postaci \(M\equiv\lambda x_1\,x_2 \dots x_n.\, P_0 P_1 \dots P_m\), to wówczas mamy następujące przypadki:
+      \begin{enumerate}
+        \item Jeśli \(P_0\) jest zmienną, to \(M\) jest postaci \ref{def:HNF}.
+        \item Jeśli \(P_0\) jest aplikacją, to \(P_0\equiv  P'_0 P''_0\), gdzie \(P'_0\) jest albo zmienną (wówczas \(M\) jest postaci \ref{def:HNF}) albo \(\lambda\)-abstrakcją (wówczas \(\mathrm{M}\) jest postaci \ref{def:HNF2}).
+        \item Jeśli \(P_0\) jest abstrakcją, to \(M\) jest postaci \ref{def:HNF2}.
+      \end{enumerate}
   \end{enumerate}
 \end{dowod}
 
@@ -199,11 +205,14 @@ Wprowadzamy następujące konwencje notacyjne:
   Niech \(M\in\mathbf{\Lambda}\). Powiemy, że \(M\) jest w:
   \begin{enumerate}
     \setlength\itemsep{0em}
-    \item \emph{czołowej postaci normalnej} (ang. \emph{head normal form}), jeśli \[M\equiv \lambda y_1\,y_2\,\dots\,y_n.\ (x M_1 M_2 \dots M_m)\quad \text{dla}\ n,\,m\geq 0.\]  
-    \item \emph{słabej czołowej postaci normalnej} (ang. \emph{weak head normal form}), jeśli
-      \[M\equiv F\, P_1\, P_2\,\dots\,P_n\quad \text{dla}\ n\geq 0,\] gdzie 
-      \(F\) jest albo \(\lambda\)-zmienną, albo \(\lambda\)-abstraktorem wiążącym zmienną, czyli wyrażeniem postaci  
-      \[M\equiv \lambda x.\,(P_1\,P_2\,\dots\,P_n).\]
+    \item \emph{czołowej postaci normalnej} (ang. \emph{head normal form}), jeśli \[M\equiv \lambda y_1\,y_2\,\dots\,y_n.\ x M_1 M_2 \dots M_m\quad \text{dla}\ n,\,m\geq 0.\]  
+      
+    \item \emph{słabej czołowej postaci normalnej} (ang. \emph{weak head normal form}), jeśli dla \(n\geq 0\) i \(x\in V\) \(\lambda\)-term \(M\) jest postaci \ref{def:whnf1} lub \ref{def:whnf2}.
+      \begin{enumerate}[label={\roman*)}, ref={\roman*)}]
+        \setlength\itemsep{0em}
+        \item \(x\, P_1\, P_2\,\dots\,P_n\quad \), \label{def:whnf1}
+        \item \(\lambda x.\,P_1\,P_2\,\dots\,P_n\). \label{def:whnf2}
+      \end{enumerate}
   \end{enumerate}
   Z określenia HNF widzimy, że każdy \(\lambda\)-term w postaci HNF jest również w postaci WHNF, ale nie odwrotnie.
 \end{definicja}
@@ -259,25 +268,6 @@ w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not
   \end{enumerate}
   przy czym w \ref{def:substitution_hindley_g} wymagamy, aby zmienna \(z\) nie występowała wcześniej w termach \(N\) i \(P\) jako zmienna wolna, zaś dla \ref{def:substitution_hindley_e}-\ref{def:substitution_hindley_g} dodatkowo \(y\not\equiv x\).
 \end{customdef}
-\begin{uwaga}
-Każde podstawienie \([x/N]\) jest funkcją z \(\mathbf{\Lambda}\to\mathbf{\Lambda}\), gdzie \(x\in V\) i \(N\in\mathbf{\Lambda}\) są dowolnymi parametrami. Zbiór \(S\) podstawień ma strukturę monoidu z działaniem składania
-  \begin{align*}
-    M([x_2/N_2]\circ[x_1/N_1]) = (M[x_1/N_1])[x_2/N_2] \equiv M[x_1/N_1][x_2/N_2]
-  \end{align*}
-  dla dowolnych \([x_1/N_1],\,[x_2/N_2]\in S\), o ile \(S\) posiada element neutralny \(\iota\) taki, że
-  \begin{align*}
-    M \iota = M,\ \text{gdzie}\ [x/x]=\iota\ \text{dla dowolnego}\ x\in V.
-  \end{align*}
-\end{uwaga}
-
-W literaturze znajdujemy mnogość propozycji, które w ten czy inny sposób starają się ułatwić rzeczywistą implementację podstawienia. Na szczególną uwagę zasługują tutaj tak zwane \emph{indeksy de Bruijna}. Zaproponowana przez N. G. de Brujina w \cite{deBruijnIndices}  notacja eliminuje bezpośrednie występowanie symboli zmiennych w \(\lambda\)-termach, zastępując je liczbą naturalną wyrażającą głębokość zagnieżdżenia odpowiedniej \(\lambda\)-abstrakcji przez którą jest związana, przykładowo:
-\[
-  \lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx))) \equiv_{de Brujin} \lambda (\lambda 2 (1 1)) \lambda 2 (1 1)
-\]
-Historycznie wiąże się ta notacja z jego pracami nad systemem komputerowo wspomaganego dowodzenia twierdzeń AUTOMATH. Rozwiązanie takie, podobnie jak w przypadku tzw. logik kombinatorów (np. rachunku SKI), eliminuje konieczność utożsamiania termów przez \(\alpha\)-konwersję, ale istotnie zmniejsza ich czytelność.
-
-Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{txa:alpha-draft}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Technikalia definiowania \(\lambda\)-termow jako klas \(\alpha\)-konwersji są na ogół w literaturze pomijane. %nie jest w literaturze przedmiotu. %Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
-
 % \subsection{Podstawienie jednoczesne}
 % Biorąc pod uwagę sens obliczeniowy rachunku \(\lambda\) interesujące okazuje się modyfikacja Definicji \ref{def:untyped_substitution_hindley} w  taki sposób, aby podstawienie miało miejsce dla wielu zmiennych równolegle w całym \(\lambda\)-termie. Za przykładem \cite{STOUGHTON1988317} wprowadzimy \emph{podstawienie jednoczesne}. W tym celu jednak uściślenia wymagają pewne pojęcia.
 
@@ -325,7 +315,7 @@ Jeśli \(M[x/y]\) jest określone i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]
 
 
 \begin{definicja}(Podstawienie jednoczesne)\label{def:simult_substitution}
-Dla dowolnego \(M\in\mathbf{\Lambda}\), ciągu \(\lambda\)-zmiennych~\(\vec{x}\) i ciągu \(\lambda\)-termów \(\vec{N}\) określamy:
+Dla dowolnego \(M\in\mathbf{\Lambda}\), nieskończonego ciągu \(\lambda\)-zmiennych~\(\vec{x}\) i nieskończonego ciągu \(\lambda\)-termów \(\vec{N}\) określamy:
   \begin{enumerate}[label={(\(\vec{s}\)\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
     \item \(x_i[\vec{x}/\vec{N}]=N_i\) dla \(i\in\mathbb{N}\).
@@ -348,6 +338,27 @@ Dla dowolnego \(M\in\mathbf{\Lambda}\), ciągu \(\lambda\)-zmiennych~\(\vec{x}\)
 \end{align*}
 \end{przyklad}
 
+\begin{uwaga}
+Każde podstawienie \([x/N]\) jest funkcją z \(\mathbf{\Lambda}\to\mathbf{\Lambda}\), gdzie \(x\in V\) i \(N\in\mathbf{\Lambda}\) są dowolnymi parametrami. Zbiór \(S\) podstawień ma strukturę monoidu z działaniem składania
+  \begin{align*}
+    M([x_2/N_2]\circ[x_1/N_1]) = (M[x_1/N_1])[x_2/N_2] \equiv M[x_1/N_1][x_2/N_2]
+  \end{align*}
+  dla dowolnych \([x_1/N_1],\,[x_2/N_2]\in S\), o ile \(S\) posiada element neutralny \(\iota\) taki, że
+  \begin{align*}
+    M \iota = M,\ \text{gdzie}\ [x/x]=\iota\ \text{dla dowolnego}\ x\in V.
+  \end{align*}
+\end{uwaga}
+
+W literaturze znajdujemy mnogość propozycji, które w ten czy inny sposób starają się ułatwić rzeczywistą implementację podstawienia. Na szczególną uwagę zasługują tutaj tak zwane \emph{indeksy de Bruijna}. Zaproponowana przez N. G. de Brujina w \cite{deBruijnIndices}  notacja eliminuje bezpośrednie występowanie symboli zmiennych w \(\lambda\)-termach, zastępując je liczbą naturalną wyrażającą głębokość zagnieżdżenia odpowiedniej \(\lambda\)-abstrakcji przez którą jest związana, przykładowo:
+\[
+  \lambda f.\,(\lambda x.\,f(xx))(\lambda x.\,f(xx)) \equiv_{de Brujin} \lambda (\lambda 2 (1 1))(\lambda 2 (1 1))
+\]
+Historycznie wiąże się ta notacja z jego pracami nad systemem komputerowo wspomaganego dowodzenia twierdzeń AUTOMATH. Rozwiązanie takie, podobnie jak w przypadku tzw. logik kombinatorów (np. rachunku SKI), eliminuje konieczność utożsamiania termów przez \(\alpha\)-konwersję, ale istotnie zmniejsza ich czytelność.
+
+Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{txa:alpha-draft}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Technikalia definiowania \(\lambda\)-termow jako klas \(\alpha\)-konwersji są na ogół w literaturze pomijane. %nie jest w literaturze przedmiotu. %Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
+
+
+
 \subsection{Redukcja}
 Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\Lambda}\) operacji \(\beta\)- i \(\eta\)-redukcji. Pożądane jest, żeby operacje te wykonywane na podtermach pozostowały w \emph{zgodzie} ze strukturą całego \(\lambda\)-termu.
 
@@ -360,12 +371,12 @@ Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\La
     \item Jeśli \(M \mathcal{R} N\), to \((PM)\,\mathcal{R}\,(PN)\).
   \end{enumerate}
 \end{definicja}
-Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) będziemy rozumieli najmniejszą (w sensie mnogościowym) relację \(\mathcal{R}_2\) taką, że \(\mathcal{R}_1\subset\mathcal{R}_2\).
+Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) względem własności \(P\) będziemy rozumieli najmniejszą (w sensie mnogościowym) relację \(\mathcal{R}_2\) taką, że \(\mathcal{R}_1\subset\mathcal{R}_2\) i \(\mathcal{R}_2\) ma własność \(P\).
   Z pewnego rodzaju domknięciami, ze względu na ich szczególną rolę, wiążemy następującą notację:
   \begin{enumerate}[label=(\alph*), ref={(\alph*)}]
     \setlength\itemsep{0em}
     \item Przez \(\mathcal{R}^{+}\) oznaczamy przechodnie domknięcie relacji \(\mathcal{R}\).\label{def:closure_a}
-    \item Przez \(\mathcal{R}^{*}\) oznaczamy zwrotnie domknięcie relacji \(\mathcal{R}^{+}\).\label{def:closure_b}
+    \item Przez \(\mathcal{R}^{*}\) oznaczamy zwrotne domknięcie relacji \(\mathcal{R}^{+}\).\label{def:closure_b}
     \item Przez \(=_{\mathcal{R}}\) oznaczamy symetryczne domknięcie relacji \(\mathcal{R}^{*}\).\label{def:closure_c}
 \end{enumerate}
 Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:closure_b} wyznacza praporzadek, który w odniesieniu do redukcji określonych na \(\mathbf{\Lambda}\) można rozumieć jako graf skierowany (w przypadku \(\mathbf{\Lambda}\) być może nieskończony) w którym krawędzie odpowiadają możliwym krokom obliczenia, zaś \ref{def:closure_c} -- kongruencję, która znów w szczególnym odniesieniu do \(\lambda\)-termów, będzie dokonywała podziału w \(\mathbf{\Lambda}\) ze względu na rezultat obliczenia.
@@ -430,7 +441,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
        M', &\text{jeśli}\ M\to_\beta M'.
      \end{cases}
    \]
-   Strategię \(S\) nazywamy \emph{normalizującą}, jeśli dla każdego \(M\in \mathrm{WN}_\beta\) istnieje \(i\in \mathbb{N}\) takie, że \(F^{i}(M)\equiv \underbrace{F(F(\dots(F}_{i\text{-razy}}(M))\dots))\in \mathrm{NF_\beta}\).
+   Strategię \(S\) nazywamy \emph{normalizującą}, jeśli dla każdego \(M\in \mathrm{WN}_\beta\) istnieje \(i\in \mathbb{N}\) takie, że \(S^{i}(M)\equiv \underbrace{S(S(\dots(S}_{i\text{-razy}}(M))\dots))\in \mathrm{NF_\beta}\).
 \end{definicja}
   \begin{przyklad}\label{ex:beta_reduction}
     \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]

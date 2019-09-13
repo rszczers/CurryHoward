@@ -2,7 +2,11 @@
 W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) przemilczając jego topologiczny charakter. %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
 
 \paragraph{Wprowadzenie}
-Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny, czyli istnieje nieskończony zstępujący ciąg zbiorów \[A\times f(A)\ \supset\ A\times f(A)\times f(A)\ \supset\ A\times f(A)\times f(A)\times f(A)\ \supset\ \dots\] Istnienie takiego ciągu narusza aksjomat ufundowania na gruncie aksjomatyki ZF, a to wyklucza możliwość określenia takich modeli.
+Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny i możliwe jest skonstruowanie nieskończonego zstępującego ciąg zbiorów:
+\[
+  f_M \ni (f_M, f_M f_M)  \ni\{f_M\} \ni f_M \ni \dots
+\]
+Istnienie takiego ciągu narusza jednak aksjomat ufundowania na gruncie aksjomatyki ZF, a to wyklucza możliwość określenia takich modeli.
 
 Rozwiązanie Scotta polega na tym, aby zamiast próbować interpretować termy jako funkcje, przypisać im nieskończone ciągi funkcji postaci 
 \[
@@ -75,12 +79,12 @@ Niech \(M\) będzie kombinacją zmiennych taką, że \(\mathrm{FV}(M)=\{x_1,\,x_
 \begin{align*}
 f_M (d_1,\,d_2,\,\dots,\,d_n) = \begin{cases}
 d_k,\ &\text{jeśli}\ M\equiv x_k, \\
-f_Q (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n),\ & \text{jeśli}\ M\equiv (PQ).
+f_P (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n),\ & \text{jeśli}\ M\equiv (PQ).
 \end{cases}
 \end{align*}
 
 \item
-Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorycznie zupelna}, jeśli dla każdej kombinacji zmiennych \(M\) istnieje \(a_M\in D\) taki, że dla wszystkich \(d_1\),\(d_2\),\(\dots\),\(d_n\in D\)
+Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorowo zupelna}, jeśli dla każdej kombinacji zmiennych \(M\) istnieje \(a_M\in D\) taki, że dla wszystkich \(d_1\),\(d_2\),\(\dots\),\(d_n\in D\)
 \[
   a_M\bullet d_1 \bullet d_2 \bullet \dots \bullet d_n = f_M(d_1,\, d_2,\,\dots,\,d_n).
 \]
@@ -92,7 +96,7 @@ Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorycznie
   Modelem bezsyntaktycznym rachunku \(\lambda\) nazywamy trójkę \((D,\,\bullet, \Lambda)\), gdzie \(\mathbb{D}=(D,\,\bullet)\) jest strukturą aplikatywną, \(\Lambda: D \to D\) i spełnione są poniższe własności:
   \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
   \setlength\itemsep{0em}
-    \item \(\mathbb{D}\) jest kombinatorycznie zupełny.
+    \item \(\mathbb{D}\) jest kombinatorowo zupełny.
     \item \(\Lambda (a) \sim a\) dla wszystkich \(a\in D\).
     \item Jeśli \(a\sim b\), to \(\Lambda(a) = \Lambda(b)\) dla wszystkich \(a,\,b\in D\).
     \item \(\Lambda(a)=e\bullet a\) dla pewnego \(e\in D\) i wszystkich \(a\in D\).
@@ -119,7 +123,7 @@ Ustalmy, że jeśli \(D'\), \(D''\), \(\dots\)  są cpo, to odpowiadające im po
   \begin{align*}
     a \sqsubseteq b \quad \Leftrightarrow\quad (a=\perp\ \land\ b\in \mathbb{N})\ \lor\ a = b
   \end{align*}
-  \(\sqsubseteq\) jest oczywiście zwrotna, przechodnia i antysymetryczna. Widzimy, że \(\mathbb{N}^{+}\) ma względem niej element najmniejszy (jest nim  \(\perp\)) i oczywiście każdy podzbiór \(\mathbb{N}^{+}\) jest skierowany. 
+  \(\sqsubseteq\) jest oczywiście zwrotna, przechodnia i antysymetryczna. Widzimy, że \(\mathbb{N}^{+}\) ma względem niej element najmniejszy (jest nim  \(\perp\)). Podzbiory jednoelementowe \(\mathbb{N}^{+}\) i podzbiory dwuelementowe zawierające \(\perp\) to wszystkie skierowane podzbiory \(\mathbb{N}^{+}\). Widzimy, że każdy z nich ma kres górny, a zatem \(\mathbb{N}^{+}\) jest cpo.
 \end{przyklad}
 
 \begin{definicja}[Monotoniczność, ciągłość, ścisłość]\label{def:m_cont}%5.3
@@ -128,7 +132,7 @@ Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).
   \setlength\itemsep{0em}
 \item Powiemy, że \(\varphi\) jest \emph{monotoniczna}, jeśli \(\varphi(a) \sqsubseteq' \varphi(b)\) dla \(a\sqsubseteq b\).
 \item Powiemy, że \(\varphi\) jest \emph{ciągła (w sensie Scotta}\footnote{Funkcje te są ciągłe w topologicznym sensie względem topologii Scotta.}), jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X)\) dla wszystkich skierowanych podzbioru \(X\subseteq D\).\label{def:m_cont_2}
-\item Powiemy, że \(\varphi\) jest \emph{ścisła} (ang. \emph{strict}), jeśli \(\varphi(\perp)=\perp'\).
+\item Powiemy, że \(\varphi\) jest \emph{ścisła} (ang. \emph{strict}), jeśli \(\varphi(\perp)=\perp'\). Funkcje, które nie są ścisłe, nazywamy niekiedy \emph{leniwymi} (ang. \emph{lazy}).
 \end{enumerate}
 Symbolem \([D\to D']\) oznaczamy zbiór wszystkich funkcji ciągłych ze zbioru \(D\)~do~\(D'\).
 \end{definicja}
@@ -160,10 +164,7 @@ Jeśli \(D\) i \(D'\) są cpo, to \([D\to D']\) jest cpo.
 Ponieważ \(D'\) jest cpo, to aby wykazać, że \([D\to D']\) ma element najmniejszy, wystarczy, że rozpatrzymy \(\perp(d)=\perp'\) dla \(d\in D\).
 
 Niech teraz \(\Phi\) będzie skierowanym podzbiorem \([D\to D']\). 
-Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\ 
-      \varphi\in\Phi\}\) jest  skierowanym podzbiorem  \(D'\). 
-
-      Istotnie, wybierzmy \(y_1,\,y_2\in\{\varphi(d)\ |\ \varphi\in\Phi\}\). Wówczas dla pewnych \(\varphi_1, \varphi_2\in\Phi\) mamy, że \(y_1=\varphi_1(d)\) oraz \(y_2=\varphi_2(d)\). Ponieważ \(\Phi\) jest skierowany, to istnieje \(\varphi_3\) taki, że \(\varphi_1\sqsubseteq \varphi_3\) i \(\varphi_2\sqsubseteq \varphi_3\). Z monotonicznośc funkcji ciągłych i faktu, że \(d\sqsubseteq d\) widzimy, że \(\{\varphi(d)\  |\ \varphi\in\Phi\}\) jest skierowanym podzbiorem \(D'\). Ponieważ zaś \(D'\) jest cpo, to dla każdego \(d\in D\) istnieje kres górny  \(\{\varphi(d)\  |\ \varphi\in\Phi\}\). Określmy więc funkcję \(\Psi_\Phi: D\to D'\) następującym wzorem:
+      Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\ \varphi\in\Phi\}\) jest  skierowanym podzbiorem  \(D'\). Wybierzmy \(y_1,\,y_2\in\{\varphi(d)\ |\ \varphi\in\Phi\}\). Wówczas dla pewnych \(\varphi_1, \varphi_2\in\Phi\) mamy, że \(y_1=\varphi_1(d)\) oraz \(y_2=\varphi_2(d)\). Ponieważ \(\Phi\) jest skierowany, to istnieje \(\varphi_3\) taki, że \(\varphi_1\preceq \varphi_3\) i \(\varphi_2\preceq \varphi_3\). Wówczas dla dowolnego \(d\in D\) \(\varphi_1(d) \sqsubseteq' \varphi_3(d)\) oraz \(\varphi_1(d) \sqsubseteq' \varphi_3(d)\), a zatem zbiór \(\{\varphi(d)\  |\ \varphi\in\Phi\}\) istotnie jest skierowany dla każdego \(d\in D\). Ponieważ zaś \(D'\) jest cpo, to dla każdego \(d\in D\) istnieje kres górny  \(\{\varphi(d)\  |\ \varphi\in\Phi\}\). Określmy więc funkcję \(\Psi_\Phi: D\to D'\) następującym wzorem:
       \begin{align*}
         \Psi_\Phi(d) = \bigsqcup \Phi d,
       \end{align*}
@@ -182,22 +183,23 @@ Wówczas  dla  wszystkich  \(d\in D\)  zbiór  \(\{\varphi(d)\  |\
                         &= \bigsqcup \left\{\bigsqcup \Phi d\ |\ d\in X\right\}
                         = \bigsqcup \Psi_\Phi(X).
           \end{align*}
-        \item \(\Phi\) jest ograniczony w \([D\to D']\). Istotnie, przypuśćmy, że dla dowolnego \(f\in[D\to D']\) istnieje \(g\in\Phi\) taki, że \(f\preceq g\). Wówczas w szczególności \(\Psi_\Phi \preceq g\) i stąd również
-          \[
-            \bigsqcup \Phi d \subseteq' g(d)\quad \text{dla wszystkich}\ d\in D.
-          \]
-          Ponieważ \(g\in\Phi\), to \(g(d)\subseteq \bigsqcup\{g(d)\ |\ g\in\Phi\}=\bigsqcup\Phi d\). Zatem \(\Psi_\Phi\) jest ograniczeniem górnym \(\Phi\).
+        \item Niech \(\varphi\in\Phi\). Wówczas dla dowolnego \(d\in D\) mamy \(\varphi(d)\sqsubseteq' \bigsqcup \Phi d = \Psi_{\Phi} d\). Zatem \(\varphi\preceq\Psi_\Phi\) i \(\Psi_\Phi\) jest ograniczeniem górnym \(\Phi\). Jeśli \(\Psi_\Phi\) nie jest kresem górnym \(\Phi\), to istnieje \(\chi\) takie, że \(\chi\preceq\Psi_\Phi\) oraz \(\chi\) jest kresem górnym \(\Phi\). Wówczas dla dowolnego \(d\in D\) mamy, że \(\chi(d)\) jest kresem górnym \(\Phi d\) oraz \(\chi(d)\sqsubseteq'\Psi_\Phi(d)\). Ale \(\Psi_\Phi(d)=\bigsqcup\Phi d\), a zatem \(\chi(d)\) nie jest kresem górnym \(\Phi d\). Stąd \(\Psi_\Phi\) jest kresem górnym \(\Phi\).   
+        % \item \(\Phi\) jest ograniczony w \([D\to D']\). Istotnie, przypuśćmy, że dla dowolnego \(f\in[D\to D']\) istnieje \(g\in\Phi\) taki, że \(f\preceq g\). Wówczas w szczególności \(\Psi_\Phi \preceq g\) i stąd również
+        %   \[
+        %     \bigsqcup \Phi d \subseteq' g(d)\quad \text{dla wszystkich}\ d\in D.
+        %   \]
+        %   Ponieważ \(g\in\Phi\), to \(g(d)\subseteq \bigsqcup\{g(d)\ |\ g\in\Phi\}=\bigsqcup\Phi d\). Zatem \(\Psi_\Phi\) jest ograniczeniem górnym \(\Phi\).
 
-          Przypuśćmy teraz, że \(\Phi\) nie ma kresu górnego. Wówczas dla dowolnego ograniczenia górnego \(f\) zbioru \(\Phi\) istnieje \(g\) takie, że \(g\preceq f\) i które jest również ograniczeniem górnym. Wówczas w szczególności mamy, że \(g\preceq \Psi_\Phi\), czyli dla dowolnego \(d\in D\)
-          \[
-            g(d) \subseteq' \bigsqcup \Phi  d\in D'.
-          \]
-          Ale \(\bigsqcup \Phi d\) jest kresem górnym \(\Phi d\) (wykazaliśmy bowiem, że \(\Phi d\) jest skierowany, zaś \(D'\) jest cpo), a zatem \(g(d)\) nie może być ograniczeniem \(\Phi d\). Istnieje stąd \(z\in \Phi d\) taki, że \(g(d)\subseteq' z\). Wówczas istnieje \(\tilde\varphi\in\Phi\) taki, że \(z=\tilde\varphi(d)\) oraz \(g(d)\subseteq' \tilde\varphi(d)\). Z dowolności \(d\) mamy, że \(g\preceq \tilde\varphi\). Zatem \(g\) nie jest ograniczeniem górnym \(\Phi\), co jest sprzeczne z założeniem. Stąd \(\Psi_\Phi\) musi być kresem górnym \(\Phi\).\qed
+        %   Przypuśćmy teraz, że \(\Phi\) nie ma kresu górnego. Wówczas dla dowolnego ograniczenia górnego \(f\) zbioru \(\Phi\) istnieje \(g\) takie, że \(g\preceq f\) i które jest również ograniczeniem górnym. Wówczas w szczególności mamy, że \(g\preceq \Psi_\Phi\), czyli dla dowolnego \(d\in D\)
+        %   \[
+        %     g(d) \subseteq' \bigsqcup \Phi  d\in D'.
+        %   \]
+        %   Ale \(\bigsqcup \Phi d\) jest kresem górnym \(\Phi d\) (wykazaliśmy bowiem, że \(\Phi d\) jest skierowany, zaś \(D'\) jest cpo), a zatem \(g(d)\) nie może być ograniczeniem \(\Phi d\). Istnieje stąd \(z\in \Phi d\) taki, że \(g(d)\subseteq' z\). Wówczas istnieje \(\tilde\varphi\in\Phi\) taki, że \(z=\tilde\varphi(d)\) oraz \(g(d)\subseteq' \tilde\varphi(d)\). Z dowolności \(d\) mamy, że \(g\preceq \tilde\varphi\). Zatem \(g\) nie jest ograniczeniem górnym \(\Phi\), co jest sprzeczne z założeniem. Stąd \(\Psi_\Phi\) musi być kresem górnym \(\Phi\).\qed
       \end{enumerate}
 \end{dowod}
-  \begin{wniosek}\label{thm:scott_seq}
+  \begin{definicja}\label{thm:scott_seq}
     Dla danego cpo \(D_0\) możemy skonstruować ciąg cpo \(\{D_n\}_{n=0}^{\infty}\) określając \(D_{n+1}=[D_n\to D_n]\) dla \(n\geq 0\). Tak określony ciąg dla \(D_0=\mathbb{N}^{+}\) (patrz Przykład \ref{ex:scott_d0}) nazywamy modelem Scotta.
-  \end{wniosek}
+  \end{definicja}
 \begin{definicja}[Projekcja]%5.5
 Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy parę \((\varphi, \psi)\) funkcji \(\varphi \in [D\to D']\), \(\psi \in [D'\to D]\) takich, że
 \begin{align}
@@ -339,14 +341,14 @@ Zauważmy, że na podstawie Faktu \ref{fact:projection}\ref{fact:projection_5} \
 Dowód, że operacja ta nie wyprowadza poza zbiór funkcji ciągłych pomijamy. 
 
 \begin{fakt}[{\cite[14.29]{Hindley:2008:LCI:1388400}}]\label{fact:model_a}%3.8
-Struktura aplikatywna \((D,\,\bullet)\) jest kombinatorycznie zupełna wtedy i tylko wtedy, gdy istnieją takie \(k,\,s\in D\), że dla wszystkich \(a,\,b,\,c\in D\) mamy: 
+Struktura aplikatywna \((D,\,\bullet)\) jest kombinatorowo zupełna wtedy i tylko wtedy, gdy istnieją takie \(k,\,s\in D\), że dla wszystkich \(a,\,b,\,c\in D\) mamy: 
 \begin{align*}
 k\bullet a\bullet b = a\quad \text{oraz}\quad s\bullet a \bullet b \bullet c = a\bullet c \bullet (b \bullet c).
 \end{align*}
 \end{fakt}
 
 \begin{fakt}[{\cite[15.30]{Hindley:2008:LCI:1388400}}]\label{fact:model}%3.12
-  Niech \((D,\bullet)\) będzie kombinatorycznie zupełną strukturą aplikatywną taką, że
+  Niech \((D,\bullet)\) będzie kombinatorowo zupełną strukturą aplikatywną taką, że
   dla dowolnych \(a,\,b\in D\) jeśli \(a\sim b\), to \(a=b\).
   Określmy \(\Lambda(a)=a\) dla wszystkich \(a\in D\). Wówczas \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym. 
 \end{fakt}
