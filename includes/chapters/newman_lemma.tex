@@ -33,11 +33,16 @@
   \caption{Rozważmy graf skierowany, w którym krawędzie odpowiadają relacji \(\to\) w zbiorze \(\{a,b,c,d\}\). Widzimy, że relacja \(\to\) ma własnosność WCR, ale nie ma własności CR.}\label{fig:wcrnotcr}
 \end{figure}
 
-\begin{definicja}(Postać normalna)
+\begin{definicja}(Postać normalna)\label{def:normalform}
   Powiemy, że \(x\in A\) jest \emph{redukowalny}, jeśli istnieje \(y\in A\) takie, że \(x\to y\). W przeciwnym wypadku powiemy, że \(x\) jest w \emph{postaci normalnej} i będziemy pisali \(x\in\mathrm{NF}\). 
-  
+   
   Element \(y\in A\) nazywamy \emph{postacią normalną} \(x\in A\), jeśli \(x\to^{*}y\) i \(y\in\mathrm{NF}\). Jeśli \(y\) jest jedyną postacią normalną \(x\), to piszemy \(x\downarrow y\). W przeciwnym wypadku, czyli jeśli istnieją \(y, z\in \mathrm{NF}, y\neq z\) takie, że \(x\to^{*} y\) i \(x\to^{*} z\), powiemy, że \(x\) jest \emph{niejednoznaczny}. 
+
 \end{definicja}
+
+\begin{uwaga*}
+  Zbiór \(\lambda\)-termów w postaci normalnej względem \(\beta\)-redukcji będziemy oznaczali symbolem \(\mathrm{NF}_\beta\).
+\end{uwaga*}
 
 \begin{definicja}
   Niech \(\to\) będzie relacją binarną na zbiorze \(A\). 
@@ -53,7 +58,7 @@
 \end{definicja}
 
 \begin{uwaga*}
-  Zbiory \(\lambda\)-termów słabo i silnie normalizowalnych względem relacji \(\beta\)-redukcji będziemy oznaczali symbolami \(\mathrm{WN}_\beta\) i \(\mathrm{SN}_\beta\) odpowiednio.
+  Zbiory \(\lambda\)-termów słabo i silnie normalizowalnych względem \(\beta\)-redukcji będziemy oznaczali symbolami \(\mathrm{WN}_\beta\) i \(\mathrm{SN}_\beta\) odpowiednio.
 \end{uwaga*}
 
 \begin{twierdzenie}(Lemat Newmana)\label{thm:newman_lemma}

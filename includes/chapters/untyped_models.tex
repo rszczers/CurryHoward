@@ -1,4 +1,4 @@
-\subsection{Model Scotta \(D_\infty\)}
+\subsection{Semantyka denotacyjna}
 W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) przemilczając jego topologiczny charakter. %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
 
 \paragraph{Wprowadzenie}
@@ -38,29 +38,57 @@ Powiemy, że \(a\) jest \emph{ekstensjonalnie równoważne} \(b\), jeśli \(a\si
 \end{definicja}
 
 \end{konwencja*}
-% Ustalmy teraz co rozumiemy przez \(\lambda\)-model.
+Ustalmy teraz co rozumiemy przez \(\lambda\)-model.
 
-% \begin{definicja}[Model syntaktyczny]%3.3
-%   Trójkę \((D,\,\bullet,\,\llbracket\,\rrbracket)\), gdzie \((D,\,\bullet)\) jest strukturą aplikatywną, \(\llbracket\,\rrbracket_\rho\) jest funkcją przyporządkowującą elementy 
-%   \(\llbracket M\rrbracket \in D\) termowi \(M\) przy wartościowaniu \(\rho\) (\emph{interpretacją} względem \(\rho\)), nazywamy \emph{\(\lambda\)-modelem}, jeśli spełnia poniższe własności:
-%   \begin{enumerate}
-%     \item \(\forall x \in V\ \left(\llbracket x \rrbracket_\rho = \rho(x)\right)\).
-%     \item \(\forall M,\,N \in \mathbf{\Lambda}\ (\llbracket MN \rrbracket_\rho = \llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho)\).
-%     \item \(\forall x \in V\,\forall M\in \mathbf{\Lambda}\,\forall d\in D\ (\, \llbracket \lambda x.\,M\rrbracket_\rho \bullet d = \llbracket M \rrbracket_{\rho[x/d]})\).
-%     \item Dla dowolnych wartościowań \(\rho\),  \(\sigma\) i dowolnego termu \(M\in\nobreak\mathbf{\Lambda}\), jeśli \[\forall x\in\nobreak\mathrm{FV}(M)\ (\rho(x) =\nobreak \sigma(x)),\] to \(\llbracket M\rrbracket_\rho =\nobreak\llbracket M \rrbracket_\sigma\).
-%     \item \(\forall M\in\mathbf{\Lambda}\,\forall x, y\in V\ (y\not\in\mathrm{FV}(M)\implies \llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho) \).
-% %    \item \(\forall M,\,N\in\mathbf{\Lambda}\,\left(\forall d\in D\,(\llbracket M\rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]} ) \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\).
-%     \item \(\forall M,\,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\).
-%   \end{enumerate}
-% \end{definicja}
+\begin{definicja}(Wartościowanie \(\lambda\)-zmiennych) Każde odwzorowanie \[\rho:\:V\to D,\] gdzie \(V\) jest zbiorem \(\lambda\)-zmiennych, a \(D\) dowolnym niepustym zbiorem, nazywamy \emph{wartościowaniem} (\(\lambda\)-zmiennych).
+\end{definicja}
 
-% Żądamy przede wszystkim, aby interpretacja \(\lambda\)-termów była zachowawcza ze względu na \(\beta\)-konwersję: chcemy utożsamiać ze sobą interpretacje \(\beta\)-konwersów tak aby ich znaczeniem była postać normalna (lub jej brak). Aplikacja jest w istocie działaniem binarnym na termach. Dlatego na uniwersum interpretacji wprowadzamy działanie \(\bullet\) tak, aby \(\llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho = \llbracket MN \rrbracket_\rho\) (Warunek 2). Warunek 3 jest konsekwencją obserwacji, że \((\lambda x.\,M) N =_\beta M[x/N]\), a zatem oczekujemy, aby 
-% \[
-%   \llbracket \lambda x.\,M \rrbracket_\rho \bullet \llbracket N \rrbracket_\rho =
-%   \llbracket (\lambda x.\,M) N\rrbracket_\rho = \llbracket M[x/N \rrbracket_\rho.
-% \]
-% Interpretacja rezultatu operacji podstawienia termu \(N\) za zmienną \(x\) nie różni się jednak w tym wypadku niczym od zmiany wartościowania zmiennej \(x\) przez interpretację termu \(\llbracket N\rrbracket_\rho\) (symbolicznie: \(\rho[x/\llbracket N \rrbracket_\rho])\), bowiem w wyniku \(\beta\)-redukcji żadna nowa zmienna nie zostaje związana i zastąpione przez \(N\) zostają wszystkie wolne wystąpienia \(x\) w \(M\). Waruneki 4 i 5 odpowiadają utożsamieniu \(\alpha\)-konwersów.
+\begin{definicja}\label{def:lambda-model-1}(\(\lambda\)-interpretacja) %3.3
+  Trójkę \((D,\,\bullet,\,\llbracket\,\rrbracket)\), gdzie 
+   \[\llbracket\,\rrbracket:\:\mathbf{\Lambda}\ \times\ D^{V}\to D\]
+  oraz \((D,\,\bullet)\) jest strukturą aplikatywną,
+  % przyporządkowuje \(\lambda\)-termom przy wybranym wartościowaniu \(\rho\)
+  % \emph{interpretację}
+  % \(\llbracket M\rrbracket \in D\) \(\lambda\)-termom \(M\in\mathbf{\Lambda}\) przy wybranym wartościowaniu \(\rho\) (\emph{interpretacją} względem \(\rho\)), 
+  nazywamy \emph{\(\lambda\)-interpretacją}, jeśli dla dowolnego wartościowania \(\rho\) spełnia poniższe własności:
+  \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+    \setlength\itemsep{0em}
+    \item \(\forall x \in V\ \left(\llbracket x \rrbracket_\rho = \rho(x)\right)\).\label{def:lambda-interpret-1}
+    \item \(\forall M,\,N \in \mathbf{\Lambda}\ (\llbracket MN \rrbracket_\rho = \llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho)\).\label{def:lambda-interpret-2}
+    \item \(\forall x \in V\,\forall M\in \mathbf{\Lambda}\,\forall d\in D\ (\, \llbracket \lambda x.\,M\rrbracket_\rho \bullet d = \llbracket M \rrbracket_{\rho[x/d]})\).\label{def:lambda-interpret-3}
+    \item Dla dowolnych wartościowań \(\rho\),  \(\sigma\) i dowolnego termu \(M\in\nobreak\mathbf{\Lambda}\), jeśli \[\forall x\in\nobreak\mathrm{FV}(M)\ (\rho(x) =\nobreak \sigma(x)),\] to \(\llbracket M\rrbracket_\rho =\nobreak\llbracket M \rrbracket_\sigma\).\label{def:lambda-interpret-4}
+     % \[\forall M\in\mathbf{\Lambda}\,\forall x, y\in V\ (y\not\in\mathrm{FV}(M)\implies \llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho) \],
+  \end{enumerate}
 
+  Jeśli dla \(\lambda\)-interpretacji \(\mathcal{M}=(D,\,\bullet,\,\llbracket\,\rrbracket)\) spełniony jest warunek
+  \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+    \setlength\itemsep{0em}
+    \setItemnumber{5}
+    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(M=_\beta N\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\),\label{def:lambda-interpret-5}
+
+   \end{enumerate}
+  to \(\mathcal{M}\) nazywamy \emph{\(\lambda\)-algebrą}. Jeśli zaś dla \(\mathcal{M}\) spełniony jest warunek
+   \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+    \setlength\itemsep{0em}
+    \setItemnumber{6}
+    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\),\label{def:lambda-interpret-6}
+   \end{enumerate}        
+  to \(\mathcal{M}\) nazywamy \emph{\(\lambda\)-modelem}. 
+
+\end{definicja}
+
+Omówmy pokrótce Definicję \ref{def:lambda-model-1}. Zauważmy na początku, że aplikacja w rachunku \(\lambda\) oznacza w istocie działanie binarne na \(\lambda\)-termach; dlatego na uniwersum interpretacji \(D\) wprowadzamy strukturę aplikatywną okreslając działanie \(\bullet\) w myśl warunku \ref{def:lambda-interpret-2}.
+
+Warunek \ref{def:lambda-interpret-3} jest konsekwencją obserwacji, że \((\lambda x.\,M) N =_\beta M[x/N]\). Oczekujemy więc, że 
+\[
+  \llbracket \lambda x.\,M \rrbracket_\rho \bullet \llbracket N \rrbracket_\rho =
+  \llbracket (\lambda x.\,M) N\rrbracket_\rho = \llbracket M[x/N \rrbracket_\rho.
+\]
+Interpretacja rezultatu operacji podstawienia termu \(N\) za zmienną \(x\) nie różni się jednak w tym wypadku niczym od zmiany wartościowania zmiennej \(x\) przez interpretację termu \(\llbracket N\rrbracket_\rho\) (symbolicznie: \(\rho[x/\llbracket N \rrbracket_\rho])\), bowiem w wyniku \(\beta\)-redukcji żadna nowa zmienna nie zostaje związana i zastąpione przez \(N\) zostają wszystkie wolne wystąpienia \(x\) w \(M\).
+
+W myśl warunku \ref{def:lambda-interpret-4} wymagamy, żeby \(\alpha\)-konwersom przypisywane było to samo znaczenie. Jeśli \(\lambda\)-interpretacja spełnia dodatkowo warunek \ref{def:lambda-interpret-5}, to jest ona zachowawcza ze względu na \(\beta\)-konwersję. Wymagamy w ten sposób, żeby \(\lambda\)-termy, które mają tę samą postać normalną (albo nie mają jej wcale) miały również to samo znaczenie.
+
+\subsubsection{Model Scotta \(D_\infty\)}
 
 \begin{definicja}% kombinacja zmiennycha, 3.7
 \begin{enumerate}
@@ -90,7 +118,6 @@ Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorowo zu
 \]
 \end{enumerate}
 \end{definicja}
-
 
 \begin{definicja}[Model bezsyntaktyczny]%3.9
   Modelem bezsyntaktycznym rachunku \(\lambda\) nazywamy trójkę \((D,\,\bullet, \Lambda)\), gdzie \(\mathbb{D}=(D,\,\bullet)\) jest strukturą aplikatywną, \(\Lambda: D \to D\) i spełnione są poniższe własności:

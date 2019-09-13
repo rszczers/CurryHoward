@@ -1,10 +1,37 @@
-\subsubsection{Leniwa ewaluacja}\label{subsec:lazy_eval}
+\subsubsection{Strategie redukcji}\label{subsec:lazy_eval}
+
+Najczęściej wyróżniamy nastepujące rodzaje strategii redukcji.
+
+\begin{definicja}
+Strategię nazywamy:
+\begin{enumerate}
+  \item \emph{normalną} (ang. \emph{normal-order}), gdy zawsze redukujemy redeksy pojedyńczo, rozpoczynając od najbardziej zewnętrznego redeksu od lewej strony wyrażenia; strategię tę nazywa się również \emph{lewostronną najbardziej zewnętrzną} (ang. \emph{leftmost outermost reduction}).
+\item \emph{aplikatywną} (ang. \emph{applicative-order}), jeśli zawsze redukujemy redeksy pojedyńczo, rozpoczynając od najbardziej zagnieżdżonego redeksu występującego najbardziej po lewej stronie wyrażenia; strategię tę nazywa się również \emph{lewostronną najbardziej wewnętrzną} (ang. \emph{leftmost innermost reduction}).
+
+\end{enumerate}
+\end{definicja}
+
+Strategia aplikatywna jest rodzajem strategii \emph{ścisłej} (nazywanej również \emph{zachłanną}, w angielskojęzycznej literaturze określanej odpowiednio \emph{strict}, \emph{gready} lub \emph{eager}). Strategiami zachłannymi nazywamy wszystkie te redukcje, w których argumenty \(\lambda\)-abstrakcji są redukowane do postaci normalnej przed zaaplikowaniem ich. Strategie, które nie są ścisłe, nazywamy \emph{strategiami nieścisłymi} (ang. \emph{non-strict}) -- argumenty \(\lambda\)-abstkracji w strategiach tego rodzaju mogą być redukowane dopiero wówczas, gdy jest to konieczne.
+
+
+
+W przeciwieństwie do strategii aplikatywnej (patrz Przykład \ref{ex:beta_reduction}\ref{ex:undeterministic_reduction_untyped}), okazuje się, że strategia normalna jest strategią normalizującą \cite[Rozdział 1.5]{Urzyczyn2006}. Niestety, narzuca ona w pesymistycznym przypadku wykładniczą złożoność obliczeniową. Zobserwujmy następującą redukcję:
+
+\begin{align*}
+  \left(\lambda x.(+\ x\ x)\right)(*\ 5\ 4)\ &\to_\beta (+\ (*\ 5\ 4)(*\ 5\ 4))\tag{\(\blacktriangledown\)}\label{ex:normal_reduction}\\
+  &\to_\beta (+\ 20\ (*\ 5\ 4))\\
+  &\to_\beta (+\ 20\ 20)\\
+  &\to_\beta 40.
+\end{align*}
+
+Widzimy, że redeksy są niepotrzebnie zwielokratniane, podczas gdy przy podejściu aplikatywnym zostałyby wpierw zredukowane. Obydwie strategie mają więc poważne wady; niekiedy stosuje się je naprzemiennie, ich efektywność zależy od wyrażenia\footnote{Analiza wyrażeń m.in. pod kątem możliwości redukowania wyrażeń strategią aplikatywną to tzw. \emph{strictness analysis}.}. Używając grafowej reprezentacji \(\lambda\)-termów możemy wprowadzić jednak pewną optymalizację: w przypadku, gdy przy pomocy strategii normalnej redukujemy te same podwyrażenia, zamiast powielać wierzchołki odpowiadające \(\beta\)-reduktom, możemy dodać krawędzie prowadzące do tych podwyrażeń (Rysunek \ref{fig:reduction_strategy}). Jest to nic innego jak ustawianie wskaźnika do innego, być może nieobliczonego jeszcze podwyrażenia\footnote{Na określenie podwyrażeń, których redukcja jest odłożona na później, używa się nazwy \emph{thunk}.} i współdzielenie wyników redukcji (Rysunek \ref{fig:reduction_strategy_detail}). Takie rozwiązanie pozwala na przeprowadzenie redukcji w skutek której współdzielone podwyrażenia są redukowane \emph{dokładnie jeden raz}. Zauważmy jednak, że używając strategii zachłannych taka optymalizacja jest niemożliwa, gdyż podwyrażenia odpowiadające argumentom są już wstępnie redukowane do postaci normalnej. Współdzielenie wprowadza również właściwe sobie problemy, których omówienie można znaleźć w \cite[Rozdział 3.8.3]{parallel_graph_rewriting}.
+
 \begin{figure}[t]
 \begin{align*}
 \psset{arrows=->}
 \pstree[levelsep=125pt,arrowsize=4pt 3]
 {
-  \TR{\begin{psmatrix}[colsep=0.4cm,rowsep=0.4cm,arrowsize=2pt 2]
+  \TR{\begin{psmatrix}[colsep=0.3cm,rowsep=0.3cm,arrowsize=2pt 2]
         &    &          & @ \\
         &    & \lambda  &   & (*\ 5\ 4) \\
         &    & @           \\
@@ -24,7 +51,7 @@
   \end{psmatrix}}
 }
 {
-  \TR{\begin{psmatrix}[colsep=0.4cm,rowsep=0.4cm,arrowsize=2pt 2]
+  \TR{\begin{psmatrix}[colsep=0.2cm,rowsep=0.3cm,arrowsize=2pt 2]
         &    & @           \\
         &  @ & &(*\ 5\ 4)         \\
     (+) &    & (*\ 5\ 4)           \\
@@ -35,7 +62,7 @@
     \ncline{2,2}{3,1}
     \ncline{2,2}{3,3}
   \end{psmatrix}}\nbput{\text{Bez współdzielenia}}
-  \TR{\begin{psmatrix}[colsep=0.4cm,rowsep=0.4cm,arrowsize=2pt 2]
+  \TR{\begin{psmatrix}[colsep=0.2cm,rowsep=0.3cm,arrowsize=2pt 2]
         &    & @           \\
         &  @ & &(*\ 5\ 4)         \\
     (+) &    & &           \\
@@ -48,34 +75,63 @@
   \end{psmatrix}}\naput{\text{Ze współdzieleniem}}
 }
 \end{align*}
-  \caption{\(\beta\)-redukcja wyrażenia strategią normalną bez współdzielenia (\ref{ex:normal_reduction}) (po lewej) i ze współdzieleniem (po prawej).}\label{fig:reduction_strategy}
+  \caption{Schematyczne porównanie redukcji (\ref{ex:normal_reduction}) z użyciem redukcji grafów wyrażeń bez współdzielenia (po lewej) i ze współdzieleniem (po prawej).}\label{fig:reduction_strategy}
 \end{figure}
 
-Najczęściej wyróżniamy nastepujące rodzaje strategii redukcji.
-
-\begin{definicja}
-Strategię nazywamy:
-\begin{enumerate}
-  \item \emph{normalną} (ang. \emph{normal-order}), gdy zawsze redukujemy redeksy pojedyńczo, rozpoczynając od najbardziej zewnętrznego redeksu od lewej strony wyrażenia; strategię tę nazywa się również \emph{lewostronną najbardziej zewnętrzną} (ang. \emph{leftmost outermost reduction}).
-\item \emph{aplikatywną} (ang. \emph{applicative-order}), jeśli zawsze redukujemy redeksy pojedyńczo, rozpoczynając od najbardziej zagnieżdżonego redeksu występującego najbardziej po lewej stronie wyrażenia; strategię tę nazywa się również \emph{lewostronną najbardziej wewnętrzną} (ang. \emph{leftmost innermost reduction}).
-
-\end{enumerate}
-\end{definicja}
-
-Strategia aplikatywna jest rodzajem strategii \emph{ścisłej} (nazywanej również \emph{zachłanną}, w angielskojęzycznej literaturze określanej odpowiednio \emph{strict}, \emph{gready} lub \emph{eager}). Strategiami zachłannymi nazywamy wszystkie te redukcje, w których argumenty \(\lambda\)-abstrakcji są redukowane do postaci normalnej przed zaaplikowaniem ich. Strategie, które nie są ścisłe, nazywamy \emph{strategiami nieścisłymi} (ang. \emph{non-strict}) -- argumenty \(\lambda\)-abstkracji w strategiach tego rodzaju mogą być redukowane dopiero wówczas, gdy jest to konieczne.
-
-W przeciwieństwie do strategii aplikatywnej (patrz Przykład \ref{ex:beta_reduction}\ref{ex:undeterministic_reduction_untyped}), okazuje się, że strategia normalna jest strategią normalizującą \cite[Rozdział 1.5]{Urzyczyn2006}. Niestety, narzuca ona w pesymistycznym przypadku wykładniczą złożoność obliczeniową. Zobserwujmy następującą redukcję:
-
-\begin{align*}
-  \left(\lambda x.(+\ x\ x)\right)(*\ 5\ 4)\ &\to_\beta (+\ (*\ 5\ 4)(*\ 5\ 4))\tag{\(\blacktriangledown\)}\label{ex:normal_reduction}\\
-  &\to_\beta (+\ 20\ (*\ 5\ 4))\\
-  &\to_\beta (+\ 20\ 20)\\
-  &\to_\beta 40.
-\end{align*}
-
-Widzimy, że redeksy są niepotrzebnie zwielokratniane, podczas gdy przy podejściu aplikatywnym zostałyby wpierw zredukowane. Obydwie strategie mają więc poważne wady; niekiedy stosuje się je naprzemiennie, ich efektywność zależy od wyrażenia\footnote{Analiza wyrażeń m.in. pod kątem możliwości redukowania ich strategią aplikatywną to tzw. \emph{strictness analysis}.}. Używając grafowej reprezentacji \(\lambda\)-termów możemy wprowadzić jednak pewną optymalizację: w przypadku, gdy przy pomocy strategii normalnej redukujemy te same podwyrażenia, zamiast powielać wierzchołki odpowiadające \(\beta\)-reduktom, możemy dodać krawędzie prowadzącą do tych podwyrażeń (patrz Rysunek \ref{fig:reduction_strategy}). Jest to nic innego jak ustawianie wskaźnika do innego, być może nieobliczonego jeszcze podwyrażenia\footnote{Na określenie podwyrażeń, których redukcja jest odłożona na później, używa się nazwy \emph{thunk}.} i współdzielenie wyników redukcji. Takie rozwiązanie pozwala na przeprowadzenie redukcji w skutek której współdzielone podwyrażenia są redukowane \emph{dokładnie jeden raz}. Zauważmy jednak, że używając strategii zachłannych taka optymalizacja jest niemożliwa, gdyż podwyrażenia odpowiadające argumentom są już wstępnie redukowane do postaci normalnej. Współdzielenie wprowadza również właściwie sobie problemy, których omówienie można znaleźć w \cite[Rozdział 3.8.3]{parallel_graph_rewriting}.
 
 Normalne strategie redukcji, które używają współdzielenia rezultatu redukcji (ang. \emph{sharing}) nazywa się strategiami \emph{call-by-need}. Wykonywanie redukcji strategią call-by-need aż do uzyskania wyrażenia w słabej czołowiej postaci normalnej nazywamy \emph{leniwą ewaluacją}. Ze względu na kolejność wykonywania redukcji strategie leniwe są więc strategiami nieścisłymi\footnote{Haskell, jako jeden z nielicznych języków programowania, określany jest jako \emph{nieścisły}; ma to jednak związek z \emph{nieścisłą semantyką} języka, a nie strategią redukcji jego wyrażeń (które notabene najczęściej redukowane są strategią leniwą, a więc nieścisłą).}. Implementacja tej strategii odpowiada \emph{leniwej redukcji grafu} \cite[Rozdział 12.1, str. 212]{PeytonJones:1987:IFP:1096899} na przykład przy pomocy abstrakcyjnej maszyny STG, jak ma to miejsce w przypadku kompilatora GHC języka Haskell. Szczegóły technicznie związane z formalizmem maszyny STG można znaleźć w \cite{jones1992implementing}; prezentacja nawet zrębów tej implementacji znacznie wykraczaja poza zamierzony zakres tej pracy. 
+
+\begin{figure}[h]
+\begin{align*}
+\psset{arrows=->}
+\pstree[levelsep=155pt,arrowsize=4pt 3]
+{
+  \TR{\begin{psmatrix}[colsep=0.3cm,rowsep=0.2cm,arrowsize=2pt 2]
+        &    &          & @     & &    &   &    &  \\
+        &    & \lambda  &       & &    &   & @  &  \\
+        &    & @        &       & &    & @ &    & 4\\
+        &  @ &          & \circ & &(*) &   & 5  &\\
+    (+) &    & \circ           \\
+    \everypsbox{\scriptstyle}%
+    \psset{nodesep=3pt,arrows=->}
+    \ncline{1,4}{2,3}
+    \ncline{1,4}{2,8}
+    \ncline{2,8}{3,7}
+    \ncline{2,8}{3,9}
+    \ncline{3,7}{4,6}
+    \ncline{3,7}{4,8}
+    \ncline{2,3}{3,3}
+    \ncline{3,3}{4,2}
+    \ncline{4,2}{5,1}
+    \ncline{4,2}{5,3}
+    \ncline{3,3}{4,4}
+    \ncline{1,4}{2,5}
+    \nccurve[ncurvA=1.5,ncurvB=4,angleA=-120,angleB=200]{5,3}{2,3}
+    \nccurve[ncurvA=1,ncurvB=1.5,angleA=-30,angleB=-30]{4,4}{2,3}
+  \end{psmatrix}}
+}
+{
+  \TR{\begin{psmatrix}[colsep=0.3cm,rowsep=0.2cm,arrowsize=2pt 2]
+        &    & @          \\
+        &  @ &            \\
+    (+) &    &   & @  &   \\
+        &    & @ &    & 4 \\
+        &(*) &   & 5  &   \\
+    \everypsbox{\scriptstyle}%
+    \psset{nodesep=2pt,arrows=->}
+    \ncline{1,3}{2,2}
+    \ncline{1,3}{3,4}
+    \ncline{2,2}{3,1}
+    \ncline{2,2}{3,4}
+    \ncline{3,4}{4,3}
+    \ncline{3,4}{4,5}
+    \ncline{4,3}{5,2}
+    \ncline{4,3}{5,4}
+  \end{psmatrix}}\naput{\beta}
+}
+\end{align*}
+  \caption{Redukcja (\ref{ex:normal_reduction}) z użyciem redukcji grafu ze współdzieleniem.}\label{fig:reduction_strategy_detail}
+\end{figure}
 
 Redukcja do słabej czołowej postaci normalnej ma szczególne znaczenie, bowiem pozwala unikać \(\alpha\)-konwersji przy kolejnych \(\beta\)-redukcjach. Sensowne wyrażenia, które kodujemy w rachunku \(\lambda\), są na ogół kombinatorami, tzn. nie zawierają zmiennych wolnych. Zauważmy, że jeśli redukujemy \(\lambda\)-term zamknięty strategią normalną, to nie jest możliwe aby wykonując podstawienie jakieś zmienne zostały dodatkowo związane \(\lambda\)-abstraktorem. Dopóki redukcja nie zostanie przeprowadzona wewnątrz \(\lambda\)-abstrakcji, to \(\alpha\)-konwersja okazuje się zbędna.
 \begin{przyklad}  
