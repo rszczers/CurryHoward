@@ -1,5 +1,5 @@
 \section{Rachunek \(\lambda\) bez typów}\label{sec:untyped_lambda}
-\subsection{Język rachunku \(\lambda\)}
+\subsection{Język rachunku \(\lambda\) i \(\lambda\)-pretermy}
 Niech  \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}. Ponieważ \(V\) jest potencjalnie nieskończony, zastrzegamy sobie możliwość wybierania w razie potrzeby wcześniej nie użytej zmiennej.
 
 \begin{definicja}[Zbiór \(\mathbf{\tilde\Lambda}\) pretermów]\label{def:lambda-untyped}
@@ -356,7 +356,7 @@ Historycznie wiąże się ta notacja z jego pracami nad systemem komputerowo wsp
 Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{txa:alpha-draft}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Technikalia definiowania \(\lambda\)-termow jako klas \(\alpha\)-konwersji są na ogół w literaturze pomijane. %nie jest w literaturze przedmiotu. %Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
 
 \subsection{Sematyka operacyjna}
-\subsubsection{Redukcje i ich własności}
+\subsubsection{Redukcje}
 Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\Lambda}\) operacji \(\beta\)- i \(\eta\)-redukcji. Pożądane jest, żeby operacje te wykonywane na podtermach pozostowały w \emph{zgodzie} ze strukturą całego \(\lambda\)-termu.
 
 \begin{definicja}(Relacja zgodna)

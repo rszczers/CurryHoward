@@ -1,7 +1,7 @@
 \subsection{Semantyka denotacyjna}
 
 
-\subsubsection{\(\lambda\)-modele}
+\subsubsection{\(\lambda\)-modele}\label{subsec:lambda-models}
 Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny i możliwe jest skonstruowanie nieskończonego zstępującego ciąg zbiorów:
 \[
   f_M \ni \left(f_M, f_M\left(f_M\right)\right)  \ni\{f_M\} \ni f_M \ni \dots
@@ -93,7 +93,7 @@ Interpretacja rezultatu operacji podstawienia termu \(N\) za zmienną \(x\) nie 
 \begin{align*}
   \llbracket M[x/N] \rrbracket_\rho = \llbracket M \rrbracket_{\rho[x/\llbracket N \rrbracket_\rho]}.
 \end{align*}
-Fakt ten wymaga dowodu; szczegółowe uzasadnienia można znaleźć w \cite[Tw. 15.10(a)]{Hindley:2008:LCI:1388400}.
+Fakt ten wymaga dowodu: przeprowadza się go indukcją strukturalną względem \(M\). Szczegółowe uzasadnienia można znaleźć w \cite[Tw. 15.10(a)]{Hindley:2008:LCI:1388400}.
 
 W myśl warunku \ref{def:lambda-interpret-4} wymagamy, żeby interpretacja \(\lambda\)-termu zależała tylko od wartościowania występujących w nim zmiennych wolnych. 
 
@@ -469,7 +469,7 @@ zaś na podstawie \ref{fact:projection}\ref{fact:projection_4}:
 \end{align*}
 Zatem wyrazy \(a_0,\,a_1,\,a_2,\,a_3,\,\dots\) możemy traktowac jako kolejne przybliżenia elementu \(a\). Zauwazmy, że na podstawie Faktu \ref{fact:projection_5} ciąg ten jest zawsze rosnący. Traktując nieformalnie \(D_\infty\) jako pewną przestrzeń informacji i w niej: element \(\perp\) jako brak informacji, zaś relację \(\sqsubseteq\) odczytując jako „więcej informacji”, kolejne przybliżenia możemy odczytąc jako proces poznawczy prowadzący do stanu pełnej informacji o jakimś fakcie.  
 
-Kolejną istotną obserwacją jest fakt, że dziedzina każdej funkcji z \(D_n\) zawiera się w powyższym sensie również w \(D_n\). Fakty \ref{fact:projection}\ref{fact:projection_4} i \ref{fact:projection}\ref{fact:projection_5} sugerują metodę określenia struktury aplikatywnej na \(D_\infty\). Przypuśćmy bowiem, że \(a,\,b\in D_\infty\). Wówczas dla każdego \(n\in\mathbb{N}\) wyrazy \(a_n\) i \(b_n\) są przybliżeniami \(a\) i \(b\), odpowiednio. Ponieważ \(a_{n+1}\in  D_{n+1}=[D_n\to D_n]\), to \(a_{n+1}(b_n)\) jest określony. A zatem \(a_{n+1}(b_n)\) jest pewnym przybliżeniem aplikacji \(a\) do \(b\). Widzimy jednocześnie, że rozwiązuje to problem samoaplikacji wymieniony na wstępie. 
+Kolejną istotną obserwacją jest fakt, że dziedzina każdej funkcji z \(D_n\) zawiera się w powyższym sensie również w \(D_n\). Fakty \ref{fact:projection}\ref{fact:projection_4} i \ref{fact:projection}\ref{fact:projection_5} sugerują metodę określenia struktury aplikatywnej na \(D_\infty\). Przypuśćmy bowiem, że \(a,\,b\in D_\infty\). Wówczas dla każdego \(n\in\mathbb{N}\) wyrazy \(a_n\) i \(b_n\) są przybliżeniami \(a\) i \(b\), odpowiednio. Ponieważ \(a_{n+1}\in  D_{n+1}=[D_n\to D_n]\), to \(a_{n+1}(b_n)\) jest określony. A zatem \(a_{n+1}(b_n)\) jest pewnym przybliżeniem aplikacji \(a\) do \(b\). Widzimy jednocześnie, że rozwiązuje to problem samoaplikacji wymieniony we wstępie do Podrozdziału \ref{subsec:lambda-models}. 
 
 \begin{definicja}%5.13
   Dla \(a,\,b\in D_\infty\) określamy:
