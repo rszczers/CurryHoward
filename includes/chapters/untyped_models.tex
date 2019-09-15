@@ -1,6 +1,5 @@
 \subsection{Semantyka denotacyjna}
 
-% W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) przemilczając jego topologiczny charakter.
 
 \subsubsection{\(\lambda\)-modele}
 Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny i możliwe jest skonstruowanie nieskończonego zstępującego ciąg zbiorów:
@@ -8,19 +7,6 @@ Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako
   f_M \ni \left(f_M, f_M\left(f_M\right)\right)  \ni\{f_M\} \ni f_M \ni \dots
 \]
 Istnienie takiego ciągu narusza jednak aksjomat ufundowania na gruncie aksjomatyki ZF, a to wyklucza możliwość określenia takich modeli.
-
-Rozwiązanie Scotta polega na tym, aby zamiast próbować interpretować termy jako funkcje, przypisać im nieskończone ciągi funkcji postaci 
-\[
-  \varphi = (\varphi_0,\,\varphi_1,\,\varphi_2,\,\dots),
-\]
-gdzie \(\varphi \in D_\infty\) i \(\varphi_n\in D_n\). Określając na takiej strukturze aplikację następująco
-\[
-  \varphi\bullet\psi = (\varphi_1(\psi_0),\,\varphi_2(\psi_1),\,\varphi_3(\psi_2),\,\dots),
-\]
-widzimy, że samoaplikacja jest poprawnie określona: 
-\[
-  \varphi\bullet\varphi = (\varphi_1(\varphi_0),\,\varphi_2(\varphi_1),\,\varphi_3(\varphi_2),\,\dots).
-\]
 
 %\subsubsection{Wprowadzenie}
 Celem wprowadzenia ustalmy szereg następujących pojęć.
@@ -48,6 +34,15 @@ Powiemy, że \(a\) jest \emph{ekstensjonalnie równoważne} \(b\), jeśli \(a\si
 Ustalmy teraz co rozumiemy przez \(\lambda\)-model.
 
 \begin{definicja}(Wartościowanie \(\lambda\)-zmiennych) Każde odwzorowanie \[\rho:\:V\to D,\] gdzie \(V\) jest zbiorem \(\lambda\)-zmiennych, a \(D\) dowolnym niepustym zbiorem, nazywamy \emph{wartościowaniem} (\(\lambda\)-zmiennych).
+
+  Jeśli \(\rho\) jest wartościowaniem, to symbolem \(\rho[x_0/d_0]\) będziemy 
+  oznaczali następujące wartościowanie:
+  \[
+    \rho[x_0/d_0](x) = \begin{cases}
+        d_0, & \text{jeśli } x=x_0, \\
+      \rho(x) & \text{w przeciwnym wypadku}.
+    \end{cases}
+  \]
 \end{definicja}
 
 \begin{definicja}\label{def:lambda-model-1}(\(\lambda\)-model) %3.3
@@ -173,48 +168,81 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
   \qed
 \end{dowod}
   
+% \subsubsection{Modele bezsyntaktyczne}
 
-\subsubsection{Model Scotta \(D_\infty\)}
+% \begin{definicja}% kombinacja zmiennycha, 3.7
+% \begin{enumerate}
+%   \setlength\itemsep{0em}
+% \item
+% Powiemy, że term \(M\) jest \emph{kombinacją zmiennych}, jeśli \(M\equiv x\) dla pewnej zmiennej \(x\) albo \(M\equiv (PQ)\) dla pewnych kombinacji zmiennych \(P\) i \(Q\). 
+% \item 
+% Niech \(M\) będzie kombinacją zmiennych taką, że \(\mathrm{FV}(M)=\{x_1,\,x_2,\,\dots,\,x_n\}\). Względem \(M\) określamy funkcję \(f_M: D^n\to D\) następującym wzorem:
 
-\begin{definicja}% kombinacja zmiennycha, 3.7
-\begin{enumerate}
-  \setlength\itemsep{0em}
-\item
-Powiemy, że term \(M\) jest \emph{kombinacją zmiennych}, jeśli \(M\equiv x\) dla pewnej zmiennej \(x\) albo \(M\equiv (PQ)\) dla pewnych kombinacji zmiennych \(P\) i \(Q\). 
-\item 
-Niech \(M\) będzie kombinacją zmiennych taką, że \(\mathrm{FV}(M)=\{x_1,\,x_2,\,\dots,\,x_n\}\). Względem \(M\) określamy funkcję \(f_M: D^n\to D\) następującym wzorem:
-
+% % \begin{align*}
+% % f_M (d_1,\,d_2,\,\dots,\,d_n) = \begin{cases}
+% % d_k,\ \text{jeśli}\ M\equiv x_k \text{dla pewnego}\ 1\leq k \leq n,\\
+% % f_Q (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n)\  \text{jeśli}\ M\equiv (QR)\ \text{dla pewnych kombinacji zmiennych QR}.
+% % \end{cases}
+% % \end{align*}
 % \begin{align*}
 % f_M (d_1,\,d_2,\,\dots,\,d_n) = \begin{cases}
-% d_k,\ \text{jeśli}\ M\equiv x_k \text{dla pewnego}\ 1\leq k \leq n,\\
-% f_Q (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n)\  \text{jeśli}\ M\equiv (QR)\ \text{dla pewnych kombinacji zmiennych QR}.
+% d_k,\ &\text{jeśli}\ M\equiv x_k, \\
+% f_P (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n),\ & \text{jeśli}\ M\equiv (PQ).
 % \end{cases}
 % \end{align*}
-\begin{align*}
-f_M (d_1,\,d_2,\,\dots,\,d_n) = \begin{cases}
-d_k,\ &\text{jeśli}\ M\equiv x_k, \\
-f_P (d_1,\,d_2,\,\dots,\,d_n) \bullet f_Q (d_1,\,d_2,\,\dots,\,d_n),\ & \text{jeśli}\ M\equiv (PQ).
-\end{cases}
-\end{align*}
 
-\item
-Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorowo zupelna}, jeśli dla każdej kombinacji zmiennych \(M\) istnieje \(a_M\in D\) taki, że dla wszystkich \(d_1\),\(d_2\),\(\dots\),\(d_n\in D\)
+% \item
+% Powiemy, że struktura aplikatywna \((D,\,\bullet)\) jest \emph{kombinatorowo zupelna}, jeśli dla każdej kombinacji zmiennych \(M\) istnieje \(a_M\in D\) taki, że dla wszystkich \(d_1\),\(d_2\),\(\dots\),\(d_n\in D\)
+% \[
+%   a_M\bullet d_1 \bullet d_2 \bullet \dots \bullet d_n = f_M(d_1,\, d_2,\,\dots,\,d_n).
+% \]
+% \end{enumerate}
+% \end{definicja}
+
+% \begin{definicja}[Model bezsyntaktyczny]%3.9
+%   Modelem bezsyntaktycznym rachunku \(\lambda\) nazywamy trójkę \((D,\,\bullet, \Lambda)\), gdzie \(\mathbb{D}=(D,\,\bullet)\) jest strukturą aplikatywną, \(\Lambda: D \to D\) i spełnione są poniższe własności:
+%   \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
+%   \setlength\itemsep{0em}
+%     \item \(\mathbb{D}\) jest kombinatorowo zupełny.
+%     \item \(\Lambda (a) \sim a\) dla wszystkich \(a\in D\).
+%     \item Jeśli \(a\sim b\), to \(\Lambda(a) = \Lambda(b)\) dla wszystkich \(a,\,b\in D\).
+%     \item \(\Lambda(a)=e\bullet a\) dla pewnego \(e\in D\) i wszystkich \(a\in D\).
+%   \end{enumerate}
+% \end{definicja}
+
+% \begin{fakt}(\cite[Tw. 15.20]{Hindley:2008:LCI:1388400})
+%   Każdy model bezsyntaktyczny \((D,\,\bullet, \Lambda)\) jest \(\lambda\)-modelem
+%   \((D,\,\bullet, \llbracket\rrbracket)\), gdzie interpretacja 
+%    \[\llbracket\,\rrbracket:\:\mathbf{\Lambda}\ \times\ D^{V}\to D\]
+%    określona jest w następujący sposób
+%   \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
+%   \setlength\itemsep{0em}
+%     \item \(\llbracket x\rrbracket_\rho = \rho(x),\)
+%     \item \(\llbracket M N \rrbracket_\rho = \llbracket M \rrbracket_\rho \bullet \llbracket N \rrbracket_\rho,\)
+%     \item \(\llbracket\lambda x.\,M\rrbracket_\rho = \Lambda(a)\), gdzie \(\forall d \in D\ a\bullet d = \llbracket M \rrbracket_{\rho[x/d]}.\)
+%   \end{enumerate}
+
+%   \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
+%     \setlength\itemsep{0em}
+%     \item[(d)] \(\Lambda(a) = \llbracket \lambda x.\,ux\rrbracket_{\sigma[u/a]}\) dla dowolnego wartościowania \(\sigma\).
+%   \end{enumerate}
+% \end{fakt}
+
+\subsubsection{Model Scotta \(D_\infty\)}
+% W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) przemilczając jego topologiczny charakter.
+
+Rozwiązanie Scotta polega na tym, aby zamiast próbować interpretować termy jako funkcje, przypisać im nieskończone ciągi funkcji postaci 
 \[
-  a_M\bullet d_1 \bullet d_2 \bullet \dots \bullet d_n = f_M(d_1,\, d_2,\,\dots,\,d_n).
+  \varphi = (\varphi_0,\,\varphi_1,\,\varphi_2,\,\dots),
 \]
-\end{enumerate}
-\end{definicja}
-
-\begin{definicja}[Model bezsyntaktyczny]%3.9
-  Modelem bezsyntaktycznym rachunku \(\lambda\) nazywamy trójkę \((D,\,\bullet, \Lambda)\), gdzie \(\mathbb{D}=(D,\,\bullet)\) jest strukturą aplikatywną, \(\Lambda: D \to D\) i spełnione są poniższe własności:
-  \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
-  \setlength\itemsep{0em}
-    \item \(\mathbb{D}\) jest kombinatorowo zupełny.
-    \item \(\Lambda (a) \sim a\) dla wszystkich \(a\in D\).
-    \item Jeśli \(a\sim b\), to \(\Lambda(a) = \Lambda(b)\) dla wszystkich \(a,\,b\in D\).
-    \item \(\Lambda(a)=e\bullet a\) dla pewnego \(e\in D\) i wszystkich \(a\in D\).
-  \end{enumerate}
-\end{definicja}
+gdzie \(\varphi \in D_\infty\) i \(\varphi_n\in D_n\). Określając na takiej strukturze aplikację następująco
+\[
+  \varphi\bullet\psi = (\varphi_1(\psi_0),\,\varphi_2(\psi_1),\,\varphi_3(\psi_2),\,\dots),
+\]
+widzimy, że samoaplikacja jest poprawnie określona: 
+\[
+  \varphi\bullet\varphi = (\varphi_1(\varphi_0),\,\varphi_2(\varphi_1),\,\varphi_3(\varphi_2),\,\dots).
+\]
 
 \paragraph{Elementy teorii porządku} 
 Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jeśli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kresem górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
@@ -359,17 +387,17 @@ I_{D_n}, & \text{jeśli}\ m=n,\\
 
 Ponieważ dla każdego \(n\in \mathbb{N}\) para \((\varphi_n, \psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\), to zachodzi następujący szereg własności.
 
-\begin{fakt}[{\cite[16.33]{Hindley:2008:LCI:1388400}}]%5.7
-Niech \(m,\,n\geq 0\). Wówczas
-\begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
-  \setlength\itemsep{0em}
-\item \(\varphi_{mn}\in [D_m\to D_n]\),
-\item jeśli \(m\leq n\), to \(\varphi_{nm}\circ \varphi_{mn} = I_{D_m}\),
-\item jeśli \(m>n\), to \(\varphi_{nm}\circ \varphi_{mn} \preceq I_{D_m}\),
-\item jeśli \(m<n\), to \((\varphi_{mn},\varphi_{nm})\) jest projekcją z \(D_n\) do \(D_m\),
-\item jeśli \(m<k<n\) lub \(n<k<m\), to \(\varphi_{kn}\circ\varphi_{mk}=\varphi_{mn}\).
-\end{enumerate}
-\end{fakt}
+% \begin{fakt}[{\cite[16.33]{Hindley:2008:LCI:1388400}}]%5.7
+% Niech \(m,\,n\geq 0\). Wówczas
+% \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
+%   \setlength\itemsep{0em}
+% \item \(\varphi_{mn}\in [D_m\to D_n]\),
+% \item jeśli \(m\leq n\), to \(\varphi_{nm}\circ \varphi_{mn} = I_{D_m}\),
+% \item jeśli \(m>n\), to \(\varphi_{nm}\circ \varphi_{mn} \preceq I_{D_m}\),
+% \item jeśli \(m<n\), to \((\varphi_{mn},\varphi_{nm})\) jest projekcją z \(D_n\) do \(D_m\),
+% \item jeśli \(m<k<n\) lub \(n<k<m\), to \(\varphi_{kn}\circ\varphi_{mk}=\varphi_{mn}\).
+% \end{enumerate}
+% \end{fakt}
 
 \paragraph{Konstrukcja \(D_\infty\)}
 %\subsubsection{Konstrukcja \(D_\infty\)}
@@ -392,19 +420,19 @@ Na zbiorze \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący spos
 
 \end{definicja}
 
-Przy powyższym określeniu \(D_\infty\) okazuje się być cpo.
+Przy powyższym określeniu \(D_\infty\) okazuje się być cpo \cite[16.36]{Hindley:2008:LCI:1388400}.
 
-\begin{fakt}[{\cite[16.36]{Hindley:2008:LCI:1388400}}]%5.10
-\begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
-  \setlength\itemsep{0em}
-\item \(D_\infty\) jest cpo.
-\item \(D_\infty\) zawiera element najmniejszy \(\perp=(\perp_0,\,\perp_1,\,\dots)\), gdzie przez \(\perp_n\) oznaczamy najmniejszy element \(D_n\).
-\item Kres górny każdego skierowany zbioru \(X\subset D_\infty\) ma postać
-\[
-\bigsqcup X = (\bigsqcup X_0,\,\bigsqcup X_1,\,\dots)
-\]
-\end{enumerate}
-\end{fakt}
+% \begin{fakt}[{\cite[16.36]{Hindley:2008:LCI:1388400}}]%5.10
+% \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
+%   \setlength\itemsep{0em}
+% \item \(D_\infty\) jest cpo.
+% \item \(D_\infty\) zawiera element najmniejszy \(\perp=(\perp_0,\,\perp_1,\,\dots)\), gdzie przez \(\perp_n\) oznaczamy najmniejszy element \(D_n\).
+% \item Kres górny każdego skierowany zbioru \(X\subset D_\infty\) ma postać
+% \[
+% \bigsqcup X = (\bigsqcup X_0,\,\bigsqcup X_1,\,\dots)
+% \]
+% \end{enumerate}
+% \end{fakt}
 
 Dodatkowo, określamy projekcję z \(D_\infty\) do \(D_n\) dla każdego \(n\in\mathbb{N}\).
 Wymaga to dowodu (patrz Fakt \ref{fact:projection}\ref{fact:projection_1}), który pomijamy.
@@ -453,44 +481,44 @@ a \bullet b = \bigsqcup\left\{\varphi_{n\infty}(a_{n+1}(b_n))\ |\ n\geq 0\right\
 Zauważmy, że na podstawie Faktu \ref{fact:projection}\ref{fact:projection_5} \(D_\infty\) jest łańcuchem, a zatem zbiorem skierowanym. Ponieważ \(D_\infty\) jest cpo, to supremum takiego zbioru zawsze istnieje. Zatem działanie \(\bullet\) jest poprawnie określone.
 Dowód, że operacja ta nie wyprowadza poza zbiór funkcji ciągłych pomijamy. 
 
-\begin{fakt}[{\cite[14.29]{Hindley:2008:LCI:1388400}}]\label{fact:model_a}%3.8
-Struktura aplikatywna \((D,\,\bullet)\) jest kombinatorowo zupełna wtedy i tylko wtedy, gdy istnieją takie \(k,\,s\in D\), że dla wszystkich \(a,\,b,\,c\in D\) mamy: 
-\begin{align*}
-k\bullet a\bullet b = a\quad \text{oraz}\quad s\bullet a \bullet b \bullet c = a\bullet c \bullet (b \bullet c).
-\end{align*}
+% \begin{fakt}[{\cite[14.29]{Hindley:2008:LCI:1388400}}]\label{fact:model_a}%3.8
+% Struktura aplikatywna \((D,\,\bullet)\) jest kombinatorowo zupełna wtedy i tylko wtedy, gdy istnieją takie \(k,\,s\in D\), że dla wszystkich \(a,\,b,\,c\in D\) mamy: 
+% \begin{align*}
+% k\bullet a\bullet b = a\quad \text{oraz}\quad s\bullet a \bullet b \bullet c = a\bullet c \bullet (b \bullet c).
+% \end{align*}
+% \end{fakt}
+
+% \begin{fakt}[{\cite[15.30]{Hindley:2008:LCI:1388400}}]\label{fact:model}%3.12
+%   Niech \((D,\bullet)\) będzie kombinatorowo zupełną strukturą aplikatywną taką, że
+%   dla dowolnych \(a,\,b\in D\) jeśli \(a\sim b\), to \(a=b\).
+%   Określmy \(\Lambda(a)=a\) dla wszystkich \(a\in D\). Wówczas \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym. 
+% \end{fakt}
+
+% Ostatecznie, na podstawie Faktu \ref{fact:model_a} i Faktu \ref{fact:model} zachodzi następujące twierdzenie.
+
+\begin{fakt}({\cite[16.55]{Hindley:2008:LCI:1388400}})
+  \((D,\,\bullet,\,\Lambda)\) jest ekstensjonalnym \(\lambda\)-modelem.
 \end{fakt}
+% \begin{dowod}
+% Określmy:
+% \begin{align*}
+%   k &=(\perp_0,\,I_{D_0},\,k_2,\,k_3,\,\dots),\\
+%   s &=(\perp_0,\,I_{D_0},\,\psi_2(s_3),\,s_3,\,s_4,\,\dots).
+% \end{align*}
+% Okazuje się \cite[Tw. 16.51, 16.53]{Hindley:2008:LCI:1388400}, że \(k,\,s\in D_\infty\) oraz, że dla dowolnych \(a,\,b,\,c\in\nobreak D_\infty\) mamy
+% \begin{align*}
+%   k\bullet a \bullet b = a\quad \text{oraz}\quad s\bullet a\bullet b\bullet c = a\bullet c\bullet (b\bullet c).
+% \end{align*}
 
-\begin{fakt}[{\cite[15.30]{Hindley:2008:LCI:1388400}}]\label{fact:model}%3.12
-  Niech \((D,\bullet)\) będzie kombinatorowo zupełną strukturą aplikatywną taką, że
-  dla dowolnych \(a,\,b\in D\) jeśli \(a\sim b\), to \(a=b\).
-  Określmy \(\Lambda(a)=a\) dla wszystkich \(a\in D\). Wówczas \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym. 
-\end{fakt}
+% Struktura \((D,\,\bullet)\) jest ekstensjonalna. Istotnie, niech \(a,\,b\in D_\infty\) takie, że \(a\sim b\) i \(m\geq 0\). Wybierzmy \(d\in D_m\) oraz ustalmy \(c=\varphi_{m\infty}(d)\). Wówczas \cite[Tw. 16.54]{Hindley:2008:LCI:1388400}
+% \begin{align*}
+%   (a\bullet c)_m = a_{m+1}(d)\quad\text{oraz}\quad (b\bullet c)_m = b_{m+1}(d).
+% \end{align*}
+% Stąd \(a_{m+1}(d)=(a\bullet c)_m = (b\bullet c)_m = b_{m+1}(d)\), a zatem \(a_n = b_n\) dla \(n>0\). Wówczas również \(a_0=\psi_0(a_1)=\psi_0(b_1)=b_0\) i stąd \(a=b\).
 
-Ostatecznie, na podstawie Faktu \ref{fact:model_a} i Faktu \ref{fact:model} zachodzi następujące twierdzenie.
-
-\begin{twierdzenie}
-  \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym.
-\end{twierdzenie}
-\begin{dowod}
-Określmy:
-\begin{align*}
-  k &=(\perp_0,\,I_{D_0},\,k_2,\,k_3,\,\dots),\\
-  s &=(\perp_0,\,I_{D_0},\,\psi_2(s_3),\,s_3,\,s_4,\,\dots).
-\end{align*}
-Okazuje się \cite[Tw. 16.51, 16.53]{Hindley:2008:LCI:1388400}, że \(k,\,s\in D_\infty\) oraz, że dla dowolnych \(a,\,b,\,c\in\nobreak D_\infty\) mamy
-\begin{align*}
-  k\bullet a \bullet b = a\quad \text{oraz}\quad s\bullet a\bullet b\bullet c = a\bullet c\bullet (b\bullet c).
-\end{align*}
-
-Struktura \((D,\,\bullet)\) jest ekstensjonalna. Istotnie, niech \(a,\,b\in D_\infty\) takie, że \(a\sim b\) i \(m\geq 0\). Wybierzmy \(d\in D_m\) oraz ustalmy \(c=\varphi_{m\infty}(d)\). Wówczas \cite[Tw. 16.54]{Hindley:2008:LCI:1388400}
-\begin{align*}
-  (a\bullet c)_m = a_{m+1}(d)\quad\text{oraz}\quad (b\bullet c)_m = b_{m+1}(d).
-\end{align*}
-Stąd \(a_{m+1}(d)=(a\bullet c)_m = (b\bullet c)_m = b_{m+1}(d)\), a zatem \(a_n = b_n\) dla \(n>0\). Wówczas również \(a_0=\psi_0(a_1)=\psi_0(b_1)=b_0\) i stąd \(a=b\).
-
-  A zatem na podstawie Faktu \ref{fact:model} \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym. \qed
-\end{dowod}
-% \begin{definicja}%5.14
+%   A zatem na podstawie Faktu \ref{fact:model} \((D,\,\bullet,\,\Lambda)\) jest modelem bezsyntaktycznym. \qed
+% \end{dowod}
+% % \begin{definicja}%5.14
 %   \begin{enumerate}
 %     \item 
 %   \end{enumerate}
