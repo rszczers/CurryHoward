@@ -118,7 +118,7 @@ Zauważmy wpierw jednak, że zgodnie z warunkiem \ref{def:lambda-interpret-3}
 % Dowolna \(\lambda\)-abstrakcja \(\lambda x. M\) indukuje funkcję \(D\to D\)
 % będącą częściową aplikacją \(\llbracket \lambda x. M \rrbracket\bullet\).
 Warunek \ref{def:lambda-interpret-6} stwierdza więc, że jeśli dwie \(\lambda\)-abstrakcje 
-\((\lambda x. M)\), \((\lambda x. N)\in\mathbf{\Lambda}\) indukują częściowe aplikacje działania \(\bullet\)
+\((\lambda x. M)\), \((\lambda x. N)\in\mathbf{\Lambda}\) indukują dwie częściowe aplikacje działania \(\bullet\)
 \[(\llbracket \lambda x. M \rrbracket_\rho\bullet\ ),\ (\llbracket \lambda x. N \rrbracket_\rho\bullet\ ):\: D\to D,\]
 które są sobie równe, czyli
 \[
@@ -139,12 +139,13 @@ Zgodnie z \eqref{eq:valuation-replace} możemy przepisać warunek \ref{def:lambd
   \begin{align}
     \forall M,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\tag{vi'}\label{eq:weak-extensional}
     \end{align}  
-Własność \ref{eq:weak-extensional} w literaturze nazywa się niekiedy warunkiem \emph{słabej ekstensjonalności}.
+Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warunkiem \emph{słabej ekstensjonalności} \(\lambda\)-abstrakcji.
 
-  \begin{konwencja*}
+  \begin{definicja}(Spełnianie, prawdziwość)
     Jeśli dla ustalonych \(M, N\in\mathbf{\Lambda}\) i wartościowania \(\rho\) zachodzi warunek \ref{def:lambda-interpret-5} względem pewnej \(\lambda\)-interpretacji \(\mathcal{M}\), to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) wzgledem \(\mathcal{M}\) i piszemy \(\mathcal{M},\rho\models M=N\).
+
     Jeśli \(\mathcal{M}\) spełnia równość \(M=N\) wzgledem dowolnego wartościowania \(\rho\), to mówimy, że równość \(M=N\) jest \emph{prawdziwa} w \(\mathcal{M}\) i piszemy \(\mathcal{M}\models M=N\).
-  \end{konwencja*}
+  \end{definicja}
 
 % \begin{lemat}
 %   Jeśli \(\mathcal{M}\) jest \(\lambda\)-modelem, to \(\mathcal{M}\) jest \(\lambda\)-algebrą.
