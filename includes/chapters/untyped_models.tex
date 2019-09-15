@@ -1,10 +1,11 @@
 \subsection{Semantyka denotacyjna}
-W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) przemilczając jego topologiczny charakter. %i topologiczny charakter modelu szczegółowe wyprowadzenia będą elementarne lub zostaną pominięte.
 
-\paragraph{Wprowadzenie}
+% W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) przemilczając jego topologiczny charakter.
+
+\subsubsection{\(\lambda\)-modele}
 Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny i możliwe jest skonstruowanie nieskończonego zstępującego ciąg zbiorów:
 \[
-  f_M \ni (f_M, f_M f_M)  \ni\{f_M\} \ni f_M \ni \dots
+  f_M \ni \left(f_M, f_M\left(f_M\right)\right)  \ni\{f_M\} \ni f_M \ni \dots
 \]
 Istnienie takiego ciągu narusza jednak aksjomat ufundowania na gruncie aksjomatyki ZF, a to wyklucza możliwość określenia takich modeli.
 
@@ -24,69 +25,153 @@ widzimy, że samoaplikacja jest poprawnie określona:
 %\subsubsection{Wprowadzenie}
 Celem wprowadzenia ustalmy szereg następujących pojęć.
 
-\begin{definicja}[Struktura aplikatywna]
+\begin{definicja}\label{def:app-structure}(Struktura aplikatywna) 
 Parę \((D,\, \bullet)\), gdzie \(D\) jest zbiorem zawierającym przynajmniej dwa elementy i w którym symbol \(\bullet\) oznacza działanie binarne na \(D\), nazywamy \emph{strukturą aplikatywną}.
 \end{definicja}
 \begin{konwencja*}
   Ponieważ nie zakładamy, że działanie \(\bullet\) jest łączne, to celem ograniczenia ilości nawiasów przyjmijmy, że \(\bullet\) wiąże lewostronnie, czyli \(a\bullet b\bullet c\bullet d \equiv \left(\left(a\bullet b\right)\bullet c\right)\bullet d\).
-\begin{definicja}[Ekstensjonala równoważność]%3.4
+\end{konwencja*}
+
+\begin{definicja}\label{def:extens-struct}(Ekstensjonalność)
+  Strukturę aplikatywną \(\mathcal{D}=(D,\bullet)\) nazywamy \emph{ekstensjonalną}, jeśli dla dowolnych \(a, b\in D\) spełnia ona warunek
+  \[ (\forall d\in D\ a \bullet d = b \bullet d) \implies a = b \]
+\end{definicja}
+
+\begin{definicja}\label{def:extens-equiv}(Ekstensjonala równoważność) %3.4
 Niech \((D,\,\bullet)\) będzie strukturą aplikatywną i niech \(a,\,b\in D\). Określamy relację: 
 \begin{align*}
-a \sim b \quad \Leftrightarrow\quad \forall d \in D \left(a \bullet d = b \bullet d\right).
+a \sim b \quad \iff\quad \forall d \in D\  a \bullet d = b \bullet d.
 \end{align*}
 Powiemy, że \(a\) jest \emph{ekstensjonalnie równoważne} \(b\), jeśli \(a\sim b\).
 \end{definicja}
 
-\end{konwencja*}
 Ustalmy teraz co rozumiemy przez \(\lambda\)-model.
 
 \begin{definicja}(Wartościowanie \(\lambda\)-zmiennych) Każde odwzorowanie \[\rho:\:V\to D,\] gdzie \(V\) jest zbiorem \(\lambda\)-zmiennych, a \(D\) dowolnym niepustym zbiorem, nazywamy \emph{wartościowaniem} (\(\lambda\)-zmiennych).
 \end{definicja}
 
-\begin{definicja}\label{def:lambda-model-1}(\(\lambda\)-interpretacja) %3.3
-  Trójkę \((D,\,\bullet,\,\llbracket\,\rrbracket)\), gdzie 
+\begin{definicja}\label{def:lambda-model-1}(\(\lambda\)-model) %3.3
+  Trójkę \(\mathcal{M}=(D,\,\bullet,\,\llbracket\,\rrbracket)\), gdzie 
    \[\llbracket\,\rrbracket:\:\mathbf{\Lambda}\ \times\ D^{V}\to D\]
   oraz \((D,\,\bullet)\) jest strukturą aplikatywną,
   % przyporządkowuje \(\lambda\)-termom przy wybranym wartościowaniu \(\rho\)
   % \emph{interpretację}
   % \(\llbracket M\rrbracket \in D\) \(\lambda\)-termom \(M\in\mathbf{\Lambda}\) przy wybranym wartościowaniu \(\rho\) (\emph{interpretacją} względem \(\rho\)), 
-  nazywamy \emph{\(\lambda\)-interpretacją}, jeśli dla dowolnego wartościowania \(\rho\) spełnia poniższe własności:
+  nazywamy \emph{\(\lambda\)-modelem}, jeśli dla dowolnego wartościowania \(\rho\) spełnione są poniższe własności:
   \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
     \setlength\itemsep{0em}
-    \item \(\forall x \in V\ \left(\llbracket x \rrbracket_\rho = \rho(x)\right)\).\label{def:lambda-interpret-1}
-    \item \(\forall M,\,N \in \mathbf{\Lambda}\ (\llbracket MN \rrbracket_\rho = \llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho)\).\label{def:lambda-interpret-2}
-    \item \(\forall x \in V\,\forall M\in \mathbf{\Lambda}\,\forall d\in D\ (\, \llbracket \lambda x.\,M\rrbracket_\rho \bullet d = \llbracket M \rrbracket_{\rho[x/d]})\).\label{def:lambda-interpret-3}
-    \item Dla dowolnych wartościowań \(\rho\),  \(\sigma\) i dowolnego termu \(M\in\nobreak\mathbf{\Lambda}\), jeśli \[\forall x\in\nobreak\mathrm{FV}(M)\ (\rho(x) =\nobreak \sigma(x)),\] to \(\llbracket M\rrbracket_\rho =\nobreak\llbracket M \rrbracket_\sigma\).\label{def:lambda-interpret-4}
-     % \[\forall M\in\mathbf{\Lambda}\,\forall x, y\in V\ (y\not\in\mathrm{FV}(M)\implies \llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho) \],
+    \item \(\forall x \in V\ \left(\llbracket x \rrbracket_\rho = \rho(x)\right)\)\label{def:lambda-interpret-1}
+    \item \(\forall M,\,N \in \mathbf{\Lambda}\ (\llbracket MN \rrbracket_\rho = \llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho)\)\label{def:lambda-interpret-2}
+    \item \(\forall x \in V\,\forall M\in \mathbf{\Lambda}\,\forall d\in D\ (\, \llbracket \lambda x.\,M\rrbracket_\rho \bullet d = \llbracket M \rrbracket_{\rho[x/d]})\)\label{def:lambda-interpret-3}
+    \item Dla dowolnych wartościowań \(\rho\),  \(\sigma\) i dowolnego termu \(M\in\nobreak\mathbf{\Lambda}\), jeśli \[\forall x\in\nobreak\mathrm{FV}(M)\ (\rho(x) =\nobreak \sigma(x)),\] to \(\llbracket M\rrbracket_\rho =\nobreak\llbracket M \rrbracket_\sigma\)\label{def:lambda-interpret-4}
+    \item \(\forall M\in\mathbf{\Lambda}\,\forall x, y\in V\ (y\not\in\mathrm{FV}(M)\implies \llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho)\)\label{def:lambda-interpret-5}
+%    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\)\label{def:lambda-interpret-6}
+%    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\llbracket M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\)\label{def:lambda-interpret-6}
+    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\left(\forall d\in D\, \llbracket M \rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]}\right)\implies \llbracket \lambda x.\,M \rrbracket_\rho=\llbracket \lambda x.\,N\rrbracket_\rho\right)\)\label{def:lambda-interpret-6}
   \end{enumerate}
 
-  Jeśli dla \(\lambda\)-interpretacji \(\mathcal{M}=(D,\,\bullet,\,\llbracket\,\rrbracket)\) spełniony jest warunek
-  \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
-    \setlength\itemsep{0em}
-    \setItemnumber{5}
-    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(M=_\beta N\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\),\label{def:lambda-interpret-5}
+  % Jeśli dla \(\lambda\)-interpretacji \(\mathcal{M}=(D,\,\bullet,\,\llbracket\,\rrbracket)\) spełniony jest warunek
+  % \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+  %   \setlength\itemsep{0em}
+  %   \setItemnumber{5}
+  %   \item \(\forall M,N\in\mathbf{\Lambda}\,\left(M=_\beta N\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\),\label{def:lambda-interpret-5}
 
-   \end{enumerate}
-  to \(\mathcal{M}\) nazywamy \emph{\(\lambda\)-algebrą}. Jeśli zaś dla \(\mathcal{M}\) spełniony jest warunek
-   \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
-    \setlength\itemsep{0em}
-    \setItemnumber{6}
-    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\),\label{def:lambda-interpret-6}
-   \end{enumerate}        
-  to \(\mathcal{M}\) nazywamy \emph{\(\lambda\)-modelem}. 
+  %  \end{enumerate}
+  % to \(\mathcal{M}\) nazywamy \emph{\(\lambda\)-algebrą}. Jeśli zaś dla \(\mathcal{M}\) spełniony jest warunek
+   % \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+   %  \setlength\itemsep{0em}
+   %  \setItemnumber{6}
+%    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\),\label{def:lambda-interpret-6}
+   % \end{enumerate}        
+  % to \(\mathcal{M}\) nazywamy \emph{\(\lambda\)-modelem}. 
 
 \end{definicja}
 
-Omówmy pokrótce Definicję \ref{def:lambda-model-1}. Zauważmy na początku, że aplikacja w rachunku \(\lambda\) oznacza w istocie działanie binarne na \(\lambda\)-termach; dlatego na uniwersum interpretacji \(D\) wprowadzamy strukturę aplikatywną okreslając działanie \(\bullet\) w myśl warunku \ref{def:lambda-interpret-2}.
+Omówmy pokrótce Definicję \ref{def:lambda-model-1}. Zauważmy na początku, że aplikacja w rachunku \(\lambda\) oznacza w istocie działanie binarne na \(\lambda\)-termach; dlatego na uniwersum interpretacji \(D\) wprowadzamy strukturę aplikatywną okreslając działanie \(\bullet\) w myśl warunku \ref{def:lambda-interpret-2}. 
 
-Warunek \ref{def:lambda-interpret-3} jest konsekwencją obserwacji, że \((\lambda x.\,M) N =_\beta M[x/N]\). Oczekujemy więc, że 
-\[
+Określając działanie \(\bullet\) wymagamy w warunku \ref{def:lambda-interpret-3}, żeby było ono zgodne z \(\beta\)-redukcją. Zauważmy, że w konsekwencji \((\lambda x.\,M) N =_\beta M[x/N]\) mamy, że
+\begin{align*}
   \llbracket \lambda x.\,M \rrbracket_\rho \bullet \llbracket N \rrbracket_\rho =
-  \llbracket (\lambda x.\,M) N\rrbracket_\rho = \llbracket M[x/N \rrbracket_\rho.
-\]
-Interpretacja rezultatu operacji podstawienia termu \(N\) za zmienną \(x\) nie różni się jednak w tym wypadku niczym od zmiany wartościowania zmiennej \(x\) przez interpretację termu \(\llbracket N\rrbracket_\rho\) (symbolicznie: \(\rho[x/\llbracket N \rrbracket_\rho])\), bowiem w wyniku \(\beta\)-redukcji żadna nowa zmienna nie zostaje związana i zastąpione przez \(N\) zostają wszystkie wolne wystąpienia \(x\) w \(M\).
+  \llbracket (\lambda x.\,M) N\rrbracket_\rho = \llbracket M[x/N] \rrbracket_\rho.  
+\end{align*}
+Interpretacja rezultatu operacji podstawienia termu \(N\) za zmienną \(x\) nie różni się w tym wypadku niczym od zmiany wartościowania \(\rho\) dla zmiennej \(x\) na desygnat \(\llbracket N\rrbracket_\rho\) (symbolicznie: \(\rho[x/\llbracket N \rrbracket_\rho])\), bowiem w wyniku \(\beta\)-redukcji żadna nowa zmienna nie zostaje związana; przez \(N\) zastąpione zostają wszystkie wolne wystąpienia \(x\) w \(M\). Zachodzi więc równość
+\begin{align*}
+  \llbracket M[x/N] \rrbracket_\rho = \llbracket M \rrbracket_{\rho[x/\llbracket N \rrbracket_\rho]}.
+\end{align*}
+Fakt ten wymaga dowodu; szczegółowe uzasadnienia można znaleźć w \cite[Tw. 15.10(a)]{Hindley:2008:LCI:1388400}.
 
-W myśl warunku \ref{def:lambda-interpret-4} wymagamy, żeby \(\alpha\)-konwersom przypisywane było to samo znaczenie. Jeśli \(\lambda\)-interpretacja spełnia dodatkowo warunek \ref{def:lambda-interpret-5}, to jest ona zachowawcza ze względu na \(\beta\)-konwersję. Wymagamy w ten sposób, żeby \(\lambda\)-termy, które mają tę samą postać normalną (albo nie mają jej wcale) miały również to samo znaczenie.
+W myśl warunku \ref{def:lambda-interpret-4} wymagamy, żeby interpretacja \(\lambda\)-termu zależała tylko od wartościowania występujących w nim zmiennych wolnych. 
+
+Warunek \ref{def:lambda-interpret-5} zapewnia, że interpretacja \(\lambda\)-termów, które są swoimi \(\alpha\)-konwersami jest taka sama.
+
+% Wymagamy w ten sposób, żeby \(\lambda\)-termy, które mają tę samą postać normalną (albo nie mają jej wcale), miały również to samo znaczenie.
+  
+Warunek \ref{def:lambda-interpret-6} odpowiada regule \(\xi\) z Rodrozdziału \ref{subsec:lambda-formal-theory}.
+Zauważmy wpierw jednak, że zgodnie z warunkiem \ref{def:lambda-interpret-3}
+\begin{align*}
+\forall d\in D\ \llbracket M \rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]}
+\iff
+\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho 
+\tag{\dagger}\label{eq:valuation-replace}
+\end{align*}
+%Oczekujemy od \(\lambda\)-modelu, że interpretacją \(\lambda\)-abstrakcji \(\lambda x.\,M\) będzie obiekt, który 
+% Dowolna \(\lambda\)-abstrakcja \(\lambda x. M\) indukuje funkcję \(D\to D\)
+% będącą częściową aplikacją \(\llbracket \lambda x. M \rrbracket\bullet\).
+Warunek \ref{def:lambda-interpret-6} stwierdza więc, że jeśli dwie \(\lambda\)-abstrakcje 
+\((\lambda x. M)\), \((\lambda x. N)\in\mathbf{\Lambda}\) indukują częściowe aplikacje działania \(\bullet\)
+\[(\llbracket \lambda x. M \rrbracket_\rho\bullet\ ),\ (\llbracket \lambda x. N \rrbracket_\rho\bullet\ ):\: D\to D,\]
+które są sobie równe, czyli
+\[
+\forall d\in D\ \llbracket \lambda x. M \rrbracket_\rho\bullet d = \llbracket \lambda x. N \rrbracket_\rho\bullet d,
+\]
+to interpretacje obu \(\lambda\)-abstrakcji również muszą być sobie równe. Zgodnie z dyskusją we wstępie do niniejszego rozdziału,
+nie możemy interpretować \(\lambda\)-abstrakcji jako funkcji \(D\to D\), nic nie stoi jednak na na przeszkodzie, żeby scharakteryzować je  
+czysto semantycznie przez operację w \(\lambda\)-modelu.
+
+
+%\(\llbracket \lambda x.\,M\rrbracket_\rho:\: D\to D\). Możemy określić rodzinę funkcji \(\llbracket \lambda x.\,M \rrbracket_\rho \bullet d\) odpowiadało będzie aplikacji interpretacji \(\lambda x.\,M\) do pewnego argumentu \(d\).
+
+
+% Wobec tego, jeśli interpretacje dwóch \(\lambda\)-abstrakcji indukują te same funkcje na \(D\), to obie interpretacje powinny być takie same.
+%   Zauważmy, że stosując się do Definicji \ref{def:extens-equiv}, warunku \ref{def:lambda-interpret-3} oraz \eqref{eq:valuation-replace-1} i \eqref{eq:valuation-replace-2} otrzymujemy następującą równoważną postać warunku \ref{def:lambda-interpret-6}:
+  % \[\forall M,N\in\mathbf{\Lambda}\,\forall d\in D\,\left(\llbracket M\rrbracket_{\rho[x/d]} = \llbracket N\rrbracket_{\rho[x/d]}\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right).\]
+Zgodnie z \eqref{eq:valuation-replace} możemy przepisać warunek \ref{def:lambda-interpret-6} do następującej równoważnej postaci
+  \begin{align}
+    \forall M,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\tag{vi'}\label{eq:weak-extensional}
+    \end{align}  
+Własność \ref{eq:weak-extensional} w literaturze nazywa się niekiedy warunkiem \emph{słabej ekstensjonalności}.
+
+  \begin{konwencja*}
+    Jeśli dla ustalonych \(M, N\in\mathbf{\Lambda}\) i wartościowania \(\rho\) zachodzi warunek \ref{def:lambda-interpret-5} względem pewnej \(\lambda\)-interpretacji \(\mathcal{M}\), to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) wzgledem \(\mathcal{M}\) i piszemy \(\mathcal{M},\rho\models M=N\).
+    Jeśli \(\mathcal{M}\) spełnia równość \(M=N\) wzgledem dowolnego wartościowania \(\rho\), to mówimy, że równość \(M=N\) jest \emph{prawdziwa} w \(\mathcal{M}\) i piszemy \(\mathcal{M}\models M=N\).
+  \end{konwencja*}
+
+% \begin{lemat}
+%   Jeśli \(\mathcal{M}\) jest \(\lambda\)-modelem, to \(\mathcal{M}\) jest \(\lambda\)-algebrą.
+% \end{lemat}
+% \begin{dowod}
+%   \qed
+% \end{dowod}
+
+% \begin{twierdzenie}(O pełności) Dla dowolnych \(M,N\in\mathbf{\Lambda}\) następujące warunki są równoważne:
+%   \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
+%     \setlength\itemsep{0em}
+%     \item \(M=_\beta N\),
+%     \item \(M\models M=N\) dla dowolnej \(\lambda\)-algebry \(\mathcal{M}\),
+%     \item \(M\models M=N\) dla dowolnej \(\lambda\)-modelu \(\mathcal{M}\).
+%   \end{enumerate}
+% \end{twierdzenie}
+% \begin{dowod}
+%   \qed
+% \end{dowod}
+
+\begin{twierdzenie}
+  Każdy \(\lambda\)-model spełnia wszystkie dowodliwe rówania teorii \(\lambda\beta\).
+\end{twierdzenie}
+\begin{dowod}
+  \qed
+\end{dowod}
+  
 
 \subsubsection{Model Scotta \(D_\infty\)}
 

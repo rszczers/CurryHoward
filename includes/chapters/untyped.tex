@@ -431,7 +431,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
 \end{konwencja*}
 
 \begin{definicja}(Strategia redukcji)
-  Strategią redukcji nazywamy każde odwzorowanie \(S:\:\mathbf{\Lambda}\to\mathbf{\Lambda}\), które spełnia następującą własność
+  Strategią redukcji nazywamy każde odwzorowanie \(S:\:\mathbf{\Lambda}\to\mathbf{\Lambda}\), które dla \(M\in\mathbf{\lambda}\) spełnia następującą równość: 
   \[
      S(M) = \begin{cases}
        M, &\text{jeśli}\ M\in \mathrm{NF}_\beta, \\
@@ -485,6 +485,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
 
 \subimport{}{reduction_strategies.tex}  
 
+\subimport{}{untyped_formal_theory.tex}
 
 \subimport{}{untyped_models.tex}
 

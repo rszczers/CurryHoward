@@ -1,0 +1,66 @@
+\subsection{Równościowa teoria rachunku \(\lambda\)}\label{subsec:lambda-formal-theory}
+Rachunek \(\lambda\) możemy rozszerzyć o teorię równościową w stylu Hilberta. Składa się ona z następujących reguł i aksjomatów inferencji.
+\begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
+\setlength\itemsep{0em}
+\item Aksjomaty:
+\begin{enumerate}[label={(\greek*)}, ref={(\greek*)}]
+  \setlength\itemsep{0em}
+  \item \(\lambda x.\,M = \lambda y.\,M[x/y]\), jeśli \(y\in\mathrm{FV}(M)\)
+  \item \((\lambda x.\,M)N = M[x/N]\)
+  \item[(\(\rho\))]{ \(M=M\)}
+\end{enumerate}
+
+\item Reguły inferencji:
+\begin{center}
+{\setlength{\extrarowheight}{20pt}%
+\begin{tabular}{cc}
+  {\begin{prooftree}
+    \Hypo{M=M'}
+    \Infer1[(l-con)]{NM=NM}
+  \end{prooftree}}
+  &
+  {\begin{prooftree}
+    \Hypo{M=N} \Hypo{N=P}
+    \Infer2[(trans)]{M=P}
+  \end{prooftree}}
+  \\
+  {\begin{prooftree}
+    \Hypo{M=M'}
+    \Infer1[(r-con)]{MN=M'N}
+  \end{prooftree}}
+  &
+  {\begin{prooftree}
+    \Hypo{M=N}
+    \Infer1[(sym)]{N=M}
+  \end{prooftree}}
+  \\
+  {\begin{prooftree}
+    \Hypo{M=M'}
+    \Infer1[(\(\xi\))]{\lambda x.\,M=\lambda x.\,M'}
+  \end{prooftree}}
+  \end{tabular}}
+\end{center}
+\end{enumerate}
+
+Powyższy system nazywamy \emph{teorią \(\lambda\beta\)}; jest ona zbiorem \emph{równości} między \(\lambda\)-termami. 
+
+\begin{definicja}(Wyprowadzenie)
+Niech \(M, N\in\mathbf{\Lambda}\) będą dowolnymi \(\lambda\)-termami.
+\emph{Wyprowadzeniem} równości \(M=N\) ze zbioru równości \(\Gamma\) w teorii \(\lambda\beta\) będziemy nazywali drzewo \(\mathcal{P}\) równości takie, że:
+\begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
+  \setlength\itemsep{0em}
+  \item liście \(\mathcal{P}\) są aksjomatami albo należą do zbioru \(\Gamma\),
+  \item korzeniem \(\mathcal{P}\) jest równość \(M=N\) (jest \emph{wnioskiem}),
+  \item wszystkie pozostałe równości w \(\mathcal{P}\) są uzyskane ze swoich dzieci (\emph{przesłanek}) za pomocą reguł inferencji.
+\end{enumerate}
+
+Jeśli istnieje wyprowadzenie \(\mathcal{P}\) równości \(M=N\) ze zbioru równości \(\Gamma\), to \(M=N\) nazywamy \emph{wyprowadzalnym w kontekście} \(\Gamma\) i piszemy \(\lambda,\,\Gamma\vdash M=N\). Jeśli \(\Gamma\) jest zbiorem pustym, to wyprowadzenie \(\mathcal{P}\) nazywamy \emph{dowodem} równości \(M=N\), a o równości \(M=N\) mówimy, że jest \emph{dowodliwa}.
+\end{definicja}
+
+Następujący fakt ustala związek między równościami dowodliwymi w \(\lambda\beta\) a \(\lambda\)-termami, które są swoimi \(\beta\)-konwersami.
+\begin{fakt}
+Niech \(M, N\in\mathbf{\Lambda}\). Wówczas
+\[
+M=_\beta N \iff \lambda \vdash M=N
+\]
+\end{fakt}

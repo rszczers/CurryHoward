@@ -1,6 +1,8 @@
 \subsubsection{Strategie redukcji}\label{subsec:lazy_eval}
-
-Najczęściej wyróżniamy nastepujące rodzaje strategii redukcji.
+Przedmiotem tego podrozdziału jest  przedstawienie najczęściej spotykanych klasyfikacji 
+obliczeń w rachunku \(\lambda\). Na gruncie tego formalizmu zakreślimy 
+czym jest szeroko stosowany w funkcyjnych językach programowania \emph{leniwy}
+sposób wykonywania programów.
 
 \begin{definicja}
 Strategię nazywamy:
@@ -12,8 +14,6 @@ Strategię nazywamy:
 \end{definicja}
 
 Strategia aplikatywna jest rodzajem strategii \emph{ścisłej} (nazywanej również \emph{zachłanną}, w angielskojęzycznej literaturze określanej odpowiednio \emph{strict}, \emph{gready} lub \emph{eager}). Strategiami zachłannymi nazywamy wszystkie te redukcje, w których argumenty \(\lambda\)-abstrakcji są redukowane do postaci normalnej przed zaaplikowaniem ich. Strategie, które nie są ścisłe, nazywamy \emph{strategiami nieścisłymi} (ang. \emph{non-strict}) -- argumenty \(\lambda\)-abstkracji w strategiach tego rodzaju mogą być redukowane dopiero wówczas, gdy jest to konieczne.
-
-
 
 W przeciwieństwie do strategii aplikatywnej (patrz Przykład \ref{ex:beta_reduction}\ref{ex:undeterministic_reduction_untyped}), okazuje się, że strategia normalna jest strategią normalizującą \cite[Rozdział 1.5]{Urzyczyn2006}. Niestety, narzuca ona w pesymistycznym przypadku wykładniczą złożoność obliczeniową. Zobserwujmy następującą redukcję:
 
