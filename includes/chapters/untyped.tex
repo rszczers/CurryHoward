@@ -196,7 +196,7 @@ Wprowadzamy następujące konwencje notacyjne:
         \item Jeśli \(P_0\) jest aplikacją, to \(P_0\equiv  P'_0 P''_0\), gdzie \(P'_0\) jest albo zmienną (wówczas \(M\) jest postaci \ref{def:HNF}) albo \(\lambda\)-abstrakcją (wówczas \(\mathrm{M}\) jest postaci \ref{def:HNF2}).
         \item Jeśli \(P_0\) jest abstrakcją, to \(M\) jest postaci \ref{def:HNF2}.
       \end{enumerate}
-  \end{enumerate}
+  \end{enumerate}\qed
 \end{dowod}
 
 \begin{definicja}[Postać HNF, WHNF]
@@ -431,7 +431,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
 \end{konwencja*}
 
 \begin{definicja}(Strategia redukcji)
-  Strategią redukcji nazywamy każde odwzorowanie \(S:\:\mathbf{\Lambda}\to\mathbf{\Lambda}\), które dla \(M\in\mathbf{\lambda}\) spełnia następującą równość: 
+  Strategią redukcji nazywamy każde odwzorowanie \(S:\:\mathbf{\Lambda}\to\mathbf{\Lambda}\), które dla \(M\in\mathbf{\Lambda}\) spełnia następującą równość: 
   \[
      S(M) = \begin{cases}
        M, &\text{jeśli}\ M\in \mathrm{NF}_\beta, \\

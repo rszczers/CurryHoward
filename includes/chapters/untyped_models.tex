@@ -1,6 +1,5 @@
 \subsection{Semantyka denotacyjna}
 
-
 \subsubsection{\(\lambda\)-modele}\label{subsec:lambda-models}
 Ustalmy wpierw, że nie możemy naiwnie interpretować \(\lambda\)-termów jako funkcji i aplikacji argumentów do funkcji. Przypuśćmy bowiem, że w pewnej interpretacji \(\llbracket M \rrbracket=f_M\), gdzie \(f_M \in A\to B\) dla pewnych zbiorów \(A\) i \(B\). Wówczas \(\llbracket M M\rrbracket=\nobreak f_M(f_M)\), a zatem \(f_M\in A\). Oznacza to, że funkcja \(f_M\) jest elementem swojej własnej dziedziny i możliwe jest skonstruowanie nieskończonego zstępującego ciąg zbiorów:
 \[
@@ -86,28 +85,30 @@ Omówmy pokrótce Definicję \ref{def:lambda-model-1}. Zauważmy na początku, �
 
 Określając działanie \(\bullet\) wymagamy w warunku \ref{def:lambda-interpret-3}, żeby było ono zgodne z \(\beta\)-redukcją. Zauważmy, że w konsekwencji \((\lambda x.\,M) N =_\beta M[x/N]\) mamy, że
 \begin{align*}
-  \llbracket \lambda x.\,M \rrbracket_\rho \bullet \llbracket N \rrbracket_\rho =
-  \llbracket (\lambda x.\,M) N\rrbracket_\rho = \llbracket M[x/N] \rrbracket_\rho.  
+  \llbracket \lambda x.\,M \rrbracket_\rho \bullet \llbracket N \rrbracket_\rho 
+    &= \llbracket (\lambda x.\,M) N\rrbracket_\rho \\
+    &= \llbracket \lambda x.\,M \rrbracket_\rho \bullet b \\
+    &= \llbracket M \rrbracket_{\rho[x/b]} \\
+    &= \llbracket M[x/N] \rrbracket_\rho\tag{\dagger}\label{eq:abstraction-to-substitution-in-model}
 \end{align*}
-Interpretacja rezultatu operacji podstawienia termu \(N\) za zmienną \(x\) nie różni się w tym wypadku niczym od zmiany wartościowania \(\rho\) dla zmiennej \(x\) na desygnat \(\llbracket N\rrbracket_\rho\) (symbolicznie: \(\rho[x/\llbracket N \rrbracket_\rho])\), bowiem w wyniku \(\beta\)-redukcji żadna nowa zmienna nie zostaje związana; przez \(N\) zastąpione zostają wszystkie wolne wystąpienia \(x\) w \(M\). Zachodzi więc równość
+Ostatnia równość wymaga dowodu: przeprowadza się go indukcją strukturalną względem \(M\). Szczegółowe uzasadnienia można znaleźć w \cite[Tw. 15.10(a)]{Hindley:2008:LCI:1388400}. Interpretacja rezultatu operacji podstawienia termu \(N\) za zmienną \(x\) nie różni się w tym wypadku niczym od zmiany wartościowania \(\rho\) dla zmiennej \(x\) na desygnat \(\llbracket N\rrbracket_\rho\) (symbolicznie: \(\rho[x/\llbracket N \rrbracket_\rho])\), bowiem w wyniku \(\beta\)-redukcji żadna nowa zmienna nie zostaje związana; przez \(N\) zastąpione zostają wszystkie wolne wystąpienia \(x\) w \(M\). Zachodzi więc równość
 \begin{align*}
   \llbracket M[x/N] \rrbracket_\rho = \llbracket M \rrbracket_{\rho[x/\llbracket N \rrbracket_\rho]}.
 \end{align*}
-Fakt ten wymaga dowodu: przeprowadza się go indukcją strukturalną względem \(M\). Szczegółowe uzasadnienia można znaleźć w \cite[Tw. 15.10(a)]{Hindley:2008:LCI:1388400}.
 
 W myśl warunku \ref{def:lambda-interpret-4} wymagamy, żeby interpretacja \(\lambda\)-termu zależała tylko od wartościowania występujących w nim zmiennych wolnych. 
 
-Warunek \ref{def:lambda-interpret-5} zapewnia, że interpretacja \(\lambda\)-termów, które są swoimi \(\alpha\)-konwersami jest taka sama.
+Warunek \ref{def:lambda-interpret-5} zapewnia, że interpretacja \(\lambda\)-termów, które są swoimi \(\alpha\)-konwersami jest taka sama. Odpowiada on więc aksjomatowi \((\alpha)\) z Podrozdziału \ref{subsec:lambda-formal-theory}.
 
 % Wymagamy w ten sposób, żeby \(\lambda\)-termy, które mają tę samą postać normalną (albo nie mają jej wcale), miały również to samo znaczenie.
   
 Warunek \ref{def:lambda-interpret-6} odpowiada regule \(\xi\) z Rodrozdziału \ref{subsec:lambda-formal-theory}.
 Zauważmy wpierw jednak, że zgodnie z warunkiem \ref{def:lambda-interpret-3}
 \begin{align*}
-\forall d\in D\ \llbracket M \rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]}
+  (\forall d\in D\ \llbracket M \rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]})
 \iff
 \llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho 
-\tag{\dagger}\label{eq:valuation-replace}
+\tag{\dagger\dagger}\label{eq:valuation-replace}
 \end{align*}
 %Oczekujemy od \(\lambda\)-modelu, że interpretacją \(\lambda\)-abstrakcji \(\lambda x.\,M\) będzie obiekt, który 
 % Dowolna \(\lambda\)-abstrakcja \(\lambda x. M\) indukuje funkcję \(D\to D\)
@@ -137,9 +138,14 @@ Zgodnie z \eqref{eq:valuation-replace} możemy przepisać warunek \ref{def:lambd
 Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warunkiem \emph{słabej ekstensjonalności} \(\lambda\)-abstrakcji.
 
   \begin{definicja}(Spełnianie, prawdziwość)
-    Jeśli dla ustalonych \(M, N\in\mathbf{\Lambda}\) i wartościowania \(\rho\) zachodzi warunek \ref{def:lambda-interpret-5} względem pewnej \(\lambda\)-interpretacji \(\mathcal{M}\), to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) wzgledem \(\mathcal{M}\) i piszemy \(\mathcal{M},\rho\models M=N\).
+    Niech \(\mathcal{M}=(D,\,\bullet,\,\llbracket\,\rrbracket)\) będzie \(\lambda\)-modelem.
+    Jeśli dla dowolnych \(\lambda\)-termów \(M, N\) i wartościowania \(\rho\) zachodzi
+    \[
+      \llbracket M \rrbracket_\rho = \llbracket N \rrbracket_\rho,
+    \]
+    to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) wzgledem \(\mathcal{M}\) i piszemy \[\mathcal{M},\rho\models M=N\].
 
-    Jeśli \(\mathcal{M}\) spełnia równość \(M=N\) wzgledem dowolnego wartościowania \(\rho\), to mówimy, że równość \(M=N\) jest \emph{prawdziwa} w \(\mathcal{M}\) i piszemy \(\mathcal{M}\models M=N\).
+    Jeśli \(\mathcal{M}\) spełnia równość \(M=N\) wzgledem dowolnego wartościowania \(\rho\), to mówimy, że równość \(M=N\) jest \emph{prawdziwa} w \(\mathcal{M}\) (lub \(\mathcal{M}\) \emph{spełnia} \(M=N\)) i piszemy \(\mathcal{M}\models M=N\).
   \end{definicja}
 
 % \begin{lemat}
@@ -165,6 +171,43 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
   Każdy \(\lambda\)-model spełnia wszystkie dowodliwe rówania teorii \(\lambda\beta\).
 \end{twierdzenie}
 \begin{dowod}
+  Dowód przeprowadzimy indukcją względem wyprowadzenia równania \(M=N\).
+  Niech \(\lambda \vdash M=N\), \(\mathcal{M}\) będzie \(\lambda\)-modelem i \(\rho\) dowolnym wartościowaniem.
+  Rozważmy następujące przypadki:
+  \begin{enumerate}
+    \setlength\itemsep{0em}
+    \item Równanie \(M=N\) jest aksjomatem w postaci:  
+      \begin{enumerate}
+      \setlength\itemsep{0em}
+        \item[\((\alpha)\)] Wówczas na podstawie warunku \ref{def:lambda-interpret-5} mamy
+      \(\llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho\) 
+        \item[\((\beta)\)] Wówczas na podstawie \eqref{eq:abstraction-to-substitution-in-model} mamy
+          \(\llbracket(\lambda x.\,M)N\rrbracket_\rho = \llbracket \lambda y.\,M[x/N]\rrbracket_\rho\) 
+       \item[\((\rho)\)] Wynika ze zwrotności semantycznej równości.
+      \end{enumerate}    
+      W każdym z powyższych przypadków \(\mathcal{M}\models M=N\).
+    \item Równanie \(M=N\) jest konkluzją reguły:
+      \begin{enumerate}
+      \setlength\itemsep{0em}
+        \item[(l-con)] Wówczas \(M\) i \(N\) są postaci \(PM'\) i \(PN'\) odpowiednio, dla pewnego \(P\in\mathbf{\Lambda}\).
+          Ponadto, z założenia indukcyjnego \(\llbracket M' \rrbracket_\rho=\llbracket N' \rrbracket_\rho\).
+          Wobec tego, na podstawie warunku \ref{def:lambda-interpret-2} mamy
+          \[\llbracket PM'\rrbracket_\rho  =
+            \llbracket P\rrbracket_\rho \bullet \llbracket M'\rrbracket_\rho =
+            \llbracket P\rrbracket_\rho \bullet \llbracket N'\rrbracket_\rho =
+            \llbracket PN'\rrbracket_\rho\]
+        \item[(r-con)] Analogicznie do (l-con).
+        \item[(\(\xi\))] Wówczas na podstawie warunku \ref{def:lambda-interpret-6} mamy
+          \(\llbracket \lambda x.\,M \rrbracket_\rho=\llbracket \lambda x.\,N\rrbracket_\rho\).
+        \item[(trans)]
+          Wówczas z założenia indykcyjnego dla pewnego \(P\in\mathbf{\Lambda}\)
+          \(\llbracket M \rrbracket_\rho = \llbracket P \rrbracket_\rho\) oraz
+          \(\llbracket P \rrbracket_\rho=\llbracket N \rrbracket_\rho\).
+          Z przechodniości semantycznej równości mamy zatem, że \( \llbracket M \rrbracket_\rho=\llbracket N \rrbracket_\rho\).
+        \item[(sym)] Wynika symetryczności semantycznej równości.
+      \end{enumerate}
+    W każdym z powyższych przypadków \(\mathcal{M}\models M=N\).
+  \end{enumerate}
   \qed
 \end{dowod}
   
@@ -247,7 +290,7 @@ widzimy, że samoaplikacja jest poprawnie określona:
 \paragraph{Elementy teorii porządku} 
 Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jeśli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kresem górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
 
-\begin{definicja}[Zupełny porządek częściowy]%5.1
+\begin{definicja}(Zupełny porządek częściowy) %5.1
 Porządek częściowy \((D,\,\sqsubseteq)\) taki, że
 \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
   \setlength\itemsep{0em}
@@ -267,7 +310,7 @@ Ustalmy, że jeśli \(D'\), \(D''\), \(\dots\)  są cpo, to odpowiadające im po
   \(\sqsubseteq\) jest oczywiście zwrotna, przechodnia i antysymetryczna. Widzimy, że \(\mathbb{N}^{+}\) ma względem niej element najmniejszy (jest nim  \(\perp\)). Podzbiory jednoelementowe \(\mathbb{N}^{+}\) i podzbiory dwuelementowe zawierające \(\perp\) to wszystkie skierowane podzbiory \(\mathbb{N}^{+}\). Widzimy, że każdy z nich ma kres górny, a zatem \(\mathbb{N}^{+}\) jest cpo.
 \end{przyklad}
 
-\begin{definicja}[Monotoniczność, ciągłość, ścisłość]\label{def:m_cont}%5.3
+\begin{definicja}(Monotoniczność, ciągłość, ścisłość)\label{def:m_cont} %5.3
 Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).
 \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}] 
   \setlength\itemsep{0em}
@@ -324,7 +367,7 @@ Niech teraz \(\Phi\) będzie skierowanym podzbiorem \([D\to D']\).
                         &= \bigsqcup \left\{\bigsqcup \Phi d\ |\ d\in X\right\}
                         = \bigsqcup \Psi_\Phi(X).
           \end{align*}
-        \item Niech \(\varphi\in\Phi\). Wówczas dla dowolnego \(d\in D\) mamy \(\varphi(d)\sqsubseteq' \bigsqcup \Phi d = \Psi_{\Phi} d\). Zatem \(\varphi\preceq\Psi_\Phi\) i \(\Psi_\Phi\) jest ograniczeniem górnym \(\Phi\). Jeśli \(\Psi_\Phi\) nie jest kresem górnym \(\Phi\), to istnieje \(\chi\) takie, że \(\chi\preceq\Psi_\Phi\) oraz \(\chi\) jest kresem górnym \(\Phi\). Wówczas dla dowolnego \(d\in D\) mamy, że \(\chi(d)\) jest kresem górnym \(\Phi d\) oraz \(\chi(d)\sqsubseteq'\Psi_\Phi(d)\). Ale \(\Psi_\Phi(d)=\bigsqcup\Phi d\), a zatem \(\chi(d)\) nie jest kresem górnym \(\Phi d\). Stąd \(\Psi_\Phi\) jest kresem górnym \(\Phi\).   
+        \item Niech \(\varphi\in\Phi\). Wówczas dla dowolnego \(d\in D\) mamy \(\varphi(d)\sqsubseteq' \bigsqcup \Phi d = \Psi_{\Phi}(d)\). Zatem \(\varphi\preceq\Psi_\Phi\) i \(\Psi_\Phi\) jest ograniczeniem górnym \(\Phi\). Jeśli \(\Psi_\Phi\) nie jest kresem górnym \(\Phi\), to istnieje \(\chi\) takie, że \(\chi\preceq\Psi_\Phi\) oraz \(\chi\) jest kresem górnym \(\Phi\). Wówczas dla dowolnego \(d\in D\) mamy, że \(\chi(d)\) jest kresem górnym \(\Phi d\) oraz \(\chi(d)\sqsubseteq'\Psi_\Phi(d)\). Ale \(\Psi_\Phi(d)=\bigsqcup\Phi d\), a zatem \(\chi(d)\) nie jest kresem górnym \(\Phi d\). Stąd \(\Psi_\Phi\) jest kresem górnym \(\Phi\).   
         % \item \(\Phi\) jest ograniczony w \([D\to D']\). Istotnie, przypuśćmy, że dla dowolnego \(f\in[D\to D']\) istnieje \(g\in\Phi\) taki, że \(f\preceq g\). Wówczas w szczególności \(\Psi_\Phi \preceq g\) i stąd również
         %   \[
         %     \bigsqcup \Phi d \subseteq' g(d)\quad \text{dla wszystkich}\ d\in D.
@@ -341,7 +384,7 @@ Niech teraz \(\Phi\) będzie skierowanym podzbiorem \([D\to D']\).
   \begin{definicja}\label{thm:scott_seq}
     Dla danego cpo \(D_0\) możemy skonstruować ciąg cpo \(\{D_n\}_{n=0}^{\infty}\) określając \(D_{n+1}=[D_n\to D_n]\) dla \(n\geq 0\). Tak określony ciąg dla \(D_0=\mathbb{N}^{+}\) (patrz Przykład \ref{ex:scott_d0}) nazywamy modelem Scotta.
   \end{definicja}
-\begin{definicja}[Projekcja]%5.5
+\begin{definicja}(Projekcja) %5.5
 Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy parę \((\varphi, \psi)\) funkcji \(\varphi \in [D\to D']\), \(\psi \in [D'\to D]\) takich, że
 \begin{align}
 \psi\circ \varphi = I_D\quad \text{oraz}\quad \varphi\circ \psi \preceq I_{D'} %\tag{\textasteriskcentered},
@@ -351,7 +394,7 @@ gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorz
 
 \begin{figure}[h]
   \centering
-\includegraphics[width=0.32\linewidth]{../embeding_i}
+\includegraphics[width=0.37\linewidth]{../embeding_i}
   \caption{Projekcja \((\varphi_n,\psi_n)\) z \(D_{n+1}\) do \(D_n\)}.\label{fig:projection}
 \end{figure}
 
