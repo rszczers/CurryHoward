@@ -109,6 +109,75 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
   \end{enumerate}
 \end{definicja}
 
+Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następującą relację:
+\[
+  \lambda x.\,zx=_{\alpha}\lambda y.\,zy
+\]
+Zauważmy, że traktując podstawienie w sposób naiwny, mamy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy pożądaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Alternatywnym rozwiązaniem jest określenie podstawienia, które wprowadzałoby do wyrażenia nową zmienną i prowadziło w konsekwencji do abstrahowania po wcześniej nie występujacych zmiennych:
+\[
+  (\lambda x.\,M)[y/N] = \lambda x'.\,M[x/x'][y/N],
+\]
+w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not\in\mathrm{FV}(N)\). Rozstrzygnięcie takie przytacza się w \cite{Hindley:2008:LCI:1388400,}. Po uwzględneniu odpowiednich modyfikacji, Definicja \ref{def:substitution} przyjmuje następującą postać:
+\begin{customdef}{4'}(Podstawienie')\label{def:untyped_substitution_hindley}
+  \begin{enumerate}[label={(S'\arabic*)}, ref={(S'\arabic*)}]
+    \setlength\itemsep{0em}
+    \item \(x[x/N] = N\)
+    \item \(y[x/N] = y,\ \text{o ile}\ x\not\equiv y\)
+    \item \((PQ)[x/N] = P[x/N]\,Q[x/N]\)
+    \item \((\lambda x.\, P)[x/N] = \lambda x.\,P\)
+    \item \((\lambda y.\, P)[x/N] = \lambda y.\,P\), jeśli \(x\not\in\mathrm{FV}(P)\)\label{def:substitution_e}\label{def:substitution_hindley_e}
+    \item \((\lambda y.\, P)[x/N] = \lambda y.\,P[x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\not\in\mathrm{FV}(N)\)\label{def:substitution_hindley_f}
+    \item \((\lambda y.\, P)[x/N] = \lambda z.\,P[y/z][x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\in\mathrm{FV}(N)\)\label{def:substitution_hindley_g}
+  \end{enumerate}
+  przy czym w \ref{def:substitution_hindley_g} wymagamy, aby zmienna \(z\) nie występowała wcześniej w pretermach \(N\) i \(P\) jako zmienna wolna, zaś dla \ref{def:substitution_hindley_e}-\ref{def:substitution_hindley_g} dodatkowo \(y\not\equiv x\).
+\end{customdef}
+% \subsection{Podstawienie jednoczesne}
+% Biorąc pod uwagę sens obliczeniowy rachunku \(\lambda\) interesujące okazuje się modyfikacja Definicji \ref{def:untyped_substitution_hindley} w  taki sposób, aby podstawienie miało miejsce dla wielu zmiennych równolegle w całym \(\lambda\)-termie. Za przykładem \cite{STOUGHTON1988317} wprowadzimy \emph{podstawienie jednoczesne}. W tym celu jednak uściślenia wymagają pewne pojęcia.
+
+\begin{lemat}(O podstawieniu)\label{lem:substitution}
+  Niech \(M,\,N,\,L\in \mathbf{\tilde\Lambda}\) i niech ponadto \(x\not\equiv y\) oraz \(x\not\in\mathrm{FV}(L)\). Wówczas
+  \begin{align}\label{eq:substitution}
+    M[x/N][y/L]\equiv M[y/L]\left[x/N\left[y/L\right]\right].
+  \end{align}
+  \begin{dowod}
+    Dowód przebiega przez indukcję strukturalną względem \(M\). Rozważmy następujące przypadki:
+    \begin{enumerate}[label={\roman*)}, ref={(\arabic*)}]
+      \item \(M\) jest zmienną. Wówczas:
+        \begin{enumerate}[label={\alph*.}]
+        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\).
+        \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i \(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \(M[x/N][y/L]\equiv L\). Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
+
+        \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne.
+        \end{enumerate}
+
+      \item \(M\equiv P Q\) dla pewnych \(P,\,Q\in\mathbf{\tilde\Lambda}\). Wówczas korzystając z założenia indukcyjnego wnosimy, że
+        \begin{align*}
+          P[x/N][y/L] &= P[y/L]\left[x/N\left[y/L\right]\right],\\
+          Q[x/N][y/L] &= Q[y/L]\left[x/N\left[y/L\right]\right].
+        \end{align*}
+        Mając na względzie \ref{def:substitution_c} widzimy, że twierdzenie zachodzi i w tym przypadku.
+        \item Jeśli \(M\equiv \lambda z.\,P\) oraz \(z\equiv x\) lub \(z\equiv y\), to z \ref{def:substitution_e} widzimy, że obydwie strony \eqref{eq:substitution} sa identyczne. Przypuśćmy, że \(z\not\equiv x\) i \(z\not\equiv y\) i \(z\not\in\mathrm{FV}(L)\). Wówczas na podstawie założenia indukcyjnego mamy:
+      \begin{align*}
+        (\lambda z.\,P)[x/N][y/L] &= \lambda z.\,P[x/N][y/L] =\\
+                                  &= \lambda z.\,P[y/L][x/N[y/L]] =\\
+                                  &= (\lambda z.\,P)[y/L][x/N[y/L]].
+      \end{align*}
+    \qed
+    \end{enumerate}
+  \end{dowod}
+\end{lemat}
+
+\begin{wniosek}\label{thm:odwracalnosc_podstawienia}
+Jeśli \(M[x/y]\) jest określone i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest określone oraz
+  \(M[x/y][y/x]=M\).
+  \begin{dowod}
+    Mając na uwadze Lemat \ref{lem:substitution} dowód przebiega przez indukcję strukturalną względem \(M\).
+    \qed
+  \end{dowod}
+\end{wniosek}
+
+
+
 \subsection{Wyrażenia \(\lambda\) i ich własności}\label{subsec:lambda_terms_untyped}
 Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie zmiennymi związanymi, tak jak w przypadku wyrażeń \(\lambda x. \,zx\) i \(\lambda y.zy\). W takim wypadku powiemy o nich, że są swoimi \emph{\(\alpha\)-wariantami} lub że są ze sobą w relacji \emph{\(\alpha\)-konwersji}.
 
@@ -126,8 +195,8 @@ Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie
 \begin{przyklad}
   \begin{align*}
     \lambda x y.\,x(xy) &\equiv \lambda x.\,(\lambda y.\,x(xy)) \\
-                        &\equiv_\alpha \lambda x.\,(\lambda z.\,x(xz)) \\
-                        &\equiv_\alpha \lambda v.\,(\lambda z.\,v(vz)) \\
+                        &=_\alpha \lambda x.\,(\lambda z.\,x(xz)) \\
+                        &=_\alpha \lambda v.\,(\lambda z.\,v(vz)) \\
                         &\equiv \lambda vz.\,v(vz).
   \end{align*}
 
@@ -244,74 +313,6 @@ Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych woln
   \]
 \end{definicja}
 
-Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następującą relację:
-\[
-  \lambda x.\,zx=_{\alpha}\lambda y.\,zy
-\]
-Zauważmy, że traktując podstawienie w sposób naiwny, mamy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy pożądaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Alternatywnym rozwiązaniem jest określenie podstawienia, które wprowadzałoby do wyrażenia nową zmienną i prowadziło w konsekwencji do abstrahowania po wcześniej nie występujacych zmiennych:
-\[
-  (\lambda x.\,M)[y/N] = \lambda x'.\,M[x/x'][y/N],
-\]
-w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not\in\mathrm{FV}(N)\). Rozstrzygnięcie takie przytacza się w \cite{Hindley:2008:LCI:1388400,}. Po uwzględneniu odpowiednich modyfikacji, Definicja \ref{def:substitution} przyjmuje następującą postać:
-\begin{customdef}{4'}(Podstawienie')\label{def:untyped_substitution_hindley}
-  \begin{enumerate}[label={(S'\arabic*)}, ref={(S'\arabic*)}]
-    \setlength\itemsep{0em}
-    \item \(x[x/N] = N\)
-    \item \(y[x/N] = y,\ \text{o ile}\ x\not\equiv y\)
-    \item \((PQ)[x/N] = P[x/N]\,Q[x/N]\)
-    \item \((\lambda x.\, P)[x/N] = \lambda x.\,P\)
-    \item \((\lambda y.\, P)[x/N] = \lambda y.\,P\), jeśli \(x\not\in\mathrm{FV}(P)\)\label{def:substitution_e}\label{def:substitution_hindley_e}
-    \item \((\lambda y.\, P)[x/N] = \lambda y.\,P[x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\not\in\mathrm{FV}(N)\)\label{def:substitution_hindley_f}
-    \item \((\lambda y.\, P)[x/N] = \lambda z.\,P[y/z][x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\in\mathrm{FV}(N)\)\label{def:substitution_hindley_g}
-  \end{enumerate}
-  przy czym w \ref{def:substitution_hindley_g} wymagamy, aby zmienna \(z\) nie występowała wcześniej w pretermach \(N\) i \(P\) jako zmienna wolna, zaś dla \ref{def:substitution_hindley_e}-\ref{def:substitution_hindley_g} dodatkowo \(y\not\equiv x\).
-\end{customdef}
-% \subsection{Podstawienie jednoczesne}
-% Biorąc pod uwagę sens obliczeniowy rachunku \(\lambda\) interesujące okazuje się modyfikacja Definicji \ref{def:untyped_substitution_hindley} w  taki sposób, aby podstawienie miało miejsce dla wielu zmiennych równolegle w całym \(\lambda\)-termie. Za przykładem \cite{STOUGHTON1988317} wprowadzimy \emph{podstawienie jednoczesne}. W tym celu jednak uściślenia wymagają pewne pojęcia.
-
-\begin{lemat}(O podstawieniu)\label{lem:substitution}
-  Niech \(M,\,N,\,L\in \mathbf{\tilde\Lambda}\) i niech ponadto \(x\not\equiv y\) oraz \(x\not\in\mathrm{FV}(L)\). Wówczas
-  \begin{align}\label{eq:substitution}
-    M[x/N][y/L]\equiv M[y/L]\left[x/N\left[y/L\right]\right].
-  \end{align}
-  \begin{dowod}
-    Dowód przebiega przez indukcję strukturalną względem \(M\). Rozważmy następujące przypadki:
-    \begin{enumerate}[label={\roman*)}, ref={(\arabic*)}]
-      \item \(M\) jest zmienną. Wówczas:
-        \begin{enumerate}[label={\alph*.}]
-        \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\).
-        \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i \(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \(M[x/N][y/L]\equiv L\). Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
-
-        \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne.
-        \end{enumerate}
-
-      \item \(M\equiv P Q\) dla pewnych \(P,\,Q\in\mathbf{\tilde\Lambda}\). Wówczas korzystając z założenia indukcyjnego wnosimy, że
-        \begin{align*}
-          P[x/N][y/L] &= P[y/L]\left[x/N\left[y/L\right]\right],\\
-          Q[x/N][y/L] &= Q[y/L]\left[x/N\left[y/L\right]\right].
-        \end{align*}
-        Mając na względzie \ref{def:substitution_c} widzimy, że twierdzenie zachodzi i w tym przypadku.
-        \item Jeśli \(M\equiv \lambda z.\,P\) oraz \(z\equiv x\) lub \(z\equiv y\), to z \ref{def:substitution_e} widzimy, że obydwie strony \eqref{eq:substitution} sa identyczne. Przypuśćmy, że \(z\not\equiv x\) i \(z\not\equiv y\) i \(z\not\in\mathrm{FV}(L)\). Wówczas na podstawie założenia indukcyjnego mamy:
-      \begin{align*}
-        (\lambda z.\,P)[x/N][y/L] &= \lambda z.\,P[x/N][y/L] =\\
-                                  &= \lambda z.\,P[y/L][x/N[y/L]] =\\
-                                  &= (\lambda z.\,P)[y/L][x/N[y/L]].
-      \end{align*}
-    \qed
-    \end{enumerate}
-  \end{dowod}
-\end{lemat}
-
-\begin{wniosek}\label{thm:odwracalnosc_podstawienia}
-Jeśli \(M[x/y]\) jest określone i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest określone oraz
-  \(M[x/y][y/x]=M\).
-  \begin{dowod}
-    Mając na uwadze Lemat \ref{def:substitution} dowód przebiega przez indukcję strukturalną względem \(M\).
-    \qed
-  \end{dowod}
-\end{wniosek}
-
-
 \begin{definicja}(Podstawienie jednoczesne)\label{def:simult_substitution}
 Dla dowolnego \(M\in\mathbf{\Lambda}\), nieskończonego ciągu \(\lambda\)-zmiennych~\(\vec{x}\) i nieskończonego ciągu \(\lambda\)-termów \(\vec{N}\) określamy:
   \begin{enumerate}[label={(\(\vec{s}\)\arabic*)}, ref={(\arabic*)}]
@@ -355,7 +356,7 @@ Historycznie wiąże się ta notacja z jego pracami nad systemem komputerowo wsp
 
 Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{txa:alpha-draft}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Technikalia definiowania \(\lambda\)-termow jako klas \(\alpha\)-konwersji są na ogół w literaturze pomijane. %nie jest w literaturze przedmiotu. %Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
 
-\subsection{Sematyka operacyjna}
+\subsection{Semantyka operacyjna}
 \subsubsection{Redukcje}
 Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\Lambda}\) operacji \(\beta\)- i \(\eta\)-redukcji. Pożądane jest, żeby operacje te wykonywane na podtermach pozostowały w \emph{zgodzie} ze strukturą całego \(\lambda\)-termu.
 
@@ -372,9 +373,9 @@ Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) względem własności \(P\) b
   Z pewnego rodzaju domknięciami, ze względu na ich szczególną rolę, wiążemy następującą notację:
   \begin{enumerate}[label=(\alph*), ref={(\alph*)}]
     \setlength\itemsep{0em}
-    \item Przez \(\mathcal{R}^{+}\) oznaczamy przechodnie domknięcie relacji \(\mathcal{R}\).\label{def:closure_a}
-    \item Przez \(\mathcal{R}^{*}\) oznaczamy zwrotne domknięcie relacji \(\mathcal{R}^{+}\).\label{def:closure_b}
-    \item Przez \(=_{\mathcal{R}}\) oznaczamy symetryczne domknięcie relacji \(\mathcal{R}^{*}\).\label{def:closure_c}
+    \item Symbolem \(\mathcal{R}^{+}\) oznaczamy domknięcie relacji \(\mathcal{R}\) względem przechodniości (\emph{przechodnie} domknięcie).\label{def:closure_a}
+    \item Symbolem \(\mathcal{R}^{*}\) oznaczamy domknięcie relacji \(\mathcal{R}^{+}\) względem zwrotności (\emph{zwrotne} domknięcie).\label{def:closure_b}
+    \item Symbolem \(=_{\mathcal{R}}\) oznaczamy domknięcie relacji \(\mathcal{R}^{*}\) względem symetryczności (\emph{symetryczne} domknięcie).\label{def:closure_c}
 \end{enumerate}
 Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:closure_b} wyznacza praporzadek, który w odniesieniu do redukcji określonych na \(\mathbf{\Lambda}\) można rozumieć jako graf skierowany (w przypadku \(\mathbf{\Lambda}\) być może nieskończony) w którym krawędzie odpowiadają możliwym krokom obliczenia, zaś \ref{def:closure_c} -- kongruencję, która znów w szczególnym odniesieniu do \(\lambda\)-termów, będzie dokonywała podziału w \(\mathbf{\Lambda}\) ze względu na rezultat obliczenia.
 
@@ -427,7 +428,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
   \begin{align*}
     \mathrm{let}\ x{=}N\ \mathrm{in}\ M \equiv (\lambda x.\,M) N
   \end{align*}
-  Jest to przykład tzw. \emph{cukru syntaktycznego}, czyli wtórnych rozszerzeń języka, które ułatwiają jego użycie. Wyrażenia let w których \(M\equiv\lambda y.M'\) dla pewnego \(M'\in\mathbf{\Lambda}\) nazywamy \emph{domknięciami}\footnote{Idiom ten w literaturze poświęconej językom programowania z rodziny Lisp powszechnie występuje pod nazwą wyrażeń \emph{let-over-lambda}.} (ang. \emph{closure}). Nieformalnie, pozwalają one na przypisywanie wartości zmiennym o tzw. \emph{zakresie leksykalnym}.
+  Jest to przykład tzw. \emph{cukru syntaktycznego}, czyli wtórnych rozszerzeń języka, które ułatwiają jego użycie. Wyrażenia let w których \(M\equiv\lambda y.M'\) dla pewnego \(M'\in\mathbf{\Lambda}\) nazywamy \emph{domknięciami}\footnote{Idiom ten w literaturze poświęconej językom programowania z rodziny Lisp występuje również pod nazwą \emph{let-over-lambda}.} (ang. \emph{closure}). Nieformalnie, pozwalają one na przypisywanie wartości zmiennym o tzw. \emph{zakresie leksykalnym}.
 \end{konwencja*}
 
 \begin{definicja}(Strategia redukcji)
@@ -451,7 +452,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
                   &\to_\beta F(\underbrace{F((\lambda x.\,F(xx))\lambda x.\,F(xx))}_{=_\beta \mathrm{Y}F})\\
                   &\to_\beta \dots
     \end{align*}
-        Y nazywamy \emph{kombinatorem punktu stałego}. Widzimy, że relacja \(\beta\)-redukcji w rachunku \(\lambda\) nie jest ani słabo, ani silnie normalizująca. 
+        i w konsekwencji \(\mathrm{Y}F =_\beta F(\mathrm{Y}F)\). Y nazywamy \emph{kombinatorem punktu stałego}. Widzimy, że relacja \(\beta\)-redukcji w rachunku \(\lambda\) nie jest ani słabo, ani silnie normalizująca. 
       \item Niech \(\Omega\equiv (\lambda x.\ xx)(\lambda x.\ xx)\). \(\Omega\) jest \(\beta\)-redeksem, którego redukcja prowadzi do ponownego otrzymania termu \(\Omega\) i w konsekwencji do stałego ciągu redukcji postaci:\label{ex:Delta}
       \begin{align*}
         \Omega\to_\beta \Omega \to_\beta \Omega \to_\beta \dots

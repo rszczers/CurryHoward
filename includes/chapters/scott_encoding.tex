@@ -1,7 +1,10 @@
 \subsection{Kodowanie typów danych}\label{subsec:scott_encoding}
+
 Prosta składnia języka rachunku \(\lambda\) pozwala wyrazić zaskakująco wiele struktur danych reprezentując je i operacje na nich jako funkcje. Z tego powodu, stanowiąc inspirację dla wielu projektantów języków programowania, uchodzi za protoplastę rodziny języków funkcyjnych. Rozwój tej legendy dobrze oddaje cykl klasycznych artykułów (tzw. \emph{Lambda Papers}) zapoczątkowany przez dokumentację języka Scheme \cite{Sussman:1975:IEL:889230}.
 
 Najpopularniejszym sposobem reprezentacji danych przez funkcje w rachunku \(\lambda\) oparty jest na kodowaniu liczb Peano za pomocą tzw. liczebników Churcha. Metoda ta, ze względu na wynikające zeń problemy natury złożonościowej \cite{Koopman:2014:CED:2746325.2746330}, ma obecnie wyłącznie walory edukacyjne, dlatego w dalszej części pracy pokażemy tzw. kodowanie Scotta. Jest ona interesująca ze względu na praktyczną możliwość reprezentacji algebraicznych typów danych (ADT, ang. \emph{Algebraic Data Types}\footnote{Nie należy mylić z \emph{Abstract Data Types}.}) znanych ze współczesnych języków funkcyjnych \cite{Jansen:2013:P9C:2941698.2941710}, pozwalając tym samym zaimplementować te konstrukcje w dowolnym języku, w którym dostępne są wyrażenia \(\lambda\). Fakt, że każdy typ danych można zastąpić tym sposobem odpowiadającą mu funkcją, wskazuje na metodę konstruowania prostych języków funkcyjnych \cite{Jensen_2006} oraz na uniwersalność rachunku \(\lambda\) jako języka przejściowego dla kompilatorów języków funkcyjnych \cite[Rozdział 3]{PeytonJones:1992:IFL:129390}. Druga z tych idei znajduje dziś bardzo praktyczne zastosowanie w przypadku Systemu F -- rozszerzenia rachunku \(\lambda\), który będzie tematem Rozdziału \ref{sec:system_f} -- i kompilatora GHC języka Haskell.
+
+Szerokie omówienie struktur danych, które można wyrazić za pomocą rachunku \(\lambda\) bez typów można znaleźć w \cite[Rozdział 3]{DBLP:journals/corr/abs-0804-3434}. Niniejszy rozdział opieramy na \cite{Jansen:2013:P9C:2941698.2941710}. Kodowanie Scotta, które jest jego tematem, jest stosunkowo mało popularne i nie spotyka się go w klasycznej literaturze przedmiotu.
 
 \subsubsection{Algebraiczne typy danych}
 Algebraiczne typy danych są podstawowym środkiem służącym do określania struktur danych we współczesnych funkcyjnych językach programowania. Na potrzeby prezentacji poszczególnych kodowań posłużymy się intuicjami o ADT zbudowanymi na gruncie następujących definicji w języku Haskell:
@@ -105,7 +108,7 @@ Funkcję tę możemy wyrazić w rachunku \(\lambda\) przy pomocy kodowania Scott
 \end{align*}
 Formalizm rachunku \(\lambda\) nie pozwala na określanie nowych nazw i rekurencyjne odnoszenie się przez nie do nich samych. Standardową techniką w rachunku \(\lambda\) do określania funkcji w ten sposób jest użycie operatora punktu stałego Y. Przypomnijmy:
 \begin{align*}
-  \mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx))).
+  \mathrm{Y}\equiv\lambda f.\,(\lambda x.\,f(xx))(\lambda x.\,f(xx)).
 \end{align*}
 Wówczas określamy
 \begin{align*}

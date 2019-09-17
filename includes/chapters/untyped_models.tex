@@ -98,11 +98,11 @@ Ostatnia równość wymaga dowodu: przeprowadza się go indukcją strukturalną 
 
 W myśl warunku \ref{def:lambda-interpret-4} wymagamy, żeby interpretacja \(\lambda\)-termu zależała tylko od wartościowania występujących w nim zmiennych wolnych. 
 
-Warunek \ref{def:lambda-interpret-5} zapewnia, że interpretacja \(\lambda\)-termów, które są swoimi \(\alpha\)-konwersami jest taka sama. Odpowiada on więc aksjomatowi \((\alpha)\) z Podrozdziału \ref{subsec:lambda-formal-theory}.
+Warunek \ref{def:lambda-interpret-5} zapewnia, że interpretacja \(\lambda\)-termów, które są swoimi \(\alpha\)-konwersami, jest taka sama. Odpowiada on więc aksjomatowi \((\alpha)\) z Podrozdziału \ref{subsec:lambda-formal-theory}.
 
 % Wymagamy w ten sposób, żeby \(\lambda\)-termy, które mają tę samą postać normalną (albo nie mają jej wcale), miały również to samo znaczenie.
   
-Warunek \ref{def:lambda-interpret-6} odpowiada regule \(\xi\) z Rodrozdziału \ref{subsec:lambda-formal-theory}.
+Warunek \ref{def:lambda-interpret-6} odpowiada regule \((\xi)\) z Rodrozdziału \ref{subsec:lambda-formal-theory}.
 Zauważmy wpierw jednak, że zgodnie z warunkiem \ref{def:lambda-interpret-3}
 \begin{align*}
   (\forall d\in D\ \llbracket M \rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]})
@@ -143,9 +143,9 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
     \[
       \llbracket M \rrbracket_\rho = \llbracket N \rrbracket_\rho,
     \]
-    to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) wzgledem \(\mathcal{M}\) i piszemy \[\mathcal{M},\rho\models M=N\].
+    to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) i piszemy \[\mathcal{M},\rho\models M=N\].
 
-    Jeśli \(\mathcal{M}\) spełnia równość \(M=N\) wzgledem dowolnego wartościowania \(\rho\), to mówimy, że równość \(M=N\) jest \emph{prawdziwa} w \(\mathcal{M}\) (lub \(\mathcal{M}\) \emph{spełnia} \(M=N\)) i piszemy \(\mathcal{M}\models M=N\).
+    Jeśli każde wartościowanie \(\rho\) spełnia równość \(M=N\), to mówimy, że równość \(M=N\) jest \emph{prawdziwa} w \(\mathcal{M}\) (lub \(\mathcal{M}\) \emph{spełnia} \(M=N\)) i piszemy \(\mathcal{M}\models M=N\).
   \end{definicja}
 
 % \begin{lemat}
@@ -191,7 +191,7 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
       \setlength\itemsep{0em}
         \item[(l-con)] Wówczas \(M\) i \(N\) są postaci \(PM'\) i \(PN'\) odpowiednio, dla pewnego \(P\in\mathbf{\Lambda}\).
           Ponadto, z założenia indukcyjnego \(\llbracket M' \rrbracket_\rho=\llbracket N' \rrbracket_\rho\).
-          Wobec tego, na podstawie warunku \ref{def:lambda-interpret-2} mamy
+          Wobec tego na podstawie warunku \ref{def:lambda-interpret-2} mamy
           \[\llbracket PM'\rrbracket_\rho  =
             \llbracket P\rrbracket_\rho \bullet \llbracket M'\rrbracket_\rho =
             \llbracket P\rrbracket_\rho \bullet \llbracket N'\rrbracket_\rho =
@@ -272,9 +272,7 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
 % \end{fakt}
 
 \subsubsection{Model Scotta \(D_\infty\)}
-% W rozdziale tym przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Ze względu na obszerność materiału zaprezentujemy wyłącznie konstrukcję modelu bezsyntaktycznego (ang. \emph{syntax-free}) przemilczając jego topologiczny charakter.
-
-Rozwiązanie Scotta polega na tym, aby zamiast próbować interpretować termy jako funkcje, przypisać im nieskończone ciągi funkcji postaci 
+W tym podrozdziale przybliżymy konstrukcję modelu Scotta \(D_\infty\) zgodnie z \cite[Rozdział 16]{Hindley:2008:LCI:1388400}. Rozwiązanie D. Scotta polega na tym, aby zamiast naiwnych prób interpretacji termów jako funkcji, przypisać im nieskończone ciągi funkcji postaci 
 \[
   \varphi = (\varphi_0,\,\varphi_1,\,\varphi_2,\,\dots),
 \]
@@ -282,10 +280,11 @@ gdzie \(\varphi \in D_\infty\) i \(\varphi_n\in D_n\). Określając na takiej st
 \[
   \varphi\bullet\psi = (\varphi_1(\psi_0),\,\varphi_2(\psi_1),\,\varphi_3(\psi_2),\,\dots),
 \]
-widzimy, że samoaplikacja jest poprawnie określona: 
+widzimy, że samoaplikacja jest wówczas poprawnie określona: 
 \[
   \varphi\bullet\varphi = (\varphi_1(\varphi_0),\,\varphi_2(\varphi_1),\,\varphi_3(\varphi_2),\,\dots).
 \]
+Wszystkie symbole użyte w powyższym wtym prowadzeniu zostaną zdefiniowane w tym podrozdziale.
 
 \paragraph{Elementy teorii porządku} 
 Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jeśli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kresem górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
@@ -315,9 +314,9 @@ Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).
 \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}] 
   \setlength\itemsep{0em}
 \item Powiemy, że \(\varphi\) jest \emph{monotoniczna}, jeśli \(\varphi(a) \sqsubseteq' \varphi(b)\) dla \(a\sqsubseteq b\).
-\item Powiemy, że \(\varphi\) jest \emph{ciągła (w sensie Scotta}\footnote{Funkcje te są ciągłe w topologicznym sensie względem topologii Scotta.}), jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X)\) dla wszystkich skierowanych podzbioru \(X\subseteq D\).\label{def:m_cont_2}
-\item Powiemy, że \(\varphi\) jest \emph{ścisła} (ang. \emph{strict}), jeśli \(\varphi(\perp)=\perp'\). Funkcje, które nie są ścisłe, nazywamy niekiedy \emph{leniwymi} (ang. \emph{lazy}).
-\end{enumerate}
+\item Powiemy, że \(\varphi\) jest \emph{ciągła (w sensie Scotta}\footnote{Funkcje te są ciągłe w topologicznym sensie względem topologii Scotta; taką topologię można określić na każdym cpo.}), jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X)\) dla wszystkich skierowanych podzbioru \(X\subseteq D\).\label{def:m_cont_2}
+\item Powiemy, że \(\varphi\) jest \emph{ścisła}\footnote{Każdą semantykę, w której \(\varphi(\perp)\neq\perp'\) dla pewnej funkcji \(\varphi\), nazywamy \emph{nieścisłą} (ang. \emph{non-strict}).} 
+ (ang. \emph{strict}), jeśli \(\varphi(\perp)=\perp'\). Funkcje, które nie są ścisłe, nazywamy niekiedy \emph{leniwymi} (ang. \emph{lazy})\end{enumerate}
 Symbolem \([D\to D']\) oznaczamy zbiór wszystkich funkcji ciągłych ze zbioru \(D\)~do~\(D'\).
 \end{definicja}
 
@@ -414,9 +413,9 @@ Dla \(n>0\) określamy teraz \(\varphi_n : D_n \to D_{n+1}\) i \(\psi_{n+1}: D_{
 \end{align*}
 Wówczas \(\varphi_n\in[D_n\to D_{n+1}]\), \(\psi_n\in[D_{n+1}\to D_n]\) i \(\psi_n\circ\varphi_n=I_{D_n}\) oraz \(\varphi_n\circ\psi_n\preceq I_{D_{n+1}}.\) \cite[Lemat 16.28]{Hindley:2008:LCI:1388400}. A zatem \((\varphi_n,\psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\).
 
-Ponieważ projekcje \((\varphi_n, \psi_n)\) przenoszą nas tylko pomiędzy następującymi po sobie cpo w ciągu \(\{D_n\}_{n=0}^\infty\), (Rysunek \ref{fig:projection}) określamy następujące złożenie pozwalające na projekcje między dowolnymi dwoma wyrazami ciągu.
+Ponieważ projekcje \((\varphi_n, \psi_n)\) przenoszą nas tylko pomiędzy następującymi po sobie cpo w ciągu \(\{D_n\}_{n=0}^\infty\), (Rysunek \ref{fig:projection}) w Definicji \ref{def:proj-consecutive} określamy złożenie pozwalające na projekcje między dowolnymi dwoma wyrazami ciągu.
 
-\begin{definicja}%5.6
+\begin{definicja}\label{def:proj-consecutive}%5.6
 Dla \(m,\,n\geq 0\) określamy \(\varphi_{mn}:D_m \to D_n\) w następujący sposób:
 \begin{align*}
 \varphi_{mn} =
@@ -428,7 +427,8 @@ I_{D_n}, & \text{jeśli}\ m=n,\\
 \end{align*}
 \end{definicja}
 
-Ponieważ dla każdego \(n\in \mathbb{N}\) para \((\varphi_n, \psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\), to zachodzi następujący szereg własności.
+% Ponieważ dla każdego \(n\in \mathbb{N}\) para \((\varphi_n, \psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\), to zachodzi następujący szereg własności.
+W myśl Definicji \ref{def:proj-consecutive}, dla każdego \(n\in \mathbb{N}\) para \((\varphi_n, \psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\).
 
 % \begin{fakt}[{\cite[16.33]{Hindley:2008:LCI:1388400}}]%5.7
 % Niech \(m,\,n\geq 0\). Wówczas
@@ -463,7 +463,7 @@ Na zbiorze \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący spos
 
 \end{definicja}
 
-Przy powyższym określeniu \(D_\infty\) okazuje się być cpo \cite[16.36]{Hindley:2008:LCI:1388400}.
+Przy powyższym określeniu \(D_\infty\) okazuje się być cpo \cite[Tw. 16.36]{Hindley:2008:LCI:1388400}.
 
 % \begin{fakt}[{\cite[16.36]{Hindley:2008:LCI:1388400}}]%5.10
 % \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
@@ -490,7 +490,7 @@ Dla \(n\geq 0\) określamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(
 
 Określona para funkcji spełnia poniższy szereg własności.
 
-\begin{fakt}[{\cite[16.38, 16.39, 16.42]{Hindley:2008:LCI:1388400}}]\label{fact:projection}%5.12
+\begin{fakt}[{\cite[Tw. 16.38, 16.39, 16.42]{Hindley:2008:LCI:1388400}}]\label{fact:projection}%5.12
 Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
 \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
   \setlength\itemsep{0em}
@@ -512,7 +512,7 @@ zaś na podstawie \ref{fact:projection}\ref{fact:projection_4}:
 \end{align*}
 Zatem wyrazy \(a_0,\,a_1,\,a_2,\,a_3,\,\dots\) możemy traktowac jako kolejne przybliżenia elementu \(a\). Zauwazmy, że na podstawie Faktu \ref{fact:projection_5} ciąg ten jest zawsze rosnący. Traktując nieformalnie \(D_\infty\) jako pewną przestrzeń informacji i w niej: element \(\perp\) jako brak informacji, zaś relację \(\sqsubseteq\) odczytując jako „więcej informacji”, kolejne przybliżenia możemy odczytąc jako proces poznawczy prowadzący do stanu pełnej informacji o jakimś fakcie.  
 
-Kolejną istotną obserwacją jest fakt, że dziedzina każdej funkcji z \(D_n\) zawiera się w powyższym sensie również w \(D_n\). Fakty \ref{fact:projection}\ref{fact:projection_4} i \ref{fact:projection}\ref{fact:projection_5} sugerują metodę określenia struktury aplikatywnej na \(D_\infty\). Przypuśćmy bowiem, że \(a,\,b\in D_\infty\). Wówczas dla każdego \(n\in\mathbb{N}\) wyrazy \(a_n\) i \(b_n\) są przybliżeniami \(a\) i \(b\), odpowiednio. Ponieważ \(a_{n+1}\in  D_{n+1}=[D_n\to D_n]\), to \(a_{n+1}(b_n)\) jest określony. A zatem \(a_{n+1}(b_n)\) jest pewnym przybliżeniem aplikacji \(a\) do \(b\). Widzimy jednocześnie, że rozwiązuje to problem samoaplikacji wymieniony we wstępie do Podrozdziału \ref{subsec:lambda-models}. 
+Kolejną istotną obserwacją jest fakt, że dziedzina każdej funkcji z \(D_n\) zawiera się w powyższym sensie również w \(D_n\). Fakty \ref{fact:projection}\ref{fact:projection_4} i \ref{fact:projection}\ref{fact:projection_5} sugerują metodę określenia struktury aplikatywnej na \(D_\infty\). Przypuśćmy bowiem, że \(a,\,b\in D_\infty\). Wówczas dla każdego \(n\in\mathbb{N}\) wyrazy \(a_n\) i \(b_n\) są przybliżeniami \(a\) i \(b\), odpowiednio. Ponieważ \(a_{n+1}\in  D_{n+1}=[D_n\to D_n]\), to \(a_{n+1}(b_n)\) jest określony. A zatem \(a_{n+1}(b_n)\) jest pewnym przybliżeniem aplikacji \(a\) do \(b\). Widzimy, że rozwiązuje to wymieniony wcześniej problem samoaplikacji. 
 
 \begin{definicja}%5.13
   Dla \(a,\,b\in D_\infty\) określamy:
@@ -540,7 +540,7 @@ Dowód, że operacja ta nie wyprowadza poza zbiór funkcji ciągłych pomijamy.
 % Ostatecznie, na podstawie Faktu \ref{fact:model_a} i Faktu \ref{fact:model} zachodzi następujące twierdzenie.
 
 \begin{fakt}({\cite[16.55]{Hindley:2008:LCI:1388400}})
-  \((D,\,\bullet,\,\Lambda)\) jest ekstensjonalnym \(\lambda\)-modelem.
+  \((D_\infty\) jest \(\lambda\)-modelem.
 \end{fakt}
 % \begin{dowod}
 % Określmy:

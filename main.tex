@@ -1,5 +1,5 @@
 %\documentclass[a4paper,oneside,twoside,reqno,12pt,openright]{book}
-\documentclass[a4paper,oneside,twoside,reqno,12pt]{article}
+\documentclass[a4paper,oneside,reqno,12pt]{article}
 %\usepackage[a4paper,left=4cm,right=3cm,top=3cm,bottom=3cm,head=0cm,headsep=0cm]{geometry}
 %\usepackage[utf8]{inputenc}
 %\usepackage[T1]{fontenc}
@@ -24,8 +24,8 @@
 \usepackage{inputenc}
 \usepackage{MnSymbol}
 \usepackage{mathtools}
-\usepackage[lmargin=142pt,rmargin=95pt,tmargin=127pt,bmargin=123pt]{geometry}
-%\usepackage{geometry}
+%\usepackage[lmargin=142pt,rmargin=95pt,tmargin=127pt,bmargin=123pt]{geometry}
+\usepackage{geometry}
 \usepackage{polski}
 \usepackage{plain}
 \usepackage{float}
@@ -90,18 +90,19 @@
 
 \tableofcontents
 %\mainmatter
-\subimport{includes/chapters/}{intro.tex}
+% \newpage
+% \subimport{includes/chapters/}{intro.tex}
 \newpage
 \subimport{includes/chapters/}{untyped.tex}
-\newpage
-%\subimport{includes/chapters/}{pure_type_systems.tex}
-%\subimport{includes/chapters/}{ipc.tex}
-\subimport{includes/chapters/}{simple_types2.tex}
-\newpage
-\subimport{includes/chapters/}{lambda2.tex}
-%\subimport{includes/chapters/}{simpletypes.tex}
-%\subimport{includes/chapters/}{denotational_semantics.tex}
-%\bibliographystyle{alpha}
+%\newpage
+%%\subimport{includes/chapters/}{pure_type_systems.tex}
+%%\subimport{includes/chapters/}{ipc.tex}
+%\subimport{includes/chapters/}{simple_types2.tex}
+%\newpage
+%\subimport{includes/chapters/}{lambda2.tex}
+%%\subimport{includes/chapters/}{simpletypes.tex}
+%%\subimport{includes/chapters/}{denotational_semantics.tex}
+%%\bibliographystyle{alpha}
 
 \newpage
 %\backmatter
