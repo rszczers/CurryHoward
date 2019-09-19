@@ -1,6 +1,6 @@
 \section{System Girarda/Reynoldsa}\label{sec:system_f}
 
-W rozdziale tym przedstawimy tzw. rachunek \(\lambda\) drugiego rzędu w stylu Churcha. System ten wprowadzony został równolegle przez J.-Y. Girarda i J. C. Reynoldsa jako System F i w literaturze szerzej znany jest pod tą właśnie nazwą. Formalizuje on pojęcie polimorfizmu parametrycznego znanego z języków programowania.
+Przedmiotem tego rozdziału bedzie rachunek \(\lambda\) drugiego rzędu w stylu Churcha. Rozumieć należy przez to, że w \(\lambda\)-termach wiązane mogą być również zmienne typowe. System ten wprowadzony został równolegle przez J.-Y. Girarda i J. C. Reynoldsa i nazywany był przez autorów Systemem F. Odpowiada on również systemowi \(\lambda 2\) w klasyfikacji, którą zaproponował H. Barendregt. Pozwala on na formalne ujęcie pojęcia polimorfizmu parametrycznego, które znamy z języków programowania.
 
 \subsection{Termy zależne od typów}
 
@@ -142,9 +142,9 @@ Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji \re
  \begin{uwaga*}
    Zauważmy, że przy powyższych rozstrzygnięciach definicyjnych nie zachodzi odpowiednik Twierdzenia \ref{thm:permutation_simple} \ref{thm:permutation_3}: nie możemy rozpatrywać dowolnych permutacji kontekstów w sądach \(\Gamma\vdash M:T\), ponieważ w myśl Definicji \ref{def:f_statement} deklaracje zmiennych termowych w poprawnie zbudowanych \(\lambda 2\)-kontekstach są uzależnione od poprzedzających je deklaracji typowych. 
 
-   Naturalnie zachodzi natomiast Lemat \ref{thm:permutation_simple} \ref{thm:permutation_1}, który oznacza tyle, że w rozszerzonym kontekście jesteśmy w stanie wyprowadzić co najmniej tyle, ile w pierwotnym. Fakt ten wyraża Lemat \ref{thm:thinning_f}.
- \end{uwaga*}
+\end{uwaga*}
 
+Następujący lemat to odpowiednik Lematu \ref{thm:permutation_simple} \ref{thm:permutation_1}.
 \begin{lemat}(O zwężaniu)\label{thm:thinning_f}
       Jeśli \begin{enumerate}[label=(\alph*), ref=(\alph*)]
         \setlength\itemsep{0em}
@@ -412,7 +412,7 @@ Zachodzi oczywiście również odpowiednik Lematu \ref{thm:eta_uniqueness_simple
 
 W odpowiednich wersjach zachodzą również Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów~\ref{sec:untyped_lambda}~i~\ref{sec:simple_types}.
 
-Kolejnym ważnym twierdzeniem, które zachodzi dla Systemu F jest silna normalizacja \(\beta\)-redukcji.
+Kolejną istotną własnością Systemu F jest silna normalizacja \(\beta\)-redukcji.
 
 \begin{twierdzenie}(O silnej normalizacji)
   Jeżeli \(\Gamma\vdash_\mathbb{T}M:\tau\), to \(M\in\mathrm{SN_\beta}\).

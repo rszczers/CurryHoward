@@ -222,8 +222,7 @@ W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzaj
   \end{equation*}
  \end{enumerate}
 \end{uwaga*}
-
-\subsubsection{Rodzaje problemów} 
+\paragraph{Klasyfikacja problemów z typowaniem}
 W teorii typów spotykamy trzy rodzaje problemów dotyczące sądów:
 \begin{enumerate}
   \setlength\itemsep{0em}
@@ -250,13 +249,13 @@ W wielu systemach problem typowalności można sprowadzić do problemu weryfikac
 \]
 gdzie \(p\in U\) jest zmienną typową, zaś kombinator \(K\equiv \lambda xy.\,x\).
 
-Wszystkie wymienione problemy są w rachunku \(\lambda\) z typami prostymi rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F (w stylu Currego) są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Milnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
-
+Wszystkie wymienione problemy są w rachunku \(\lambda\) z typami prostymi rozstrzygalne, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
+Fakt ten nie jest oczywisty dla innych systemów typów; za przykład wystarczy wziąć wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że problemy typowalności i weryfikacji typu w Systemie F (w stylu Currego) są nierozstrzygalne.
 \subimport{includes/chapters/}{unification.tex}
 
 \subsection{Własności}
 
-Przedstawimy teraz szereg lematów ustalających między innymi związki między rachunkiem \(\lambda\) bez typów wprowadzonym w Rozdziale \ref{sec:untyped_lambda}, a rachunkiem \(\lambda\) z typami prostymi.
+Przedstawimy teraz szereg lematów ustalających związki między rachunkiem \(\lambda\) bez typów wprowadzonym w Rozdziale \ref{sec:untyped_lambda}, a rachunkiem \(\lambda\) z typami prostymi oraz najistotniejsze własności wprowadzonego właśnie systemu typów.
 
 \begin{lemat}(O generowaniu)\label{thm:generation}
   \begin{enumerate}[label=(\arabic*)]
@@ -461,7 +460,12 @@ sposób.
 
 \subimport{includes/chapters/}{to_church_style.tex}
 \subsection{Podsumowanie}
-System typów, który był przedmiotem Rozdziału \ref{sec:simple_types} jest najbardziej elementarnym przypadkiem typowanego rachunku \(\lambda\)\footnote{Patologicznym przypadkiem jest rachunek \(\lambda\) bez typów, jeśli przyjmiemy, że wszystkie wyrażenia mają w nim dokładnie jeden typ. Argument ten często podejmowany jest przeciwko dynamicznie typowanym językom programowania.}. W literaturze często spotyka się być może jeszcze prostszy, równoważny wariant typów prostych, w którym wszystkie typy buduje się wyłącznie z jednej stałej typowej. Pod pojęciem typów prostych rozumie się także szereg rozszerzeń przedstawionego przez nas systemu.% Ich celem jest zwiększenie ekspresji, np. o odpowiednie konstrukcje dla par%, w których pierwszy element może być innego typu niż drugi. Konstrukcja ta jest bowiem niemożliwa w naszym, elementarnym ujęciu.
+System typów, który był przedmiotem Rozdziału \ref{sec:simple_types} jest najbardziej elementarnym przypadkiem typowanego rachunku \(\lambda\)\footnote{Patologicznym przypadkiem jest rachunek \(\lambda\) bez typów, jeśli przyjmiemy, że wszystkie wyrażenia mają w nim dokładnie jeden typ. Argument ten często podejmowany jest przeciwko dynamicznie typowanym językom programowania.}. W literaturze występują pewne rozbieżności co do składni typów prostych: niekiedy występuje w niej typ bazowy z którego budowane są pozostałe typy lub dodatkowy konstruktor typu dla pary (można porównać np. \cite{Girard:1989:PT:64805,DBLP:journals/corr/abs-0804-3434}). Rozszerzenia takie nie wpływają jednak na samą istotę typowania, która polega na \emph{zależności termów od termów}. Jak przekonamy się w Rozdziale \ref{sec:system_f}, zależność tę można rozszerzyć pozwalając również typom na decydowanie o postaci termu. 
+%
+%W literaturze często spotyka się być może jeszcze prostszy, równoważny wariant typów prostych, w którym wszystkie typy buduje się wyłącznie z jednej stałej typowej. Pod pojęciem typów prostych rozumie się w literaturze także rozszerzenie przedstawionego przez nas systemu dodające do niego konstruktor typu dla par
+
+
+% Ich celem jest zwiększenie ekspresji, np. o odpowiednie konstrukcje dla par%, w których pierwszy element może być innego typu niż drugi. Konstrukcja ta jest bowiem niemożliwa w naszym, elementarnym ujęciu.
 
 % Istotnie, rozważmy następujące kodowanie pary i dwóch projekcji:
 % \begin{align*}
@@ -469,6 +473,4 @@ System typów, który był przedmiotem Rozdziału \ref{sec:simple_types} jest na
 %   \mathrm{fst} &\equiv \lambda p:\sigma\to\sigma.\ p\,(\lambda x:\sigma\, \lambda y:\tau.\ x) \\
 %   \mathrm{snd} &\equiv \lambda p:\tau\to\tau.\ p\,(\lambda x:\sigma\, \lambda y:\tau.\ y) % \end{align*} 
 
-Mają one na ogół szczególny cel praktyczny: na przykład rozszerzenie o typ dla par umożliwiają elegancką prezentację analogii między intuicjonistycznym rachunkiem zdań, typowanym rachunkiem \(\lambda\) i kategoriami kartezjańsko domkniętymi, znanej szerzej jako izomorfizm Currego-Howarda-Lambeka \cite[Rozdział~3.1]{Girard:1989:PT:64805}. Nie wpływa to jednak na samą istotę typowania, która polega na zależności termów od termów. Jak przekonamy się w Rozdziale \ref{sec:system_f}, zależność tę można rozszerzyć pozwalając typom na decydowanie o postaci termu. 
-
-
+%Mają one na ogół szczególny cel praktyczny: na przykład rozszerzenie o typ dla par umożliwiają elegancką prezentację analogii między intuicjonistycznym rachunkiem zdań, typowanym rachunkiem \(\lambda\) i kategoriami kartezjańsko domkniętymi, znanej szerzej jako izomorfizm Currego-Howarda-Lambeka \cite[Rozdział~3.1]{Girard:1989:PT:64805}.
