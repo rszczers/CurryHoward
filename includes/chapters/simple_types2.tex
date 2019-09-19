@@ -59,14 +59,21 @@ Późniejsze litery alfabetu greckiego (\(\sigma,\, \tau,\, \rho,\,\dots\)), by�
 \begin{definicja}\label{def:context_simple}
   \begin{enumerate}[label=(\arabic*)]
   \setlength\itemsep{0em}
-  \item Jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_n:\sigma_n)\) jest kontekstem, to liniowo
-    uporządkowany zbiór \( \mathrm{dom}\, \Gamma = (x_1,\dots,x_n) \) nazywamy
-      \emph{dziedziną} kontekstu \(\Gamma\), zaś zbiór \(\mathrm{rg}\,\Gamma = \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}\) -- \emph{zakresem} kontekstu \(\Gamma\).
+  \item Dla kontekstu \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_n:\sigma_n)\) określamy
+    \begin{align*}
+       \mathrm{dom}\,\Gamma &= \{x\in V\ |\ (x:\sigma) \in \Gamma \},\\
+       \mathrm{rg}\,\Gamma &= \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}.
+    \end{align*}
+      Zbiory \(\mathrm{dom}\,\Gamma\) i \(\mathrm{rg}\,\Gamma\) nazywamy odpowiednio \emph{dziedziną} i \emph{zakresem} kontekstu~\(\Gamma\).
+  % \item Jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_n:\sigma_n)\) jest kontekstem, to liniowo
+  %   uporządkowany zbiór \( \mathrm{dom}\, \Gamma = (x_1,\dots,x_n) \) nazywamy
+  %     \emph{dziedziną} kontekstu \(\Gamma\), zaś zbiór \(\mathrm{rg}\,\Gamma = \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}\) -- \emph{zakresem} kontekstu \(\Gamma\).
       % \begin{align*}
       %   \mathrm{dom}\,\Gamma &= \{M\in\mathbf{\Lambda}\ |\ (x:\sigma) \in \Gamma \},\\
       %   \mathrm{rg}\,\Gamma &= \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}.
       % \end{align*}
-    \item Kontekst \(\Gamma'\) nazywamy \emph{podkontekstem} \(\Gamma\) i piszemy \(\Gamma'\subseteq\Gamma\), jeśli wszystkie deklaracje występujące w \(\Gamma\) występują również w \(\Gamma\) z zachowaniem tego samego porządku; kontekst pusty oznaczać będziemy symbolem \(\emptyset\).
+    \item Powiemy, że konteksty \((\Gamma=(D_1, \preceq_1)\) i \(\Delta=(D_2, \preceq_2\) są \emph{rozłączne}, jeśli \(D_1 \cap D_2=\emptyset\).
+    \item Kontekst \(\Gamma'\) nazywamy \emph{podkontekstem} \(\Gamma\) i piszemy \(\Gamma'\subseteq\Gamma\), jeśli wszystkie deklaracje występujące w \(\Gamma'\) występują również w \(\Gamma\) z zachowaniem tego samego porządku; kontekst pusty oznaczać będziemy symbolem \(\emptyset\).
     \item Kontekst \(\Gamma'\) nazywamy \emph{permutacją} kontekstu \(\Gamma\), jeśli wszystkie deklaracje w \(\Gamma'\) występują w \(\Gamma\) i odwrotnie.
     % \item Dla kontekstów \(\Delta=(D_1, \preceq_1)\) i \(\Gamma=(D_2, \preceq_2)\) \emph{przekrojem} \(\Delta\) i \(\Gamma\) nazywamy kontekst 
     %   \(\Delta \cap \Gamma = (D_1 \cap D_2, \preceq_{12})\), gdzie dla dowolnych \(d_1, d_2\in D_1\cap D_2\)
@@ -82,19 +89,27 @@ Późniejsze litery alfabetu greckiego (\(\sigma,\, \tau,\, \rho,\,\dots\)), by�
       \[
         \Gamma \concat \Gamma' = (x_1:\sigma_1,\,\dots,\,x_k:\sigma_m,\,y_1:\rho_1,\,\dots\,y_n:\rho_n).
       \]
-    \item Jeśli \(\Gamma=(D,\preceq)\) jest kontekstem i \(\Phi\) jest zbiorem \(\lambda\)-zmiennych, wówczas \emph{projekcją} \(\Gamma\) na \(\Phi\) (symbolicznie \(\Gamma \upharpoonright \Phi\)) nazywamy podkontekst \(\Gamma'\) kontekstu \(\Gamma\) taki, że \(\mathrm{dom} \Gamma' = (\mathrm{dom} \Gamma) \cap \Phi\)  
+    \item Jeśli \(\Gamma\) jest kontekstem i \(\Phi\) jest zbiorem \(\lambda\)-zmiennych, wówczas \emph{projekcją} \(\Gamma\) na \(\Phi\) (symbolicznie \(\Gamma \upharpoonright \Phi\)) nazywamy podkontekst \(\Gamma'\) kontekstu \(\Gamma\) taki, że \(\mathrm{dom} \Gamma' = (\mathrm{dom} \Gamma) \cap \Phi\).  
   \end{enumerate}
 \end{definicja}
 \begin{przyklad}
   Niech \(\Gamma\equiv(y:\sigma,\,x_1:\rho_1,\,x_2:\rho_2,\,z:\tau,\,x_3:\rho_3)\). Wówczas:
   \begin{enumerate}[label=(\arabic*)]
     \setlength\itemsep{0em}
-    \item \(\mathrm{dom}\,\Gamma=(y,\,x_1,\,x_2,\,z,\,x_3)\).
+    \item \(\mathrm{dom}\,\Gamma=\{y,\,x_1,\,x_2,\,z,\,x_3\}\).
     \item \(\emptyset \subseteq (x_1:\rho_1,\,z:\tau)\subseteq\Gamma\).
     \item \((x_1:\rho_1,\,x_2:\rho_2,\,x_3:\rho_3,\,y:\sigma,\,z:\tau)\) jest permutacją \(\Gamma\).
     \item \(\Gamma\upharpoonright \{z,\,u,\,x_1\}=(x_1:\rho_1,\,z:\tau).\)
   \end{enumerate}
 \end{przyklad}
+
+\begin{konwencja*}
+  Niech \(\Gamma, \Delta\) będą rozłącznymi kontekstami i \(x:\sigma\) dowolną deklaracją. Wprowadzamy następującą notację:
+  \begin{align*}
+    \Gamma, x:\sigma &\equiv \Gamma \concat (x:\sigma)\\
+    \Gamma, \Delta   &\equiv \Gamma \concat \Delta
+  \end{align*}
+\end{konwencja*}
 
 \subsection{Typowanie}\label{subsec:simple_types_typing}
 Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
@@ -113,7 +128,7 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
         \Hypo{ \Gamma, x:\sigma \vdash M:\tau}
         \Infer1[(abs)]{\Gamma \vdash (\lambda\, x.\, M):\sigma\to\tau}
       \end{prooftree}}.&
-      \end{tabular}
+    \end{tabular}
 \end{center}
 
 \vspace{0.5em}
@@ -132,7 +147,7 @@ W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzaj
       \item Wszystkie pozostałe sądy w \(\mathcal{P}\) są uzyskane ze swoich dzieci za pomocą reguły (app) albo (abs).
   \end{enumerate}
   Jeśli istnieje wyprowadzenie sądu dla \(\Gamma\vdash M:\sigma\), to powiemy, że jest on \emph{wyprowadzalny}. 
-  Jeśli nie będzie to prowadziło do niejednoznaczności, będziemy wówczas pisali \(\Gamma\vdash M:\sigma\).
+  Jeśli nie będzie to prowadziło do niejednoznaczności, będziemy wówczas również pisali \(\Gamma\vdash M:\sigma\).
 %  Drzewo \(\mathcal{P}\) będziemy nazywali \emph{wyprowadzeniem} typu dla \(M\) w kontekście \(\Gamma\) i pisali \(\Gamma \vdash M:\sigma\). %Jeśli wyprowadzalność sądu będzie jednoznacznie wynikała z kontekstu, to będziemy omijać indeks \(\mathbb{T}\) przy symbolu \(\vdash_\mathbb{T}\).
 \end{definicja}
 
@@ -161,29 +176,33 @@ W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzaj
   \Infer1[(abs)]{x:{\tau\to\sigma}, y:{\sigma\to\rho}\vdash \lambda z .\, x(yz):{\sigma\to\rho}}
   \Infer1[(abs)]{x:{\tau\to\rho}\vdash \lambda y z.\,x(yz):{(\sigma\to\tau)\to\sigma\to\rho}}
   \Infer1[(abs)]{\vdash \lambda x y z .\, x(yz):{(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho}}
+\item\label{ex:typing_3}  
+  Nie wszystkie \(\lambda\)-termy są typowalne. Jeśli \(\Gamma\vdash xx:\tau\), to \(\Gamma\vdash x:\sigma\to\tau\) i \(\Gamma\vdash x:\sigma\). Wówczas \(x:\sigma\in\Gamma\) i \(x:\sigma\to\tau\in\Gamma\). Ponieważ wszystkie deklaracje w \(\Gamma\) są różne, to \(\sigma\equiv\sigma\to\tau\), co nie jest możliwe.
 \end{prooftree}
   \end{center}
-\item\label{ex:typing_3}
-  Nie wszystkie \(\lambda\)-termy są typowalne. Niech \(\omega\equiv (\lambda x.\, x x)\) i przypuśćmy, że \(\omega\) ma typ \(\sigma\) w kontekście \(\Gamma\). Zauważmy, że wówczas w \(x:{\sigma\to\sigma}\in\Gamma\). Ponieważ \(\omega\) zawiera w sobie podterm \((xx)\), to w wyprowadzeniu musiał on zostać otrzymany przez zastosowanie reguły (app). Wówczas \(x:\sigma \in \Gamma\)  i \(x:{\sigma\to\sigma} \in \Gamma\), co nie jest możliwe, bo wszystkie deklaracje w \(\Gamma\) muszą mieć różne podmioty.
+% \item\label{ex:typing_3}
+%   Nie wszystkie \(\lambda\)-termy są typowalne. Niech \(\omega\equiv (\lambda x.\, x x)\) i przypuśćmy, że \(\omega\) ma typ \(\sigma\) w kontekście \(\Gamma\). Zauważmy, że wówczas w \(x:{\sigma\to\sigma}\in\Gamma\). Ponieważ \(\omega\) zawiera w sobie podterm \((xx)\), to w wyprowadzeniu musiał on zostać otrzymany przez zastosowanie reguły (app). Wówczas \(x:\sigma \in \Gamma\)  i \(x:{\sigma\to\sigma} \in \Gamma\), co nie jest możliwe, bo wszystkie deklaracje w \(\Gamma\) muszą mieć różne podmioty.
+  
   %Co więcej, można wykazać że typ \((\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\) może mieć tylko i wyłącznie operacja złożenia~\cite{Wadler1989}.
 \end{enumerate}
 %  Zauważmy, że term \(\lambda x^{\tau\to\rho}\lambda y^{\sigma\to\tau}\lambda z^\sigma . x(yz)\) odpowiada operacji złożenia funkcji.
 \end{przyklad}
 
+
 \begin{uwaga*}
-  Notacja dowodowa zaproponowana w Przykładzie \ref{ex:typing} wprowadza wiele redundancji, która utrudnia zorientowanie się w dłuższych wyprowadzeniach, zaś zlinearyzowanie dowodów pozwala na notowanie kolejnych sądów w arbitralnym porządku. Nic nie stoi na przeszkodzie abyśmy ograniczyli się tylko do rozpatrywania wyprowadzeń, w których zależności pomiędzy sądami ustalają ścisły porządek częściowy, tzn. takich, że:
-  \begin{easylist}
-    & żaden sąd nie poprzedza sam siebie (antyzwrotność),
-    & jeśli jeden sąd poprzedza drugi, to drugi nie poprzedza pierwszego (antysymetryczność),
-    & jeśli sąd \(J_k\) poprzedza \(J_l\) i \(J_l\) poprzedza \(J_m\), to \(J_k\) poprzedza \(J_m\) (przechodniość).
-  \end{easylist}
-  Taki charakter dowodów oddaje wariant notacji w postaci drzew wprowadzony przez Pravitza i proponowany w \cite{Hindley:2008:LCI:1388400}. Powtarzanie się kontekstów eliminuje się w niej przez wprowadzanie każdej deklaracji do dowodu przed użyciem i wykreślanie jej po użyciu. W dalszej części pracy będziemy korzystać z analogicznej pod wieloma względami notacji Fitcha (tzw. notacji flagowej). Poniżej pokazujemy wyprowadzenia typu z Przykładu \ref{ex:typing} w tej notacji.
+% Zauważmy, że wyprowadzenia ustalają ścisły porządek częściowy:
+%   \begin{easylist}
+%     & żaden sąd nie poprzedza sam siebie (antyzwrotność),
+%     & jeśli jeden sąd poprzedza drugi, to drugi nie poprzedza pierwszego (antysymetryczność),
+%     & jeśli sąd \(J_k\) poprzedza \(J_l\) i \(J_l\) poprzedza \(J_m\), to \(J_k\) poprzedza \(J_m\) (przechodniość).
+%   \end{easylist}
+  Notacja dowodowa zaproponowana w Przykładzie \ref{ex:typing} utrudnia zorientowanie się w dłuższych wyprowadzeniach przez konieczność wielokrotnego powtarzania kontekstów. Wariant notacji w postaci drzew wprowadzony przez Pravitza i proponowany w \cite{Hindley:2008:LCI:1388400} eliminuje ten problem przez wprowadzanie do wyprowadzenia poszczególnych deklaracji przed użyciem i wykreślanie jej po użyciu. W dalszej części pracy będziemy korzystać z analogicznej pod wieloma względami notacji Fitcha (tzw. notacji flagowej) proponowanej w \cite{nederpelt_geuvers_2014}. Poniżej pokazujemy wyprowadzenia typu z Przykładu \ref{ex:typing} w tej notacji.
   \begin{enumerate}[label=(\alph*)]
    \item
   \begin{equation*}
     \begin{fitch}
       \fh x:\sigma & (var) \\
-      \fa \fh y:\sigma & (var) \\
+      \fa \fh y:\tau & (var) \\
       \fa \lambda y.\,x:\tau\to\sigma & (abs) 1 \\
       \lambda x y.\,x:\sigma\to\tau\to\sigma & (abs) 3
     \end{fitch}
@@ -297,9 +316,9 @@ Przedstawimy teraz szereg lematów ustalających między innymi związki między
   \qed
 \end{dowod}
 
-\begin{uwaga*}
-  Zauważmy, że część \ref{thm:permutation_3} Lematu \ref{thm:permutation_simple} rozluźnia konieczność eliminowania maksymalnej deklaracji z kontekstu przy stosowaniu reguły \emph{abs}. W tekstach wprowadzających typy proste zazwyczaj przez kontekst rozumie się po prostu skończony zbiór wzajemnie różnych deklaracji \cite{Barendregt_1992, Urzyczyn2006, Hindley:2008:LCI:1388400}. Ponieważ branie dowolnej permutacji listy nie wpływa na typowanie, to widzimy, że obydwa znaczenia możemy stosować zamiennie, bowiem jest to nic innego jak traktowanie kontekstu jako zbioru deklaracji. 
-\end{uwaga*}
+% \begin{uwaga*}
+%   Zauważmy, że część \ref{thm:permutation_3} Lematu \ref{thm:permutation_simple} rozluźnia konieczność eliminowania maksymalnej deklaracji z kontekstu przy stosowaniu reguły \emph{abs}. W tekstach wprowadzających typy proste zazwyczaj przez kontekst rozumie się po prostu skończony zbiór wzajemnie różnych deklaracji \cite{Barendregt_1992, Urzyczyn2006, Hindley:2008:LCI:1388400}. Ponieważ branie dowolnej permutacji listy nie wpływa na typowanie, to widzimy, że obydwa znaczenia możemy stosować zamiennie, bowiem jest to nic innego jak traktowanie kontekstu jako zbioru deklaracji. 
+% \end{uwaga*}
 
 \begin{lemat}(O podstawieniu)\label{thm:substitution}
   Załóżmy, że
@@ -427,7 +446,7 @@ sposób.
   Relacja \(\to_\beta\) określona na typowalnych \(\lambda\)-termach  ma własność CR.
 \end{twierdzenie}
 \begin{dowod}
-  Wynika to bezpośrednio z Twierdzenia \ref{thm:cr_untyped} i Lematu \ref{thm:subject_reduction}. \qed
+  Wynika to bezpośrednio z Faktu \ref{thm:cr_untyped} i Lematu \ref{thm:subject_reduction}. \qed
 \end{dowod}
 
 \subimport{includes/chapters/}{polymorphism.tex}
@@ -442,11 +461,14 @@ sposób.
 
 \subimport{includes/chapters/}{to_church_style.tex}
 \subsection{Podsumowanie}
-System typów, który był przedmiotem Rozdziału \ref{sec:simple_types} jest najbardziej elementarnym przypadkiem typowanego rachunku \(\lambda\)\footnote{Patologicznym przypadkiem jest rachunek \(\lambda\) bez typów, jeśli przyjmiemy, że wszystkie wyrażenia mają w nim dokładnie jeden typ. Argument ten często podejmowany jest na rzecz statycznie typowanych języków programowania.}. W literaturze często spotyka się być może jeszcze prostszy, równoważny wariant typów prostych, w którym wszystkie typy buduje się wyłącznie z jednej stałej typowej. Pod pojęciem typów prostych rozumie się także szereg rozszerzeń przedstawionego przez nas systemu.% Ich celem jest zwiększenie ekspresji, np. o odpowiednie konstrukcje dla par%, w których pierwszy element może być innego typu niż drugi. Konstrukcja ta jest bowiem niemożliwa w naszym, elementarnym ujęciu.
+System typów, który był przedmiotem Rozdziału \ref{sec:simple_types} jest najbardziej elementarnym przypadkiem typowanego rachunku \(\lambda\)\footnote{Patologicznym przypadkiem jest rachunek \(\lambda\) bez typów, jeśli przyjmiemy, że wszystkie wyrażenia mają w nim dokładnie jeden typ. Argument ten często podejmowany jest przeciwko dynamicznie typowanym językom programowania.}. W literaturze często spotyka się być może jeszcze prostszy, równoważny wariant typów prostych, w którym wszystkie typy buduje się wyłącznie z jednej stałej typowej. Pod pojęciem typów prostych rozumie się także szereg rozszerzeń przedstawionego przez nas systemu.% Ich celem jest zwiększenie ekspresji, np. o odpowiednie konstrukcje dla par%, w których pierwszy element może być innego typu niż drugi. Konstrukcja ta jest bowiem niemożliwa w naszym, elementarnym ujęciu.
 
 % Istotnie, rozważmy następujące kodowanie pary i dwóch projekcji:
 % \begin{align*}
 %   \mathrm{pair}&\equiv\lambda x:\sigma\, \lambda y:\tau.\ z x y \\
 %   \mathrm{fst} &\equiv \lambda p:\sigma\to\sigma.\ p\,(\lambda x:\sigma\, \lambda y:\tau.\ x) \\
 %   \mathrm{snd} &\equiv \lambda p:\tau\to\tau.\ p\,(\lambda x:\sigma\, \lambda y:\tau.\ y) % \end{align*} 
-Mają one na ogół szczególny cel praktyczny: na przykład rozszerzenie o typ dla par umożliwiają elegancką prezentację analogii między intuicjonistycznym rachunkiem zdań, typowanym rachunkiem \(\lambda\) i kategoriami kartezjańsko domkniętymi, znanej szerzej jako izomorfizm Currego-Howarda-Lambeka \cite[Rozdział 3.1]{Girard:1989:PT:64805}. Nie wpływa to jednak na samą istotę typowania, która polega na zależności termów od termów. Jak przekonamy się w Rozdziale \ref{sec:system_f} zależność tę można rozszerzyć, pozwalając typom na decydowanie o postaci termu. 
+
+Mają one na ogół szczególny cel praktyczny: na przykład rozszerzenie o typ dla par umożliwiają elegancką prezentację analogii między intuicjonistycznym rachunkiem zdań, typowanym rachunkiem \(\lambda\) i kategoriami kartezjańsko domkniętymi, znanej szerzej jako izomorfizm Currego-Howarda-Lambeka \cite[Rozdział~3.1]{Girard:1989:PT:64805}. Nie wpływa to jednak na samą istotę typowania, która polega na zależności termów od termów. Jak przekonamy się w Rozdziale \ref{sec:system_f}, zależność tę można rozszerzyć pozwalając typom na decydowanie o postaci termu. 
+
+

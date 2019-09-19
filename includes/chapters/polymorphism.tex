@@ -1,5 +1,5 @@
 \subsubsection{Uniwersalny polimorfizm}\label{subsec:polymorphism}
-Jak wspominaliśmy, istnieje kilka wariantów wprowadzania typów prostych. Przedstawiony w tym rozdziale rachunek powszechnie nazywany jest \emph{stylem Currego}. Charakteryzuje go interesująca własność: poprawne termy mają jednoznacznie wyznaczony typ z dokładnością do podstawienia. Oznacza to, że zmienne wystepujące w typie każdego poprawnego termu są w istocie kwantyfikowane po zbiorze wszystkich typów prostych. Każdy taki typ nazywamy \emph{typem (uniwersalnie parametrycznie) polimorficznym} zgodnie z klasyfikacją zaproponowaną w \cite{Cardelli1985}.
+Istnieje kilka wariantów wprowadzania typów prostych. Przedstawiony w tym rozdziale rachunek powszechnie nazywany jest \emph{stylem Currego}. Charakteryzuje go interesująca własność: poprawne termy mają jednoznacznie wyznaczony typ z dokładnością do podstawienia. Oznacza to, że zmienne wystepujące w typie każdego poprawnego termu są w istocie kwantyfikowane po zbiorze wszystkich typów prostych. Każdy taki typ nazywamy \emph{typem (uniwersalnie parametrycznie) polimorficznym} zgodnie z klasyfikacją zaproponowaną w \cite{Cardelli1985}.
 
 \begin{definicja}(Podstawienie typu)
 Podstawienie typu \(\tau\) za zmienną typową \(p\) w typie \(\sigma\) nazywamy następującą funkcję :
@@ -12,7 +12,7 @@ Podstawienie typu \(\tau\) za zmienną typową \(p\) w typie \(\sigma\) nazywamy
 \end{definicja}
 
 \begin{lemat}\label{thm:polymorphism}
-  Jeśli \(\Gamma\vdash_\mathbb{T} M:\sigma\), to \(\Gamma [p/\tau]\vdash_\mathbb{T} M:\sigma[p/\tau]\) dla dowolnego \(\tau\in\mathbb{T}\) i zmiennej \(p\in U\).
+  Jeśli \(\Gamma\vdash M:\sigma\), to \(\Gamma [p/\tau]\vdash M:\sigma[p/\tau]\) dla dowolnego \(\tau\in\mathbb{T}\) i zmiennej \(p\in U\).
 \end{lemat}
 \begin{dowod}
   Dowód przebiega przez indukcję względem długości wyprowadzenia \(\Gamma\vdash M:\sigma\). Szczegóły pomijamy. \qed

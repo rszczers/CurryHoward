@@ -6,13 +6,13 @@ Przypisanie typu \(\lambda\)-termowi rozpoczynamy zawsze od określenia typów d
   \item Inny sposób polega na nie ustalaniu typów zmiennych. Składnia \(\lambda\)-termów nie ulega wówczas zmianie, zaś o typie rozstrzyga algorytm rekonstrukcji typu. Typy w tym stylu były przedmotem Rozdziału \ref{sec:simple_types}. W literaturze powszechnie nazywa się to podejście \emph{stylem Currego} albo typowaniem \emph{implicite}, zaś systemy w takim stylu określa się systemami \emph{przypisywania typu} (ang. \emph{type assignment systems}).
 \end{enumerate}
 
-Obydwa podejścia dają w rezultacie takie same systemy typów \cite[Rozdział 3.4]{Urzyczyn2006}.  % Systemy w stylu Currego odpowiadają językom programowania funkcyjnego takim jak ML, Clean czy Haskell. Programując w takich językach rolę wyprowadzania typu w istocie przejmuje kompilator, zaś deklaracje typów mają tylko charakter dokumentacji.  
-Rozwiązaniem kompromisowym jest tzw. typowanie w \emph{stylu de Brujina}\footnote{W \cite{Urzyczyn2006} nazywa się to podejście \emph{nieortodoksyjnym stylem Churcha}} \cite[1A.33]{barendregt_dekkers_statman_2013} w którym nie ustala się typu wszystkich zmiennych, jednak adnotacje typowe są częścią składni (tak jak w stylu Churcha) i zależą od ustalonego kontekstu. 
+Obydwa podejścia dają w rezultacie podobne systemy typów \cite[Rozdział 3.4]{Urzyczyn2006}.  % Systemy w stylu Currego odpowiadają językom programowania funkcyjnego takim jak ML, Clean czy Haskell. Programując w takich językach rolę wyprowadzania typu w istocie przejmuje kompilator, zaś deklaracje typów mają tylko charakter dokumentacji.  
+Rozwiązaniem kompromisowym jest tzw. typowanie w \emph{stylu de Brujina}\footnote{W \cite{Urzyczyn2006} nazywa się to podejście \emph{nieortodoksyjnym stylem Churcha}} \cite[1A.33]{barendregt_dekkers_statman_2013} w którym nie ustala się typu wszystkich zmiennych, jednak adnotacje typowe są częścią składni (tak jak w stylu Churcha) i zależą od ustalonego kontekstu (jak w stylu Currego). 
 
-Zaprezentujemy teraz alternatywną składnię oraz reguły wyprowadzania typów dla systemu typów prostych w stylu Churcha. Wszystkie określenia oraz twierdzenia występujące dotychczas w Rozdziale \ref{sec:simple_types} mają swoje odpowiedniki dla systemu w stylu Churcha \cite[Rozdział 2.10]{nederpelt_geuvers_2014}. Wyjątek stanowi Lemat \ref{thm:polymorphism}, który jest zastąpiony w tym systemie Lematem \ref{thm:type_uniqueness} o jednoznaczności typu.
+Zaprezentujemy teraz alternatywną składnię oraz reguły wyprowadzania typów dla systemu typów prostych w stylu Churcha. Wszystkie określenia oraz twierdzenia występujące dotychczas w Rozdziale \ref{sec:simple_types} mają swoje odpowiedniki dla systemu w stylu Churcha (szczegóły w \cite[Rozdział 2.10]{nederpelt_geuvers_2014}). Wyjątek stanowi Lemat \ref{thm:polymorphism}, który jest zastąpiony w tym systemie Lematem \ref{thm:type_uniqueness} o jednoznaczności typu.
 
 \subsubsection{Składnia}
-Zbiór typów \(\mathbb{T}\) definiujemy w myśl Definicji \ref{def:typy-proste}. Niech \(U,\,V\) będą przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych, odpowiednio: zmiennych typowych i \(\lambda\)-zmiennych. Celem zdefiniowania \(\lambda\)-termów w stylu Churcha przeprowadzamy konstrukcję analogiczną do tej przedstawionej w Rozdziale \ref{sec:untyped_lambda}: określamy zbiór pretermów \(\mathbb{\tilde\Lambda}_\mathbb{T}\), a następnie definiujemy \(\lambda\)-termy jako klasy abstrakcji \(\alpha\)-konwersji.
+Zbiór typów \(\mathbb{T}\) definiujemy w myśl Definicji \ref{def:typy-proste}. Niech \(U,\,V\) będą przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych, odpowiednio: zmiennych typowych i \(\lambda\)-zmiennych. Celem zdefiniowania \(\lambda\)-termów w stylu Churcha przeprowadzamy konstrukcję analogiczną do tej przedstawionej w Rozdziale \ref{sec:untyped_lambda}: określamy zbiór pretermów \(\mathbf{\tilde\Lambda}_\mathbb{T}\), a następnie definiujemy \(\lambda\)-termy jako klasy abstrakcji \(\alpha\)-konwersji.
 \begin{align*}
   \mathbb{T}\ &\leftarrow \ U\ |\ (\mathbb{T}\to\mathbb{T})\\
   \mathbf{\tilde\Lambda}_\mathbb{T}\ &\leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}_\mathbb{T}\,\mathbf{\tilde\Lambda}_\mathbb{T}) \ |\ (\lambda V:\mathbb{T}.\, \mathbf{\tilde\Lambda}_\mathbb{T})
@@ -20,8 +20,8 @@ Zbiór typów \(\mathbb{T}\) definiujemy w myśl Definicji \ref{def:typy-proste}
 
 Zauważmy, że \(\lambda\)-termy w stylu Churcha różnią się od stylu Currego tylko w wypadku \(\lambda\)-abstrakcji.  Z tą jedną modyfikacją definicje zbioru zmiennych wolnych, podstawienia, \(\beta\)- i \(\eta\)-redukcji, są analogiczne do tych z Rozdziału \ref{sec:untyped_lambda}, zaś pojęcia kontekstu i wyprowadzenia sądu przyjmujemy z Podrozdziału \ref{subsec:simple_types_typing}.
 
-\subsubsection{Typowanie}
-
+\subsubsection{Wyprowadzanie typu}
+Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 \begin{center}
     \begin{tabular}{ ccc}
       \(\Gamma \vdash x:\sigma\ \text{(var)}\), & jeśli \(x:\sigma\in\Gamma\),
@@ -41,12 +41,34 @@ Zauważmy, że \(\lambda\)-termy w stylu Churcha różnią się od stylu Currego
 
 Zauważmy, że mając zadany kontekst, typ każdego poprawnego \(\lambda\)-termu jest jednoznacznie określony. Jest to istotna różnica, którą wprowadza styl Churcha. W~systemach w stylu Currego termy poprawne są zamknięte ze względu na podstawienie typu. Własność, którą wyraża Lemat \ref{thm:type_uniqueness} zachodzi w nich z dokładnością do podstawienia. 
 
-\begin{lemat}\label{thm:type_uniqueness}(O jednoznaczności)
-  Jeśli \(\Gamma\vdash M:\sigma\) i \(M\to^{*}_\beta N\), to \(\Gamma\vdash N:\sigma\).
+\begin{lemat}(O jednoznaczności typu)\label{thm:type_uniqueness}
+  Jeśli \(\Gamma\vdash M:\sigma\) i \(\Gamma\vdash M:\tau\), to \(\sigma\equiv \tau\).
 \end{lemat}
 \begin{dowod}
-  Dowód przebiega przez indukcję względem długości wyprowadzenia \(\Gamma\vdash M:\sigma\). Szczegóły pomijamy.\qed
+  Dowód przeprowadzamy indukcją strukturalną względem \(M\). Szczegóły pomijamy.\qed
 \end{dowod}
+
+\begin{twierdzenie}\label{thm:untypable_selfapp}(Nietypowalność samoaplikacji)
+  \(\lambda\)-termy postaci \(MM\) dla \(M\in\mathbb{\lambda}\) nie są typowalne.
+\end{twierdzenie}
+\begin{dowod}
+  Przypuśćmy, że istnieje kontekst \(\Gamma\) i typ \(\tau\) taki, że \(\Gamma\vdash MM:\sigma\).
+  Wówczas z Lematu \ref{thm:generation}\ref{thm:generation_2}
+  \(\Gamma\vdash M:\sigma\to\tau\) i \(\Gamma\vdash M:\sigma\) dla pewnego \(\sigma\in\mathbb{T}\).
+  Z Twierdzenia \ref{thm:type_uniqueness} mamy natomiast, że \(\sigma\to\tau\equiv \sigma\),
+  co jest niemożliwe.\qed
+\end{dowod}
+
+\begin{uwaga*}
+  Ponieważ wszystkie \(\lambda\)-termy samoreplikujące się przy \(\beta\)-redukcji nie są typowalne (Twierdzenie \ref{thm:untypable_selfapp}), nie jest możliwe  w rachunku \(\lambda\) z typami prostymi reprezentowanie rekurencyjnych typów ADT w myśl Podrozdziału \ref{sec:adt_recurrency}. Dodanie typów prostych do rachunku \(\lambda\) bez typów znacznie zmniejsza ekspresywność systemu, uniemożliwiając wyrażenie operacji rekursji prostej. Okazuje się, że stosujac reprezentację Churcha dla liczb naturalnych i utożsamiajac \(\lambda\)-termy za pomocą \(\beta\)-konwersji, rachunek \(\lambda\) z typami prostymi równoważny jest zbiorowi \emph{wielomianów rozszerzonych} \cite{DBLP:journals/corr/abs-cs-0701022}. Liczebnikom Churcha odpowiada wówczas typ postaci \((\sigma\to\sigma)\to\sigma\to\sigma\) i możliwe jest określenie na nich dodawania i mnożenia.
+\end{uwaga*}
+
+% \begin{lemat}\label{thm:type_uniqueness}(O jednoznaczności)
+%   Jeśli \(\Gamma\vdash M:\sigma\) i \(M\to^{*}_\beta N\), to \(\Gamma\vdash N:\sigma\).
+% \end{lemat}
+% \begin{dowod}
+%   Dowód przebiega przez indukcję względem długości wyprowadzenia \(\Gamma\vdash M:\sigma\). Szczegóły pomijamy.\qed
+% \end{dowod}
 
 \begin{przyklad}\label{ex:church_identity}
 %    \begin{enumerate}[label=(\alph*)]

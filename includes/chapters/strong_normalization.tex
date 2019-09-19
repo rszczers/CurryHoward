@@ -1,8 +1,6 @@
 \subsubsection{Silna normalizacja}\label{subsec:strong_normalization}
 Pokażemy, że wszystkie typowalne \(\lambda\)-termy redukują się do postaci \(\beta\)-normalnej przez skończony ciąg \(\beta\)-redukcji. Oznacza to, że nie ma możliwości otrzymania nieskończonego ciągu \(\beta\)-redukcji, tak jak to miało miejsce w Przykładzie \ref{ex:beta_reduction} \ref{ex:Y} \ref{ex:Delta} i to bez względu na przyjętą strategię redukcji. 
 
-Ponieważ wszystkie \(\lambda\)-termy samoreplikujące się przy \(\beta\)-redukcji nie są typowalne (Przykład \ref{ex:typing}\ref{ex:typing_3}), nie jest możliwe  w rachunku \(\lambda\) z typami prostymi reprezentowanie rekurencyjnych typów ADT w myśl Podrozdziału \ref{sec:adt_recurrency}. Wynika to z faktu, że dodanie typów prostych do rachunku \(\lambda\) bez typów znacznie zmniejsza ekspresywność systemu, uniemożliwiając wyrażenie operacji rekursji prostej. Okazuje się, że stosujac reprezentację Churcha dla liczb naturalnych i utożsamiajac \(\lambda\)-termy za pomocą \(\beta\)-konwersji, rachunek \(\lambda\) z typami prostymi równoważny jest zbiorowi \emph{wielomianów rozszerzonych} \cite{DBLP:journals/corr/abs-cs-0701022}. Liczebnikom Churcha odpowiada wówczas typ postaci \((\sigma\to\sigma)\to\sigma\to\sigma\) i możliwe jest określenie na nich dodawania i mnożenia.
-
 Ponieważ wszystkie ciągi redukcji są w tym systemie skończone, to relacja \(\beta\)-konwersji jest rozstrzygalna, wystarczy bowiem sprowadzić jej argumenty do postaci normalnej\footnote{Rodzi to jednak nietrywialne problemy natury złożonościowej \cite[Rozdział 3.7]{Urzyczyn2006}.}. Opracowany tutaj dowód pochodzi z \cite[Dodatek A3]{Hindley:2008:LCI:1388400}. Polega on na:
 \begin{enumerate}
   \setlength\itemsep{0em}
@@ -13,17 +11,16 @@ Ponieważ wszystkie ciągi redukcji są w tym systemie skończone, to relacja \(
 Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} oryginalnie przypisywane W. Taitowi \cite{Tait67}, z odpowiednimi zmianami stosuje się w dowodach własności silnej normalizacji dla innych systemów typów \cite[Podrozdział 11.5]{Urzyczyn2006}\cite[Rozdział 6]{Girard:1989:PT:64805}.
 
 \begin{definicja}(Termy redukowalne)
-  Niech \(\Gamma\vdash_\mathbb{T} M:\sigma\). Powiemy, że \(M\) jest \emph{redukowalny} (także \emph{silnie obliczalny}), jeśli spełnia poniższe warunki:
+  Niech \(\Gamma\vdash M:\sigma\). Powiemy, że \(M\) jest \emph{redukowalny} (także \emph{silnie obliczalny}), jeśli spełnia poniższe warunki:
   \begin{enumerate}[label=(R\arabic*), ref=(R\arabic*)]
     \item Jesli \(\sigma\) jest zmienną typową, to \(M\) jest silnie normalizowalny. Określamy:
       \[
         \llbracket \sigma \rrbracket = \mathrm{SN}.
       \]
-    \item Jesli \(\sigma\) jest typem funkcyjnym postaci \(\sigma\equiv \rho\to\tau\), to dla wszystkich termów redukowalnych \(N\) takich, że \(\Gamma'\vdash_\mathbb{T}MN:\tau\), \(MN\) jest redukowalny. Określamy:
+    \item Jesli \(\sigma\) jest typem funkcyjnym postaci \(\sigma\equiv \rho\to\tau\), to dla wszystkich termów redukowalnych \(N\) takich, że \(\Gamma'\vdash MN:\tau\), \(MN\) jest redukowalny. Określamy:
       \[
         \llbracket \rho \to \tau\rrbracket = \{M\ |\ \forall N (N\in\llbracket \rho \rrbracket)\implies MN\in\llbracket \tau \rrbracket\}.
       \]
-
   \end{enumerate}
 \end{definicja}
 
@@ -109,13 +106,13 @@ Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} orygi
 \end{dowod}
 
 \begin{definicja}
-  Powiemy, że kontekst \(\Gamma=\{x_1:\sigma_1,\,x_2:\sigma_2,\dots ,\,x_n:\sigma_n\}\) \emph{spełnia} stwierdzenie \(M:\sigma\) i będziemy pisali \(\Gamma\models M:\sigma\), jeśli dla dowolnych \(N_1\in\llbracket \sigma_1 \rrbracket\), \(N_2\in\llbracket \sigma_2 \rrbracket\), \(\dots\), \(N_n\in\llbracket \sigma_n \rrbracket\) mamy, że:
+  Powiemy, że kontekst \(\Gamma=(x_1:\sigma_1,\,x_2:\sigma_2,\dots ,\,x_n:\sigma_n)\) \emph{spełnia} stwierdzenie \(M:\sigma\) i będziemy pisali \(\Gamma\models M:\sigma\), jeśli dla dowolnych \(N_1\in\llbracket \sigma_1 \rrbracket\), \(N_2\in\llbracket \sigma_2 \rrbracket\), \(\dots\), \(N_n\in\llbracket \sigma_n \rrbracket\) mamy, że:
   \[
     M[x_1/N_1,\,x_2/N_2,\,\dots,\,x_n/N_n]\in\llbracket \tau \rrbracket.
   \]
 \end{definicja}
 \begin{lemat}\label{thm:o_poprawnosci}
-  Jeśli \(\Gamma\vdash_{\mathbb{T}}M:\tau\), to \(\Gamma\models M:\tau\).
+  Jeśli \(\Gamma\vdash M:\tau\), to \(\Gamma\models M:\tau\).
 \end{lemat}
 \begin{dowod}
   Dowód będzie przebiegał przez indukcję względem wyprowadzenia \(\Gamma\vdash M:\tau\). Niech \(\Gamma=(x_1:\tau_1,\,x_2:\tau_2,\,\dots,\,x_n:\tau_n)\) będzie kontekstem dla którego istnieje wyprowadzenie \(J:\:\Gamma\vdash M:\tau\). Wybierzmy \(N_1\in\llbracket\tau_1 \rrbracket,\,N_2\in\llbracket\tau_2\rrbracket,\,\dots,\,N_n\in\llbracket\tau_n\rrbracket\). Rozważmy następujące przypadki:
@@ -167,10 +164,10 @@ Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} orygi
   \qed
 \end{dowod}
 \begin{twierdzenie}(O silnej normalizacji)
-  Jeżeli \(\Gamma\vdash_\mathbb{T}M:\tau\), to \(M\in\mathrm{SN_\beta}\).
+  Jeżeli \(\Gamma\vdash M:\tau\), to \(M\in\mathrm{SN_\beta}\).
 \end{twierdzenie}
 \begin{dowod}
-  Na podstawie Lematu \ref{thm:o_poprawnosci}, jeśli \(\Gamma\vdash_\mathbb{T} M:\tau\), to \(M\in\llbracket \tau \llbracket\). Stosując Lemat \ref{thm:sn_lemat1} otrzymujemy tezę. \qed
+  Na podstawie Lematu \ref{thm:o_poprawnosci}, jeśli \(\Gamma\vdash M:\tau\), to \(M\in\llbracket \tau \llbracket\). Stosując Lemat \ref{thm:sn_lemat1} otrzymujemy tezę. \qed
 \end{dowod}
 
 Natychmiast widzimy, że własność silnej normalizacji pociąga za sobą własność słabej normalizacji, dlatego pomijamy dowód tej drugiej.
