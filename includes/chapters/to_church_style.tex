@@ -12,13 +12,13 @@ Rozwiązaniem kompromisowym jest tzw. typowanie w \emph{stylu de Brujina}\footno
 Zaprezentujemy teraz alternatywną składnię oraz reguły wyprowadzania typów dla systemu typów prostych w stylu Churcha. Wszystkie określenia oraz twierdzenia występujące dotychczas w Rozdziale \ref{sec:simple_types} mają swoje odpowiedniki dla systemu w stylu Churcha \cite[Rozdział 2.10]{nederpelt_geuvers_2014}. Wyjątek stanowi Lemat \ref{thm:polymorphism}, który jest zastąpiony w tym systemie Lematem \ref{thm:type_uniqueness} o jednoznaczności typu.
 
 \subsubsection{Składnia}
-Zbiór typów \(\mathbb{T}\) definiujemy w myśl Definicji \ref{def:typy-proste}. Niech \(U,\,V\) będą przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych, odpowiednio: zmiennych typowych i (\(\lambda\)-zmiennych). Celem zdefiniowania \(\lambda\)-termów w stylu Churcha przeprowadzamy konstrukcję analogiczną do tej przedstawionej w Rozdziale \ref{sec:untyped_lambda}: określamy zbiór pretermów \(\mathbb{\tilde\Lambda}_\mathbb{T}\), a następnie definiujemy \(\lambda\)-termy jako klasy abstrakcji \(\alpha\)-konwersji.
+Zbiór typów \(\mathbb{T}\) definiujemy w myśl Definicji \ref{def:typy-proste}. Niech \(U,\,V\) będą przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych, odpowiednio: zmiennych typowych i \(\lambda\)-zmiennych. Celem zdefiniowania \(\lambda\)-termów w stylu Churcha przeprowadzamy konstrukcję analogiczną do tej przedstawionej w Rozdziale \ref{sec:untyped_lambda}: określamy zbiór pretermów \(\mathbb{\tilde\Lambda}_\mathbb{T}\), a następnie definiujemy \(\lambda\)-termy jako klasy abstrakcji \(\alpha\)-konwersji.
 \begin{align*}
   \mathbb{T}\ &\leftarrow \ U\ |\ (\mathbb{T}\to\mathbb{T})\\
   \mathbf{\tilde\Lambda}_\mathbb{T}\ &\leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}_\mathbb{T}\,\mathbf{\tilde\Lambda}_\mathbb{T}) \ |\ (\lambda V:\mathbb{T}.\, \mathbf{\tilde\Lambda}_\mathbb{T})
 \end{align*}
 
-Zauważmy, że \(\lambda\)-termy w stylu Churcha różnią się od stylu Currego tylko w wypadku \(\lambda\)-abstrakcji.  Z tą jedną modyfikacją definicje zbioru zmiennych wolnych, podstawienia, \(\beta\)- i \(\eta\)-redukcji, kontekstu i wyprowadzenia są analogiczne do tych z Rozdziałów \ref{sec:untyped_lambda} i \ref{sec:simple_types}.
+Zauważmy, że \(\lambda\)-termy w stylu Churcha różnią się od stylu Currego tylko w wypadku \(\lambda\)-abstrakcji.  Z tą jedną modyfikacją definicje zbioru zmiennych wolnych, podstawienia, \(\beta\)- i \(\eta\)-redukcji, są analogiczne do tych z Rozdziału \ref{sec:untyped_lambda}, zaś pojęcia kontekstu i wyprowadzenia sądu przyjmujemy z Podrozdziału \ref{subsec:simple_types_typing}.
 
 \subsubsection{Typowanie}
 
@@ -42,7 +42,7 @@ Zauważmy, że \(\lambda\)-termy w stylu Churcha różnią się od stylu Currego
 Zauważmy, że mając zadany kontekst, typ każdego poprawnego \(\lambda\)-termu jest jednoznacznie określony. Jest to istotna różnica, którą wprowadza styl Churcha. W~systemach w stylu Currego termy poprawne są zamknięte ze względu na podstawienie typu. Własność, którą wyraża Lemat \ref{thm:type_uniqueness} zachodzi w nich z dokładnością do podstawienia. 
 
 \begin{lemat}\label{thm:type_uniqueness}(O jednoznaczności)
-  Jeśli \(\Gamma\vdash M:\sigma\) i \(M\to^{*}_\beta\), to \(\Gamma\vdash N:\sigma\).
+  Jeśli \(\Gamma\vdash M:\sigma\) i \(M\to^{*}_\beta N\), to \(\Gamma\vdash N:\sigma\).
 \end{lemat}
 \begin{dowod}
   Dowód przebiega przez indukcję względem długości wyprowadzenia \(\Gamma\vdash M:\sigma\). Szczegóły pomijamy.\qed

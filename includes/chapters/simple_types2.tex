@@ -11,21 +11,21 @@ Niech \(U\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowyc
 \end{enumerate}
 \end{definicja}
 
-Zmienne typowe nazywa się w literaturze niekiedy \emph{stałymi typowymi}\footnote{Ta raczej nieszczęśliwa konwencja podkreśla fakt, że abstrakcja nie może odbywać się po zmiennych typowych.}. Typy proste zbudowane tylko wedle reguły \ref{def:t-1} nazywamy typami \emph{atomowymi}, zaś wyrażenia zbudowe wedle reguły \ref{def:t-2} -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbb{T}\). Definicję \ref{def:typy-proste} można równoznacznie wyrazić przy pomocy notacji Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać:
+Zmienne typowe nazywa się w literaturze niekiedy \emph{stałymi typowymi}\footnote{Podkreśla się w ten sposób ograniczenie typów prostych: abstrakcja po zmiennych typowych jest w tym systemie niemożliwa.}. Typy proste zbudowane tylko wedle reguły \ref{def:t-1} nazywamy typami \emph{atomowymi}, zaś wyrażenia zbudowane wedle reguły \ref{def:t-2} -- typami \emph{funkcyjnymi}. Zbiór typów prostych określony w myśl powyższej definicji będziemy oznaczali przez \(\mathbb{T}\). Definicję \ref{def:typy-proste} można równoznacznie wyrazić przy pomocy notacji Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać:
 \begin{align*}
   \mathbb{T}\ \leftarrow \ U\ |\ (\mathbb{T}\to\mathbb{T})
 \end{align*}
 
 Późniejsze litery alfabetu greckiego (\(\sigma,\, \tau,\, \rho,\,\dots\)), być może z indeksami, będą służyły nam za zmienne metasyntaktyczne do oznaczania typów prostych. Dla lepszej czytelności będziemy pomijali najbardziej zewnętrzne nawiasy. Konstruktor typu \(\to\) wiąże prawostronnie; oznacza to, że typy \(\sigma\to\tau\to\rho\) oraz \(\sigma\to(\tau\to\rho)\) będziemy uznawali za tożsame.
 
-Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} mają strukturę drzewa binarnego. Wysokość takiego drzewa będziemy nazywali \emph{stopniem} typu. 
-\begin{definicja}\label{def:stopien-typu}(Stopień typu)
-  Stopniem typu nazywamy następująco określoną funkcję \(\delta :\: \mathbb{T} \to \mathbb{N}\)
-  \begin{align*}
-    \delta(p) &= 0,\ \text{gdzie \(p\) jest typem atomowym},\\
-    \delta(\sigma\to\sigma)&=1 + \max\left(\delta(\sigma),\ \delta(\sigma)\right).
-  \end{align*}
-\end{definicja}
+% Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} mają strukturę drzewa binarnego. Wysokość takiego drzewa będziemy nazywali \emph{stopniem} typu. 
+% \begin{definicja}\label{def:stopien-typu}(Stopień typu)
+%   Stopniem typu nazywamy następująco określoną funkcję \(\delta :\: \mathbb{T} \to \mathbb{N}\)
+%   \begin{align*}
+%     \delta(p) &= 0,\ \text{gdzie \(p\) jest typem atomowym},\\
+%     \delta(\sigma\to\sigma)&=1 + \max\left(\delta(\sigma),\ \delta(\sigma)\right).
+%   \end{align*}
+% \end{definicja}
 
 % \subsection{Pseudotermy}
 %   Niech \(\mathrm{V}\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\ \) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}.
@@ -49,30 +49,40 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
 \begin{definicja}(Stwierdzenie, deklaracja, kontekst, sąd)\label{def:statement_simple}
   \begin{enumerate}[label=(\arabic*)]
   \setlength\itemsep{0em}
-  \item \emph{Stwierdzeniem} (ang. \emph{statement}) nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\mathbf{\Lambda}\) i \(\sigma\in\mathbb{T}\). W stwierdzeniu \(M:\sigma\) \(\lambda\)-term \(M\) nazwamy \emph{podmiotem}  (ang. \emph{subject}), zaś \(\sigma\) -- \emph{predykatem}\footnote{Nazwy te historycznie sięgają prac nad semantyką formalną języków naturalnych R. Montague'a.}.
-  \item \emph{Deklaracją} (ang. \emph{declaration}) nazywamy każde stwierdzenie w którym podmot jest zmienną termową.
-  \item \emph{Kontekstem} (ang. \emph{context}) nazywamy skończony liniowo uporządkowany zbiór (\emph{listę}) deklaracji, w którym wszystkie podmioty są wzajemnie różne.
-  \item \emph{Sądem} (ang. \emph{judgement}) nazywamy każdy napis postaci \(\Gamma\vdash M:\sigma\), gdzie \(\Gamma\) jest kontekstem, zaś \(M:\sigma\) -- stwierdzeniem.  
+  \item \emph{Stwierdzeniem} (ang. \emph{statement}) nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\mathbf{\Lambda}\) i \(\sigma\in\mathbb{T}\). W stwierdzeniu \(M:\sigma\) \(\lambda\)-term \(M\) nazwamy \emph{podmiotem}  (ang. \emph{subject}), zaś \(\sigma\) -- \emph{predykatem}\footnote{Nazwy te historycznie sięgają prac nad semantyką formalną języków naturalnych R. Montague.}.
+  \item \emph{Deklaracją} (ang. \emph{declaration}) nazywamy każde stwierdzenie w którym podmiot jest zmienną termową.
+  \item \emph{Kontekstem} (ang. \emph{context}) nazywamy skończony liniowo uporządkowany zbiór (\emph{listę}) deklaracji \((\Gamma, \preceq)\), w którym wszystkie podmioty są wzajemnie różne.
+  \item \emph{Sądem} (ang. \emph{judgement}) nazywamy każdy napis postaci \(\Gamma\vdash M:\sigma\), gdzie \(\Gamma\) jest kontekstem, zaś \(M:\sigma\) -- stwierdzeniem; w przypadku, gdy \(\Gamma = \emptyset\), piszemy \(\vdash M:\sigma\).  
   \end{enumerate}
 \end{definicja}
 
 \begin{definicja}\label{def:context_simple}
   \begin{enumerate}[label=(\arabic*)]
   \setlength\itemsep{0em}
-  \item Jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_n:\sigma_n)\), to liniowo
+  \item Jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_n:\sigma_n)\) jest kontekstem, to liniowo
     uporządkowany zbiór \( \mathrm{dom}\, \Gamma = (x_1,\dots,x_n) \) nazywamy
-      \emph{dziedziną} kontekstu \(\Gamma\), zaś \( \mathrm{rg},\Gamma\) -- zakresem kontekstu \(\Gamma\) oraz
-      \begin{align*}
-        \mathrm{dom}\,\Gamma &= \{M\in\mathbf{\Lambda}\ |\ (x:\sigma) \in \Gamma \},\\
-        \mathrm{rg}\,\Gamma &= \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}.
-      \end{align*}
-    \item Kontekst \(\Gamma'\) nazywamy \emph{podkontekstem} \(\Gamma\) i piszemy \(\Gamma'\subseteq\Gamma\), jeśli wszystkie deklaracje występujące w \(\Gamma\) występują również w \(\Gamma\) z zachowaniem tego samego porządku.
+      \emph{dziedziną} kontekstu \(\Gamma\), zaś zbiór \(\mathrm{rg}\,\Gamma = \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}\) -- \emph{zakresem} kontekstu \(\Gamma\).
+      % \begin{align*}
+      %   \mathrm{dom}\,\Gamma &= \{M\in\mathbf{\Lambda}\ |\ (x:\sigma) \in \Gamma \},\\
+      %   \mathrm{rg}\,\Gamma &= \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}.
+      % \end{align*}
+    \item Kontekst \(\Gamma'\) nazywamy \emph{podkontekstem} \(\Gamma\) i piszemy \(\Gamma'\subseteq\Gamma\), jeśli wszystkie deklaracje występujące w \(\Gamma\) występują również w \(\Gamma\) z zachowaniem tego samego porządku; kontekst pusty oznaczać będziemy symbolem \(\emptyset\).
     \item Kontekst \(\Gamma'\) nazywamy \emph{permutacją} kontekstu \(\Gamma\), jeśli wszystkie deklaracje w \(\Gamma'\) występują w \(\Gamma\) i odwrotnie.
-    \item Jeśli \(\Gamma\) jest kontekstem i \(\Phi\) jest zbiorem \(\lambda\)-zmiennych, wówczas \emph{projekcją} \(\Gamma\) na \(\Phi\) (symbolicznie \(\Gamma \upharpoonright \Phi\)) nazywamy podkontekst \(\Gamma'\) kontekstu \(\Gamma\) taki, że \(\mathrm{dom} \Gamma' = (\mathrm{dom} \Gamma) \cap \Phi\)  
-    \item Dla kontekstów \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_k:\sigma_m)\) i \(\Gamma'=(y_1:\rho_1,\,\dots\,y_n:\rho_n)\) takich, że \(\mathrm{dom}(\Gamma)\cap\mathrm{dom}(\Gamma')=\emptyset\) \emph{konkatenacją} \(\Gamma\) i \(\Gamma'\) nazywamy kontekst
+    % \item Dla kontekstów \(\Delta=(D_1, \preceq_1)\) i \(\Gamma=(D_2, \preceq_2)\) \emph{przekrojem} \(\Delta\) i \(\Gamma\) nazywamy kontekst 
+    %   \(\Delta \cap \Gamma = (D_1 \cap D_2, \preceq_{12})\), gdzie dla dowolnych \(d_1, d_2\in D_1\cap D_2\)
+ % \[d_1\preceq_{12} d_2 \iff d_1 \preceq_1 d_2 \land d_1 \preceq_2 d_2.\]
+    \item Jeśli \(\Gamma=(D_1,\preceq_1)\) i \(\Delta=(D_2, \preceq_2)\) są kontekstami takimi, że \(D_1 \cap D_2=\emptyset\), to \emph{konkatenacją} \(\Gamma\) i \(\Gamma'\) nazywamy kontekst \(\Gamma \concat \Gamma' = (D_1\cup D_2, \preceq_{12})\), gdzie \(d_1 \preceq_{12} d_2\) zachodzi wtedy i tylko wtedy, gdy:
+      \begin{enumerate}
+      \setlength\itemsep{0em}
+        \item dla \(d_1, d_2\in D_1\) zachodzi \(d_1\preceq d_2\) lub
+        \item dla \(d_1, d_2\in D_2\) zachodzi \(d_1\preceq d_2\) lub
+        \item \(d_1 \in D_1\) i \(d_2 \in D_2\).
+      \end{enumerate}
+      Przy powyższych ustaleniach, jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_k:\sigma_m)\) oraz \(\Delta=(y_1:\rho_1,\,\dots\,y_n:\rho_n)\), to mamy 
       \[
         \Gamma \concat \Gamma' = (x_1:\sigma_1,\,\dots,\,x_k:\sigma_m,\,y_1:\rho_1,\,\dots\,y_n:\rho_n).
       \]
+    \item Jeśli \(\Gamma=(D,\preceq)\) jest kontekstem i \(\Phi\) jest zbiorem \(\lambda\)-zmiennych, wówczas \emph{projekcją} \(\Gamma\) na \(\Phi\) (symbolicznie \(\Gamma \upharpoonright \Phi\)) nazywamy podkontekst \(\Gamma'\) kontekstu \(\Gamma\) taki, że \(\mathrm{dom} \Gamma' = (\mathrm{dom} \Gamma) \cap \Phi\)  
   \end{enumerate}
 \end{definicja}
 \begin{przyklad}
@@ -80,13 +90,13 @@ Zauważmy, że obiekty skonstruowane w myśl Definicji \ref{def:typy-proste} maj
   \begin{enumerate}[label=(\arabic*)]
     \setlength\itemsep{0em}
     \item \(\mathrm{dom}\,\Gamma=(y,\,x_1,\,x_2,\,z,\,x_3)\).
-    \item \(\emptyset \subseteq (x_1:\rho_1,\,z:\tau)\subseteq\Gamma\)
+    \item \(\emptyset \subseteq (x_1:\rho_1,\,z:\tau)\subseteq\Gamma\).
     \item \((x_1:\rho_1,\,x_2:\rho_2,\,x_3:\rho_3,\,y:\sigma,\,z:\tau)\) jest permutacją \(\Gamma\).
     \item \(\Gamma\upharpoonright \{z,\,u,\,x_1\}=(x_1:\rho_1,\,z:\tau).\)
   \end{enumerate}
 \end{przyklad}
 
-\subsection{Typowanie}
+\subsection{Typowanie}\label{subsec:simple_types_typing}
 Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 \vspace{0.5em}
 \begin{center}
@@ -110,16 +120,24 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 
 W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplikować do innego termu, odpowiednio. Dlatego mówimy, że w rachunku \(\lambda\) z typami prostymi termy \emph{zależą} od termów. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność (abstrakcja) jest \emph{pierwszego rzędu}.
 
-\begin{definicja}(Typowalność)\\
-  Mówimy, że \(\lambda\)-term \(M\) jest typu \(\sigma\) w kontekście \(\Gamma\), jeśli istnieje skończone drzewo sądów spełniające poniższe warunki:
+\begin{definicja}(Wyprowadzenie typu) 
+%  Mówimy, że stwierdzenie \(M:\sigma\) jest \emph{wyprowadzalne} z kontekstu \(\Gamma\), jeśli istnieje skończone drzewo sądów \(\mathcal{P}\) spełniające poniższe warunki:
+%  Mówimy, że \(\lambda\)-term \(M\) jest typu \(\sigma\) w kontekście \(\Gamma\), jeśli istnieje skończone drzewo sądów \(\mathcal{P}\) spełniające poniższe warunki:
+  \emph{Wyprowadzeniem} sądu \(\Gamma\vdash M:\sigma\) nazywamy skończone drzewo sądów \(\mathcal{P}\) takie, że dla pewnego kontekstu \(\Delta\) spełnione są następujące warunki:
+%  Wyprowadzeniem typu \(\lambda\)-termu \(M\) nazywamy skończone drzewo sądów \(\mathcal{P}\) takie, że dla pewnego kontekstu \(\Delta\) spełnione są następujące warunki:
   \begin{enumerate}[label=(D\arabic*)]
       \setlength\itemsep{0em}
-      \item W korzeniu drzewa znajduje się sąd \(\Gamma \vdash M:\sigma\).
-      \item Liście są \emph{aksjomatami}, czyli sądami postaci \(\Gamma \vdash x:\sigma\).
-      \item Każdego rodzica można otrzymać z jego dzieci przez zastosowanie którejś z reguł wyprowadzania typu.
+      \item W korzeniu \(\mathcal{P}\) znajduje się sąd \(\Gamma \vdash M:\sigma\), gdzie \(\Gamma\subset\Delta\).
+      \item Liście \(\mathcal{P}\) są \emph{aksjomatami}, czyli sądami postaci \(\Delta \vdash x:\sigma\).
+      \item Wszystkie pozostałe sądy w \(\mathcal{P}\) są uzyskane ze swoich dzieci za pomocą reguły (app) albo (abs).
   \end{enumerate}
-  Tak określony obiekt będziemy nazywali \emph{wyprowadzeniem} typu dla \(M\) (w kontekście \(\Gamma\)) i pisali \(\Gamma \vdash_\mathbb{T} M:\sigma\). O sądzie \(\Gamma \vdash M:\sigma\) będziemy wówczas mówili, że jest \emph{wyprowadzalny}. %Jeśli wyprowadzalność sądu będzie jednoznacznie wynikała z kontekstu, to będziemy omijać indeks \(\mathbb{T}\) przy symbolu \(\vdash_\mathbb{T}\).
+  Jeśli istnieje wyprowadzenie sądu dla \(\Gamma\vdash M:\sigma\), to powiemy, że jest on \emph{wyprowadzalny}. 
+  Jeśli nie będzie to prowadziło do niejednoznaczności, będziemy wówczas pisali \(\Gamma\vdash M:\sigma\).
+%  Drzewo \(\mathcal{P}\) będziemy nazywali \emph{wyprowadzeniem} typu dla \(M\) w kontekście \(\Gamma\) i pisali \(\Gamma \vdash M:\sigma\). %Jeśli wyprowadzalność sądu będzie jednoznacznie wynikała z kontekstu, to będziemy omijać indeks \(\mathbb{T}\) przy symbolu \(\vdash_\mathbb{T}\).
 \end{definicja}
+
+\begin{definicja}(Poprawność, typowalność)
+  \(\lambda\)-term \(M\in\mathbf{\Lambda}\) nazywamy \emph{poprawnym} (ang. \emph{legal}) lub \emph{typowalnym} (ang. \emph{typable}), jeśli istnieje wyprowadzenie sądu \(\Gamma\vdash M:\rho\) dla pewnego kontekstu \(\Gamma\) i typu \(\rho\in\mathbb{T}\). \end{definicja}
 
 \begin{przyklad}\label{ex:typing}
  \begin{enumerate}[label=(\alph*)]
@@ -145,7 +163,7 @@ W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzaj
   \Infer1[(abs)]{\vdash \lambda x y z .\, x(yz):{(\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho}}
 \end{prooftree}
   \end{center}
-\item
+\item\label{ex:typing_3}
   Nie wszystkie \(\lambda\)-termy są typowalne. Niech \(\omega\equiv (\lambda x.\, x x)\) i przypuśćmy, że \(\omega\) ma typ \(\sigma\) w kontekście \(\Gamma\). Zauważmy, że wówczas w \(x:{\sigma\to\sigma}\in\Gamma\). Ponieważ \(\omega\) zawiera w sobie podterm \((xx)\), to w wyprowadzeniu musiał on zostać otrzymany przez zastosowanie reguły (app). Wówczas \(x:\sigma \in \Gamma\)  i \(x:{\sigma\to\sigma} \in \Gamma\), co nie jest możliwe, bo wszystkie deklaracje w \(\Gamma\) muszą mieć różne podmioty.
   %Co więcej, można wykazać że typ \((\tau\to\rho)\to(\sigma\to\tau)\to\sigma\to\rho\) może mieć tylko i wyłącznie operacja złożenia~\cite{Wadler1989}.
 \end{enumerate}
@@ -155,10 +173,9 @@ W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzaj
 \begin{uwaga*}
   Notacja dowodowa zaproponowana w Przykładzie \ref{ex:typing} wprowadza wiele redundancji, która utrudnia zorientowanie się w dłuższych wyprowadzeniach, zaś zlinearyzowanie dowodów pozwala na notowanie kolejnych sądów w arbitralnym porządku. Nic nie stoi na przeszkodzie abyśmy ograniczyli się tylko do rozpatrywania wyprowadzeń, w których zależności pomiędzy sądami ustalają ścisły porządek częściowy, tzn. takich, że:
   \begin{easylist}
-    &   żaden sąd nie poprzedza sam siebie (antyzwrotność),
-   
-    &  jeśli jeden sąd poprzedza drugi, to drugi nie poprzedza pierwszego (antysymetryczność),
-    & jeśli sąd \(J_k\) poprzedza \(J_l\) i \(J_l\) poprzedza \(J_m\), to \(J_k\) poprzedza \(J_m\) (przechodzniość).
+    & żaden sąd nie poprzedza sam siebie (antyzwrotność),
+    & jeśli jeden sąd poprzedza drugi, to drugi nie poprzedza pierwszego (antysymetryczność),
+    & jeśli sąd \(J_k\) poprzedza \(J_l\) i \(J_l\) poprzedza \(J_m\), to \(J_k\) poprzedza \(J_m\) (przechodniość).
   \end{easylist}
   Taki charakter dowodów oddaje wariant notacji w postaci drzew wprowadzony przez Pravitza i proponowany w \cite{Hindley:2008:LCI:1388400}. Powtarzanie się kontekstów eliminuje się w niej przez wprowadzanie każdej deklaracji do dowodu przed użyciem i wykreślanie jej po użyciu. W dalszej części pracy będziemy korzystać z analogicznej pod wieloma względami notacji Fitcha (tzw. notacji flagowej). Poniżej pokazujemy wyprowadzenia typu z Przykładu \ref{ex:typing} w tej notacji.
   \begin{enumerate}[label=(\alph*)]
@@ -167,7 +184,7 @@ W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzaj
     \begin{fitch}
       \fh x:\sigma & (var) \\
       \fa \fh y:\sigma & (var) \\
-      \fa \lambda y.\,x:\tau\to\sigma:\sigma & (abs) 1 \\
+      \fa \lambda y.\,x:\tau\to\sigma & (abs) 1 \\
       \lambda x y.\,x:\sigma\to\tau\to\sigma & (abs) 3
     \end{fitch}
   \end{equation*}
@@ -187,27 +204,22 @@ W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzaj
  \end{enumerate}
 \end{uwaga*}
 
-\begin{definicja}(Poprawność, typowalność)
-  \(\lambda\)-term \(M\in\mathbf{\Lambda}\) nazywamy \emph{poprawnym} (ang. \emph{legal}) lub \emph{typowalnym} (ang. \emph{typable}), jeśli istnieje wyprowadzenie \(\Gamma\vdash M:\rho\) dla pewnego kontekstu \(\Gamma\) i typu \(\rho\in\mathbb{T}\). 
-\end{definicja}
-
 \subsubsection{Rodzaje problemów} 
 W teorii typów spotykamy trzy rodzaje problemów dotyczące sądów:
 \begin{enumerate}
   \setlength\itemsep{0em}
   \item \emph{Problem typowalności} (ang. \emph{well-typedness, typability})
-
     Polega na rozstrzygnięciu czy zadany term jest poprawny, czyli znalezieniu kontekstu oraz wyprowadzenia typu względem tego kontekstu dla zadanego termu. Symbolicznie:
     \[ \mathbf{?} \vdash \text{term}\ :\ \mathbf{?} \]
     Problem typowalności przy zadanym kontekście nazywamy problemem \emph{przypisania typu} (ang. \emph{type assignment}). Ma on nastepującą postać: 
     \[ \text{kontekst} \vdash \text{term}\ :\ \mathbf{?} \]
   \item \emph{Problem weryfikacji typu} (ang. \emph{type checking}) 
     
-    Polega na sprawdzeniu czy term ma zadany typ względem danego kontekstu.
+    Polega na sprawdzeniu czy term ma zadany typ względem danego kontekstu. Symbolicznie:
     \[ \text{kontekst} \stackrel{\mathbf{?}}{\vdash} \text{term}\ :\ \text{typ} \]
   \item \emph{Problem inhabitacji} (ang. \emph{inhabitation, term finding})
 
-    Polega na skonstruowaniu termu (lub przynajmniej wykazaniu istnienia takiego termu), który    miałby zadany typ względem danego kontekstu. 
+    Polega na skonstruowaniu termu (lub przynajmniej wykazaniu istnienia takiego termu), który    miałby zadany typ względem danego kontekstu. Symbolicznie: 
     \[
       \text{kontekst} \vdash \mathbf{?}\ :\ \text{typ}
     \]
@@ -219,7 +231,7 @@ W wielu systemach problem typowalności można sprowadzić do problemu weryfikac
 \]
 gdzie \(p\in U\) jest zmienną typową, zaś kombinator \(K\equiv \lambda xy.\,x\).
 
-Wszystkie wymione problemy są w rachunku \(\lambda\) z typami prostymi rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć słynny wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F (w stylu Currego) są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Milnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
+Wszystkie wymienione problemy są w rachunku \(\lambda\) z typami prostymi rozstrzygalne\footnote{Nie jest to bynajmniej oczywiste dla innych systemów typów; za przykład wystarczy wziąć wynik J. B. Wellsa \cite{Wells_98}, który stwierdza, że  problemy typowalności i weryfikacji typu w Systemie F (w stylu Currego) są nierozstrzygalne. Stąd w praktyce uzasadnione jest zainteresowanie mniej ekspresywnymi systemami typów, np. systemem Hindleya-Milnera.}, tzn. istnieją efektywnie obliczalne metody ich rozwiązywania. Czytelnika zainteresowanego szczegółami odsyłamy do \cite[Twierdzenie 3.2.7]{Urzyczyn2006} i \cite[Rozdział 4.4]{Barendregt_1992}.
 
 \subimport{includes/chapters/}{unification.tex}
 
@@ -230,9 +242,9 @@ Przedstawimy teraz szereg lematów ustalających między innymi związki między
 \begin{lemat}(O generowaniu)\label{thm:generation}
   \begin{enumerate}[label=(\arabic*)]
      \setlength\itemsep{0em}
-     \item Jeśli \(\Gamma\vdash_{\mathbb{T}} x:\sigma\), to \(x:\sigma\in\Gamma\).\label{thm:generation_1}
-     \item Jeśli \(\Gamma\vdash_{\mathbb{T}}MN:\tau\), to \(\Gamma\vdash_\mathbb{T} M:\sigma\to\tau\) i \(\Gamma\vdash_\mathbb{T} N:\sigma\) dla pewnego \(\sigma\in\mathbb{T}\).\label{thm:generation_2}
-     \item Jeśli \(\Gamma\vdash_{\mathbb{T}}\lambda x.\, M:\tau\) i \(x\not\in\mathrm{dom}\,\Gamma\), to \(\tau\equiv \tau_1\to\tau_2\) oraz \(\Gamma,x:\tau_1\vdash_\mathbb{T} N:\tau_2\). \label{thm:generation_3}
+     \item Jeśli \(\Gamma\vdash x:\sigma\), to \(x:\sigma\in\Gamma\).\label{thm:generation_1}
+     \item Jeśli \(\Gamma\vdash MN:\tau\), to \(\Gamma\vdash M:\sigma\to\tau\) i \(\Gamma\vdash N:\sigma\) dla pewnego \(\sigma\in\mathbb{T}\).\label{thm:generation_2}
+     \item Jeśli \(\Gamma\vdash\lambda x.\, M:\tau\) i \(x\not\in\mathrm{dom}\,\Gamma\), to \(\tau\equiv \tau_1\to\tau_2\) oraz \(\Gamma,x:\tau_1\vdash N:\tau_2\). \label{thm:generation_3}
   \end{enumerate} 
 \end{lemat}
 \begin{dowod}
@@ -259,15 +271,15 @@ Przedstawimy teraz szereg lematów ustalających między innymi związki między
 \end{dowod}
 
 \begin{lemat}(O zmiennych wolnych)\label{thm:fv}
-  Jeśli sąd \(J: \Gamma \vdash L:\sigma\) jest wyprowadzalny, to \(\mathrm{FV}(L)\subseteq \mathrm{dom}\,\Gamma\).
+  Jeśli sąd \(\Gamma \vdash L:\sigma\) jest wyprowadzalny, to \(\mathrm{FV}(L)\subseteq \mathrm{dom}\,\Gamma\).
 \end{lemat}
 \begin{dowod}
-  Prosty dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(J\). Rozważmy następujące przypadki:
+  Dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(J:\Gamma \vdash L:\sigma\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
     \item Jeśli \(J\) jest konsekwencą reguły \emph{var}, to \(L\equiv x\) dla pewnej \(\lambda\)-zmiennej \(x\). Wobec tego \(x:\sigma\in\Gamma\), a zatem \(\mathrm{FV}(x)\subseteq\mathrm{dom}\,\Gamma\).
     \item Jeśli \(J\) jest konsekwencją reguły \emph{app}, to \(J\) musi mieć postać \(\Gamma\vdash MN:\sigma\). Z założenia indukcyjnego: \(\mathrm{FV}(M)\subseteq \mathrm{dom}\,\Gamma\) i  \(\mathrm{FV}(N)\subseteq \mathrm{dom}\,\Gamma\). Z Definicji \ref{def:untyped_fv}: \(\mathrm{FV}(MN)=\mathrm{FV}(M)\cup\mathrm{FV}(N)\). Stąd \(\mathrm{FV}(MN)\subseteq \mathrm{dom}\,\Gamma\).
-    \item Jeśli \(J\) jest konsekwencją reguły \emph{abs}, to \(J\) musi mieć postać \(\Gamma\vdash \lambda x.\,M:\sigma\). Z założenia indukcyjnego \(FV(M)\subseteq\mathrm{dom}\,\Gamma\). Ponieważ \(\mathrm{FV}(\lambda x.\,M)=\mathrm{FV}(M)\setminus\{x\}\subseteq\mathrm{FV}(M)\) (z Definicji \ref{def:untyped_fv}), to \(\mathrm{FV}(M)\subseteq\mathrm{dom}\,\Gamma\). 
+    \item Jeśli \(J\) jest konsekwencją reguły \emph{abs}, to \(J\) musi mieć postać \(\Gamma\vdash \lambda x.\,M:\sigma\). Z~założenia indukcyjnego \(FV(M)\subseteq\mathrm{dom}\,\Gamma\). Ponieważ \(\mathrm{FV}(\lambda x.\,M)=\mathrm{FV}(M)\setminus\{x\}\subseteq\mathrm{FV}(M)\) (z Definicji \ref{def:untyped_fv}), to \(\mathrm{FV}(M)\subseteq\mathrm{dom}\,\Gamma\). 
   \end{enumerate}  
   \qed
 \end{dowod}
@@ -286,7 +298,7 @@ Przedstawimy teraz szereg lematów ustalających między innymi związki między
 \end{dowod}
 
 \begin{uwaga*}
-  Zauważmy, że (\ref{thm:permutation_simple}.\ref{thm:permutation_3}) rozluźnia konieczność eliminowania maksymalnej deklaracji z kontekstu przy stosowaniu reguły \emph{abs}. W tekstach wprowadzających typy proste zazwyczaj przez kontekst rozumie się po prostu skończony zbiór wzajemnie różnych deklaracji \cite{Barendregt_1992, Urzyczyn2006, Hindley:2008:LCI:1388400}. Ponieważ branie dowolnej permutacji listy nie wpływa na typowanie, to widzimy, że obydwa znaczenia możemy stosować zamiennie, bowiem jest to nic innego jak traktowanie kontekstu jako zbioru deklaracji. 
+  Zauważmy, że część \ref{thm:permutation_3} Lematu \ref{thm:permutation_simple} rozluźnia konieczność eliminowania maksymalnej deklaracji z kontekstu przy stosowaniu reguły \emph{abs}. W tekstach wprowadzających typy proste zazwyczaj przez kontekst rozumie się po prostu skończony zbiór wzajemnie różnych deklaracji \cite{Barendregt_1992, Urzyczyn2006, Hindley:2008:LCI:1388400}. Ponieważ branie dowolnej permutacji listy nie wpływa na typowanie, to widzimy, że obydwa znaczenia możemy stosować zamiennie, bowiem jest to nic innego jak traktowanie kontekstu jako zbioru deklaracji. 
 \end{uwaga*}
 
 \begin{lemat}(O podstawieniu)\label{thm:substitution}
@@ -320,7 +332,7 @@ sposób.
       {\begin{prooftree}
         \Hypo{\Gamma \vdash P[x/N]:\tau \to \rho} \Hypo{ \Gamma \vdash Q[x/N]:\tau}
         \Infer2[(app)]{\Gamma \vdash (P[x/N]Q[x/N]):\rho}
-      \end{prooftree}},
+      \end{prooftree}}.
       \end{center}
       Tezę otrzymujemy z faktu, że \((PQ)[x/N]=P[x/N]Q[x/N]\). 
     \item Jeśli \(\Gamma,\,x:\sigma\vdash   M:\rho\) jest konsekwencją reguły \emph{abs}, to \(M\equiv \lambda y.\,P:\rho\) dla \(\rho\equiv \sigma\to\tau,\,y\not\equiv x\). Z założenia indukcyjnego istnieje wyprowadzenie
@@ -330,7 +342,7 @@ sposób.
         {\begin{prooftree}
           \Hypo{ \Gamma', y:\tau\vdash P[x/N]:\rho}
           \Infer1[(abs)]{\Gamma' \vdash (\lambda\, y.\, P[x/N]):\tau\to\rho}
-        \end{prooftree}}
+        \end{prooftree}}.
       \end{center}
         Ponieważ \((\lambda y.\,P)[x/N]=\lambda y.\,P[x/N]\) oraz \(M\equiv \lambda y.\,P:\tau\to\rho\), otrzymujemy tezę.
     \end{enumerate}
@@ -342,10 +354,10 @@ sposób.
     Załóżmy, że
     \begin{enumerate}[label=(\roman*)]
       \setlength\itemsep{0em}
-      \item \(\Gamma\vdash_\mathbb{T} M:\sigma\) 
+      \item \(\Gamma\vdash M:\sigma\) 
       \item \(M\to^{*}_\beta N\)
     \end{enumerate}
-    Wówczas \(\Gamma\vdash_\mathbb{T}N:\sigma\).
+    Wówczas \(\Gamma\vdash N:\sigma\).
 \end{lemat}
 \begin{dowod}
   Pokażemy, że twierdzenie zachodzi dla jednego kroku redukcji \(\to_\beta\). Dowód zwrotności jest trywialny, zaś aby pokazać przechodniość wystarczy skorzystać z indukcji wzgledem długości ciągu redukcji.
@@ -374,7 +386,7 @@ sposób.
           {\begin{prooftree}
             \Hypo{\Gamma \vdash P:\tau \to \sigma} \Hypo{ \Gamma \vdash Q':\tau}
             \Infer2[(app)]{\Gamma \vdash PQ':\sigma}
-          \end{prooftree}},
+          \end{prooftree}}.
         \end{center}
           Ponieważ \(N\equiv PQ'\), to otrzymujemy tezę. 
           \label{thm:subject_reduction_1}
@@ -390,7 +402,7 @@ sposób.
         {\begin{prooftree}
           \Hypo{ \Gamma', x:\rho\vdash P':\tau}
           \Infer1[(abs)]{\Gamma \vdash \lambda\, x.\, P':\rho\to\tau}
-        \end{prooftree}}
+        \end{prooftree}}.
       \end{center}
       Stąd teza.
   \end{enumerate}
@@ -401,10 +413,10 @@ sposób.
     Załóżmy, że
     \begin{enumerate}[label=(\roman*), ref=\roman*]
       \setlength\itemsep{0em}
-      \item \(\Gamma\vdash_\mathbb{T} M:\sigma\) 
-      \item \(M\to^{*}_\eta N\)
+      \item \(\Gamma\vdash M:\sigma\), 
+      \item \(M\to^{*}_\eta N\).
     \end{enumerate}
-    Wówczas \(\Gamma\vdash_\mathbb{T}N:\sigma\).
+    Wówczas \(\Gamma\vdash N:\sigma\).
 \end{lemat}
 
 \begin{dowod}
