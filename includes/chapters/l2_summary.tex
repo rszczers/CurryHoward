@@ -1,6 +1,6 @@
 \subsection{Język pośredni GHC}
 
-Języki programowania to narzędzia służące do reprezentowania pojęć i łączących je wzajemnie zależności w sposób umożliwiający efektywne tłumaczenie ich na język maszynowy. Myśleć można o nich w bardzo uproszczony sposób jak o środkach komunikacji człowieka z maszyną.
+Języki programowania to narzędzia służące do reprezentowania pojęć i ich wzajemnych zależności w sposób umożliwiający efektywne tłumaczenie ich na język maszynowy. Myśleć można o nich w bardzo uproszczony sposób jak o środkach komunikacji człowieka z maszyną.
 
 GHC (ang. \emph{Glasgow Haskell Compiler}) to otwartoźródłowy kompilator języka Haskell. Kompilatorem nazywamy program, którego zadaniem jest tłumaczenie kodu programu napisanego w danym języku (w \emph{języku kodu źródłowego}) na kod w innym języku (języku \emph{wyjściowym}) z zachowaniem własności programu wejściowego. GHC jest stosunkowo wyjątkowym kompilatorem, gdyż kompilację do kodu wyjściowego poprzedza w nim kompilacja do kodu \emph{pośredniego}, który jest rozszerzonym wariantem Systemu F w stylu Churcha \cite{Sulzmann2007}. 
 
@@ -40,10 +40,9 @@ comp =
     g_aqg (f_aqh x_aqi)
 \end{minted}
 
-Pierwsza, druga i trzecia linia to rezultat przypisania typu. Symbolowi \texttt{forall} odpowiada symbol polimorficznej abstrakcji \(\Pi\). Dalej widzimy ciało funkcji \texttt{comp}: symbol \texttt{\textbackslash} odpowiada w nim \(\lambda\)-abstraktorowi, zaś symbol \texttt{@} wyróżnia zmienne typowe, które oznaczaliśmy symbolem \(\ast\). Widzimy, że (\ref{ex:typing_compar}) i powyższy kod to dokładnie to samo.
+Pierwsza, druga i trzecia linia to rezultat przypisania typu. Symbolowi \texttt{forall} odpowiada symbol polimorficznej abstrakcji \(\Pi\). Dalej widzimy ciało funkcji \texttt{comp}: symbol \texttt{\textbackslash} odpowiada w nim \(\lambda\)-abstraktorowi, zaś symbol \texttt{@} wyróżnia zmienne typowe, które oznaczaliśmy symbolem \(\ast\). Widzimy, że (\ref{ex:typing_compar}) i powyższy kod z dokładnością do użytych symboli są takie same.
 
-Haskell jest \emph{słabo} typowanym językiem: kod źródłowy może być zupełnie pozbawiony deklaracji typowych (chociaż nie musi), zaś kompilacja przebiega przez proces przypisywania wyrażeniom typu\footnote{Może to prowadzić do nieporozumień. Na przykład język C jest \emph{silnie} statycznie typowanym językiem, ale za typowanie odpowiada wyłącznie programista. Kod zostaje sprawdzony pod względem składni i kompilacja zaciera wszystkie deklaracje typowe.}. Pod tym względem przypomina systemy w stylu Currego. Przypomnijmy jednak, że w Systemie F w tym stylu problem typowania jest nierozstrzygalny \cite{Wells_98}. Rewolucyjne okazuje się dopuszczenie myśli, że język pośredni może dysponować szerszą ekspresją niż język źródłowy. Wówczas dysponując tylko kompilatorem języka pośredniego (np. z wariantu Systemu F do kodu maszynowego), możemy zająć się tłumaczeniem być może uboższego (ale rozstrzygalnego) języka źródłowego na język pośredni. Pozwala to też na swobodne eksperymentowanie z językami źródłowymi, mając jednocześnie pewność, że praca nigdy nie podda się próbie czasu i nie przyćmią jej w przyszłości być może bardziej ekspresywne systemy typów.
-
+Kod źródłowy programów w języku Haskell może być zupełnie pozbawiony deklaracji typowych, zaś kompilacja przebiega przez proces przypisywania wyrażeniom typu\footnote{Dla porównania: język programowania C jest również statycznie typowanym językiem, ale za typowanie odpowiada wyłącznie programista, nie algorytm typowania. Kod zostaje sprawdzony pod względem składni i kompilacja zaciera wszystkie deklaracje typowe.}. Pod tym względem przypomina systemy w stylu Currego. Deklaracje typowe w kodzie źródłowym służą w istocie wyłącznie weryfikacji przez algorytm typowania czy oczekiwane przez programistę własności programu są sensowne. Przypomnijmy jednak, że w Systemie F w stylu Currego problem typowania jest nierozstrzygalny \cite{Wells_98}. Jeśli jednak dopuścimy, żeby język źródłowy dysponował być może węższą ekspresją, ale miał rozstrzygalny system typów, to typy wyrażeń mogą być uzgodnione algorytmicznie na etapie tłumaczenia do języka przejściowego. Dlatego Haskell ma \emph{statyczny} system typów: wszystkie deklaracje typowe są w nim znane przed etapem kompilacji do języka maszynowego. Podział kompilacji programu na proces tłumaczenia go na język przejściowy i dopiero wówczas na język maszynowy umożliwia przede wszystkim niezależnie optymalizować metody redukcji wyrażeń i stopniowo rozszerzać ekspresję języka źródłowego.
 
 \subsection{Podsumowanie}
 System F, który był przedmiotem Rozdziału \ref{sec:system_f} można umieścić na kanwie zaproponowanej przez H. P. Barendregta w \cite[Rozdział 5]{Barendregt_1992} klasyfikacji rozszerzeń rachunku \(\lambda\) z typami prostymi (tzw. \emph{kostki \(\lambda\)}, Rysunek \ref{fig:lambda-cube}) w miejscu systemu \(\lambda 2\). 
@@ -81,9 +80,9 @@ Wszystkie części kostki \(\lambda\) są systemami w stylu Churcha. System \(\l
 
 System    \(\lambda{\underline{\omega}}\)   to    rozszerzenie,   w
 którym   sama   struktura   typów    jest   podobna   do   typów
-prostych:   typy   zależą   w  nim   od   typów.   Zaobserwujmy,
+prostych:   \emph{typy   zależą   w  nim   od   typów}.   Zaobserwujmy,
 że   typy   takie  jak   \(\beta\to\beta\),   \(\gamma\to\gamma\),
-\((\beta\to\gamma)\to(\beta\to\gamma)\)   itp.    wszystkie   mają
+\((\beta\to\gamma)\to(\beta\to\gamma)\)   itp.    mają
 tę  samą strukturę  postaci   \(\Diamond\to  \Diamond\),  gdzie
 \(\Diamond\)  jest tym  samym typem  wystepującym po  obu stronach
 \(\to\). Wprowadzając  operator abstrakcji  względem \(\Diamond\)
@@ -112,27 +111,31 @@ Mamy   więc    \(\ast:\square\),   \(\ast\to\ast    :   \square\),
 Łącznie, symbole \(\ast\)  i \(\square\) nazywamy \emph{rodzajami}
 (ang. \emph{sort}).
 
-System \(\lambda P\) rozszerza typy proste o abstrakcję umożliwiającą uzależnienie typów od termów. Typy takie mają postać \(\lambda x:A.\,M\), gdzie \(M\) jest typem, a \(x\) zmienną typową. 
+System \(\lambda P\) rozszerza typy proste o abstrakcję umożliwiającą \emph{uzależnienie typów od termów}. Typy takie mają postać \(\lambda x:A.\,M\), gdzie \(M\) jest typem, a \(x\) zmienną typową. 
 
-Jak zauważył Barendregt, rozszerzenia \(\lambda 2\), \(\lambda{\underline{\omega}}\) i \(\lambda P\) są od siebie w pewnym sensie niezależne i można je ze sobą składać. Intuicję tę można sformalizować  w ten sposób, aby wybierając tylko odpowiednią kombinację zależności, otrzymać odpowiadającą jej teorię \cite{barendregt_1991}. Ponieważ przybliżenie tego uogólnionego systemu wykracza poza zamierzony zakres tej pracy, prezentujemy tylko zestawienie systemów kostki \(\lambda\).
+Jak zauważył Barendregt, rozszerzenia \(\lambda 2\), \(\lambda{\underline{\omega}}\) i \(\lambda P\) są od siebie w pewnym sensie niezależne i można je ze sobą składać. Intuicję tę można sformalizować  w ten sposób, aby wybierając tylko odpowiednią kombinację zależności, otrzymać odpowiadającą jej teorię (szczegóły w \cite{barendregt_1991}). Ponieważ przybliżenie tego uogólnionego systemu wykracza poza zamierzony zakres tej pracy, prezentujemy tylko zestawienie systemów kostki \(\lambda\) w Tabeli \ref{tab:lambda-cube}. Zależności charakteryzujące zebrane systemy oznaczamy następującymi symbolami:
+\begin{itemize}
+  \setlength\itemsep{0em}
+  \item \((*,*)\) - termy zależne od termów (typy funkcyjne),
+  \item \((\Box,*)\) - termy zależne od typów (typy polimorficzne),
+  \item \((*,\Box)\) - typy zależne od termów (typy zależne),
+  \item \((\Box, \Box)\) - typy zależne od typów (rodziny typów, \emph{higher-kinded types}).
+\end{itemize}
 
+\begin{table}[H]
   \begin{center}
-  \begin{tabular}{r | l | c c c c}
-    0 & \(\lambda_{\to}\)                 & \((*,\,*)\) \\
-    1 & \(\lambda 2\)                     & \((*,\,*)\) & \((\Box,\,*)\) \\
-    2 & \(\lambda P\)                     & \((*,\,*)\) & & \((*,\,\Box)\) \\
-    1+2 & \(\lambda P2\)                  & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) \\
-    3 & \(\lambda \underline{\omega}\)    & \((*,\,*)\) & & & \((\Box,\,\Box)\)\\
-    1+3 & \(\lambda \omega\)              & \((*,\,*)\) & \((\Box,\,*)\) & & \((\Box,\,\Box)\)\\
-    2+3 & \(\lambda P\underline{\omega}\) & \((*,\,*)\) & & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
-    1+2+3 & \(\lambda C\)                 & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
-  \end{tabular}
-
-  \begin{itemize}
-    \item \((*,*)\) - termy zależne od termów (typy funkcyjne),
-    \item \((\Box,*)\) - termy zalezne od typów (typy polimorficzne),
-    \item \((*,\Box)\) - typy zależne od termów (typy zależne),
-    \item \((\Box, \Box)\) - typy zależne od typów (rodziny typów, higher-kinded types).
-  \end{itemize}
+    \begin{tabular}{l | c c c c}
+    System & Zależności \\
+    \hline 
+    \(\lambda_{\to}\)                 & \((*,\,*)\) \\
+    \(\lambda 2\)                     & \((*,\,*)\) & \((\Box,\,*)\) \\
+    \(\lambda P\)                     & \((*,\,*)\) & & \((*,\,\Box)\) \\
+    \(\lambda P2\)                    & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) \\
+    \(\lambda \underline{\omega}\)    & \((*,\,*)\) & & & \((\Box,\,\Box)\)\\
+    \(\lambda \omega\)                & \((*,\,*)\) & \((\Box,\,*)\) & & \((\Box,\,\Box)\)\\
+    \(\lambda P\underline{\omega}\)   & \((*,\,*)\) & & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
+    \(\lambda C\)                     & \((*,\,*)\) & \((\Box,\,*)\) & \((*,\,\Box)\) & \((\Box,\,\Box)\) \\
+  \end{tabular}\\
   \end{center}
-
+  \caption{Zestawienie systemów kostki \(\lambda\).} \label{tab:lambda-cube}
+\end{table}

@@ -23,10 +23,8 @@ Elementy \(\mathbf{\tilde\Lambda}\) będziemy oznaczali literami \(L,\ M,\ N,\ P
   & \emph{najbardziej zewnętrzne nawiasy bedą pomijane,}
   & \emph{aplikacja wiąże lewostronnie; wyrażenia postaci \((PQ)R\) będą zapisywane w postaci \(PQR\),}
   & \emph{\(\lambda\)-abstrakcja wiąże prawostronnie: \(\lambda x_1.\, (\lambda x_2.\,P)\) zapisujemy  \(\lambda x_1.\, \lambda x_2.\,P\),}
-  & \emph{następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, \lambda x_2 . \, \dots  \lambda x_n .\, P\) zapisujemy pod wspólnym \(\lambda\)-abstraktorem: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\).}
-  & \emph{n-krotną aplikację \(P\in\mathbf{\tilde\Lambda}\) do siebie zapisujemy skrótowo: \(P^n\equiv \underbrace{P\,P\ \dots\ P}_{\text{n-razy}}\)}
-
-
+  & \emph{następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, \lambda x_2 . \, \dots  \lambda x_n .\, P\) zapisujemy pod wspólnym \(\lambda\)-abstraktorem: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\),}
+  & \emph{n-krotną aplikację \(P\in\mathbf{\tilde\Lambda}\) do siebie zapisujemy skrótowo: \(P^n\equiv \underbrace{P\,P\ \dots\ P}_{\text{n-razy}}\).}
 \end{easylist}
 
 \begin{przyklad}
@@ -225,7 +223,7 @@ Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie
 \begin{definicja}(Zbiór \(\mathbf{\Lambda}\) \(\lambda\)-termów)
   Każdą klasę abstrakcji relacji \(=_{\alpha}\) nazywamy \(\lambda\)-termem. Zbiór wszystkich \(\lambda\)-termów \(\mathbf{\Lambda}\) to zbiór ilorazowy relacji \(\alpha\)-konwersji:
   \begin{align*}
-    \mathbf{\Lambda}=\left\{[M]_{=_\alpha}\ |\ M\in\mathbf{\tilde\Lambda}\right\}
+    \mathbf{\Lambda}=\left\{[M]_{=_\alpha}\ |\ M\in\mathbf{\tilde\Lambda}\right\}.
   \end{align*}
 \end{definicja}
 
@@ -247,8 +245,8 @@ Wprowadzamy następujące konwencje notacyjne:
  Każdy \(M\in\mathbf{\Lambda}\) ma jedną z poniższych postaci:
  \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
-    \item \(M \equiv \lambda x_1\dots x_n.\ y\,N_1 \dots N_m\), gdzie \(n,m\geq 0\) i \(y\in \mathrm{V}\)\label{def:HNF}
-    \item \(M \equiv \lambda x_1\dots x_n.\ (\lambda y.\ N_0)\,N_1\dots N_m\), gdzie \(n\geq 0\) i \(m\geq 1\)\label{def:HNF2}
+    \item \(M \equiv \lambda x_1\dots x_n.\ y\,N_1 \dots N_m\), gdzie \(n,m\geq 0\) i \(y\in \mathrm{V}\)\label{def:HNF},
+    \item \(M \equiv \lambda x_1\dots x_n.\ (\lambda y.\ N_0)\,N_1\dots N_m\), gdzie \(n\geq 0\) i \(m\geq 1\)\label{def:HNF2}.
   \end{enumerate}
 \end{twierdzenie}
 %\noindent O \(\lambda\)-termach postaci \ref{def:HNF} i \ref{def:HNF2} mówimy, że są w \emph{czołowej postaci normalnej} (HNF, ang. \emph{head normal form}) albo w \emph{słabej czołowej postaci normalnej} (WHNF, ang.~\emph{weak head normal form}), odpowiednio. 
@@ -272,7 +270,7 @@ Wprowadzamy następujące konwencje notacyjne:
   Niech \(M\in\mathbf{\Lambda}\). Powiemy, że \(M\) jest w:
   \begin{enumerate}
     \setlength\itemsep{0em}
-    \item \emph{czołowej postaci normalnej} (ang. \emph{head normal form}), jeśli \[M\equiv \lambda y_1\,y_2\,\dots\,y_n.\ x M_1 M_2 \dots M_m\quad \text{dla}\ n,\,m\geq 0.\]  
+    \item \emph{czołowej postaci normalnej} (ang. \emph{head normal form}), jeśli \[M\equiv \lambda y_1\,y_2\,\dots\,y_n.\ x M_1 M_2 \dots M_m\quad \text{dla}\ n,\,m\geq 0,\]  
       
     \item \emph{słabej czołowej postaci normalnej} (ang. \emph{weak head normal form}), jeśli dla \(n\geq 0\) i \(x\in V\) \(\lambda\)-term \(M\) jest postaci \ref{def:whnf1} lub \ref{def:whnf2}.
       \begin{enumerate}[label={\roman*)}, ref={\roman*)}]
@@ -291,7 +289,7 @@ Wprowadzamy następujące konwencje notacyjne:
 Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów.
 
 \begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów \(\lambda\)-termu)
-  Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) określamy
+  Dla dowolnego \(\lambda\)-termu \({M=[M']_{=_{\alpha}}}\) określamy
   \[
     \mathrm{Sub}(M)=\mathrm{Sub}(M'),
   \]
@@ -317,11 +315,11 @@ Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych woln
 Dla dowolnego \(M\in\mathbf{\Lambda}\), nieskończonego ciągu \(\lambda\)-zmiennych~\(\vec{x}\) i nieskończonego ciągu \(\lambda\)-termów \(\vec{N}\) określamy:
   \begin{enumerate}[label={(\(\vec{s}\)\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
-    \item \(x_i[\vec{x}/\vec{N}]=N_i\) dla \(i\in\mathbb{N}\).
-    \item \(y[\vec{x}/\vec{N}]=y\) o ile dla dowolnego \(i\in\mathbb{N},\ y\not\equiv x_i\).
-    \item \((PQ)[\vec{x}/\vec{N}]=P[\vec{x}/\vec{N}]Q[\vec{x}/\vec{N}]\)
+    \item \(x_i[\vec{x}/\vec{N}]=N_i\) dla \(i\in\mathbb{N}\),
+    \item \(y[\vec{x}/\vec{N}]=y\) o ile dla dowolnego \(i\in\mathbb{N},\ y\not\equiv x_i\),
+    \item \((PQ)[\vec{x}/\vec{N}]=P[\vec{x}/\vec{N}]Q[\vec{x}/\vec{N}]\),
 %    \item \((\lambda y.\,P)[\vec{x}/\vec{N}]=\lambda y'.\,P[y/y'][\vec{x}/\vec{N}]\), gdzie \(y'\) jest wcześniej nie występującą zmienną, \(y\not\equiv x_i\)  dla wszystkich \(i\in\mathbb{N}\) i \(y\not\in\bigcup_{i\in\mathbb{N}}FV(N_i)\).
-    \item \((\lambda y.\,P)[\vec{x}/\vec{N}]=\lambda y.\,P[\vec{x}/\vec{N}]\), jeśli \(y\neq x_i\) dla wszystkich \(i\in\mathbb{N}\) i \(y\not\in\bigcup_{i\in\mathbb{N}}FV(N_i)\)
+    \item \((\lambda y.\,P)[\vec{x}/\vec{N}]=\lambda y.\,P[\vec{x}/\vec{N}]\), jeśli \(y\neq x_i\) dla wszystkich \(i\in\mathbb{N}\) i \(y\not\in\bigcup_{i\in\mathbb{N}}FV(N_i)\).
  \end{enumerate}
 \end{definicja}
 

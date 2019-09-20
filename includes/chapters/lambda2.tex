@@ -12,7 +12,7 @@ Przedmiotem tego rozdziału bedzie rachunek \(\lambda\) drugiego rzędu w stylu 
 Za oznaczenia metazmiennych przebiegających zbiór typów \(\mathbb{T}2\) posłużą nam późniejsze litery alfabetu greckiego: \(\sigma,\tau,\rho,\dots\) lub następujące litery alfabetu łacińskiego: \(A,\, B,\, T\).
 \end{definicja}
 \begin{definicja}(Pretermy \(\mathbf{\tilde\Lambda}_\mathbb{T2}\))
-  Niech \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi termowymi} i oznaczali literami alfabetu łacińskiego (\(x,\, y,\, z,\,\dots\)). Zbiór pretermów \(\mathbf{\tilde\Lambda}_\mathbb{T2}\) Systemu F określamy w notacji BNF następującym zapisem:
+  Niech \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych. Zmienne te będziemy nazywali \emph{zmiennymi termowymi} i oznaczali literami alfabetu łacińskiego (\(x,\, y,\, z,\,\dots\)). Zbiór pretermów~\(\mathbf{\tilde\Lambda}_\mathbb{T2}\) Systemu F określamy w notacji BNF następującym zapisem:
   \begin{align*}
       \mathbf{\tilde\Lambda}_\mathbb{T2}\ &\leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbf{\tilde\Lambda}_\mathbb{T2}) \ |\ (\mathbf{\tilde\Lambda}_\mathbb{T2}\,\mathbb{T2}) \ |\ (\lambda V:\mathbb{T2}.\, \mathbf{\tilde\Lambda}_\mathbb{T2})\ |\ (\lambda V:*.\, \mathbf{\tilde\Lambda}_\mathbb{T2})
   \end{align*}
@@ -29,19 +29,19 @@ Stosujemy standardowe konwencje notacyjne:
   & Opuszczamy najbardziej zewnętrzne nawiasy,
   & Aplikacja wiąże prawostronnie,
   & Aplikacja i \(\to\) wiążą mocniej niż \(\lambda-\) i \(\Pi\)-abstrakcja,
-  & Kolejne \(\lambda\)- i \(\Pi\)-abstrakcje zmiennych tych samych typów mogą występować pod wspónym znakiem i wiążą prawostronnie,
+  & Kolejne \(\lambda\)- i \(\Pi\)-abstrakcje zmiennych tych samych typów mogą występować pod wspólnym znakiem i wiążą prawostronnie,
   & Konstruktor typu \(\to\) wiaże prawostronnie.
 \end{easylist}
-  Przykładowo: \(\Pi\alpha\,\beta:*.\,\alpha\to\beta\to\alpha\ \equiv\ \Pi\alpha:*.(\Pi\beta:*.\,(\alpha\to(\beta\to\alpha))))\).
+  Przykładowo: \(\Pi\alpha\,\beta:*.\,\alpha\to\beta\to\alpha\ \equiv\ \Pi\alpha:*.(\Pi\beta:*.\,(\alpha\to(\beta\to\alpha)))\).
 \end{konwencja*}
 
-Wyrażenia \(\lambda\) (\(\lambda\)-termy) w Systemie F to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja ta jest analogiczna do zaprezentowanej w Rozdziale \ref{subsec:lambda_terms_untyped}. Za oznaczenia metazmiennych przebiegające zbiór wyrażeń Systemu F posłużą nam późniejsze litery alfabetu łacińskiego: \(M\), \(N\), \(P\), \(\dots\).
+Wyrażenia \(\lambda\) w Systemie F to klasy abstrakcji \(\alpha\)-konwersji. Konstrukcja ta jest analogiczna do zaprezentowanej w Podrozdziale \ref{subsec:lambda_terms_untyped}. Za oznaczenia metazmiennych przebiegających zbiór wyrażeń Systemu F posłużą nam późniejsze litery alfabetu łacińskiego: \(M\), \(N\), \(P\), \(\dots\)
 
-Oczywistemu rozszerzeniu ulega szereg pojęć z Rozdziału \ref{sec:simple_types}. Poniżej umieszczamy najistotniejsze z nich. 
+Naturalnemu rozszerzeniu ulega szereg pojęć z Rozdziału \ref{sec:simple_types}. Poniżej umieszczamy najistotniejsze z nich. 
 %, ale aby nie wchodzić w szczegóły, ustalmy, że utożsamiać będziemy wyrażenia, które różnią się między sobią wyłącznie zmiennymi związanymi. 
 
   \begin{definicja}(Zbiór \(\mathrm{FV}\) zmiennych wolnych)
-    Przez \(\mathrm{FV}(M)\) oznaczamy zbiór wszystkich wolnych zmiennych termowych i typowych wystepujących w \(M\in\mathbf{\Lambda}_{\mathtt{T}2}\).
+    Przez \(\mathrm{FV}(M)\) oznaczamy zbiór wszystkich wolnych zmiennych termowych i typowych występujących w \(M\in\mathbf{\Lambda}_{\mathtt{T}2}\).
     \begin{align*}
       \mathrm{FV}(x) &= {x},\\
       \mathrm{FV}(\lambda x:\sigma.\,M) &= \mathrm{FV}(\sigma)\cup(\mathrm{FV}(M)\setminus \{x\}),\\
@@ -55,10 +55,10 @@ Oczywistemu rozszerzeniu ulega szereg pojęć z Rozdziału \ref{sec:simple_types
   %W oczywity sposób rozszerzamy Definicję \ref{def:untyped_subterm}.
   \begin{enumerate}[label={(\arabic*)}, ref={\arabic*}]
     \setlength\itemsep{0em}
-    \item \(\mathrm{Sub}(x)=\{x\}\)\label{def:untyped_subterm_1}    \item \(\mathrm{Sub}(MN)=\mathrm{Sub}(M)\cup\mathrm{Sub}(N)\cup\{M\,N\}\)\label{def:untyped_subterm_2}
-    \item \(\mathrm{Sub}(M\sigma)=\mathrm{Sub}(M)\cup\{M\sigma\}\)\label{def:untyped_subterm_2}
-    \item \(\mathrm{Sub}(\lambda x:\alpha.\, M) = \mathrm{Sub}(M)\cup \{\lambda x:\alpha.\, M\}\)\label{def:untyped_subterm_3}
-    \item \(\mathrm{Sub}(\lambda \sigma:*.\, M) = \mathrm{Sub}(M)\cup \{\lambda \sigma:*.\, M\}\)\label{def:untyped_subterm_3}
+    \item \(\mathrm{Sub}(x)=\{x\}\)\label{def:untyped_subterm_1}    \item \(\mathrm{Sub}(MN)=\mathrm{Sub}(M)\cup\mathrm{Sub}(N)\cup\{M\,N\}\)\label{def:untyped_subterm_2},
+    \item \(\mathrm{Sub}(M\sigma)=\mathrm{Sub}(M)\cup\{M\sigma\}\)\label{def:untyped_subterm_2},
+    \item \(\mathrm{Sub}(\lambda x:\alpha.\, M) = \mathrm{Sub}(M)\cup \{\lambda x:\alpha.\, M\}\)\label{def:untyped_subterm_3},
+    \item \(\mathrm{Sub}(\lambda \sigma:*.\, M) = \mathrm{Sub}(M)\cup \{\lambda \sigma:*.\, M\}\)\label{def:untyped_subterm_3}.
   \end{enumerate}
 \end{definicja}
 
@@ -79,27 +79,37 @@ Oczywistemu rozszerzeniu ulega szereg pojęć z Rozdziału \ref{sec:simple_types
   \end{definicja}
 
   \begin{definicja}(\(\alpha\)-konwersja) 
-    Relacją \(=_{\alpha}\) (\(\alpha\)-konwersji) nazywamy najmniejszą w sensie mnogościowym zgodną relację równowazności na \(\mathbf{\tilde\Lambda}_{\mathbb{T}2}\) taką, że
+    Relacją \(=_{\alpha}\) (\(\alpha\)-konwersji) nazywamy najmniejszą w sensie mnogościowym zgodną relację równoważności na \(\mathbf{\tilde\Lambda}_{\mathbb{T}2}\) taką, że
     \begin{enumerate}[label=(\(\alpha\)\arabic*), ref=(\(\alpha\)\arabic*)]
       \setlength\itemsep{0em}
-      \item \(\lambda x:\sigma.\,M =_\alpha \lambda y:\sigma.\,M[x/y]\), jeśli \(M[x/y]\) jest określone i \(y\not\in \mathrm{FV}(M)\).
-      \item \(\lambda \alpha:*.\,M =_\alpha \lambda \beta:*.\,M[\alpha/\beta]\), jeśli \(\beta\) nie występuje w \(M\).
+      \item \(\lambda x:\sigma.\,M =_\alpha \lambda y:\sigma.\,M[x/y]\), jeśli \(M[x/y]\) jest określone i \(y\not\in \mathrm{FV}(M)\),
+      \item \(\lambda \alpha:*.\,M =_\alpha \lambda \beta:*.\,M[\alpha/\beta]\), jeśli \(\beta\) nie występuje w \(M\),
       \item \(\Pi \alpha:*.\,M =_\alpha \Pi \beta:*.\,M[\alpha/\beta]\), jeśli \(\beta\) nie występuje w \(M\).
     \end{enumerate}
   \end{definicja}
 
 \begin{przyklad} Rozważmy następujące przykłady \(\alpha\)-konwertów:
   \begin{align*}
-    \text{a)}\quad &\lambda \alpha:*.\,\lambda x:\alpha.\,x=_\alpha 
-              & \text{b)} \quad& \Pi \alpha:*.\,\alpha\to\alpha =_\alpha\\
-    &\lambda \beta:*.\,\lambda x:\beta.\, x=_\alpha 
-              & &\Pi\beta:*.\,\beta\to\beta  =_\alpha\\ 
-    &\lambda \beta:*.\,\lambda y:\beta.\, y. 
-              & &\Pi\beta:*.\,\beta\to\beta.
+    \begin{aligned}
+    \text{a)}\quad \\ \null\\ \null\\
+    \end{aligned}
+    \begin{aligned}
+      \lambda \alpha:*.\,\lambda x:\alpha.\,x\\
+      =_\alpha \lambda \beta:*.\,\lambda x:\beta.\, x \\
+      =_\alpha\lambda \beta:*.\,\lambda y:\beta.\, y
+    \end{aligned} &\quad & 
+    \begin{aligned}
+    \text{b)}\quad \\ \null\\ \null\\
+    \end{aligned}
+    \begin{aligned}
+      \Pi \alpha:*.\,\alpha\to\alpha\\
+      =_\alpha \Pi\beta:*.\,\beta\to\beta\\ 
+      =_\alpha\Pi\beta:*.\,\beta\to\beta
+    \end{aligned}
   \end{align*}
 \end{przyklad}
 
-Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji \ref{def:statement_simple} i Definicji \ref{def:context_simple}.
+Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji~\ref{def:statement_simple} i Definicji~\ref{def:context_simple}.
 \begin{definicja}(Stwierdzenie, deklaracja)
     \begin{enumerate}
   \setlength\itemsep{0em}
@@ -107,8 +117,10 @@ Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji \re
     \item  Deklaracją nazywamy każde stwierdzenie ze zmienną typową lub zmienną termową w miejscu podmiotu.
   \end{enumerate}
 
-\end{definicja}
+%  Kontekst i sąd definiujemy wówczas analogicznie do pojęć z Rozdziału \ref{sec:simple_types}.
+ \end{definicja}
 \begin{definicja}(\(\lambda 2\)-kontekst, dziedzina, zakres)\label{def:f_statement}
+  Rozważmy następującą definicję rekurencyjną.
   \begin{enumerate}[label=(E\arabic*), ref=(E\arabic*)]
   \setlength\itemsep{0em}
   \item \(\emptyset\) jest \(\lambda 2\)-kontekstem; oznaczamy go parą nawiasów
@@ -119,7 +131,7 @@ Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji \re
     \end{enumerate}
     to \(\Gamma, \alpha:*\) jest \(\lambda 2\)-kontekstem, gdzie 
       \begin{align*} 
-        \mathrm{dom}(\Gamma, \alpha:*)&=(\mathrm{dom}(\Gamma),\, \alpha),\\
+        \mathrm{dom}(\Gamma, \alpha:*)&=\mathrm{dom}(\Gamma) \cup \{\alpha\},\\
         \mathrm{rg}(\Gamma, \alpha:*)&=\mathrm{rg}(\Gamma)\cup\{*\}.
       \end{align*}
   \item Jeśli:\label{def:f_context_3}
@@ -131,16 +143,16 @@ Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji \re
     \end{enumerate}
       to \(\Gamma, x:\rho\) jest \(\lambda 2\)-kontekstem, gdzie 
       \begin{align*} 
-        \mathrm{dom}(\Gamma, x:\rho)&=(\mathrm{dom}(\Gamma), x),\\
+        \mathrm{dom}(\Gamma, x:\rho)&=\mathrm{dom}(\Gamma) \cup  \{x\},\\
       \mathrm{rg}(\Gamma, \alpha:*)&=\mathrm{rg}(\Gamma)\cup\{\rho\}.
       \end{align*}
-      \(\mathrm{dom}(\Gamma)\) i \(\mathrm{rg}(\Gamma)\) nazywamy odpowiednio \emph{dziedziną} i \emph{zakresem} \(\lambda 2\)-kontekstu \(\Gamma\).
+      \(\mathrm{dom}(\Gamma)\) i \(\mathrm{rg}(\Gamma)\) nazywamy odpowiednio \emph{dziedziną} i \emph{zakresem} \(\lambda 2\)-kontekstu~\(\Gamma\).
   \end{enumerate}
     Jeśli \(\Gamma=(a_{11}: a_{12},\,\dots,\,a_{n1}:a_{n2})\) jest \(\lambda 2\)-kontekstem, to przez \(\Gamma[\alpha/\sigma]\) oznaczamy \(\lambda 2\)-kontekst, w którym jeśli \(a_{i1}\in V\), to \(a_{i2}\) zamieniamy na \(x_{i2}[\alpha/\sigma]\)  dla \(1\leq i \leq n\).
 \end{definicja}
 
  \begin{uwaga*}
-   Zauważmy, że przy powyższych rozstrzygnięciach definicyjnych nie zachodzi odpowiednik Twierdzenia \ref{thm:permutation_simple} \ref{thm:permutation_3}: nie możemy rozpatrywać dowolnych permutacji kontekstów w sądach \(\Gamma\vdash M:T\), ponieważ w myśl Definicji \ref{def:f_statement} deklaracje zmiennych termowych w poprawnie zbudowanych \(\lambda 2\)-kontekstach są uzależnione od poprzedzających je deklaracji typowych. 
+   Zauważmy, że przy powyższych rozstrzygnięciach definicyjnych nie zachodzi odpowiednik Twierdzenia \ref{thm:permutation_simple}\ref{thm:permutation_3}: nie możemy rozpatrywać dowolnych permutacji kontekstów w sądach \(\Gamma\vdash M:T\), ponieważ w myśl Definicji \ref{def:f_statement} deklaracje zmiennych termowych w poprawnie zbudowanych \(\lambda 2\)-kontekstach są uzależnione od poprzedzających je deklaracji typowych. 
 
 \end{uwaga*}
 
@@ -148,13 +160,13 @@ Następujący lemat to odpowiednik Lematu \ref{thm:permutation_simple} \ref{thm:
 \begin{lemat}(O zwężaniu)\label{thm:thinning_f}
       Jeśli \begin{enumerate}[label=(\alph*), ref=(\alph*)]
         \setlength\itemsep{0em}
-        \item \(\Gamma'\) i \(\Gamma''\) są kontekstami takimi, że \(\Gamma' \subseteq \Gamma''\)
-        \item \(\Gamma'\vdash M:\sigma\)
+        \item \(\Gamma'\) i \(\Gamma''\) są kontekstami takimi, że \(\Gamma' \subseteq \Gamma''\),
+        \item \(\Gamma'\vdash M:\sigma\),
       \end{enumerate}
       to \(\Gamma''\vdash M:\sigma\).
 \end{lemat}
 \begin{dowod}
-  Dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu. Szczegóły pomijamy \(\Gamma'\vdash M:\sigma\).
+  Dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(\Gamma'\vdash M:\sigma\). Szczegóły pomijamy.
   \qed
 \end{dowod}
 
@@ -169,12 +181,12 @@ Następujący lemat to odpowiednik Lematu \ref{thm:permutation_simple} \ref{thm:
     \item           \(\alpha:*,\,x:\alpha\to\alpha\)           jest
 \(\lambda 2\)-kontekstem      na      podstawie      
 \ref{def:f_context_3}.     Zauważmy,     że
-deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
+deklaracja    \(\alpha:*\)    występuje   w    kontekście    przed
 \(x:\alpha\to\alpha\).\label{ex:f_context_c}
 
     \item \(\alpha:*,\,x:\alpha\to\alpha,\,\beta:*\) jest \(\lambda 2\)-kontekstem na podstawie \ref{def:f_context_2}.\label{ex:f_context_d}
 
-    \item \(\Gamma\equiv(\alpha:*,\,x:\alpha\to\alpha,\,\beta:*,\,y:(\alpha\to\alpha)\to\beta)\) jest \(\lambda 2\)-kontekstem na podstawie \ref{def:f_context_3}. Wówczas \(\mathrm{dom}(\Gamma)=(\alpha,\,x,\,\beta,y)\) i \(\mathrm{rg}(\Gamma)=\{*,\,\alpha\to\alpha,\, \beta,\,(\alpha\to\alpha)\to\beta\}\).\label{ex:f_context_e}
+    \item \(\Gamma\equiv(\alpha:*,\,x:\alpha\to\alpha,\,\beta:*,\,y:(\alpha\to\alpha)\to\beta)\) jest \(\lambda 2\)-kontekstem na podstawie \ref{def:f_context_3}. Wówczas \(\mathrm{dom}(\Gamma)=\{\alpha,\,x,\,\beta,y\}\) i \(\mathrm{rg}(\Gamma)=\{*,\,\alpha\to\alpha,\, \beta,\,(\alpha\to\alpha)\to\beta\}\).\label{ex:f_context_e}
   \end{enumerate}
 \end{przyklad}
 
@@ -185,25 +197,25 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
 
     \vspace{0.5cm}
     (var) &
-      \(\Gamma \vdash x:\sigma\), & jeśli \(x:\sigma\in\Gamma\)\\
+      \(\Gamma \vdash x:\sigma\), & jeśli \(x:\sigma\in\Gamma\),\\
     \vspace{0.5cm}
 
     (app) &
     {\begin{prooftree}
       \Hypo{\Gamma \vdash M:\sigma \to \tau} \Hypo{ \Gamma \vdash N:\sigma}
       \Infer2[]{\Gamma \vdash MN:\tau}
-    \end{prooftree}} & \\
+    \end{prooftree}}, & \\
     \vspace{0.5cm}
 
     (abs) &
     {\begin{prooftree}
       \Hypo{ \Gamma, x:\sigma \vdash M:\tau }
       \Infer1[]{\Gamma \vdash (\lambda\, x:\sigma.\, M):\sigma\to \tau}
-    \end{prooftree}} & \\
+    \end{prooftree}}, & \\
     \vspace{0.5cm}
 
     (form) &
-      \(\Gamma\vdash B:*\), & jeśli \(B\in\mathbb{T}2\) i  \(\mathrm{FV}(B)\subseteq \mathrm{rg}\,\Gamma\)\\
+      \(\Gamma\vdash B:*\), & jeśli \(B\in\mathbb{T}2\) i  \(\mathrm{FV}(B)\subseteq \mathrm{rg}\,\Gamma\),\\
     \vspace{0.5cm}
 
     (\(\Pi\)-e) &
@@ -211,7 +223,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
       \Hypo{ \Gamma \vdash M:(\Pi \alpha:*.\,A)}
       \Hypo{ \Gamma \vdash B:* }
       \Infer2[]{\Gamma \vdash M B : A[\alpha/B]}
-    \end{prooftree}} &
+    \end{prooftree}}, &
      \\
     \vspace{0.5cm}
 
@@ -219,7 +231,7 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
     {\begin{prooftree}
       \Hypo{\Gamma, \alpha : * \vdash M:A } 
       \Infer1[]{\Gamma \vdash \lambda \alpha:*.\,M:\Pi \alpha:*.\,A}
-    \end{prooftree}} & \\
+    \end{prooftree}}. & \\
   \end{tabular}
   \end{center}
 
@@ -339,8 +351,8 @@ deklaracja    \(\alpha:*\)    wysępuje   w    kontekście    przed
   \begin{definicja}(\(\beta\)-redukcja)
     \(\beta\)-redukcją nazywamy najmniejszą (w sensie mnogościowym) zgodną na \(\mathbf{\Lambda}_{\mathbb{T}2}\) relację binarną \(\to_\beta\) taką, że
   \begin{align*}
-    (\lambda x:\sigma.\,M)N &\to_\beta M[x/N].\\
-    (\lambda \alpha:*.\,M) T &\to_\beta M[\alpha/T]
+    (\lambda x:\sigma.\,M)N &\to_\beta M[x/N],\\
+    (\lambda \alpha:*.\,M) T &\to_\beta M[\alpha/T].
   \end{align*}
   \end{definicja}
 
@@ -383,10 +395,10 @@ Lemat \ref{thm:uniqueness_f} (podobnie jak Lemat \ref{thm:type_uniqueness}) zape
 
     Na podstawie lematu o redukcji podmiotu (Lemat \ref{thm:uniqueness_f}) widzimy, że każdy kolejny redukt w poniższym ciągu ma typ nat. 
     \begin{align*}
-      \lambda \alpha : *.\,\lambda f:\alpha\to\alpha.\,\lambda x:\alpha.\,f(f x))\,\mathrm{nat\  suc\  zero} &\to_\beta\\
-      \lambda f : \mathrm{nat}\to\mathrm{nat}.\,\lambda x :\mathrm{nat} .\, f\,(f\,x))\, \mathrm{suc\  zero} &\to_\beta\\
-      (\lambda x:\mathrm{nat}.\,\mathrm{suc}\,(\mathrm{suc}\ x))\,\mathrm{zero} &\to_\beta \\
-      \mathrm{suc}\,(\mathrm{suc}\ \mathrm{zero})&
+      \lambda \alpha : *.\,\lambda f:\alpha\to\alpha.\,\lambda x:\alpha.\,f(f x))\,\mathrm{nat\  suc\  zero}\\
+      \to_\beta\lambda f : \mathrm{nat}\to\mathrm{nat}.\,\lambda x :\mathrm{nat} .\, f\,(f\,x))\, \mathrm{suc\  zero}\\
+      \to_\beta(\lambda x:\mathrm{nat}.\,\mathrm{suc}\,(\mathrm{suc}\ x))\,\mathrm{zero} \\
+      \to_\beta\mathrm{suc}\,(\mathrm{suc}\ \mathrm{zero})&
     \end{align*}
   \end{przyklad}
 
@@ -407,7 +419,7 @@ Zachodzi oczywiście również odpowiednik Lematu \ref{thm:eta_uniqueness_simple
   Dowód przeprowadzamy przez indukcję względem długości wyprowadzenia sądu \(\Gamma\vdash M:\tau\). Szczegóły pomijamy. \qed
 \end{dowod}
 
-\begin{przyklad} Zwróćmy ponownie uwagę na Przykład \ref{ex:f_typing}\ref{ex:f_typing_1}. Ponieważ \(\lambda \beta : *.\,x\beta\nobreak\to_\eta\nobreak x\), to ze względu Lemat \ref{thm:eta_uniqueness_f} wyprowadzalny jest również \(\Gamma\vdash x:\perp\).
+\begin{przyklad} Zwróćmy ponownie uwagę na Przykład \ref{ex:f_typing}\ref{ex:f_typing_1}. Ponieważ \(\lambda \beta : *.\,x\beta\nobreak\to_\eta\nobreak x\), to ze względu na Lemat \ref{thm:eta_uniqueness_f} wyprowadzalny jest również \(\Gamma\vdash x:\perp\).
 \end{przyklad}
 
 W odpowiednich wersjach zachodzą również Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów~\ref{sec:untyped_lambda}~i~\ref{sec:simple_types}.
@@ -428,7 +440,7 @@ Kolejną istotną własnością Systemu F jest silna normalizacja \(\beta\)-redu
 nie jest typowalny w tym systemie.
 \end{wniosek*}
 
-Jako Fakt \ref{fact:cr_f} przedstawimy własność Churcha-Rossera upewniającą nas, że \(\beta\)-redukcja, bez względu na przyjętą strategię, zawsze prowadzi do tych samych rezultatów, a zatem ma sens obliczeniowy. Fakt ten otrzymujemy jako wniosek z lematu Newmana (Twierdzenie \ref{thm:newman_lemma}), wykazując, że \(\beta\)-redukcja ma słabą własność Churcha-Rossera (WCR) \cite[Twierdzenie 11.2.12]{Urzyczyn2006}.
+Jako Fakt \ref{fact:cr_f} przedstawimy własność Churcha-Rossera upewniającą nas, \mbox{\(\beta\)-redukcja}, bez względu na przyjętą strategię, zawsze prowadzi do tych samych rezultatów, a zatem ma sens obliczeniowy. Fakt ten otrzymujemy jako wniosek z lematu Newmana (Twierdzenie \ref{thm:newman_lemma}), wykazując, że \(\beta\)-redukcja ma słabą własność Churcha-Rossera (WCR) \cite[Twierdzenie 11.2.12]{Urzyczyn2006}.
 
 \begin{fakt}(Własność Churcha-Rossera)\label{fact:cr_f}
   Relacja \(\beta\)-redukcji ma własność CR.

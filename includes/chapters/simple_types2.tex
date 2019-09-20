@@ -72,7 +72,7 @@ Późniejsze litery alfabetu greckiego (\(\sigma,\, \tau,\, \rho,\,\dots\)), by�
       %   \mathrm{dom}\,\Gamma &= \{M\in\mathbf{\Lambda}\ |\ (x:\sigma) \in \Gamma \},\\
       %   \mathrm{rg}\,\Gamma &= \{\sigma\in\mathbb{T}\ |\ (x:\sigma) \in \Gamma \}.
       % \end{align*}
-    \item Powiemy, że konteksty \((\Gamma=(D_1, \preceq_1)\) i \(\Delta=(D_2, \preceq_2\) są \emph{rozłączne}, jeśli \(D_1 \cap D_2=\emptyset\).
+    \item Powiemy, że konteksty \(\Gamma=(D_1, \preceq_1)\) i \(\Delta=(D_2, \preceq_2)\) są \emph{rozłączne}, jeśli \({D_1\cap D_2=\emptyset}\).
     \item Kontekst \(\Gamma'\) nazywamy \emph{podkontekstem} \(\Gamma\) i piszemy \(\Gamma'\subseteq\Gamma\), jeśli wszystkie deklaracje występujące w \(\Gamma'\) występują również w \(\Gamma\) z zachowaniem tego samego porządku; kontekst pusty oznaczać będziemy symbolem \(\emptyset\).
     \item Kontekst \(\Gamma'\) nazywamy \emph{permutacją} kontekstu \(\Gamma\), jeśli wszystkie deklaracje w \(\Gamma'\) występują w \(\Gamma\) i odwrotnie.
     % \item Dla kontekstów \(\Delta=(D_1, \preceq_1)\) i \(\Gamma=(D_2, \preceq_2)\) \emph{przekrojem} \(\Delta\) i \(\Gamma\) nazywamy kontekst 
@@ -133,7 +133,7 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 
 \vspace{0.5em}
 
-W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplikować do innego termu, odpowiednio. Dlatego mówimy, że w rachunku \(\lambda\) z typami prostymi termy \emph{zależą} od termów. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność (abstrakcja) jest \emph{pierwszego rzędu}.
+W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplikować do innego termu, odpowiednio. Dlatego mówimy, że w rachunku \(\lambda\) z typami prostymi \emph{termy zależą od termów}. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność (abstrakcja) jest \emph{pierwszego rzędu}.
 
 \begin{definicja}(Wyprowadzenie typu) 
 %  Mówimy, że stwierdzenie \(M:\sigma\) jest \emph{wyprowadzalne} z kontekstu \(\Gamma\), jeśli istnieje skończone drzewo sądów \(\mathcal{P}\) spełniające poniższe warunki:

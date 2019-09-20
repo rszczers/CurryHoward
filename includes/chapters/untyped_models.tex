@@ -19,7 +19,7 @@ Parę \((D,\, \bullet)\), gdzie \(D\) jest zbiorem zawierającym przynajmniej dw
 
 \begin{definicja}\label{def:extens-struct}(Ekstensjonalność)
   Strukturę aplikatywną \(\mathcal{D}=(D,\bullet)\) nazywamy \emph{ekstensjonalną}, jeśli dla dowolnych \(a, b\in D\) spełnia ona warunek
-  \[ (\forall d\in D\ a \bullet d = b \bullet d) \implies a = b \]
+  \[ (\forall d\in D\ a \bullet d = b \bullet d) \implies a = b. \]
 \end{definicja}
 
 \begin{definicja}\label{def:extens-equiv}(Ekstensjonala równoważność) %3.4
@@ -54,14 +54,14 @@ Ustalmy teraz co rozumiemy przez \(\lambda\)-model.
   nazywamy \emph{\(\lambda\)-modelem}, jeśli dla dowolnego wartościowania \(\rho\) spełnione są poniższe własności:
   \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}]
     \setlength\itemsep{0em}
-    \item \(\forall x \in V\ \left(\llbracket x \rrbracket_\rho = \rho(x)\right)\)\label{def:lambda-interpret-1}
-    \item \(\forall M,\,N \in \mathbf{\Lambda}\ (\llbracket MN \rrbracket_\rho = \llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho)\)\label{def:lambda-interpret-2}
-    \item \(\forall x \in V\,\forall M\in \mathbf{\Lambda}\,\forall d\in D\ (\, \llbracket \lambda x.\,M\rrbracket_\rho \bullet d = \llbracket M \rrbracket_{\rho[x/d]})\)\label{def:lambda-interpret-3}
-    \item Dla dowolnych wartościowań \(\rho\),  \(\sigma\) i dowolnego termu \(M\in\nobreak\mathbf{\Lambda}\), jeśli \[\forall x\in\nobreak\mathrm{FV}(M)\ (\rho(x) =\nobreak \sigma(x)),\] to \(\llbracket M\rrbracket_\rho =\nobreak\llbracket M \rrbracket_\sigma\)\label{def:lambda-interpret-4}
-    \item \(\forall M\in\mathbf{\Lambda}\,\forall x, y\in V\ (y\not\in\mathrm{FV}(M)\implies \llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho)\)\label{def:lambda-interpret-5}
+    \item \(\forall x \in V\ \left(\llbracket x \rrbracket_\rho = \rho(x)\right)\)\label{def:lambda-interpret-1},
+    \item \(\forall M,\,N \in \mathbf{\Lambda}\ (\llbracket MN \rrbracket_\rho = \llbracket M\rrbracket_\rho \bullet \llbracket N \rrbracket_\rho)\)\label{def:lambda-interpret-2},
+    \item \(\forall x \in V\,\forall M\in \mathbf{\Lambda}\,\forall d\in D\ (\, \llbracket \lambda x.\,M\rrbracket_\rho \bullet d = \llbracket M \rrbracket_{\rho[x/d]})\)\label{def:lambda-interpret-3},
+    \item Dla dowolnych wartościowań \(\rho\),  \(\sigma\) i dowolnego termu \(M\in\nobreak\mathbf{\Lambda}\), jeśli \[\forall x\in\nobreak\mathrm{FV}(M)\ (\rho(x) =\nobreak \sigma(x)),\] to \(\llbracket M\rrbracket_\rho =\nobreak\llbracket M \rrbracket_\sigma\)\label{def:lambda-interpret-4},
+    \item \(\forall M\in\mathbf{\Lambda}\,\forall x, y\in V\ (y\not\in\mathrm{FV}(M)\implies \llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho)\)\label{def:lambda-interpret-5},
 %    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\)\label{def:lambda-interpret-6}
 %    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\llbracket M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\)\label{def:lambda-interpret-6}
-    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\left(\forall d\in D\, \llbracket M \rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]}\right)\implies \llbracket \lambda x.\,M \rrbracket_\rho=\llbracket \lambda x.\,N\rrbracket_\rho\right)\)\label{def:lambda-interpret-6}
+    \item \(\forall M,N\in\mathbf{\Lambda}\,\left(\left(\forall d\in D\, \llbracket M \rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]}\right)\implies \llbracket \lambda x.\,M \rrbracket_\rho=\llbracket \lambda x.\,N\rrbracket_\rho\right)\)\label{def:lambda-interpret-6}.
   \end{enumerate}
 
   % Jeśli dla \(\lambda\)-interpretacji \(\mathcal{M}=(D,\,\bullet,\,\llbracket\,\rrbracket)\) spełniony jest warunek
@@ -89,7 +89,7 @@ Określając działanie \(\bullet\) wymagamy w warunku \ref{def:lambda-interpret
     &= \llbracket (\lambda x.\,M) N\rrbracket_\rho \\
     &= \llbracket \lambda x.\,M \rrbracket_\rho \bullet b \\
     &= \llbracket M \rrbracket_{\rho[x/b]} \\
-    &= \llbracket M[x/N] \rrbracket_\rho\tag{\dagger}\label{eq:abstraction-to-substitution-in-model}
+    &= \llbracket M[x/N]. \rrbracket_\rho\tag{\dagger}\label{eq:abstraction-to-substitution-in-model}
 \end{align*}
 Ostatnia równość wymaga dowodu: przeprowadza się go indukcją strukturalną względem \(M\). Szczegółowe uzasadnienia można znaleźć w \cite[Tw. 15.10(a)]{Hindley:2008:LCI:1388400}. Interpretacja rezultatu operacji podstawienia termu \(N\) za zmienną \(x\) nie różni się w tym wypadku niczym od zmiany wartościowania \(\rho\) dla zmiennej \(x\) na desygnat \(\llbracket N\rrbracket_\rho\) (symbolicznie: \(\rho[x/\llbracket N \rrbracket_\rho])\), bowiem w wyniku \(\beta\)-redukcji żadna nowa zmienna nie zostaje związana; przez \(N\) zastąpione zostają wszystkie wolne wystąpienia \(x\) w \(M\). Zachodzi więc równość
 \begin{align*}
@@ -107,7 +107,7 @@ Zauważmy wpierw jednak, że zgodnie z warunkiem \ref{def:lambda-interpret-3}
 \begin{align*}
   (\forall d\in D\ \llbracket M \rrbracket_{\rho[x/d]}=\llbracket N \rrbracket_{\rho[x/d]})
 \iff
-\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho 
+\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho.
 \tag{\dagger\dagger}\label{eq:valuation-replace}
 \end{align*}
 %Oczekujemy od \(\lambda\)-modelu, że interpretacją \(\lambda\)-abstrakcji \(\lambda x.\,M\) będzie obiekt, który 
@@ -121,7 +121,7 @@ które są sobie równe, czyli
 \forall d\in D\ \llbracket \lambda x. M \rrbracket_\rho\bullet d = \llbracket \lambda x. N \rrbracket_\rho\bullet d,
 \]
 to interpretacje obu \(\lambda\)-abstrakcji również muszą być sobie równe. Zgodnie z dyskusją we wstępie do niniejszego rozdziału,
-nie możemy interpretować \(\lambda\)-abstrakcji jako funkcji \(D\to D\), nic nie stoi jednak na na przeszkodzie, żeby scharakteryzować je  
+nie możemy interpretować \(\lambda\)-abstrakcji jako funkcji \(D\to D\). Nic nie stoi jednak na na przeszkodzie, żeby scharakteryzować je  
 czysto semantycznie przez operację w \(\lambda\)-modelu.
 
 
@@ -133,7 +133,7 @@ czysto semantycznie przez operację w \(\lambda\)-modelu.
   % \[\forall M,N\in\mathbf{\Lambda}\,\forall d\in D\,\left(\llbracket M\rrbracket_{\rho[x/d]} = \llbracket N\rrbracket_{\rho[x/d]}\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right).\]
 Zgodnie z \eqref{eq:valuation-replace} możemy przepisać warunek \ref{def:lambda-interpret-6} do następującej równoważnej postaci
   \begin{align}
-    \forall M,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right)\tag{vi'}\label{eq:weak-extensional}
+    \forall M,N\in\mathbf{\Lambda}\,\left(\llbracket\lambda x.\,M\rrbracket_\rho \sim \llbracket \lambda x.\,N\rrbracket_\rho\ \implies \llbracket \lambda x.\,M\rrbracket_\rho = \llbracket \lambda x.\,N\rrbracket_\rho\right).\tag{vi'}\label{eq:weak-extensional}
     \end{align}  
 Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warunkiem \emph{słabej ekstensjonalności} \(\lambda\)-abstrakcji.
 
@@ -143,7 +143,7 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
     \[
       \llbracket M \rrbracket_\rho = \llbracket N \rrbracket_\rho,
     \]
-    to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) i piszemy \[\mathcal{M},\rho\models M=N\].
+    to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) i piszemy \(\mathcal{M},\rho\models M=N.\)
 
     Jeśli każde wartościowanie \(\rho\) spełnia równość \(M=N\), to mówimy, że równość \(M=N\) jest \emph{prawdziwa} w \(\mathcal{M}\) (lub \(\mathcal{M}\) \emph{spełnia} \(M=N\)) i piszemy \(\mathcal{M}\models M=N\).
   \end{definicja}
@@ -180,9 +180,9 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
       \begin{enumerate}
       \setlength\itemsep{0em}
         \item[\((\alpha)\)] Wówczas na podstawie warunku \ref{def:lambda-interpret-5} mamy
-      \(\llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho\) 
+      \(\llbracket\lambda x.\,M\rrbracket_\rho = \llbracket \lambda y.\,M[x/y]\rrbracket_\rho\). 
         \item[\((\beta)\)] Wówczas na podstawie \eqref{eq:abstraction-to-substitution-in-model} mamy
-          \(\llbracket(\lambda x.\,M)N\rrbracket_\rho = \llbracket \lambda y.\,M[x/N]\rrbracket_\rho\) 
+          \(\llbracket(\lambda x.\,M)N\rrbracket_\rho = \llbracket \lambda y.\,M[x/N]\rrbracket_\rho\).
        \item[\((\rho)\)] Wynika ze zwrotności semantycznej równości.
       \end{enumerate}    
       W każdym z powyższych przypadków \(\mathcal{M}\models M=N\).
@@ -195,7 +195,7 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
           \[\llbracket PM'\rrbracket_\rho  =
             \llbracket P\rrbracket_\rho \bullet \llbracket M'\rrbracket_\rho =
             \llbracket P\rrbracket_\rho \bullet \llbracket N'\rrbracket_\rho =
-            \llbracket PN'\rrbracket_\rho\]
+            \llbracket PN'\rrbracket_\rho.\]
         \item[(r-con)] Analogicznie do (l-con).
         \item[(\(\xi\))] Wówczas na podstawie warunku \ref{def:lambda-interpret-6} mamy
           \(\llbracket \lambda x.\,M \rrbracket_\rho=\llbracket \lambda x.\,N\rrbracket_\rho\).
@@ -284,7 +284,7 @@ widzimy, że samoaplikacja jest wówczas poprawnie określona:
 \[
   \varphi\bullet\varphi = (\varphi_1(\varphi_0),\,\varphi_2(\varphi_1),\,\varphi_3(\varphi_2),\,\dots).
 \]
-Wszystkie symbole użyte w powyższym wtym prowadzeniu zostaną zdefiniowane w tym podrozdziale.
+Wszystkie symbole użyte w powyższym wprowadzeniu zostaną zdefiniowane w tym podrozdziale.
 
 \paragraph{Elementy teorii porządku} 
 Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jeśli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kresem górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
@@ -304,7 +304,7 @@ Ustalmy, że jeśli \(D'\), \(D''\), \(\dots\)  są cpo, to odpowiadające im po
 \begin{przyklad}\label{ex:scott_d0}
   Ustalmy \(\perp\not\in \mathbb{N}\) i niech \(\mathbb{N}^{+}=\mathbb{N}\cup{\perp}\). Określmy na \(\mathbb{N}^+\) następującą relację:
   \begin{align*}
-    a \sqsubseteq b \quad \Leftrightarrow\quad (a=\perp\ \land\ b\in \mathbb{N})\ \lor\ a = b
+    a \sqsubseteq b \quad \Leftrightarrow\quad (a=\perp\ \land\ b\in \mathbb{N})\ \lor\ a = b.
   \end{align*}
   \(\sqsubseteq\) jest oczywiście zwrotna, przechodnia i antysymetryczna. Widzimy, że \(\mathbb{N}^{+}\) ma względem niej element najmniejszy (jest nim  \(\perp\)). Podzbiory jednoelementowe \(\mathbb{N}^{+}\) i podzbiory dwuelementowe zawierające \(\perp\) to wszystkie skierowane podzbiory \(\mathbb{N}^{+}\). Widzimy, że każdy z nich ma kres górny, a zatem \(\mathbb{N}^{+}\) jest cpo.
 \end{przyklad}
@@ -316,7 +316,8 @@ Niech \(D\) i \(D'\) bedą cpo i \(\varphi: D\to D'\).
 \item Powiemy, że \(\varphi\) jest \emph{monotoniczna}, jeśli \(\varphi(a) \sqsubseteq' \varphi(b)\) dla \(a\sqsubseteq b\).
 \item Powiemy, że \(\varphi\) jest \emph{ciągła (w sensie Scotta}\footnote{Funkcje te są ciągłe w topologicznym sensie względem topologii Scotta; taką topologię można określić na każdym cpo.}), jeśli \(\varphi(\bigsqcup X) = \bigsqcup \varphi (X)\) dla wszystkich skierowanych podzbioru \(X\subseteq D\).\label{def:m_cont_2}
 \item Powiemy, że \(\varphi\) jest \emph{ścisła}\footnote{Każdą semantykę, w której \(\varphi(\perp)\neq\perp'\) dla pewnej funkcji \(\varphi\), nazywamy \emph{nieścisłą} (ang. \emph{non-strict}).} 
- (ang. \emph{strict}), jeśli \(\varphi(\perp)=\perp'\). Funkcje, które nie są ścisłe, nazywamy niekiedy \emph{leniwymi} (ang. \emph{lazy})\end{enumerate}
+ (ang. \emph{strict}), jeśli \(\varphi(\perp)=\perp'\). Funkcje, które nie są ścisłe, nazywamy niekiedy \emph{leniwymi} (ang. \emph{lazy}).
+\end{enumerate}
 Symbolem \([D\to D']\) oznaczamy zbiór wszystkich funkcji ciągłych ze zbioru \(D\)~do~\(D'\).
 \end{definicja}
 
@@ -342,7 +343,7 @@ Jeśli \(D\) i \(D'\) są cpo, to \([D\to D']\) jest cpo.
   %   \item 
       Określmy na \([D\to D']\) relację  \(\preceq\):
 \[
-\varphi \preceq \psi\quad \Leftrightarrow\quad \forall d\in D \left(\varphi(d) \sqsubseteq' \psi(d)\right),
+\varphi \preceq \psi\quad \Leftrightarrow\quad \forall d\in D \left(\varphi(d) \sqsubseteq' \psi(d)\right).
 \]
 Ponieważ \(D'\) jest cpo, to aby wykazać, że \([D\to D']\) ma element najmniejszy, wystarczy, że rozpatrzymy \(\perp(d)=\perp'\) dla \(d\in D\).
 
@@ -366,7 +367,11 @@ Niech teraz \(\Phi\) będzie skierowanym podzbiorem \([D\to D']\).
                         &= \bigsqcup \left\{\bigsqcup \Phi d\ |\ d\in X\right\}
                         = \bigsqcup \Psi_\Phi(X).
           \end{align*}
-        \item Niech \(\varphi\in\Phi\). Wówczas dla dowolnego \(d\in D\) mamy \(\varphi(d)\sqsubseteq' \bigsqcup \Phi d = \Psi_{\Phi}(d)\). Zatem \(\varphi\preceq\Psi_\Phi\) i \(\Psi_\Phi\) jest ograniczeniem górnym \(\Phi\). Jeśli \(\Psi_\Phi\) nie jest kresem górnym \(\Phi\), to istnieje \(\chi\) takie, że \(\chi\preceq\Psi_\Phi\) oraz \(\chi\) jest kresem górnym \(\Phi\). Wówczas dla dowolnego \(d\in D\) mamy, że \(\chi(d)\) jest kresem górnym \(\Phi d\) oraz \(\chi(d)\sqsubseteq'\Psi_\Phi(d)\). Ale \(\Psi_\Phi(d)=\bigsqcup\Phi d\), a zatem \(\chi(d)\) nie jest kresem górnym \(\Phi d\). Stąd \(\Psi_\Phi\) jest kresem górnym \(\Phi\).   
+% Niech chi będzie ograniczeniem górnym zbioru Phi. Wtedy dla każdego d\in D mamy phi(d) \sqsubseteq chi(d) dla każdego phi \in Phi, a więc Psi_Phi(d)=sup{\phi(d):\phi \in Phi}\sqsubseteq chi(d). Zatem Psi_Phi \preceq chi.
+        \item Niech \(\varphi\in\Phi\). Wówczas dla dowolnego \(d\in D\) mamy \(\varphi(d)\sqsubseteq' \bigsqcup \Phi d = \Psi_{\Phi}(d)\). Zatem \(\varphi\preceq\Psi_\Phi\) i stąd \(\Phi\) jest ograniczony, a \(\Psi_\Phi\) jest jego ograniczeniem górnym. Niech \(\chi\) będzie dowolnym ograniczeniem górnym zbioru \(\Phi\). Oznacza to, że dla każdego \(d\in D\) mamy, że \(\varphi(d) \sqsubseteq'\chi(d)\) dla dowolnego \(\varphi\in \Phi\). Wówczas \(\Psi_\Phi(d)\sqsubseteq'\chi(d)\) dla dowolnego \(d\in D\) i wobec tego \(\Psi_\Phi\preceq \chi\). Zatem \(\Psi_\Phi\) jest kresem górnym \(\Phi\).\qed
+          
+          % Jeśli \(\Psi_\Phi\) nie jest kresem górnym \(\Phi\), to istnieje \(\chi\) takie, że \(\chi\preceq\Psi_\Phi\) oraz \(\chi\) jest kresem górnym \(\Phi\). Wówczas dla dowolnego \(d\in D\) mamy, że \(\chi(d)\) jest kresem górnym \(\Phi d\) oraz \(\chi(d)\sqsubseteq'\Psi_\Phi(d)\). Ale \(\Psi_\Phi(d)=\bigsqcup\Phi d\), a zatem \(\chi(d)\) nie jest kresem górnym \(\Phi d\). Stąd \(\Psi_\Phi\) jest kresem górnym \(\Phi\).   
+
         % \item \(\Phi\) jest ograniczony w \([D\to D']\). Istotnie, przypuśćmy, że dla dowolnego \(f\in[D\to D']\) istnieje \(g\in\Phi\) taki, że \(f\preceq g\). Wówczas w szczególności \(\Psi_\Phi \preceq g\) i stąd również
         %   \[
         %     \bigsqcup \Phi d \subseteq' g(d)\quad \text{dla wszystkich}\ d\in D.
@@ -386,7 +391,7 @@ Niech teraz \(\Phi\) będzie skierowanym podzbiorem \([D\to D']\).
 \begin{definicja}(Projekcja) %5.5
 Niech \(D\) i \(D'\) będą cpo. \emph{Projekcją} z \(D'\) do \(D\) nazywamy parę \((\varphi, \psi)\) funkcji \(\varphi \in [D\to D']\), \(\psi \in [D'\to D]\) takich, że
 \begin{align}
-\psi\circ \varphi = I_D\quad \text{oraz}\quad \varphi\circ \psi \preceq I_{D'} %\tag{\textasteriskcentered},
+\psi\circ \varphi = I_D\quad \text{oraz}\quad \varphi\circ \psi \preceq I_{D'}, %\tag{\textasteriskcentered},
 \end{align}
 gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorze \(D\) i \(D'\), odpowiednio.
 \end{definicja}
@@ -394,7 +399,7 @@ gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorz
 \begin{figure}[h]
   \centering
 \includegraphics[width=0.37\linewidth]{../embeding_i}
-  \caption{Projekcja \((\varphi_n,\psi_n)\) z \(D_{n+1}\) do \(D_n\)}.\label{fig:projection}
+  \caption{Projekcja \((\varphi_n,\psi_n)\) z \(D_{n+1}\) do \(D_n\).}\label{fig:projection}
 \end{figure}
 
   Okazuje się, że ciąg cpo \(\{D_n\}_{n=0}^\infty\) skonstruowany w myśl Wniosku \ref{thm:scott_seq} można określić definiując dla każdego \(n\in\mathbb{N}\) projekcję \((\varphi_n,\psi_n)\) z \(D_{n+1}\) do \(D_n\). Istotnie, spróbujmy skonstruować taką rodzinę projekcji. Wybierzmy \(d\in D_0\) i niech \(\kappa_d\) oznacza funkcję stałą 
@@ -408,8 +413,8 @@ gdzie \(\perp_0\) jest elementem najmniejszym \(D_0\). Widzimy, że \(\varphi_0:
 
 Dla \(n>0\) określamy teraz \(\varphi_n : D_n \to D_{n+1}\) i \(\psi_{n+1}: D_{n+1}\to D_n\) następującym wzorem:
 \begin{align*}
-  \varphi_n(\sigma) &= \varphi_{n-1}\circ\sigma\circ\psi_{n-1}\quad \text{dla}\ \sigma\in D_n,\\ 
-  \psi_n(\tau) &= \psi_{n-1}\circ\varphi_{n-1}\quad &\text{dla}\ \tau \in D_{n+1}
+  \varphi_n(\sigma) &= \varphi_{n-1}\circ\sigma\circ\psi_{n-1},\quad \text{dla}\ \sigma\in D_n,\\ 
+  \psi_n(\tau) &= \psi_{n-1}\circ\varphi_{n-1},\quad \text{dla}\ \tau \in D_{n+1}.
 \end{align*}
 Wówczas \(\varphi_n\in[D_n\to D_{n+1}]\), \(\psi_n\in[D_{n+1}\to D_n]\) i \(\psi_n\circ\varphi_n=I_{D_n}\) oraz \(\varphi_n\circ\psi_n\preceq I_{D_{n+1}}.\) \cite[Lemat 16.28]{Hindley:2008:LCI:1388400}. A zatem \((\varphi_n,\psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\).
 
@@ -448,15 +453,14 @@ W myśl Definicji \ref{def:proj-consecutive}, dla każdego \(n\in \mathbb{N}\) p
 Mając zadane dwa cpo \(D\), \(D'\) możemy zapytać czy istnieje włożenie jednego z nich w drugi. Zauważmy, że jeśli \(\varphi,\,\psi\) jest projekcją z \(D'\) do \(D\), to \(\phi\) jest włożeniem \(D\) w \(D'\) (w sensie topologii Scotta). Ciąg \(\{D_n\}_{n=0}^\infty\) intuicyjnie przypomina więc wstępujący ciąg zbiorów. Formalizuje to następująca definicja.
 
 
-\begin{definicja}%5.8
+\begin{definicja}(\(D_\infty\)) %5.8
 Niech \(D_\infty\) oznacza zbiór wszystkich nieskończonych ciągów postaci
-\[
-d=(d_0,\,d_1,\,\dots)
-\]
-takich, że dla wszystkich \(n\geq 0\) mamy, że \(d_n\in D_n\) oraz \(\psi_n (d_{n+1}) = d_n\). 
+\( d=(d_0,\,d_1,\,\dots) \)
+  takich, że dla wszystkich \(n\geq 0\) mamy, że \(d_n\in D_n\) oraz \({\psi_n (d_{n+1}) = d_n}\). 
+
 Na zbiorze \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący sposób:
 \[
-(d_0,\,d_1,\,\dots) \sqsubseteq (d_0',\,d_1',\,\dots) \quad \Leftrightarrow\quad  \forall n\geq 0\  (d_n\sqsubseteq d_n') 
+(d_0,\,d_1,\,\dots) \sqsubseteq (d_0',\,d_1',\,\dots) \quad \iff\quad  \forall n\geq 0\  (d_n\sqsubseteq d_n').
 \]
 
   Przez \(d_n\) oznaczać będziemy \(n\)-ty element ciągu \(d\). Jeśli \(X\subset D_\infty\), to określamy \(X_n=\{ d_n\ |\ d\in X\}\).
@@ -464,7 +468,8 @@ Na zbiorze \(D_\infty\) określamy relację \(\sqsubseteq\) w nastepujący spos
 \end{definicja}
 
 Przy powyższym określeniu \(D_\infty\) okazuje się być cpo \cite[Tw. 16.36]{Hindley:2008:LCI:1388400}.
-
+Dodatkowo, określamy projekcję z \(D_\infty\) do \(D_n\) dla każdego \(n\in\mathbb{N}\).
+Wymaga to dowodu (patrz Fakt \ref{fact:projection}\ref{fact:projection_1}), który pomijamy.
 % \begin{fakt}[{\cite[16.36]{Hindley:2008:LCI:1388400}}]%5.10
 % \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
 %   \setlength\itemsep{0em}
@@ -477,10 +482,8 @@ Przy powyższym określeniu \(D_\infty\) okazuje się być cpo \cite[Tw. 16.36]{
 % \end{enumerate}
 % \end{fakt}
 
-Dodatkowo, określamy projekcję z \(D_\infty\) do \(D_n\) dla każdego \(n\in\mathbb{N}\).
-Wymaga to dowodu (patrz Fakt \ref{fact:projection}\ref{fact:projection_1}), który pomijamy.
 
-\begin{definicja}[\(D_\infty\)]%5.11
+\begin{definicja}%5.11
 Dla \(n\geq 0\) określamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(\varphi_{\infty n}: D_\infty \to D_n\), gdzie 
 \begin{align*}
 \varphi_{n\infty}(d) &= (\varphi_{n0}(d),\,\varphi_{n1}(d),\,\dots)\ \text{dla}\ d\in D_n,\\
@@ -517,7 +520,7 @@ Kolejną istotną obserwacją jest fakt, że dziedzina każdej funkcji z \(D_n\)
 \begin{definicja}%5.13
   Dla \(a,\,b\in D_\infty\) określamy:
 \begin{align*}
-a \bullet b = \bigsqcup\left\{\varphi_{n\infty}(a_{n+1}(b_n))\ |\ n\geq 0\right\}%\tag{\textasteriskcentered}
+a \bullet b = \bigsqcup\left\{\varphi_{n\infty}(a_{n+1}(b_n))\ |\ n\geq 0\right\}.%\tag{\textasteriskcentered}
 \end{align*}
 \end{definicja}
 
@@ -540,7 +543,7 @@ Dowód, że operacja ta nie wyprowadza poza zbiór funkcji ciągłych pomijamy.
 % Ostatecznie, na podstawie Faktu \ref{fact:model_a} i Faktu \ref{fact:model} zachodzi następujące twierdzenie.
 
 \begin{fakt}({\cite[16.55]{Hindley:2008:LCI:1388400}})
-  \((D_\infty\) jest \(\lambda\)-modelem.
+  \(D_\infty\) jest \(\lambda\)-modelem.
 \end{fakt}
 % \begin{dowod}
 % Określmy:
