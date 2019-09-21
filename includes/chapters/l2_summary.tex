@@ -2,7 +2,7 @@
 
 Języki programowania to narzędzia służące do reprezentowania pojęć i ich wzajemnych zależności w sposób umożliwiający efektywne tłumaczenie ich na język maszynowy. Myśleć można o nich w bardzo uproszczony sposób jak o środkach komunikacji człowieka z maszyną.
 
-GHC (ang. \emph{Glasgow Haskell Compiler}) to otwartoźródłowy kompilator języka Haskell. Kompilatorem nazywamy program, którego zadaniem jest tłumaczenie kodu programu napisanego w danym języku (w \emph{języku kodu źródłowego}) na kod w innym języku (języku \emph{wyjściowym}) z zachowaniem własności programu wejściowego. GHC jest stosunkowo wyjątkowym kompilatorem, gdyż kompilację do kodu wyjściowego poprzedza w nim kompilacja do kodu \emph{pośredniego}, który jest rozszerzonym wariantem Systemu F w stylu Churcha \cite{Sulzmann2007}. 
+GHC (ang. \emph{Glasgow Haskell Compiler}) to otwartoźródłowy kompilator języka Haskell. Kompilatorem nazywamy program, którego zadaniem jest tłumaczenie kodu programu napisanego w danym języku (w~języku \emph{kodu źródłowego}) na kod w innym języku (języku \emph{wyjściowym}) z zachowaniem własności programu wejściowego. GHC jest stosunkowo wyjątkowym kompilatorem, gdyż kompilację do kodu wyjściowego poprzedza w nim kompilacja do kodu \emph{pośredniego}, który jest rozszerzonym wariantem Systemu F w stylu Churcha \cite{Sulzmann2007}. 
 
 Język Haskell to polimorficzny statycznie typowany, leniwy, czysto funkcyjny język programowania. Leniwość odnosi się do strategii ewaluacji nakreślonej w Rozdziale \ref{subsec:lazy_eval}. Funkcyjność języka polega na tym, że funkcje są w nim obiektami pierwszego rzędu, tzn. można z nich budować struktury danych i przesyłać jako argument tak jak pozostałe obiekty języka. Czystość oznacza ograniczenie efektów ubocznych: funkcje nie współdzielą stanu i zwracają za każdym razem tę samą wartość obliczenia. 
 
@@ -108,7 +108,7 @@ Typy konstruktorów typów nazywamy \emph{gatunkami} (ang. \emph{kind}). Zbiór 
 Mamy   więc    \(\ast:\square\),   \(\ast\to\ast    :   \square\),
 \((\ast\to\ast)\to\ast\to\ast\)  itp.   Termy,  które   mają  typ
 \(\ast\)  nazywamy   wówczas  \emph{konstruktorami  właściwymi}.
-Łącznie, symbole \(\ast\)  i \(\square\) nazywamy \emph{rodzajami}
+Łącznie, symbole \(\ast\)  i \(\square\) nazywamy \emph{sortami}
 (ang. \emph{sort}).
 
 System \(\lambda P\) rozszerza typy proste o abstrakcję umożliwiającą \emph{uzależnienie typów od termów}. Typy takie mają postać \(\lambda x:A.\,M\), gdzie \(M\) jest typem, a \(x\) zmienną typową. 

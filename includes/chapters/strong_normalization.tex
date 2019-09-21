@@ -49,7 +49,7 @@ Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} orygi
     \begin{enumerate}[label=(\arabic*)]
     \setlength\itemsep{0em}
 
-    \item Niech \(M\in\llbracket \sigma \to \rho\rrbracket\) i niech \(x\) bedzie dowolną \(\lambda\)-zmienną. Z części \ref{def:l1_b} założenia indukcyjnego mamy \(x\in\llbracket \sigma \rrbracket\), zatem z definicji \(\llbracket \sigma\to\rho\rrbracket\) mamy \(Mx\in\llbracket p\rrbracket\). Ponieważ z części \ref{def:l1_a} założenia indukcyjnego \(\llbracket\rho\rrbracket\in\mathrm{SN}\), to \(Mx\in\mathrm{SN}\) i w konsekwencji \(\llbracket\sigma\to\rho\rrbracket\subseteq \mathrm{SN}\).
+    \item Niech \(M\in\llbracket \sigma \to \rho\rrbracket\) i niech \(x\) bedzie dowolną \(\lambda\)-zmienną. Z~części \ref{def:l1_b} założenia indukcyjnego mamy \(x\in\llbracket \sigma \rrbracket\), zatem z~definicji \(\llbracket \sigma\to\rho\rrbracket\) mamy \(Mx\in\llbracket p\rrbracket\). Ponieważ z części \ref{def:l1_a} założenia indukcyjnego \(\llbracket\rho\rrbracket\in\mathrm{SN}\), to \(Mx\in\mathrm{SN}\) i w konsekwencji \(\llbracket\sigma\to\rho\rrbracket\subseteq \mathrm{SN}\).
     \item Niech \(P\in\llbracket \sigma \rrbracket\). Wówczas z części \ref{def:l1_a} założenia indukcyjnego \(P\in\mathrm{SN}\). Chcemy pokazać, że \(xN_1 N_2 \dots N_k \in \llbracket \rho \rrbracket\). Z części \ref{def:l1_b} założenia indukcyjnego \[xN_1 N_2 \dots N_k N_{k+1} \in \llbracket \rho \rrbracket.\] Ustalając \(N_{k+1}\equiv P\) otrzymujemy tezę.
      \end{enumerate}
   \end{enumerate}
@@ -66,15 +66,15 @@ Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} orygi
   Wówczas \((\lambda x.\,M)N_0 N_1 \dots N_k \in \mathrm{SN}\).
 \end{lemat}
 \begin{dowod}
-  (Ad  absurdum) Przypuśćmy,  że  \(P_0\equiv(\lambda  x.\, M)N_0  N_1
-  \dots N_k \not\in\mathrm{SN}\). Wówczas istnieje nieskończony ciąg redukcji
+  (Ad  absurdum) Przypuśćmy,  że  \[P_0\equiv(\lambda  x.\, M)N_0  N_1
+  \dots N_k \not\in\mathrm{SN}.\] Wówczas istnieje nieskończony ciąg redukcji
   \[
     P_0\to P_1 \to \dots
   \]
   Każdy podterm \(\lambda\)-termu silnie normalizowalnego jest silnie
   normalizowalny. Ponieważ \(P_0\equiv M[x/N_0]N_0  N_1 \dots N_k
-  \in\mathrm{SN}\), to \(M[x/N_0],\,N_0,\,  N_1,\, \dots,\, N_k
-  \in\mathrm{SN}\). Na podstawie Lematu \ref{thm:sn_lem2'} mamy ponadto, że \(M\in\mathrm{SN}\). Wobec tego dla pewnego \(n\in\mathbb{N}\) redukcji ulega redeks czołowy:
+  \in\mathrm{SN}\), to \[M[x/N_0],\,N_0,\,  N_1,\, \dots,\, N_k
+  \in\mathrm{SN}.\] Na podstawie Lematu \ref{thm:sn_lem2'} mamy ponadto, że \(M\in\mathrm{SN}\). Wobec tego dla pewnego \(n\in\mathbb{N}\) redukcji ulega redeks czołowy:
   \begin{align*}
     P_n\equiv (\lambda x.\,M')N'_0 N'_1 \dots N'_k\to_\beta M'[x/N'_0]N'_0 N'_1\dots N'_k\equiv P_{n+1},
   \end{align*}
@@ -97,9 +97,9 @@ Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} orygi
     \setlength\itemsep{0em}
     \item Jeśli \(\tau\) jest zmienną typową, to \(\llbracket \tau \rrbracket=\mathrm{SN}\). Wobec tego problem sprowadza się do Lematu \ref{thm:sn_lemat2}.  
     \item Przypuśćmy, że \(\tau\equiv \sigma\to\rho\) i niech \(M[x/N_0]N_1\dots N_k \in \llbracket \sigma\to \rho \rrbracket\). Wybierzmy dowolny \(P\in\llbracket\sigma\rrbracket\). Wówczas \(M[x/N_0] N_1 \dots N_k N_{k+1}\in\llbracket \rho\rrbracket\). Z założenia indukcyjnego mamy jednak, że 
-      \(
+      \[
         (\lambda x.\,M)N_0 N_1\dots N_k N_{k+1}\in\llbracket \rho \rrbracket.
-      \)
+      \]
       Wystarczy więc przyjąć \(N_{k+1}\equiv P\) i z definicji \(\llbracket \sigma \to \rho \rrbracket\) mamy, że \((\lambda x.\,M)N_0 N_1 \dots N_k \in \llbracket \sigma \to \rho \rrbracket\).
   \end{enumerate}
   \qed
@@ -118,13 +118,13 @@ Rozumowanie przedstawione w tym dowodzie, tzw. \emph{computability method} orygi
   Dowód będzie przebiegał przez indukcję względem wyprowadzenia \(\Gamma\vdash M:\tau\). Niech \(\Gamma=(x_1:\tau_1,\,x_2:\tau_2,\,\dots,\,x_n:\tau_n)\) będzie kontekstem dla którego istnieje wyprowadzenie \(J:\:\Gamma\vdash M:\tau\). Wybierzmy \(N_1\in\llbracket\tau_1 \rrbracket,\,N_2\in\llbracket\tau_2\rrbracket,\,\dots,\,N_n\in\llbracket\tau_n\rrbracket\). Rozważmy następujące przypadki:
   \begin{enumerate}[label=(\alph*)]
     \setlength\itemsep{0em}
-    \item \(J\) jest konsekwencją reguły \emph{var}. Wówczas \(J\) jest postaci \(\Gamma \vdash x_i:\tau\) dla pewnego \(i\in\mathbb{N}\), \(1\leq i\leq n\), gdzie \(x_i:\tau\in\Gamma\). Stąd \(M[\vec{x}/\vec{N}]=x_i[x_i/N_i]=N_i\in\llbracket \tau \rrbracket\). Z dowolności \(N_i\), \(\Gamma\vDash M:\tau\).
-    \item \(J\) jest konsekwencją reguły \emph{app}. Wówczas \(J\) jest postaci \(\Gamma\vdash PQ:\tau\). Z założenia indukcyjnego istnieje \(\sigma\in\mathbb{T}\) takie, że \(\Gamma\models P:\sigma\to\tau\) i \(\Gamma\models Q:\sigma\). Wobec tego \(P[\vec{x}/\vec{N}]\in\llbracket\sigma\to\tau\rrbracket\) i \(Q\llbracket \vec{x}/\vec{N} \rrbracket \in \llbracket \sigma \rrbracket\). Z definicji jednoczesnego podstawienia (Definicja \ref{def:simult_substitution}) mamy:
+    \item \(J\) jest konsekwencją reguły \emph{var}. Wówczas \(J\) jest postaci \({\Gamma \vdash x_i:\tau}\) dla pewnego \(i\in\mathbb{N}\), \(1\leq i\leq n\), gdzie \(x_i:\tau\in\Gamma\). Stąd \(M[\vec{x}/\vec{N}]=x_i[x_i/N_i]=N_i\in\llbracket \tau \rrbracket\). Z dowolności \(N_i\), \(\Gamma\vDash M:\tau\).
+    \item \(J\) jest konsekwencją reguły \emph{app}. Wówczas \(J\) jest postaci \({\Gamma\vdash PQ:\tau}\). Z założenia indukcyjnego istnieje \(\sigma\in\mathbb{T}\) takie, że \(\Gamma\models P:\sigma\to\tau\) i \(\Gamma\models Q:\sigma\). Wobec tego \(P[\vec{x}/\vec{N}]\in\llbracket\sigma\to\tau\rrbracket\) i \(Q\llbracket \vec{x}/\vec{N} \rrbracket \in \llbracket \sigma \rrbracket\). Z~definicji jednoczesnego podstawienia (Definicja \ref{def:simult_substitution}) mamy:
       \begin{align*}
         PQ[\vec{x}/\vec{N}]=P[\vec{x}/\vec{N}]Q[\vec{x}/\vec{N}]
       \end{align*}
       Z definicji \(\llbracket \sigma \to \tau \rrbracket\) wówczas \(M\in\llbracket \tau\rrbracket\).
-    \item \(J\) jest konsekwencją reguły \emph{abs}. Wówczas \(J\) jest postaci \(\Gamma\vdash \lambda y.\,P:\sigma \to\rho\), gdzie \(y\not\in\mathrm{dom}\Gamma\). Z założenia indukcyjnego mamy, że \(\Gamma,y:\sigma\models P:\rho\). Oznacza to, że dla dowolnych \(N_1\in\llbracket\tau_1\rrbracket\), \(N_2\in\llbracket\tau_2\rrbracket\), \(\dots\), \(N_n\in\llbracket\tau_n\rrbracket\) mamy
+    \item \(J\) jest konsekwencją reguły \emph{abs}. Wówczas \(J\) jest postaci \[\Gamma\vdash \lambda y.\,P:\sigma \to\rho,\] gdzie \(y\not\in\mathrm{dom}\Gamma\). Z założenia indukcyjnego mamy, że \(\Gamma,y:\sigma\models P:\rho\). Oznacza to, że dla dowolnych \(N_1\in\llbracket\tau_1\rrbracket\), \(N_2\in\llbracket\tau_2\rrbracket\), \(\dots\), \(N_n\in\llbracket\tau_n\rrbracket\) mamy
     \begin{align} 
       \forall N\in\llbracket \sigma \rrbracket\, \left(
         P[\vec{x},y/\vec{N},N]\in\llbracket \rho \rrbracket \tag{\textasteriskcentered} \label{eq:poprawnosc}

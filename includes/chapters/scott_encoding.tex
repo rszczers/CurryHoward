@@ -21,9 +21,9 @@ Algebraiczne typy danych są podstawowym środkiem służącym do określania st
   data List t      = Nil
                    | Cons t (List t)
 \end{minted}
-Definicja typu rozpoczynają się od słowa kluczowego \texttt{data}\footnote{Dyskusja ta ma na celu wyłącznie ustalenie uwagi; świadomi jesteśmy niuansów związanych z określaniem synonimów typów lub definiowaniem typów przy pomocy słowa kluczowego \texttt{newtype}.} po którym występuje \emph{konstruktor typu}. Na wzór notacji BNF, typy przyjmują jedną z \emph{wartości} odzielonych znakiem "|". Każda z wartości składa się z \emph{konstruktora wartości} i ewentualnie występujących po nim \emph{parametrów typowych}. Zauważmy, że umożliwia to rekurencyjnie konstruowanie typów, tak jak w wypadku \texttt{Nat} i \texttt{List}.
+Definicja typu rozpoczynają się od słowa kluczowego \texttt{data}\footnote{Dyskusja ta ma na celu wyłącznie ustalenie uwagi; świadomi jesteśmy niuansów związanych z określaniem synonimów typów lub definiowaniem typów przy pomocy słowa kluczowego \texttt{newtype}.} po którym występuje \emph{konstruktor typu}. Na wzór notacji BNF, typy przyjmują jedną z \emph{wartości} odzielonych znakiem "|". Każda z wartości składa się z~\emph{konstruktora wartości} i ewentualnie występujących po nim \emph{parametrów typowych}. Zauważmy, że umożliwia to rekurencyjnie konstruowanie typów, tak jak w~wypadku \texttt{Nat} i \texttt{List}.
 
-Pokażemy, że algebraiczne typy danych możemy reprezentować w zwięzły sposób w rachunku \(\lambda\) bez typów. Przedstawione tutaj koncepcje w zaskakujący sposób przenoszą się do bardziej złożonych typowanych systemów rachunku \(\lambda\).
+Pokażemy, że algebraiczne typy danych możemy reprezentować w~zwięzły sposób w rachunku \(\lambda\) bez typów. Przedstawione tutaj koncepcje w zaskakujący sposób przenoszą się do bardziej złożonych typowanych systemów rachunku \(\lambda\).
 
 \subsubsection{Proste typy wyliczeniowe}\label{ref:untyped_simple_enumeration}
 Typy wyliczeniowe to typy, które reprezentują możliwe warianty przyjmowanej wartości. Najprostrzym nietrywialnym przykładem takiego typu jest \texttt{Boolean}. Ma on dwa konstruktory wartości: \texttt{True}, \texttt{False}. Praca z tego rodzaju typami wymaga mechanizmu dopasowywania wzorców (ang. \emph{pattern-matching}) \cite[Rozdział IV]{PeytonJones:1992:IFL:129390}, który pozwala na wybór częściowej definicji funkcji w zależności od zadanego konstruktora wartości. Ponieważ w rachunku \(\lambda\) wyrażenia nie mają typów (lub, przyjmując perspektywę systemów z typami: wszystkie wyrażenia mają jeden, ten sam typ), interesowało nas będzie nie bezpośrednie kodowanie typu, ale kodowanie mechanizmu, który odpowiada za dopasowywanie wzorców. Posłużmy się znowu przykładem z języka Haskell i określmy funkcję odpowiadającą wykonaniu instrukcji warunkowej:
@@ -31,7 +31,7 @@ Typy wyliczeniowe to typy, które reprezentują możliwe warianty przyjmowanej w
 if True  a b = a
 if False a b = b
 \end{minted}
-gdzie \texttt{True} i \texttt{False} są wartościami typu \texttt{Boolean}. Właśnie ze względu na nie, mechanizm dopasowywania wzorca wybiera odpowiednią implementację instrukcji warunkowej. Ten sam efekt osiągnęlibyśmy kodując \texttt{True} i \texttt{False} w rachunku \(\lambda\) w następujący sposób:
+gdzie \texttt{True} i \texttt{False} są wartościami typu \texttt{Boolean}. Właśnie ze względu na nie, mechanizm dopasowywania wzorca wybiera odpowiednią im\-ple\-men\-ta\-cję instrukcji warunkowej. Ten sam efekt osiągnęlibyśmy kodując \texttt{True} i~\texttt{False} w~rachunku \(\lambda\) w~następujący sposób:
 \begin{align*}
   \mathrm{True} &\equiv \lambda a b.\,a\\
   \mathrm{False} &\equiv \lambda a b.\,b
@@ -48,11 +48,11 @@ Tego rodzaju typy możemy reprezentować przez domknięcie. Standardowym sposobe
 \begin{align*}
   \mathrm{Tuple}\equiv\lambda a b f .\,f a b
 \end{align*}
-Uzywając wyrażeń let, powyższą reprezentację możemy przepisać w postaci:
+Uzywając wyrażeń let, powyższą reprezentację możemy przepisać w~postaci:
 \begin{align*}
   \mathrm{let}\ a = a\ b = b\ \mathrm{in}\ f
 \end{align*}
-Aplikując \(\mathrm{Tuple}\) tylko do dwóch termów (\emph{domykając} term Tuple) otrzymujemy reprezentację pary. Argument \(f\) nazywamy \emph{kontynuacją}, gdyż aplikując \((\mathrm{Tuple}\ x\ y)\) dla dowolnych \(x, y\in\mathbf{\Lambda}\) do pewnego \(f\in\mathbf{\Lambda}\), w konsekwencji \(x\) i \(y\) zostają zaaplikowane do \(f\).
+Aplikując \(\mathrm{Tuple}\) tylko do dwóch termów (\emph{domykając} term Tuple) otrzymujemy reprezentację pary. Argument \(f\) nazywamy \emph{kontynuacją}, gdyż aplikując \((\mathrm{Tuple}\ x\ y)\) dla dowolnych \(x, y\in\mathbf{\Lambda}\) do pewnego \(f\in\mathbf{\Lambda}\), w~konsekwencji \(x\) i \(y\) zostają zaaplikowane do \(f\).
 Zauważmy, że wówczas reprezentacja \texttt{fst} i \texttt{snd} ma postać:
 \begin{align*}
   \mathrm{fst} \equiv \lambda t.\,t(\lambda a b.\,a) \\
@@ -163,7 +163,7 @@ Przedstawimy teraz klasyczny sposób kodowania typów po raz pierwszy zaprezento
   \mathrm{Zero}_{Ch} &\equiv \lambda f x.\,x\\
   \mathrm{Succ}_{Ch} &\equiv \lambda n f x.\,f\,(n\,f\,x)
 \end{align*}
-Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w literaturze popularnie nazywa się \emph{liczebnikami Churcha} i oznacza następująco:
+Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w~literaturze popularnie nazywa się \emph{liczebnikami Churcha} i oznacza następująco:
 \begin{align*}
   \bar{1} &\equiv \mathrm{Succ}_{Ch}\ \mathrm{Zero}_{Ch} \ =_\beta\ \lambda f x.\, fx\\
   \bar{2} &\equiv \mathrm{Succ}_{Ch}\ \mathrm{Succ}_{Ch}\ \mathrm{Zero}_{Ch}\ =_\beta\ \lambda f x.\, f\,f\,x\\
@@ -172,7 +172,7 @@ Wyrażenia będące skutkiem konsekwentnej aplikacji Succ do Zero w literaturze 
 \end{align*}
 
 Liczba naturalna \(n\) jest kodowana przez funkcję w której jej pierwszy argument jest aplikowany \(n\) razy do drugiego argumentu.
-Porównując je do kodowania Scotta widzimy, że różnica polega na aplikowaniu do kontynuacji termu \((n\,f\,x)\) w przypadku brania następnika. Da się pokazać \cite{hinze_2005}, że liczebniki Churcha są w istocie operacją \texttt{foldl} na argumentach \texttt{Succ} i {Zero}. Istotnie, niech \(\mathrm{nat} \equiv \lambda c.\ c\ \mathrm{Succ}\ \mathrm{Zero}\). Wówczas \(\mathrm{nat}\ \bar{n} =_\beta \bar{n}\). Z tego powodu kodowanie operacji na liczebnikach Churcha, lub ogólnie – funkcji opartych na rekursji prostej po zbiorze liczb naturalnych – jest wyjątkowo proste przy użyciu tej metody. Przykładowo, używając metody Churcha, operację dodawania kodujemy w następujący sposób:
+Porównując je do kodowania Scotta widzimy, że różnica polega na aplikowaniu do kontynuacji termu \((n\,f\,x)\) w przypadku brania następnika. Da się pokazać \cite{hinze_2005}, że liczebniki Churcha są w istocie operacją \texttt{foldl} na argumentach \texttt{Succ} i {Zero}. Istotnie, niech \(\mathrm{nat} \equiv \lambda c.\ c\ \mathrm{Succ}\ \mathrm{Zero}\). Wówczas \(\mathrm{nat}\ \bar{n} =_\beta \bar{n}\). Z tego powodu kodowanie operacji na liczebnikach Churcha, lub ogólnie – funkcji opartych na rekursji prostej po zbiorze liczb naturalnych – jest wyjątkowo proste przy użyciu tej metody. Przykładowo, używając metody Churcha, operację dodawania kodujemy w~następujący sposób:
 \begin{align*}
   \mathrm{add}_{Ch} \equiv \lambda n\, m.\ n\ \mathrm{Succ}_{Ch}\ m
 \end{align*}

@@ -98,7 +98,7 @@ Ostatnia równość wymaga dowodu: przeprowadza się go indukcją strukturalną 
 
 W myśl warunku \ref{def:lambda-interpret-4} wymagamy, żeby interpretacja \(\lambda\)-termu zależała tylko od wartościowania występujących w nim zmiennych wolnych. 
 
-Warunek \ref{def:lambda-interpret-5} zapewnia, że interpretacja \(\lambda\)-termów, które są swoimi \(\alpha\)-konwersami, jest taka sama. Odpowiada on więc aksjomatowi \((\alpha)\) z Podrozdziału \ref{subsec:lambda-formal-theory}.
+Warunek \ref{def:lambda-interpret-5} zapewnia, że interpretacja \(\lambda\)-termów, które są swoimi \(\alpha\)-konwersami, jest taka sama. Odpowiada on więc aksjomatowi \((\alpha)\) z~Podrozdziału \ref{subsec:lambda-formal-theory}.
 
 % Wymagamy w ten sposób, żeby \(\lambda\)-termy, które mają tę samą postać normalną (albo nie mają jej wcale), miały również to samo znaczenie.
   
@@ -114,7 +114,7 @@ Zauważmy wpierw jednak, że zgodnie z warunkiem \ref{def:lambda-interpret-3}
 % Dowolna \(\lambda\)-abstrakcja \(\lambda x. M\) indukuje funkcję \(D\to D\)
 % będącą częściową aplikacją \(\llbracket \lambda x. M \rrbracket\bullet\).
 Warunek \ref{def:lambda-interpret-6} stwierdza więc, że jeśli dwie \(\lambda\)-abstrakcje 
-\((\lambda x. M)\), \((\lambda x. N)\in\mathbf{\Lambda}\) indukują dwie częściowe aplikacje działania \(\bullet\)
+\[(\lambda x. M),\,(\lambda x. N)\in\mathbf{\Lambda}\] indukują dwie częściowe aplikacje działania \(\bullet\)
 \[(\llbracket \lambda x. M \rrbracket_\rho\bullet\ ),\ (\llbracket \lambda x. N \rrbracket_\rho\bullet\ ):\: D\to D,\]
 które są sobie równe, czyli
 \[
@@ -143,9 +143,9 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
     \[
       \llbracket M \rrbracket_\rho = \llbracket N \rrbracket_\rho,
     \]
-    to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) i piszemy \(\mathcal{M},\rho\models M=N.\)
+    to mówimy, że wartościowanie \(\rho\) \emph{spełnia} równość \(M=N\) i~piszemy \(\mathcal{M},\rho\models M=N.\)
 
-    Jeśli każde wartościowanie \(\rho\) spełnia równość \(M=N\), to mówimy, że równość \(M=N\) jest \emph{prawdziwa} w \(\mathcal{M}\) (lub \(\mathcal{M}\) \emph{spełnia} \(M=N\)) i piszemy \(\mathcal{M}\models M=N\).
+    Jeśli każde wartościowanie \(\rho\) spełnia równość \(M=N\), to mówimy, że równość \(M=N\) jest \emph{prawdziwa} w \(\mathcal{M}\) (lub \(\mathcal{M}\) \emph{spełnia} \(M=N\)) i~piszemy \(\mathcal{M}\models M=N\).
   \end{definicja}
 
 % \begin{lemat}
@@ -206,9 +206,8 @@ Własność \eqref{eq:weak-extensional} w literaturze nazywa się niekiedy warun
           Z przechodniości semantycznej równości mamy zatem, że \( \llbracket M \rrbracket_\rho=\llbracket N \rrbracket_\rho\).
         \item[(sym)] Wynika symetryczności semantycznej równości.
       \end{enumerate}
-    W każdym z powyższych przypadków \(\mathcal{M}\models M=N\).
+    W każdym z powyższych przypadków \(\mathcal{M}\models M=N\).\qed
   \end{enumerate}
-  \qed
 \end{dowod}
   
 % \subsubsection{Modele bezsyntaktyczne}
@@ -287,13 +286,13 @@ widzimy, że samoaplikacja jest wówczas poprawnie określona:
 Wszystkie symbole użyte w powyższym wprowadzeniu zostaną zdefiniowane w tym podrozdziale.
 
 \paragraph{Elementy teorii porządku} 
-Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jeśli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kresem górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
+Niech \((D,\sqsubseteq)\) będzie zbiorem częściowo uporzadkowanym. Powiemy, że \(b\in D\) jest elementem \emph{najmniejszym}, jeśli \(b\sqsubseteq d\) dla wszystkich \(d\in D\). Element ten, o ile istnieje, wyznaczony jest jednoznacznie i będziemy oznaczać go symbolem \(\perp\). Niech \(X\subset D\). \emph{Ograniczeniem górnym} \(X\) nazywamy element \(u\in D\) taki, że \(x\sqsubseteq u\) dla wszystkich \(x\in X\). \emph{Kresem górny} zbioru \(X\) nazywamy element \(\ell\in D\) taki, że \(\ell\) jest ograniczeniem górnym \(X\) i \(\ell\sqsubseteq u\) dla wszystkich ograniczeń górnych \(u\) zbioru \(X\). Element taki, o ile istnieje, będziemy oznaczali symbolem \(\bigsqcup X\). Podzbiór \(X\subset D\) nazywamy \emph{skierowanym}, jeśli \(X\neq\emptyset\) i~dla dowolnych \(x, y\in X\) istnieje \(z\in X\) taki, że \(x\sqsubseteq z\) i \(y\sqsubseteq z\). 
 
 \begin{definicja}(Zupełny porządek częściowy) %5.1
-Porządek częściowy \((D,\,\sqsubseteq)\) taki, że
+  Porządek częściowy \({(D,\,\sqsubseteq)}\) taki, że
 \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
   \setlength\itemsep{0em}
-  \item posiada element najmniejszy oraz
+  \item posiada element najmniejszy, 
   \item każdy skierowany poddzbiór \(X\subset D\) ma kres górny,
 \end{enumerate}
   nazywamy \emph{zupełnym porządkiem częściowym} (w skrócie: \emph{cpo}).
@@ -402,21 +401,21 @@ gdzie przez \(I_D\) i \(I_{D'}\) oznaczamy funkcję identycznościową na zbiorz
   \caption{Projekcja \((\varphi_n,\psi_n)\) z \(D_{n+1}\) do \(D_n\).}\label{fig:projection}
 \end{figure}
 
-  Okazuje się, że ciąg cpo \(\{D_n\}_{n=0}^\infty\) skonstruowany w myśl Wniosku \ref{thm:scott_seq} można określić definiując dla każdego \(n\in\mathbb{N}\) projekcję \((\varphi_n,\psi_n)\) z \(D_{n+1}\) do \(D_n\). Istotnie, spróbujmy skonstruować taką rodzinę projekcji. Wybierzmy \(d\in D_0\) i niech \(\kappa_d\) oznacza funkcję stałą 
+  Okazuje się, że ciąg cpo \(\{D_n\}_{n=0}^\infty\) skonstruowany w~myśl Wniosku \ref{thm:scott_seq} można określić definiując dla każdego \(n\in\mathbb{N}\) projekcję \((\varphi_n,\psi_n)\) z~\(D_{n+1}\) do \(D_n\). Istotnie, spróbujmy skonstruować taką rodzinę projekcji. Wybierzmy \(d\in D_0\) i niech \(\kappa_d\) oznacza funkcję stałą 
   \[\kappa_d(c)=d\quad \text{dla wszystkich}\ c\in D_0.\]
   Określmy \(D_1=[D_0\to D_0]\). Ponieważ \(\kappa_d\) jest funkcją ciągłą, to \(\kappa_d\in D_1\). Niech teraz
   \begin{align*}
     \varphi_0 (d) &= \kappa_d  \quad \text{dla wszystkich}\ d\in D_0,\\
     \psi_0(c) &= c(\perp_0) \quad \text{dla wszystkich}\ c\in D_1,
   \end{align*}
-gdzie \(\perp_0\) jest elementem najmniejszym \(D_0\). Widzimy, że \(\varphi_0: D_0 \to D_1\) i \(\psi_0:\nobreak D_1\to\nobreak D_0\). Funkcje \(\varphi_0\) i \(\psi_0\) są ciągłe, zaś \(\psi_0\circ\varphi_0 = I_{D_0}\) (dowód pomijamy), zatem \((\varphi_0,\,\psi_0)\) jest projekcją z \(D_1\) do \(D_0\).
+gdzie \(\perp_0\) jest elementem najmniejszym \(D_0\). Widzimy, że \(\varphi_0: D_0 \to D_1\) i \(\psi_0:\nobreak D_1\to\nobreak D_0\). Funkcje \(\varphi_0\) i \(\psi_0\) są ciągłe, zaś \(\psi_0\circ\varphi_0 = I_{D_0}\) (dowód pomijamy), zatem \((\varphi_0,\,\psi_0)\) jest projekcją z~\(D_1\) do \(D_0\).
 
 Dla \(n>0\) określamy teraz \(\varphi_n : D_n \to D_{n+1}\) i \(\psi_{n+1}: D_{n+1}\to D_n\) następującym wzorem:
 \begin{align*}
   \varphi_n(\sigma) &= \varphi_{n-1}\circ\sigma\circ\psi_{n-1},\quad \text{dla}\ \sigma\in D_n,\\ 
   \psi_n(\tau) &= \psi_{n-1}\circ\varphi_{n-1},\quad \text{dla}\ \tau \in D_{n+1}.
 \end{align*}
-Wówczas \(\varphi_n\in[D_n\to D_{n+1}]\), \(\psi_n\in[D_{n+1}\to D_n]\) i \(\psi_n\circ\varphi_n=I_{D_n}\) oraz \(\varphi_n\circ\psi_n\preceq I_{D_{n+1}}.\) \cite[Lemat 16.28]{Hindley:2008:LCI:1388400}. A zatem \((\varphi_n,\psi_n)\) jest projekcją z \(D_{n+1}\) do \(D_n\).
+Wówczas \(\varphi_n\in[D_n\to D_{n+1}]\), \(\psi_n\in[D_{n+1}\to D_n]\) i \(\psi_n\circ\varphi_n=I_{D_n}\) oraz \(\varphi_n\circ\psi_n\preceq I_{D_{n+1}}.\) \cite[Lemat 16.28]{Hindley:2008:LCI:1388400}. A zatem \((\varphi_n,\psi_n)\) jest projekcją z~\(D_{n+1}\) do \(D_n\).
 
 Ponieważ projekcje \((\varphi_n, \psi_n)\) przenoszą nas tylko pomiędzy następującymi po sobie cpo w ciągu \(\{D_n\}_{n=0}^\infty\), (Rysunek \ref{fig:projection}) w Definicji \ref{def:proj-consecutive} określamy złożenie pozwalające na projekcje między dowolnymi dwoma wyrazami ciągu.
 
@@ -494,7 +493,7 @@ Dla \(n\geq 0\) określamy funkcje \(\varphi_{n\infty}:D_n\to D_\infty\) oraz \(
 Określona para funkcji spełnia poniższy szereg własności.
 
 \begin{fakt}[{\cite[Tw. 16.38, 16.39, 16.42]{Hindley:2008:LCI:1388400}}]\label{fact:projection}%5.12
-Niech \(m,\,n\geq 0\), \(m\leq n\) i \(a,\,b\in D_\infty\). Wówczas:
+Niech \(m,\,n\geq 0\), \(m\leq n\) oraz \(a,\,b\in D_\infty\). Wówczas:
 \begin{enumerate}[label={(\roman*)}, ref={(\roman*)}] 
   \setlength\itemsep{0em}
   \item \((\varphi_{n\infty},\,\varphi_{\infty n})\) jest projekcją z \(D_\infty\) do \(D_n\),\label{fact:projection_1}
@@ -515,7 +514,7 @@ zaś na podstawie \ref{fact:projection}\ref{fact:projection_4}:
 \end{align*}
 Zatem wyrazy \(a_0,\,a_1,\,a_2,\,a_3,\,\dots\) możemy traktowac jako kolejne przybliżenia elementu \(a\). Zauwazmy, że na podstawie Faktu \ref{fact:projection_5} ciąg ten jest zawsze rosnący. Traktując nieformalnie \(D_\infty\) jako pewną przestrzeń informacji i w niej: element \(\perp\) jako brak informacji, zaś relację \(\sqsubseteq\) odczytując jako „więcej informacji”, kolejne przybliżenia możemy odczytąc jako proces poznawczy prowadzący do stanu pełnej informacji o jakimś fakcie.  
 
-Kolejną istotną obserwacją jest fakt, że dziedzina każdej funkcji z \(D_n\) zawiera się w powyższym sensie również w \(D_n\). Fakty \ref{fact:projection}\ref{fact:projection_4} i \ref{fact:projection}\ref{fact:projection_5} sugerują metodę określenia struktury aplikatywnej na \(D_\infty\). Przypuśćmy bowiem, że \(a,\,b\in D_\infty\). Wówczas dla każdego \(n\in\mathbb{N}\) wyrazy \(a_n\) i \(b_n\) są przybliżeniami \(a\) i \(b\), odpowiednio. Ponieważ \(a_{n+1}\in  D_{n+1}=[D_n\to D_n]\), to \(a_{n+1}(b_n)\) jest określony. A zatem \(a_{n+1}(b_n)\) jest pewnym przybliżeniem aplikacji \(a\) do \(b\). Widzimy, że rozwiązuje to wymieniony wcześniej problem samoaplikacji. 
+Kolejną istotną obserwacją jest fakt, że dziedzina każdej funkcji z~\(D_n\) zawiera się w powyższym sensie również w \(D_n\). Fakty \ref{fact:projection}\ref{fact:projection_4} i \ref{fact:projection}\ref{fact:projection_5} sugerują metodę określenia struktury aplikatywnej na \(D_\infty\). Przypuśćmy bowiem, że \(a,\,b\in D_\infty\). Wówczas dla każdego \(n\in\mathbb{N}\) wyrazy \(a_n\) i \(b_n\) są przybliżeniami \(a\) i \(b\), odpowiednio. Ponieważ \(a_{n+1}\in  D_{n+1}=[D_n\to D_n]\), to \(a_{n+1}(b_n)\) jest określony. A zatem \(a_{n+1}(b_n)\) jest pewnym przybliżeniem aplikacji \(a\) do \(b\). Widzimy, że rozwiązuje to wymieniony wcześniej problem samoaplikacji. 
 
 \begin{definicja}%5.13
   Dla \(a,\,b\in D_\infty\) określamy:

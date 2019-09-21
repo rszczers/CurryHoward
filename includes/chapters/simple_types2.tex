@@ -50,7 +50,7 @@ Późniejsze litery alfabetu greckiego (\(\sigma,\, \tau,\, \rho,\,\dots\)), by�
   \begin{enumerate}[label=(\arabic*)]
   \setlength\itemsep{0em}
   \item \emph{Stwierdzeniem} (ang. \emph{statement}) nazywamy każdy napis postaci \(M:\sigma\), gdzie \(M\in\mathbf{\Lambda}\) i \(\sigma\in\mathbb{T}\). W stwierdzeniu \(M:\sigma\) \(\lambda\)-term \(M\) nazwamy \emph{podmiotem}  (ang. \emph{subject}), zaś \(\sigma\) -- \emph{predykatem}\footnote{Nazwy te historycznie sięgają prac nad semantyką formalną języków naturalnych R. Montague.}.
-  \item \emph{Deklaracją} (ang. \emph{declaration}) nazywamy każde stwierdzenie w którym podmiot jest zmienną termową.
+  \item \emph{Deklaracją} (ang. \emph{declaration}) nazywamy każde stwierdzenie w~którym podmiot jest zmienną termową.
   \item \emph{Kontekstem} (ang. \emph{context}) nazywamy skończony liniowo uporządkowany zbiór (\emph{listę}) deklaracji \((\Gamma, \preceq)\), w którym wszystkie podmioty są wzajemnie różne.
   \item \emph{Sądem} (ang. \emph{judgement}) nazywamy każdy napis postaci \(\Gamma\vdash M:\sigma\), gdzie \(\Gamma\) jest kontekstem, zaś \(M:\sigma\) -- stwierdzeniem; w przypadku, gdy \(\Gamma = \emptyset\), piszemy \(\vdash M:\sigma\).  
   \end{enumerate}
@@ -133,7 +133,7 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
 
 \vspace{0.5em}
 
-W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplikować do innego termu, odpowiednio. Dlatego mówimy, że w rachunku \(\lambda\) z typami prostymi \emph{termy zależą od termów}. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność (abstrakcja) jest \emph{pierwszego rzędu}.
+W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzajów: \(\lambda\)-termy i typy. \(\lambda\)-termy możemy przekształcać dwoma dualnymi operacjami: \(\lambda\)-abstrakcją i aplikacją. Rezultat operacji zależy od wyboru zmiennej wolnej, którą chcemy wyabstrahować z termu albo wyboru termu, który chcemy zaaplikować do innego termu, odpowiednio. Dlatego mówimy, że w rachunku \(\lambda\) z~typami prostymi \emph{termy zależą od termów}. Ponieważ abstrahowanie przebiega wyłącznie po zbiorze \(\lambda\)-zmiennych, mówimy, że zależność (abstrakcja) jest \emph{pierwszego rzędu}.
 
 \begin{definicja}(Wyprowadzenie typu) 
 %  Mówimy, że stwierdzenie \(M:\sigma\) jest \emph{wyprowadzalne} z kontekstu \(\Gamma\), jeśli istnieje skończone drzewo sądów \(\mathcal{P}\) spełniające poniższe warunki:
@@ -283,7 +283,7 @@ Przedstawimy teraz szereg lematów ustalających związki między rachunkiem \(\
       x.\,P\) dla pewnego \(P\) dla którego twierdzenie zachodzi. Ponieważ
       \(\mathrm{Sub}(\lambda x.\,M) = \mathrm{Sub}(M) \cup \{\lambda x.\,M\}\),
       (Definicja~\ref{def:untyped_subterm}.\ref{def:untyped_subterm_3})
-      to teza zachodzi również w tym przypadku.
+      to teza zachodzi również w~tym przypadku.
   \end{enumerate}
   \qed
 \end{dowod}
@@ -297,9 +297,8 @@ Przedstawimy teraz szereg lematów ustalających związki między rachunkiem \(\
     \setlength\itemsep{0em}
     \item Jeśli \(J\) jest konsekwencą reguły \emph{var}, to \(L\equiv x\) dla pewnej \(\lambda\)-zmiennej \(x\). Wobec tego \(x:\sigma\in\Gamma\), a zatem \(\mathrm{FV}(x)\subseteq\mathrm{dom}\,\Gamma\).
     \item Jeśli \(J\) jest konsekwencją reguły \emph{app}, to \(J\) musi mieć postać \(\Gamma\vdash MN:\sigma\). Z założenia indukcyjnego: \(\mathrm{FV}(M)\subseteq \mathrm{dom}\,\Gamma\) i  \(\mathrm{FV}(N)\subseteq \mathrm{dom}\,\Gamma\). Z Definicji \ref{def:untyped_fv}: \(\mathrm{FV}(MN)=\mathrm{FV}(M)\cup\mathrm{FV}(N)\). Stąd \(\mathrm{FV}(MN)\subseteq \mathrm{dom}\,\Gamma\).
-    \item Jeśli \(J\) jest konsekwencją reguły \emph{abs}, to \(J\) musi mieć postać \(\Gamma\vdash \lambda x.\,M:\sigma\). Z~założenia indukcyjnego \(FV(M)\subseteq\mathrm{dom}\,\Gamma\). Ponieważ \(\mathrm{FV}(\lambda x.\,M)=\mathrm{FV}(M)\setminus\{x\}\subseteq\mathrm{FV}(M)\) (z Definicji \ref{def:untyped_fv}), to \(\mathrm{FV}(M)\subseteq\mathrm{dom}\,\Gamma\). 
+    \item Jeśli \(J\) jest konsekwencją reguły \emph{abs}, to \(J\) musi mieć postać \(\Gamma\vdash \lambda x.\,M:\sigma\). Z~założenia indukcyjnego \(FV(M)\subseteq\mathrm{dom}\,\Gamma\). Ponieważ \(\mathrm{FV}(\lambda x.\,M)=\mathrm{FV}(M)\setminus\{x\}\subseteq\mathrm{FV}(M)\) (z Definicji \ref{def:untyped_fv}), to \(\mathrm{FV}(M)\subseteq\mathrm{dom}\,\Gamma\).\qed 
   \end{enumerate}  
-  \qed
 \end{dowod}
 
 \begin{lemat}\label{thm:permutation_simple}

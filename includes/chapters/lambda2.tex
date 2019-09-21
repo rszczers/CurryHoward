@@ -1,6 +1,6 @@
 \section{System Girarda/Reynoldsa}\label{sec:system_f}
 
-Przedmiotem tego rozdziału będzie rachunek \(\lambda\) drugiego rzędu w stylu Churcha. Rozumieć należy przez to, że w \(\lambda\)-termach wiązane mogą być również zmienne typowe. System ten wprowadzony został równolegle przez J.-Y. Girarda i J. C. Reynoldsa i nazywany był przez autorów Systemem F. Odpowiada on również systemowi \(\lambda 2\) w klasyfikacji, którą zaproponował H. Barendregt. Pozwala on na formalne ujęcie pojęcia polimorfizmu parametrycznego, które znamy z języków programowania.
+Przedmiotem tego rozdziału będzie rachunek \(\lambda\) drugiego rzędu w~stylu Churcha. Rozumieć należy przez to, że w \(\lambda\)-termach wiązane mogą być również zmienne typowe. System ten wprowadzony został równolegle przez J.-Y. Girarda i J. C. Reynoldsa i nazywany był przez autorów Systemem F. Odpowiada on również systemowi \(\lambda 2\) w klasyfikacji, którą zaproponował H. Barendregt. Pozwala on na formalne ujęcie pojęcia polimorfizmu parametrycznego, które znamy z języków programowania.
 
 \subsection{Termy zależne od typów}
 
@@ -62,7 +62,7 @@ Naturalnemu rozszerzeniu ulega szereg pojęć z Rozdziału \ref{sec:simple_types
   \end{enumerate}
 \end{definicja}
 
-  \begin{definicja}(Podstawienie) Rozszerzamy definicję podstawienia o reguły obejmujące zmienne typowe.
+  \begin{definicja}(Podstawienie) Rozszerzamy definicję podstawienia o~reguły obejmujące zmienne typowe.
   \begin{align*}
     x[x/P] &= P,\\
     y[x/P] &= y,\\
@@ -152,7 +152,7 @@ Odpowiednim modyfikacjom ulegają również pojęcia wprowadzone w Definicji~\re
 \end{definicja}
 
  \begin{uwaga*}
-   Zauważmy, że przy powyższych rozstrzygnięciach definicyjnych nie zachodzi odpowiednik Twierdzenia \ref{thm:permutation_simple}\ref{thm:permutation_3}: nie możemy rozpatrywać dowolnych permutacji kontekstów w sądach \(\Gamma\vdash M:T\), ponieważ w myśl Definicji \ref{def:f_statement} deklaracje zmiennych termowych w poprawnie zbudowanych \(\lambda 2\)-kontekstach są uzależnione od poprzedzających je deklaracji typowych. 
+   Zauważmy, że przy powyższych rozstrzygnięciach definicyjnych nie zachodzi odpowiednik Twierdzenia \ref{thm:permutation_simple}\ref{thm:permutation_3}: nie możemy rozpatrywać dowolnych permutacji kontekstów w sądach \(\Gamma\vdash M:T\), ponieważ w~myśl Definicji \ref{def:f_statement} deklaracje zmiennych termowych w poprawnie zbudowanych \(\lambda 2\)-kontekstach są uzależnione od poprzedzających je deklaracji typowych. 
 
 \end{uwaga*}
 
@@ -356,7 +356,7 @@ deklaracja    \(\alpha:*\)    występuje   w    kontekście    przed
   \end{align*}
   \end{definicja}
 
-Lemat \ref{thm:uniqueness_f}, podobnie do Lematu \ref{thm:subject_reduction} dla typów prostych, zapewnia nas, że również w Systemie F typ termu zachowuje się przy \(\beta\)-redukcji. Praktyczny sens tego twierdzenia polega na tym, że relacja posiadania tego samego typu jest zamknięta na \(\beta\)-konwersję i aby rozstrzygnąć o typie danego termu wystarczy, że znamy typ któregokolwiek jego \(\beta\)-konwersu.
+Lemat \ref{thm:uniqueness_f}, podobnie do Lematu \ref{thm:subject_reduction} dla typów prostych, zapewnia nas, że również w Systemie F typ termu zachowuje się przy \(\beta\)-redukcji. Praktyczny sens tego twierdzenia polega na tym, że relacja posiadania tego samego typu jest zamknięta na \(\beta\)-konwersję i aby rozstrzygnąć o~typie danego termu wystarczy, że znamy typ któregokolwiek jego \(\beta\)-konwersu.
 
 \begin{lemat}(O redukcji podmiotu)\label{thm:uniqueness_f}
   Jeśli \(\Gamma\vdash M:\tau\) i \(M\to^{*}_\beta N\), to \(\Gamma\vdash N:\tau\).
@@ -422,7 +422,7 @@ Zachodzi oczywiście również odpowiednik Lematu \ref{thm:eta_uniqueness_simple
 \begin{przyklad} Zwróćmy ponownie uwagę na Przykład \ref{ex:f_typing}\ref{ex:f_typing_1}. Ponieważ \(\lambda \beta : *.\,x\beta\nobreak\to_\eta\nobreak x\), to ze względu na Lemat \ref{thm:eta_uniqueness_f} wyprowadzalny jest również \(\Gamma\vdash x:\perp\).
 \end{przyklad}
 
-W odpowiednich wersjach zachodzą również Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów~\ref{sec:untyped_lambda}~i~\ref{sec:simple_types}.
+W odpowiednich wersjach zachodzą również Lemat \ref{thm:generation} o generowaniu, Lemat \ref{thm:subterm} o podtermie, Lemat \ref{thm:fv} o zmiennych wolnych i Lemat \ref{thm:substitution} o~podstawieniu. We wszystkich przypadkach metoda dowodowa nie odbiega znacząco od odpowiedników z Rozdziałów~\ref{sec:untyped_lambda}~i~\ref{sec:simple_types}.
 
 Kolejną istotną własnością Systemu F jest silna normalizacja \(\beta\)-redukcji.
 
