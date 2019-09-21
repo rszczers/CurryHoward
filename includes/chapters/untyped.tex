@@ -1,6 +1,6 @@
 \section{Rachunek \(\lambda\) bez typów}\label{sec:untyped_lambda}
-\subsection{Język rachunku \(\lambda\) i \(\lambda\)-pretermy}
-Niech  \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}. Ponieważ \(V\) jest potencjalnie nieskończony, zastrzegamy sobie możliwość wybierania w razie potrzeby wcześniej nie użytej zmiennej.
+\subsection{Język rachunku \(\lambda\) i~\(\lambda\)-pretermy}
+Niech \(V\) będzie przeliczalnie nieskończonym zbiorem zmiennych przedmiotowych \(x,\ y,\ \dots\) (indeksowanych być może liczbami naturalnymi). Elementy takiego zbioru będziemy nazywali \emph{\(\lambda\)-zmiennymi}. Ponieważ \(V\) jest potencjalnie nieskończony, zastrzegamy sobie możliwość wybierania w~razie potrzeby wcześniej nie użytej zmiennej.
 
 \begin{definicja}[Zbiór \(\mathbf{\tilde\Lambda}\) pretermów]\label{def:lambda-untyped}
 Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbiór wyrażeń \(\mathbf{\tilde\Lambda}\) taki, że:
@@ -8,7 +8,7 @@ Zbiorem pretermów będziemy nazywali najmniejszy (w sensie mnogościowym) zbió
   \setlength\itemsep{0em}
   \item Jeśli \(x \in V\), to \(x\in\mathbf{\tilde\Lambda}\).\label{pret1}
   \item Jeśli \(M,\,N\in \mathbf{\tilde\Lambda}\), to \((M\,N)\in\mathbf{\tilde\Lambda}\).\label{pret2}
-  \item Jeśli \(x\in V\) i \(M\in\mathbf{\tilde\Lambda}\), to \((\lambda x.\,M)\in\mathbf{\tilde\Lambda}\).\label{pret3}
+  \item Jeśli \(x\in V\) i~\(M\in\mathbf{\tilde\Lambda}\), to \((\lambda x.\,M)\in\mathbf{\tilde\Lambda}\).\label{pret3}
   \end{enumerate}
 \end{definicja}
 Definicję \ref{def:lambda-untyped} można równoznacznie wyrazić przy pomocy notacji Backusa-Naura. Wówczas ma ona następującą, zwięzłą postać:
@@ -18,13 +18,14 @@ Definicję \ref{def:lambda-untyped} można równoznacznie wyrazić przy pomocy n
 
 Powiemy, że dwa \(\lambda\)-termy są \emph{syntaktycznie równe}, jeśli rozumiane jako ciągi znaków są identyczne. Równość syntaktyczną będziemy oznaczali znakiem \(\equiv\).
 
-Elementy \(\mathbf{\tilde\Lambda}\) będziemy oznaczali literami \(L,\ M,\ N,\ P,\ Q,\ R\) i ich wariantami z górnymi lub dolnymi indeksami. Wyrażenia postaci \ref{pret2} nazywamy \emph{aplikacjami} \(M\) do \(N\). Symbol \(\lambda\) występujący w \ref{pret3} nazywamy \emph{\(\lambda\)-abstraktorem}, zaś wyrażenia powstałe przez zastosowanie tej reguły to \emph{\(\lambda\)-abstrakcje}. W wyrażeniu postaci \((\lambda x.\,M)\) preterm \(M\) jest w \emph{zasięgu} \(\lambda\)-abstraktora, a zmienna \(x\) jest przez niego \emph{związana}. Ponadto, będziemy stosowali następujące konwencje notacyjne:
+Elementy \(\mathbf{\tilde\Lambda}\) będziemy oznaczali literami \(L,\ M,\ N,\ P,\ Q,\ R\) i~ich wariantami z górnymi lub dolnymi indeksami. Wyrażenia postaci \ref{pret2} nazywamy \emph{aplikacjami} \(M\) do \(N\). Symbol \(\lambda\) występujący w~\ref{pret3} nazywamy \emph{\(\lambda\)-abstraktorem}, zaś wyrażenia powstałe przez zastosowanie tej reguły to \emph{\(\lambda\)-abstrakcje}. W wyrażeniu postaci \((\lambda x.\,M)\) preterm \(M\) jest w~\emph{zasięgu} \(\lambda\)-abstraktora, a zmienna \(x\) jest przez niego \emph{związana}. Ponadto, będziemy stosowali następujące konwencje notacyjne:
 \begin{easylist}
   & \emph{najbardziej zewnętrzne nawiasy bedą pomijane,}
-  & \emph{aplikacja wiąże lewostronnie; wyrażenia postaci \((PQ)R\) będą zapisywane w postaci \(PQR\),}
+  & \emph{aplikacja wiąże lewostronnie; wyrażenia postaci \((PQ)R\) będą zapisywane w~postaci \(PQR\),}
   & \emph{\(\lambda\)-abstrakcja wiąże prawostronnie: \(\lambda x_1.\, (\lambda x_2.\,P)\) zapisujemy  \(\lambda x_1.\, \lambda x_2.\,P\),}
   & \emph{następujące po sobie \(\lambda\)-abstrakcje postaci \(\lambda x_1 . \, \lambda x_2 . \, \dots  \lambda x_n .\, P\) zapisujemy pod wspólnym \(\lambda\)-abstraktorem: \(\lambda x_1 \, x_2 \, \dots \, x_n .\, P\),}
-  & \emph{n-krotną aplikację \(P\in\mathbf{\tilde\Lambda}\) do siebie zapisujemy skrótowo: \(P^n\equiv \underbrace{P\,P\ \dots\ P}_{\text{n-razy}}\).}
+  & \emph{n-krotną aplikację \(P\in\mathbf{\tilde\Lambda}\) do siebie zapisujemy skrótowo:
+  \({P^n\equiv\underbrace{P\,P\ \dots\ P}_{\text{n-razy}}}\).}
 \end{easylist}
 
 \begin{przyklad}
@@ -45,7 +46,7 @@ Elementy \(\mathbf{\tilde\Lambda}\) będziemy oznaczali literami \(L,\ M,\ N,\ P
 % Przypomnijmy, że \emph{selektorem} w \(V\) nazywamy każdą funkcję \(s:\:\mathcal{P}(V)-\{\emptyset\}\rightarrow V\) taką, że \(s(X)\in X\) dla \(\emptyset\neq X\subseteq V\).
 
 
-%   Niech \(f:D\to E\) będzie dowolną funkcją i niech \(d\in D,\ e\in E\). Funkcję \(f[x/N]:\:D\to E\) określamy w następujący sposób:
+%   Niech \(f:D\to E\) będzie dowolną funkcją i~niech \(d\in D,\ e\in E\). Funkcję \(f[x/N]:\:D\to E\) określamy w następujący sposób:
 %   \[
 %     f[d/e]d' = \begin{cases}
 %       e, &\text{jeśli}\ d'\equiv d, \\
@@ -55,7 +56,7 @@ Elementy \(\mathbf{\tilde\Lambda}\) będziemy oznaczali literami \(L,\ M,\ N,\ P
  % \end{konwencja*}
 
 
-Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występować wielokrotnie. Obserwację tę ujmuje następująca definicja.
+Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i~występować wielokrotnie. Obserwację tę ujmuje następująca definicja.
 \begin{definicja}\label{def:untyped_subterm}(Multizbiór \(\mathrm{Sub}\) podtermów pretermu)
   \begin{enumerate}[label={(\arabic*)}, ref={\arabic*}]
     \setlength\itemsep{0em}
@@ -75,10 +76,10 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
     & = \left\{((\lambda x .\, x\, x)\,(\lambda x .\, x\, x))^{1}, \ (\lambda x .\, x\, x)^2,\ (x\,x)^{2},\ x^{4}\right\}\\
   \end{split}
   \end{align*}
-  W powyższych przykładach użyliśmy standardowej notacji w górnym indeksie umieszczając krotność występowania elementu.
+  W powyższych przykładach użyliśmy standardowej notacji w~górnym indeksie umieszczając krotność występowania elementu.
 \end{przyklad}
 \begin{definicja}[Zbiór \(\mathrm{FV}\) zmiennych wolnych]\label{def:untyped_fv}
-  Dla dowolnego pretermu \(M\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\) w następujący sposób:
+  Dla dowolnego pretermu \(M\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w~\(M\) w~następujący sposób:
 \begin{align*}
     \mathrm{FV}(x) &= \{x\}\\
     \mathrm{FV}(\lambda x .\, P)  &= \mathrm{FV}(P)\setminus\{x\}\\
@@ -96,7 +97,7 @@ Podwyrażenia \(\lambda\)-pretermu mogą być wzajemnie identyczne i występowa�
 \end{przyklad}
 
 \begin{definicja}(Podstawienie)\label{def:substitution}
-  Dla dowolnych \(\mathrm{M,\,N}\in\mathbf{\tilde\Lambda}\) i \(x\in V\) przez \(N[x/N]\) oznaczamy rezultat podstawienia termu \(N\) za wszystkie wolne wystąpienia zmiennej \(x\) w \(M\), o ile w rezultacie podstawienia nie zostaną związane żadne zmienne wolne występujące w \(N\). W takim wypadku:
+  Dla dowolnych \(\mathrm{M,\,N}\in\mathbf{\tilde\Lambda}\) i~\(x\in V\) przez \(N[x/N]\) oznaczamy rezultat podstawienia termu \(N\) za wszystkie wolne wystąpienia zmiennej \(x\) w~\(M\), o ile w~rezultacie podstawienia nie zostaną związane żadne zmienne wolne występujące w~\(N\). W takim wypadku:
   \begin{enumerate}[label={(S\arabic*)}, ref={(S\arabic*)}]
     \setlength\itemsep{0em}
     \item \(x[x/N] = N\)
@@ -111,11 +112,11 @@ Operacja podstawienia wymaga jednak pewnej delikatności. Rozważmy następując
 \[
   \lambda x.\,zx=_{\alpha}\lambda y.\,zy
 \]
-Zauważmy, że traktując podstawienie w sposób naiwny, mamy, że \((\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x]\), a więc tracimy pożądaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w Definicji \ref{def:substitution} wymóg, aby podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Alternatywnym rozwiązaniem jest określenie podstawienia, które wprowadzałoby do wyrażenia nową zmienną i prowadziło w konsekwencji do abstrahowania po wcześniej nie występujacych zmiennych:
+Zauważmy, że traktując podstawienie w~sposób naiwny, mamy, że \[(\lambda x.\,zx)[z/x]\neq_{\alpha}(\lambda y.\,zy)[z/x],\] a więc tracimy pożądaną własność niezmienniczości \(\alpha\)-konwersji względem podstawienia. Stąd w~Definicji \ref{def:substitution} wymóg, aby podstawienie nie prowadziło do uszczuplenia zbioru zmiennych wolnych. Alternatywnym rozwiązaniem jest określenie podstawienia, które wprowadzałoby do wyrażenia nową zmienną i~prowadziło w~konsekwencji do abstrahowania po wcześniej nie występujacych zmiennych:
 \[
   (\lambda x.\,M)[y/N] = \lambda x'.\,M[x/x'][y/N],
 \]
-w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not\in\mathrm{FV}(N)\). Rozstrzygnięcie takie przytacza się w \cite{Hindley:2008:LCI:1388400,}. Po uwzględneniu odpowiednich modyfikacji, Definicja \ref{def:substitution} przyjmuje następującą postać:
+w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i~\(x'\not\in\mathrm{FV}(N)\). Rozstrzygnięcie takie przytacza się w~\cite{Hindley:2008:LCI:1388400,}. Po uwzględneniu odpowiednich modyfikacji, Definicja \ref{def:substitution} przyjmuje następującą postać:
 \begin{customdef}{4'}(Podstawienie')\label{def:untyped_substitution_hindley}
   \begin{enumerate}[label={(S'\arabic*)}, ref={(S'\arabic*)}]
     \setlength\itemsep{0em}
@@ -124,16 +125,16 @@ w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not
     \item \((PQ)[x/N] = P[x/N]\,Q[x/N]\)
     \item \((\lambda x.\, P)[x/N] = \lambda x.\,P\)
     \item \((\lambda y.\, P)[x/N] = \lambda y.\,P\), jeśli \(x\not\in\mathrm{FV}(P)\)\label{def:substitution_e}\label{def:substitution_hindley_e}
-    \item \((\lambda y.\, P)[x/N] = \lambda y.\,P[x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\not\in\mathrm{FV}(N)\)\label{def:substitution_hindley_f}
-    \item \((\lambda y.\, P)[x/N] = \lambda z.\,P[y/z][x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i \(y\in\mathrm{FV}(N)\)\label{def:substitution_hindley_g}
+    \item \((\lambda y.\, P)[x/N] = \lambda y.\,P[x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i~\(y\not\in\mathrm{FV}(N)\)\label{def:substitution_hindley_f}
+    \item \((\lambda y.\, P)[x/N] = \lambda z.\,P[y/z][x/N],\ \text{gdzie}\ x\in\mathrm{FV}(P)\) i~\(y\in\mathrm{FV}(N)\)\label{def:substitution_hindley_g}
   \end{enumerate}
-  przy czym w \ref{def:substitution_hindley_g} wymagamy, aby zmienna \(z\) nie występowała wcześniej w pretermach \(N\) i \(P\) jako zmienna wolna, zaś dla \ref{def:substitution_hindley_e}-\ref{def:substitution_hindley_g} dodatkowo \(y\not\equiv x\).
+  przy czym w~\ref{def:substitution_hindley_g} wymagamy, aby zmienna \(z\) nie występowała wcześniej w~pretermach \(N\) i~\(P\) jako zmienna wolna, zaś dla \ref{def:substitution_hindley_e}-\ref{def:substitution_hindley_g} dodatkowo \(y\not\equiv x\).
 \end{customdef}
 % \subsection{Podstawienie jednoczesne}
 % Biorąc pod uwagę sens obliczeniowy rachunku \(\lambda\) interesujące okazuje się modyfikacja Definicji \ref{def:untyped_substitution_hindley} w  taki sposób, aby podstawienie miało miejsce dla wielu zmiennych równolegle w całym \(\lambda\)-termie. Za przykładem \cite{STOUGHTON1988317} wprowadzimy \emph{podstawienie jednoczesne}. W tym celu jednak uściślenia wymagają pewne pojęcia.
 
 \begin{lemat}(O podstawieniu)\label{lem:substitution}
-  Niech \(M,\,N,\,L\in \mathbf{\tilde\Lambda}\) i niech ponadto \(x\not\equiv y\) oraz \(x\not\in\mathrm{FV}(L)\). Wówczas
+  Niech \(M,\,N,\,L\in \mathbf{\tilde\Lambda}\) i~niech ponadto \(x\not\equiv y\) oraz \(x\not\in\mathrm{FV}(L)\). Wówczas
   \begin{align}\label{eq:substitution}
     M[x/N][y/L]\equiv M[y/L]\left[x/N\left[y/L\right]\right].
   \end{align}
@@ -143,9 +144,9 @@ w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not
       \item \(M\) jest zmienną. Wówczas:
         \begin{enumerate}[label={\alph*.}]
         \item Jeśli \(M\equiv x\), to obie strony \eqref{eq:substitution} po podstawieniu są postaci \(N[y/L]\).
-        \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i \(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \(M[x/N][y/L]\equiv L\). Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
+        \item Jeśli \(M\equiv y\), to ponieważ \(x\not\equiv y\) i~\(x\not\in\mathrm{FV}(M)\), po wykonaniu podstawienia po lewej stronie \eqref{lem:substitution} otrzymujemy \[M[x/N][y/L]\equiv L.\] Ponieważ \(x\not\in\mathrm{FV}(L)\), to po wykonaniu podstawienia po prawej stronie widzimy, że obydwie strony są identyczne.
 
-        \item Jeśli \(M\equiv z\) i \(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} sa identyczne.
+        \item Jeśli \(M\equiv z\) i~\(z\not\equiv x\)  oraz \(z\not\equiv y\), to obydwie strony \eqref{eq:substitution} są identyczne.
         \end{enumerate}
 
       \item \(M\equiv P Q\) dla pewnych \(P,\,Q\in\mathbf{\tilde\Lambda}\). Wówczas korzystając z założenia indukcyjnego wnosimy, że
@@ -153,8 +154,8 @@ w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not
           P[x/N][y/L] &= P[y/L]\left[x/N\left[y/L\right]\right],\\
           Q[x/N][y/L] &= Q[y/L]\left[x/N\left[y/L\right]\right].
         \end{align*}
-        Mając na względzie \ref{def:substitution_c} widzimy, że twierdzenie zachodzi i w tym przypadku.
-        \item Jeśli \(M\equiv \lambda z.\,P\) oraz \(z\equiv x\) lub \(z\equiv y\), to z \ref{def:substitution_e} widzimy, że obydwie strony \eqref{eq:substitution} sa identyczne. Przypuśćmy, że \(z\not\equiv x\) i \(z\not\equiv y\) i \(z\not\in\mathrm{FV}(L)\). Wówczas na podstawie założenia indukcyjnego mamy:
+        Mając na względzie \ref{def:substitution_c} widzimy, że twierdzenie zachodzi i~w~tym przypadku.
+      \item Jeśli \(M\equiv \lambda z.\,P\) oraz \({z\equiv x}\) lub \({z\equiv y}\), to z \ref{def:substitution_e} widzimy, że obydwie strony \eqref{eq:substitution} są identyczne. Przypuśćmy, że \(z\not\equiv x\) i~\({z\not\equiv y}\) i~\(z\not\in\mathrm{FV}(L)\). Wówczas na podstawie założenia indukcyjnego mamy:
       \begin{align*}
         (\lambda z.\,P)[x/N][y/L] &= \lambda z.\,P[x/N][y/L] =\\
                                   &= \lambda z.\,P[y/L][x/N[y/L]] =\\
@@ -166,7 +167,7 @@ w przypadku, gdy \(x\not\equiv y\), gdzie \(x'\not\in\mathrm{FV}(M)\) i \(x'\not
 \end{lemat}
 
 \begin{wniosek}\label{thm:odwracalnosc_podstawienia}
-Jeśli \(M[x/y]\) jest określone i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest określone oraz
+Jeśli \(M[x/y]\) jest określone i~\(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]\) jest określone oraz
   \(M[x/y][y/x]=M\).
   \begin{dowod}
     Mając na uwadze Lemat \ref{lem:substitution} dowód przebiega przez indukcję strukturalną względem \(M\).
@@ -176,17 +177,17 @@ Jeśli \(M[x/y]\) jest określone i \(y\not\in\mathrm{FV}(M)\), to \(M[x/y][y/x]
 
 
 
-\subsection{Wyrażenia \(\lambda\) i ich własności}\label{subsec:lambda_terms_untyped}
-Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie zmiennymi związanymi, tak jak w przypadku wyrażeń \(\lambda x. \,zx\) i \(\lambda y.zy\). W takim wypadku powiemy o nich, że są swoimi \emph{\(\alpha\)-wariantami} lub że są ze sobą w relacji \emph{\(\alpha\)-konwersji}.
+\subsection{Wyrażenia \(\lambda\) i~ich własności}\label{subsec:lambda_terms_untyped}
+Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie zmiennymi związanymi, tak jak w~przypadku wyrażeń \(\lambda x. \,zx\) i~\(\lambda y.zy\). W takim wypadku powiemy o nich, że są swoimi \emph{\(\alpha\)-wariantami} lub że są ze sobą w~relacji \emph{\(\alpha\)-konwersji}.
 
 \begin{definicja}(\(\alpha\)-konwersja)\label{def:untyped_alpha}
-  Relacją \(=_{\alpha}\) (\(\alpha\)-konwersji) nazywamy najmniejszy w sensie mnogościowym praporządek na \(\mathbf{\tilde\Lambda}\) taki, że
+  Relacją \(=_{\alpha}\) (\(\alpha\)-konwersji) nazywamy najmniejszy w~sensie mnogościowym praporządek na \(\mathbf{\tilde\Lambda}\) taki, że:
   \begin{enumerate}[label={(\(\alpha\)\arabic*)}, ref={(\(\alpha\)\arabic*)}]
   \setlength\itemsep{0em}
-  \item Jeśli \(y\not\in \mathrm{FV}(M)\) oraz \(M[x/y]\) jest określone,\\ to \(\lambda x.\,M~=_{\alpha}~\lambda y.\,M[x/y]\)\label{def:alpha_1}
-  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(x\in V\) zachodzi \(\lambda x.\,M =_{\alpha} \lambda x.\,N\)\label{def:alpha_2}
-  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(MZ =_{\alpha} NZ\)\label{def:alpha_3}
-  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(ZM =_{\alpha} ZN\)\label{def:alpha_4}
+  \item Jeśli \(y\not\in \mathrm{FV}(M)\) oraz \(M[x/y]\) jest określone,\\ to \(\lambda x.\,M~=_{\alpha}~\lambda y.\,M[x/y]\)\label{def:alpha_1}.
+  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(x\in V\) zachodzi \(\lambda x.\,M =_{\alpha} \lambda x.\,N\)\label{def:alpha_2}.
+  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(MZ =_{\alpha} NZ\)\label{def:alpha_3}.
+  \item Jeśli \(M=_{\alpha} N\), to dla dowolnego \(Z\in\mathbf{\tilde\Lambda}\) zachodzi \(ZM =_{\alpha} ZN\)\label{def:alpha_4}.
   \end{enumerate}
 \end{definicja}
 
@@ -207,15 +208,15 @@ Na ogół chcielibyśmy utożsamiać pretermy, które różnią się wyłącznie
     %Fakt \ref{def:odwracalnosc_podstawienia}
 
     \begin{enumerate}[label={\roman*)}, ref={(\roman*)}]
-      \item Jeśli \(M=_{\alpha} N\) w konsekwencji zwrotności \(=_{\alpha}\), to \(M\equiv N\), a zatem również \(N\equiv M\). Stąd \(N=_{\alpha} M\).
-      \item Jeśli \(M=_{\alpha} N\) w konsekwencji przechodniości \(=_{\alpha}\), to istnieje \(L\in\mathbf{\tilde\Lambda}\) takie, że \(M=_{\alpha}L\) i \(L=_{\alpha}N\). Wówczas z założenia indukcyjnego \(N=_{\alpha}L\) i \(L=_{\alpha}M\). Z przechodniości relacji \(=_{\alpha}\) otrzymujemy spodziewaną tezę.
-      \item Przypuśćmy, że \(M=_{\alpha} N\) w konsekwencji  \ref{def:alpha_1}  dla \(M\equiv\lambda x.\,M'\) i \(N\equiv\lambda y.\,M'[x/y]\). Ponieważ \(x\not\in\mathrm{FV}(M'[x/y])\), to ze względu na Wniosek \ref{thm:odwracalnosc_podstawienia} mamy, że \(M'[x/y][y/x]=M'\). Zatem, na podstawie \ref{def:alpha_1}:
+      \item Jeśli \(M=_{\alpha} N\) w~konsekwencji zwrotności \(=_{\alpha}\), to \(M\equiv N\), a zatem również \(N\equiv M\). Stąd \(N=_{\alpha} M\).
+      \item Jeśli \(M=_{\alpha} N\) w~konsekwencji przechodniości \(=_{\alpha}\), to istnieje \(L\in\mathbf{\tilde\Lambda}\) takie, że \(M=_{\alpha}L\) i~\(L=_{\alpha}N\). Wówczas z założenia indukcyjnego \(N=_{\alpha}L\) i~\(L=_{\alpha}M\). Z przechodniości relacji \(=_{\alpha}\) otrzymujemy spodziewaną tezę.
+      \item Przypuśćmy, że \(M=_{\alpha} N\) w~konsekwencji  \ref{def:alpha_1}  dla \(M\equiv\lambda x.\,M'\) i~\(N\equiv\lambda y.\,M'[x/y]\). Ponieważ \(x\not\in\mathrm{FV}(M'[x/y])\), to ze względu na Wniosek \ref{thm:odwracalnosc_podstawienia} mamy, że \(M'[x/y][y/x]=M'\). Zatem, na podstawie \ref{def:alpha_1}:
   \begin{align*}
         \lambda y.\,M'[x/y] =_{\alpha} \lambda x.\,M'[x/y][y/x].
       \end{align*}
-    \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_2}, gdzie \(M=\lambda x.\,M'\) i \(N=\lambda x.\,N'\) dla \(M'=_{\alpha} N'\), to z założenia indukcyjnego \(N' =_{\alpha} M'\) i w konsekwencji \ref{def:alpha_2} mamy, że \(N=_{\alpha} M\).
-    \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_3} dla \(M\equiv M'Z\) i \(N\equiv N'Z\) takich, że \(M'=_{\alpha}N'\), to z założenia indukcyjnego oczywiście \(N'=_{\alpha}M'\), a zatem z \ref{def:alpha_3} \(N=_{\alpha} M\).\label{proof:alpha_cases_4}
-    \item  Jeśli \(M=_{\alpha} N\) w konsekwencji \ref{def:alpha_4}, to postępujemy jak w przypadku \ref{proof:alpha_cases_4}.\qed
+    \item  Jeśli \(M=_{\alpha} N\) w~konsekwencji \ref{def:alpha_2}, gdzie \(M=\lambda x.\,M'\) i~\(N=\lambda x.\,N'\) dla \(M'=_{\alpha} N'\), to z założenia indukcyjnego \(N' =_{\alpha} M'\) i~w~konsekwencji \ref{def:alpha_2} mamy, że \(N=_{\alpha} M\).
+    \item  Jeśli \(M=_{\alpha} N\) w~konsekwencji \ref{def:alpha_3} dla \(M\equiv M'Z\) i~\(N\equiv N'Z\) takich, że \(M'=_{\alpha}N'\), to z założenia indukcyjnego \(N'=_{\alpha}M'\), a~zatem z~\ref{def:alpha_3} \(N=_{\alpha} M\).\label{proof:alpha_cases_4}
+    \item  Jeśli \(M=_{\alpha} N\) w~konsekwencji \ref{def:alpha_4}, to postępujemy jak w~przypadku \ref{proof:alpha_cases_4}.\qed
     \end{enumerate}
   \end{dowod}
 \end{wniosek}
@@ -245,8 +246,8 @@ Wprowadzamy następujące konwencje notacyjne:
  Każdy \(M\in\mathbf{\Lambda}\) ma jedną z poniższych postaci:
  \begin{enumerate}[label={(\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
-    \item \(M \equiv \lambda x_1\dots x_n.\ y\,N_1 \dots N_m\), gdzie \(n,m\geq 0\) i \(y\in \mathrm{V}\)\label{def:HNF},
-    \item \(M \equiv \lambda x_1\dots x_n.\ (\lambda y.\ N_0)\,N_1\dots N_m\), gdzie \(n\geq 0\) i \(m\geq 1\)\label{def:HNF2}.
+    \item \(M \equiv \lambda x_1\dots x_n.\ y\,N_1 \dots N_m\), gdzie \(n,m\geq 0\) i~\(y\in \mathrm{V}\)\label{def:HNF},
+    \item \(M \equiv \lambda x_1\dots x_n.\ (\lambda y.\ N_0)\,N_1\dots N_m\), gdzie \(n\geq 0\) i~\(m\geq 1\)\label{def:HNF2}.
   \end{enumerate}
 \end{twierdzenie}
 %\noindent O \(\lambda\)-termach postaci \ref{def:HNF} i \ref{def:HNF2} mówimy, że są w \emph{czołowej postaci normalnej} (HNF, ang. \emph{head normal form}) albo w \emph{słabej czołowej postaci normalnej} (WHNF, ang.~\emph{weak head normal form}), odpowiednio. 
@@ -255,7 +256,7 @@ Wprowadzamy następujące konwencje notacyjne:
   \begin{enumerate}[label={\roman*)}, ref={\roman*)}]
     \setlength\itemsep{0em}
     \item Jeśli \(M\) jest zmienną, to wówczas \(M\) jest postaci \ref{def:HNF}.
-    \item Jeśli \(M\) jest aplikacją, to wówczas \(M \equiv P_{0} P_{1} \dots P_{m} \), gdzie \(P_{0}\) nie jest aplikacją. Wówczas \(M\) jest postaci \ref{def:HNF} albo postaci \ref{def:HNF2} dla \(n=0\), w zależności od tego czy \(P_0\) jest zmienną (wówczas jest to przypadek \ref{def:HNF}) czy abstrakcją (wówczas jest to przypadek \ref{def:HNF2}).
+    \item Jeśli \(M\) jest aplikacją, to wówczas \(M \equiv P_{0} P_{1} \dots P_{m} \), gdzie \(P_{0}\) nie jest aplikacją. Wówczas \(M\) jest postaci \ref{def:HNF} albo postaci \ref{def:HNF2} dla \(n=0\), w~zależności od tego czy \(P_0\) jest zmienną (wówczas jest to przypadek \ref{def:HNF}) czy abstrakcją (wówczas jest to przypadek \ref{def:HNF2}).
 %    \item Jeśli \(M\) jest abstrakcją, to wówczas \(M\equiv \lambda x_1\,x_2\dots x_m.\ P_0\,P_1\dots P_n\), gdzie \(P_0\) abstrakcją już nie jest. Wówczas \(P_0\) jest albo zmienną (przypadek \ref{def:HNF}) albo aplikacją (przypadek \ref{def:HNF2}).\qed
     \item Jeśli \(M\) jest abstrakcją postaci \(M\equiv\lambda x_1\,x_2 \dots x_n.\, P_0 P_1 \dots P_m\), to wówczas mamy następujące przypadki:
       \begin{enumerate}
@@ -272,54 +273,54 @@ Wprowadzamy następujące konwencje notacyjne:
     \setlength\itemsep{0em}
     \item \emph{czołowej postaci normalnej} (ang. \emph{head normal form}), jeśli \[M\equiv \lambda y_1\,y_2\,\dots\,y_n.\ x M_1 M_2 \dots M_m\quad \text{dla}\ n,\,m\geq 0,\]  
       
-    \item \emph{słabej czołowej postaci normalnej} (ang. \emph{weak head normal form}), jeśli dla \(n\geq 0\) i \(x\in V\) \(\lambda\)-term \(M\) jest postaci \ref{def:whnf1} lub \ref{def:whnf2}.
+    \item \emph{słabej czołowej postaci normalnej} (ang. \emph{weak head normal form}), jeśli dla \(n\geq 0\) i~\(x\in V\) \(\lambda\)-term \(M\) jest postaci \ref{def:whnf1} lub \ref{def:whnf2}.
       \begin{enumerate}[label={\roman*)}, ref={\roman*)}]
         \setlength\itemsep{0em}
         \item \(x\, P_1\, P_2\,\dots\,P_n\quad \), \label{def:whnf1}
         \item \(\lambda x.\,P_1\,P_2\,\dots\,P_n\). \label{def:whnf2}
       \end{enumerate}
   \end{enumerate}
-  Z określenia HNF widzimy, że każdy \(\lambda\)-term w postaci HNF jest również w postaci WHNF, ale nie odwrotnie.
+  Z określenia HNF widzimy, że każdy \(\lambda\)-term w~postaci HNF jest również w~postaci WHNF, ale nie odwrotnie.
 \end{definicja}
 
 \begin{przyklad}
-  \(\lambda x.(\lambda y.\,y)\,N\) jest w w postaci WHNF, ale nie jest w postaci HNF, ponieważ zawiera redeks czołowy \((\lambda y.\,y)N\).
+  \(\lambda x.(\lambda y.\,y)\,N\) jest w~postaci WHNF, ale nie jest w~postaci HNF, ponieważ zawiera redeks czołowy \((\lambda y.\,y)N\).
 \end{przyklad}
 
-Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych wolnych i operacji podstawienia definiowane uprzednio dla pretermów.
+Na zbiór \(\mathbf{\Lambda}\) przenoszą się pojęcia podtermu, zmiennych wolnych i~operacji podstawienia definiowane uprzednio dla pretermów.
 
 \begin{definicja}(Multizbiór \(\mathrm{Sub}\) podtermów \(\lambda\)-termu)
   Dla dowolnego \(\lambda\)-termu \({M=[M']_{=_{\alpha}}}\) określamy
   \[
     \mathrm{Sub}(M)=\mathrm{Sub}(M'),
   \]
-  gdzie \(\mathrm{Sub}(M')\) jest multizbiorem podwyrażeń pretermu \(M'\) zdefiniowanym w myśl Definicji \ref{def:untyped_subterm}.
+  gdzie \(\mathrm{Sub}(M')\) jest multizbiorem podwyrażeń pretermu \(M'\) zdefiniowanym w~myśl Definicji \ref{def:untyped_subterm}.
 \end{definicja}
 
 \begin{definicja}(Zbiór zmiennych wolnych \(\mathrm{FV}\))
-  Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w \(M\)
+  Dla dowolnego \(\lambda\)-termu \(M=[M']_{=_{\alpha}}\) określamy zbiór \(\mathrm{FV}(M)\) \emph{zmiennych wolnych} w~\(M\)
   \[
     \mathrm{FV}(M)=\mathrm{FV}(M'),
   \]
-  gdzie \(\mathrm{FV}(M')\) jest zbiorem zmiennych wolnych pretermu \(M'\) zdefiniowanym w myśl Definicji \ref{def:untyped_fv}.
+  gdzie \(\mathrm{FV}(M')\) jest zbiorem zmiennych wolnych pretermu \(M'\) zdefiniowanym w~myśl Definicji \ref{def:untyped_fv}.
 \end{definicja}
 
 \begin{definicja}(Podstawienie)\label{def:untyped_lambda_substitution}
-  Niech \(M=[M']_{=_\alpha}\) i \(N=[N']_{=_\alpha}\) i niech \(M'[x/N']\) będzie określone w myśl Definicji \ref{def:substitution}. Wówczas
+  Niech \(M=[M']_{=_\alpha}\) i~\(N=[N']_{=_\alpha}\) i~niech \(M'[x/N']\) będzie określone w~myśl Definicji \ref{def:substitution}. Wówczas
   \[
     M[x/N]= [M'[x/N']]_{=_\alpha}.
   \]
 \end{definicja}
 
 \begin{definicja}(Podstawienie jednoczesne)\label{def:simult_substitution}
-Dla dowolnego \(M\in\mathbf{\Lambda}\), nieskończonego ciągu \(\lambda\)-zmiennych~\(\vec{x}\) i nieskończonego ciągu \(\lambda\)-termów \(\vec{N}\) określamy:
+Dla dowolnego \(M\in\mathbf{\Lambda}\), nieskończonego ciągu \(\lambda\)-zmiennych~\(\vec{x}\) i~nieskończonego ciągu \(\lambda\)-termów \(\vec{N}\) określamy:
   \begin{enumerate}[label={(\(\vec{s}\)\arabic*)}, ref={(\arabic*)}]
     \setlength\itemsep{0em}
     \item \(x_i[\vec{x}/\vec{N}]=N_i\) dla \(i\in\mathbb{N}\),
     \item \(y[\vec{x}/\vec{N}]=y\) o ile dla dowolnego \(i\in\mathbb{N},\ y\not\equiv x_i\),
     \item \((PQ)[\vec{x}/\vec{N}]=P[\vec{x}/\vec{N}]Q[\vec{x}/\vec{N}]\),
 %    \item \((\lambda y.\,P)[\vec{x}/\vec{N}]=\lambda y'.\,P[y/y'][\vec{x}/\vec{N}]\), gdzie \(y'\) jest wcześniej nie występującą zmienną, \(y\not\equiv x_i\)  dla wszystkich \(i\in\mathbb{N}\) i \(y\not\in\bigcup_{i\in\mathbb{N}}FV(N_i)\).
-    \item \((\lambda y.\,P)[\vec{x}/\vec{N}]=\lambda y.\,P[\vec{x}/\vec{N}]\), jeśli \(y\neq x_i\) dla wszystkich \(i\in\mathbb{N}\) i \(y\not\in\bigcup_{i\in\mathbb{N}}FV(N_i)\).
+    \item \((\lambda y.\,P)[\vec{x}/\vec{N}]=\lambda y.\,P[\vec{x}/\vec{N}]\), jeśli \(y\neq x_i\) dla wszystkich \(i\in\mathbb{N}\) i~\(y\not\in\bigcup_{i\in\mathbb{N}}FV(N_i)\).
  \end{enumerate}
 \end{definicja}
 
@@ -328,7 +329,7 @@ Dla dowolnego \(M\in\mathbf{\Lambda}\), nieskończonego ciągu \(\lambda\)-zmien
 \end{konwencja*}
 
 \begin{przyklad}
-  Zauważmy, że podstawienia w myśl Definicji \ref{def:substitution} i Definicji \ref{def:simult_substitution} mogą, ale nie muszą, prowadzić do różnych rezultatów.
+  Zauważmy, że podstawienia w~myśl Definicji \ref{def:substitution} i~Definicji \ref{def:simult_substitution} mogą, ale nie muszą, prowadzić do różnych rezultatów.
 \begin{align*}
   \text{a)}\quad &  (xy)[y/x][x/u] = uu, &\quad\text{b)}\quad & (\lambda x.\,yx)[x/y][y/z]=\lambda x.\,zx, \\
                 &  (xy)[y/x, x/u] = ux. & &(\lambda x.\,yx)[x/y,y/z]=\lambda x.\,zx.\\
@@ -346,17 +347,17 @@ Dla dowolnego \(M\in\mathbf{\Lambda}\), nieskończonego ciągu \(\lambda\)-zmien
 %   \end{align*}
 % \end{uwaga}
 
-W literaturze znajdujemy mnogość propozycji, które w ten czy inny sposób starają się ułatwić rzeczywistą implementację podstawienia. Na szczególną uwagę zasługują tutaj tak zwane \emph{indeksy de Bruijna}. Zaproponowana przez N. G. de Brujina w \cite{deBruijnIndices}  notacja eliminuje bezpośrednie występowanie symboli zmiennych w \(\lambda\)-termach, zastępując je liczbą naturalną wyrażającą głębokość zagnieżdżenia odpowiedniej \(\lambda\)-abstrakcji przez którą jest związana, przykładowo:
+W literaturze znajdujemy mnogość propozycji, które w~ten czy inny sposób starają się ułatwić rzeczywistą implementację podstawienia. Na szczególną uwagę zasługują tutaj tak zwane \emph{indeksy de Bruijna}. Zaproponowana przez N. G. de Brujina w~\cite{deBruijnIndices}  notacja eliminuje bezpośrednie występowanie symboli zmiennych w~\(\lambda\)-termach, zastępując je liczbą naturalną wyrażającą głębokość zagnieżdżenia odpowiedniej \(\lambda\)-abstrakcji przez którą jest związana, przykładowo:
 \[
   \lambda f.\,(\lambda x.\,f(xx))(\lambda x.\,f(xx)) \equiv_{de Brujin} \lambda (\lambda 2 (1 1))(\lambda 2 (1 1))
 \]
-Historycznie wiąże się ta notacja z jego pracami nad systemem komputerowo wspomaganego dowodzenia twierdzeń AUTOMATH. Rozwiązanie takie, podobnie jak w przypadku tzw. logik kombinatorów (np. rachunku SKI), eliminuje konieczność \(\alpha\)-konwersji termów przy wykonywaniu \(\beta\)-redukcji, ale istotnie zmniejsza ich czytelność wyrażeń.
+Historycznie wiąże się ta notacja z jego pracami nad systemem komputerowo wspomaganego dowodzenia twierdzeń AUTOMATH. Rozwiązanie takie, podobnie jak w~przypadku tzw. logik kombinatorów (np. rachunku SKI), eliminuje konieczność \(\alpha\)-konwersji termów przy wykonywaniu \(\beta\)-redukcji, ale istotnie zmniejsza ich czytelność wyrażeń.
 
-Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w \cite{txa:alpha-draft}. Nasze rozważania opierają się w tej materii przeważająco na \cite{Urzyczyn2006}. Technikalia definiowania \(\lambda\)-termow jako klas \(\alpha\)-konwersji są na ogół w literaturze pomijane. %nie jest w literaturze przedmiotu. %Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
+Szerszy komentarz dotyczący dotychczasowych prób uchwycenia operacji podstawienia można prześledzić w~\cite{txa:alpha-draft}. Nasze rozważania opierają się w~tej materii przeważająco na \cite{Urzyczyn2006}. Technikalia definiowania \(\lambda\)-termow jako klas \(\alpha\)-konwersji są na ogół w~literaturze pomijane. %nie jest w literaturze przedmiotu. %Analogiczną konstrukcję należałoby powtarzać wprowadzając każdy kolejny system, dlatego w dalszej części tej pracy będziemy poprzestawali na nieformalnym traktowaniu wyrażeń danego systemu jako odpowiednich klas \(\alpha\)-konwersji.
 
 \subsection{Semantyka operacyjna}
 \subsubsection{Redukcje}
-Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\Lambda}\) operacji \(\beta\)- i \(\eta\)-redukcji. Pożądane jest, żeby operacje te wykonywane na podtermach pozostowały w \emph{zgodzie} ze strukturą całego \(\lambda\)-termu.
+Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\Lambda}\) operacji \(\beta\)- i~\(\eta\)-redukcji. Pożądane jest, żeby operacje te wykonywane na podtermach pozostowały w~\emph{zgodzie} ze strukturą całego \(\lambda\)-termu.
 
 \begin{definicja}(Relacja zgodna)
   Relację binarną \(\mathcal{R}\) na zbiorze \(\mathbf{\Lambda}\) nazywamy \emph{zgodną}, jeśli dla dowolnych \(M,\,N,\,P \in \mathbf{\Lambda}\) zachodzą następujące warunki:
@@ -367,7 +368,7 @@ Sens obliczeniowy \(\lambda\)-termom nadajemy przez określenie na \(\mathbf{\La
     \item Jeśli \(M \mathcal{R} N\), to \((PM)\,\mathcal{R}\,(PN)\).
   \end{enumerate}
 \end{definicja}
-Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) względem własności \(P\) będziemy rozumieli najmniejszą (w sensie mnogościowym) relację \(\mathcal{R}_2\) taką, że \(\mathcal{R}_1\subset\mathcal{R}_2\) i \(\mathcal{R}_2\) ma własność \(P\).
+Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) względem własności \(P\) będziemy rozumieli najmniejszą (w sensie mnogościowym) relację \(\mathcal{R}_2\) taką, że \(\mathcal{R}_1\subset\mathcal{R}_2\) i~\(\mathcal{R}_2\) ma własność \(P\).
   Z pewnego rodzaju domknięciami, ze względu na ich szczególną rolę, wiążemy następującą notację:
   \begin{enumerate}[label=(\alph*), ref={(\alph*)}]
     \setlength\itemsep{0em}
@@ -375,7 +376,7 @@ Przez \emph{domknięcie relacji} \(\mathcal{R}_1\) względem własności \(P\) b
     \item Symbolem \(\mathcal{R}^{*}\) oznaczamy domknięcie relacji \(\mathcal{R}^{+}\) względem zwrotności (\emph{zwrotne} domknięcie).\label{def:closure_b}
     \item Symbolem \(=_{\mathcal{R}}\) oznaczamy domknięcie relacji \(\mathcal{R}^{*}\) względem symetryczności (\emph{symetryczne} domknięcie).\label{def:closure_c}
 \end{enumerate}
-Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:closure_b} wyznacza praporzadek, który w odniesieniu do redukcji określonych na \(\mathbf{\Lambda}\) można rozumieć jako graf skierowany (w przypadku \(\mathbf{\Lambda}\) być może nieskończony) w którym krawędzie odpowiadają możliwym krokom obliczenia, zaś \ref{def:closure_c} -- kongruencję, która znów w szczególnym odniesieniu do \(\lambda\)-termów, będzie dokonywała podziału w \(\mathbf{\Lambda}\) ze względu na rezultat obliczenia.
+Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:closure_b} wyznacza praporzadek, który w~odniesieniu do redukcji określonych na \(\mathbf{\Lambda}\) można rozumieć jako graf skierowany (w przypadku \(\mathbf{\Lambda}\) być może nieskończony) w~którym krawędzie odpowiadają możliwym krokom obliczenia, zaś \ref{def:closure_c} -- kongruencję, która znów w~szczególnym odniesieniu do \(\lambda\)-termów, będzie dokonywała podziału w~\(\mathbf{\Lambda}\) ze względu na rezultat obliczenia.
 
 \subimport{}{newman_lemma.tex}
 
@@ -384,14 +385,14 @@ Dla lepszego zrozumienia powyższych operacji warto zauważyć, że \ref{def:clo
   \[
     (\lambda x.\,M)N\rightarrow_\beta M[x/N].
   \]
-  \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}. Przez \(\to_\beta^{+}\), \(\to_\beta^{*}\), \(=_\beta\) oznaczamy odpowiednie domknięcia relacji \(\beta\)-redukcji.  Symbolem \(\leftarrow_\beta\) oznaczać będziemy relację odwrotną do \(\beta\)-redukcji, zaś przez \(\xleftrightarrow[\beta]{}\) jej symetryczne domknięcie. 
+  \emph{\(\beta\)-redeksami} bedziemy nazywali wyrażenia postaci \((\lambda x.\, M)N\), zaś rezultat ich \(\beta\)-redukcji w~postaci termu \(M[x/N]\) -- \emph{\(\beta\)-reduktem}. Przez \(\to_\beta^{+}\), \(\to_\beta^{*}\), \(=_\beta\) oznaczamy odpowiednie domknięcia relacji \(\beta\)-redukcji.  Symbolem \(\leftarrow_\beta\) oznaczać będziemy relację odwrotną do \(\beta\)-redukcji, zaś przez \(\xleftrightarrow[\beta]{}\) jej symetryczne domknięcie. 
   
   \emph{Ciągiem \(\beta\)-redukcji} nazywamy każdy skończony lub nieskończony ciąg \(\lambda\)-termów \(M_0,\,M_1,\,\dots\) taki, że 
   \(
     M_0 \to_\beta M_1 \to_\beta \dots
   \)
 
-  Relację \(=_\beta\) nazywamy \emph{\(\beta\)-konwersją}. Zauważmy, że \(M =_{\beta} N\) wtedy i tylko wtedy, gdy istnieje skończony ciąg \(\lambda\)-termów \(M\equiv M_0\), \(M_1\), \(\dots\), \(M_n \equiv N\) taki, że \(M_i \to_\beta M_{i+1}\) lub \(M_{i+1} \to_\beta M_i\) dla \(0\leq i \leq n\). 
+  Relację \(=_\beta\) nazywamy \emph{\(\beta\)-konwersją}. Zauważmy, że \(M =_{\beta} N\) wtedy i~tylko wtedy, gdy istnieje skończony ciąg \(\lambda\)-termów \(M\equiv M_0\), \(M_1\), \(\dots\), \(M_n \equiv N\) taki, że \(M_i \to_\beta M_{i+1}\) lub \(M_{i+1} \to_\beta M_i\) dla \(0\leq i \leq n\). 
   
 \end{definicja}
 
@@ -422,11 +423,11 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
 \end{dowod}
 
 \begin{konwencja*}
-  Składnię rachunku \(\lambda\) często rozszerza się o wyrażenia let pozwalające konstruować \(\beta\)-redeksy w czytelny sposób. Rozszerzenie ma następującą postąć:
+  Składnię rachunku \(\lambda\) często rozszerza się o wyrażenia let pozwalające konstruować \(\beta\)-redeksy w~czytelny sposób. Rozszerzenie ma następującą postąć:
   \begin{align*}
     \mathrm{let}\ x{=}N\ \mathrm{in}\ M \equiv (\lambda x.\,M) N
   \end{align*}
-  Jest to przykład tzw. \emph{cukru syntaktycznego}, czyli wtórnych rozszerzeń języka, które ułatwiają jego użycie. Wyrażenia let w których \(M\equiv\lambda y.M'\) dla pewnego \(M'\in\mathbf{\Lambda}\) nazywamy \emph{domknięciami}\footnote{Idiom ten w literaturze poświęconej językom programowania z rodziny Lisp występuje również pod nazwą \emph{let-over-lambda}.} (ang. \emph{closure}). Nieformalnie, pozwalają one na przypisywanie wartości zmiennym o tzw. \emph{zakresie leksykalnym}.
+  Jest to przykład tzw. \emph{cukru syntaktycznego}, czyli wtórnych rozszerzeń języka, które ułatwiają jego użycie. Wyrażenia let w~których \(M\equiv\lambda y.M'\) dla pewnego \(M'\in\mathbf{\Lambda}\) nazywamy \emph{domknięciami}\footnote{Idiom ten w~literaturze poświęconej językom programowania z rodziny Lisp występuje również pod nazwą \emph{let-over-lambda}.} (ang. \emph{closure}). Nieformalnie, pozwalają one na przypisywanie wartości zmiennym o tzw. \emph{zakresie leksykalnym}.
 \end{konwencja*}
 
 \begin{definicja}(Strategia redukcji)
@@ -442,7 +443,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
   \begin{przyklad}\label{ex:beta_reduction}
     \begin{enumerate}[label={(\alph*)}, ref={(\alph*)}]
     \setlength\itemsep{0em} 
-    \item Oznaczmy \(\mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))\) i niech \(F\) będzie dowolnym \(\lambda\)-termem. Wówczas otrzymujemy nieskończony ciąg redukcji postaci\label{ex:Y}
+    \item Oznaczmy \(\mathrm{Y}\equiv\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx)))\) i~niech \(F\) będzie dowolnym \(\lambda\)-termem. Wówczas otrzymujemy nieskończony ciąg redukcji postaci\label{ex:Y}
     \begin{align*}
       \mathrm{Y}F &\equiv (\lambda f.\,(\lambda x.\,(f(xx))\lambda x.\,(f(xx))))F\\
                   &\to_\beta (\lambda x.\,F(xx))\lambda x.\,F(xx)\\
@@ -450,8 +451,8 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
                   &\to_\beta F(\underbrace{F((\lambda x.\,F(xx))\lambda x.\,F(xx))}_{=_\beta \mathrm{Y}F})\\
                   &\to_\beta \dots
     \end{align*}
-        i w konsekwencji \(\mathrm{Y}F =_\beta F(\mathrm{Y}F)\). Y nazywamy \emph{kombinatorem punktu stałego}. Widzimy, że relacja \(\beta\)-redukcji w rachunku \(\lambda\) nie jest ani słabo, ani silnie normalizująca. 
-      \item Niech \(\Omega\equiv (\lambda x.\ xx)(\lambda x.\ xx)\). \(\Omega\) jest \(\beta\)-redeksem, którego redukcja prowadzi do ponownego otrzymania termu \(\Omega\) i w konsekwencji do stałego ciągu redukcji postaci:\label{ex:Delta}
+        i~w~konsekwencji \(\mathrm{Y}F =_\beta F(\mathrm{Y}F)\). Y nazywamy \emph{kombinatorem punktu stałego}. Widzimy, że relacja \(\beta\)-redukcji w~rachunku \(\lambda\) nie jest ani słabo, ani silnie normalizująca. 
+      \item Niech \(\Omega\equiv (\lambda x.\ xx)(\lambda x.\ xx)\). \(\Omega\) jest \(\beta\)-redeksem, którego redukcja prowadzi do ponownego otrzymania termu \(\Omega\) i~w~konsekwencji do stałego ciągu redukcji postaci:\label{ex:Delta}
       \begin{align*}
         \Omega\to_\beta \Omega \to_\beta \Omega \to_\beta \dots
       \end{align*}
@@ -459,8 +460,8 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
       \begin{align*}
         \Delta\Delta \to_\beta \Delta\Delta\Delta \to_\beta \Delta\Delta\Delta\Delta \to_\beta \dots
       \end{align*}
-        Ponownie, ponieważ każda redukcja powoduje wydłużenie termu, \(\Delta\Delta\) nie ma postaci normalnej i w konsekwencji każdy powstały ciąg redukcji termu \(\Delta\Delta\) jest nieskończony.  
-      \item Redukcja \(\lambda\)-termu posiadającego więcej niż jeden redeks może prowadzić do różnych (choć \(\beta\)-równoważnych) reduktów. Zależy to od wyboru strategii redukcji. Rozważmy następujący term: \((\lambda u.\ v)\,\Omega\). Konsekwentne redukowanie podtermu \(\Omega\) prowadzić musi do niekończącego się stałego ciągu redukcji \[(\lambda u.\ v)\,\Omega\to_\beta(\lambda u.\ v)\,\Omega\to_\beta \dots\] Wybierając strategię polegającą na aplikacji \(\Omega\) do \((\lambda u.\ v)\) otrzymujemy natychmiastowo redeks w postaci normalnej.\label{ex:undeterministic_reduction_untyped}
+        Ponownie, ponieważ każda redukcja powoduje wydłużenie termu, \(\Delta\Delta\) nie ma postaci normalnej i~w~konsekwencji każdy powstały ciąg redukcji termu \(\Delta\Delta\) jest nieskończony.  
+      \item Redukcja \(\lambda\)-termu posiadającego więcej niż jeden redeks może prowadzić do różnych (choć \(\beta\)-równoważnych) reduktów. Zależy to od wyboru strategii redukcji. Rozważmy następujący term: \((\lambda u.\ v)\,\Omega\). Konsekwentne redukowanie podtermu \(\Omega\) prowadzić musi do niekończącego się stałego ciągu redukcji \[(\lambda u.\ v)\,\Omega\to_\beta(\lambda u.\ v)\,\Omega\to_\beta \dots\] Wybierając strategię polegającą na aplikacji \(\Omega\) do \((\lambda u.\ v)\) otrzymujemy natychmiastowo redeks w~postaci normalnej.\label{ex:undeterministic_reduction_untyped}
     \end{enumerate}
   \end{przyklad}
 \begin{definicja}(\(\eta\)-redukcja)
@@ -469,7 +470,7 @@ Dowód przeprowadzamy przez indukcję względem definicji \ref{def:untyped_subst
     \lambda x.\,Mx\to_\eta M,\ \text{o ile}\ x\not\in \mathrm{FV}(M).
   \]
 
-  \(\eta\)-redukcja pozwala na pominięcie niczego nie wnoszącej \(\lambda\)-abstrakcji. Operację odwrotną nazywamy \emph{\(\eta\)-abstrakcją}, zaś \(\lambda\)-termy będące w którejkolwiek z tych relacji nazywamy \emph{\(\eta\)-konwersami}. Operacja ta nie ma wpływu na rezultat obliczenia, jedynie optymializuje zapis \(\lambda\)-termów i stąd ma duże znaczenie stylistyczne w~programowaniu funkcyjnym.
+  \(\eta\)-redukcja pozwala na pominięcie niczego nie wnoszącej \(\lambda\)-abstrakcji. Operację odwrotną nazywamy \emph{\(\eta\)-abstrakcją}, zaś \(\lambda\)-termy będące w~którejkolwiek z tych relacji nazywamy \emph{\(\eta\)-konwersami}. Operacja ta nie ma wpływu na rezultat obliczenia, jedynie optymializuje zapis \(\lambda\)-termów i~stąd ma duże znaczenie stylistyczne w~programowaniu funkcyjnym.
   \end{definicja}
 
   \begin{przyklad} 
