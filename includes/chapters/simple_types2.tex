@@ -85,7 +85,7 @@ Późniejsze litery alfabetu greckiego (\(\sigma,\, \tau,\, \rho,\,\dots\)), by�
         \item dla \(d_1, d_2\in D_2\) zachodzi \(d_1\preceq d_2\) lub
         \item \(d_1 \in D_1\) i \(d_2 \in D_2\).
       \end{enumerate}
-      Przy powyższych ustaleniach, jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_k:\sigma_m)\) oraz \(\Delta=(y_1:\rho_1,\,\dots\,y_n:\rho_n)\), to mamy 
+      Przy powyższych ustaleniach, jeśli \(\Gamma=(x_1:\sigma_1,\,\dots,\,x_k:\sigma_m)\) oraz \({\Delta=(y_1:\rho_1,\,\dots\,y_n:\rho_n)}\), to mamy 
       \[
         \Gamma \concat \Gamma' = (x_1:\sigma_1,\,\dots,\,x_k:\sigma_m,\,y_1:\rho_1,\,\dots\,y_n:\rho_n).
       \]
@@ -138,12 +138,12 @@ W systemie tym mamy do czynienia z wyraźnym podziałem na obiekty dwóch rodzaj
 \begin{definicja}(Wyprowadzenie typu) 
 %  Mówimy, że stwierdzenie \(M:\sigma\) jest \emph{wyprowadzalne} z kontekstu \(\Gamma\), jeśli istnieje skończone drzewo sądów \(\mathcal{P}\) spełniające poniższe warunki:
 %  Mówimy, że \(\lambda\)-term \(M\) jest typu \(\sigma\) w kontekście \(\Gamma\), jeśli istnieje skończone drzewo sądów \(\mathcal{P}\) spełniające poniższe warunki:
-  \emph{Wyprowadzeniem} sądu \(\Gamma\vdash M:\sigma\) nazywamy skończone drzewo sądów \(\mathcal{P}\) takie, że dla pewnego kontekstu \(\Delta\) spełnione są następujące warunki:
+  \emph{Wyprowadzeniem} sądu \(\Gamma\vdash M:\sigma\) nazywamy skończone drzewo sądów \(\mathcal{P}\) takie, że spełnione są następujące warunki:
 %  Wyprowadzeniem typu \(\lambda\)-termu \(M\) nazywamy skończone drzewo sądów \(\mathcal{P}\) takie, że dla pewnego kontekstu \(\Delta\) spełnione są następujące warunki:
   \begin{enumerate}[label=(D\arabic*)]
       \setlength\itemsep{0em}
-      \item W korzeniu \(\mathcal{P}\) znajduje się sąd \(\Gamma \vdash M:\sigma\), gdzie \(\Gamma\subset\Delta\).
-      \item Liście \(\mathcal{P}\) są \emph{aksjomatami}, czyli sądami postaci \(\Delta \vdash x:\sigma\).
+      \item W korzeniu \(\mathcal{P}\) znajduje się sąd \(\Gamma \vdash M:\sigma\).
+      \item Liście \(\mathcal{P}\) są \emph{aksjomatami}, czyli sądami postaci \(\Gamma' \vdash x:\sigma\) dla pewnego kontekstu \(\Gamma'\).
       \item Wszystkie pozostałe sądy w \(\mathcal{P}\) są uzyskane ze swoich dzieci za pomocą reguły (app) albo (abs).
   \end{enumerate}
   Jeśli istnieje wyprowadzenie sądu dla \(\Gamma\vdash M:\sigma\), to powiemy, że jest on \emph{wyprowadzalny}. 
