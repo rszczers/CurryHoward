@@ -1,9 +1,10 @@
-%\documentclass[a4paper,oneside,twoside,reqno,12pt,openright]{book}
-\documentclass[a4paper,oneside,reqno,12pt]{article}
+\documentclass[a4paper,oneside,twoside,reqno,12pt,openright]{article}
+% \documentclass[a4paper,oneside,reqno,12pt]{article}
 %\usepackage[a4paper,left=4cm,right=3cm,top=3cm,bottom=3cm,head=0cm,headsep=0cm]{geometry}
 %\usepackage[utf8]{inputenc}
 %\usepackage[T1]{fontenc}
 %\usepackage{fontspec}
+
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage
@@ -24,8 +25,8 @@
 \usepackage{inputenc}
 \usepackage{MnSymbol}
 \usepackage{mathtools}
-%\usepackage[lmargin=142pt,rmargin=95pt,tmargin=127pt,bmargin=123pt]{geometry}
-\usepackage{geometry}
+\usepackage[lmargin=142pt,rmargin=95pt,tmargin=127pt,bmargin=123pt]{geometry}
+%\usepackage{geometry}
 \usepackage{polski}
 \usepackage{plain}
 \usepackage{float}
@@ -58,6 +59,7 @@
 \usepackage{pst-plot}
 \usepackage{pstricks-add}
 \usepackage{moreenum}
+\usepackage[all]{nowidow}
 %\usepackage{cite}
 
 %\DeclareSymbolFontAlphabet{\amsmathbb}{AMSb}%
@@ -79,18 +81,31 @@
 
 \begin{document}
 
-% \frontmatter
-% \subimport{}{title.tex}
-% \newpage
-% \null
-% \newpage
-% \subimport{}{oswiadczenie.tex}
-% \newpage
-% \subimport{}{abstract.tex}
-
+%\frontmatter
+\thispagestyle{empty}
+\subimport{}{title.tex}
+\newpage
+\thispagestyle{empty}
+\null
+\newpage
+\thispagestyle{empty}
+\subimport{}{oswiadczenie.tex}
+\newpage
+\thispagestyle{empty}
+\null
+\newpage
+\thispagestyle{empty}
 \tableofcontents
+\newpage
+\thispagestyle{empty}
+\null
+\newpage
+\thispagestyle{empty}
+\subimport{}{abstract.tex}
+\newpage
 %\mainmatter
-% \newpage
+%\newpage
+\setcounter{page}{1}
 \subimport{includes/chapters/}{intro.tex}
 \newpage
 \subimport{includes/chapters/}{untyped.tex}

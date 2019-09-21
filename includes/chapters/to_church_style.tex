@@ -3,11 +3,11 @@ Przypisanie typu \(\lambda\)-termowi rozpoczynamy zawsze od określenia typów d
 
 \begin{enumerate}
   \item Możemy przypisać unikalny typ każdej \(\lambda\)-zmiennej przed jej wprowadzeniem. Takie podejście nazywamy \emph{stylem Churcha} albo typowaniem \emph{explicite}, ponieważ deklaracje typowe zmiennych występują jawnie w składni \(\lambda\)-termów. W konsekwencji w podejściu tym nie spotykamy problemu typowalności. Stąd systemy w tym stylu nazywa się również systemami {typowanymi} (ang. \emph{typed systems}).
-  \item Inny sposób polega na nie ustalaniu typów zmiennych. Składnia \(\lambda\)-termów nie ulega wówczas zmianie, zaś o typie rozstrzyga algorytm rekonstrukcji typu. Typy w tym stylu były przedmotem Rozdziału \ref{sec:simple_types}. W literaturze powszechnie nazywa się to podejście \emph{stylem Currego} albo typowaniem \emph{implicite}, zaś systemy w takim stylu określa się systemami \emph{przypisywania typu} (ang. \emph{type assignment systems}).
+  \item Inny sposób polega na nie ustalaniu typów zmiennych. Składnia \(\lambda\)-termów nie ulega wówczas zmianie, zaś o typie rozstrzyga algorytm rekonstrukcji typu. Typy w tym stylu były przedmotem Rozdziału \ref{sec:simple_types}. W literaturze powszechnie nazywa się to podejście \emph{stylem Curry'ego} albo typowaniem \emph{implicite}, zaś systemy w takim stylu określa się systemami \emph{przypisywania typu} (ang. \emph{type assignment systems}).
 \end{enumerate}
 
 Obydwa podejścia dają w rezultacie podobne systemy typów \cite[Rozdział 3.4]{Urzyczyn2006}.  % Systemy w stylu Currego odpowiadają językom programowania funkcyjnego takim jak ML, Clean czy Haskell. Programując w takich językach rolę wyprowadzania typu w istocie przejmuje kompilator, zaś deklaracje typów mają tylko charakter dokumentacji.  
-Rozwiązaniem kompromisowym jest tzw. typowanie w \emph{stylu de Brujina}\footnote{W \cite{Urzyczyn2006} nazywa się to podejście \emph{nieortodoksyjnym stylem Churcha}} \cite[1A.33]{barendregt_dekkers_statman_2013} w którym nie ustala się typu wszystkich zmiennych, jednak adnotacje typowe są częścią składni (tak jak w stylu Churcha) i zależą od ustalonego kontekstu (jak w stylu Currego). 
+Rozwiązaniem kompromisowym jest tzw. typowanie w \emph{stylu de Brujina}\footnote{W \cite{Urzyczyn2006} nazywa się to podejście \emph{nieortodoksyjnym stylem Churcha}} \cite[1A.33]{barendregt_dekkers_statman_2013} w którym nie ustala się typu wszystkich zmiennych, jednak adnotacje typowe są częścią składni (tak jak w stylu Churcha) i zależą od ustalonego kontekstu (jak w stylu Curry'ego). 
 
 Zaprezentujemy teraz alternatywną składnię oraz reguły wyprowadzania typów dla systemu typów prostych w stylu Churcha. Wszystkie określenia oraz twierdzenia występujące dotychczas w Rozdziale \ref{sec:simple_types} mają swoje odpowiedniki dla systemu w stylu Churcha (szczegóły w \cite[Rozdział 2.10]{nederpelt_geuvers_2014}). Wyjątek stanowi Lemat \ref{thm:polymorphism}, który jest zastąpiony w tym systemie Lematem \ref{thm:type_uniqueness} o jednoznaczności typu.
 
@@ -18,7 +18,7 @@ Zbiór typów \(\mathbb{T}\) definiujemy w myśl Definicji \ref{def:typy-proste}
   \mathbf{\tilde\Lambda}_\mathbb{T}\ &\leftarrow \ V\ |\ (\mathbf{\tilde\Lambda}_\mathbb{T}\,\mathbf{\tilde\Lambda}_\mathbb{T}) \ |\ (\lambda V:\mathbb{T}.\, \mathbf{\tilde\Lambda}_\mathbb{T})
 \end{align*}
 
-Zauważmy, że \(\lambda\)-termy w stylu Churcha różnią się od stylu Currego tylko w wypadku \(\lambda\)-abstrakcji.  Z tą jedną modyfikacją definicje zbioru zmiennych wolnych, podstawienia, \(\beta\)- i \(\eta\)-redukcji, są analogiczne do tych z Rozdziału \ref{sec:untyped_lambda}, zaś pojęcia kontekstu i wyprowadzenia sądu przyjmujemy z Podrozdziału \ref{subsec:simple_types_typing}.
+Zauważmy, że \(\lambda\)-termy w stylu Churcha różnią się od stylu Curry'ego tylko w wypadku \(\lambda\)-abstrakcji.  Z tą jedną modyfikacją definicje zbioru zmiennych wolnych, podstawienia, \(\beta\)- i \(\eta\)-redukcji, są analogiczne do tych z Rozdziału \ref{sec:untyped_lambda}, zaś pojęcia kontekstu i wyprowadzenia sądu przyjmujemy z Podrozdziału \ref{subsec:simple_types_typing}.
 
 \subsubsection{Wyprowadzanie typu}
 Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
@@ -39,7 +39,7 @@ Wprowadzamy następujące reguły wyprowadzania typu (relacji typowalności):
       \end{tabular}
 \end{center}
 
-Zauważmy, że mając zadany kontekst, typ każdego poprawnego \(\lambda\)-termu jest jednoznacznie określony. Jest to istotna różnica, którą wprowadza styl Churcha. W~systemach w stylu Currego termy poprawne są zamknięte ze względu na podstawienie typu. Własność, którą wyraża Lemat \ref{thm:type_uniqueness} zachodzi w nich z dokładnością do podstawienia. 
+Zauważmy, że mając zadany kontekst, typ każdego poprawnego \(\lambda\)-termu jest jednoznacznie określony. Jest to istotna różnica, którą wprowadza styl Churcha. W~systemach w stylu Curry'ego termy poprawne są zamknięte ze względu na podstawienie typu. Własność, którą wyraża Lemat \ref{thm:type_uniqueness} zachodzi w nich z dokładnością do podstawienia. 
 
 \begin{lemat}(O jednoznaczności typu)\label{thm:type_uniqueness}
   Jeśli \(\Gamma\vdash M:\sigma\) i \(\Gamma\vdash M:\tau\), to \(\sigma\equiv \tau\).
@@ -79,7 +79,7 @@ Zauważmy, że nie istnieje jeden typ dla reprezentacji funkcji identycznościow
         \lambda \sigma:* .\,\lambda x:\sigma.\,x,
       \end{align*}
       gdzie symbolem \(*\) oznaczamy typ obiektów będących typami (szczegóły omówimy w Rozdziale \ref{sec:system_f}).
-      Własność tę (polimorfizm parametryczny) miał w pewnym sensie rachunek \(\lambda\) w stylu Currego (Podrozdział \ref{subsec:polymorphism}). 
+      Własność tę (polimorfizm parametryczny) miał w pewnym sensie rachunek \(\lambda\) w stylu Curry'ego (Podrozdział \ref{subsec:polymorphism}). 
 %    \item
 %      Przykład dotyczy iteracji. Przypuśćmy, że term \(F\) jest typu \(\sigma\to\sigma\) i okreslamy \(D_{\sigma F}\equiv\lambda x:\nobreak\sigma.\,F(Fx)\). Chcąc określić \(D\) dla dowolnych \(F\) i \(\sigma\)
 %  \end{enumerate}
